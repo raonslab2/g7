@@ -65,7 +65,7 @@ Laravel config cache 이후에도 secret이 `env()` 호출에 의존하지 않�
 | runtime env | `/etc/g7-agentopt-v2/runtime.env` |
 | project | `GNUBOARD7`, root `/home/mrdev/git/g7` |
 | provider | `CODEX / CODEX_1` |
-| Agent.Tools release | `agent-tools-2.1.3+g03a4f82dfa87` (최초 검증 binding) |
+| Agent.Tools release | `agent-tools-2.1.3+ga07f40b3370e` (`evidence_pack_v1`) |
 
 빈 user allowlist는 이 전용 runtime에서 trusted proxy identity를 허용한다는 현재 AgentOpt 계약이며, proxy secret은 browser에 전달되지 않는다. 다른 project worktree와 request worktree를 공유하지 않는다.
 
@@ -83,4 +83,3 @@ Laravel config cache 이후에도 secret이 `env()` 호출에 의존하지 않�
 - follow-up state: `RUNNING -> COMPLETED`
 - terminal result: 존재 확인
 - G7/AgentOpt 재시작 뒤 G7 history에서 request 1건 재조회 성공
-
