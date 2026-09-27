@@ -1,0 +1,36 @@
+{
+    "identifier": "raonslab-product",
+    "vendor": "raonslab",
+    "name": {
+        "ko": "RAON Hub 제품화",
+        "en": "RAON Hub Product Layer"
+    },
+    "version": "0.1.0",
+    "license": "MIT",
+    "description": {
+        "ko": "G7 코어를 수정하지 않고 브랜드, 홈 화면, 제품 UX를 제공하는 모듈",
+        "en": "Brand, home, and product UX without modifying G7 core"
+    },
+    "g7_version": ">=7.0.11",
+    "dependencies": {
+        "modules": {
+            "sirsoft-board": ">=1.1.2"
+        },
+        "plugins": {}
+    },
+    "assets": {
+        "js": {
+            "entry": "resources/js/index.ts",
+            "output": "dist/js/module.iife.js"
+        },
+        "css": {
+            "entry": "resources/css/main.css",
+            "output": "dist/css/module.css"
+        },
+        "handlers": false
+    },
+    "loading": {
+        "strategy": "global",
+        "priority": 80
+    }
+}

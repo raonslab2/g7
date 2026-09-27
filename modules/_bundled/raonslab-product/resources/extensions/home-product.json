@@ -1,0 +1,146 @@
+{
+  "target_layout": "home",
+  "priority": 20,
+  "injections": [
+    {
+      "target_id": "main_content",
+      "position": "replace",
+      "components": [
+        {
+          "id": "raon_home",
+          "comment": "RAON Hub 제품 홈 루트",
+          "type": "basic",
+          "name": "Div",
+          "props": { "className": "rh-home" },
+          "children": [
+            {
+              "id": "raon_home_shell",
+              "comment": "홈 콘텐츠 폭과 모바일 여백",
+              "type": "basic",
+              "name": "Div",
+              "props": { "className": "rh-shell" },
+              "children": [
+                {
+                  "id": "raon_home_eyebrow",
+                  "comment": "제품 카테고리 라벨",
+                  "type": "basic",
+                  "name": "Div",
+                  "props": { "className": "rh-eyebrow" },
+                  "text": "$t:raonslab-product.home.eyebrow"
+                },
+                {
+                  "id": "raon_home_title",
+                  "comment": "제품 핵심 가치 제목",
+                  "type": "basic",
+                  "name": "H1",
+                  "props": { "className": "rh-title" },
+                  "text": "$t:raonslab-product.home.title"
+                },
+                {
+                  "id": "raon_home_lede",
+                  "comment": "제품 설명",
+                  "type": "basic",
+                  "name": "P",
+                  "props": { "className": "rh-lede" },
+                  "text": "$t:raonslab-product.home.lede"
+                },
+                {
+                  "id": "raon_home_actions",
+                  "comment": "핵심 사용자 여정 진입점",
+                  "type": "basic",
+                  "name": "Div",
+                  "props": { "className": "rh-actions" },
+                  "children": [
+                    {
+                      "id": "raon_home_community",
+                      "comment": "커뮤니티 이동",
+                      "type": "basic",
+                      "name": "Button",
+                      "props": { "className": "rh-action rh-action-primary" },
+                      "actions": [{ "type": "click", "handler": "navigate", "params": { "path": "/boards" } }],
+                      "text": "$t:raonslab-product.home.community_action"
+                    },
+                    {
+                      "id": "raon_home_search",
+                      "comment": "통합 검색 이동",
+                      "type": "basic",
+                      "name": "Button",
+                      "props": { "className": "rh-action" },
+                      "actions": [{ "type": "click", "handler": "navigate", "params": { "path": "/search" } }],
+                      "text": "$t:raonslab-product.home.search_action"
+                    },
+                    {
+                      "id": "raon_home_profile",
+                      "comment": "로그인 사용자의 프로필 이동",
+                      "type": "basic",
+                      "name": "Button",
+                      "if": "{{_global.currentUser?.uuid}}",
+                      "props": { "className": "rh-action" },
+                      "actions": [{ "type": "click", "handler": "navigate", "params": { "path": "/mypage/profile" } }],
+                      "text": "$t:raonslab-product.home.profile_action"
+                    },
+                    {
+                      "id": "raon_home_register",
+                      "comment": "비회원 가입 이동",
+                      "type": "basic",
+                      "name": "Button",
+                      "if": "{{!_global.currentUser?.uuid}}",
+                      "props": { "className": "rh-action" },
+                      "actions": [{ "type": "click", "handler": "navigate", "params": { "path": "/register" } }],
+                      "text": "$t:raonslab-product.home.register_action"
+                    }
+                  ]
+                },
+                {
+                  "id": "raon_home_capabilities",
+                  "comment": "서비스 기능 요약",
+                  "type": "basic",
+                  "name": "Div",
+                  "props": { "className": "rh-grid" },
+                  "children": [
+                    {
+                      "id": "raon_home_card_community",
+                      "comment": "커뮤니티 기능 카드",
+                      "type": "basic",
+                      "name": "Div",
+                      "props": { "className": "rh-card" },
+                      "children": [
+                        { "id": "raon_home_card_community_kicker", "comment": "커뮤니티 카드 라벨", "type": "basic", "name": "Div", "props": { "className": "rh-card-kicker" }, "text": "$t:raonslab-product.home.community_kicker" },
+                        { "id": "raon_home_card_community_title", "comment": "커뮤니티 카드 제목", "type": "basic", "name": "H2", "props": { "className": "rh-card-title" }, "text": "$t:raonslab-product.home.community_title" },
+                        { "id": "raon_home_card_community_copy", "comment": "커뮤니티 카드 설명", "type": "basic", "name": "P", "props": { "className": "rh-card-copy" }, "text": "$t:raonslab-product.home.community_copy" }
+                      ]
+                    },
+                    {
+                      "id": "raon_home_card_notice",
+                      "comment": "알림과 탐색 기능 카드",
+                      "type": "basic",
+                      "name": "Div",
+                      "props": { "className": "rh-card" },
+                      "children": [
+                        { "id": "raon_home_card_notice_kicker", "comment": "알림 카드 라벨", "type": "basic", "name": "Div", "props": { "className": "rh-card-kicker" }, "text": "$t:raonslab-product.home.notice_kicker" },
+                        { "id": "raon_home_card_notice_title", "comment": "알림 카드 제목", "type": "basic", "name": "H2", "props": { "className": "rh-card-title" }, "text": "$t:raonslab-product.home.notice_title" },
+                        { "id": "raon_home_card_notice_copy", "comment": "알림 카드 설명", "type": "basic", "name": "P", "props": { "className": "rh-card-copy" }, "text": "$t:raonslab-product.home.notice_copy" }
+                      ]
+                    },
+                    {
+                      "id": "raon_home_card_ai",
+                      "comment": "AI 작업 공간 예고 카드",
+                      "type": "basic",
+                      "name": "Div",
+                      "props": { "className": "rh-card" },
+                      "children": [
+                        { "id": "raon_home_card_ai_kicker", "comment": "AI 카드 라벨", "type": "basic", "name": "Div", "props": { "className": "rh-card-kicker" }, "text": "$t:raonslab-product.home.ai_kicker" },
+                        { "id": "raon_home_card_ai_title", "comment": "AI 카드 제목", "type": "basic", "name": "H2", "props": { "className": "rh-card-title" }, "text": "$t:raonslab-product.home.ai_title" },
+                        { "id": "raon_home_card_ai_copy", "comment": "AI 카드 설명", "type": "basic", "name": "P", "props": { "className": "rh-card-copy" }, "text": "$t:raonslab-product.home.ai_copy" }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
