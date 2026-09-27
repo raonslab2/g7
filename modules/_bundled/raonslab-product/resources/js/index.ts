@@ -25,8 +25,34 @@ function markProductRuntime(): void {
   document.body.classList.add('raon-product');
 }
 
+/** 기본 템플릿의 upstream 표기는 관리자·업데이트 정보에 남기고 제품 화면에서는 숨깁니다. */
+function removeTemplateAttribution(): void {
+  document.querySelectorAll('#footer p').forEach((node) => {
+    if ((node.textContent ?? '').trim().startsWith('Powered by')) {
+      (node as HTMLElement).hidden = true;
+    }
+  });
+
+  document.querySelectorAll<HTMLElement>('#mobile_cart_btn, [data-testid="nav-shop"]').forEach((node) => {
+    node.hidden = true;
+  });
+
+  document.querySelectorAll<HTMLButtonElement>('button').forEach((button) => {
+    const label = (button.textContent ?? '').trim();
+    const commerceIcon = button.querySelector('.fa-shopping-cart, .fa-shopping-bag');
+    if (commerceIcon || ['주문조회', 'Order lookup', 'Order Lookup'].includes(label)) {
+      button.hidden = true;
+    }
+  });
+}
+
+const observer = new MutationObserver(removeTemplateAttribution);
+observer.observe(document.documentElement, { childList: true, subtree: true });
+
 if (document.readyState === 'loading') {
   window.addEventListener('DOMContentLoaded', markProductRuntime, { once: true });
 } else {
   markProductRuntime();
 }
+
+removeTemplateAttribution();

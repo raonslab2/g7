@@ -29,6 +29,13 @@ body.raon-product #footer {
   border-color: var(--raon-border);
 }
 
+body.raon-product #mobile_cart_btn,
+body.raon-product #desktop_header [data-testid='nav-shop'],
+body.raon-product #desktop_header button:has(.fa-shopping-cart),
+body.raon-product #desktop_header button:has(.fa-shopping-bag) {
+  display: none !important;
+}
+
 .rh-home {
   min-height: calc(100vh - 9rem);
   width: 100%;
@@ -158,6 +165,23 @@ body.raon-product #footer {
   color: var(--raon-muted);
   font-size: .9rem;
   line-height: 1.65;
+}
+
+.rh-card-link {
+  margin-top: 1rem;
+  border: 0;
+  padding: 0;
+  color: var(--raon-accent-strong);
+  background: transparent;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.rh-card-link:hover,
+.rh-card-link:focus-visible {
+  color: #c4ceff;
+  text-decoration: underline;
+  outline: none;
 }
 
 @media (max-width: 760px) {

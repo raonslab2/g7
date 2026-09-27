@@ -1,0 +1,21 @@
+{
+    "version": "1.0.0",
+    "routes": [
+        {
+            "path": "*/ai/requests/:request_id",
+            "layout": "ai_workspace",
+            "auth_required": true,
+            "meta": {
+                "title": "$t:raonslab-ai-workspace.page.detail_title"
+            }
+        },
+        {
+            "path": "*/ai",
+            "layout": "ai_workspace",
+            "auth_required": true,
+            "meta": {
+                "title": "$t:raonslab-ai-workspace.page.title"
+            }
+        }
+    ]
+}

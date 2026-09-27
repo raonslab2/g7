@@ -1,0 +1,20 @@
+{
+    "name": "raonslab/gnuboard7-ai-workspace",
+    "description": "AI_GCS V2 adapter and workspace for Gnuboard7",
+    "type": "library",
+    "version": "0.1.0",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Modules\\Raonslab\\Ai\\Workspace\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Modules\\Raonslab\\Ai\\Workspace\\Tests\\": "tests/"
+        }
+    },
+    "require": {
+        "php": "^8.2"
+    }
+}

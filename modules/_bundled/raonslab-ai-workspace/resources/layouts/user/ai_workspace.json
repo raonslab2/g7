@@ -1,0 +1,33 @@
+{
+    "version": "1.0.0",
+    "layout_name": "ai_workspace",
+    "extends": "_user_base",
+    "permissions": ["raonslab-ai-workspace.requests.use"],
+    "slots": {
+        "content": [
+            {
+                "id": "raon_ai_workspace",
+                "comment": "RAON AI 작업공간 — 화면 동작은 모듈 전용 에셋이 담당",
+                "type": "basic",
+                "name": "Div",
+                "props": {
+                    "className": "rai-workspace",
+                    "data-request-id": "{{route.request_id ?? ''}}",
+                    "aria-live": "polite"
+                },
+                "children": [
+                    {
+                        "id": "raon_ai_workspace_loading",
+                        "type": "basic",
+                        "name": "Div",
+                        "props": {
+                            "className": "rai-loading",
+                            "role": "status"
+                        },
+                        "text": "$t:raonslab-ai-workspace.page.loading"
+                    }
+                ]
+            }
+        ]
+    }
+}

@@ -1,20 +1,20 @@
 {
-    "identifier": "raonslab-product",
+    "identifier": "raonslab-ai-workspace",
     "vendor": "raonslab",
     "name": {
-        "ko": "RAON Hub 제품화",
-        "en": "RAON Hub Product Layer"
+        "ko": "RAON AI 작업공간",
+        "en": "RAON AI Workspace"
     },
-    "version": "0.1.1",
+    "version": "0.1.0",
     "license": "MIT",
     "description": {
-        "ko": "G7 코어를 수정하지 않고 브랜드, 홈 화면, 제품 UX를 제공하는 모듈",
-        "en": "Brand, home, and product UX without modifying G7 core"
+        "ko": "AI_GCS V2 요청 API를 사용하는 사용자용 AI 작업공간",
+        "en": "User-facing AI workspace backed by the AI_GCS V2 Request API"
     },
     "g7_version": ">=7.0.11",
     "dependencies": {
         "modules": {
-            "sirsoft-board": ">=1.1.2"
+            "raonslab-product": ">=0.1.0"
         },
         "plugins": {}
     },
@@ -31,6 +31,6 @@
     },
     "loading": {
         "strategy": "global",
-        "priority": 80
+        "priority": 90
     }
 }
