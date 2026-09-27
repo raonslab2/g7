@@ -21,6 +21,7 @@ class AiAdapterContractTest extends ModuleTestCase
         config()->set('raonslab-ai-workspace', [
             'base_url' => 'http://127.0.0.1:18771',
             'proxy_token' => 'test-only-proxy-token',
+            'proxy_token_file' => '/tmp/g7-ai-workspace-test-token-does-not-exist',
             'project_id' => 'GNUBOARD7',
             'operator_id' => 'g7-adapter',
             'origin' => 'http://127.0.0.1:18770',

@@ -1,0 +1,20 @@
+[Unit]
+Description=GNUBOARD7 isolated AgentOpt V2 runtime
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=mrdev
+Group=mrdev
+WorkingDirectory=/var/lib/g7-agentopt
+EnvironmentFile=/etc/g7-agentopt-v2/runtime.env
+Environment=PATH=/home/mrdev/.local/bin:/home/mrdev/bin:/usr/local/bin:/usr/bin:/bin
+ExecStart=/var/lib/g7-agentopt/venv/bin/python -m uvicorn agentopt_v2.app:create_app --factory --host 127.0.0.1 --port 18771 --no-proxy-headers
+Restart=on-failure
+RestartSec=3
+TimeoutStopSec=20
+KillMode=control-group
+
+[Install]
+WantedBy=multi-user.target

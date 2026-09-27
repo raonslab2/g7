@@ -19,6 +19,10 @@ export function stateLabel(state: unknown): string {
 
 export function eventLabel(event: Record<string, unknown>): string {
     const raw = String(event.event_type ?? event.type ?? event.status ?? '').toUpperCase();
+    const payload = typeof event.payload === 'object' && event.payload !== null
+        ? event.payload as Record<string, unknown>
+        : {};
+    const persistedState = String(payload.state ?? '').toUpperCase();
     const labels: Record<string, string> = {
         REQUEST_CREATED: '요청이 접수되었습니다.',
         ACCEPTED: '요청이 접수되었습니다.',
@@ -31,6 +35,12 @@ export function eventLabel(event: Record<string, unknown>): string {
         CANCELLED: '작업이 취소되었습니다.',
         INTERRUPTED: '작업이 중단되었습니다.',
     };
+    if (raw === 'REQUEST.STATE' && persistedState) {
+        return `${stateLabel(persistedState)} 상태로 변경되었습니다.`;
+    }
+    if (raw === 'REQUEST.ACCEPTED') return labels.ACCEPTED;
+    if (raw === 'REQUEST.COMPLETED') return labels.COMPLETED;
+    if (raw === 'REQUEST.FAILED') return labels.FAILED;
     return labels[raw] ?? '작업 상태가 갱신되었습니다.';
 }
 

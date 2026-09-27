@@ -132,6 +132,15 @@ class AiGcsV2Adapter
     {
         $token = (string) config('raonslab-ai-workspace.proxy_token', '');
         if ($token === '') {
+            $tokenFile = (string) config(
+                'raonslab-ai-workspace.proxy_token_file',
+                '/etc/g7-product/ai-gcs-v2-token'
+            );
+            if ($tokenFile !== '' && is_readable($tokenFile)) {
+                $token = trim((string) file_get_contents($tokenFile));
+            }
+        }
+        if ($token === '') {
             throw new AiGcsException('AI 서비스 인증이 구성되지 않았습니다.', 503, 'AIGCS_NOT_CONFIGURED');
         }
 

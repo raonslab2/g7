@@ -6,7 +6,7 @@ G7 로그인 사용자가 AI_GCS V2의 canonical Request를 제출하고, 저장
 
 ## 런타임 설정
 
-`.env.product.example`의 `G7_AIGCS_V2_*` 항목을 별도 G7 환경 파일에 설정합니다. `G7_AIGCS_V2_PROXY_TOKEN`은 서버 측에서만 사용되며 브라우저 응답이나 번들에 포함되지 않습니다.
+`.env.product.example`의 `G7_AIGCS_V2_*` 항목을 별도 G7 환경 파일에 설정합니다. 설정 캐시를 사용하는 운영 환경에서는 기본 경로 `/etc/g7-product/ai-gcs-v2-token`에 전용 token을 `0640 root:mrdev`로 설치합니다. token은 서버 측에서만 사용되며 브라우저 응답이나 번들에 포함되지 않습니다.
 
 ## 개발 검증
 

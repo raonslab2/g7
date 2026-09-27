@@ -7,6 +7,7 @@ const API = '/api/modules/raonslab-ai-workspace/requests';
 let activeAbort: AbortController | null = null;
 let activeRoot: HTMLElement | null = null;
 let renderNonce = 0;
+const eventHistory = new Map<string, JsonObject[]>();
 
 function escapeHtml(value: unknown): string {
     return String(value ?? '')
@@ -159,6 +160,8 @@ function resultText(request: JsonObject): string {
     const value = request.final_result ?? request.result ?? request.error;
     if (typeof value === 'string') return value;
     if (value == null) return '';
+    if (typeof value.text === 'string') return value.text;
+    if (typeof value.message === 'string') return value.message;
     return JSON.stringify(value, null, 2);
 }
 
@@ -169,7 +172,7 @@ async function renderDetail(root: HTMLElement, requestId: string, nonce: number)
         try {
             const request = await api(`/${encodeURIComponent(requestId)}`);
             if (nonce !== renderNonce) return null;
-            paintDetail(root, request);
+            paintDetail(root, request, requestId);
             return request;
         } catch (error) {
             setNotice(root, error instanceof Error ? error.message : '요청을 불러오지 못했습니다.', 'error');
@@ -182,15 +185,16 @@ async function renderDetail(root: HTMLElement, requestId: string, nonce: number)
     if (!TERMINAL_STATES.has(String(first.state))) streamEvents(root, requestId, nonce, load);
 }
 
-function paintDetail(root: HTMLElement, request: JsonObject): void {
+function paintDetail(root: HTMLElement, request: JsonObject, requestId: string): void {
     const state = String(request.state ?? request.status ?? '');
     const output = resultText(request);
     const question = request.question ? (typeof request.question === 'string' ? request.question : JSON.stringify(request.question, null, 2)) : '';
     root.querySelector<HTMLElement>('[data-rai-detail]')!.innerHTML = `<div class="rai-detail-head"><div><span class="rai-kicker">REQUEST</span><h1>${escapeHtml(titleOf(request))}</h1><p>${escapeHtml(formatDate(request.created_at))} · ${escapeHtml(request.provider ?? '')}${request.profile ? ` / ${escapeHtml(request.profile)}` : ''}</p></div><span class="rai-state rai-state-${escapeHtml(state.toLowerCase())}">${escapeHtml(stateLabel(state))}</span></div>
-        <div class="rai-detail-grid"><section class="rai-panel"><h2>요청 내용</h2><pre>${escapeHtml(request.prompt ?? request.original_prompt ?? '')}</pre></section><section class="rai-panel"><h2>진행 이벤트</h2><div class="rai-events" data-rai-events><div class="rai-event"><span></span><p>서버에 저장된 이벤트에 연결하는 중입니다.</p></div></div></section></div>
+        <div class="rai-detail-grid"><section class="rai-panel"><h2>요청 내용</h2><pre>${escapeHtml(request.prompt ?? request.original_prompt ?? '')}</pre></section><section class="rai-panel"><h2>진행 이벤트</h2><div class="rai-events" data-rai-events></div></section></div>
         ${question ? `<section class="rai-panel rai-attention"><h2>사용자 입력 필요</h2><pre>${escapeHtml(question)}</pre></section>` : ''}
         <section class="rai-panel rai-result"><h2>결과</h2>${output ? `<pre>${escapeHtml(output)}</pre>` : '<div class="rai-empty"><span>완료되면 이곳에 결과가 표시됩니다.</span></div>'}</section>
         <form class="rai-followup" data-rai-followup><label>${state === 'WAITING_USER' ? '답변 또는 계속할 지시' : '같은 요청에 후속 지시'}<textarea name="text" rows="4" required placeholder="기존 맥락을 이어서 요청할 내용을 입력하세요."></textarea></label><button class="rai-primary" type="submit">${state === 'WAITING_USER' || state === 'INTERRUPTED' ? '이어서 실행' : '후속 지시 보내기'}</button><input type="hidden" name="resume" value="${state === 'WAITING_USER' || state === 'INTERRUPTED' ? '1' : '0'}"></form>`;
+    paintEvents(root, eventHistory.get(requestId) ?? []);
 }
 
 function bindFollowUp(root: HTMLElement, requestId: string, reload: () => Promise<JsonObject | null>): void {
@@ -222,7 +226,10 @@ function bindFollowUp(root: HTMLElement, requestId: string, reload: () => Promis
 }
 
 async function streamEvents(root: HTMLElement, requestId: string, nonce: number, reload: () => Promise<JsonObject | null>): Promise<void> {
-    let after = Number(sessionStorage.getItem(`rai:event:${requestId}`) ?? 0);
+    // 새 화면에서는 0부터 재생해 서버에 저장된 이벤트를 권위 있는 이력으로 사용한다.
+    // 연결이 끊어진 뒤에는 같은 루프의 cursor를 유지해 누락 없이 이어 받는다.
+    let after = 0;
+    eventHistory.set(requestId, []);
     activeAbort?.abort();
     activeAbort = new AbortController();
     const signal = activeAbort.signal;
@@ -248,9 +255,10 @@ async function streamEvents(root: HTMLElement, requestId: string, nonce: number,
                     const sequence = Number(event.sequence ?? id ?? 0);
                     if (Number.isSafeInteger(sequence) && sequence > after) {
                         after = sequence;
-                        sessionStorage.setItem(`rai:event:${requestId}`, String(after));
-                        appendEvent(root, event);
+                        const history = eventHistory.get(requestId) ?? [];
+                        eventHistory.set(requestId, [...history, event].slice(-100));
                         const current = await reload();
+                        paintEvents(root, eventHistory.get(requestId) ?? []);
                         bindFollowUp(root, requestId, reload);
                         if (current && TERMINAL_STATES.has(String(current.state))) return;
                     }
@@ -266,9 +274,18 @@ async function streamEvents(root: HTMLElement, requestId: string, nonce: number,
     }
 }
 
-function appendEvent(root: HTMLElement, event: JsonObject): void {
+function paintEvents(root: HTMLElement, history: JsonObject[]): void {
     const events = root.querySelector<HTMLElement>('[data-rai-events]');
     if (!events) return;
+    events.innerHTML = '';
+    if (!history.length) {
+        events.innerHTML = '<div class="rai-event"><span></span><p>서버에 저장된 이벤트에 연결하는 중입니다.</p></div>';
+        return;
+    }
+    [...history].reverse().forEach((event) => appendEvent(events, event));
+}
+
+function appendEvent(events: HTMLElement, event: JsonObject): void {
     const row = document.createElement('div');
     row.className = 'rai-event';
     const dot = document.createElement('span');
@@ -277,7 +294,7 @@ function appendEvent(root: HTMLElement, event: JsonObject): void {
     const time = document.createElement('time');
     time.textContent = formatDate(event.created_at);
     row.append(dot, copy, time);
-    events.prepend(row);
+    events.append(row);
 }
 
 function mount(): void {
