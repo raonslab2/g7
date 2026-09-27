@@ -1,5 +1,5 @@
 import '../css/main.css';
-import { eventLabel, stateLabel, TERMINAL_STATES, titleOf } from './presentation';
+import { createIdempotencyKey, eventLabel, stateLabel, TERMINAL_STATES, titleOf } from './presentation';
 
 type JsonObject = Record<string, any>;
 
@@ -133,7 +133,7 @@ async function renderIndex(root: HTMLElement, nonce: number): Promise<void> {
                     profile,
                     prompt: String(data.get('prompt') ?? ''),
                     attachment_ids: [],
-                    idempotency_key: crypto.randomUUID(),
+                    idempotency_key: createIdempotencyKey(),
                 }),
             });
             navigate(`/ai/requests/${encodeURIComponent(request.request_id)}`);
@@ -211,7 +211,7 @@ function bindFollowUp(root: HTMLElement, requestId: string, reload: () => Promis
                 const endpoint = data.get('resume') === '1' ? 'resume' : 'messages';
                 await api(`/${encodeURIComponent(requestId)}/${endpoint}`, {
                     method: 'POST',
-                    body: JSON.stringify({ text: String(data.get('text') ?? ''), attachment_ids: [], idempotency_key: crypto.randomUUID() }),
+                    body: JSON.stringify({ text: String(data.get('text') ?? ''), attachment_ids: [], idempotency_key: createIdempotencyKey() }),
                 });
                 await reload();
                 bind();

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { eventLabel, stateLabel, TERMINAL_STATES, titleOf } from './presentation';
+import { createIdempotencyKey, eventLabel, stateLabel, TERMINAL_STATES, titleOf } from './presentation';
 
 describe('AI 작업 표현 계층', () => {
     it('서버 상태를 가짜 진척률 없이 사용자 의미로 표시한다', () => {
@@ -15,5 +15,20 @@ describe('AI 작업 표현 계층', () => {
 
     it('명시 제목이 없으면 prompt의 안전한 앞부분을 사용한다', () => {
         expect(titleOf({ prompt: '문서 구조를 검토해 주세요.' })).toBe('문서 구조를 검토해 주세요.');
+    });
+
+    it('브라우저 native randomUUID를 우선 사용한다', () => {
+        expect(createIdempotencyKey({ randomUUID: () => 'native-uuid' })).toBe('native-uuid');
+    });
+
+    it('평문 HTTP처럼 randomUUID가 없어도 UUID v4 key를 생성한다', () => {
+        const key = createIdempotencyKey({
+            getRandomValues(values) {
+                values.fill(0);
+                return values;
+            },
+        });
+
+        expect(key).toBe('00000000-0000-4000-8000-000000000000');
     });
 });

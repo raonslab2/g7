@@ -1,5 +1,9 @@
 # 변경 이력
 
+## 0.1.4 - 2026-09-28
+
+- 평문 HTTP 검수 주소에서 `crypto.randomUUID()`가 없는 브라우저를 위한 idempotency UUID fallback 추가
+
 ## 0.1.3 - 2026-09-28
 
 - G7 7.0.11 사용자 라우트 규약에 맞춰 AI 작업공간 라우트를 `resources/routes/user.json`으로 이동

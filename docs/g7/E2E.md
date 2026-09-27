@@ -52,7 +52,8 @@ Chromium이 다음 화면을 실제로 열고 full-page screenshot을 남겼다.
 ## Test 결과
 
 - RAON product/adapter PHP: 6 tests, 16 assertions PASS
-- AI workspace Vitest: 3 tests PASS
+- AI workspace Vitest: 5 tests PASS
+- HTTP review ingress UUID compatibility: `isSecureContext=false`, `crypto.randomUUID=undefined`인 실제 Chromium에서 fallback UUID v4 제출 payload와 console/page error 0건 확인
 - production asset build: PASS
 - Agent.Tools targeted project validation: 30 PASS
 - Agent.Tools full regression: 159 PASS
