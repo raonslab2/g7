@@ -30,6 +30,8 @@ Chromium이 다음 화면을 실제로 열고 full-page screenshot을 남겼다.
 - AI request detail: 390
 - admin dashboard: 768
 
+`/ai` 직접 진입 회귀 검증에서 local, 고정 public `58770`, 임시 HTTPS가 모두 HTTP 200을 반환했다. 비로그인 Chromium은 `/login?redirect=%2Fai`로 정상 전환됐고 390px overflow, console error, 실패 resource가 없었다. request detail 경로도 서버 route resolver에서 등록 경로로 확인했다.
+
 최초 캡처의 console 404는 배포에서 제외된 source map을 가리키는 build 주석이었다. production sourcemap을 opt-in으로 바꾸고 재검증해 제거했다.
 
 ## AI Adapter journey
@@ -49,7 +51,7 @@ Chromium이 다음 화면을 실제로 열고 full-page screenshot을 남겼다.
 
 ## Test 결과
 
-- RAON product/adapter PHP: 5 tests, 12 assertions PASS
+- RAON product/adapter PHP: 6 tests, 16 assertions PASS
 - AI workspace Vitest: 3 tests PASS
 - production asset build: PASS
 - Agent.Tools targeted project validation: 30 PASS

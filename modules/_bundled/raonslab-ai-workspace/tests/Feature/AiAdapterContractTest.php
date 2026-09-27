@@ -86,4 +86,20 @@ class AiAdapterContractTest extends ModuleTestCase
         $this->assertStringContainsString("['auth:sanctum'", file_get_contents($root.'/src/routes/api.php'));
         $this->assertStringContainsString('data-request-id', file_get_contents($root.'/resources/layouts/user/ai_workspace.json'));
     }
+
+    #[Test]
+    public function user_workspace_routes_use_the_g7_typed_route_location(): void
+    {
+        $root = dirname(__DIR__, 2);
+        $routesPath = $root.'/resources/routes/user.json';
+
+        $this->assertFileExists($routesPath);
+        $this->assertFileDoesNotExist($root.'/resources/routes.json');
+
+        $routes = json_decode((string) file_get_contents($routesPath), true, 512, JSON_THROW_ON_ERROR);
+        $paths = array_column($routes['routes'], 'path');
+
+        $this->assertContains('*/ai', $paths);
+        $this->assertContains('*/ai/requests/:request_id', $paths);
+    }
 }

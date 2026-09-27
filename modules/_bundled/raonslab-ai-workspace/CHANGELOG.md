@@ -1,5 +1,10 @@
 # 변경 이력
 
+## 0.1.3 - 2026-09-28
+
+- G7 7.0.11 사용자 라우트 규약에 맞춰 AI 작업공간 라우트를 `resources/routes/user.json`으로 이동
+- `/ai`와 `/ai/requests/:request_id`가 SPA catch-all에서 실제 등록 라우트로 판정되도록 회귀 테스트 추가
+
 ## 0.1.2 - 2026-09-28
 
 - production build의 source map을 opt-in으로 전환해 배포 자산 404 제거

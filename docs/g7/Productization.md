@@ -31,7 +31,7 @@
 - reduced-motion 대응
 - 제품 범위 밖 ecommerce navigation만 presentation layer에서 숨김
 
-### `raonslab-ai-workspace 0.1.2`
+### `raonslab-ai-workspace 0.1.3`
 
 - 공식 module lifecycle, route, JSON layout, permission, migration 사용
 - loading/empty/success/validation/permission/server/network 상태 제공
@@ -39,6 +39,7 @@
 - fake progress와 ETA 없음
 - raw provider payload/shell 대신 사용자 의미 중심 event label 제공
 - terminal result와 same-request follow-up 제공
+- G7 typed user route(`resources/routes/user.json`)로 `/ai`와 request detail 직접 진입 지원
 
 ## 반응형·접근성
 
