@@ -58,7 +58,7 @@ Chromium이 다음 화면을 실제로 열고 full-page screenshot을 남겼다.
 - Agent.Tools targeted project validation: 30 PASS
 - Agent.Tools full regression: 159 PASS
 - Agent.Tools G7 validation recipes: 13 PASS
-- G7 AgentOpt binding: `agent-tools-2.1.3+ga07f40b3370e`
+- G7 AgentOpt binding: `agent-tools-2.1.3+g70bc17f79232`
 - external fixed ingress: `http://203.245.29.156:58770/` HTTP 200
 - local health: `http://127.0.0.1:18770/` HTTP 200
 
