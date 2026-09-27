@@ -1,0 +1,26 @@
+[Unit]
+Description=GNUBOARD7 product standalone nginx
+Requires=g7-product-fpm.service
+After=network.target g7-product-fpm.service
+
+[Service]
+Type=simple
+User=mrdev
+Group=mrdev
+RuntimeDirectory=g7-product-web
+RuntimeDirectoryMode=0755
+WorkingDirectory=/home/mrdev/git/g7
+ExecStartPre=/usr/sbin/nginx -t -p /home/mrdev/git/g7/ -c deploy/nginx/g7-product.conf
+ExecStart=/usr/sbin/nginx -p /home/mrdev/git/g7/ -c deploy/nginx/g7-product.conf -g "daemon off;"
+ExecReload=/bin/kill -HUP $MAINPID
+Restart=on-failure
+RestartSec=3s
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=full
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectControlGroups=true
+
+[Install]
+WantedBy=multi-user.target

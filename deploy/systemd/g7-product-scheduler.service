@@ -1,0 +1,14 @@
+[Unit]
+Description=Run GNUBOARD7 product scheduler
+After=network.target mysql.service
+Wants=mysql.service
+
+[Service]
+Type=oneshot
+User=mrdev
+Group=mrdev
+WorkingDirectory=/home/mrdev/git/g7
+ExecStart=/usr/bin/php8.3 artisan schedule:run --no-interaction
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=full

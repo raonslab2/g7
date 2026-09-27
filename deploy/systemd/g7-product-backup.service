@@ -1,0 +1,14 @@
+[Unit]
+Description=Back up GNUBOARD7 product database and persistent files
+After=mysql.service
+Wants=mysql.service
+
+[Service]
+Type=oneshot
+ExecStart=/home/mrdev/git/g7/scripts/g7-backup.sh
+Nice=10
+IOSchedulingClass=best-effort
+IOSchedulingPriority=7
+PrivateTmp=true
+ProtectSystem=full
+ReadWritePaths=/var/backups/g7-product

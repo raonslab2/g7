@@ -1,0 +1,21 @@
+[Unit]
+Description=GNUBOARD7 product database queue worker
+After=network.target mysql.service
+Wants=mysql.service
+
+[Service]
+Type=simple
+User=mrdev
+Group=mrdev
+WorkingDirectory=/home/mrdev/git/g7
+ExecStart=/usr/bin/php8.3 artisan queue:work database --sleep=3 --tries=3 --timeout=900 --max-time=3600
+Restart=always
+RestartSec=3s
+TimeoutStopSec=930s
+KillSignal=SIGTERM
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=full
+
+[Install]
+WantedBy=multi-user.target

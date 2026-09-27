@@ -1,0 +1,11 @@
+[Unit]
+Description=Daily GNUBOARD7 product backup
+
+[Timer]
+OnCalendar=*-*-* 03:40:00
+Persistent=true
+RandomizedDelaySec=10m
+Unit=g7-product-backup.service
+
+[Install]
+WantedBy=timers.target
