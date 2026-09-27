@@ -14,7 +14,7 @@ Browser
 G7 AI UI
   -> G7 AI Application Service
   -> G7 AI_GCS V2 API Adapter
-  -> AI_GCS V2 Request API
+  -> G7 전용 AgentOpt V2 Request API 127.0.0.1:18771
   -> AgentOpt V2 canonical Request/provider lane
 ```
 
@@ -34,8 +34,10 @@ G7은 AI_GCS/AgentOpt DB, SQLite, filesystem, provider session을 읽지 않는�
 | logs | `storage/logs`, 전용 nginx/FPM/application 로그 |
 | backup | `/var/backups/g7-product` |
 | services | `g7-product-*` namespace |
+| public review ingress | relay `203.245.29.156:58770` → remote loopback `18770` → local `18770` |
+| isolated AgentOpt | `127.0.0.1:18771`, `/var/lib/g7-agentopt` |
 
-전역 nginx 설정, 기존 reverse tunnel, production 포트, 다른 서비스 unit, 시스템 기본 PHP를 변경하지 않는다. 새 PHP 8.3의 배포판 기본 FPM unit도 비활성화하고 G7 전용 pool만 실행한다.
+전역 nginx 설정, 기존 reverse tunnel, production 포트, 다른 서비스 unit, 시스템 기본 PHP를 변경하지 않는다. 사용자 요청으로 추가한 external review ingress도 `g7-product-reverse-tunnel`과 relay user service로 분리했다. 새 PHP 8.3의 배포판 기본 FPM unit도 비활성화하고 G7 전용 pool만 실행한다.
 
 ## 코드 계층
 
@@ -83,7 +85,8 @@ G7 사용자와 AI request owner는 명시적 mapping으로 저장한다. servic
 
 - credential commit 및 frontend secret 주입 금지
 - G7 DB 계정은 G7 DB에만 권한 부여
-- loopback bind가 기본이며 외부 공개는 별도 승인된 reverse proxy/TLS 뒤에서만 수행
+- loopback bind가 기본이며 외부 공개는 사용자 승인된 별도 reverse ingress에서만 수행
+- 고정 `58770`은 검수용 HTTP이므로 정식 운영 전 TLS 적용 필수
 - user/admin/API 권한은 G7 RBAC middleware로 재검증
 - AI project 권한은 Adapter에서 G7 identity mapping과 API authorization을 모두 검증
 - 사용자 화면에는 provider shell/internal secret/raw trace를 기본 노출하지 않음

@@ -51,7 +51,7 @@ core patch마다 다음을 `docs/g7`에 기록한다.
 - focused/broad regression 증거
 - patch 제거와 rollback 절차
 
-감사 시점 제품 의미의 core patch는 없다. `public/build/manifest.json`의 EOF newline 변화는 동일 frontend build가 만든 비기능 산출물이며 semantic core modification으로 취급하지 않고 release 전에 정리한다.
+감사 시점 제품 의미의 core patch는 없다. 제품 변경은 RAON bundled module, deployment, scripts, environment template, 문서에 한정됐다. `7.0.11`과 현재 `upstream/main`이 동일한 상태에서 merge-tree simulation은 conflict marker 0이었다.
 
 ## Rollback
 

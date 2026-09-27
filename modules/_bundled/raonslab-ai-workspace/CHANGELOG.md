@@ -1,5 +1,9 @@
 # 변경 이력
 
+## 0.1.2 - 2026-09-28
+
+- production build의 source map을 opt-in으로 전환해 배포 자산 404 제거
+
 ## 0.1.1 - 2026-09-28
 
 - 페이지 진입 시 persisted event를 처음부터 재생하고 reconnect cursor로 연속성 유지

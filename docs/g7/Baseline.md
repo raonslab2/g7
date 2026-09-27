@@ -48,8 +48,9 @@
 | 앱 접근 | `http://127.0.0.1:18770/` HTTP 200 |
 | 설치기 재진입 | 설치 후 `/install` 비공개(HTTP 404) |
 | 서비스 | `g7-product-fpm`, `g7-product-web`, `g7-product-queue`, scheduler/backup timer |
-| 재시작 영속성 | 서비스 재시작 전후 user 1, migration 216, HTTP 200 |
-| 백업 | `/var/backups/g7-product`, 외부 archive SHA-256와 내부 4개 payload SHA-256 검증 성공 |
+| 재시작 영속성 | 제품화 후 전용 service 재시작 전후 user 3, board 3, AI request 1, HTTP 200 |
+| 백업 | `/var/backups/g7-product`, 최신 archive SHA-256·DB gzip·persistent payload 검증 성공 |
+| 외부 검수 | 승인된 reverse SSH ingress `http://203.245.29.156:58770`, 외부 HTTP 200 |
 
 인스톨러 완료 상태는 서버에서 확정됐으나 Chromium 폴링 화면은 완료 card로 전환되지 않고 빠른 폴링을 계속했다. 이는 설치 실패가 아니라 installer UI 상태 반영 결함 후보이며 E2E 문서에 원본 증거와 함께 추적한다.
 

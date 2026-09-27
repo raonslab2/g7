@@ -11,7 +11,7 @@ export default defineConfig({
     },
     outDir: 'dist',
     emptyOutDir: true,
-    sourcemap: !['0', 'false'].includes(process.env.G7_BUILD_SOURCEMAP ?? ''),
+    sourcemap: ['1', 'true'].includes(process.env.G7_BUILD_SOURCEMAP ?? ''),
     target: 'es2020',
     rollupOptions: {
       output: {

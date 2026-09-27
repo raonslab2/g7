@@ -1,0 +1,27 @@
+[Unit]
+Description=GNUBOARD7 isolated product reverse SSH tunnel
+After=network-online.target g7-product-web.service
+Wants=network-online.target
+Requires=g7-product-web.service
+PartOf=g7-product-web.service
+
+[Service]
+Type=simple
+User=mrdev
+ExecStart=/usr/bin/autossh -M 0 -N \
+  -R 127.0.0.1:18770:127.0.0.1:18770 \
+  -i /home/mrdev/.ssh/thispc_reverse_5222_ed25519 \
+  -o IdentitiesOnly=yes \
+  -o BatchMode=yes \
+  -o ServerAliveInterval=10 \
+  -o ServerAliveCountMax=3 \
+  -o TCPKeepAlive=yes \
+  -o ExitOnForwardFailure=yes \
+  -o ConnectTimeout=10 \
+  -o StrictHostKeyChecking=yes \
+  mrdev@203.245.29.156
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

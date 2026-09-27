@@ -1,0 +1,13 @@
+[Unit]
+Description=GNUBOARD7 relay-side public TCP ingress
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/python3 %h/.local/lib/g7-product/g7-public-tcp-proxy.py
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=default.target
