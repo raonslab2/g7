@@ -1,7 +1,6 @@
 import '../css/main.css';
 import {
     classifyFailure,
-    createIdempotencyKey,
     eventLabel,
     followUpEndpoint,
     isTerminalEvent,
@@ -12,6 +11,7 @@ import {
     TERMINAL_STATES,
     titleOf,
     type FailureKind,
+    IdempotencyIntent,
 } from './presentation';
 
 type JsonObject = Record<string, any>;
@@ -66,7 +66,7 @@ function userErrorMessage(kind: FailureKind, status = 0): string {
     if (kind === 'network') return '네트워크 연결을 확인한 뒤 다시 시도해 주세요.';
     if (kind === 'permission') {
         return status === 401
-            ? '로그인 상태를 확인해 주세요. 인증 후 다시 시도할 수 있습니다.'
+            ? '로그인이 필요하거나 로그인 세션이 만료되었습니다. 다시 로그인한 뒤 재시도해 주세요.'
             : '이 작업을 실행하거나 요청을 볼 권한이 없습니다.';
     }
     if (kind === 'service') return 'AI 서비스를 현재 사용할 수 없습니다. 잠시 후 다시 시도해 주세요.';
@@ -158,7 +158,7 @@ function requestListItem(request: JsonObject): string {
 
 async function renderIndex(root: HTMLElement, nonce: number): Promise<void> {
     root.innerHTML = `<main class="rai-shell">
-        <section class="rai-hero"><div><span class="rai-eyebrow">RAON AI</span><h1>AI 작업공간</h1><p>요청부터 결과와 후속 지시까지 하나의 작업 흐름으로 이어집니다.</p></div><span class="rai-connection" data-rai-connection>서비스 확인 중</span></section>
+        <section class="rai-hero"><div><span class="rai-eyebrow">RAON AI</span><h1>AI 작업공간</h1><p>요청부터 결과와 후속 지시까지 하나의 작업 흐름으로 이어집니다.</p></div><span class="rai-connection" data-rai-connection role="status" aria-live="polite">서비스 확인 중</span></section>
         <div class="rai-notice" data-rai-notice role="status" hidden></div>
         <section class="rai-grid">
             <form class="rai-compose" data-rai-compose>
@@ -207,23 +207,33 @@ async function renderIndex(root: HTMLElement, nonce: number): Promise<void> {
         }
     };
 
-    root.querySelector('[data-rai-compose]')?.addEventListener('submit', async (event) => {
+    const submissionIntent = new IdempotencyIntent();
+    let retrySubmission = false;
+    const compose = root.querySelector<HTMLFormElement>('[data-rai-compose]');
+    compose?.addEventListener('input', () => { submissionIntent.changed(); });
+    compose?.addEventListener('change', () => { submissionIntent.changed(); });
+    compose?.addEventListener('submit', async (event) => {
         event.preventDefault();
         const form = event.currentTarget as HTMLFormElement;
         const submit = root.querySelector<HTMLButtonElement>('[data-rai-submit]')!;
         const data = new FormData(form);
         const [provider, profile] = String(data.get('lane') ?? '').split(':', 2);
+        const prompt = String(data.get('prompt') ?? '');
+        const fingerprint = JSON.stringify([provider, profile, prompt]);
+        const idempotencyKey = submissionIntent.begin(fingerprint, retrySubmission);
+        retrySubmission = false;
         submit.disabled = true;
         submit.textContent = '제출 중…';
         try {
             const request = await api('', {
                 method: 'POST',
-                body: JSON.stringify({ provider, profile, prompt: String(data.get('prompt') ?? ''), attachment_ids: [], idempotency_key: createIdempotencyKey() }),
+                body: JSON.stringify({ provider, profile, prompt, attachment_ids: [], idempotency_key: idempotencyKey }),
             });
+            submissionIntent.succeeded();
             navigate(`/ai/requests/${encodeURIComponent(request.request_id)}`);
         } catch (error) {
             const failure = workspaceError(error);
-            setNotice(root, failure.message, 'error', () => form.requestSubmit());
+            setNotice(root, failure.message, 'error', () => { retrySubmission = true; form.requestSubmit(); });
             submit.disabled = false;
             submit.textContent = '요청 보내기';
         }
@@ -276,31 +286,39 @@ function paintDetail(root: HTMLElement, request: JsonObject, requestId: string):
     const selectionStart = previousTextarea?.selectionStart ?? draft.length;
     const selectionEnd = previousTextarea?.selectionEnd ?? draft.length;
     const detail = root.querySelector<HTMLElement>('[data-rai-detail]')!;
-    const resultSection = `<section class="rai-panel rai-result" data-rai-result><h2>${terminal ? '결과' : '현재까지의 결과'}</h2>${output ? `<pre>${escapeHtml(output)}</pre>` : `<div class="rai-empty"><span>${terminal ? '표시할 결과 요약이 없습니다.' : '완료되면 이곳에 결과가 표시됩니다.'}</span></div>`}</section>`;
+    const disclosureState = new Map(Array.from(detail.querySelectorAll<HTMLDetailsElement>('[data-rai-disclosure]'))
+        .map((item) => [item.dataset.raiDisclosure ?? '', item.open]));
+    const active = document.activeElement instanceof HTMLElement && detail.contains(document.activeElement)
+        ? document.activeElement.dataset.raiFocus ?? ''
+        : '';
+    // A prior turn's result can remain in an upstream row while a new turn is
+    // running. Only terminal state may present it as the current result.
+    const visibleOutput = terminal ? output : '';
+    const resultSection = `<section class="rai-panel rai-result" data-rai-result><h2>${terminal ? '결과' : '현재 결과'}</h2>${visibleOutput ? `<pre>${escapeHtml(visibleOutput)}</pre>` : `<div class="rai-empty"><span>${terminal ? '표시할 결과 요약이 없습니다.' : '새 실행이 완료되면 이곳에 결과가 표시됩니다.'}</span></div>`}</section>`;
     const questionSection = waitingQuestion
         ? `<section class="rai-panel rai-attention" aria-labelledby="rai-question-title"><h2 id="rai-question-title">답변이 필요합니다</h2><pre>${escapeHtml(waitingQuestion)}</pre><p>아래 입력창에 답변하면 같은 요청에서 계속됩니다.</p></section>`
         : '';
-    const showCurrentResult = !terminal && output;
     const resume = followUpEndpoint(state) === 'resume';
     const label = state === 'WAITING_USER' ? '질문에 답변' : resume ? '중단된 작업에 이어서 지시' : '같은 요청에 후속 지시';
     const buttonLabel = state === 'WAITING_USER' ? '답변 보내기' : resume ? '이어서 실행' : '후속 지시 보내기';
 
-    detail.innerHTML = `<div class="rai-detail-head"><div><span class="rai-kicker">REQUEST</span><h1>${escapeHtml(titleOf(request))}</h1><p>${escapeHtml(formatDate(request.created_at))} · ${escapeHtml(request.provider ?? '')}${request.profile ? ` / ${escapeHtml(request.profile)}` : ''}</p></div><span class="rai-state rai-state-${escapeHtml(state.toLowerCase())}">${escapeHtml(stateLabel(state))}</span></div>
+    detail.innerHTML = `<div class="rai-detail-head"><div><span class="rai-kicker">REQUEST</span><h1>${escapeHtml(titleOf(request))}</h1><p>${escapeHtml(formatDate(request.created_at))} · ${escapeHtml(request.provider ?? '')}${request.profile ? ` / ${escapeHtml(request.profile)}` : ''}</p></div><span class="rai-state rai-state-${escapeHtml(state.toLowerCase())}" role="status" aria-live="polite">${escapeHtml(stateLabel(state))}</span></div>
         ${terminal ? resultSection : ''}
         ${questionSection}
-        ${showCurrentResult ? resultSection : ''}
         <section class="rai-detail-grid rai-detail-context" aria-label="요청 및 진행 정보">
-            <details class="rai-panel rai-disclosure"${!terminal && prompt.length <= 500 ? ' open' : ''}><summary><span>요청 원문</span><small>${prompt.length.toLocaleString('ko-KR')}자</small></summary><pre>${escapeHtml(prompt)}</pre></details>
-            <details class="rai-panel rai-disclosure"><summary><span>진행 이력</span><small data-rai-event-count>${eventCountLabel(feed.events.size)}</small></summary><div class="rai-events" data-rai-events></div></details>
+            <details class="rai-panel rai-disclosure" data-rai-disclosure="prompt"${(disclosureState.get('prompt') ?? (!terminal && prompt.length <= 500)) ? ' open' : ''}><summary data-rai-focus="prompt-summary"><span>요청 원문</span><small>${prompt.length.toLocaleString('ko-KR')}자</small></summary><pre>${escapeHtml(prompt)}</pre></details>
+            <details class="rai-panel rai-disclosure" data-rai-disclosure="events"${disclosureState.get('events') ? ' open' : ''}><summary data-rai-focus="events-summary"><span>진행 이력</span><small data-rai-event-count>${eventCountLabel(feed.events.size)}</small></summary><div class="rai-events" data-rai-events></div></details>
         </section>
-        ${!terminal && !showCurrentResult ? resultSection : ''}
-        <form class="rai-followup" data-rai-followup><label>${label}<textarea name="text" rows="4" required data-rai-followup-text placeholder="기존 맥락을 이어서 요청할 내용을 입력하세요.">${escapeHtml(draft)}</textarea></label><button class="rai-primary" type="submit">${buttonLabel}</button></form>`;
+        ${!terminal ? resultSection : ''}
+        <form class="rai-followup" data-rai-followup><label>${label}<textarea name="text" rows="4" required data-rai-followup-text data-rai-focus="followup-text" placeholder="기존 맥락을 이어서 요청할 내용을 입력하세요.">${escapeHtml(draft)}</textarea></label><button class="rai-primary" type="submit" data-rai-focus="followup-submit">${buttonLabel}</button></form>`;
     paintEvents(root, [...feed.events.values()]);
 
     if (restoreFocus) {
         const next = root.querySelector<HTMLTextAreaElement>('[data-rai-followup-text]');
         next?.focus({ preventScroll: true });
         next?.setSelectionRange(Math.min(selectionStart, next.value.length), Math.min(selectionEnd, next.value.length));
+    } else if (active) {
+        root.querySelector<HTMLElement>(`[data-rai-focus="${active}"]`)?.focus({ preventScroll: true });
     }
 }
 
@@ -308,13 +326,25 @@ async function renderDetail(root: HTMLElement, requestId: string, nonce: number)
     root.innerHTML = `<main class="rai-shell"><button class="rai-back" type="button" data-rai-back>← 작업 목록</button><div class="rai-notice" data-rai-notice role="status" hidden></div><section class="rai-detail" data-rai-detail><div class="rai-loading">요청 상태를 불러오는 중입니다.</div></section></main>`;
     root.querySelector('[data-rai-back]')?.addEventListener('click', () => navigate('/ai'));
     let currentRequest: JsonObject | null = null;
+    let pendingPaint: JsonObject | null = null;
+    let composing = false;
+    const followUpIntent = new IdempotencyIntent();
+    let retryFollowUp = false;
+
+    const applyRequest = (request: JsonObject): void => {
+        currentRequest = request;
+        if (composing) {
+            pendingPaint = request;
+            return;
+        }
+        paintDetail(root, request, requestId);
+    };
 
     const load = async (): Promise<JsonObject | null> => {
         try {
             const request = await api(`/${encodeURIComponent(requestId)}`);
             if (nonce !== renderNonce) return null;
-            currentRequest = request;
-            paintDetail(root, request, requestId);
+            applyRequest(request);
             clearNotice(root, 'request');
             return request;
         } catch (error) {
@@ -327,7 +357,23 @@ async function renderDetail(root: HTMLElement, requestId: string, nonce: number)
 
     root.addEventListener('input', (event) => {
         const target = event.target;
-        if (target instanceof HTMLTextAreaElement && target.matches('[data-rai-followup-text]')) detailDrafts.set(requestId, target.value);
+        if (target instanceof HTMLTextAreaElement && target.matches('[data-rai-followup-text]')) {
+            detailDrafts.set(requestId, target.value);
+            followUpIntent.changed();
+        }
+    });
+    root.addEventListener('compositionstart', (event) => {
+        if (event.target instanceof HTMLTextAreaElement && event.target.matches('[data-rai-followup-text]')) composing = true;
+    });
+    root.addEventListener('compositionend', (event) => {
+        if (!(event.target instanceof HTMLTextAreaElement) || !event.target.matches('[data-rai-followup-text]')) return;
+        composing = false;
+        detailDrafts.set(requestId, event.target.value);
+        if (pendingPaint) {
+            const request = pendingPaint;
+            pendingPaint = null;
+            applyRequest(request);
+        }
     });
 
     root.addEventListener('submit', async (event) => {
@@ -342,6 +388,9 @@ async function renderDetail(root: HTMLElement, requestId: string, nonce: number)
         const originalLabel = button.textContent ?? '보내기';
         const baseline = Math.max(feedFor(requestId).cursor, latestEventSequence(currentRequest));
         const endpoint = followUpEndpoint(currentRequest.state ?? currentRequest.status);
+        const fingerprint = JSON.stringify([endpoint, text]);
+        const idempotencyKey = followUpIntent.begin(fingerprint, retryFollowUp);
+        retryFollowUp = false;
         stopActiveStream();
         button.disabled = true;
         textarea.disabled = true;
@@ -349,17 +398,17 @@ async function renderDetail(root: HTMLElement, requestId: string, nonce: number)
         try {
             const next = await api(`/${encodeURIComponent(requestId)}/${endpoint}`, {
                 method: 'POST',
-                body: JSON.stringify({ text, attachment_ids: [], idempotency_key: createIdempotencyKey() }),
+                body: JSON.stringify({ text, attachment_ids: [], idempotency_key: idempotencyKey }),
             });
             if (nonce !== renderNonce) return;
             detailDrafts.delete(requestId);
-            currentRequest = next;
-            paintDetail(root, next, requestId);
+            followUpIntent.succeeded();
+            applyRequest(next);
             clearNotice(root);
             startEventStream(root, requestId, nonce, load, baseline, 'follow-up');
         } catch (error) {
             const failure = workspaceError(error);
-            setNotice(root, failure.message, 'error', () => form.requestSubmit(), 'request');
+            setNotice(root, failure.message, 'error', () => { retryFollowUp = true; form.requestSubmit(); }, 'request');
             button.disabled = false;
             textarea.disabled = false;
             button.textContent = originalLabel;
@@ -400,6 +449,14 @@ async function streamEvents(
     const feed = feedFor(requestId);
     feed.cursor = Math.max(feed.cursor, initialAfter);
     let retries = 0;
+    let reloadTimer: number | undefined;
+    const queueReload = (): void => {
+        if (reloadTimer !== undefined) window.clearTimeout(reloadTimer);
+        reloadTimer = window.setTimeout(() => {
+            reloadTimer = undefined;
+            void reload();
+        }, 150);
+    };
     while (!signal.aborted && nonce === renderNonce && generation === streamGeneration) {
         try {
             const response = await fetch(`${API}/${encodeURIComponent(requestId)}/events?after=${feed.cursor}`, {
@@ -435,11 +492,16 @@ async function streamEvents(
                 feed.events.set(sequence, { ...event, sequence });
                 if (feed.events.size > 100) feed.events.delete(Math.min(...feed.events.keys()));
                 paintEvents(root, [...feed.events.values()]);
+                if (!isTerminalEvent(event) || sequence <= initialAfter) {
+                    queueReload();
+                    return false;
+                }
+                if (reloadTimer !== undefined) {
+                    window.clearTimeout(reloadTimer);
+                    reloadTimer = undefined;
+                }
                 const current = await reload();
-                if (!current) return false;
-                return isTerminalEvent(event)
-                    && sequence > initialAfter
-                    && TERMINAL_STATES.has(String(current.state ?? current.status ?? '').toUpperCase());
+                return Boolean(current && TERMINAL_STATES.has(String(current.state ?? current.status ?? '').toUpperCase()));
             };
 
             while (!signal.aborted) {

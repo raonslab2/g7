@@ -11,6 +11,7 @@ import {
     stateLabel,
     TERMINAL_STATES,
     titleOf,
+    IdempotencyIntent,
 } from './presentation';
 
 describe('AI 작업 표현 계층', () => {
@@ -42,6 +43,19 @@ describe('AI 작업 표현 계층', () => {
         });
 
         expect(key).toBe('00000000-0000-4000-8000-000000000000');
+    });
+
+    it('불확실 재시도는 idempotency key를 재사용하고 새 의도와 성공 뒤에는 회전한다', () => {
+        let sequence = 0;
+        const intent = new IdempotencyIntent(() => `key-${++sequence}`);
+
+        expect(intent.begin('same payload')).toBe('key-1');
+        expect(intent.begin('same payload', true)).toBe('key-1');
+        expect(intent.begin('same payload')).toBe('key-2');
+        intent.changed();
+        expect(intent.begin('edited payload', true)).toBe('key-3');
+        intent.succeeded();
+        expect(intent.begin('edited payload', true)).toBe('key-4');
     });
 
     it('terminal의 빈 질문은 사용자 입력으로 표시하지 않는다', () => {

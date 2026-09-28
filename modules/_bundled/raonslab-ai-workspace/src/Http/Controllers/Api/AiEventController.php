@@ -8,11 +8,15 @@ use Illuminate\Http\JsonResponse;
 use Modules\Raonslab\Ai\Workspace\Exceptions\AiGcsException;
 use Modules\Raonslab\Ai\Workspace\Http\Requests\EventCursorRequest;
 use Modules\Raonslab\Ai\Workspace\Services\AiWorkspaceService;
+use Modules\Raonslab\Ai\Workspace\Services\CustomerSafeAiPayload;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class AiEventController extends Controller
 {
-    public function __construct(private readonly AiWorkspaceService $workspace) {}
+    public function __construct(
+        private readonly AiWorkspaceService $workspace,
+        private readonly CustomerSafeAiPayload $customerSafe,
+    ) {}
 
     public function __invoke(EventCursorRequest $request, string $requestId): StreamedResponse|JsonResponse
     {
@@ -35,13 +39,8 @@ class AiEventController extends Controller
         }
 
         return response()->stream(function () use ($stream): void {
-            while (! $stream->eof()) {
-                $chunk = $stream->read(8192);
-                if ($chunk === '') {
-                    usleep(20_000);
-                    continue;
-                }
-                echo $chunk;
+            foreach ($this->customerSafe->sanitizedSse($stream) as $frame) {
+                echo $frame;
                 if (ob_get_level() > 0) {
                     @ob_flush();
                 }

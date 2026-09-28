@@ -37,6 +37,28 @@ export function createIdempotencyKey(
     return `${hex.slice(0, 8)}-${hex.slice(8, 12)}-${hex.slice(12, 16)}-${hex.slice(16, 20)}-${hex.slice(20)}`;
 }
 
+/** Keeps one key for an explicitly requested retry, and rotates for new intent. */
+export class IdempotencyIntent {
+    private pending: { fingerprint: string; key: string } | null = null;
+
+    constructor(private readonly factory: () => string = () => createIdempotencyKey()) {}
+
+    begin(fingerprint: string, retry = false): string {
+        if (!retry || this.pending?.fingerprint !== fingerprint) {
+            this.pending = { fingerprint, key: this.factory() };
+        }
+        return this.pending.key;
+    }
+
+    changed(): void {
+        this.pending = null;
+    }
+
+    succeeded(): void {
+        this.pending = null;
+    }
+}
+
 export function stateLabel(state: unknown): string {
     const labels: Record<string, string> = {
         ACCEPTED: '접수됨',

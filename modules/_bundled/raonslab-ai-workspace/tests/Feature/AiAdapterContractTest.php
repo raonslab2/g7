@@ -13,8 +13,10 @@ use Modules\Raonslab\Ai\Workspace\Exceptions\AiGcsException;
 use Modules\Raonslab\Ai\Workspace\Repositories\Contracts\AiRequestRepositoryInterface;
 use Modules\Raonslab\Ai\Workspace\Services\AiGcsV2Adapter;
 use Modules\Raonslab\Ai\Workspace\Services\AiWorkspaceService;
+use Modules\Raonslab\Ai\Workspace\Services\CustomerSafeAiPayload;
 use Modules\Raonslab\Ai\Workspace\Tests\ModuleTestCase;
 use PHPUnit\Framework\Attributes\Test;
+use GuzzleHttp\Psr7\Utils;
 
 class AiAdapterContractTest extends ModuleTestCase
 {
@@ -108,22 +110,159 @@ class AiAdapterContractTest extends ModuleTestCase
         $adapter = Mockery::mock(AiGcsV2Adapter::class);
         $adapter->shouldNotReceive('getRequest');
         $adapter->shouldNotReceive('followUp');
+        $adapter->shouldNotReceive('resume');
+        $adapter->shouldNotReceive('eventStream');
         $requests = Mockery::mock(AiRequestRepositoryInterface::class);
         $requests->shouldReceive('owned')
-            ->twice()
+            ->times(4)
             ->with($user, 'req-owned-by-user-b')
             ->andThrow((new ModelNotFoundException)->setModel('AiRequest'));
-        $workspace = new AiWorkspaceService($adapter, $requests);
+        $workspace = new AiWorkspaceService($adapter, $requests, new CustomerSafeAiPayload);
 
-        foreach (['detail', 'followUp'] as $method) {
+        foreach (['detail', 'followUp', 'resume', 'events'] as $method) {
             try {
-                $method === 'detail'
-                    ? $workspace->detail($user, 'req-owned-by-user-b')
-                    : $workspace->followUp($user, 'req-owned-by-user-b', ['text' => '계속']);
+                match ($method) {
+                    'detail' => $workspace->detail($user, 'req-owned-by-user-b'),
+                    'followUp' => $workspace->followUp($user, 'req-owned-by-user-b', ['text' => '계속']),
+                    'resume' => $workspace->resume($user, 'req-owned-by-user-b', ['text' => '계속']),
+                    'events' => $workspace->events($user, 'req-owned-by-user-b', 0),
+                };
                 $this->fail('Expected ownership verification to fail closed.');
             } catch (ModelNotFoundException) {
                 $this->assertTrue(true);
             }
+        }
+    }
+
+    #[Test]
+    public function current_v2_request_shapes_cross_the_browser_boundary_as_an_allowlisted_dto(): void
+    {
+        $safe = (new CustomerSafeAiPayload)->request([
+            'request_id' => 'req_safe_1',
+            'user_id' => 'user-b-must-not-cross',
+            'project_id' => 'GNUBOARD7',
+            'provider' => 'CODEX',
+            'profile' => 'CODEX_1',
+            'prompt' => '고객 요청을 검토해 주세요.',
+            'state' => 'COMPLETED',
+            'status' => [
+                'last_event_sequence' => 41,
+                'waiting_reason' => '완료됨',
+                'native_turn_id' => 'turn-private',
+            ],
+            'final_result' => [
+                'output' => "검토가 완료되었습니다.\ntoken=top-secret-token\n경로 /srv/private/report.txt\ncommand: rm -rf /srv/private",
+                'payload' => ['credential' => 'nested-secret', 'cwd' => '/home/operator'],
+            ],
+            'result' => ['turn' => ['command' => 'private shell']],
+            'native_session_id' => 'session-private',
+            'workspace_path' => '/home/operator/workspace',
+            'agent_tools_root' => '/opt/agent-tools',
+            'output_schema' => ['token' => 'schema-secret'],
+            'evidence' => [['shell' => 'cat /etc/passwd']],
+        ]);
+
+        $serialized = json_encode($safe, JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR);
+        $this->assertSame('검토가 완료되었습니다.', strtok($safe['result']['text'], "\n"));
+        $this->assertSame(41, $safe['status']['last_event_sequence']);
+        $this->assertStringContainsString('[credential hidden]', $serialized);
+        $this->assertStringContainsString('[filesystem path hidden]', $serialized);
+        $this->assertStringContainsString('[명령 원문 숨김]', $serialized);
+        foreach (['top-secret-token', 'nested-secret', '/srv/private', '/home/operator', '/opt/agent-tools', 'rm -rf', 'user-b-must-not-cross', 'session-private', 'native_turn_id', 'output_schema', 'evidence'] as $private) {
+            $this->assertStringNotContainsString($private, $serialized);
+        }
+    }
+
+    #[Test]
+    public function codex_and_claude_result_text_is_preserved_without_native_result_envelopes(): void
+    {
+        $presenter = new CustomerSafeAiPayload;
+        $codex = $presenter->request([
+            'request_id' => 'req_codex',
+            'state' => 'COMPLETED',
+            'result' => ['text' => 'CODEX 고객 결과', 'turn' => ['id' => 'native-turn', 'usage' => ['tokens' => 99]]],
+        ]);
+        $claude = $presenter->request([
+            'request_id' => 'req_claude',
+            'state' => 'COMPLETED',
+            'result' => ['result' => 'CLAUDE 고객 결과', 'session_id' => 'native-session', 'usage' => ['cost' => 1]],
+        ]);
+
+        $this->assertSame(['text' => 'CODEX 고객 결과'], $codex['result']);
+        $this->assertSame(['text' => 'CLAUDE 고객 결과'], $claude['result']);
+        $this->assertArrayNotHasKey('turn', $codex['result']);
+        $this->assertArrayNotHasKey('session_id', $claude['result']);
+    }
+
+    #[Test]
+    public function detail_messages_and_resume_all_return_the_same_customer_safe_request_contract(): void
+    {
+        $user = new User(['uuid' => '5f72e0c0-8b89-4d5f-8c44-a5ba69048993']);
+        $user->id = 102;
+        $adapter = Mockery::mock(AiGcsV2Adapter::class);
+        $raw = fn (string $text): array => [
+            'request_id' => 'req_same_contract',
+            'state' => 'COMPLETED',
+            'status' => ['last_event_sequence' => 8, 'command' => 'private'],
+            'result' => ['text' => $text, 'native' => ['token' => 'inner-secret']],
+            'workspace_path' => '/srv/private/worktree',
+            'native_session_id' => 'session-secret',
+        ];
+        $adapter->shouldReceive('getRequest')->once()->andReturn($raw('detail result'));
+        $adapter->shouldReceive('followUp')->once()->andReturn($raw('message result'));
+        $adapter->shouldReceive('resume')->once()->andReturn($raw('resume result'));
+        $requests = Mockery::mock(AiRequestRepositoryInterface::class);
+        $requests->shouldReceive('owned')->times(3)->with($user, 'req_same_contract');
+        $requests->shouldReceive('remember')->times(3)->with($user, Mockery::type('array'));
+        $workspace = new AiWorkspaceService($adapter, $requests, new CustomerSafeAiPayload);
+
+        $responses = [
+            $workspace->detail($user, 'req_same_contract'),
+            $workspace->followUp($user, 'req_same_contract', ['text' => 'continue', 'idempotency_key' => 'same-key']),
+            $workspace->resume($user, 'req_same_contract', ['text' => 'resume', 'idempotency_key' => 'same-key']),
+        ];
+
+        $this->assertSame(['detail result', 'message result', 'resume result'], array_map(
+            fn (array $response): string => $response['result']['text'],
+            $responses
+        ));
+        foreach ($responses as $response) {
+            $serialized = json_encode($response, JSON_THROW_ON_ERROR);
+            $this->assertSame(8, $response['status']['last_event_sequence']);
+            $this->assertStringNotContainsString('inner-secret', $serialized);
+            $this->assertStringNotContainsString('/srv/private', $serialized);
+            $this->assertStringNotContainsString('session-secret', $serialized);
+            $this->assertArrayNotHasKey('command', $response['status']);
+        }
+    }
+
+    #[Test]
+    public function sse_is_rebuilt_from_allowlisted_events_without_echoing_raw_chunks(): void
+    {
+        $raw = ': upstream heartbeat with token=heartbeat-secret'."\n"
+            .'id: 72'."\n"
+            .'event: provider.result'."\n"
+            .'data: '.json_encode([
+                'sequence' => 72,
+                'event_type' => 'provider.result',
+                'created_at' => '2026-09-28T03:00:00Z',
+                'payload' => [
+                    'state' => 'COMPLETED',
+                    'token' => 'stream-secret',
+                    'cwd' => '/srv/private',
+                    'command' => 'bash -c private',
+                    'native' => ['credential' => 'nested-stream-secret'],
+                ],
+            ], JSON_THROW_ON_ERROR)."\n\n";
+
+        $frames = implode('', iterator_to_array((new CustomerSafeAiPayload)->sanitizedSse(Utils::streamFor($raw))));
+
+        $this->assertStringContainsString("id: 72\n", $frames);
+        $this->assertStringContainsString("event: provider.result\n", $frames);
+        $this->assertStringContainsString('"sequence":72', $frames);
+        $this->assertStringContainsString('"state":"COMPLETED"', $frames);
+        foreach (['heartbeat-secret', 'stream-secret', 'nested-stream-secret', '/srv/private', 'bash -c private', 'upstream heartbeat'] as $private) {
+            $this->assertStringNotContainsString($private, $frames);
         }
     }
 
@@ -142,6 +281,9 @@ class AiAdapterContractTest extends ModuleTestCase
         $this->assertStringContainsString("['auth:sanctum'", file_get_contents($root.'/src/routes/api.php'));
         $this->assertStringContainsString("'permission:user,raonslab-ai-workspace.requests.use'", file_get_contents($root.'/src/routes/api.php'));
         $this->assertStringContainsString('data-request-id', file_get_contents($root.'/resources/layouts/user/ai_workspace.json'));
+        $eventController = file_get_contents($root.'/src/Http/Controllers/Api/AiEventController.php');
+        $this->assertStringContainsString('sanitizedSse', $eventController);
+        $this->assertStringNotContainsString('echo $chunk', $eventController);
     }
 
     #[Test]

@@ -11,20 +11,18 @@ class AiWorkspaceService
     public function __construct(
         private readonly AiGcsV2Adapter $adapter,
         private readonly AiRequestRepositoryInterface $requests,
+        private readonly CustomerSafeAiPayload $customerSafe,
     ) {}
 
     public function capabilities(User $user): array
     {
         $projects = $this->adapter->projects($user);
         $providers = $this->adapter->providers($user);
-        $session = $this->adapter->session($user);
-
-        return [
-            'project_id' => $this->adapter->projectId(),
-            'projects' => $projects['projects'] ?? $projects['items'] ?? $projects,
-            'providers' => $providers['providers'] ?? $providers['items'] ?? $providers,
-            'session' => $session,
-        ];
+        return $this->customerSafe->capabilities(
+            $this->adapter->projectId(),
+            $projects['projects'] ?? $projects['items'] ?? $projects,
+            $providers['providers'] ?? $providers['items'] ?? $providers,
+        );
     }
 
     public function list(User $user): array
@@ -39,10 +37,12 @@ class AiWorkspaceService
                 continue;
             }
             $this->requests->remember($user, $item);
-            $owned[] = $item;
+            $owned[] = $this->customerSafe->request($item);
         }
 
-        return ['requests' => $owned, 'next_cursor' => $response['next_cursor'] ?? null];
+        // The current customer UI does not paginate. Upstream cursors are
+        // opaque operator data, so they do not cross this boundary.
+        return ['requests' => $owned, 'next_cursor' => null];
     }
 
     public function submit(User $user, array $input): array
@@ -51,7 +51,7 @@ class AiWorkspaceService
         $normalized = $this->unwrapRequest($remote);
         $this->requests->remember($user, $normalized);
 
-        return $normalized;
+        return $this->customerSafe->request($normalized);
     }
 
     public function detail(User $user, string $requestId): array
@@ -60,7 +60,7 @@ class AiWorkspaceService
         $remote = $this->unwrapRequest($this->adapter->getRequest($user, $requestId));
         $this->requests->remember($user, $remote);
 
-        return $remote;
+        return $this->customerSafe->request($remote);
     }
 
     public function followUp(User $user, string $requestId, array $input): array
@@ -69,7 +69,7 @@ class AiWorkspaceService
         $remote = $this->unwrapRequest($this->adapter->followUp($user, $requestId, $input));
         $this->requests->remember($user, $remote);
 
-        return $remote;
+        return $this->customerSafe->request($remote);
     }
 
     public function resume(User $user, string $requestId, array $input): array
@@ -78,7 +78,7 @@ class AiWorkspaceService
         $remote = $this->unwrapRequest($this->adapter->resume($user, $requestId, $input));
         $this->requests->remember($user, $remote);
 
-        return $remote;
+        return $this->customerSafe->request($remote);
     }
 
     public function events(User $user, string $requestId, int $after): StreamInterface
