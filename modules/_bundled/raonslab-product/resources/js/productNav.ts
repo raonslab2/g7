@@ -5,19 +5,20 @@
  *   Escape·바깥 클릭·포커스 이탈·하위 링크 선택 시 닫고, aria-expanded 와 패널 hidden 을 함께 맞춘다.
  * - 현재 주소에 해당하는 링크에 aria-current="page", 그 그룹 버튼에 data-current 를 단다(직접 진입·새로고침 포함).
  * - 문서 목차(`a[data-rh-anchor]`)는 해시 변경 없이 스크롤·포커스만 옮긴다(라우터 재진입 방지).
+ * - 모바일 문서 메뉴(`[data-rh-docnav-toggle]`)는 기본 닫힘 disclosure 다. Escape 는 닫고 토글로 포커스를 돌린다.
+ * - 문서 분류는 resources/taxonomy/info-policy.json 단일 출처에서 읽는다.
  */
 
-const TRIGGER = '[data-rh-menu-trigger]';
+import taxonomy from '../taxonomy/info-policy.json';
 
-const PAGE_GROUPS: Record<string, 'info' | 'policy'> = {
-  service: 'info',
-  cases: 'info',
-  technology: 'info',
-  privacy: 'policy',
-  terms: 'policy',
-  'ai-workspace-policy': 'policy',
-  'open-source': 'policy',
-};
+const TRIGGER = '[data-rh-menu-trigger]';
+const DOCNAV_TOGGLE = '[data-rh-docnav-toggle]';
+
+export type ProductPageGroup = 'info' | 'policy';
+
+const PAGE_GROUPS: Record<string, ProductPageGroup> = Object.fromEntries(
+  taxonomy.groups.flatMap((group) => group.items.map((item) => [item.slug, group.key as ProductPageGroup])),
+);
 
 /** G7의 clean URL에서 비교에 불필요한 끝 슬래시만 제거한다. */
 export function normalizePath(pathname: string): string {
@@ -60,8 +61,29 @@ export function toggleMenu(trigger: HTMLElement, open?: boolean): void {
   setOpen(trigger, next);
 }
 
+/** 모바일 문서 메뉴의 열림 상태를 aria-expanded 와 패널 hidden 에 함께 반영한다. */
+export function setDocnavOpen(toggle: HTMLElement, open: boolean): void {
+  setOpen(toggle, open);
+}
+
+function openDocnavToggles(): HTMLElement[] {
+  return Array.from(document.querySelectorAll<HTMLElement>(`${DOCNAV_TOGGLE}[aria-expanded="true"]`));
+}
+
+export function closeDocnav(): void {
+  openDocnavToggles().forEach((toggle) => setOpen(toggle, false));
+}
+
 function onClick(event: MouseEvent): void {
   const target = event.target as Element | null;
+  const docnavToggle = target?.closest?.<HTMLElement>(DOCNAV_TOGGLE);
+  if (docnavToggle) {
+    event.preventDefault();
+    setDocnavOpen(docnavToggle, docnavToggle.getAttribute('aria-expanded') !== 'true');
+    return;
+  }
+  if (target?.closest?.('.rh-docnav-panel a')) closeDocnav();
+
   const trigger = target?.closest?.<HTMLElement>(TRIGGER);
   if (trigger) {
     event.preventDefault();
@@ -81,6 +103,14 @@ function onClick(event: MouseEvent): void {
 function onKeydown(event: KeyboardEvent): void {
   const target = event.target as HTMLElement | null;
   if (event.key === 'Escape') {
+    const docnav = openDocnavToggles();
+    if (docnav.length > 0) {
+      closeDocnav();
+      docnav[0].focus();
+      event.preventDefault();
+      return;
+    }
+
     const open = openTriggers();
     if (open.length === 0) return;
     const focusInside = open.find((trigger) => trigger.closest('.rh-gnav-group')?.contains(target));
@@ -138,10 +168,13 @@ let lastPath: string | null = null;
 /** DOM 변화마다 호출된다. 현재 위치 표시를 맞추고, 주소가 바뀌었으면 열린 메뉴를 닫는다. */
 export function syncProductNav(): void {
   const path = normalizePath(window.location.pathname);
-  if (lastPath !== null && lastPath !== path) closeAllMenus();
+  if (lastPath !== null && lastPath !== path) {
+    closeAllMenus();
+    closeDocnav();
+  }
   lastPath = path;
 
-  document.querySelectorAll<HTMLAnchorElement>('.rh-gnav a[data-rh-nav-path], .rh-native-side a[data-rh-nav-path]').forEach((link) => {
+  document.querySelectorAll<HTMLAnchorElement>('.rh-gnav a[data-rh-nav-path], a.rh-side-link[data-rh-nav-path]').forEach((link) => {
     const current = link.dataset.rhNavPath === path && path !== '/';
     if (current) {
       if (link.getAttribute('aria-current') !== 'page') link.setAttribute('aria-current', 'page');

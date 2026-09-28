@@ -1,0 +1,28 @@
+{
+  "_comment": "정보·정책 문서 분류의 단일 출처. 순서·그룹·slug·라벨 키를 바꾸면 `npm run taxonomy:sync` 로 extension JSON 을 다시 생성한다. 문서 제목·본문·SEO 는 sirsoft-page Page DB 가 정본이다.",
+  "groups": [
+    {
+      "key": "info",
+      "label": "nav.info",
+      "items": [
+        { "key": "about", "slug": "about", "label": "nav.info_about", "description": "nav.info_about_desc" },
+        { "key": "services", "slug": "service", "label": "nav.info_services", "description": "nav.info_services_desc" },
+        { "key": "cases", "slug": "cases", "label": "nav.info_cases", "description": "nav.info_cases_desc" },
+        { "key": "principles", "slug": "technology", "label": "nav.info_principles", "description": "nav.info_principles_desc" },
+        { "key": "faq", "slug": "faq", "label": "nav.info_faq", "description": "nav.info_faq_desc" },
+        { "key": "contact", "slug": "contact", "label": "nav.info_contact", "description": "nav.info_contact_desc" }
+      ]
+    },
+    {
+      "key": "policy",
+      "label": "nav.policy",
+      "items": [
+        { "key": "privacy", "slug": "privacy", "label": "nav.policy_privacy", "description": "nav.policy_privacy_desc" },
+        { "key": "community", "slug": "terms", "label": "nav.policy_community", "description": "nav.policy_community_desc" },
+        { "key": "ai_policy", "slug": "ai-workspace-policy", "label": "nav.policy_ai", "description": "nav.policy_ai_desc" },
+        { "key": "oss", "slug": "open-source", "label": "nav.policy_oss", "description": "nav.policy_oss_desc" },
+        { "key": "refund", "slug": "refund", "label": "nav.policy_refund", "description": "nav.policy_refund_desc" }
+      ]
+    }
+  ]
+}

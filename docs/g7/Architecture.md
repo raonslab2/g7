@@ -49,6 +49,8 @@ G7은 AI_GCS/AgentOpt DB, SQLite, filesystem, provider session을 읽지 않는�
 
 제품 기능은 Module → Plugin → Template → Hook/Event → Adapter/config 순으로 공식 확장점을 우선한다. 불가피한 core patch는 별도 inventory, upstream 충돌 분석, rollback을 남기기 전에는 허용하지 않는다.
 
+운영 장애의 판정·복구·재발 방지 규칙은 [프로젝트 트러블슈팅](Troubleshooting.md)에 기록한다.
+
 ## 주요 런타임 흐름
 
 ### Native web
@@ -58,6 +60,10 @@ Nginx는 public entry만 노출하고 임의 PHP 실행과 dotfile 접근을 차
 ### Extension lifecycle
 
 `_bundled` 또는 정식 package → `_pending` 검증 → official lifecycle install/update → active directory → migration/permission/menu/layout sync의 흐름을 따른다. 활성 복사본은 직접 수정하지 않는다.
+
+### 정보·정책 문서
+
+공개 안내 문서 11종은 `sirsoft-page`의 `/page/{slug}`이며 제목·본문·SEO·version은 Page DB가 정본이다. 그룹·순서·짧은 라벨은 `raonslab-product/resources/taxonomy/info-policy.json` 단일 출처가 정하고, 생성 스크립트가 상위 메뉴·product footer·문서 메뉴 Layout Extension을 만든다. 기본 템플릿의 모바일 드로어 정보·정책 목록과 검색봇 서버 렌더 footer는 확장 지점이 없어 제품 분류와 다를 수 있다(제한과 제안: `docs/g7/audit/INITIALIZATION_AUDIT_2026-09-28.md`).
 
 ### AI adapter
 

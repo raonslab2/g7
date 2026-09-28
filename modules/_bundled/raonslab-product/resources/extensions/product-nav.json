@@ -116,6 +116,55 @@
                               },
                               "children": [
                                 {
+                                  "id": "rh_gnav_info_about_item",
+                                  "type": "basic",
+                                  "name": "Li",
+                                  "props": {
+                                    "className": "rh-gnav-item"
+                                  },
+                                  "children": [
+                                    {
+                                      "id": "rh_gnav_info_about",
+                                      "type": "basic",
+                                      "name": "A",
+                                      "props": {
+                                        "className": "rh-gnav-link",
+                                        "href": "/page/about",
+                                        "data-rh-nav-path": "/page/about"
+                                      },
+                                      "children": [
+                                        {
+                                          "id": "rh_gnav_info_about_title",
+                                          "type": "basic",
+                                          "name": "Span",
+                                          "props": {
+                                            "className": "rh-gnav-link-title"
+                                          },
+                                          "text": "$t:raonslab-product.nav.info_about"
+                                        },
+                                        {
+                                          "id": "rh_gnav_info_about_desc",
+                                          "type": "basic",
+                                          "name": "Span",
+                                          "props": {
+                                            "className": "rh-gnav-link-desc"
+                                          },
+                                          "text": "$t:raonslab-product.nav.info_about_desc"
+                                        }
+                                      ],
+                                      "actions": [
+                                        {
+                                          "type": "click",
+                                          "handler": "navigate",
+                                          "params": {
+                                            "path": "/page/about"
+                                          }
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                },
+                                {
                                   "id": "rh_gnav_info_services_item",
                                   "type": "basic",
                                   "name": "Li",
@@ -256,6 +305,104 @@
                                           "handler": "navigate",
                                           "params": {
                                             "path": "/page/technology"
+                                          }
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                },
+                                {
+                                  "id": "rh_gnav_info_faq_item",
+                                  "type": "basic",
+                                  "name": "Li",
+                                  "props": {
+                                    "className": "rh-gnav-item"
+                                  },
+                                  "children": [
+                                    {
+                                      "id": "rh_gnav_info_faq",
+                                      "type": "basic",
+                                      "name": "A",
+                                      "props": {
+                                        "className": "rh-gnav-link",
+                                        "href": "/page/faq",
+                                        "data-rh-nav-path": "/page/faq"
+                                      },
+                                      "children": [
+                                        {
+                                          "id": "rh_gnav_info_faq_title",
+                                          "type": "basic",
+                                          "name": "Span",
+                                          "props": {
+                                            "className": "rh-gnav-link-title"
+                                          },
+                                          "text": "$t:raonslab-product.nav.info_faq"
+                                        },
+                                        {
+                                          "id": "rh_gnav_info_faq_desc",
+                                          "type": "basic",
+                                          "name": "Span",
+                                          "props": {
+                                            "className": "rh-gnav-link-desc"
+                                          },
+                                          "text": "$t:raonslab-product.nav.info_faq_desc"
+                                        }
+                                      ],
+                                      "actions": [
+                                        {
+                                          "type": "click",
+                                          "handler": "navigate",
+                                          "params": {
+                                            "path": "/page/faq"
+                                          }
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                },
+                                {
+                                  "id": "rh_gnav_info_contact_item",
+                                  "type": "basic",
+                                  "name": "Li",
+                                  "props": {
+                                    "className": "rh-gnav-item"
+                                  },
+                                  "children": [
+                                    {
+                                      "id": "rh_gnav_info_contact",
+                                      "type": "basic",
+                                      "name": "A",
+                                      "props": {
+                                        "className": "rh-gnav-link",
+                                        "href": "/page/contact",
+                                        "data-rh-nav-path": "/page/contact"
+                                      },
+                                      "children": [
+                                        {
+                                          "id": "rh_gnav_info_contact_title",
+                                          "type": "basic",
+                                          "name": "Span",
+                                          "props": {
+                                            "className": "rh-gnav-link-title"
+                                          },
+                                          "text": "$t:raonslab-product.nav.info_contact"
+                                        },
+                                        {
+                                          "id": "rh_gnav_info_contact_desc",
+                                          "type": "basic",
+                                          "name": "Span",
+                                          "props": {
+                                            "className": "rh-gnav-link-desc"
+                                          },
+                                          "text": "$t:raonslab-product.nav.info_contact_desc"
+                                        }
+                                      ],
+                                      "actions": [
+                                        {
+                                          "type": "click",
+                                          "handler": "navigate",
+                                          "params": {
+                                            "path": "/page/contact"
                                           }
                                         }
                                       ]
@@ -525,6 +672,55 @@
                                       ]
                                     }
                                   ]
+                                },
+                                {
+                                  "id": "rh_gnav_policy_refund_item",
+                                  "type": "basic",
+                                  "name": "Li",
+                                  "props": {
+                                    "className": "rh-gnav-item"
+                                  },
+                                  "children": [
+                                    {
+                                      "id": "rh_gnav_policy_refund",
+                                      "type": "basic",
+                                      "name": "A",
+                                      "props": {
+                                        "className": "rh-gnav-link",
+                                        "href": "/page/refund",
+                                        "data-rh-nav-path": "/page/refund"
+                                      },
+                                      "children": [
+                                        {
+                                          "id": "rh_gnav_policy_refund_title",
+                                          "type": "basic",
+                                          "name": "Span",
+                                          "props": {
+                                            "className": "rh-gnav-link-title"
+                                          },
+                                          "text": "$t:raonslab-product.nav.policy_refund"
+                                        },
+                                        {
+                                          "id": "rh_gnav_policy_refund_desc",
+                                          "type": "basic",
+                                          "name": "Span",
+                                          "props": {
+                                            "className": "rh-gnav-link-desc"
+                                          },
+                                          "text": "$t:raonslab-product.nav.policy_refund_desc"
+                                        }
+                                      ],
+                                      "actions": [
+                                        {
+                                          "type": "click",
+                                          "handler": "navigate",
+                                          "params": {
+                                            "path": "/page/refund"
+                                          }
+                                        }
+                                      ]
+                                    }
+                                  ]
                                 }
                               ]
                             }
@@ -594,6 +790,10 @@
             "title": "$t:raonslab-product.nav.info",
             "links": [
               {
+                "label": "$t:raonslab-product.nav.info_about",
+                "href": "/page/about"
+              },
+              {
                 "label": "$t:raonslab-product.nav.info_services",
                 "href": "/page/service"
               },
@@ -604,6 +804,14 @@
               {
                 "label": "$t:raonslab-product.nav.info_principles",
                 "href": "/page/technology"
+              },
+              {
+                "label": "$t:raonslab-product.nav.info_faq",
+                "href": "/page/faq"
+              },
+              {
+                "label": "$t:raonslab-product.nav.info_contact",
+                "href": "/page/contact"
               }
             ]
           },
@@ -625,6 +833,10 @@
               {
                 "label": "$t:raonslab-product.nav.policy_oss",
                 "href": "/page/open-source"
+              },
+              {
+                "label": "$t:raonslab-product.nav.policy_refund",
+                "href": "/page/refund"
               }
             ]
           }
