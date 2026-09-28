@@ -102,17 +102,34 @@ describe('사업 홈 레이아웃 확장', () => {
 describe('시각 구조', () => {
   const key = (k: string) => `$t:raonslab-product.home.${k}`;
 
-  it('hero 흐름 도식은 업무 입력 → 에이전트 실행 → 검증 → 운영 결과 순서다', () => {
+  it('hero 흐름 도식은 업무 입력 → 에이전트 실행 → 검증 → 운영 결과 노드 파이프라인이다', () => {
     const flow = byId('raon_home_flow');
     expect(flow?.props).toMatchObject({ role: 'group', 'aria-labelledby': 'rh-flow-label' });
     const steps = childrenWith(byId('raon_home_flow_list'), 'rh-flow-step');
     const stages = steps.map((step) => textsUnder(step).find((t) => t.includes('visual_stage_')));
     expect(stages).toEqual(['input', 'run', 'verify', 'result'].map((s) => key(`visual_stage_${s}`)));
+    const glyphs = steps.map((step) => classOf(childrenWith(step, 'rh-flow-node')[0]?.children?.[0]));
+    expect(glyphs).toEqual(['input', 'run', 'verify', 'result'].map((s) => `rh-glyph rh-glyph-${s}`));
     for (const step of steps) {
-      const node = childrenWith(step, 'rh-flow-node')[0];
-      expect(node?.props?.['aria-hidden']).toBe('true');
+      expect(childrenWith(step, 'rh-flow-node')[0]?.props?.['aria-hidden']).toBe('true');
       expect(textsUnder(step).some((t) => /flow_\w+_copy$/.test(t))).toBe(true);
     }
+  });
+
+  it('상태 레인은 통과만 운영 결과까지 가고, 미검증은 멈추며, 실패는 되돌림 루프로 돌아간다', () => {
+    const rows = byId('raon_home_flow_rows');
+    expect(rows?.props?.['aria-hidden']).toBe('true');
+    const marks = childrenWith(rows, 'rh-run-row').map((row) => (row.children ?? []).map((m) => classOf(m).replace('rh-mark rh-mark-', '')));
+    expect(marks).toEqual([
+      ['done', 'done', 'pass', 'out'],
+      ['done', 'done', 'open', 'none'],
+      ['done', 'done', 'fail', 'none'],
+    ]);
+    expect(childrenWith(rows, 'rh-flow-loop')).toHaveLength(1);
+    const legend = textsUnder(byId('raon_home_flow_legend'));
+    expect(legend).toEqual(['pass', 'fail', 'open'].map((s) => key(`visual_status_${s}`)));
+    // 도식에는 숫자 문구가 없다(근거 없는 수치 금지)
+    expect(textsUnder(byId('raon_home_flow')).filter((t) => !t.startsWith('$t:'))).toEqual([]);
   });
 
   it('hero 는 copy 가 먼저, 흐름 도식이 뒤에 온다(작은 화면 첫 화면 순서)', () => {
@@ -149,6 +166,7 @@ describe('시각 구조', () => {
     for (const field of ['summary', 'problem', 'scope', 'flow', 'verified', 'unverified', 'fit']) {
       expect(texts, field).toContain(key(`case_${name}_${field}`));
     }
+    for (const lane of lanes) expect(lane.children?.[0]?.children?.[0]?.props?.['aria-hidden'], lane.id).toBe('true');
     expect(textsUnder(lanes[2])).toContain(key(`case_${name}_verified`));
     expect(textsUnder(lanes[3])).toContain(key(`case_${name}_unverified`));
   });
@@ -161,7 +179,10 @@ describe('시각 구조', () => {
 
   it('새 문구는 시각 전용 단계 이름 키만 추가한다', () => {
     const visualKeys = Object.keys(ko.home).filter((k) => k.startsWith('visual_'));
-    expect(visualKeys.sort()).toEqual(['visual_stage_input', 'visual_stage_result', 'visual_stage_run', 'visual_stage_verify']);
+    expect(visualKeys.sort()).toEqual([
+      'visual_stage_input', 'visual_stage_result', 'visual_stage_run', 'visual_stage_verify',
+      'visual_status_fail', 'visual_status_open', 'visual_status_pass',
+    ]);
   });
 });
 
