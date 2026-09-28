@@ -120,7 +120,7 @@
 
 | ID | 우선 | 층위 | 조치 | 담당 lane | 선행 |
 |---|---|---|---|---|---|
-| B1 | P0 | DB | about/faq/contact/refund content pack v1(`88e7e7b0…85f7`, 검증기 통과)으로 `raonslab-product:remediate-info-pages` 적용(dry-run → apply → 재실행 already_applied) | 콘텐츠·DB lane | B2, 백업, payload sha256 승인 |
+| B1 | P0 | DB | about/faq/contact/refund content pack v1(`/tmp/rh-pack/pack.canonical.json`, SHA-256 `88e7e7b0…85f7`, envelope·pages 검증 통과)으로 `raonslab-product:remediate-info-pages "$PACK" --actor=… --sha256=88e7…85f7` 적용(dry-run → apply → 재실행 already_applied) | 콘텐츠·DB lane | B2, 백업, payload sha256 승인 |
 | B2 | P1 | RUNTIME | 0.4.1 배포: `module:update` → 새 프로세스 `route:clear`/`route:cache` → `g7-product-fpm` reload → smoke(content gate off) | 배포 lane | source 리뷰 |
 | B3 | P1 | ADMIN CONFIG | 샘플 게시판 `new-board` 비활성화(게시물 0건 확인 후, 삭제 아님) | 관리 lane | — |
 | B4 | P1 | RUNTIME/ADMIN CONFIG | `APP_URL`·sitemap host 단일화 후 sitemap 재생성(중복·`localhost` 제거), 결제 미운영 동안 `/shop/products` sitemap 제외 여부 결정 | 배포 lane | — |

@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Event;
 use Modules\Raonslab\Product\Providers\ProductServiceProvider;
 use Modules\Raonslab\Product\Services\InfoPageRemediator;
+use Modules\Raonslab\Product\Services\NativePageContentPack;
 use Modules\Sirsoft\Page\Database\Seeders\PageSeeder;
 use Modules\Sirsoft\Page\Models\Page;
 use Modules\Sirsoft\Page\Models\PageVersion;
@@ -77,8 +78,8 @@ class InfoPageRemediationCommandTest extends PageModuleTestCase
     {
         $before = $this->state();
 
-        $exit = Artisan::call('raonslab-product:remediate-info-pages', [
-            'payload' => $this->payloadFile(),
+        $exit = $this->remediate([
+            'pack' => $this->payloadFile(),
             '--actor' => (string) $this->actor->id,
             '--dry-run' => true,
         ]);
@@ -88,9 +89,10 @@ class InfoPageRemediationCommandTest extends PageModuleTestCase
         foreach (self::SLUGS as $slug) {
             $this->assertStringContainsString("{$slug}: would_update", $output);
         }
-        $this->assertStringContainsString('payload_sha256: ', $output);
-        $this->assertStringContainsString('schema: '.InfoPageRemediator::PACK_SCHEMA, $output);
+        $this->assertMatchesRegularExpression('/pack_sha256: [0-9a-f]{64} \(not checked\)/', $output);
+        $this->assertStringContainsString('schema: '.NativePageContentPack::SCHEMA, $output);
         $this->assertStringContainsString('pack_id: synthetic-pack', $output);
+        $this->assertStringContainsString('base_commit: '.InfoPageRemediator::AUDITED_BASE_COMMIT, $output);
         $this->assertSame($before, $this->state());
     }
 
@@ -103,8 +105,8 @@ class InfoPageRemediationCommandTest extends PageModuleTestCase
         $versionRowsBefore = PageVersion::count();
         $payload = $this->payloadFile();
 
-        $exit = Artisan::call('raonslab-product:remediate-info-pages', [
-            'payload' => $payload,
+        $exit = $this->remediate([
+            'pack' => $payload,
             '--actor' => $this->actor->email,
         ]);
         $this->assertSame(0, $exit, Artisan::output());
@@ -128,8 +130,8 @@ class InfoPageRemediationCommandTest extends PageModuleTestCase
         Event::assertNotDispatched(Login::class);
 
         $after = $this->state();
-        $exit = Artisan::call('raonslab-product:remediate-info-pages', [
-            'payload' => $payload,
+        $exit = $this->remediate([
+            'pack' => $payload,
             '--actor' => (string) $this->actor->id,
         ]);
         $output = Artisan::output();
@@ -148,8 +150,8 @@ class InfoPageRemediationCommandTest extends PageModuleTestCase
         $faq->forceFill(['title' => ['ko' => '관리자 수정', 'en' => 'Edited by admin']])->saveQuietly();
         $before = $this->state();
 
-        $exit = Artisan::call('raonslab-product:remediate-info-pages', [
-            'payload' => $this->payloadFile(),
+        $exit = $this->remediate([
+            'pack' => $this->payloadFile(),
             '--actor' => (string) $this->actor->id,
         ]);
 
@@ -167,8 +169,8 @@ class InfoPageRemediationCommandTest extends PageModuleTestCase
         Page::where('slug', 'refund')->firstOrFail()->forceFill(['published' => false])->saveQuietly();
         $before = $this->state();
 
-        $exit = Artisan::call('raonslab-product:remediate-info-pages', [
-            'payload' => $this->payloadFile(),
+        $exit = $this->remediate([
+            'pack' => $this->payloadFile(),
             '--actor' => (string) $this->actor->id,
         ]);
 
@@ -189,8 +191,8 @@ class InfoPageRemediationCommandTest extends PageModuleTestCase
         });
         $before = $this->state();
 
-        $exit = Artisan::call('raonslab-product:remediate-info-pages', [
-            'payload' => $this->payloadFile(),
+        $exit = $this->remediate([
+            'pack' => $this->payloadFile(),
             '--actor' => (string) $this->actor->id,
         ]);
 
@@ -215,6 +217,10 @@ class InfoPageRemediationCommandTest extends PageModuleTestCase
             'unknown schema' => $pack(['schema' => 'raonslab-product.native-page-content-pack.v0']),
             'missing pack_id' => array_diff_key($valid, ['pack_id' => true]),
             'short base_commit' => $pack(['base_commit' => 'abc123']),
+            'other baseline commit' => $pack(['base_commit' => str_repeat('b', 40)]),
+            'uppercase base_commit' => $pack(['base_commit' => strtoupper(InfoPageRemediator::AUDITED_BASE_COMMIT)]),
+            'empty pack_id' => $pack(['pack_id' => '   ']),
+            'pages as list' => ['pages' => array_values($pages)] + $valid,
             'extra envelope key' => $valid + ['notes' => 'x'],
             'missing slug' => ['pages' => array_diff_key($pages, ['refund' => true])] + $valid,
             'extra slug' => ['pages' => $pages + ['terms' => $pages['about']]] + $valid,
@@ -228,8 +234,8 @@ class InfoPageRemediationCommandTest extends PageModuleTestCase
         ];
 
         foreach ($invalid as $case => $payload) {
-            $exit = Artisan::call('raonslab-product:remediate-info-pages', [
-                'payload' => $this->payloadFile($payload),
+            $exit = $this->remediate([
+                'pack' => $this->payloadFile($payload),
                 '--actor' => (string) $this->actor->id,
             ]);
             $this->assertSame(1, $exit, $case.': '.Artisan::output());
@@ -237,10 +243,10 @@ class InfoPageRemediationCommandTest extends PageModuleTestCase
 
         $path = $this->payloadFile();
         foreach (['', 'not-an-id', (string) $regularUser->id, $blockedAdmin->email] as $actor) {
-            $this->assertSame(1, Artisan::call('raonslab-product:remediate-info-pages', ['payload' => $path, '--actor' => $actor]), $actor);
+            $this->assertSame(1, $this->remediate(['pack' => $path, '--actor' => $actor]), $actor);
         }
-        $this->assertSame(1, Artisan::call('raonslab-product:remediate-info-pages', [
-            'payload' => 'relative/payload.json',
+        $this->assertSame(1, $this->remediate([
+            'pack' => 'relative/payload.json',
             '--actor' => (string) $this->actor->id,
         ]));
 
@@ -277,6 +283,53 @@ class InfoPageRemediationCommandTest extends PageModuleTestCase
         $seeder->run();
     }
 
+    #[Test]
+    public function apply_requires_the_approved_whole_file_sha256(): void
+    {
+        $before = $this->state();
+        $file = $this->payloadFile();
+
+        $this->assertSame(1, Artisan::call('raonslab-product:remediate-info-pages', [
+            'pack' => $file,
+            '--actor' => (string) $this->actor->id,
+        ]));
+        $this->assertStringContainsString('Applying requires --sha256', Artisan::output());
+
+        $this->assertSame(1, $this->remediate(['pack' => $file, '--sha256' => str_repeat('0', 64)]));
+        $this->assertStringContainsString('does not match the approved value', Artisan::output());
+
+        $this->assertSame(1, $this->remediate(['pack' => $file, '--sha256' => 'not-a-sha']));
+        $this->assertSame($before, $this->state());
+
+        $this->assertSame(0, $this->remediate(['pack' => $file, '--sha256' => strtoupper(hash_file('sha256', $file))]));
+        $this->assertMatchesRegularExpression('/pack_sha256: [0-9a-f]{64} \(matches approved\)/', Artisan::output());
+    }
+
+    #[Test]
+    public function pack_envelope_is_validated_before_any_page_is_read(): void
+    {
+        $pack = NativePageContentPack::fromFile($this->payloadFile(), InfoPageRemediator::AUDITED_BASE_COMMIT);
+
+        $this->assertSame('synthetic-pack', $pack->packId);
+        $this->assertSame(InfoPageRemediator::AUDITED_BASE_COMMIT, $pack->baseCommit);
+        $this->assertSame(self::SLUGS, array_keys($pack->pages));
+        $this->assertArrayNotHasKey('schema', $pack->pages);
+
+        $this->expectException(\InvalidArgumentException::class);
+        NativePageContentPack::fromFile($this->payloadFile(), str_repeat('c', 40));
+    }
+
+    /** 승인 SHA-256 을 기본으로 붙여 명령을 실행한다(dry-run 이거나 명시한 값이 있으면 그대로). */
+    private function remediate(array $arguments): int
+    {
+        $arguments += ['--actor' => (string) $this->actor->id];
+        if (empty($arguments['--dry-run']) && ! array_key_exists('--sha256', $arguments) && is_file((string) ($arguments['pack'] ?? ''))) {
+            $arguments['--sha256'] = hash_file('sha256', $arguments['pack']);
+        }
+
+        return Artisan::call('raonslab-product:remediate-info-pages', $arguments);
+    }
+
     /** @return array<string, array<string, mixed>> */
     private function state(): array
     {
@@ -309,10 +362,10 @@ class InfoPageRemediationCommandTest extends PageModuleTestCase
         }
 
         return [
-            'base_commit' => str_repeat('a', 40),
+            'base_commit' => InfoPageRemediator::AUDITED_BASE_COMMIT,
             'pack_id' => 'synthetic-pack',
             'pages' => $pages,
-            'schema' => InfoPageRemediator::PACK_SCHEMA,
+            'schema' => NativePageContentPack::SCHEMA,
         ];
     }
 

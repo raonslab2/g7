@@ -28,12 +28,13 @@ HTTPS 공개 설정을 운영자가 모두 제공한 뒤에만 `RAON_CONSULTATIO
 /usr/bin/php8.3 artisan raonslab-product:bootstrap-pages /secure/approved-raon-pages.json --actor=SUPER_ADMIN_ID
 ```
 
-그대로 남은 G7 샘플 Page 4종(about/faq/contact/refund)은 백업 뒤 운영자가 승인된 외부 payload로 한 번 교체합니다.
-사전 상태가 하나라도 다르면 아무것도 쓰지 않으며 module install/update는 이 명령을 호출하지 않습니다.
+그대로 남은 G7 샘플 Page 4종(about/faq/contact/refund)은 백업 뒤 운영자가 승인된 content pack v1으로 한 번 교체합니다.
+파일 전체 SHA-256과 감사 기준 `base_commit`이 맞아야 하고, 사전 상태가 하나라도 다르면 아무것도 쓰지 않으며
+module install/update는 이 명령을 호출하지 않습니다. 실제 pack의 경로·SHA-256은 [docs/info-policy-0.4.1.md](docs/info-policy-0.4.1.md)에 있습니다.
 
 ```bash
-/usr/bin/php8.3 artisan raonslab-product:remediate-info-pages /secure/approved-info-pages.json --actor=SUPER_ADMIN_ID --dry-run
-/usr/bin/php8.3 artisan raonslab-product:remediate-info-pages /secure/approved-info-pages.json --actor=SUPER_ADMIN_ID
+/usr/bin/php8.3 artisan raonslab-product:remediate-info-pages /abs/path/pack.canonical.json --actor=SUPER_ADMIN_ID --sha256=APPROVED_SHA256 --dry-run
+/usr/bin/php8.3 artisan raonslab-product:remediate-info-pages /abs/path/pack.canonical.json --actor=SUPER_ADMIN_ID --sha256=APPROVED_SHA256
 ```
 
 문서 분류를 바꾸면 `npm run taxonomy:sync`로 extension JSON을 다시 만들고 `npm run taxonomy:check`로 확인합니다.

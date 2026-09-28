@@ -68,7 +68,7 @@
 | wrong initial assumption | 0.4.0 native Page 전환이 공개 문서 전체를 정리했으므로 남은 Page는 RAON 소유 문서라고 보았다. |
 | actual cause | `sirsoft-page` 설치 시 `PageSeeder`가 6개 샘플(terms/privacy/refund/about/faq/contact)을 `published=true`, `current_version=1`로 만든다. 0.4.0은 7개 RAON slug만 다뤘고 terms·privacy만 전환해 나머지 4개가 원문 v1로 남았다. |
 | evidence | `modules/_bundled/sirsoft-page/database/seeders/PageSeeder.php`; 공개 API `/api/modules/sirsoft-page/pages/{about,faq,contact,refund}` 200·제목 원문; 기술 감사의 v1 의미 지문 4개가 `PageSeeder` 원문 재계산값과 정확히 일치(`InfoPageRemediator::SOURCE_FINGERPRINTS`, `InfoPageRemediationCommandTest::untouched_seeder_samples_match_the_audited_source_fingerprints`). |
-| resolution | URL은 유지하고 제자리 교체한다. `raonslab-product:remediate-info-pages`가 승인된 외부 ko/en payload·활성 최고 관리자 actor를 받아 한 외부 transaction에서 4행을 잠그고, v1·발행·원문 지문이 모두 맞을 때만 `PageService::updatePage()`로 v2를 만든다. 하나라도 어긋나면 전부 중단하고, 재실행은 `already_applied`로 끝난다. 본문은 저장소에 두지 않는다. |
+| resolution | URL은 유지하고 제자리 교체한다. `raonslab-product:remediate-info-pages`가 승인된 content pack v1(파일 SHA-256·감사 base_commit 대조)·활성 최고 관리자 actor를 받아 한 외부 transaction에서 4행을 잠그고, v1·발행·원문 지문이 모두 맞을 때만 `PageService::updatePage()`로 v2를 만든다. 하나라도 어긋나면 전부 중단하고, 재실행은 `already_applied`로 끝난다. 본문은 저장소에 두지 않는다. |
 | prevention rule | 설치 시더가 만드는 공개 데이터는 "제품 소유 아님"으로 간주하고 발행 전 전수 분류한다. 제품 분류(taxonomy)는 Page 목록이 아니라 명시적 slug 집합으로 두고, 분류에 든 slug는 배포 smoke가 200·샘플 문구 부재를 확인한다. |
 | related regression test | `modules/_bundled/raonslab-product/tests/Feature/InfoPageRemediationCommandTest.php`; `modules/_bundled/raonslab-product/tests/browser/info-policy-smoke.cjs`(`no sample/placeholder wording in document body`) |
 | related commit/request_id | 이 문서를 포함한 0.4.1 source commit; `req_04b635bdc600403cbf7a3795159ce168`; 기술 감사 `req_3f95be490cb44061be39e563598fe52d` |
@@ -84,7 +84,7 @@
 | evidence | `modules/_bundled/sirsoft-page/database/seeders/PageSeeder.php`의 FAQ 원문; 런타임 `config('mail.default')=smtp`, `storage/app/settings/mail.json`의 host 미설정(값 비공개로 존재 여부만 확인); `storage/app/settings/identity.json`의 `default_provider=g7:core.mail`; `config/core.php`의 `core.auth.signup_*` 정책 정의. |
 | resolution | FAQ·문의 문서는 메일 발송·운영 시간·응답 기한을 약속하지 않는다. 공개 문의 경로는 확인된 `/board/questions`만 안내하고, 상담 접수는 `intake_enabled=false` 동안 닫혀 있음을 밝힌다. 메일 발송은 SMTP 설정과 실제 발송 리허설이 끝난 뒤에만 문구에 넣는다. |
 | prevention rule | 사용자 약속(메일 발송, 응답 시간, 운영 시간, 가격, SLA)은 런타임 설정과 실제 동작 증거가 있을 때만 공개한다. 교체 명령은 `입력하세요`·`DEMO/MOCK/SANDBOX/TEST` 문구를 거부하고, smoke는 운영 시간·영업일 문구를 실패로 본다. |
-| related regression test | `InfoPageRemediationCommandTest::invalid_payloads_and_actors_fail_before_any_write`; `info-policy-smoke.cjs`(`SAMPLE_TEXT`) |
+| related regression test | `InfoPageRemediationCommandTest::invalid_payloads_and_actors_fail_before_any_write`, `apply_requires_the_approved_whole_file_sha256`; `info-policy-smoke.cjs`(`SAMPLE_TEXT`) |
 | related commit/request_id | 0.4.1 source commit; `req_04b635bdc600403cbf7a3795159ce168` |
 
 ## CASE 7 — CMS 분류를 여러 파일에 하드코딩

@@ -29,25 +29,21 @@
 
 ## 샘플 Page 교체 명령
 
-`raonslab-product:remediate-info-pages {payload} --actor=ID|email [--dry-run]`
+`raonslab-product:remediate-info-pages {pack} --actor=ID|email --sha256=<승인 SHA-256> [--dry-run]`
 
-payload는 콘텐츠 lane의 content pack v1 envelope다(저장소에 두지 않음, 보안 경로의 JSON):
+- 인자 `pack`은 콘텐츠 lane의 content pack v1 파일 절대 경로다(저장소에 두지 않음). `NativePageContentPack`이 파일 전체
+  SHA-256을 계산하고 `--sha256`과 다르면 거부한다. 실제 적용(`--dry-run` 없음)은 `--sha256`이 없으면 실행하지 않는다.
+- envelope은 정확히 `schema`·`pack_id`·`base_commit`·`pages` 네 키다.
+  - `schema` = `raonslab-product.native-page-content-pack.v1`
+  - `pack_id` = 비어 있지 않은 문자열(100자 이하)
+  - `base_commit` = 소문자 40자 SHA이며 `InfoPageRemediator::AUDITED_BASE_COMMIT`
+    (`390cdc7a379e1f2b9c8e3991b241edcc59dbdd71`, 원문 지문을 측정한 감사 기준)과 같아야 한다
+  - `pages` = slug 키 객체. 명령은 이 `pages`만 `InfoPageRemediator`로 넘긴다
+- `pages`: 정확히 about·faq·contact·refund, 각 page 키는 `title`·`content`·`content_mode`·`published`·`seo_meta`만.
+  ko·en 필수, `content_mode=html`, `published`는 `true`만 허용(현재 발행 상태 선언일 뿐 `updatePage`로 넘기지 않아 발행 상태 불변),
+  `seo_meta`는 title·description 필수·keywords 선택, `입력하세요`·`DEMO/MOCK/SANDBOX/TEST` 문구 거부.
+- 명령 출력: `pack_sha256: … (matches approved|not checked)`, `schema`, `pack_id`, `base_commit`, slug별 결과.
 
-```json
-{
-  "schema": "raonslab-product.native-page-content-pack.v1",
-  "pack_id": "…",
-  "base_commit": "<40자 commit SHA>",
-  "pages": {
-    "about":   { "title": {"ko": "…", "en": "…"}, "content": {"ko": "<…>", "en": "<…>"}, "content_mode": "html",
-                 "published": true, "seo_meta": {"title": "…", "description": "…", "keywords": "…(선택)"} },
-    "faq": { … }, "contact": { … }, "refund": { … }
-  }
-}
-```
-
-- envelope 키는 정확히 4개, `schema` 일치, `base_commit`은 40자 hex. 명령은 `payload_sha256`·`schema`·`pack_id`·`base_commit`을 출력하므로 승인된 SHA-256과 대조한다.
-- `pages`는 정확히 4개 slug, ko·en 필수, `content_mode=html`, `published`는 `true`만 허용(현재 상태 선언일 뿐 `updatePage`로 넘기지 않아 발행 상태 불변), `입력하세요`·`DEMO/MOCK/SANDBOX/TEST` 문구 거부.
 - 하나의 외부 transaction에서 4행을 `lockForUpdate`로 잠그고 먼저 모두 분류한다.
   - 현재 의미 지문 = 목표 지문 → `already_applied`
   - 발행 상태 + `current_version=1` + 감사 지문(`InfoPageRemediator::SOURCE_FINGERPRINTS`) 일치 → 교체 대상
@@ -57,13 +53,31 @@ payload는 콘텐츠 lane의 content pack v1 envelope다(저장소에 두지 않
 
 ## 배포·적용 순서(이 source 턴에서는 실행하지 않음)
 
-1. 콘텐츠 lane이 4개 ko/en payload를 승인하고 sha256을 기록한다(명령 출력 `payload_sha256`과 대조).
+1. 콘텐츠 pack을 승인하고 파일 전체 SHA-256을 기록한다. 이번 pack: `raon-native-pages-wave2-2026-09-28`, 51,412 bytes,
+   SHA-256 `88e7e7b0e18dca947f0251ce6dd217e0f0a0c0aa73e6161dbf4c1882b0ac85f7`, 현재 위치 `/tmp/rh-pack/pack.canonical.json`
+   (운영자 전용 보안 경로로 옮긴 경우 아래 경로만 바꾸고 SHA-256은 그대로 대조한다).
 2. 공식 백업.
 3. source 반영 뒤 `module:build raonslab-product --production`(이미 커밋된 dist와 같아야 함), `module:update raonslab-product --force`.
 4. 새 PHP 프로세스에서 `route:clear` → `route:cache`, `g7-product-fpm.service`만 graceful reload(Troubleshooting CASE 1).
 5. `route:list --name=raonslab-product.compatibility` 14개와 legacy 301 1건 확인.
 6. `G7_SMOKE_CONTENT_GATE=0 node modules/_bundled/raonslab-product/tests/browser/info-policy-smoke.cjs` — UI 계약 확인.
-7. `remediate-info-pages --dry-run` → 4개 `would_update` 확인 → 적용 → 재실행 4개 `already_applied`.
+7. 샘플 Page 교체(같은 파일·같은 SHA-256, actor는 활성 최고 관리자 ID 또는 정확한 email):
+
+   ```bash
+   cd /home/mrdev/git/g7
+   PACK=/tmp/rh-pack/pack.canonical.json
+   PACK_SHA256=88e7e7b0e18dca947f0251ce6dd217e0f0a0c0aa73e6161dbf4c1882b0ac85f7
+   sha256sum "$PACK"   # 위 값과 같아야 한다
+   /usr/bin/php8.3 artisan raonslab-product:remediate-info-pages "$PACK" --actor=SUPER_ADMIN_ID --sha256="$PACK_SHA256" --dry-run
+   #   기대: pack_sha256: 88e7…85f7 (matches approved) / pack_id: raon-native-pages-wave2-2026-09-28
+   #         base_commit: 390cdc7a…dd71 / about·faq·contact·refund: would_update
+   /usr/bin/php8.3 artisan raonslab-product:remediate-info-pages "$PACK" --actor=SUPER_ADMIN_ID --sha256="$PACK_SHA256"
+   #   기대: 4개 updated
+   /usr/bin/php8.3 artisan raonslab-product:remediate-info-pages "$PACK" --actor=SUPER_ADMIN_ID --sha256="$PACK_SHA256"
+   #   기대: 4개 already_applied (쓰기 없음)
+   ```
+
+   `conflict`가 하나라도 나오면 아무것도 쓰지 않은 상태이므로 원인(관리자 편집·version·비발행)을 확인하기 전 재시도하지 않는다.
 8. `node modules/_bundled/raonslab-product/tests/browser/info-policy-smoke.cjs`(content gate 포함) 1회.
 
 ## 롤백
@@ -73,7 +87,7 @@ payload는 콘텐츠 lane의 content pack v1 envelope다(저장소에 두지 않
 
 ## 검증 기록(source 턴)
 
-- 콘텐츠 pack `raon-native-pages-wave2-2026-09-28`(SHA-256 `88e7e7b0e18dca947f0251ce6dd217e0f0a0c0aa73e6161dbf4c1882b0ac85f7`, 51,412 bytes)은 DB 없이 명령의 payload 검증기를 통과했고, 4개 목표 지문이 모두 원문 지문과 다르며, smoke content gate 정규식에 걸리는 문구가 없다. 본문은 저장소에 복사하지 않았다.
+- 콘텐츠 pack `raon-native-pages-wave2-2026-09-28`(SHA-256 `88e7e7b0e18dca947f0251ce6dd217e0f0a0c0aa73e6161dbf4c1882b0ac85f7`, 51,412 bytes)은 DB 없이 `NativePageContentPack::fromFile`(승인 SHA-256·감사 base_commit 대조)과 `InfoPageRemediator` pages 검증을 통과했고(한 글자 다른 SHA-256은 거부), 4개 목표 지문이 모두 원문 지문과 다르며, smoke content gate 정규식에 걸리는 문구가 없다. 본문은 저장소에 복사하지 않았다.
 
 - vitest 74/74, phpunit(ProductLayerContract·NativePageBootstrap command/unit·InfoPageRemediation) 22 tests / 225 assertions PASS.
 - 새 smoke를 live 0.4.0에 실행: 476 PASS / 356 FAIL(이번 변경이 고치는 결함을 모두 검출). 같은 smoke를 live 런타임 위에 0.4.1 layout·asset·번역을 클라이언트에서만 겹쳐 실행: 1208 PASS / 0 FAIL(content gate off), content gate on이면 샘플 4개 × 4 viewport 16건만 FAIL — DB 교체 전 예상 상태.

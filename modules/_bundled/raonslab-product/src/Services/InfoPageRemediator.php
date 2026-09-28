@@ -17,7 +17,7 @@ use RuntimeException;
  *
  * - 하나의 외부 transaction 안에서 4개 행을 모두 잠그고 분류한 뒤에만 쓴다. 하나라도 충돌이면 전부 중단한다.
  * - 쓰기는 PageService::updatePage() 로만 한다(버전 스냅샷·훅·권한 스코프 유지). raw SQL·Model save 없음.
- * - payload 는 `raonslab-product.native-page-content-pack.v1` envelope(schema·pack_id·base_commit·pages)이다.
+ * - 입력은 content pack 의 `pages` 만이다. envelope·파일 SHA-256·base_commit 은 NativePageContentPack 이 판정한다.
  * - 발행 상태는 바꾸지 않는다. page 의 `published` 는 true 만 허용하는 사전 조건 선언이며 updatePage 로 넘기지 않는다.
  * - module install/update 가 호출하지 않는다. 명시적 CLI 명령에서만 실행된다.
  */
@@ -27,8 +27,11 @@ class InfoPageRemediator
 
     public const REQUIRED_VERSION = 1;
 
-    /** 콘텐츠 lane 이 만드는 승인 payload 의 envelope 스키마 */
-    public const PACK_SCHEMA = 'raonslab-product.native-page-content-pack.v1';
+    /**
+     * SOURCE_FINGERPRINTS 를 측정한 감사 기준 commit. content pack 의 base_commit 은 이 값이어야 한다
+     * (다른 기준에서 만든 pack 은 다른 원문을 전제했을 수 있다).
+     */
+    public const AUDITED_BASE_COMMIT = '390cdc7a379e1f2b9c8e3991b241edcc59dbdd71';
 
     /**
      * 기술 감사(2026-09-28)가 운영 DB 의 v1 스냅샷에서 계산하고, sirsoft-page PageSeeder 원문으로 재현한 지문.
@@ -89,15 +92,15 @@ class InfoPageRemediator
     }
 
     /**
-     * @param  array<string, mixed>  $payload  content pack envelope
+     * @param  array<string, mixed>  $pages  content pack 의 pages (slug => page)
      * @return array<string, string> slug => already_applied|would_update|updated
      *
-     * @throws InvalidArgumentException payload 가 계약을 어기면
+     * @throws InvalidArgumentException pages 가 계약을 어기면
      * @throws InfoPageRemediationConflict 사전 조건이 하나라도 맞지 않으면(쓰기 없음)
      */
-    public function remediate(array $payload, Authenticatable $actor, bool $dryRun = false): array
+    public function remediate(array $pages, Authenticatable $actor, bool $dryRun = false): array
     {
-        $targets = $this->validatedPayload($payload);
+        $targets = $this->validatedPages($pages);
 
         return $this->connection->transaction(function () use ($targets, $actor, $dryRun): array {
             $rows = Page::query()
@@ -195,35 +198,17 @@ class InfoPageRemediator
     }
 
     /**
-     * @param  array<string, mixed>  $payload
+     * @param  array<string, mixed>  $pages  content pack 의 pages
      * @return array<string, array{title: array<string, string>, content: array<string, string>, content_mode: string, seo_meta: array<string, string>}>
      */
-    private function validatedPayload(array $payload): array
+    private function validatedPages(array $pages): array
     {
-        if (array_diff(array_keys($payload), ['schema', 'pack_id', 'base_commit', 'pages']) !== []
-            || count($payload) !== 4) {
-            throw new InvalidArgumentException('The content pack must contain exactly schema, pack_id, base_commit and pages.');
-        }
-        if (($payload['schema'] ?? null) !== self::PACK_SCHEMA) {
-            throw new InvalidArgumentException('Unsupported content pack schema; expected '.self::PACK_SCHEMA.'.');
-        }
-        if (! is_string($payload['pack_id']) || trim($payload['pack_id']) === '' || mb_strlen($payload['pack_id']) > 100) {
-            throw new InvalidArgumentException('The content pack pack_id is invalid.');
-        }
-        if (! is_string($payload['base_commit']) || preg_match('/^[0-9a-f]{40}$/', $payload['base_commit']) !== 1) {
-            throw new InvalidArgumentException('The content pack base_commit must be a 40-character commit SHA.');
-        }
-        if (! is_array($payload['pages'])) {
-            throw new InvalidArgumentException('The content pack pages must be an object.');
-        }
-        $pages = $payload['pages'];
-
         $actualSlugs = array_keys($pages);
         $expectedSlugs = array_keys(self::SOURCE_FINGERPRINTS);
         sort($actualSlugs);
         sort($expectedSlugs);
         if ($actualSlugs !== $expectedSlugs) {
-            throw new InvalidArgumentException('The content pack pages must contain exactly: '.implode(', ', array_keys(self::SOURCE_FINGERPRINTS)).'.');
+            throw new InvalidArgumentException('The pages must contain exactly: '.implode(', ', array_keys(self::SOURCE_FINGERPRINTS)).'.');
         }
 
         $targets = [];

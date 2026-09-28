@@ -3,14 +3,15 @@
 namespace Modules\Raonslab\Product\Console\Commands;
 
 use Illuminate\Console\Command;
-use JsonException;
+use InvalidArgumentException;
 use Modules\Raonslab\Product\Console\Concerns\ActsAsPageActor;
 use Modules\Raonslab\Product\Exceptions\InfoPageRemediationConflict;
 use Modules\Raonslab\Product\Services\InfoPageRemediator;
+use Modules\Raonslab\Product\Services\NativePageContentPack;
 use Throwable;
 
 /**
- * 그대로 남은 G7 샘플 Page 4종을 승인된 외부 payload 로 한 번 교체한다.
+ * 그대로 남은 G7 샘플 Page 4종을 승인된 content pack 으로 한 번 교체한다.
  * module install/update 는 이 명령을 호출하지 않는다. 운영자가 백업 뒤 직접 실행한다.
  */
 class RemediateInfoPagesCommand extends Command
@@ -18,17 +19,20 @@ class RemediateInfoPagesCommand extends Command
     use ActsAsPageActor;
 
     protected $signature = 'raonslab-product:remediate-info-pages
-        {payload : Absolute path to the approved raonslab-product.native-page-content-pack.v1 JSON (about/faq/contact/refund)}
+        {pack : Absolute path to the approved raonslab-product.native-page-content-pack.v1 JSON (about/faq/contact/refund)}
         {--actor= : Active super administrator ID or exact email for Page attribution}
+        {--sha256= : Approved SHA-256 of the whole pack file (required unless --dry-run)}
         {--dry-run : Lock and classify all four Pages, report, and write nothing}';
 
     protected $description = 'Replace the untouched G7 sample about/faq/contact/refund Pages through PageService (all-or-nothing)';
 
     public function handle(InfoPageRemediator $remediator): int
     {
-        $path = (string) $this->argument('payload');
-        if (! str_starts_with($path, '/') || ! is_file($path) || ! is_readable($path)) {
-            $this->error('The payload must be an absolute path to a readable file.');
+        $dryRun = (bool) $this->option('dry-run');
+        $expectedSha256 = $this->option('sha256');
+        $expectedSha256 = is_string($expectedSha256) && $expectedSha256 !== '' ? $expectedSha256 : null;
+        if (! $dryRun && $expectedSha256 === null) {
+            $this->error('Applying requires --sha256 with the approved whole-file SHA-256 of the content pack.');
 
             return self::FAILURE;
         }
@@ -41,21 +45,27 @@ class RemediateInfoPagesCommand extends Command
         }
 
         try {
-            $payload = json_decode((string) file_get_contents($path), true, 512, JSON_THROW_ON_ERROR);
-            if (! is_array($payload)) {
-                throw new JsonException('The payload root must be an object.');
-            }
-            $this->line('payload_sha256: '.hash_file('sha256', $path));
-            foreach (['schema', 'pack_id', 'base_commit'] as $field) {
-                if (is_string($payload[$field] ?? null)) {
-                    $this->line("{$field}: {$payload[$field]}");
-                }
-            }
+            $pack = NativePageContentPack::fromFile(
+                (string) $this->argument('pack'),
+                InfoPageRemediator::AUDITED_BASE_COMMIT,
+                $expectedSha256,
+            );
+        } catch (InvalidArgumentException $exception) {
+            $this->error('Content pack rejected: '.$exception->getMessage());
 
+            return self::FAILURE;
+        }
+
+        $this->line('pack_sha256: '.$pack->sha256.($expectedSha256 === null ? ' (not checked)' : ' (matches approved)'));
+        $this->line('schema: '.NativePageContentPack::SCHEMA);
+        $this->line('pack_id: '.$pack->packId);
+        $this->line('base_commit: '.$pack->baseCommit);
+
+        try {
             $results = $this->asPageActor(
                 $actor,
                 'raonslab-info-page-remediation',
-                fn (): array => $remediator->remediate($payload, $actor, (bool) $this->option('dry-run')),
+                fn (): array => $remediator->remediate($pack->pages, $actor, $dryRun),
             );
         } catch (InfoPageRemediationConflict $conflict) {
             foreach ($conflict->conflicts as $slug => $reason) {
