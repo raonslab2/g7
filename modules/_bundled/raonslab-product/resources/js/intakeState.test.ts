@@ -1,5 +1,13 @@
 import { describe, expect, it } from 'vitest';
-import { currentIntakeState, intakeStateOf, needsIntakeState, publishIntakeState } from './intakeState';
+import {
+  currentIntakeState,
+  INTAKE_CACHE_TTL_MS,
+  intakeStateOf,
+  needsIntakeState,
+  publishIntakeState,
+  readCachedIntakeState,
+  writeCachedIntakeState,
+} from './intakeState';
 
 function fakeRoot(): HTMLElement {
   return { dataset: {} } as unknown as HTMLElement;
@@ -31,5 +39,21 @@ describe('상담 접수 상태(클릭 전 표시)', () => {
     expect(needsIntakeState(fakeDocument({}, true))).toBe(true);
     expect(needsIntakeState(fakeDocument({}, false))).toBe(false);
     expect(needsIntakeState(fakeDocument({ rhIntake: 'closed' }, true))).toBe(false);
+  });
+
+  it('메뉴 표시용 기억 값은 짧은 시간만 유효하고 형식이 틀리면 버린다', () => {
+    const data = new Map<string, string>();
+    const storage = { getItem: (k: string) => data.get(k) ?? null, setItem: (k: string, v: string) => void data.set(k, v) };
+    writeCachedIntakeState(storage, 'closed', 1_000);
+    expect(readCachedIntakeState(storage, 1_000 + INTAKE_CACHE_TTL_MS)).toBe('closed');
+    expect(readCachedIntakeState(storage, 1_001 + INTAKE_CACHE_TTL_MS)).toBeNull();
+    expect(readCachedIntakeState(storage, 999)).toBeNull();
+    data.set('rh-intake-state', '{"state":"yes","at":1000}');
+    expect(readCachedIntakeState(storage, 1_000)).toBeNull();
+    data.set('rh-intake-state', 'not json');
+    expect(readCachedIntakeState(storage, 1_000)).toBeNull();
+    expect(readCachedIntakeState(null, 1_000)).toBeNull();
+    const blocked = { setItem: () => { throw new Error('blocked'); } };
+    expect(() => writeCachedIntakeState(blocked, 'open', 1)).not.toThrow();
   });
 });

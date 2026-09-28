@@ -22,7 +22,7 @@ import {
   validateDraft,
 } from './consultation';
 import { currentLocale, t } from './i18n';
-import { intakeStateOf, needsIntakeState, publishIntakeState } from './intakeState';
+import { intakeStateOf, needsIntakeState, publishIntakeState, readCachedIntakeState, writeCachedIntakeState } from './intakeState';
 
 type View = 'loading' | 'unavailable' | 'form' | 'success';
 type BannerKind = 'error' | 'warn' | 'ok';
@@ -98,11 +98,21 @@ async function fetchConfig(): Promise<IntakeConfig | null> {
 
 let configInFlight: Promise<IntakeConfig | null> | null = null;
 
+function sessionStore(): Storage | null {
+  try {
+    return window.sessionStorage;
+  } catch {
+    return null;
+  }
+}
+
 /** 동시에 들어온 확인은 한 요청으로 합치고, 결과를 화면의 접수 상태 표시에 반영한다. */
 function loadConfig(): Promise<IntakeConfig | null> {
   configInFlight ??= fetchConfig().then((config) => {
     configInFlight = null;
-    publishIntakeState(intakeStateOf(config));
+    const state = intakeStateOf(config);
+    publishIntakeState(state);
+    writeCachedIntakeState(sessionStore(), state, Date.now());
     return config;
   });
   return configInFlight;
@@ -542,5 +552,9 @@ export function syncConsultationIslands(): void {
     if (host.dataset[MOUNTED] !== 'true') mount(host);
   });
   // 상담 양식이 없는 화면(상위 메뉴만 있는 문서 화면)에서도 접수 상태를 한 번 확인한다.
-  if (configInFlight === null && needsIntakeState()) void loadConfig();
+  if (configInFlight === null && needsIntakeState()) {
+    const cached = readCachedIntakeState(sessionStore(), Date.now());
+    if (cached) publishIntakeState(cached);
+    else void loadConfig();
+  }
 }

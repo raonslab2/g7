@@ -3,7 +3,7 @@
  * RAON Agent Factory 사업 홈 — 실제 브라우저 모바일/데스크톱 스모크.
  *
  * 실행 중인 G7 런타임(G7_BASE_URL)을 실제 Chromium 으로 연다.
- * RH_CANDIDATE_DIST 를 주면 배포 전 후보 빌드(모듈 JS/CSS·홈 레이아웃 확장·다국어)를
+ * RH_CANDIDATE_DIST 를 주면 배포 전 후보 빌드(모듈 JS/CSS·홈 레이아웃 확장·상위 메뉴·다국어)를
  * 네트워크 가로채기로 끼워 넣어 검증한다 — 런타임 파일·DB 는 바꾸지 않는다.
  * 상담 API 는 시나리오별로 계약 응답을 돌려주는 스텁을 쓰며, "접수 불가" 는 실제 응답도 확인한다.
  *
@@ -27,7 +27,7 @@ const VIEWPORTS = [
   { name: 'mobile-412', width: 412, height: 915, mobile: true },
   { name: 'desktop-1280', width: 1280, height: 900, mobile: false },
 ];
-const SECTION_ORDER = ['rh-hero', 'rh-problem', 'rh-services', 'rh-cases', 'rh-process', 'rh-tech', 'rh-consult'];
+const SECTION_ORDER = ['rh-hero', 'rh-proof', 'rh-services', 'rh-fit', 'rh-case', 'rh-process', 'rh-consult'];
 const API = '/api/modules/raonslab-product/consultations';
 const OPEN_CONFIG = {
   success: true,
@@ -53,6 +53,7 @@ function assert(scope, check, ok, detail = '') {
 
 let moduleAssets = null;
 const candidateLayout = JSON.parse(fs.readFileSync(path.join(MODULE_ROOT, 'resources/extensions/home-product.json'), 'utf8'));
+const candidateNav = JSON.parse(fs.readFileSync(path.join(MODULE_ROOT, 'resources/extensions/product-nav.json'), 'utf8'));
 const candidateLang = {
   ko: JSON.parse(fs.readFileSync(path.join(MODULE_ROOT, 'resources/lang/ko.json'), 'utf8')),
   en: JSON.parse(fs.readFileSync(path.join(MODULE_ROOT, 'resources/lang/en.json'), 'utf8')),
@@ -78,6 +79,23 @@ async function bundleOf(kind) {
   return parts.join(kind === 'js' ? '\n;\n' : '\n');
 }
 
+function findNode(node, id) {
+  if (Array.isArray(node)) {
+    for (const child of node) {
+      const found = findNode(child, id);
+      if (found) return found;
+    }
+    return null;
+  }
+  if (!node || typeof node !== 'object') return null;
+  if (node.id === id) return node;
+  for (const child of Object.values(node)) {
+    const found = findNode(child, id);
+    if (found) return found;
+  }
+  return null;
+}
+
 function replaceNode(node, id, replacement) {
   if (Array.isArray(node)) return node.map((child) => replaceNode(child, id, replacement));
   if (node && typeof node === 'object') {
@@ -95,10 +113,12 @@ async function installCandidate(context) {
   const cssBundle = await bundleOf('css');
   await context.route(/\/bundles\/modules\.js/, (route) => route.fulfill({ status: 200, contentType: 'application/javascript', body: jsBundle }));
   await context.route(/\/bundles\/modules\.css/, (route) => route.fulfill({ status: 200, contentType: 'text/css', body: cssBundle }));
-  await context.route(/\/api\/layouts\/sirsoft-basic\/home\.json/, async (route) => {
+  // 홈 본문과 모든 화면의 상위 메뉴(_user_base overlay)를 후보로 바꾼다.
+  await context.route(/\/api\/layouts\/sirsoft-basic\/[\w/-]+\.json/, async (route) => {
     const response = await route.fetch();
     const body = await response.json();
     body.data = replaceNode(body.data, 'raon_home', candidateLayout.injections[0].components[0]);
+    body.data = replaceNode(body.data, 'rh_gnav_root', findNode(candidateNav, 'rh_gnav_root'));
     await route.fulfill({ response, json: body });
   });
   await context.route(/\/templates\/sirsoft-basic\/lang\/(ko|en)\.json/, async (route) => {
@@ -148,7 +168,9 @@ async function openHome(context, vp, url = '/') {
     errors.push(msg.text());
   });
   page.on('pageerror', (err) => errors.push(String(err)));
-  page.unexpectedResponses = () => badResponses.filter((line) => line !== `404 ${API}/config`);
+  // config 는 IP 당 분당 60회로 제한된다. 이 스모크는 한 IP 에서 수십 번 새로 여므로 429 는 별도로 기록한다(화면은 닫힘으로 처리).
+  page.unexpectedResponses = () => badResponses.filter((line) => line !== `404 ${API}/config` && line !== `429 ${API}/config`);
+  page.configThrottled = () => badResponses.filter((line) => line === `429 ${API}/config`).length;
   page.knownConfig404 = () => badResponses.includes(`404 ${API}/config`);
   await page.goto(`${BASE}${url}`, { waitUntil: 'networkidle' });
   await page.waitForSelector('.rh-home', { timeout: 15000 });
@@ -163,7 +185,6 @@ async function overflow(page) {
     document.querySelectorAll('.rh-home *').forEach((el) => {
       const r = el.getBoundingClientRect();
       if (r.width === 0 || getComputedStyle(el).visibility === 'hidden') return;
-      if (el.closest('.rh-subnav-list')) return; // 가로 스크롤 목록은 의도된 동작
       if (r.right > vw + 0.5 || r.left < -0.5) offenders.push(`${el.tagName}.${el.className}`.slice(0, 80));
     });
     return { scrollWidth: document.documentElement.scrollWidth, vw, offenders: offenders.slice(0, 5), count: offenders.length };
@@ -234,6 +255,40 @@ async function layoutChecks(browser, vp) {
   await installCandidate(context);
   const { page, errors } = await openHome(context, vp);
   const scope = vp.name;
+
+  // 1) 실제 런타임 config(접수 닫힘) — 클릭 전 상태 표시와 첫 화면·증거·사례 위치
+  await page.waitForFunction(() => document.documentElement.dataset.rhIntake !== undefined, null, { timeout: 15000 });
+  const closed = await page.evaluate(() => {
+    window.scrollTo(0, 0);
+    const shown = (el) => !!el && el.getBoundingClientRect().height > 0 && getComputedStyle(el).display !== 'none';
+    const top = (sel) => { const el = document.querySelector(sel); return el ? Math.round(el.getBoundingClientRect().top + window.scrollY) : null; };
+    const gnav = document.querySelector('.rh-gnav');
+    return {
+      intake: document.documentElement.dataset.rhIntake,
+      heroCtas: [...document.querySelectorAll('.rh-hero .rh-action')].filter(shown).map((a) => [a.classList.contains('rh-action-primary') ? 'primary' : 'secondary', a.getAttribute('href')]),
+      gnavShown: shown(gnav),
+      gnavCta: shown(document.querySelector('.rh-gnav-cta')) ? document.querySelector('.rh-gnav-cta').innerText.replace(/\s+/g, ' ').trim() : null,
+      subnav: !!document.querySelector('.rh-subnav'),
+      vh: window.innerHeight,
+      height: document.documentElement.scrollHeight,
+      chars: document.querySelector('.rh-home').innerText.replace(/\s+/g, '').length,
+      proofTop: top('#rh-proof'),
+      caseTop: top('#rh-case'),
+      // 행동 유형 = 보이는 행동 링크의 목적지 종류. 상담 양식의 "다시 확인" 같은 상태 버튼은 행동 링크가 아니다.
+      ctaTypes: new Set([...document.querySelectorAll('.rh-home a.rh-action')].filter(shown).map((a) => a.getAttribute('href'))).size,
+    };
+  });
+  record(scope, `측정: 높이 ${closed.height}px · 글자 ${closed.chars} · 증거 ${closed.proofTop}px · 사례 ${closed.caseTop}px (${(closed.caseTop / closed.vh).toFixed(2)}화면)`, 'INFO');
+  assert(scope, '접수 닫힘이 클릭 전에 확정된다', closed.intake === 'closed', closed.intake);
+  assert(scope, '닫힘: 주 행동 사례, 보조 행동 도입 절차', JSON.stringify(closed.heroCtas) === JSON.stringify([['primary', '#rh-case'], ['secondary', '#rh-process']]), JSON.stringify(closed.heroCtas));
+  assert(scope, '홈 섹션 바로가기 줄 없음', !closed.subnav);
+  if (vp.mobile) assert(scope, '모바일 홈: 제품 바 없이 기본 헤더 하나', !closed.gnavShown);
+  else assert(scope, '데스크톱: 상담 진입점에 접수 준비 중 표시', closed.gnavShown && /접수 준비 중/.test(closed.gnavCta ?? ''), closed.gnavCta);
+  assert(scope, 'RAON Hub 증거가 첫 화면 안에서 시작', closed.proofTop !== null && closed.proofTop < closed.vh, `${closed.proofTop}/${closed.vh}`);
+  assert(scope, '행동 유형 2개 이하', closed.ctaTypes <= 2, closed.ctaTypes);
+  if (vp.name === 'mobile-390') assert(scope, '390px 전체 높이 5,800px 이하', closed.height <= 5800, closed.height);
+
+  // 2) 접수 열림 계약 스텁 — 상담이 주 행동이 되고 양식이 뜬다
   await stubConsultation(page, { config: 'open', replies: [{ status: 201, body: { data: { reference: 'x' } } }] });
   await page.reload({ waitUntil: 'networkidle' });
   await page.waitForSelector('.rh-home form', { timeout: 15000 });
@@ -246,63 +301,23 @@ async function layoutChecks(browser, vp) {
     h1: document.querySelector('.rh-home h1')?.textContent ?? '',
     bg: getComputedStyle(document.querySelector('.rh-home')).backgroundColor,
     transition: getComputedStyle(document.querySelector('.rh-action')).transitionDuration,
-    flowSteps: document.querySelectorAll('.rh-flow-step').length,
-    processSteps: document.querySelectorAll('.rh-process-step').length,
+    flowSteps: [...document.querySelectorAll('.rh-flow-stage')].map((el) => el.textContent.trim()),
+    timeline: [...document.querySelectorAll('.rh-timeline-title')].map((el) => el.textContent.trim()),
+    openCtas: [...document.querySelectorAll('.rh-hero .rh-action')].filter((a) => a.getBoundingClientRect().height > 0).map((a) => a.getAttribute('href')),
+    exposedIcons: [...document.querySelectorAll('.rh-home i')].filter((i) => i.getAttribute('aria-hidden') !== 'true' && !i.closest('[aria-hidden="true"]')).length,
   }));
   assert(scope, 'title 적용', info.title.startsWith('RAON Agent Factory'), info.title);
   assert(scope, 'meta description 적용', info.description.length > 20, info.description);
-  assert(scope, '섹션 순서 hero→문제→서비스→사례→절차→기술→상담', JSON.stringify(info.sections) === JSON.stringify(SECTION_ORDER), info.sections.join(','));
-  assert(scope, 'H1 주제목', info.h1.includes('AI 에이전트'), info.h1);
+  assert(scope, '7개 섹션 순서', JSON.stringify(info.sections) === JSON.stringify(SECTION_ORDER), info.sections.join(','));
+  assert(scope, 'H1 승인 문장', info.h1 === '기업 업무에 맞는 AI 에이전트, 구축부터 실행·검증·운영까지.', info.h1);
   assert(scope, '제품 CSS 연결(차콜 배경)', info.bg === 'rgb(18, 20, 22)', info.bg);
-  assert(scope, '흐름·도입 단계 목록 렌더', info.flowSteps === 4 && info.processSteps === 5, `${info.flowSteps}/${info.processSteps}`);
+  assert(scope, '흐름 4단계', JSON.stringify(info.flowSteps) === JSON.stringify(['업무 입력', '제한된 실행', '검증', '결과']), info.flowSteps.join(' → '));
+  assert(scope, '절차 타임라인 4단계', JSON.stringify(info.timeline) === JSON.stringify(['범위', '실행', '검증', '승인·복구']), info.timeline.join(' → '));
+  assert(scope, '열림: 주 행동 상담, 보조 행동 사례', JSON.stringify(info.openCtas) === JSON.stringify(['#rh-consult', '#rh-case']), info.openCtas.join(','));
   assert(scope, '번역 키 미노출', !/raonslab-product\./.test(info.bodyText));
-  assert(scope, '개발 용어 미노출', !/\b(DEMO|MOCK|SANDBOX|TEST)\b/.test(info.bodyText.toUpperCase()));
+  assert(scope, '개발 용어·내부 코드 미노출', !/\b(DEMO|MOCK|SANDBOX|TEST)\b/.test(info.bodyText.toUpperCase()) && !/MOBILE_STOCK|J1~J10|A1~A10|Provider/.test(info.bodyText));
   assert(scope, 'reduced-motion 전환 제거', info.transition === '0s', info.transition);
-
-  // 시각 구조: 첫 화면 구성, 흐름 도식 방향, 근거 레인, 타임라인 방향, 장식 아이콘 숨김
-  const visual = await page.evaluate(() => {
-    window.scrollTo(0, 0);
-    const box = (el) => (el ? el.getBoundingClientRect() : null);
-    const stages = [...document.querySelectorAll('.rh-flow-stage')];
-    const stageBoxes = stages.map(box);
-    const nodes = [...document.querySelectorAll('.rh-process-node')].map(box);
-    const icon = document.querySelector('.rh-home i.fas');
-    return {
-      vh: window.innerHeight,
-      h1Bottom: box(document.querySelector('.rh-title'))?.bottom ?? Infinity,
-      ctaBottom: box(document.querySelector('.rh-action-primary'))?.bottom ?? Infinity,
-      stageBottoms: stageBoxes.map((b) => Math.round(b.bottom)),
-      stageTexts: stages.map((el) => el.textContent.trim()),
-      stagesInRow: stageBoxes.every((b) => Math.abs(b.top - stageBoxes[0].top) < 2),
-      stagesInColumn: stageBoxes.every((b) => Math.abs(b.left - stageBoxes[0].left) < 2),
-      processInRow: nodes.every((b) => Math.abs(b.top - nodes[0].top) < 2),
-      processInColumn: nodes.every((b) => Math.abs(b.left - nodes[0].left) < 2),
-      processCount: nodes.length,
-      lanes: [...document.querySelectorAll('.rh-case')].map((c) => [...c.querySelectorAll('.rh-lane')].map((l) => l.className.split(' ')[1])),
-      stations: [...document.querySelector('.rh-case').querySelectorAll('.rh-lane-mark')].map(box),
-      boundary: getComputedStyle(document.querySelector('.rh-lane-limit')).borderLeftStyle + '/' + getComputedStyle(document.querySelector('.rh-lane-limit')).borderTopStyle,
-      runRows: [...document.querySelectorAll('.rh-run-row')].map((r) => r.querySelectorAll('.rh-mark').length),
-      loop: (() => { const b = box(document.querySelector('.rh-flow-loop')); return b ? Math.round(b.width) : 0; })(),
-      legendBottom: box(document.querySelector('.rh-legend'))?.bottom ?? Infinity,
-      exposedIcons: [...document.querySelectorAll('.rh-home i')].filter((i) => i.getAttribute('aria-hidden') !== 'true' && !i.closest('[aria-hidden="true"]')).length,
-      iconFont: icon ? getComputedStyle(icon, '::before').fontFamily : '',
-      iconWidth: icon ? Math.round(icon.getBoundingClientRect().width) : 0,
-    };
-  });
-  const mobileLayout = vp.width <= 640;
-  assert(scope, '첫 화면에 H1·주 CTA·흐름 도식 첫 단계 노출', visual.h1Bottom <= visual.vh && visual.ctaBottom <= visual.vh && visual.stageBottoms[0] <= visual.vh, JSON.stringify({ vh: visual.vh, h1: visual.h1Bottom, cta: visual.ctaBottom, stage: visual.stageBottoms[0] }));
-  if (mobileLayout) assert(scope, '작은 화면: 흐름 4단계 전체가 첫 화면 안', visual.stageBottoms.every((b) => b <= visual.vh), visual.stageBottoms.join(','));
-  assert(scope, '흐름 도식 단계 이름 순서', JSON.stringify(visual.stageTexts) === JSON.stringify(['업무 입력', '에이전트 실행', '검증', '운영 결과']), visual.stageTexts.join(' → '));
-  assert(scope, '흐름 도식: 모든 폭에서 가로로 연결된 파이프라인', visual.stagesInRow);
-  assert(scope, '상태 레인 3줄·되돌림 루프 렌더', JSON.stringify(visual.runRows) === '[4,4,4]' && visual.loop > 20, `${visual.runRows} loop=${visual.loop}`);
-  const stationsRow = visual.stations.every((b) => Math.abs(b.top - visual.stations[0].top) < 2);
-  const stationsColumn = visual.stations.every((b) => Math.abs(b.left - visual.stations[0].left) < 2);
-  assert(scope, `사례 근거 레일 방향(${vp.width > 960 ? '가로' : '세로'})·한계 점선 경계`, visual.stations.length === 4 && (vp.width > 960 ? stationsRow : stationsColumn) && visual.boundary.includes('dashed'), visual.boundary);
-  assert(scope, `도입 절차 타임라인 방향(${vp.width > 960 ? '가로' : '세로'})`, visual.processCount === 5 && (vp.width > 960 ? visual.processInRow : visual.processInColumn));
-  const laneOrder = ['rh-lane-problem', 'rh-lane-build', 'rh-lane-verified', 'rh-lane-limit'];
-  assert(scope, '사례 근거 패널: 문제·구현·검증·한계', visual.lanes.length === 2 && visual.lanes.every((l) => JSON.stringify(l) === JSON.stringify(laneOrder)), JSON.stringify(visual.lanes));
-  assert(scope, '장식 아이콘은 보조기기에서 숨김', visual.exposedIcons === 0, visual.exposedIcons);
-  assert(scope, '아이콘 글꼴 로드(동봉 FontAwesome)', /Font Awesome/i.test(visual.iconFont) && visual.iconWidth > 0, `${visual.iconFont} ${visual.iconWidth}px`);
+  assert(scope, '장식 아이콘은 보조기기에서 숨김', info.exposedIcons === 0, info.exposedIcons);
 
   const ov = await overflow(page);
   assert(scope, '가로 넘침 0', ov.scrollWidth <= ov.vw && ov.count === 0, JSON.stringify(ov));
@@ -311,26 +326,21 @@ async function layoutChecks(browser, vp) {
   const lowContrast = await contrastReport(page);
   assert(scope, '텍스트 대비(WCAG AA)', lowContrast.length === 0, lowContrast.slice(0, 5).join(' | '));
 
-  // 주 CTA → 상담 섹션 이동 + 포커스
-  await page.click('.rh-actions .rh-action-primary');
+  // 주 CTA(열림) → 상담 섹션 이동 + 포커스, 보조 CTA → 사례
+  await page.click('.rh-hero .rh-action-primary >> visible=true');
   await page.waitForTimeout(300);
   const afterCta = await page.evaluate(() => ({ focus: document.activeElement?.id, top: document.getElementById('rh-consult').getBoundingClientRect().top, hash: location.hash }));
   assert(scope, '주 CTA → 상담 섹션 이동·포커스', afterCta.focus === 'rh-consult-title' && Math.abs(afterCta.top) < 200 && afterCta.hash === '', JSON.stringify(afterCta));
+  await page.evaluate(() => window.scrollTo(0, 0));
+  await page.click('.rh-proof .rh-text-link');
+  await page.waitForTimeout(300);
+  assert(scope, '증거 줄 → 사례 이동·포커스', (await page.evaluate(() => document.activeElement?.id)) === 'rh-case-title');
 
-  // 바로가기(IA) 전 항목
-  for (const key of ['services', 'cases', 'process', 'tech', 'consult']) {
-    await page.evaluate(() => window.scrollTo(0, 0));
-    await page.click(`.rh-subnav-link[data-rh-jump="${key}"]`);
-    await page.waitForTimeout(150);
-    const focus = await page.evaluate(() => document.activeElement?.id);
-    assert(scope, `바로가기 ${key}`, focus === `rh-${key}-title`, focus);
-  }
-
-  // 키보드: 첫 바로가기부터 Tab 으로 CTA 까지 이동하며 포커스 표시 확인
-  await page.evaluate(() => { window.scrollTo(0, 0); document.querySelector('.rh-subnav-link').focus(); });
+  // 키보드: 페이지 처음부터 Tab 으로 Hero CTA 까지 이동하며 포커스 표시 확인
+  await page.evaluate(() => { window.scrollTo(0, 0); document.getElementById('rh-hero-title').focus(); });
   let sawCta = false;
   let outlineOk = true;
-  for (let i = 0; i < 8; i += 1) {
+  for (let i = 0; i < 4; i += 1) {
     await page.keyboard.press('Tab');
     const f = await page.evaluate(() => {
       const el = document.activeElement;
@@ -374,6 +384,7 @@ async function layoutChecks(browser, vp) {
   assert(scope, '콘솔 오류 0', errors.length === 0, errors.slice(0, 3).join(' | '));
   assert(scope, '예상 밖 4xx/5xx 응답 0', page.unexpectedResponses().length === 0, page.unexpectedResponses().join(' | '));
   if (page.knownConfig404()) record(scope, '상담 config 실제 응답', 'SKIPPED', `404 ${API}/config — 백엔드 미배포(별도 요청), 화면은 fail-closed 로 처리`);
+  if (page.configThrottled()) record(scope, `상담 config 429 ${page.configThrottled()}회(스모크 요청량으로 인한 분당 제한)`, 'INFO');
   await context.close();
 }
 
@@ -539,10 +550,19 @@ async function navigationChecks(browser) {
   await installCandidate(context);
 
   // 직접 URL + 새로고침: 제목·스타일 유지, 해시 진입
-  const { page, errors } = await openHome(context, { name: scope }, '/#rh-cases');
+  const { page, errors } = await openHome(context, { name: scope }, '/#rh-case');
   await page.waitForTimeout(500);
-  const direct = await page.evaluate(() => ({ focus: document.activeElement?.id, top: Math.round(document.getElementById('rh-cases').getBoundingClientRect().top) }));
-  assert(scope, '해시 직접 진입(/#rh-cases)', direct.focus === 'rh-cases-title' && Math.abs(direct.top) < 200, JSON.stringify(direct));
+  const direct = await page.evaluate(() => ({ focus: document.activeElement?.id, top: Math.round(document.getElementById('rh-case').getBoundingClientRect().top) }));
+  assert(scope, '해시 직접 진입(/#rh-case)', direct.focus === 'rh-case-title' && Math.abs(direct.top) < 200, JSON.stringify(direct));
+  for (const key of ['proof', 'services', 'fit', 'process', 'consult']) {
+    const p = await context.newPage();
+    await p.goto(`${BASE}/#rh-${key}`, { waitUntil: 'networkidle' });
+    await p.waitForSelector('.rh-home');
+    await p.waitForTimeout(600);
+    const hit = await p.evaluate((k) => ({ focus: document.activeElement?.id, top: Math.round(document.getElementById(`rh-${k}`).getBoundingClientRect().top) }), key);
+    assert(scope, `해시 직접 진입(/#rh-${key})`, hit.focus === `rh-${key}-title` && Math.abs(hit.top) < 200, JSON.stringify(hit));
+    await p.close();
+  }
   await page.reload({ waitUntil: 'networkidle' });
   await page.waitForSelector('.rh-home');
   await page.waitForTimeout(400);
@@ -550,7 +570,7 @@ async function navigationChecks(browser) {
   assert(scope, '새로고침 후 title·meta·style 유지', reload.title.startsWith('RAON Agent Factory') && reload.bg === 'rgb(18, 20, 22)' && reload.desc.length > 20, JSON.stringify(reload));
 
   // SPA 이동: 커뮤니티 → 제목 원복 → 뒤로 → 홈 제목
-  await page.click('.rh-more-link >> text=커뮤니티');
+  await page.click('.rh-more .rh-text-link >> text=커뮤니티');
   await page.waitForURL('**/board/community');
   await page.waitForTimeout(800);
   const away = await page.evaluate(() => ({ title: document.title, home: !!document.querySelector('.rh-home') }));
@@ -561,10 +581,24 @@ async function navigationChecks(browser) {
   assert(scope, '뒤로가기 후 홈 제목 재적용', (await page.title()).startsWith('RAON Agent Factory'));
   assert(scope, '콘솔 오류 0', errors.length === 0, errors.slice(0, 3).join(' | '));
   assert(scope, '예상 밖 4xx/5xx 응답 0', page.unexpectedResponses().length === 0, page.unexpectedResponses().join(' | '));
+  if (page.configThrottled()) record(scope, `상담 config 429 ${page.configThrottled()}회(스모크 요청량으로 인한 분당 제한)`, 'INFO');
   await page.close();
 
+  // 사례 기술 근거 링크 → 사례 문서
+  {
+    const p = await context.newPage();
+    await p.goto(`${BASE}/`, { waitUntil: 'networkidle' });
+    await p.waitForSelector('.rh-home');
+    await p.click('#rh-case .rh-case-foot a[href="/page/cases"]');
+    await p.waitForURL('**/page/cases');
+    assert(scope, '사례 → 기술 근거(/page/cases) 이동', new URL(p.url()).pathname === '/page/cases');
+    await p.close();
+  }
+
   // 기존 URL 보존 (비로그인)
-  for (const url of ['/board/community', '/board/notice', '/board/questions', '/boards', '/search', '/login', '/register']) {
+  for (const url of ['/board/community', '/board/notice', '/board/questions', '/boards', '/search', '/login', '/register',
+    '/page/about', '/page/service', '/page/cases', '/page/technology', '/page/faq', '/page/contact',
+    '/page/privacy', '/page/terms', '/page/ai-workspace-policy', '/page/open-source', '/page/refund']) {
     const p = await context.newPage();
     const errs = [];
     p.on('pageerror', (err) => errs.push(String(err)));

@@ -847,7 +847,7 @@ textarea.rh-input {
   }
 
   .rh-hero {
-    padding: 1.5rem 0 2rem;
+    padding: 1.25rem 0 1.5rem;
   }
 
   .rh-hero-grid {
@@ -886,7 +886,7 @@ textarea.rh-input {
   .rh-flow-step {
     grid-template-columns: 2.5rem minmax(0, 1fr);
     column-gap: .85rem;
-    padding: .4rem 0;
+    padding: .25rem 0;
   }
 
   .rh-flow-step:not(:last-child)::after {
@@ -909,12 +909,39 @@ textarea.rh-input {
     font-size: .86rem;
   }
 
-  .rh-section {
-    padding: 3.25rem 0;
+  .rh-section,
+  .rh-proof {
+    padding: 2.25rem 0;
   }
 
-  .rh-section-head {
-    margin-bottom: 1.75rem;
+  .rh-section-head,
+  .rh-proof .rh-section-head {
+    margin-bottom: 1.1rem;
+  }
+
+  .rh-h2 {
+    font-size: 1.4rem;
+  }
+
+  .rh-proof-item {
+    padding: .55rem 0;
+  }
+
+  .rh-offer {
+    gap: .2rem;
+    padding: .8rem 0;
+  }
+
+  .rh-fit-grid {
+    gap: 1.1rem;
+  }
+
+  .rh-fit-col-raon {
+    padding-top: 1rem;
+  }
+
+  .rh-fit-note {
+    margin-top: 1.1rem !important;
   }
 
   .rh-consult-panel {

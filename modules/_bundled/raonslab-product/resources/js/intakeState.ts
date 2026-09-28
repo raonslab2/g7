@@ -27,3 +27,31 @@ export function currentIntakeState(root: HTMLElement = document.documentElement)
 export function needsIntakeState(doc: Document = document): boolean {
   return doc.documentElement.dataset.rhIntake === undefined && doc.querySelector(INTAKE_SHOW_SELECTOR) !== null;
 }
+
+/**
+ * 상위 메뉴만 있는 화면에서 페이지를 옮길 때마다 config 를 다시 묻지 않도록 짧게 기억한다(탭 세션 한정).
+ * 상담 양식은 이 값을 쓰지 않고 항상 새로 확인한다 — 기억한 값은 표시용이며 접수 판단에 쓰지 않는다.
+ */
+export const INTAKE_CACHE_KEY = 'rh-intake-state';
+export const INTAKE_CACHE_TTL_MS = 120_000;
+
+export function readCachedIntakeState(storage: Pick<Storage, 'getItem'> | null, now: number): IntakeState | null {
+  try {
+    const raw = storage?.getItem(INTAKE_CACHE_KEY);
+    if (!raw) return null;
+    const parsed = JSON.parse(raw) as { state?: unknown; at?: unknown };
+    if ((parsed.state !== 'open' && parsed.state !== 'closed') || typeof parsed.at !== 'number') return null;
+    if (now - parsed.at < 0 || now - parsed.at > INTAKE_CACHE_TTL_MS) return null;
+    return parsed.state;
+  } catch {
+    return null;
+  }
+}
+
+export function writeCachedIntakeState(storage: Pick<Storage, 'setItem'> | null, state: IntakeState, now: number): void {
+  try {
+    storage?.setItem(INTAKE_CACHE_KEY, JSON.stringify({ state, at: now }));
+  } catch {
+    // 저장소가 막힌 환경에서는 기억하지 않는다.
+  }
+}
