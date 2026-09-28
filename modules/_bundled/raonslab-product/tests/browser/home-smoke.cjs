@@ -259,6 +259,42 @@ async function layoutChecks(browser, vp) {
   assert(scope, '개발 용어 미노출', !/\b(DEMO|MOCK|SANDBOX|TEST)\b/.test(info.bodyText.toUpperCase()));
   assert(scope, 'reduced-motion 전환 제거', info.transition === '0s', info.transition);
 
+  // 시각 구조: 첫 화면 구성, 흐름 도식 방향, 근거 레인, 타임라인 방향, 장식 아이콘 숨김
+  const visual = await page.evaluate(() => {
+    window.scrollTo(0, 0);
+    const box = (el) => (el ? el.getBoundingClientRect() : null);
+    const stages = [...document.querySelectorAll('.rh-flow-stage')];
+    const stageBoxes = stages.map(box);
+    const nodes = [...document.querySelectorAll('.rh-process-node')].map(box);
+    const icon = document.querySelector('.rh-home i.fas');
+    return {
+      vh: window.innerHeight,
+      h1Bottom: box(document.querySelector('.rh-title'))?.bottom ?? Infinity,
+      ctaBottom: box(document.querySelector('.rh-action-primary'))?.bottom ?? Infinity,
+      stageBottoms: stageBoxes.map((b) => Math.round(b.bottom)),
+      stageTexts: stages.map((el) => el.textContent.trim()),
+      stagesInRow: stageBoxes.every((b) => Math.abs(b.top - stageBoxes[0].top) < 2),
+      stagesInColumn: stageBoxes.every((b) => Math.abs(b.left - stageBoxes[0].left) < 2),
+      processInRow: nodes.every((b) => Math.abs(b.top - nodes[0].top) < 2),
+      processInColumn: nodes.every((b) => Math.abs(b.left - nodes[0].left) < 2),
+      processCount: nodes.length,
+      lanes: [...document.querySelectorAll('.rh-case')].map((c) => [...c.querySelectorAll('.rh-lane')].map((l) => l.className.split(' ')[1])),
+      exposedIcons: [...document.querySelectorAll('.rh-home i')].filter((i) => i.getAttribute('aria-hidden') !== 'true' && !i.closest('[aria-hidden="true"]')).length,
+      iconFont: icon ? getComputedStyle(icon, '::before').fontFamily : '',
+      iconWidth: icon ? Math.round(icon.getBoundingClientRect().width) : 0,
+    };
+  });
+  const mobileLayout = vp.width <= 640;
+  assert(scope, '첫 화면에 H1·주 CTA·흐름 도식 첫 단계 노출', visual.h1Bottom <= visual.vh && visual.ctaBottom <= visual.vh && visual.stageBottoms[0] <= visual.vh, JSON.stringify({ vh: visual.vh, h1: visual.h1Bottom, cta: visual.ctaBottom, stage: visual.stageBottoms[0] }));
+  if (mobileLayout) assert(scope, '작은 화면: 흐름 4단계 전체가 첫 화면 안', visual.stageBottoms.every((b) => b <= visual.vh), visual.stageBottoms.join(','));
+  assert(scope, '흐름 도식 단계 이름 순서', JSON.stringify(visual.stageTexts) === JSON.stringify(['업무 입력', '에이전트 실행', '검증', '운영 결과']), visual.stageTexts.join(' → '));
+  assert(scope, `흐름 도식 방향(${mobileLayout ? '가로' : '세로'})`, mobileLayout ? visual.stagesInRow : visual.stagesInColumn);
+  assert(scope, `도입 절차 타임라인 방향(${vp.width > 960 ? '가로' : '세로'})`, visual.processCount === 5 && (vp.width > 960 ? visual.processInRow : visual.processInColumn));
+  const laneOrder = ['rh-lane-problem', 'rh-lane-build', 'rh-lane-verified', 'rh-lane-limit'];
+  assert(scope, '사례 근거 패널: 문제·구현·검증·한계', visual.lanes.length === 2 && visual.lanes.every((l) => JSON.stringify(l) === JSON.stringify(laneOrder)), JSON.stringify(visual.lanes));
+  assert(scope, '장식 아이콘은 보조기기에서 숨김', visual.exposedIcons === 0, visual.exposedIcons);
+  assert(scope, '아이콘 글꼴 로드(동봉 FontAwesome)', /Font Awesome/i.test(visual.iconFont) && visual.iconWidth > 0, `${visual.iconFont} ${visual.iconWidth}px`);
+
   const ov = await overflow(page);
   assert(scope, '가로 넘침 0', ov.scrollWidth <= ov.vw && ov.count === 0, JSON.stringify(ov));
   const small = await touchTargets(page);
