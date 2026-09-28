@@ -1,5 +1,19 @@
 # 변경 이력
 
+## [0.2.1] - 2026-09-28
+
+### Changed
+
+- hero 업무 흐름을 입력·실행·검증·운영 결과 노드와 상태 레인, 실패 되돌림 루프로 시각화
+- 자체 구현 사례를 문제·구현·검증·한계가 연결된 근거 레일로 재구성
+- 서비스 단계와 도입 절차를 반응형 연결 도식으로 정리하고 카드 반복을 줄여 정보 계층 개선
+- 360/390/412px 및 desktop에서 같은 흐름 관계를 유지하도록 반응형 스타일과 구조 계약 보강
+
+### Compatibility
+
+- 상담 backend/admin, SEO hook, public fail-closed 설정과 기존 G7/AI route 계약은 변경하지 않음
+- 공개 Service/Contract/Repository/Model/Route 변경이 없는 visual-only release라 소비 모듈 최소 버전 제약은 유지
+
 ## [0.2.0] - 2026-09-28
 
 ### Added
