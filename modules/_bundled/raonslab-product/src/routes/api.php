@@ -18,16 +18,8 @@ Route::prefix('admin/consultations')
     ->middleware(['auth:sanctum', 'admin', 'throttle:600,1'])
     ->name('admin.consultations.')
     ->group(function (): void {
-        Route::get('/', [AdminConsultationController::class, 'index'])
-            ->middleware('permission:admin,raonslab-product.consultations.read')
-            ->name('index');
-        Route::get('/{consultation}', [AdminConsultationController::class, 'show'])
-            ->middleware('permission:admin,raonslab-product.consultations.read')
-            ->name('show');
-        Route::post('/{consultation}/notes', [AdminConsultationController::class, 'note'])
-            ->middleware('permission:admin,raonslab-product.consultations.manage')
-            ->name('notes.store');
-        Route::patch('/{consultation}/status', [AdminConsultationController::class, 'status'])
-            ->middleware('permission:admin,raonslab-product.consultations.manage')
-            ->name('status.update');
+        Route::get('/', [AdminConsultationController::class, 'deprecated'])->name('index');
+        Route::get('/{reference}', [AdminConsultationController::class, 'deprecated'])->name('show');
+        Route::post('/{reference}/notes', [AdminConsultationController::class, 'deprecated'])->name('notes.store');
+        Route::patch('/{reference}/status', [AdminConsultationController::class, 'deprecated'])->name('status.update');
     });

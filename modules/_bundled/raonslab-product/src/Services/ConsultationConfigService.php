@@ -2,15 +2,22 @@
 
 namespace Modules\Raonslab\Product\Services;
 
+use Illuminate\Http\Request;
+
 class ConsultationConfigService
 {
+    public function __construct(private LegacyConsultationAudit $legacyAudit) {}
+
     /** @return array{intake_enabled: bool, consent_version: string, privacy_copy: string, privacy_policy_url: string, privacy_links: array<int, string>, privacy_contact: string, retention_notice: string} */
-    public function publicConfig(): array
+    public function publicConfig(Request $request): array
     {
         $privacyPolicyUrl = $this->value('privacy_policy_url');
+        if (! $this->isTrustedHttpsUrl($privacyPolicyUrl)) {
+            $privacyPolicyUrl = '';
+        }
 
         return [
-            'intake_enabled' => $this->isIntakeEnabled(),
+            'intake_enabled' => $this->isIntakeEnabled($request),
             'consent_version' => $this->value('consent_version'),
             'privacy_copy' => $this->value('privacy_copy'),
             'privacy_policy_url' => $privacyPolicyUrl,
@@ -20,9 +27,9 @@ class ConsultationConfigService
         ];
     }
 
-    public function isIntakeEnabled(): bool
+    public function isIntakeEnabled(Request $request): bool
     {
-        if (config('raonslab-product-consultations.enabled') !== true) {
+        if (config('raonslab-product-consultations.enabled') !== true || $this->legacyAudit->hasData()) {
             return false;
         }
 
@@ -32,7 +39,9 @@ class ConsultationConfigService
             }
         }
 
-        return filter_var($this->value('privacy_policy_url'), FILTER_VALIDATE_URL) !== false;
+        return $this->isTrustedHttpsUrl((string) config('app.url'))
+            && $this->isTrustedHttpsUrl($this->value('privacy_policy_url'))
+            && $request->isSecure();
     }
 
     public function consentVersion(): string
@@ -40,9 +49,20 @@ class ConsultationConfigService
         return $this->value('consent_version');
     }
 
-    public function notificationRecipient(): string
+    public function isTrustedHttpsUrl(string $url): bool
     {
-        return $this->value('notification_to');
+        if ($url === '' || preg_match('/[\x00-\x20\x7F\\\\]/', $url) === 1) {
+            return false;
+        }
+
+        $parts = parse_url($url);
+
+        return is_array($parts)
+            && strtolower((string) ($parts['scheme'] ?? '')) === 'https'
+            && ($parts['host'] ?? '') !== ''
+            && ! isset($parts['user'])
+            && ! isset($parts['pass'])
+            && filter_var($url, FILTER_VALIDATE_URL) !== false;
     }
 
     private function value(string $key): string

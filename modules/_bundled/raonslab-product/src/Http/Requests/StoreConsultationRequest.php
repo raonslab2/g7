@@ -17,7 +17,7 @@ class StoreConsultationRequest extends FormRequest
 
     protected function prepareForValidation(): void
     {
-        if (! app(ConsultationConfigService::class)->isIntakeEnabled()) {
+        if (! app(ConsultationConfigService::class)->isIntakeEnabled($this)) {
             throw new HttpResponseException(ResponseHelper::error('errors.503.message', 503));
         }
 

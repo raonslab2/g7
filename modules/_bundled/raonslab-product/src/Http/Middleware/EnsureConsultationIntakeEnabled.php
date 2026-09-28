@@ -14,7 +14,7 @@ class EnsureConsultationIntakeEnabled
 
     public function handle(Request $request, Closure $next): Response
     {
-        if (! $this->configService->isIntakeEnabled()) {
+        if (! $this->configService->isIntakeEnabled($request)) {
             return ResponseHelper::error('errors.503.message', 503);
         }
 

@@ -11,5 +11,5 @@ return [
     'privacy_policy_url' => trim((string) env('RAON_CONSULTATION_PRIVACY_POLICY_URL', '')),
     'privacy_contact' => trim((string) env('RAON_CONSULTATION_PRIVACY_CONTACT', '')),
     'retention_notice' => trim((string) env('RAON_CONSULTATION_RETENTION_NOTICE', '')),
-    'notification_to' => trim((string) env('RAON_CONSULTATION_NOTIFICATION_TO', '')),
+    'board_slug' => trim((string) env('RAON_CONSULTATION_BOARD_SLUG', 'raon-consultations')),
 ];

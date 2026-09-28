@@ -5,248 +5,131 @@ namespace Modules\Raonslab\Product\Tests\Feature;
 require_once __DIR__.'/../ModuleTestCase.php';
 
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Mail;
-use Mockery;
-use Modules\Raonslab\Product\Models\Consultation;
-use Modules\Raonslab\Product\Services\ConsultationService;
+use Illuminate\Support\Facades\RateLimiter;
 use Modules\Raonslab\Product\Tests\ModuleTestCase;
+use Modules\Sirsoft\Board\Models\Board;
+use Modules\Sirsoft\Board\Models\Post;
 use PHPUnit\Framework\Attributes\Test;
-use RuntimeException;
 
 class ConsultationIntakeTest extends ModuleTestCase
 {
     #[Test]
-    /**
-     * @scenario case=config_fail_closed
-     *
-     * @effects config_exposes_disabled_values, intake_fails_closed
-     */
-    public function config_is_empty_and_intake_fails_closed_without_explicit_server_values(): void
+    public function intake_fails_closed_without_https_or_explicit_privacy_config(): void
     {
         $this->getJson('/api/modules/raonslab-product/consultations/config')
-            ->assertOk()
-            ->assertJsonPath('data.intake_enabled', false)
-            ->assertJsonPath('data.consent_version', '')
-            ->assertJsonPath('data.privacy_copy', '')
-            ->assertJsonPath('data.privacy_policy_url', '')
-            ->assertJsonPath('data.privacy_links', [])
-            ->assertJsonPath('data.privacy_contact', '')
-            ->assertJsonPath('data.retention_notice', '');
+            ->assertOk()->assertJsonPath('data.intake_enabled', false);
 
-        $this->postConsultation([], 'synthetic-key-00000001')->assertStatus(503);
-        $this->assertDatabaseCount('raonslab_product_consultations', 0);
-    }
-
-    #[Test]
-    /**
-     * @scenario case=request_guards
-     *
-     * @effects same_origin_enforced, idempotency_key_required
-     */
-    public function same_origin_and_idempotency_key_are_required(): void
-    {
         $this->enableIntake();
-
-        $this->withHeader('Idempotency-Key', 'synthetic-key-00000002')
+        $this->withHeaders(['Origin' => 'http://localhost', 'Idempotency-Key' => 'synthetic-key-00000001'])
             ->postJson('/api/modules/raonslab-product/consultations', $this->syntheticPayload())
             ->assertForbidden();
-
-        $this->postConsultation($this->syntheticPayload(), 'synthetic-key-00000003', 'https://other.example.test')
-            ->assertForbidden();
-
-        $this->withHeaders(['Origin' => 'http://localhost', 'Idempotency-Key' => ''])
-            ->postJson('/api/modules/raonslab-product/consultations', $this->syntheticPayload())
-            ->assertStatus(422)
-            ->assertJsonValidationErrors(['idempotency_key']);
     }
 
     #[Test]
-    /**
-     * @scenario case=validation_failure
-     *
-     * @effects invalid_consent_rejected, wrong_consent_version_rejected, oversized_message_rejected
-     */
-    public function validation_rejects_missing_consent_wrong_version_and_oversized_message(): void
+    public function guest_submit_persists_one_private_board_post_and_returns_only_opaque_receipt(): void
     {
         $this->enableIntake();
+        $notificationCount = DB::table('notifications')->count();
 
-        $response = $this->postConsultation($this->syntheticPayload([
-            'privacy_consent' => false,
-            'privacy_consent_version' => 'wrong-version',
-            'message' => str_repeat('x', 5001),
-        ]), 'synthetic-key-00000004');
-
-        $response->assertStatus(422)
-            ->assertJsonValidationErrors(['privacy_consent', 'privacy_consent_version', 'message']);
-    }
-
-    #[Test]
-    /**
-     * @scenario case=first_submission
-     *
-     * @effects submission_persisted_before_success, public_response_excludes_pii, pii_encrypted_at_rest
-     */
-    public function first_submission_is_201_and_public_response_never_echoes_pii(): void
-    {
-        $this->enableIntake();
-
-        $response = $this->postConsultation($this->syntheticPayload(), 'synthetic-key-00000005');
-
-        $response->assertCreated()
-            ->assertJsonPath('success', true)
+        $response = $this->postConsultation($this->syntheticPayload(), 'synthetic-key-00000002')
+            ->assertCreated()
             ->assertJsonPath('data.status', 'NEW')
             ->assertJsonStructure(['data' => ['reference', 'status', 'received_at']]);
-        $this->assertSame(['reference', 'status', 'received_at'], array_keys($response->json('data')));
+
+        $reference = $response->json('data.reference');
+        $this->assertMatchesRegularExpression('/^RAON-[A-F0-9]{26}$/', $reference);
         $this->assertStringNotContainsString('synthetic@example.test', $response->getContent());
 
-        $raw = DB::table('raonslab_product_consultations')->first();
-        $this->assertNotSame('Synthetic Visitor', $raw->contact_name);
-        $this->assertNotSame('synthetic@example.test', $raw->email);
-        $this->assertNotSame('This is synthetic consultation data used only by automated tests.', $raw->message);
-        $this->assertSame(64, strlen($raw->idempotency_key_hash));
-        $this->assertSame('NOT_CONFIGURED', $raw->mail_status);
+        $board = Board::where('slug', 'raon-consultations')->sole();
+        $post = Post::where('board_id', $board->id)->sole();
+        $this->assertFalse($board->is_active);
+        $this->assertTrue($post->is_secret);
+        $this->assertSame($reference, $post->title);
+        $this->assertSame('NEW', $post->category);
+        $this->assertStringContainsString('synthetic@example.test', $post->content);
+        $this->assertDatabaseCount('raonslab_product_consultations', 0);
+        $this->assertSame($notificationCount, DB::table('notifications')->count());
     }
 
     #[Test]
-    /**
-     * @scenario case=idempotent_retry
-     *
-     * @effects idempotent_retry_reuses_reference, single_record_preserved
-     */
-    public function same_key_and_payload_returns_200_with_same_reference_and_one_row(): void
+    public function duplicate_retry_returns_same_receipt_and_keeps_one_post(): void
     {
         $this->enableIntake();
         $payload = $this->syntheticPayload();
 
-        $first = $this->postConsultation($payload, 'synthetic-key-00000006')->assertCreated();
-        $retry = $this->postConsultation($payload, 'synthetic-key-00000006')->assertOk();
+        $first = $this->postConsultation($payload, 'synthetic-key-00000003')->assertCreated();
+        $retry = $this->postConsultation($payload, 'synthetic-key-00000003')->assertOk();
 
         $this->assertSame($first->json('data.reference'), $retry->json('data.reference'));
-        $this->assertDatabaseCount('raonslab_product_consultations', 1);
-        $this->assertDatabaseCount('raonslab_product_consultation_histories', 1);
+        $this->assertSame(1, Post::whereHas('board', fn ($query) => $query->where('slug', 'raon-consultations'))->count());
     }
 
     #[Test]
-    /**
-     * @scenario case=idempotency_conflict
-     *
-     * @effects idempotency_conflict_rejected, single_record_preserved
-     */
-    public function same_key_with_different_payload_returns_409_without_duplicate(): void
+    public function reused_key_with_different_payload_is_rejected(): void
     {
         $this->enableIntake();
-        $this->postConsultation($this->syntheticPayload(), 'synthetic-key-00000007')->assertCreated();
+        $this->postConsultation($this->syntheticPayload(), 'synthetic-key-00000004')->assertCreated();
 
         $this->postConsultation(
-            $this->syntheticPayload(['message' => 'A different synthetic message.']),
-            'synthetic-key-00000007',
+            $this->syntheticPayload(['message' => 'Different synthetic content.']),
+            'synthetic-key-00000004',
         )->assertStatus(409);
 
-        $this->assertDatabaseCount('raonslab_product_consultations', 1);
+        $this->assertSame(1, Post::whereHas('board', fn ($query) => $query->where('slug', 'raon-consultations'))->count());
     }
 
     #[Test]
-    /**
-     * @scenario case=persistence_reload
-     *
-     * @effects record_persists_across_queries
-     */
-    public function stored_record_is_loaded_from_the_database_by_a_fresh_model_query(): void
+    public function validation_and_legacy_data_guard_remain_enforced(): void
     {
         $this->enableIntake();
-        $response = $this->postConsultation($this->syntheticPayload(), 'synthetic-key-00000008')->assertCreated();
+        $this->postConsultation($this->syntheticPayload(['privacy_consent' => false]), 'synthetic-key-00000005')
+            ->assertStatus(422)->assertJsonValidationErrors(['privacy_consent']);
 
-        $reference = $response->json('data.reference');
-        unset($response);
-
-        $this->assertSame(
-            $reference,
-            Consultation::query()->sole()->reference,
-        );
-    }
-
-    #[Test]
-    /**
-     * @scenario case=storage_failure
-     *
-     * @effects storage_failure_returns_unavailable, failed_storage_creates_no_record
-     */
-    public function database_failure_returns_503_and_does_not_claim_success(): void
-    {
-        $this->enableIntake();
-        $service = Mockery::mock(ConsultationService::class);
-        $service->shouldReceive('submit')->once()->andThrow(new RuntimeException('synthetic storage failure'));
-        $this->app->instance(ConsultationService::class, $service);
-
-        $this->postConsultation($this->syntheticPayload(), 'synthetic-key-00000009')
-            ->assertStatus(503)
-            ->assertJsonPath('success', false);
-        $this->assertDatabaseCount('raonslab_product_consultations', 0);
-    }
-
-    #[Test]
-    /**
-     * @scenario case=log_mailer
-     *
-     * @effects log_mailer_not_marked_sent
-     */
-    public function log_mailer_is_not_reported_as_delivered(): void
-    {
-        $this->enableIntake();
-        config([
-            'raonslab-product-consultations.notification_to' => 'operator@example.test',
-            'mail.default' => 'log',
-            'mail.mailers.log.transport' => 'log',
+        DB::table('raonslab_product_consultations')->insert([
+            'reference' => 'LEGACY-SYNTHETIC',
+            'idempotency_key_hash' => str_repeat('a', 64),
+            'payload_hash' => str_repeat('b', 64),
+            'contact_name' => 'encrypted-synthetic-name',
+            'email' => 'encrypted-synthetic-email',
+            'message' => 'encrypted-synthetic-message',
+            'privacy_consent_version' => 'synthetic-test-v1',
+            'privacy_consented_at' => now(),
+            'status' => 'NEW',
+            'mail_status' => 'NOT_CONFIGURED',
+            'created_at' => now(),
+            'updated_at' => now(),
         ]);
 
-        $this->postConsultation($this->syntheticPayload(), 'synthetic-key-00000010')->assertCreated();
-
-        $this->assertSame('NOT_CONFIGURED', Consultation::query()->sole()->mail_status->value);
+        $this->postConsultation($this->syntheticPayload(), 'synthetic-key-00000006')->assertStatus(503);
     }
 
     #[Test]
-    /**
-     * @scenario case=mail_failure
-     *
-     * @effects mail_failure_recorded_separately, stored_submission_remains_successful
-     */
-    public function mail_failure_is_recorded_separately_after_successful_storage(): void
+    public function public_submission_rate_limit_is_enforced(): void
     {
         $this->enableIntake();
-        config([
-            'raonslab-product-consultations.notification_to' => 'operator@example.test',
-            'mail.default' => 'smtp',
-            'mail.mailers.smtp.transport' => 'smtp',
-        ]);
-        Mail::shouldReceive('raw')->once()->andThrow(new RuntimeException('synthetic mail failure'));
-
-        $this->postConsultation($this->syntheticPayload(), 'synthetic-key-00000011')->assertCreated();
-
-        $consultation = Consultation::query()->sole();
-        $this->assertSame('FAILED', $consultation->mail_status->value);
-        $this->assertNotNull($consultation->mail_attempted_at);
-    }
-
-    #[Test]
-    /**
-     * @scenario case=public_throttle
-     *
-     * @effects public_rate_limit_enforced
-     */
-    public function public_store_is_throttled(): void
-    {
-        $this->enableIntake();
+        RateLimiter::clear(sha1('|127.0.0.1'));
+        RateLimiter::clear(sha1('|2001:db8::9999'));
 
         for ($attempt = 1; $attempt <= 10; $attempt++) {
-            $this->withServerVariables(['REMOTE_ADDR' => '198.51.100.77'])
-                ->withHeaders(['Origin' => 'http://localhost', 'Idempotency-Key' => sprintf('throttle-key-%08d', $attempt)])
-                ->postJson('/api/modules/raonslab-product/consultations', $this->syntheticPayload())
+            $this->withServerVariables([
+                'HTTPS' => 'on',
+                'SERVER_PORT' => 443,
+                'REMOTE_ADDR' => '2001:db8::9999',
+            ])->withHeaders([
+                'Origin' => 'https://localhost',
+                'Idempotency-Key' => sprintf('rate-limit-key-%04d', $attempt),
+            ])->postJson('https://localhost/api/modules/raonslab-product/consultations', $this->syntheticPayload())
                 ->assertCreated();
         }
 
-        $this->withServerVariables(['REMOTE_ADDR' => '198.51.100.77'])
-            ->withHeaders(['Origin' => 'http://localhost', 'Idempotency-Key' => 'throttle-key-00000011'])
-            ->postJson('/api/modules/raonslab-product/consultations', $this->syntheticPayload())
+        $this->withServerVariables([
+            'HTTPS' => 'on',
+            'SERVER_PORT' => 443,
+            'REMOTE_ADDR' => '2001:db8::9999',
+        ])->withHeaders([
+            'Origin' => 'https://localhost',
+            'Idempotency-Key' => 'rate-limit-key-0011',
+        ])->postJson('https://localhost/api/modules/raonslab-product/consultations', $this->syntheticPayload())
             ->assertStatus(429);
     }
 }

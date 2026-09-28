@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\Route;
 use Modules\Raonslab\Product\Http\Middleware\EnsureConsultationIntakeEnabled;
 use Modules\Raonslab\Product\Http\Middleware\RequireSameOrigin;
 use Modules\Raonslab\Product\Providers\ProductServiceProvider;
+use Modules\Raonslab\Product\Services\ConsultationBoardProvisioner;
+use Modules\Sirsoft\Board\Providers\BoardServiceProvider;
 use Tests\TestCase;
 
 /**
@@ -28,6 +30,7 @@ abstract class ModuleTestCase extends TestCase
      */
     protected function setUpTraits()
     {
+        app('migrator')->path(base_path('modules/_bundled/sirsoft-board/database/migrations'));
         app('migrator')->path(dirname(__DIR__).'/database/migrations');
         $this->refreshDatabase();
 
@@ -38,10 +41,13 @@ abstract class ModuleTestCase extends TestCase
     {
         parent::setUp();
 
+        config(['sirsoft-board' => require base_path('modules/_bundled/sirsoft-board/config/board.php')]);
+        $this->app->register(BoardServiceProvider::class);
         $this->app->register(ProductServiceProvider::class);
         $this->registerModuleRoutes();
         $this->createDefaultRoles();
         $this->disableIntake();
+        app(ConsultationBoardProvisioner::class)->ensureReady();
     }
 
     protected function enableIntake(): void
@@ -53,7 +59,8 @@ abstract class ModuleTestCase extends TestCase
             'raonslab-product-consultations.privacy_policy_url' => 'https://example.test/privacy',
             'raonslab-product-consultations.privacy_contact' => 'privacy@example.test',
             'raonslab-product-consultations.retention_notice' => 'Synthetic test retention notice.',
-            'raonslab-product-consultations.notification_to' => '',
+            'raonslab-product-consultations.board_slug' => 'raon-consultations',
+            'app.url' => 'https://localhost',
         ]);
     }
 
@@ -66,7 +73,7 @@ abstract class ModuleTestCase extends TestCase
             'raonslab-product-consultations.privacy_policy_url' => '',
             'raonslab-product-consultations.privacy_contact' => '',
             'raonslab-product-consultations.retention_notice' => '',
-            'raonslab-product-consultations.notification_to' => '',
+            'raonslab-product-consultations.board_slug' => 'raon-consultations',
         ]);
     }
 
@@ -85,20 +92,24 @@ abstract class ModuleTestCase extends TestCase
         ], $overrides);
     }
 
-    protected function postConsultation(array $payload, string $key, string $origin = 'http://localhost')
+    protected function postConsultation(array $payload, string $key, string $origin = 'https://localhost')
     {
-        return $this->withHeaders([
-            'Origin' => $origin,
-            'Idempotency-Key' => $key,
-        ])->postJson('/api/modules/raonslab-product/consultations', $payload);
+        $ipSuffix = substr(hash('sha256', $key), 0, 4);
+
+        return $this->withServerVariables([
+            'HTTPS' => 'on',
+            'SERVER_PORT' => 443,
+            'REMOTE_ADDR' => "2001:db8::{$ipSuffix}",
+        ])
+            ->withHeaders([
+                'Origin' => $origin,
+                'Idempotency-Key' => $key,
+            ])->postJson('https://localhost/api/modules/raonslab-product/consultations', $payload);
     }
 
     protected function createAdminUser(array $permissions): User
     {
-        $role = Role::create([
-            'identifier' => 'raon-test-admin-'.uniqid(),
-            'name' => ['ko' => '합성 테스트 관리자', 'en' => 'Synthetic test admin'],
-        ]);
+        $role = Role::where('identifier', 'admin')->firstOrFail();
         $user = User::factory()->create();
         $user->roles()->attach($role);
 
@@ -128,6 +139,11 @@ abstract class ModuleTestCase extends TestCase
             ->name('api.modules.raonslab-product.')
             ->middleware('api')
             ->group(dirname(__DIR__).'/src/routes/api.php');
+
+        Route::prefix('api/modules/sirsoft-board')
+            ->name('api.modules.sirsoft-board.')
+            ->middleware('api')
+            ->group(base_path('modules/_bundled/sirsoft-board/src/routes/api.php'));
 
         $storeRoute = Route::getRoutes()->match(Request::create(
             '/api/modules/raonslab-product/consultations',

@@ -2,12 +2,13 @@
 
 namespace Modules\Raonslab\Product\Services;
 
-use Modules\Raonslab\Product\Models\Consultation;
+use Modules\Sirsoft\Board\Models\Post;
 
 final readonly class ConsultationSubmissionResult
 {
     public function __construct(
-        public Consultation $consultation,
+        public Post $post,
         public bool $created,
+        public string $reference,
     ) {}
 }
