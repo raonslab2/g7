@@ -24,9 +24,32 @@ class ProductLayerContractTest extends ModuleTestCase
         $this->assertSame('>=1.1.2', $manifest['dependencies']['modules']['sirsoft-page']);
         $this->assertSame('page/show', $extension['target_layout']);
         $this->assertSame(
-            ['page_content_card', 'page_content_card', 'page_html_content'],
-            array_column($extension['injections'], 'target_id')
+            [
+                ['page_content_card', 'inject_props'],
+                ['page_content_card', 'prepend_child'],
+                ['page_html_content', 'prepend'],
+                ['page_content_card', 'append_child'],
+            ],
+            array_map(
+                fn (array $injection): array => [$injection['target_id'], $injection['position']],
+                $extension['injections'],
+            ),
         );
+
+        // 분류 단일 출처의 11개 slug 가 모든 조건식에 같은 순서로 들어간다.
+        $taxonomy = json_decode((string) file_get_contents(
+            $moduleRoot.'/resources/taxonomy/info-policy.json'
+        ), true, flags: JSON_THROW_ON_ERROR);
+        $slugs = collect($taxonomy['groups'])->flatMap(fn (array $group) => array_column($group['items'], 'slug'))->all();
+        $this->assertSame(
+            ['about', 'service', 'cases', 'technology', 'faq', 'contact', 'privacy', 'terms', 'ai-workspace-policy', 'open-source', 'refund'],
+            $slugs,
+        );
+        $condition = "['".implode("','", $slugs)."'].includes(page?.data?.slug)";
+        $this->assertStringContainsString($condition, $extension['injections'][0]['props']['className']);
+        foreach ([1, 2, 3] as $index) {
+            $this->assertSame('{{'.$condition.'}}', $extension['injections'][$index]['components'][0]['if']);
+        }
         $this->assertStringContainsString(
             'rh-native-page-card',
             $extension['injections'][0]['props']['className'],

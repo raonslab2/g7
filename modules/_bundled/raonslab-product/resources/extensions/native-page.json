@@ -1,4 +1,5 @@
 {
+  "_comment": "scripts/taxonomy.mjs 가 resources/taxonomy/info-policy.json 에서 생성한다. 직접 수정하지 말 것.",
   "target_layout": "page/show",
   "priority": 25,
   "injections": [
@@ -6,7 +7,7 @@
       "target_id": "page_content_card",
       "position": "inject_props",
       "props": {
-        "className": "{{['service','cases','technology','privacy','terms','ai-workspace-policy','open-source'].includes(page?.data?.slug) ? 'rh-native-page-card' : 'bg-white dark:bg-gray-800 rounded-lg shadow p-10'}}"
+        "className": "{{['about','service','cases','technology','faq','contact','privacy','terms','ai-workspace-policy','open-source','refund'].includes(page?.data?.slug) ? 'rh-native-page-card' : 'bg-white dark:bg-gray-800 rounded-lg shadow p-10'}}"
       }
     },
     {
@@ -17,7 +18,7 @@
           "id": "rh_native_page_breadcrumb",
           "type": "basic",
           "name": "Nav",
-          "if": "{{['service','cases','technology','privacy','terms','ai-workspace-policy','open-source'].includes(page?.data?.slug)}}",
+          "if": "{{['about','service','cases','technology','faq','contact','privacy','terms','ai-workspace-policy','open-source','refund'].includes(page?.data?.slug)}}",
           "props": {
             "className": "rh-native-breadcrumb",
             "aria-label": "$t:raonslab-product.native_page.breadcrumb_label"
@@ -26,12 +27,65 @@
             {
               "type": "basic",
               "name": "A",
-              "props": { "href": "/", "className": "rh-crumb-link" },
+              "props": {
+                "href": "/",
+                "className": "rh-crumb-link"
+              },
               "text": "$t:raonslab-product.footer.home",
-              "actions": [{ "type": "click", "handler": "navigate", "params": { "path": "/" } }]
+              "actions": [
+                {
+                  "type": "click",
+                  "handler": "navigate",
+                  "params": {
+                    "path": "/"
+                  }
+                }
+              ]
             },
-            { "type": "basic", "name": "Span", "props": { "aria-hidden": "true" }, "text": "/" },
-            { "type": "basic", "name": "Span", "props": { "aria-current": "page" }, "text": "{{page?.data?.title ?? ''}}" }
+            {
+              "type": "basic",
+              "name": "Span",
+              "props": {
+                "aria-hidden": "true"
+              },
+              "text": "/"
+            },
+            {
+              "id": "rh_native_page_breadcrumb_info",
+              "type": "basic",
+              "name": "Span",
+              "if": "{{['about','service','cases','technology','faq','contact'].includes(page?.data?.slug)}}",
+              "props": {
+                "className": "rh-crumb-group"
+              },
+              "text": "$t:raonslab-product.nav.info"
+            },
+            {
+              "id": "rh_native_page_breadcrumb_policy",
+              "type": "basic",
+              "name": "Span",
+              "if": "{{['privacy','terms','ai-workspace-policy','open-source','refund'].includes(page?.data?.slug)}}",
+              "props": {
+                "className": "rh-crumb-group"
+              },
+              "text": "$t:raonslab-product.nav.policy"
+            },
+            {
+              "type": "basic",
+              "name": "Span",
+              "props": {
+                "aria-hidden": "true"
+              },
+              "text": "/"
+            },
+            {
+              "type": "basic",
+              "name": "Span",
+              "props": {
+                "aria-current": "page"
+              },
+              "text": "{{page?.data?.title ?? ''}}"
+            }
           ]
         }
       ]
@@ -41,36 +95,771 @@
       "position": "prepend",
       "components": [
         {
+          "id": "rh_native_page_docnav",
+          "comment": "모바일·태블릿 문서 메뉴: 기본 닫힘 disclosure. 데스크톱에서는 CSS 로 숨기고 우측 메뉴를 쓴다.",
+          "type": "basic",
+          "name": "Div",
+          "if": "{{['about','service','cases','technology','faq','contact','privacy','terms','ai-workspace-policy','open-source','refund'].includes(page?.data?.slug)}}",
+          "props": {
+            "className": "rh-docnav-mobile"
+          },
+          "children": [
+            {
+              "id": "rh_native_page_docnav_toggle",
+              "type": "basic",
+              "name": "Button",
+              "props": {
+                "className": "rh-docnav-toggle",
+                "type": "button",
+                "id": "rh-docnav-toggle",
+                "aria-expanded": "false",
+                "aria-controls": "rh-docnav-panel",
+                "data-rh-docnav-toggle": "true"
+              },
+              "children": [
+                {
+                  "type": "basic",
+                  "name": "Span",
+                  "props": {
+                    "className": "rh-docnav-toggle-text"
+                  },
+                  "children": [
+                    {
+                      "type": "basic",
+                      "name": "Span",
+                      "props": {
+                        "className": "rh-docnav-toggle-label"
+                      },
+                      "text": "$t:raonslab-product.native_page.menu_toggle"
+                    },
+                    {
+                      "type": "basic",
+                      "name": "Span",
+                      "props": {
+                        "className": "rh-docnav-toggle-current"
+                      },
+                      "text": "{{page?.data?.title ?? ''}}"
+                    }
+                  ]
+                },
+                {
+                  "type": "basic",
+                  "name": "Span",
+                  "props": {
+                    "className": "rh-gnav-caret",
+                    "aria-hidden": "true"
+                  }
+                }
+              ]
+            },
+            {
+              "id": "rh_native_page_docnav_panel",
+              "type": "basic",
+              "name": "Nav",
+              "props": {
+                "className": "rh-docnav-panel",
+                "id": "rh-docnav-panel",
+                "hidden": true,
+                "aria-label": "$t:raonslab-product.native_page.navigation_label"
+              },
+              "children": [
+                {
+                  "id": "rh_native_page_docnav_info_label",
+                  "type": "basic",
+                  "name": "P",
+                  "props": {
+                    "className": "rh-side-label",
+                    "id": "rh-docnav-mobile-info-label"
+                  },
+                  "text": "$t:raonslab-product.nav.info"
+                },
+                {
+                  "id": "rh_native_page_docnav_info_list",
+                  "type": "basic",
+                  "name": "Ul",
+                  "props": {
+                    "className": "rh-side-list",
+                    "aria-labelledby": "rh-docnav-mobile-info-label"
+                  },
+                  "children": [
+                    {
+                      "id": "rh_native_page_docnav_info_about_item",
+                      "type": "basic",
+                      "name": "Li",
+                      "children": [
+                        {
+                          "id": "rh_native_page_docnav_info_about",
+                          "type": "basic",
+                          "name": "A",
+                          "props": {
+                            "className": "rh-side-link",
+                            "href": "/page/about",
+                            "data-rh-nav-path": "/page/about"
+                          },
+                          "text": "$t:raonslab-product.nav.info_about",
+                          "actions": [
+                            {
+                              "type": "click",
+                              "handler": "navigate",
+                              "params": {
+                                "path": "/page/about"
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "id": "rh_native_page_docnav_info_services_item",
+                      "type": "basic",
+                      "name": "Li",
+                      "children": [
+                        {
+                          "id": "rh_native_page_docnav_info_services",
+                          "type": "basic",
+                          "name": "A",
+                          "props": {
+                            "className": "rh-side-link",
+                            "href": "/page/service",
+                            "data-rh-nav-path": "/page/service"
+                          },
+                          "text": "$t:raonslab-product.nav.info_services",
+                          "actions": [
+                            {
+                              "type": "click",
+                              "handler": "navigate",
+                              "params": {
+                                "path": "/page/service"
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "id": "rh_native_page_docnav_info_cases_item",
+                      "type": "basic",
+                      "name": "Li",
+                      "children": [
+                        {
+                          "id": "rh_native_page_docnav_info_cases",
+                          "type": "basic",
+                          "name": "A",
+                          "props": {
+                            "className": "rh-side-link",
+                            "href": "/page/cases",
+                            "data-rh-nav-path": "/page/cases"
+                          },
+                          "text": "$t:raonslab-product.nav.info_cases",
+                          "actions": [
+                            {
+                              "type": "click",
+                              "handler": "navigate",
+                              "params": {
+                                "path": "/page/cases"
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "id": "rh_native_page_docnav_info_principles_item",
+                      "type": "basic",
+                      "name": "Li",
+                      "children": [
+                        {
+                          "id": "rh_native_page_docnav_info_principles",
+                          "type": "basic",
+                          "name": "A",
+                          "props": {
+                            "className": "rh-side-link",
+                            "href": "/page/technology",
+                            "data-rh-nav-path": "/page/technology"
+                          },
+                          "text": "$t:raonslab-product.nav.info_principles",
+                          "actions": [
+                            {
+                              "type": "click",
+                              "handler": "navigate",
+                              "params": {
+                                "path": "/page/technology"
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "id": "rh_native_page_docnav_info_faq_item",
+                      "type": "basic",
+                      "name": "Li",
+                      "children": [
+                        {
+                          "id": "rh_native_page_docnav_info_faq",
+                          "type": "basic",
+                          "name": "A",
+                          "props": {
+                            "className": "rh-side-link",
+                            "href": "/page/faq",
+                            "data-rh-nav-path": "/page/faq"
+                          },
+                          "text": "$t:raonslab-product.nav.info_faq",
+                          "actions": [
+                            {
+                              "type": "click",
+                              "handler": "navigate",
+                              "params": {
+                                "path": "/page/faq"
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "id": "rh_native_page_docnav_info_contact_item",
+                      "type": "basic",
+                      "name": "Li",
+                      "children": [
+                        {
+                          "id": "rh_native_page_docnav_info_contact",
+                          "type": "basic",
+                          "name": "A",
+                          "props": {
+                            "className": "rh-side-link",
+                            "href": "/page/contact",
+                            "data-rh-nav-path": "/page/contact"
+                          },
+                          "text": "$t:raonslab-product.nav.info_contact",
+                          "actions": [
+                            {
+                              "type": "click",
+                              "handler": "navigate",
+                              "params": {
+                                "path": "/page/contact"
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "rh_native_page_docnav_policy_label",
+                  "type": "basic",
+                  "name": "P",
+                  "props": {
+                    "className": "rh-side-label",
+                    "id": "rh-docnav-mobile-policy-label"
+                  },
+                  "text": "$t:raonslab-product.nav.policy"
+                },
+                {
+                  "id": "rh_native_page_docnav_policy_list",
+                  "type": "basic",
+                  "name": "Ul",
+                  "props": {
+                    "className": "rh-side-list",
+                    "aria-labelledby": "rh-docnav-mobile-policy-label"
+                  },
+                  "children": [
+                    {
+                      "id": "rh_native_page_docnav_policy_privacy_item",
+                      "type": "basic",
+                      "name": "Li",
+                      "children": [
+                        {
+                          "id": "rh_native_page_docnav_policy_privacy",
+                          "type": "basic",
+                          "name": "A",
+                          "props": {
+                            "className": "rh-side-link",
+                            "href": "/page/privacy",
+                            "data-rh-nav-path": "/page/privacy"
+                          },
+                          "text": "$t:raonslab-product.nav.policy_privacy",
+                          "actions": [
+                            {
+                              "type": "click",
+                              "handler": "navigate",
+                              "params": {
+                                "path": "/page/privacy"
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "id": "rh_native_page_docnav_policy_community_item",
+                      "type": "basic",
+                      "name": "Li",
+                      "children": [
+                        {
+                          "id": "rh_native_page_docnav_policy_community",
+                          "type": "basic",
+                          "name": "A",
+                          "props": {
+                            "className": "rh-side-link",
+                            "href": "/page/terms",
+                            "data-rh-nav-path": "/page/terms"
+                          },
+                          "text": "$t:raonslab-product.nav.policy_community",
+                          "actions": [
+                            {
+                              "type": "click",
+                              "handler": "navigate",
+                              "params": {
+                                "path": "/page/terms"
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "id": "rh_native_page_docnav_policy_ai_policy_item",
+                      "type": "basic",
+                      "name": "Li",
+                      "children": [
+                        {
+                          "id": "rh_native_page_docnav_policy_ai_policy",
+                          "type": "basic",
+                          "name": "A",
+                          "props": {
+                            "className": "rh-side-link",
+                            "href": "/page/ai-workspace-policy",
+                            "data-rh-nav-path": "/page/ai-workspace-policy"
+                          },
+                          "text": "$t:raonslab-product.nav.policy_ai",
+                          "actions": [
+                            {
+                              "type": "click",
+                              "handler": "navigate",
+                              "params": {
+                                "path": "/page/ai-workspace-policy"
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "id": "rh_native_page_docnav_policy_oss_item",
+                      "type": "basic",
+                      "name": "Li",
+                      "children": [
+                        {
+                          "id": "rh_native_page_docnav_policy_oss",
+                          "type": "basic",
+                          "name": "A",
+                          "props": {
+                            "className": "rh-side-link",
+                            "href": "/page/open-source",
+                            "data-rh-nav-path": "/page/open-source"
+                          },
+                          "text": "$t:raonslab-product.nav.policy_oss",
+                          "actions": [
+                            {
+                              "type": "click",
+                              "handler": "navigate",
+                              "params": {
+                                "path": "/page/open-source"
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "id": "rh_native_page_docnav_policy_refund_item",
+                      "type": "basic",
+                      "name": "Li",
+                      "children": [
+                        {
+                          "id": "rh_native_page_docnav_policy_refund",
+                          "type": "basic",
+                          "name": "A",
+                          "props": {
+                            "className": "rh-side-link",
+                            "href": "/page/refund",
+                            "data-rh-nav-path": "/page/refund"
+                          },
+                          "text": "$t:raonslab-product.nav.policy_refund",
+                          "actions": [
+                            {
+                              "type": "click",
+                              "handler": "navigate",
+                              "params": {
+                                "path": "/page/refund"
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "target_id": "page_content_card",
+      "position": "append_child",
+      "components": [
+        {
           "id": "rh_native_page_side_navigation",
+          "comment": "데스크톱 우측 문서 메뉴. DOM·탭 순서상 본문 뒤에 둔다.",
           "type": "basic",
           "name": "Nav",
-          "if": "{{['service','cases','technology','privacy','terms','ai-workspace-policy','open-source'].includes(page?.data?.slug)}}",
+          "if": "{{['about','service','cases','technology','faq','contact','privacy','terms','ai-workspace-policy','open-source','refund'].includes(page?.data?.slug)}}",
           "props": {
             "className": "rh-native-side",
             "aria-label": "$t:raonslab-product.native_page.navigation_label"
           },
           "children": [
-            { "type": "basic", "name": "P", "props": { "className": "rh-side-label" }, "text": "$t:raonslab-product.nav.info" },
             {
+              "id": "rh_native_page_side_info_label",
+              "type": "basic",
+              "name": "P",
+              "props": {
+                "className": "rh-side-label",
+                "id": "rh-docnav-side-info-label"
+              },
+              "text": "$t:raonslab-product.nav.info"
+            },
+            {
+              "id": "rh_native_page_side_info_list",
               "type": "basic",
               "name": "Ul",
-              "props": { "className": "rh-side-list" },
+              "props": {
+                "className": "rh-side-list",
+                "aria-labelledby": "rh-docnav-side-info-label"
+              },
               "children": [
-                { "type": "basic", "name": "Li", "children": [{ "type": "basic", "name": "A", "props": { "href": "/page/service", "className": "rh-side-link", "data-rh-nav-path": "/page/service" }, "text": "$t:raonslab-product.nav.info_services", "actions": [{ "type": "click", "handler": "navigate", "params": { "path": "/page/service" } }] }] },
-                { "type": "basic", "name": "Li", "children": [{ "type": "basic", "name": "A", "props": { "href": "/page/cases", "className": "rh-side-link", "data-rh-nav-path": "/page/cases" }, "text": "$t:raonslab-product.nav.info_cases", "actions": [{ "type": "click", "handler": "navigate", "params": { "path": "/page/cases" } }] }] },
-                { "type": "basic", "name": "Li", "children": [{ "type": "basic", "name": "A", "props": { "href": "/page/technology", "className": "rh-side-link", "data-rh-nav-path": "/page/technology" }, "text": "$t:raonslab-product.nav.info_principles", "actions": [{ "type": "click", "handler": "navigate", "params": { "path": "/page/technology" } }] }] }
+                {
+                  "id": "rh_native_page_side_info_about_item",
+                  "type": "basic",
+                  "name": "Li",
+                  "children": [
+                    {
+                      "id": "rh_native_page_side_info_about",
+                      "type": "basic",
+                      "name": "A",
+                      "props": {
+                        "className": "rh-side-link",
+                        "href": "/page/about",
+                        "data-rh-nav-path": "/page/about"
+                      },
+                      "text": "$t:raonslab-product.nav.info_about",
+                      "actions": [
+                        {
+                          "type": "click",
+                          "handler": "navigate",
+                          "params": {
+                            "path": "/page/about"
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "rh_native_page_side_info_services_item",
+                  "type": "basic",
+                  "name": "Li",
+                  "children": [
+                    {
+                      "id": "rh_native_page_side_info_services",
+                      "type": "basic",
+                      "name": "A",
+                      "props": {
+                        "className": "rh-side-link",
+                        "href": "/page/service",
+                        "data-rh-nav-path": "/page/service"
+                      },
+                      "text": "$t:raonslab-product.nav.info_services",
+                      "actions": [
+                        {
+                          "type": "click",
+                          "handler": "navigate",
+                          "params": {
+                            "path": "/page/service"
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "rh_native_page_side_info_cases_item",
+                  "type": "basic",
+                  "name": "Li",
+                  "children": [
+                    {
+                      "id": "rh_native_page_side_info_cases",
+                      "type": "basic",
+                      "name": "A",
+                      "props": {
+                        "className": "rh-side-link",
+                        "href": "/page/cases",
+                        "data-rh-nav-path": "/page/cases"
+                      },
+                      "text": "$t:raonslab-product.nav.info_cases",
+                      "actions": [
+                        {
+                          "type": "click",
+                          "handler": "navigate",
+                          "params": {
+                            "path": "/page/cases"
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "rh_native_page_side_info_principles_item",
+                  "type": "basic",
+                  "name": "Li",
+                  "children": [
+                    {
+                      "id": "rh_native_page_side_info_principles",
+                      "type": "basic",
+                      "name": "A",
+                      "props": {
+                        "className": "rh-side-link",
+                        "href": "/page/technology",
+                        "data-rh-nav-path": "/page/technology"
+                      },
+                      "text": "$t:raonslab-product.nav.info_principles",
+                      "actions": [
+                        {
+                          "type": "click",
+                          "handler": "navigate",
+                          "params": {
+                            "path": "/page/technology"
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "rh_native_page_side_info_faq_item",
+                  "type": "basic",
+                  "name": "Li",
+                  "children": [
+                    {
+                      "id": "rh_native_page_side_info_faq",
+                      "type": "basic",
+                      "name": "A",
+                      "props": {
+                        "className": "rh-side-link",
+                        "href": "/page/faq",
+                        "data-rh-nav-path": "/page/faq"
+                      },
+                      "text": "$t:raonslab-product.nav.info_faq",
+                      "actions": [
+                        {
+                          "type": "click",
+                          "handler": "navigate",
+                          "params": {
+                            "path": "/page/faq"
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "rh_native_page_side_info_contact_item",
+                  "type": "basic",
+                  "name": "Li",
+                  "children": [
+                    {
+                      "id": "rh_native_page_side_info_contact",
+                      "type": "basic",
+                      "name": "A",
+                      "props": {
+                        "className": "rh-side-link",
+                        "href": "/page/contact",
+                        "data-rh-nav-path": "/page/contact"
+                      },
+                      "text": "$t:raonslab-product.nav.info_contact",
+                      "actions": [
+                        {
+                          "type": "click",
+                          "handler": "navigate",
+                          "params": {
+                            "path": "/page/contact"
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
               ]
             },
-            { "type": "basic", "name": "P", "props": { "className": "rh-side-label rh-native-side-policy-label" }, "text": "$t:raonslab-product.nav.policy" },
             {
+              "id": "rh_native_page_side_policy_label",
+              "type": "basic",
+              "name": "P",
+              "props": {
+                "className": "rh-side-label",
+                "id": "rh-docnav-side-policy-label"
+              },
+              "text": "$t:raonslab-product.nav.policy"
+            },
+            {
+              "id": "rh_native_page_side_policy_list",
               "type": "basic",
               "name": "Ul",
-              "props": { "className": "rh-side-list" },
+              "props": {
+                "className": "rh-side-list",
+                "aria-labelledby": "rh-docnav-side-policy-label"
+              },
               "children": [
-                { "type": "basic", "name": "Li", "children": [{ "type": "basic", "name": "A", "props": { "href": "/page/privacy", "className": "rh-side-link", "data-rh-nav-path": "/page/privacy" }, "text": "$t:raonslab-product.nav.policy_privacy", "actions": [{ "type": "click", "handler": "navigate", "params": { "path": "/page/privacy" } }] }] },
-                { "type": "basic", "name": "Li", "children": [{ "type": "basic", "name": "A", "props": { "href": "/page/terms", "className": "rh-side-link", "data-rh-nav-path": "/page/terms" }, "text": "$t:raonslab-product.nav.policy_community", "actions": [{ "type": "click", "handler": "navigate", "params": { "path": "/page/terms" } }] }] },
-                { "type": "basic", "name": "Li", "children": [{ "type": "basic", "name": "A", "props": { "href": "/page/ai-workspace-policy", "className": "rh-side-link", "data-rh-nav-path": "/page/ai-workspace-policy" }, "text": "$t:raonslab-product.nav.policy_ai", "actions": [{ "type": "click", "handler": "navigate", "params": { "path": "/page/ai-workspace-policy" } }] }] },
-                { "type": "basic", "name": "Li", "children": [{ "type": "basic", "name": "A", "props": { "href": "/page/open-source", "className": "rh-side-link", "data-rh-nav-path": "/page/open-source" }, "text": "$t:raonslab-product.nav.policy_oss", "actions": [{ "type": "click", "handler": "navigate", "params": { "path": "/page/open-source" } }] }] }
+                {
+                  "id": "rh_native_page_side_policy_privacy_item",
+                  "type": "basic",
+                  "name": "Li",
+                  "children": [
+                    {
+                      "id": "rh_native_page_side_policy_privacy",
+                      "type": "basic",
+                      "name": "A",
+                      "props": {
+                        "className": "rh-side-link",
+                        "href": "/page/privacy",
+                        "data-rh-nav-path": "/page/privacy"
+                      },
+                      "text": "$t:raonslab-product.nav.policy_privacy",
+                      "actions": [
+                        {
+                          "type": "click",
+                          "handler": "navigate",
+                          "params": {
+                            "path": "/page/privacy"
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "rh_native_page_side_policy_community_item",
+                  "type": "basic",
+                  "name": "Li",
+                  "children": [
+                    {
+                      "id": "rh_native_page_side_policy_community",
+                      "type": "basic",
+                      "name": "A",
+                      "props": {
+                        "className": "rh-side-link",
+                        "href": "/page/terms",
+                        "data-rh-nav-path": "/page/terms"
+                      },
+                      "text": "$t:raonslab-product.nav.policy_community",
+                      "actions": [
+                        {
+                          "type": "click",
+                          "handler": "navigate",
+                          "params": {
+                            "path": "/page/terms"
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "rh_native_page_side_policy_ai_policy_item",
+                  "type": "basic",
+                  "name": "Li",
+                  "children": [
+                    {
+                      "id": "rh_native_page_side_policy_ai_policy",
+                      "type": "basic",
+                      "name": "A",
+                      "props": {
+                        "className": "rh-side-link",
+                        "href": "/page/ai-workspace-policy",
+                        "data-rh-nav-path": "/page/ai-workspace-policy"
+                      },
+                      "text": "$t:raonslab-product.nav.policy_ai",
+                      "actions": [
+                        {
+                          "type": "click",
+                          "handler": "navigate",
+                          "params": {
+                            "path": "/page/ai-workspace-policy"
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "rh_native_page_side_policy_oss_item",
+                  "type": "basic",
+                  "name": "Li",
+                  "children": [
+                    {
+                      "id": "rh_native_page_side_policy_oss",
+                      "type": "basic",
+                      "name": "A",
+                      "props": {
+                        "className": "rh-side-link",
+                        "href": "/page/open-source",
+                        "data-rh-nav-path": "/page/open-source"
+                      },
+                      "text": "$t:raonslab-product.nav.policy_oss",
+                      "actions": [
+                        {
+                          "type": "click",
+                          "handler": "navigate",
+                          "params": {
+                            "path": "/page/open-source"
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "rh_native_page_side_policy_refund_item",
+                  "type": "basic",
+                  "name": "Li",
+                  "children": [
+                    {
+                      "id": "rh_native_page_side_policy_refund",
+                      "type": "basic",
+                      "name": "A",
+                      "props": {
+                        "className": "rh-side-link",
+                        "href": "/page/refund",
+                        "data-rh-nav-path": "/page/refund"
+                      },
+                      "text": "$t:raonslab-product.nav.policy_refund",
+                      "actions": [
+                        {
+                          "type": "click",
+                          "handler": "navigate",
+                          "params": {
+                            "path": "/page/refund"
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
               ]
             }
           ]

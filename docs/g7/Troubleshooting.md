@@ -1,7 +1,7 @@
 # GNUBOARD7 프로젝트 트러블슈팅
 
 이 문서는 RAON Hub 운영에서 재발 가능성이 확인된 사례만 기록한다. 현재 기준은 main/runtime
-`390cdc7a379e1f2b9c8e3991b241edcc59dbdd71`, `raonslab-product 0.4.0`이다.
+`390cdc7a379e1f2b9c8e3991b241edcc59dbdd71`, `raonslab-product 0.4.0`이며 CASE 5~8은 source `raonslab-product 0.4.1` 변경과 함께 기록했다.
 
 ## CASE 1 — Native Page 배포 뒤 legacy route 404
 
@@ -59,6 +59,62 @@
 | related regression test | G7 제품 회귀 대상 아님. Adapter 경계는 `modules/_bundled/raonslab-ai-workspace/tests/Feature/AiAdapterContractTest.php`, 사용자 상태 표시는 `modules/_bundled/raonslab-ai-workspace/resources/js/presentation.test.ts`로 고정한다. |
 | related commit/request_id | product commit 없음; Production evidence `req_9460a4c28982425bb8ca2c5937179528`, `req_65edcf3409dd460a94f739b76360def8` |
 
+## CASE 5 — 설치 시더 샘플 Page 4종이 운영 문서로 노출
+
+| 필드 | 내용 |
+|---|---|
+| CASE ID / date | `G7-NATIVE-PAGE-004` / 2026-09-28 KST |
+| symptom | `/page/about`은 "그누보드7 소개"(G7 홍보·기술 스택), `/page/contact`·`/page/refund`는 `[… 입력하세요.]` 자리표시자, `/page/faq`는 G7 회원 FAQ를 발행 상태로 공개했다. 모바일 드로어·검색봇 footer·sitemap이 네 URL을 계속 링크한다. |
+| wrong initial assumption | 0.4.0 native Page 전환이 공개 문서 전체를 정리했으므로 남은 Page는 RAON 소유 문서라고 보았다. |
+| actual cause | `sirsoft-page` 설치 시 `PageSeeder`가 6개 샘플(terms/privacy/refund/about/faq/contact)을 `published=true`, `current_version=1`로 만든다. 0.4.0은 7개 RAON slug만 다뤘고 terms·privacy만 전환해 나머지 4개가 원문 v1로 남았다. |
+| evidence | `modules/_bundled/sirsoft-page/database/seeders/PageSeeder.php`; 공개 API `/api/modules/sirsoft-page/pages/{about,faq,contact,refund}` 200·제목 원문; 기술 감사의 v1 의미 지문 4개가 `PageSeeder` 원문 재계산값과 정확히 일치(`InfoPageRemediator::SOURCE_FINGERPRINTS`, `InfoPageRemediationCommandTest::untouched_seeder_samples_match_the_audited_source_fingerprints`). |
+| resolution | URL은 유지하고 제자리 교체한다. `raonslab-product:remediate-info-pages`가 승인된 외부 ko/en payload·활성 최고 관리자 actor를 받아 한 외부 transaction에서 4행을 잠그고, v1·발행·원문 지문이 모두 맞을 때만 `PageService::updatePage()`로 v2를 만든다. 하나라도 어긋나면 전부 중단하고, 재실행은 `already_applied`로 끝난다. 본문은 저장소에 두지 않는다. |
+| prevention rule | 설치 시더가 만드는 공개 데이터는 "제품 소유 아님"으로 간주하고 발행 전 전수 분류한다. 제품 분류(taxonomy)는 Page 목록이 아니라 명시적 slug 집합으로 두고, 분류에 든 slug는 배포 smoke가 200·샘플 문구 부재를 확인한다. |
+| related regression test | `modules/_bundled/raonslab-product/tests/Feature/InfoPageRemediationCommandTest.php`; `modules/_bundled/raonslab-product/tests/browser/info-policy-smoke.cjs`(`no sample/placeholder wording in document body`) |
+| related commit/request_id | 이 문서를 포함한 0.4.1 source commit; `req_04b635bdc600403cbf7a3795159ce168`; 기술 감사 `req_3f95be490cb44061be39e563598fe52d` |
+
+## CASE 6 — FAQ·메일 문구가 확인되지 않은 운영 약속을 공개
+
+| 필드 | 내용 |
+|---|---|
+| CASE ID / date | `G7-NATIVE-PAGE-005` / 2026-09-28 KST |
+| symptom | 샘플 FAQ가 "가입 후 이메일로 인증 메일이 발송", "비밀번호 재설정 링크가 발송", "평일 오전 9시~오후 6시, 1~2 영업일 내 처리"를 안내했다. 연결된 `/page/contact`는 자리표시자였다. |
+| wrong initial assumption | G7 기본 FAQ 문구는 플랫폼 기본 동작 설명이라 사실이라고 보았다. |
+| actual cause | 문구는 시더 예시다. 런타임 유효 mailer는 `smtp`지만 관리자 메일 설정에 SMTP host·계정이 비어 있어 실제 발송 경로가 검증되지 않았고, 운영 시간·처리 기한은 승인된 근거가 없다. 가입 인증은 코어 설정 토글이 아니라 본인인증 정책(`core.auth.signup_after_create`, provider `g7:core.mail`)에 달려 있다. |
+| evidence | `modules/_bundled/sirsoft-page/database/seeders/PageSeeder.php`의 FAQ 원문; 런타임 `config('mail.default')=smtp`, `storage/app/settings/mail.json`의 host 미설정(값 비공개로 존재 여부만 확인); `storage/app/settings/identity.json`의 `default_provider=g7:core.mail`; `config/core.php`의 `core.auth.signup_*` 정책 정의. |
+| resolution | FAQ·문의 문서는 메일 발송·운영 시간·응답 기한을 약속하지 않는다. 공개 문의 경로는 확인된 `/board/questions`만 안내하고, 상담 접수는 `intake_enabled=false` 동안 닫혀 있음을 밝힌다. 메일 발송은 SMTP 설정과 실제 발송 리허설이 끝난 뒤에만 문구에 넣는다. |
+| prevention rule | 사용자 약속(메일 발송, 응답 시간, 운영 시간, 가격, SLA)은 런타임 설정과 실제 동작 증거가 있을 때만 공개한다. 교체 명령은 `입력하세요`·`DEMO/MOCK/SANDBOX/TEST` 문구를 거부하고, smoke는 운영 시간·영업일 문구를 실패로 본다. |
+| related regression test | `InfoPageRemediationCommandTest::invalid_payloads_and_actors_fail_before_any_write`; `info-policy-smoke.cjs`(`SAMPLE_TEXT`) |
+| related commit/request_id | 0.4.1 source commit; `req_04b635bdc600403cbf7a3795159ce168` |
+
+## CASE 7 — CMS 분류를 여러 파일에 하드코딩
+
+| 필드 | 내용 |
+|---|---|
+| CASE ID / date | `G7-NATIVE-PAGE-006` / 2026-09-28 KST |
+| symptom | 정보·정책 문서 목록이 `native-page.json`(조건식 3곳·side nav), `product-nav.json`(드롭다운·footer), `productNav.ts`(현재 그룹)에 각각 적혀 있었고 7개 slug만 알았다. about/faq/contact/refund는 문서 표현·현재 위치가 빠져 stock 카드로 보였고, 데스크톱 문서 메뉴는 float + `overflow:hidden` 부모 때문에 sticky가 동작하지 않고 본문 일부만 옆에 붙었다. |
+| wrong initial assumption | Page가 DB 정본이므로 메뉴도 Page 목록에서 자동 생성하거나, 몇 개 slug를 각 파일에 추가하면 충분하다고 보았다. |
+| actual cause | `sirsoft-page`는 공개 목록 API를 두지 않으며 G7 Menu는 관리자 sidebar 전용이다. 분류(그룹·순서·짧은 라벨·설명)는 제품 소유 데이터인데 단일 출처 없이 복제돼 드리프트가 생겼다. |
+| evidence | `docs/extension/menus.md`; `modules/_bundled/sirsoft-page/AGENTS.md`; 0.4.0 `native-page.json`·`product-nav.json`·`productNav.ts`; 360/390/412/1280 human DOM 측정(0.4.0: 1280에서 스크롤 후 문서 메뉴 top 음수). |
+| resolution | `resources/taxonomy/info-policy.json`을 단일 출처로 두고 `scripts/taxonomy.mjs`가 extension JSON의 분류 종속 부분을 생성한다. `productNav.ts`와 browser smoke는 같은 JSON을 읽는다. 문서 메뉴는 grid 오른쪽 열(DOM은 본문 뒤) + 실제 sticky, 모바일은 기본 닫힘 disclosure다. |
+| prevention rule | 분류를 바꿀 때는 JSON만 고치고 `npm run taxonomy:sync`를 실행한다. vitest 드리프트 테스트가 커밋된 extension JSON과 생성 결과의 바이트 불일치를 실패로 본다. Page 제목·본문·SEO는 계속 Page DB가 정본이다. |
+| related regression test | `modules/_bundled/raonslab-product/resources/js/infoPolicy.test.ts`; `modules/_bundled/raonslab-product/tests/Feature/ProductLayerContractTest.php`; `info-policy-smoke.cjs` |
+| related commit/request_id | 0.4.1 source commit; `req_04b635bdc600403cbf7a3795159ce168` |
+
+## CASE 8 — footer linkGroups "미적용" 오진(HeadlessChrome UA)
+
+| 필드 | 내용 |
+|---|---|
+| CASE ID / date | `G7-NATIVE-PAGE-007` / 2026-09-28 KST |
+| symptom | 감사용 Playwright가 `/`, `/page/service`, `/board/questions`에서 G7 기본 footer(회사소개/자주 묻는 질문/문의하기 · 이용약관/개인정보처리방침/취소·반품·교환)를 보았고, Footer fiber에서 `linkGroups` prop을 찾지 못했다. |
+| wrong initial assumption | product `footer` `inject_props` 주입이 런타임에서 누락되거나 Footer 번들이 prop을 무시한다고 보았다. |
+| actual cause | Playwright 기본 UA에 `HeadlessChrome`이 들어 있어 `SeoMiddleware`가 봇으로 판정하고 서버 렌더 HTML을 준다. 그 HTML의 footer는 템플릿 `seo-config.json`의 고정 `footer_nav` 렌더 모드이며 React가 없어 fiber도 없다. 일반 Chrome UA의 human SPA footer는 product `linkGroups`를 정상 렌더한다. 모듈 `seo-config.json`은 템플릿 설정보다 먼저 병합돼(`SeoConfigMerger`: 모듈 → 플러그인 → 템플릿 최종 우선) 모듈이 `footer_nav`를 덮을 수 없다. |
+| evidence | `app/Seo/SeoConfigMerger.php`; `templates/_bundled/sirsoft-basic/seo-config.json`(`footer_nav`, `header_nav`, `component_map.Footer`); 같은 URL을 HeadlessChrome UA와 일반 Chrome UA로 요청해 서버 HTML `<header class="block">`/SPA DOM 차이를 대조. |
+| resolution | human 검증은 명시한 일반 Chrome UA로만 한다(smoke는 UA 고정 + `HeadlessChrome/` 금지 계약). 봇 footer·모바일 드로어 불일치는 기본 템플릿 확장 지점 부재로 분류하고 템플릿을 직접 패치하지 않는다(`docs/g7/audit/INITIALIZATION_AUDIT_2026-09-28.md`의 제안 참조). |
+| prevention rule | UI 결함 판정 전 응답 표면(bot SSR vs human SPA)을 먼저 확정한다. CASE 2와 같은 원리: 검증은 구현이 소유한 표면에서 한다. |
+| related regression test | `info-policy-smoke.cjs`(`normal browser UA renders human app DOM`, `footer link text and href follow taxonomy`); `infoPolicy.test.ts`(smoke UA 계약) |
+| related commit/request_id | 0.4.1 source commit; 오진 출처 `req_9160cea72adc49aabbcbcc3f5edab73a`; 진단 `req_04b635bdc600403cbf7a3795159ce168` |
+
 ## 권위 경로
 
 | 영역 | repository-relative authoritative paths |
@@ -78,6 +134,8 @@
 | G7 DevTools MCP | `docs/ai-tools/agents/src/mcp/g7-devtools-server.ts`; 안내 `docs/ai-tools/devtools/README.md` | source available. repository에 연결 설정을 추가하지 않았고 이 요청에서 Connected 상태나 호출을 확인하지 않았다. |
 | Browser DevTools runtime | `resources/js/core/devtools/`; `routes/devtools.php`; `public/build/core/devtools.min.js` | source/build asset available. production debug dump를 활성화하거나 수집하지 않았다. |
 | G7 agent workflow | `docs/ai-tools/agents/src/coordinator/Coordinator.ts`; `docs/ai-tools/agents/src/mcp/index.ts` | source available. 이 요청의 orchestrator로 실행하거나 MCP endpoint를 게시하지 않았다. |
+
+이 요청(`req_04b635bdc600403cbf7a3795159ce168`)에서도 위 G7 AI 도구는 경로만 source-review했고 연결·호출하지 않았다. 검증은 repository의 vitest·phpunit·Playwright smoke를 직접 실행했다.
 
 AgentOpt/Agent.Tools는 request truth, 실행 조율과 프로젝트 context를 담당한다. 위 G7 도구는 저장소 규칙에
 맞춘 구현·검증 보조 수단이며 대체 orchestrator가 아니다. 파일 존재는 연결 증거가 아니므로 MCP는 실제

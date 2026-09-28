@@ -1,0 +1,22 @@
+{
+  "_comment": "공개 사용자 화면에서 이커머스 통화·배송국가 선택기를 숨긴다. 이 제품 사이트는 온라인 결제·주문을 받지 않는다. 이커머스가 priority 320 으로 header_currency_inject_anchor 에 선택기를 append_child 한 뒤, 이 확장이 같은 id 의 빈 앵커로 교체해 헤더·모바일 드로어 SlotContainer 양쪽에서 선택기가 사라진다. 모듈·설정·데이터는 변경하지 않으며 _admin_base 는 대상이 아니다. 이 파일을 제거하고 module:update 하면 원상 복구된다.",
+  "target_layout": "_user_base",
+  "priority": 400,
+  "injections": [
+    {
+      "target_id": "header_currency_inject_anchor",
+      "position": "replace",
+      "components": [
+        {
+          "id": "header_currency_inject_anchor",
+          "type": "basic",
+          "name": "Div",
+          "props": {
+            "className": "hidden",
+            "data-rh-commerce-suppressed": "currency"
+          }
+        }
+      ]
+    }
+  ]
+}
