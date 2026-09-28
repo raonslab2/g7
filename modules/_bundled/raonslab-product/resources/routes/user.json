@@ -1,0 +1,61 @@
+{
+  "version": "1.0.0",
+  "routes": [
+    {
+      "path": "*/info/services",
+      "layout": "rh_info_services",
+      "auth_required": false,
+      "meta": {
+        "title": "$t:raonslab-product.nav.info_services"
+      }
+    },
+    {
+      "path": "*/info/cases",
+      "layout": "rh_info_cases",
+      "auth_required": false,
+      "meta": {
+        "title": "$t:raonslab-product.nav.info_cases"
+      }
+    },
+    {
+      "path": "*/info/principles",
+      "layout": "rh_info_principles",
+      "auth_required": false,
+      "meta": {
+        "title": "$t:raonslab-product.nav.info_principles"
+      }
+    },
+    {
+      "path": "*/policy/privacy",
+      "layout": "rh_policy_privacy",
+      "auth_required": false,
+      "meta": {
+        "title": "$t:raonslab-product.nav.policy_privacy"
+      }
+    },
+    {
+      "path": "*/policy/community",
+      "layout": "rh_policy_community",
+      "auth_required": false,
+      "meta": {
+        "title": "$t:raonslab-product.nav.policy_community"
+      }
+    },
+    {
+      "path": "*/policy/ai-workspace",
+      "layout": "rh_policy_ai_workspace",
+      "auth_required": false,
+      "meta": {
+        "title": "$t:raonslab-product.nav.policy_ai"
+      }
+    },
+    {
+      "path": "*/policy/open-source",
+      "layout": "rh_policy_open_source",
+      "auth_required": false,
+      "meta": {
+        "title": "$t:raonslab-product.nav.policy_oss"
+      }
+    }
+  ]
+}
