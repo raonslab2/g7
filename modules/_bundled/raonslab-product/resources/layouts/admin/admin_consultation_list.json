@@ -1,0 +1,148 @@
+{
+  "version": "1.0.0",
+  "layout_name": "admin_consultation_list",
+  "permissions": [
+    "raonslab-product.consultations.read"
+  ],
+  "extends": "_admin_base",
+  "meta": {
+    "title": "사업 상담 / Consultations",
+    "description": "익명 방문자가 제출한 사업 상담 접수 목록"
+  },
+  "data_sources": [
+    {
+      "id": "consultations",
+      "label_key": "Consultations",
+      "type": "api",
+      "endpoint": "/api/modules/raonslab-product/admin/consultations",
+      "method": "GET",
+      "auto_fetch": true,
+      "auth_required": true,
+      "params": {
+        "status": "{{query.status ?? ''}}",
+        "page": "{{query.page ?? 1}}",
+        "per_page": "{{query.per_page ?? 20}}"
+      },
+      "errorHandling": {
+        "403": {
+          "handler": "showErrorPage",
+          "params": {
+            "target": "content"
+          }
+        }
+      },
+      "fallback": {
+        "data": {
+          "data": [],
+          "current_page": 1,
+          "last_page": 1,
+          "total": 0
+        }
+      }
+    }
+  ],
+  "slots": {
+    "content": [
+      {
+        "id": "consultation_list_page",
+        "type": "basic",
+        "name": "Div",
+        "props": {
+          "className": "admin-page-content-responsive"
+        },
+        "children": [
+          {
+            "id": "consultation_list_header",
+            "type": "composite",
+            "name": "PageHeader",
+            "props": {
+              "title": "사업 상담 / Consultations",
+              "description": "접수된 상담을 조회하고 처리 상태를 관리합니다."
+            }
+          },
+          {
+            "id": "consultation_status_filter",
+            "type": "composite",
+            "name": "Select",
+            "props": {
+              "value": "{{query.status ?? ''}}",
+              "className": "w-52 mb-4",
+              "options": [
+                {"label": "전체 상태 / All", "value": ""},
+                {"label": "신규 / NEW", "value": "NEW"},
+                {"label": "연락 완료 / CONTACTED", "value": "CONTACTED"},
+                {"label": "검토 완료 / QUALIFIED", "value": "QUALIFIED"},
+                {"label": "종결 / CLOSED", "value": "CLOSED"}
+              ]
+            },
+            "actions": [
+              {
+                "type": "change",
+                "handler": "replaceUrl",
+                "params": {
+                  "mergeQuery": true,
+                  "query": {
+                    "status": "{{$event.target.value}}",
+                    "page": 1
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "id": "consultation_empty",
+            "type": "basic",
+            "name": "P",
+            "if": "{{(consultations?.data?.data ?? []).length === 0}}",
+            "props": {
+              "className": "p-6 text-secondary"
+            },
+            "text": "접수된 상담이 없습니다. / No consultations found."
+          },
+          {
+            "id": "consultation_row_{{idx}}",
+            "type": "basic",
+            "name": "Div",
+            "iteration": {
+              "source": "{{consultations?.data?.data ?? []}}",
+              "item_var": "consultation",
+              "index_var": "idx"
+            },
+            "props": {
+              "className": "mb-3 p-4 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg"
+            },
+            "actions": [
+              {
+                "type": "click",
+                "handler": "navigate",
+                "params": {
+                  "path": "/admin/consultations/{{consultation.reference}}"
+                }
+              }
+            ],
+            "children": [
+              {
+                "type": "basic",
+                "name": "H2",
+                "props": {"className": "section-heading"},
+                "text": "{{consultation.contact_name ?? ''}} · {{consultation.company ?? '-'}}"
+              },
+              {
+                "type": "basic",
+                "name": "P",
+                "props": {"className": "text-sm text-secondary mt-1"},
+                "text": "{{consultation.reference ?? ''}} · {{consultation.status ?? ''}} · {{consultation.received_at ?? ''}}"
+              },
+              {
+                "type": "basic",
+                "name": "P",
+                "props": {"className": "text-sm text-secondary mt-1"},
+                "text": "{{consultation.email ?? ''}} · {{consultation.service_interest ?? '-'}} · mail: {{consultation.mail_status ?? ''}}"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

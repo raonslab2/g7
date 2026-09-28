@@ -1,0 +1,63 @@
+feature: consultation_intake_admin_loop
+description: 익명 상담 접수부터 관리자 조회, 메모, 순차 상태 처리까지의 폐쇄 루프
+test_files:
+  - modules/_bundled/raonslab-product/tests/Feature/ConsultationIntakeTest.php
+  - modules/_bundled/raonslab-product/tests/Feature/ConsultationAdminTest.php
+  - modules/_bundled/raonslab-product/tests/Unit/ConsultationContractTest.php
+
+axes:
+  case:
+    - config_fail_closed
+    - request_guards
+    - validation_failure
+    - first_submission
+    - idempotent_retry
+    - idempotency_conflict
+    - persistence_reload
+    - storage_failure
+    - log_mailer
+    - mail_failure
+    - public_throttle
+    - admin_authorization
+    - admin_read
+    - admin_mutation
+    - invalid_status_transition
+    - module_registration
+    - admin_layout_contract
+
+effects:
+  - config_exposes_disabled_values
+  - intake_fails_closed
+  - same_origin_enforced
+  - idempotency_key_required
+  - invalid_consent_rejected
+  - wrong_consent_version_rejected
+  - oversized_message_rejected
+  - submission_persisted_before_success
+  - public_response_excludes_pii
+  - pii_encrypted_at_rest
+  - idempotent_retry_reuses_reference
+  - single_record_preserved
+  - idempotency_conflict_rejected
+  - record_persists_across_queries
+  - storage_failure_returns_unavailable
+  - failed_storage_creates_no_record
+  - log_mailer_not_marked_sent
+  - mail_failure_recorded_separately
+  - stored_submission_remains_successful
+  - public_rate_limit_enforced
+  - admin_auth_required
+  - admin_permission_required
+  - admin_list_filter_works
+  - admin_detail_contains_pii_for_authorized_user
+  - internal_note_history_preserved
+  - ordered_status_history_preserved
+  - close_outcome_preserved
+  - admin_sensitive_fields_encrypted
+  - invalid_status_transition_rejected
+  - close_requires_outcome
+  - extension_config_registered
+  - admin_permissions_registered
+  - admin_menu_registered
+  - public_guards_registered
+  - admin_layout_contract_validated
