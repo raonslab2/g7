@@ -2,17 +2,17 @@
 
 namespace Modules\Raonslab\Product\Console\Commands;
 
+use App\Models\User;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Auth;
 use JsonException;
-use Modules\Raonslab\Product\Console\Concerns\ActsAsPageActor;
+use Modules\Raonslab\Product\Auth\NativePageActorGuard;
 use Modules\Raonslab\Product\Services\NativePageBootstrapper;
 use Throwable;
 
 /** Imports an approved external Page payload through the official PageService. */
 class BootstrapNativePagesCommand extends Command
 {
-    use ActsAsPageActor;
-
     protected $signature = 'raonslab-product:bootstrap-pages
         {payload : Absolute path to the approved native Page JSON export}
         {--actor= : Active super administrator ID or exact email for Page attribution}
@@ -42,11 +42,14 @@ class BootstrapNativePagesCommand extends Command
                 return self::FAILURE;
             }
 
-            $results = $this->asPageActor(
-                $actor,
-                'raonslab-native-page-bootstrap',
-                fn (): array => $bootstrapper->bootstrap($payload, (bool) $this->option('dry-run')),
-            );
+            $auth = Auth::getFacadeRoot();
+            $previousGuard = $auth->getDefaultDriver();
+            $guardName = 'raonslab-native-page-bootstrap';
+            config(["auth.guards.{$guardName}" => ['driver' => $guardName]]);
+            $auth->extend($guardName, fn () => new NativePageActorGuard($actor));
+            $auth->shouldUse($guardName);
+
+            $results = $bootstrapper->bootstrap($payload, (bool) $this->option('dry-run'));
             foreach ($results as $slug => $status) {
                 $this->line("{$slug}: {$status}");
             }
@@ -55,8 +58,36 @@ class BootstrapNativePagesCommand extends Command
             $this->error('Native Page bootstrap failed closed: '.$exception->getMessage());
 
             return self::FAILURE;
+        } finally {
+            if (isset($auth, $previousGuard)) {
+                $auth->shouldUse($previousGuard);
+                $auth->forgetGuards();
+                config()->offsetUnset("auth.guards.{$guardName}");
+            }
         }
 
         return self::SUCCESS;
+    }
+
+    private function resolveActor(string $identifier): ?User
+    {
+        if ($identifier === '') {
+            return null;
+        }
+
+        $query = User::query();
+        if (ctype_digit($identifier)) {
+            $query->whereKey((int) $identifier);
+        } elseif (filter_var($identifier, FILTER_VALIDATE_EMAIL)) {
+            $query->where('email', $identifier);
+        } else {
+            return null;
+        }
+
+        return $query
+            ->where('is_super', true)
+            ->whereNull('blocked_at')
+            ->whereNull('withdrawn_at')
+            ->first();
     }
 }

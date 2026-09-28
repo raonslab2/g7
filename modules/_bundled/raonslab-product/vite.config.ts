@@ -10,7 +10,7 @@ export default defineConfig({
       formats: ['iife'],
     },
     outDir: 'dist',
-    emptyOutDir: false,
+    emptyOutDir: true,
     sourcemap: ['1', 'true'].includes(process.env.G7_BUILD_SOURCEMAP ?? ''),
     target: 'es2020',
     rollupOptions: {

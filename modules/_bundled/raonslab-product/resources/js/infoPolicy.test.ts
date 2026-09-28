@@ -1,37 +1,26 @@
 import { existsSync, readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
-import { afterEach, describe, expect, it, vi } from 'vitest';
-// @ts-expect-error — 생성 스크립트는 빌드 대상이 아닌 Node ESM 이다.
-import { applyProductNav, buildNativePage, generated, serialize, taxonomySlugs } from '../../scripts/taxonomy.mjs';
-import taxonomy from '../taxonomy/info-policy.json';
-import { closeDocnav, installProductNav, normalizePath, productPageGroup, setDocnavOpen } from './productNav';
+import { describe, expect, it } from 'vitest';
+import { normalizePath, productPageGroup } from './productNav';
 
 const root = resolve(__dirname, '..');
-const readText = (path: string) => readFileSync(path, 'utf8');
-const readJson = (path: string) => JSON.parse(readText(path));
+const readJson = (path: string) => JSON.parse(readFileSync(path, 'utf8'));
 const nav = readJson(resolve(root, 'extensions/product-nav.json'));
 const nativePage = readJson(resolve(root, 'extensions/native-page.json'));
-const commerceChrome = readJson(resolve(root, 'extensions/public-commerce-chrome.json'));
 const ko = readJson(resolve(root, 'lang/ko.json'));
 const en = readJson(resolve(root, 'lang/en.json'));
 const moduleManifest = readJson(resolve(root, '../module.json'));
 const componentManifest = readJson(resolve(root, '../components.json'));
 const composerManifest = readJson(resolve(root, '../composer.json'));
 const packageManifest = readJson(resolve(root, '../package.json'));
-const compatibilityRoutes = readText(resolve(root, '../src/routes/compatibility.php'));
-const redirectController = readText(resolve(root, '../src/Http/Controllers/LegacyPageRedirectController.php'));
-const mainCss = readText(resolve(root, 'css/main.css'));
-const indexTs = readText(resolve(root, 'js/index.ts'));
-const browserSmoke = readText(resolve(root, '../tests/browser/info-policy-smoke.cjs'));
-const viteConfig = readText(resolve(root, '../vite.config.ts'));
+const compatibilityRoutes = readFileSync(resolve(root, '../src/routes/compatibility.php'), 'utf8');
+const redirectController = readFileSync(resolve(root, '../src/Http/Controllers/LegacyPageRedirectController.php'), 'utf8');
+const mainCss = readFileSync(resolve(root, 'css/main.css'), 'utf8');
+const browserSmoke = readFileSync(resolve(root, '../tests/browser/info-policy-smoke.cjs'), 'utf8');
 
 type Node = {
-  id?: string;
   name?: string;
-  if?: string;
-  text?: string;
   props?: Record<string, unknown>;
-  children?: Node[];
   actions?: Array<{ handler: string; params?: { path?: string } }>;
 };
 
@@ -52,11 +41,6 @@ const collect = (value: unknown): Node[] => {
   return nodes;
 };
 
-const findById = (value: unknown, id: string): Node | undefined => collect(value).find((node) => node.id === id);
-const hrefs = (value: unknown): string[] => collect(value)
-  .filter((node) => node.name === 'A')
-  .map((node) => String(node.props?.href ?? ''));
-
 function flatten(obj: Record<string, unknown>, prefix = ''): Record<string, string> {
   return Object.entries(obj).reduce<Record<string, string>>((result, [key, value]) => {
     const path = prefix ? `${prefix}.${key}` : key;
@@ -66,12 +50,11 @@ function flatten(obj: Record<string, unknown>, prefix = ''): Record<string, stri
   }, {});
 }
 
-const APPROVED = {
-  info: ['about', 'service', 'cases', 'technology', 'faq', 'contact'],
-  policy: ['privacy', 'terms', 'ai-workspace-policy', 'open-source', 'refund'],
+const PAGE_GROUPS = {
+  info: ['/page/service', '/page/cases', '/page/technology'],
+  policy: ['/page/privacy', '/page/terms', '/page/ai-workspace-policy', '/page/open-source'],
 };
-const paths = (slugs: string[]) => slugs.map((slug) => `/page/${slug}`);
-const ALL_PATHS = paths([...APPROVED.info, ...APPROVED.policy]);
+const CANONICAL = [...PAGE_GROUPS.info, ...PAGE_GROUPS.policy];
 const LEGACY = {
   '/info/services': '/page/service',
   '/info/cases': '/page/cases',
@@ -82,225 +65,37 @@ const LEGACY = {
   '/policy/open-source': '/page/open-source',
 };
 
-describe('정보·정책 분류 단일 출처', () => {
-  it('승인된 IA 순서(정보 6 · 정책 5)를 그대로 담는다', () => {
-    expect(taxonomy.groups.map((group) => group.key)).toEqual(['info', 'policy']);
-    expect(taxonomy.groups[0].items.map((item) => item.slug)).toEqual(APPROVED.info);
-    expect(taxonomy.groups[1].items.map((item) => item.slug)).toEqual(APPROVED.policy);
-    expect(taxonomySlugs(taxonomy)).toHaveLength(11);
-  });
+describe('native Page 정보·정책 계약', () => {
+  it('7개 canonical page 링크를 public navigation과 Page 확장에만 둔다', () => {
+    const navHrefs = collect(nav).map((node) => node.props?.href).filter(Boolean);
+    const sideHrefs = collect(nativePage).map((node) => node.props?.href).filter(Boolean);
 
-  it('커밋된 extension JSON 은 생성기 결과와 바이트 단위로 같다(드리프트 금지)', () => {
-    for (const [path, content] of Object.entries(generated() as Record<string, string>)) {
-      expect(readText(path), path).toBe(content);
+    for (const href of CANONICAL) {
+      expect(navHrefs, href).toContain(href);
+      expect(sideHrefs, href).toContain(href);
     }
-    expect(serialize(buildNativePage(taxonomy))).toBe(readText(resolve(root, 'extensions/native-page.json')));
-    expect(applyProductNav(nav, taxonomy)).toEqual(nav);
+    for (const legacy of Object.keys(LEGACY)) expect(navHrefs, legacy).not.toContain(legacy);
   });
 
-  it('상위 드롭다운 두 목록이 분류 순서를 따른다', () => {
-    expect(hrefs(findById(nav, 'rh_gnav_info_list'))).toEqual(paths(APPROVED.info));
-    expect(hrefs(findById(nav, 'rh_gnav_policy_list'))).toEqual(paths(APPROVED.policy));
-    for (const node of collect(findById(nav, 'rh_gnav_list')).filter((item) => item.name === 'A' && item.props?.href !== '/#rh-consult')) {
-      expect(node.props?.['data-rh-nav-path']).toBe(node.props?.href);
-      expect(node.actions?.[0]?.params?.path).toBe(node.props?.href);
-    }
-  });
-
-  it('product footer linkGroups 가 같은 분류·라벨을 쓰고 커뮤니티 그룹은 유지된다', () => {
-    const footer = nav.injections.find((injection: { target_id: string }) => injection.target_id === 'footer');
-    const groups = footer.props.linkGroups as Array<{ title: string; links: Array<{ label: string; href: string }> }>;
-    expect(groups.map((group) => group.title)).toEqual([
-      '$t:raonslab-product.footer.community',
-      '$t:raonslab-product.nav.info',
-      '$t:raonslab-product.nav.policy',
-    ]);
-    expect(groups[0].links.map((link) => link.href)).toEqual(['/', '/board/notice', '/board/questions', '/board/community', '/search']);
-    expect(groups[1].links.map((link) => link.href)).toEqual(paths(APPROVED.info));
-    expect(groups[2].links.map((link) => link.href)).toEqual(paths(APPROVED.policy));
-    const dropdownLabels = collect(findById(nav, 'rh_gnav_list'))
-      .filter((node) => node.props?.className === 'rh-gnav-link-title')
-      .map((node) => node.text);
-    expect([...groups[1].links, ...groups[2].links].map((link) => link.label)).toEqual(dropdownLabels);
-  });
-
-  it('문서 메뉴(데스크톱 우측·모바일 disclosure)가 11개 문서를 같은 순서로 담는다', () => {
-    expect(hrefs(findById(nativePage, 'rh_native_page_side_navigation'))).toEqual(ALL_PATHS);
-    expect(hrefs(findById(nativePage, 'rh_native_page_docnav_panel'))).toEqual(ALL_PATHS);
-    expect(productPageGroup('/page/about')).toBe('info');
-    expect(productPageGroup('/page/refund')).toBe('policy');
-  });
-
-  it('모든 라벨·설명 키가 ko/en 에 있고 두 언어의 키 집합이 같다', () => {
-    const koFlat = flatten(ko);
-    const enFlat = flatten(en);
-    expect(Object.keys(enFlat).sort()).toEqual(Object.keys(koFlat).sort());
-    const keys = taxonomy.groups.flatMap((group) => [group.label, ...group.items.flatMap((item) => [item.label, item.description])]);
-    for (const key of [...keys, 'native_page.menu_toggle', 'native_page.navigation_label', 'native_page.breadcrumb_label']) {
-      expect(koFlat[key], key).toBeTruthy();
-      expect(enFlat[key], key).toBeTruthy();
-    }
-    // 그룹 이름과 항목 이름이 겹치지 않는다(en 의 "About" 그룹 ↔ About 항목 혼동 방지)
-    expect(enFlat['nav.info']).not.toBe(enFlat['nav.info_about']);
-  });
-});
-
-describe('page/show overlay 계약', () => {
-  const injections = nativePage.injections as Array<{ target_id: string; position: string; components?: Node[]; props?: Record<string, string> }>;
-  const condition = `{{['about','service','cases','technology','faq','contact','privacy','terms','ai-workspace-policy','open-source','refund'].includes(page?.data?.slug)}}`;
-
-  it('공식 확장 지점만 쓰고, 우측 메뉴는 DOM 상 본문 뒤(append_child)에 둔다', () => {
+  it('공식 page/show overlay의 breadcrumb를 responsive presentation invariant로 사용한다', () => {
     expect(nativePage.target_layout).toBe('page/show');
-    expect(injections.map((item) => [item.target_id, item.position])).toEqual([
+    expect(nativePage.injections.map((item: { target_id: string; position: string }) => [item.target_id, item.position])).toEqual([
       ['page_content_card', 'inject_props'],
       ['page_content_card', 'prepend_child'],
       ['page_html_content', 'prepend'],
-      ['page_content_card', 'append_child'],
     ]);
+    expect(JSON.stringify(nativePage)).toContain('page?.data?.slug');
     expect(JSON.stringify(nativePage)).not.toContain('"content":');
-    expect(injections.some((injection) => injection.target_id === 'page_html_content' && injection.position === 'inject_props')).toBe(false);
+    expect(JSON.stringify(nativePage.injections[1].components)).toContain('rh-native-breadcrumb');
+    expect(nativePage.injections.some((injection: any) => (
+      injection.target_id === 'page_html_content' && injection.position === 'inject_props'
+    ))).toBe(false);
+    expect(mainCss).toContain('body.raon-product #main_content :has(> .rh-native-breadcrumb) {');
+    expect(mainCss).toContain('body.raon-product #main_content :has(> .rh-native-breadcrumb)::after {');
+    expect(mainCss).toContain('body.raon-product #main_content :has(> .rh-native-breadcrumb) #page_html_content {');
   });
 
-  it('breadcrumb·모바일 메뉴·우측 메뉴가 11개 slug 전부에서 같은 조건으로 켜진다', () => {
-    expect(injections[1].components?.[0].id).toBe('rh_native_page_breadcrumb');
-    expect(injections[2].components?.[0].id).toBe('rh_native_page_docnav');
-    expect(injections[3].components?.[0].id).toBe('rh_native_page_side_navigation');
-    for (const index of [1, 2, 3]) expect(injections[index].components?.[0].if).toBe(condition);
-    expect(injections[0].props?.className).toContain(condition.slice(2, -2));
-  });
-
-  it('breadcrumb 은 홈 / 그룹 / 현재 문서 순이고 그룹은 slug 로 판정한다', () => {
-    const crumbs = injections[1].components?.[0].children ?? [];
-    expect(crumbs.filter((node) => node.props?.className === 'rh-crumb-group').map((node) => node.text)).toEqual([
-      '$t:raonslab-product.nav.info',
-      '$t:raonslab-product.nav.policy',
-    ]);
-    expect(crumbs.at(-1)?.props?.['aria-current']).toBe('page');
-  });
-
-  it('모바일 문서 메뉴는 기본 닫힘 disclosure 계약을 갖는다', () => {
-    const toggle = findById(nativePage, 'rh_native_page_docnav_toggle');
-    const panel = findById(nativePage, 'rh_native_page_docnav_panel');
-    expect(toggle?.name).toBe('Button');
-    expect(toggle?.props).toMatchObject({
-      type: 'button',
-      'aria-expanded': 'false',
-      'aria-controls': 'rh-docnav-panel',
-      'data-rh-docnav-toggle': 'true',
-    });
-    expect(panel?.name).toBe('Nav');
-    expect(panel?.props).toMatchObject({ id: 'rh-docnav-panel', hidden: true });
-    for (const list of collect(panel).filter((node) => node.name === 'Ul')) {
-      expect(String(list.props?.['aria-labelledby'])).toMatch(/^rh-docnav-mobile-(info|policy)-label$/);
-    }
-  });
-
-  it('CSS 는 우측 grid·sticky·모바일 disclosure·목록 표식·발행일 숨김을 정의한다', () => {
-    expect(mainCss).toContain('grid-template-columns: minmax(0, 1fr) 15rem;');
-    expect(mainCss).toContain('grid-row: 1 / -1;');
-    expect(mainCss).toMatch(/> \.rh-native-side \{\n\s+position: sticky;/);
-    expect(mainCss).not.toMatch(/\.rh-native-side \{[^}]*float:/);
-    expect(mainCss).not.toMatch(/:has\(> \.rh-native-breadcrumb\) \{[^}]*overflow: hidden/);
-    expect(mainCss).toContain('.rh-docnav-panel[hidden] {\n  display: none !important;');
-    expect(mainCss).toMatch(/\.rh-docnav-toggle \{[^}]*min-height: 48px;/);
-    expect(mainCss).toContain(':is(.rh-doc-list, .rh-flowline, .rh-status-list, .rh-rail, .rh-facts, .rh-side-list)');
-    expect(mainCss).toContain('#main_content :has(> .rh-native-breadcrumb) > p {\n  display: none;');
-  });
-});
-
-describe('공개 쇼핑·통화 노출 억제', () => {
-  it('통화 선택기는 이커머스 주입(priority 320) 뒤에 같은 id 의 빈 앵커로 교체된다', () => {
-    expect(commerceChrome.target_layout).toBe('_user_base');
-    expect(commerceChrome.priority).toBeGreaterThan(320);
-    expect(commerceChrome.injections).toHaveLength(1);
-    expect(commerceChrome.injections[0]).toMatchObject({ target_id: 'header_currency_inject_anchor', position: 'replace' });
-    expect(commerceChrome.injections[0].components[0].id).toBe('header_currency_inject_anchor');
-    expect(commerceChrome.injections[0].components[0].children).toBeUndefined();
-  });
-
-  it('Powered by 그누보드7 표기는 숨기지 않는다', () => {
-    expect(indexTs).not.toContain("startsWith('Powered by')");
-    expect(indexTs).not.toContain("querySelectorAll('#footer p')");
-    expect(indexTs).toContain('data-testid="nav-shop"');
-  });
-});
-
-describe('모바일 문서 메뉴 키보드 계약', () => {
-  type FakeElement = {
-    attrs: Record<string, string>;
-    hidden: boolean;
-    focused: boolean;
-    getAttribute: (name: string) => string | null;
-    setAttribute: (name: string, value: string) => void;
-    focus: () => void;
-    closest: (selector: string) => FakeElement | null;
-    matches: (selector: string) => boolean;
-  };
-
-  function element(attrs: Record<string, string>): FakeElement {
-    const node: FakeElement = {
-      attrs,
-      hidden: true,
-      focused: false,
-      getAttribute: (name) => node.attrs[name] ?? null,
-      setAttribute: (name, value) => { node.attrs[name] = value; },
-      focus: () => { node.focused = true; },
-      closest: (selector) => (selector === '[data-rh-docnav-toggle]' && 'data-rh-docnav-toggle' in node.attrs ? node : null),
-      matches: () => false,
-    };
-    return node;
-  }
-
-  afterEach(() => vi.unstubAllGlobals());
-
-  function stubDocument(toggle: FakeElement, panel: FakeElement) {
-    const listeners: Record<string, (event: unknown) => void> = {};
-    vi.stubGlobal('window', { addEventListener: vi.fn(), location: { pathname: '/page/faq' } });
-    vi.stubGlobal('document', {
-      addEventListener: (type: string, handler: (event: unknown) => void) => { listeners[type] = handler; },
-      getElementById: (id: string) => (id === 'rh-docnav-panel' ? panel : null),
-      querySelectorAll: (selector: string) => (
-        selector === '[data-rh-docnav-toggle][aria-expanded="true"]' && toggle.attrs['aria-expanded'] === 'true' ? [toggle] : []
-      ),
-    });
-    return listeners;
-  }
-
-  it('열기·닫기가 aria-expanded 와 패널 hidden 을 함께 맞춘다', () => {
-    const toggle = element({ 'aria-controls': 'rh-docnav-panel', 'aria-expanded': 'false', 'data-rh-docnav-toggle': 'true' });
-    const panel = element({ id: 'rh-docnav-panel' });
-    stubDocument(toggle, panel);
-
-    setDocnavOpen(toggle as unknown as HTMLElement, true);
-    expect(toggle.attrs['aria-expanded']).toBe('true');
-    expect(panel.hidden).toBe(false);
-
-    closeDocnav();
-    expect(toggle.attrs['aria-expanded']).toBe('false');
-    expect(panel.hidden).toBe(true);
-  });
-
-  it('클릭은 토글하고 Escape 는 닫은 뒤 토글로 포커스를 돌린다', () => {
-    const toggle = element({ 'aria-controls': 'rh-docnav-panel', 'aria-expanded': 'false', 'data-rh-docnav-toggle': 'true' });
-    const panel = element({ id: 'rh-docnav-panel' });
-    const listeners = stubDocument(toggle, panel);
-    installProductNav();
-
-    const preventDefault = vi.fn();
-    listeners.click({ target: toggle, preventDefault });
-    expect(toggle.attrs['aria-expanded']).toBe('true');
-    expect(panel.hidden).toBe(false);
-
-    listeners.keydown({ key: 'Escape', target: panel, preventDefault });
-    expect(toggle.attrs['aria-expanded']).toBe('false');
-    expect(panel.hidden).toBe(true);
-    expect(toggle.focused).toBe(true);
-    expect(preventDefault).toHaveBeenCalledTimes(2);
-  });
-});
-
-describe('기존 계약 유지', () => {
-  it('본문을 담았던 product route/layout/translation은 제거된 상태를 유지한다', () => {
+  it('본문을 담았던 product route/layout/translation은 제거된다', () => {
     expect(existsSync(resolve(root, 'routes/user.json'))).toBe(false);
     for (const name of [
       'rh_info_services.json', 'rh_info_cases.json', 'rh_info_principles.json',
@@ -311,16 +106,29 @@ describe('기존 계약 유지', () => {
       expect(ko).not.toHaveProperty(key);
       expect(en).not.toHaveProperty(key);
     }
-    for (const legacy of Object.keys(LEGACY)) expect(hrefs(nav), legacy).not.toContain(legacy);
   });
 
-  it('모듈 버전 메타데이터가 함께 움직이고 sirsoft-page 계약을 명시한다', () => {
-    expect(moduleManifest.version).toBe('0.4.1');
+  it('모듈은 검증한 sirsoft-page 계약을 명시한다', () => {
+    expect(moduleManifest.version).toBe('0.4.0');
     expect(componentManifest.version).toBe(moduleManifest.version);
     expect(composerManifest.version).toBe(moduleManifest.version);
     expect(packageManifest.version).toBe(moduleManifest.version);
     expect(moduleManifest.dependencies.modules['sirsoft-page']).toBe('>=1.1.2');
-    expect(viteConfig).toContain('emptyOutDir: false');
+  });
+
+  it('runtime smoke는 viewport별 한 context를 재사용하고 상담 설정을 안전하게 먼저 확인한다', () => {
+    expect(browserSmoke.match(/browser\.newContext\(/g)).toHaveLength(1);
+    expect(browserSmoke).toContain('for (const [slug] of PAGES) await inspectNativePage(page, viewport, slug');
+    expect(browserSmoke.indexOf('await inspectConsultationConfig(api)')).toBeLessThan(
+      browserSmoke.indexOf('await inspectLegacyRedirect(api, firstSlug, firstLegacy)'),
+    );
+    expect(browserSmoke).toContain("['artisan', 'route:list', '--name=raonslab-product.compatibility', '--json']");
+    expect(browserSmoke).toContain('Googlebot/2.1');
+    expect(browserSmoke).toContain("headers['x-seo-cache']");
+    expect(browserSmoke).not.toContain("document.querySelector('link[rel=\"canonical\"]')");
+    expect(browserSmoke).toContain("response.headers()['content-type']");
+    expect(browserSmoke).toContain('const rawBody = await response.text()');
+    expect(browserSmoke).not.toContain('await response.json()');
   });
 
   it('기존 URL 7개를 native slug로 명시적으로 매핑하고 locale 경로도 받는다', () => {
@@ -334,26 +142,10 @@ describe('기존 계약 유지', () => {
     expect(redirectController).not.toContain("$prefix.'/page/'");
   });
 
-  it('runtime smoke 는 일반 Chrome UA 로 human DOM 을 보고 footer 문구·href 와 11개 문서를 확인한다', () => {
-    expect(browserSmoke.match(/browser\.newContext\(/g)).toHaveLength(1);
-    expect(browserSmoke).toContain("require('../../resources/taxonomy/info-policy.json')");
-    expect(browserSmoke).toContain('for (const slug of DOC_SLUGS) await inspectNativePage(page, viewport, slug');
-    expect(browserSmoke).toMatch(/desktop: 'Mozilla\/5\.0 \(Windows NT 10\.0; Win64; x64\)[^']*Chrome\/[^']*'/);
-    expect(browserSmoke).not.toContain('HeadlessChrome/');
-    expect(browserSmoke).toContain("'footer link text and href follow taxonomy'");
-    expect(browserSmoke).toContain("'Powered by attribution remains'");
-    expect(browserSmoke).toContain("'Escape closes document menu and returns focus'");
-    // 표현 부재는 짧은 고정 대기 뒤 FAIL 로 기록하고 계속 진행한다(구 런타임에서 페이지마다 15초 대기 금지).
-    expect(browserSmoke).toContain("waitForSelector('.rh-native-breadcrumb', { timeout: PRESENTATION_WAIT_MS })");
-    expect(browserSmoke).toContain("'RAON document presentation is applied'");
-    expect(browserSmoke).not.toContain("waitForSelector('.rh-native-breadcrumb', { timeout: 15000 })");
-    expect(browserSmoke.indexOf('await inspectConsultationConfig(api)')).toBeLessThan(
-      browserSmoke.indexOf('await inspectLegacyRedirect(api, firstSlug, firstLegacy)'),
-    );
-    expect(browserSmoke).toContain("['artisan', 'route:list', '--name=raonslab-product.compatibility', '--json']");
-    expect(browserSmoke).toContain('Googlebot/2.1');
-    expect(browserSmoke).toContain("headers['x-seo-cache']");
-    expect(browserSmoke).not.toContain('await response.json()');
+  it('ko/en presentation key 집합은 같고 본문 문구는 남지 않는다', () => {
+    expect(Object.keys(flatten(en)).sort()).toEqual(Object.keys(flatten(ko)).sort());
+    expect(JSON.stringify(ko)).not.toContain('확정된 개인정보처리방침이 아닙니다');
+    expect(JSON.stringify(en)).not.toContain('This is not a final privacy policy');
   });
 });
 
@@ -363,8 +155,6 @@ describe('현재 위치 경로 정규화', () => {
     expect(normalizePath('/board/notice')).toBe('/board/notice');
     expect(productPageGroup('/page/technology')).toBe('info');
     expect(productPageGroup('/page/terms')).toBe('policy');
-    expect(productPageGroup('/page/contact')).toBe('info');
     expect(productPageGroup('/board/notice')).toBeNull();
-    expect(productPageGroup('/page/unknown')).toBeNull();
   });
 });

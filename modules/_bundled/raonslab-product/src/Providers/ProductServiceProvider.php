@@ -8,7 +8,6 @@ use Modules\Raonslab\Product\Adapters\G7BoardConsultationAdapter;
 use Modules\Raonslab\Product\Console\Commands\BootstrapNativePagesCommand;
 use Modules\Raonslab\Product\Console\Commands\ConsultationReadinessCommand;
 use Modules\Raonslab\Product\Console\Commands\ConsultationRehearsalCommand;
-use Modules\Raonslab\Product\Console\Commands\RemediateInfoPagesCommand;
 use Modules\Raonslab\Product\Console\Commands\SeedQaContentCommand;
 use Modules\Raonslab\Product\Contracts\ConsultationBoardGateway;
 
@@ -22,7 +21,6 @@ class ProductServiceProvider extends BaseModuleServiceProvider
 
     protected array $commands = [
         BootstrapNativePagesCommand::class,
-        RemediateInfoPagesCommand::class,
         SeedQaContentCommand::class,
         ConsultationReadinessCommand::class,
         ConsultationRehearsalCommand::class,

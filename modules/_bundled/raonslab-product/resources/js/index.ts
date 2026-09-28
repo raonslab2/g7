@@ -28,12 +28,14 @@ function markProductRuntime(): void {
   document.body.classList.add('raon-product');
 }
 
-/**
- * 온라인 결제를 받지 않는 제품 화면에서 템플릿의 쇼핑·장바구니·주문조회 진입점을 숨깁니다.
- * "Powered by 그누보드7" 표기는 오픈소스 고지로 유지합니다. 통화 선택기는 public-commerce-chrome.json
- * Layout Extension 이 공식 확장 지점에서 제거합니다.
- */
-function hideCommerceEntryPoints(): void {
+/** 기본 템플릿의 upstream 표기는 관리자·업데이트 정보에 남기고 제품 화면에서는 숨깁니다. */
+function removeTemplateAttribution(): void {
+  document.querySelectorAll('#footer p').forEach((node) => {
+    if ((node.textContent ?? '').trim().startsWith('Powered by')) {
+      (node as HTMLElement).hidden = true;
+    }
+  });
+
   document.querySelectorAll<HTMLElement>('#mobile_cart_btn, [data-testid="nav-shop"]').forEach((node) => {
     node.hidden = true;
   });
@@ -62,7 +64,7 @@ function queueHomeSync(): void {
 }
 
 const observer = new MutationObserver(() => {
-  hideCommerceEntryPoints();
+  removeTemplateAttribution();
   queueHomeSync();
 });
 observer.observe(document.documentElement, { childList: true, subtree: true });
@@ -75,5 +77,5 @@ if (document.readyState === 'loading') {
   markProductRuntime();
 }
 
-hideCommerceEntryPoints();
+removeTemplateAttribution();
 queueHomeSync();

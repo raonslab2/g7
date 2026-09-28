@@ -3,7 +3,6 @@
 - [제품 요약](product-brief.md)
 - [상담 API](api/README.md)
 - [Q&A 콘텐츠 적용·롤백](qa-content.md)
-- [0.4.1 정보·정책 분류·문서 메뉴·샘플 Page 교체 운영](info-policy-0.4.1.md)
 - [0.4.0 native Page 전환 근거·운영·롤백](native-page-remediation-0.4.0.md)
 - [영업 문구와 근거](sales-evidence-map.md)
 - [0.3.0 RC 검증](release-validation-0.3.0.md)
