@@ -9,6 +9,11 @@ const en = JSON.parse(readFileSync(resolve(root, 'lang/en.json'), 'utf8'));
 
 type Node = { id?: string; name?: string; text?: string; props?: Record<string, unknown>; children?: Node[]; actions?: Array<{ handler: string; params?: { path?: string } }> };
 
+const byId = (id: string): Node | undefined => nodes.find((n) => n.id === id);
+const classOf = (n?: Node): string => String(n?.props?.className ?? '');
+const childrenWith = (n: Node | undefined, cls: string): Node[] => (n?.children ?? []).filter((c) => classOf(c).split(' ').includes(cls));
+const textsUnder = (n?: Node): string[] => { const out: string[] = []; if (n) walk(n, (x) => { if (x.text) out.push(x.text); }); return out; };
+
 function walk(node: Node, visit: (n: Node) => void): void {
   visit(node);
   node.children?.forEach((child) => walk(child, visit));
@@ -91,6 +96,72 @@ describe('사업 홈 레이아웃 확장', () => {
       expect(enFlat[key], key).toBeTruthy();
     }
     expect(Object.keys(koFlat).sort()).toEqual(Object.keys(enFlat).sort());
+  });
+});
+
+describe('시각 구조', () => {
+  const key = (k: string) => `$t:raonslab-product.home.${k}`;
+
+  it('hero 흐름 도식은 업무 입력 → 에이전트 실행 → 검증 → 운영 결과 순서다', () => {
+    const flow = byId('raon_home_flow');
+    expect(flow?.props).toMatchObject({ role: 'group', 'aria-labelledby': 'rh-flow-label' });
+    const steps = childrenWith(byId('raon_home_flow_list'), 'rh-flow-step');
+    const stages = steps.map((step) => textsUnder(step).find((t) => t.includes('visual_stage_')));
+    expect(stages).toEqual(['input', 'run', 'verify', 'result'].map((s) => key(`visual_stage_${s}`)));
+    for (const step of steps) {
+      const node = childrenWith(step, 'rh-flow-node')[0];
+      expect(node?.props?.['aria-hidden']).toBe('true');
+      expect(textsUnder(step).some((t) => /flow_\w+_copy$/.test(t))).toBe(true);
+    }
+  });
+
+  it('hero 는 copy 가 먼저, 흐름 도식이 뒤에 온다(작은 화면 첫 화면 순서)', () => {
+    const grid = byId('raon_home_hero_inner');
+    expect(grid?.children?.map((c) => c.id)).toEqual(['raon_home_hero_copy', 'raon_home_flow']);
+  });
+
+  it('아이콘은 모두 장식으로 숨기고 FontAwesome solid 이름만 쓴다', () => {
+    const icons = nodes.filter((n) => n.name === 'Icon');
+    expect(icons.length).toBeGreaterThanOrEqual(20);
+    for (const icon of icons) {
+      expect(icon.props?.['aria-hidden'], icon.id).toBe('true');
+      expect(String(icon.props?.name)).toMatch(/^fa-[a-z-]+$/);
+      expect(classOf(icon)).not.toMatch(/\bw-\d|\bh-\d/);
+    }
+  });
+
+  it('서비스는 실증 → 구축 → 운영 단계 트랙이며 범위 표시가 1→3 으로 넓어진다', () => {
+    const stages = childrenWith(byId('raon_home_services_list'), 'rh-stage');
+    expect(stages.map((s) => s.id)).toEqual(['raon_home_service_pilot', 'raon_home_service_build', 'raon_home_service_operate']);
+    stages.forEach((stage, index) => {
+      const rail = childrenWith(stage, 'rh-stage-rail')[0];
+      expect(rail?.props?.['aria-hidden']).toBe('true');
+      const scope = nodes.find((n) => n.id === `${stage.id}_scope`);
+      expect(classOf(scope)).toContain(`rh-scope-${index + 1}`);
+      expect(scope?.props?.['aria-hidden']).toBe('true');
+    });
+  });
+
+  it.each(['stock', 'hub'])('사례 %s 는 문제·구현·검증·한계 근거 레인을 순서대로 가진다', (name) => {
+    const lanes = childrenWith(byId(`raon_home_case_${name}_evidence`), 'rh-lane');
+    expect(lanes.map((l) => classOf(l).split(' ')[1])).toEqual(['rh-lane-problem', 'rh-lane-build', 'rh-lane-verified', 'rh-lane-limit']);
+    const texts = textsUnder(byId(`raon_home_case_${name}`));
+    for (const field of ['summary', 'problem', 'scope', 'flow', 'verified', 'unverified', 'fit']) {
+      expect(texts, field).toContain(key(`case_${name}_${field}`));
+    }
+    expect(textsUnder(lanes[2])).toContain(key(`case_${name}_verified`));
+    expect(textsUnder(lanes[3])).toContain(key(`case_${name}_unverified`));
+  });
+
+  it('도입 절차 타임라인은 5단계이고 번호 표지는 장식이다', () => {
+    const steps = childrenWith(byId('raon_home_process_list'), 'rh-process-step');
+    expect(steps).toHaveLength(5);
+    for (const step of steps) expect(childrenWith(step, 'rh-process-node')[0]?.props?.['aria-hidden']).toBe('true');
+  });
+
+  it('새 문구는 시각 전용 단계 이름 키만 추가한다', () => {
+    const visualKeys = Object.keys(ko.home).filter((k) => k.startsWith('visual_'));
+    expect(visualKeys.sort()).toEqual(['visual_stage_input', 'visual_stage_result', 'visual_stage_run', 'visual_stage_verify']);
   });
 });
 
