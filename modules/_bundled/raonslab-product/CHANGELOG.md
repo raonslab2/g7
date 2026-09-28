@@ -1,5 +1,29 @@
 # 변경 이력
 
+## [0.2.2] - 2026-09-28
+
+### Changed
+
+- 공개 상담 config와 접수 판정에 실제 요청의 HTTPS 여부, 공개 사이트 HTTPS URL, 개인정보처리방침 HTTPS URL, 안전한 개인정보 연락처 검사를 추가
+- 접수 닫힘(`503`, `intake_disabled`)과 저장 여부가 불확실한 일시 장애(`500`, `temporary_failure`)를 구분하고, 불확실한 실패 뒤 입력과 Idempotency-Key를 보존
+- 관리자 목록 응답에 페이지 메타와 서버 판정 `abilities.can_manage`를 추가하고, 상세 응답에 순차 전이를 위한 `next_status`를 추가
+- 관리자 목록·상세 화면에 로딩, 오류, 빈 결과, 범위 밖 페이지, read-only, 전송 중 상태를 명시
+
+### Fixed
+
+- 알림 또는 커밋 이후 재조회 실패가 이미 저장된 상담을 실패 응답으로 바꾸지 않도록 저장과 후처리 경계를 분리
+- 필터·페이지 이동 시 목록 query를 보존하고 키보드로 상세 화면을 열 수 있도록 관리자 화면 계약 보강
+
+### Security
+
+- 신뢰하지 않은 forwarded scheme, HTTP·상대·스크립트성·userinfo 포함 URL로 공개 접수가 열리지 않도록 fail-closed 강화
+- 저장 장애 로그에는 PII·예외 메시지·trace 대신 incident ID와 예외 클래스만 기록
+
+### Compatibility
+
+- 기존 상담 route와 migration은 유지하며 새 migration은 없음
+- 공개 API 응답에 오류 사유, pagination, abilities, next status를 추가한 하위 호환 보강으로 소비 확장 최소 버전 제약 변경 없음
+
 ## [0.2.1] - 2026-09-28
 
 ### Changed

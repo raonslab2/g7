@@ -4,11 +4,11 @@
 `RAON_CONSULTATION_INTAKE_ENABLED`를 `true`로 바꾸지 않는다.
 
 - [ ] 운영 도메인 확정
-- [ ] TLS 인증서와 HTTPS 강제, reverse proxy 신뢰 범위 검증
+- [ ] TLS 인증서와 HTTPS 강제, `APP_URL` HTTPS 설정, reverse proxy 신뢰 범위와 `Request::isSecure()` 검증
 - [ ] 개인정보 수집·이용 문안과 버전 승인
-- [ ] 개인정보처리방침 HTTPS URL 승인
+- [ ] 개인정보처리방침 HTTPS 절대 URL 승인(HTTP·상대 URL·userinfo 금지)
 - [ ] 보관 기간·파기 정책 및 화면 문구 승인
-- [ ] 개인정보 담당 연락처 승인
+- [ ] 개인정보 담당 연락처 승인(연락처 문구에 URL이 있으면 모두 HTTPS)
 - [ ] 상담 알림 수신 메일과 mail transport 승인·시험
 - [ ] production 암호화 키·백업·복구·접근 통제 점검
 - [ ] rate limit, same-origin, 201/200/409/422/429/503 외부 경로 재검증
