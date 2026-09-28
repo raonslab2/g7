@@ -1,0 +1,41 @@
+{
+  "schema": "raonslab-product.public-case-asset.v1",
+  "_comment": "홈 공개 사례 이미지의 출처 기록. 이미지 바이트를 바꾸거나 출처를 바꾸려면 새 독립 검토(PASS_PUBLIC)를 거쳐 이 파일과 evidenceBinding.test.ts 를 함께 갱신한다.",
+  "assets": [
+    {
+      "file": "mobile-stock-public-case-01-new-paper-account-390x844.png",
+      "case": "MOBILE_STOCK",
+      "caption_ko": "모의투자 · 자체 제품 · 예시 데이터",
+      "sha256": "4fa8b7a705bede727aa21f4ba7a089466b2455b15051f2c660adcbeafa3e30de",
+      "git_blob": "5f56e1334a18d5a2a6bc08e030f253d1927c6241",
+      "byte_size": 197799,
+      "pixel_size": "780x1760",
+      "source": {
+        "repository": "raonslab2/mobile-stock",
+        "evidence_commit": "7063bed01e287bbaeaa5b7e3f8c555b39b19ec70",
+        "path": "docs/evidence/screenshots/mobile-stock-public-case-01-new-paper-account-390x844.png",
+        "evidence_document": "docs/evidence/MOBILE_STOCK_PUBLIC_CASE_EVIDENCE_20260929.md",
+        "manifest": "docs/evidence/screenshots/mobile-stock-public-case-manifest.json",
+        "product_source_commit": "2d59feffa95ca91652afa2d528909e16be98e5f0",
+        "manifest_public_use": "HOME_OR_DETAIL"
+      },
+      "review": {
+        "request": "req_82fc148ab10a4d4195d6f08eb7ad7aa1",
+        "verdict": "PASS_PUBLIC",
+        "scope": "자체 제작 모바일 모의투자 앱. 새 계정 → 첫 모의 원화 매수까지, 로컬 모의 브로커(PAPER, 실거래 비활성), 선택형 KIS 연결은 조회 전용 시세이며 주문 경로 없음. 예시 데이터.",
+        "excluded_claims": [
+          "AI 분석 기능",
+          "실거래·증권 주문 연결",
+          "실제 KIS 시세",
+          "투자 수익·투자 조언",
+          "고객 납품",
+          "배포 런타임",
+          "전체 브라우저 회귀",
+          "프런트엔드 타입 검사"
+        ],
+        "home_image_rule": "홈에는 01(새 Paper 계정) 이미지만 쓴다. 손익이 보이는 05 이미지는 쓰지 않는다."
+      },
+      "copied_from": "canonical mobile request worktree req_6074314eab7d444aa4abaa35a6f936e3, git object read (git cat-file) at the evidence commit; operator checkout not used"
+    }
+  ]
+}

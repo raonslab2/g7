@@ -137,7 +137,8 @@ html:not(.dark) body.raon-product:has(.rh-native-breadcrumb) {
 :where(.rh-home) p,
 :where(.rh-home) h1,
 :where(.rh-home) h2,
-:where(.rh-home) h3 {
+:where(.rh-home) h3,
+:where(.rh-home) h4 {
   margin: 0;
 }
 
@@ -493,6 +494,97 @@ html[data-rh-intake='open'] [data-rh-intake-show='closed'] {
 
 .rh-text-link:hover {
   color: var(--rh-text);
+}
+
+/* 두 제품 미리보기: RAON Hub 사실 줄, MOBILE_STOCK 실제 화면(예시 데이터) + 범위 세 줄 */
+.rh-proof-cases {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.rh-proof-case {
+  display: grid;
+  gap: .75rem;
+  min-width: 0;
+}
+
+.rh-proof-case-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: .15rem .75rem;
+}
+
+.rh-proof-case-name {
+  color: var(--rh-text);
+  font-size: 1.1rem;
+  font-weight: 750;
+  line-height: 1.35;
+}
+
+.rh-proof-case-kind {
+  color: var(--rh-muted);
+  font-size: .88rem;
+}
+
+.rh-proof-case-ms {
+  grid-template-columns: 9rem minmax(0, 1fr);
+  column-gap: 1.25rem;
+  align-items: start;
+  border-top: 1px solid var(--rh-border);
+  padding-top: 1.25rem;
+}
+
+.rh-proof-case-body {
+  min-width: 0;
+}
+
+.rh-shot {
+  min-width: 0;
+}
+
+.rh-shot-img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 390 / 880;
+  border: 1px solid var(--rh-border-strong);
+  border-radius: .75rem;
+  background: var(--rh-surface);
+}
+
+.rh-shot-caption {
+  margin-top: .4rem !important;
+  color: var(--rh-muted);
+  font-size: .75rem;
+  line-height: 1.35;
+  text-align: center;
+  word-break: keep-all;
+}
+
+.rh-proof-points {
+  display: grid;
+  gap: .45rem;
+  margin-top: .7rem !important;
+}
+
+.rh-proof-points > li {
+  position: relative;
+  padding-left: 1.1rem;
+  color: var(--rh-text-soft);
+  font-size: .93rem;
+  line-height: 1.5;
+  word-break: keep-all;
+}
+
+.rh-proof-points > li::before {
+  position: absolute;
+  top: .68em;
+  left: 0;
+  width: .55rem;
+  height: 2px;
+  background: var(--rh-ok);
+  content: '';
 }
 
 /* 구매 범위: 3행 비교(행 제목 | 입력 | 결과물 | 고객 준비) */
@@ -911,7 +1003,7 @@ textarea.rh-input {
 
   .rh-section,
   .rh-proof {
-    padding: 2.25rem 0;
+    padding: 2rem 0;
   }
 
   .rh-section-head,
@@ -924,7 +1016,54 @@ textarea.rh-input {
   }
 
   .rh-proof-item {
-    padding: .55rem 0;
+    padding: .45rem 0;
+  }
+
+  .rh-proof-value {
+    font-size: .93rem;
+  }
+
+  .rh-more {
+    margin-top: 1.25rem;
+  }
+
+  .rh-consult-grid {
+    gap: 1.5rem;
+  }
+
+  .rh-proof-case-ms {
+    grid-template-columns: 6.25rem minmax(0, 1fr);
+    column-gap: 1rem;
+    padding-top: 1rem;
+  }
+
+  .rh-proof-cases {
+    gap: 1rem;
+  }
+
+  .rh-case-list {
+    gap: 1.5rem;
+  }
+
+  .rh-case-item + .rh-case-item {
+    padding-top: 1.5rem;
+  }
+
+  .rh-verdict-col {
+    padding: .75rem 0;
+  }
+
+  .rh-timeline-step {
+    padding-bottom: .8rem;
+  }
+
+  .rh-trust {
+    margin-top: 1.5rem;
+    padding-top: 1.1rem;
+  }
+
+  .rh-proof-points > li {
+    font-size: .88rem;
   }
 
   .rh-offer {
@@ -1124,6 +1263,29 @@ textarea.rh-input {
 .rh-case-meta {
   color: var(--rh-muted);
   font-size: .85rem;
+}
+
+/* 사례 항목: 이름 → (주의 문장) → 구성 줄 → 판정. 두 번째 항목부터 구분선 */
+.rh-case-item + .rh-case-item {
+  border-top: 1px solid var(--rh-border);
+  padding-top: 2rem;
+}
+
+.rh-case-name {
+  margin-bottom: 1rem !important;
+  color: var(--rh-text);
+  font-size: 1.1rem;
+  font-weight: 750;
+  line-height: 1.4;
+  word-break: keep-all;
+}
+
+.rh-case-item-note {
+  margin: -.5rem 0 1rem !important;
+  color: var(--rh-muted);
+  font-size: .9rem;
+  line-height: 1.6;
+  word-break: keep-all;
 }
 
 /* 도입 절차: 한 줄 타임라인(범위 → 실행 → 검증 → 승인·복구). 번호는 장식 카운터 */

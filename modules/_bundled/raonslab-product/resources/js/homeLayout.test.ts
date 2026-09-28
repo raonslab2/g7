@@ -177,13 +177,16 @@ describe('시각 구조', () => {
     }
   });
 
-  it('공개 사례는 RAON Hub 하나이며 구성 → 검증됨 → 아직 미검증 → 기술 근거 순서다', () => {
+  it('공개 사례는 RAON Hub · MOBILE_STOCK 두 개이며 이름 → (구성·주의) → 검증됨 → 아직 미검증 순서다', () => {
     const cases = childrenWith(byId('raon_home_case_list'), 'rh-case-item');
-    expect(cases.map((c) => c.id)).toEqual(['raon_home_case_hub']);
-    expect((cases[0].children ?? []).map((c) => c.id)).toEqual(['raon_home_case_hub_stack', 'raon_home_case_hub_verdict', 'raon_home_case_hub_foot']);
+    expect(cases.map((c) => c.id)).toEqual(['raon_home_case_hub', 'raon_home_case_ms']);
+    expect((cases[0].children ?? []).map((c) => c.id)).toEqual(['raon_home_case_hub_name', 'raon_home_case_hub_stack', 'raon_home_case_hub_verdict', 'raon_home_case_hub_foot']);
+    expect((cases[1].children ?? []).map((c) => c.id)).toEqual(['raon_home_case_ms_name', 'raon_home_case_ms_note', 'raon_home_case_ms_verdict', 'raon_home_case_ms_foot']);
     expect(textsUnder(byId('raon_home_case_hub_stack'))).toEqual(['g7', 'ext', 'ai'].map((k) => key(`case_stack_${k}`)));
-    const verdict = (byId('raon_home_case_hub_verdict')?.children ?? []).map((c) => textsUnder(c)[0]);
-    expect(verdict).toEqual([key('case_verified_title'), key('case_open_title')]);
+    for (const id of ['raon_home_case_hub', 'raon_home_case_ms']) {
+      const verdict = (byId(`${id}_verdict`)?.children ?? []).map((c) => textsUnder(c)[0]);
+      expect(verdict).toEqual([key('case_verified_title'), key('case_open_title')]);
+    }
     expect([ko.home.case_verified_title, ko.home.case_open_title]).toEqual(['검증됨', '아직 미검증']);
     expect([ko.home.case_verified1, ko.home.case_verified2, ko.home.case_verified3].join(' ')).toMatch(/회원·게시판·검색.*같은 요청.*코어 수정 0건/);
     expect([ko.home.case_open1, ko.home.case_open2].join(' ')).toMatch(/외부 고객.*장기 운영.*상용 부하/);
@@ -192,10 +195,20 @@ describe('시각 구조', () => {
     expect(more?.actions?.[0]?.params?.path).toBe('/page/cases');
   });
 
-  it('MOBILE_STOCK 은 증거가 결합되기 전까지 홈에 공개 증거로 나오지 않는다', () => {
-    expect(JSON.stringify(layout)).not.toMatch(/MOBILE_STOCK|case_stock/);
-    for (const dict of [ko, en]) expect(JSON.stringify(dict.home)).not.toMatch(/MOBILE_STOCK|모의투자|paper-trading/i);
+  it('증거 섹션이 두 제품을 미리 보여 준다: RAON Hub 사실 줄 + MOBILE_STOCK 화면·캡션·범위 세 줄', () => {
+    const previews = childrenWith(byId('raon_home_proof_cases'), 'rh-proof-case');
+    expect(previews.map((p) => p.id)).toEqual(['raon_home_proof_hub', 'raon_home_proof_ms']);
+    const img = byId('raon_home_proof_ms_shot_img');
+    expect(img?.name).toBe('Img');
+    expect(img?.props?.src).toBeUndefined();
+    expect(img?.props?.['data-rh-asset']).toBe('resources/assets/cases/mobile-stock-public-case-01-new-paper-account-390x844.png');
+    expect(img?.props?.alt).toBe(key('ms_shot_alt'));
+    expect(textsUnder(byId('raon_home_proof_ms_shot'))).toContain(key('ms_caption'));
+    expect(byId('raon_home_proof_ms_points')?.children).toHaveLength(3);
+    // 증거 섹션 안에서 새 섹션을 만들지 않는다
+    expect(home.children).toHaveLength(7);
   });
+
 
   it('도입 절차는 범위 → 실행 → 검증 → 승인·복구 한 줄 타임라인이고, 신뢰는 원칙 세 줄이다', () => {
     const steps = childrenWith(byId('raon_home_process_list'), 'rh-timeline-step');
@@ -252,7 +265,7 @@ describe('사용자 문구 정책', () => {
       const text = JSON.stringify(dict.home);
       expect(text).not.toMatch(/ChatGPT|Claude|Copilot|Gemini|대화형 AI는|chat-style AI/i);
     }
-    expect(ko.home.fit_note).toMatch(/RAON은 그 구축을 맡습니다/);
+    expect(ko.home.fit_note).toMatch(/RAON이 설계하고 구축합니다/);
   });
 
   it('홈 문구에는 원시 점검 코드·내부 모듈 ID·공급자 용어를 쓰지 않는다(상세는 사례 문서)', () => {
