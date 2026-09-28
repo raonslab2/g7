@@ -1,12 +1,15 @@
 import { describe, expect, it } from 'vitest';
 import {
   buildPayload,
+  canSubmit,
+  classifyConfigLoad,
   classifySubmitResponse,
   DEFAULT_SERVICE_OPTIONS,
   EMPTY_DRAFT,
   parseIntakeConfig,
   parseRetryAfter,
   payloadFingerprint,
+  planRecovery,
   resolveIdempotencyKey,
   safePolicyUrl,
   validateDraft,
@@ -17,7 +20,7 @@ const OPEN = { data: { enabled: true, consent_version: '2026-09-v1', privacy_cop
 
 describe('상담 접수 설정(fail-closed)', () => {
   it('접수가 열려 있고 동의 문안·버전이 모두 있을 때만 설정을 돌려준다', () => {
-    const config = parseIntakeConfig(OPEN, ORIGIN);
+    const config = parseIntakeConfig(OPEN);
     expect(config?.consentVersion).toBe('2026-09-v1');
     expect(config?.privacyCopy).toBe('수집 항목: 이름, 이메일');
     expect(config?.serviceOptions).toEqual(DEFAULT_SERVICE_OPTIONS);
@@ -33,7 +36,7 @@ describe('상담 접수 설정(fail-closed)', () => {
     ['동의 문안 누락', { data: { enabled: true, consent_version: 'v1' } }],
     ['공백 문안', { data: { enabled: true, consent_version: 'v1', privacy_copy: '   ' } }],
   ])('%s → 접수 불가', (_label, body) => {
-    expect(parseIntakeConfig(body, ORIGIN)).toBeNull();
+    expect(parseIntakeConfig(body)).toBeNull();
   });
 
   it('privacy 하위 객체와 서비스 옵션 선언을 읽는다', () => {
@@ -43,18 +46,39 @@ describe('상담 접수 설정(fail-closed)', () => {
         privacy: { privacy_consent_version: 'v2', copy: '문안', policy_url: '/page/privacy', retention_notice: '1년 보관' },
         service_interests: [{ value: 'pilot', label: '실증' }, 'build', { id: '' }],
       },
-    }, ORIGIN);
+    });
     expect(config?.consentVersion).toBe('v2');
-    expect(config?.privacyPolicyUrl).toBe(`${ORIGIN}/page/privacy`);
+    // 상대 경로는 서버와 같은 규칙으로 링크를 만들지 않는다(https 절대 주소만).
+    expect(config?.privacyPolicyUrl).toBeNull();
     expect(config?.retentionNotice).toBe('1년 보관');
     expect(config?.serviceOptions).toEqual([{ value: 'pilot', label: '실증' }, { value: 'build', label: null }]);
   });
 
-  it('정책 링크는 같은 origin 또는 https 만 허용한다', () => {
-    expect(safePolicyUrl('javascript:alert(1)', ORIGIN)).toBeNull();
-    expect(safePolicyUrl('http://elsewhere.example/privacy', ORIGIN)).toBeNull();
-    expect(safePolicyUrl('https://elsewhere.example/privacy', ORIGIN)).toBe('https://elsewhere.example/privacy');
-    expect(safePolicyUrl('', ORIGIN)).toBeNull();
+  it('정책 링크는 https 절대 주소만 허용한다', () => {
+    expect(safePolicyUrl('https://elsewhere.example/privacy')).toBe('https://elsewhere.example/privacy');
+    expect(safePolicyUrl('HTTPS://elsewhere.example/privacy')).toBe('https://elsewhere.example/privacy');
+    for (const rejected of [
+      '',
+      'javascript:alert(1)',
+      'JavaScript://x%0aalert(1)',
+      'data:text/html,<b>x</b>',
+      'http://elsewhere.example/privacy',
+      '/page/privacy',
+      '//elsewhere.example/privacy',
+      `${ORIGIN.replace('https:', 'http:')}/privacy`,
+      'https://user@elsewhere.example/privacy',
+      ' https://elsewhere.example/privacy',
+      'https:\\\\elsewhere.example/privacy',
+    ]) {
+      expect(safePolicyUrl(rejected), rejected).toBeNull();
+    }
+  });
+
+  it('config 조회 결과를 열림/닫힘 확인/확인 실패로 구분한다', () => {
+    expect(classifyConfigLoad(true, OPEN)).toMatchObject({ state: 'open' });
+    expect(classifyConfigLoad(true, { data: { intake_enabled: false } })).toEqual({ state: 'closed' });
+    expect(classifyConfigLoad(false, OPEN)).toEqual({ state: 'error' });
+    expect(classifyConfigLoad(true, null)).toEqual({ state: 'error' });
   });
 });
 
@@ -103,9 +127,19 @@ describe('POST 응답 분류', () => {
     expect(outcome).toEqual({ kind: 'validation', message: '입력 오류', errors: { email: '이메일 형식', privacy_consent: '버전 불일치' } });
   });
 
+  it('503 은 서버가 접수 닫힘 사유를 명시할 때만 닫힘이다', () => {
+    const disabled = { success: false, errors: { reason: 'intake_disabled', retryable: false } };
+    expect(classifySubmitResponse(503, disabled, null)).toEqual({ kind: 'disabled' });
+    // 사유 없는 503(유지보수 등)·일시 장애 500 은 재시도 가능한 서버 오류다.
+    expect(classifySubmitResponse(503, { success: false }, null)).toEqual({ kind: 'server' });
+    const temporary = { success: false, errors: { reason: 'temporary_failure', retryable: true, incident_id: '01TEST' } };
+    expect(classifySubmitResponse(500, temporary, null)).toEqual({ kind: 'server' });
+    expect(classifySubmitResponse(500, disabled, null)).toEqual({ kind: 'server' });
+  });
+
   it.each([
     [409, { kind: 'duplicate' }],
-    [503, { kind: 'disabled' }],
+    [503, { kind: 'server' }],
     [500, { kind: 'server' }],
     [403, { kind: 'server' }],
     [404, { kind: 'server' }],
@@ -118,5 +152,50 @@ describe('POST 응답 분류', () => {
     expect(parseRetryAfter('99999')).toBe(600);
     expect(parseRetryAfter(null)).toBeNull();
     expect(parseRetryAfter('soon')).toBeNull();
+  });
+});
+
+describe('불확실한 응답 뒤 입력·키 보존', () => {
+  it.each(['network', 'server', 'throttle', 'validation'] as const)('%s 뒤에는 입력과 같은 키를 지킨다', (kind) => {
+    expect(planRecovery(kind)).toEqual({ keepDraft: true, keepKey: true, closeForm: false });
+  });
+
+  it('닫힘 응답이라도 config 재확인이 실패하거나 열려 있으면 입력과 키를 지킨다', () => {
+    expect(planRecovery('disabled', 'error')).toEqual({ keepDraft: true, keepKey: true, closeForm: false });
+    expect(planRecovery('disabled', 'open')).toEqual({ keepDraft: true, keepKey: true, closeForm: false });
+    expect(planRecovery('disabled', null)).toEqual({ keepDraft: true, keepKey: true, closeForm: false });
+  });
+
+  it('닫힘이 확인된 경우에만 입력 화면을 거두고 비운다', () => {
+    expect(planRecovery('disabled', 'closed')).toEqual({ keepDraft: false, keepKey: false, closeForm: true });
+  });
+
+  it('성공은 비우고, 키 충돌은 입력을 지키되 새 키를 쓴다', () => {
+    expect(planRecovery('success')).toEqual({ keepDraft: false, keepKey: false, closeForm: false });
+    expect(planRecovery('duplicate')).toEqual({ keepDraft: true, keepKey: false, closeForm: false });
+  });
+
+  it('재시도는 같은 키를 다시 쓴다(서버가 이미 저장했다면 200 으로 수렴)', () => {
+    const fingerprint = payloadFingerprint({ contact_name: '홍', email: 'a@b.co' });
+    const first = resolveIdempotencyKey(null, fingerprint, () => 'first-key-0000000001');
+    const plan = planRecovery('server');
+    const kept = plan.keepKey ? first : null;
+    expect(resolveIdempotencyKey(kept, fingerprint, () => 'second-key-000000001').key).toBe('first-key-0000000001');
+  });
+});
+
+describe('연속 클릭 방지', () => {
+  const ready = { submitting: false, view: 'form', hasConfig: true, throttleUntil: 0 };
+
+  it('전송 중에는 다음 전송을 시작하지 않는다', () => {
+    expect(canSubmit(ready, 1_000)).toBe(true);
+    expect(canSubmit({ ...ready, submitting: true }, 1_000)).toBe(false);
+  });
+
+  it('접수 불가 화면·설정 없음·대기 시간 중에도 막는다', () => {
+    expect(canSubmit({ ...ready, view: 'unavailable' }, 1_000)).toBe(false);
+    expect(canSubmit({ ...ready, hasConfig: false }, 1_000)).toBe(false);
+    expect(canSubmit({ ...ready, throttleUntil: 2_000 }, 1_000)).toBe(false);
+    expect(canSubmit({ ...ready, throttleUntil: 2_000 }, 2_000)).toBe(true);
   });
 });

@@ -2,8 +2,10 @@
 
 namespace Modules\Raonslab\Product\Http\Controllers\Admin;
 
+use App\Enums\PermissionType;
 use App\Http\Controllers\Api\Base\AdminBaseController;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use Modules\Raonslab\Product\Enums\ConsultationStatus;
 use Modules\Raonslab\Product\Exceptions\InvalidStatusTransitionException;
 use Modules\Raonslab\Product\Http\Requests\Admin\AddConsultationNoteRequest;
@@ -14,6 +16,8 @@ use Modules\Raonslab\Product\Services\ConsultationService;
 
 class ConsultationController extends AdminBaseController
 {
+    private const MANAGE_PERMISSION = 'raonslab-product.consultations.manage';
+
     public function __construct(private ConsultationService $consultationService)
     {
         parent::__construct();
@@ -24,14 +28,29 @@ class ConsultationController extends AdminBaseController
         $validated = $request->validated();
         $status = isset($validated['status']) ? ConsultationStatus::from($validated['status']) : null;
         $paginator = $this->consultationService->paginate($status, (int) ($validated['per_page'] ?? 20));
-        $paginator->through(fn (Consultation $consultation): array => $this->listData($consultation));
 
-        return $this->success('common.success', $paginator);
+        return $this->success('common.success', [
+            'data' => $paginator->getCollection()
+                ->map(fn (Consultation $consultation): array => $this->listData($consultation))
+                ->values(),
+            'meta' => [
+                'current_page' => $paginator->currentPage(),
+                'last_page' => $paginator->lastPage(),
+                'per_page' => $paginator->perPage(),
+                'total' => $paginator->total(),
+                'from' => $paginator->firstItem(),
+                'to' => $paginator->lastItem(),
+            ],
+            'abilities' => $this->abilities($request),
+        ]);
     }
 
-    public function show(Consultation $consultation): JsonResponse
+    public function show(Request $request, Consultation $consultation): JsonResponse
     {
-        return $this->success('common.success', $this->detailData($this->consultationService->detail($consultation)));
+        return $this->success('common.success', [
+            ...$this->detailData($this->consultationService->detail($consultation)),
+            'abilities' => $this->abilities($request),
+        ]);
     }
 
     public function note(AddConsultationNoteRequest $request, Consultation $consultation): JsonResponse
@@ -42,7 +61,10 @@ class ConsultationController extends AdminBaseController
             $request->user(),
         );
 
-        return $this->success('common.success', $this->detailData($updated));
+        return $this->success('common.success', [
+            ...$this->detailData($updated),
+            'abilities' => $this->abilities($request),
+        ]);
     }
 
     public function status(UpdateConsultationStatusRequest $request, Consultation $consultation): JsonResponse
@@ -62,7 +84,23 @@ class ConsultationController extends AdminBaseController
             ]);
         }
 
-        return $this->success('common.success', $this->detailData($updated));
+        return $this->success('common.success', [
+            ...$this->detailData($updated),
+            'abilities' => $this->abilities($request),
+        ]);
+    }
+
+    /**
+     * 화면이 변경 컨트롤을 노출할지 판단하는 서버 판정값입니다.
+     * 라우트 권한 미들웨어(`permission:admin,...manage`)와 같은 식별자·타입·판정기로 계산합니다.
+     *
+     * @return array{can_manage: bool}
+     */
+    private function abilities(Request $request): array
+    {
+        return [
+            'can_manage' => $request->user()?->hasPermission(self::MANAGE_PERMISSION, PermissionType::Admin) === true,
+        ];
     }
 
     /** @return array<string, mixed> */
@@ -86,6 +124,7 @@ class ConsultationController extends AdminBaseController
     {
         return [
             ...$this->listData($consultation),
+            'next_status' => $consultation->status->next()?->value,
             'phone' => $consultation->phone,
             'message' => $consultation->message,
             'privacy_consent_version' => $consultation->privacy_consent_version,

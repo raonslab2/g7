@@ -6,7 +6,10 @@
  */
 import {
   buildPayload,
+  canSubmit,
+  classifyConfigLoad,
   classifySubmitResponse,
+  type ConfigLoad,
   CONSULTATION_API,
   type ConsultationDraft,
   createIdempotencyKey,
@@ -15,8 +18,8 @@ import {
   type FieldName,
   type IdempotencySlot,
   type IntakeConfig,
-  parseIntakeConfig,
   payloadFingerprint,
+  planRecovery,
   type Receipt,
   resolveIdempotencyKey,
   validateDraft,
@@ -85,13 +88,12 @@ async function fetchWithTimeout(url: string, init: RequestInit, timeoutMs: numbe
   }
 }
 
-async function loadConfig(): Promise<IntakeConfig | null> {
+async function loadConfig(): Promise<ConfigLoad> {
   try {
     const response = await fetchWithTimeout(`${CONSULTATION_API}/config`, { headers: requestHeaders(false) }, CONFIG_TIMEOUT_MS);
-    if (!response.ok) return null;
-    return parseIntakeConfig(await response.json().catch(() => null), window.location.origin);
+    return classifyConfigLoad(response.ok, await response.json().catch(() => null));
   } catch {
-    return null;
+    return { state: 'error' };
   }
 }
 
@@ -372,10 +374,10 @@ function focusFirst(island: Island, selector: string): void {
 async function start(island: Island): Promise<void> {
   island.view = 'loading';
   render(island);
-  const config = await loadConfig();
+  const loaded = await loadConfig();
   if (!islands.has(island)) return;
-  island.config = config;
-  island.view = config ? 'form' : 'unavailable';
+  island.config = loaded.state === 'open' ? loaded.config : null;
+  island.view = island.config ? 'form' : 'unavailable';
   render(island);
 }
 
@@ -396,8 +398,8 @@ function showErrors(island: Island, errors: FieldErrors, fallbackMessage = ''): 
 }
 
 async function submitForm(island: Island): Promise<void> {
-  if (island.submitting || island.view !== 'form' || !island.config) return;
-  if (island.throttleUntil > Date.now()) return;
+  if (!island.config) return;
+  if (!canSubmit({ submitting: island.submitting, view: island.view, hasConfig: true, throttleUntil: island.throttleUntil }, Date.now())) return;
 
   const clientErrors = validateDraft(sharedDraft);
   if (Object.keys(clientErrors).length > 0) {
@@ -430,10 +432,16 @@ async function submitForm(island: Island): Promise<void> {
   island.submitting = false;
   if (!islands.has(island)) return;
 
+  // 저장 여부가 불확실한 응답 뒤에는 입력과 키를 그대로 둔다(planRecovery). 여기서 지우는 것은
+  // 성공했거나 닫힘이 확인된 경우뿐이다.
+  const applyPlan = (plan: ReturnType<typeof planRecovery>): void => {
+    if (!plan.keepDraft) sharedDraft = { ...EMPTY_DRAFT };
+    if (!plan.keepKey) sharedSlot = null;
+  };
+
   switch (outcome.kind) {
     case 'success':
-      sharedDraft = { ...EMPTY_DRAFT };
-      sharedSlot = null;
+      applyPlan(planRecovery('success'));
       island.receipt = outcome.receipt;
       island.replay = outcome.replay;
       island.errors = {};
@@ -447,7 +455,7 @@ async function submitForm(island: Island): Promise<void> {
       return;
     case 'duplicate':
       // 같은 키에 다른 내용이 묶여 있다 — 다음 신청은 새 키로 보낸다.
-      sharedSlot = null;
+      applyPlan(planRecovery('duplicate'));
       island.banner = { kind: 'warn', text: t('consult.error_duplicate') };
       break;
     case 'throttle': {
@@ -466,12 +474,13 @@ async function submitForm(island: Island): Promise<void> {
       island.banner = { kind: 'error', text: t('consult.error_disabled') };
       updateStatus(island);
       focusFirst(island, '[data-rh-banner]');
-      // 접수가 닫혔는지 다시 확인하고, 닫혔으면 입력 화면을 거둔다(fail-closed).
-      const config = await loadConfig();
+      // 접수가 닫혔는지 다시 확인한다. 닫힘이 확인되면 입력 화면을 거두고(fail-closed),
+      // 확인하지 못하면(config 조회 실패) 입력과 키를 지킨 채 폼을 둔다.
+      const recheck = await loadConfig();
       if (!islands.has(island)) return;
-      if (!config) {
-        sharedDraft = { ...EMPTY_DRAFT };
-        sharedSlot = null;
+      const plan = planRecovery('disabled', recheck.state);
+      applyPlan(plan);
+      if (plan.closeForm) {
         island.config = null;
         island.view = 'unavailable';
         render(island);

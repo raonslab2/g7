@@ -54,8 +54,8 @@ class ConsultationIntakeTest extends ModuleTestCase
         $this->postConsultation($this->syntheticPayload(), 'synthetic-key-00000003', 'https://other.example.test')
             ->assertForbidden();
 
-        $this->withHeaders(['Origin' => 'http://localhost', 'Idempotency-Key' => ''])
-            ->postJson('/api/modules/raonslab-product/consultations', $this->syntheticPayload())
+        $this->withHeaders(['Origin' => self::SECURE_ORIGIN, 'Idempotency-Key' => ''])
+            ->postJson(self::SECURE_ORIGIN.self::STORE_PATH, $this->syntheticPayload())
             ->assertStatus(422)
             ->assertJsonValidationErrors(['idempotency_key']);
     }
@@ -169,9 +169,9 @@ class ConsultationIntakeTest extends ModuleTestCase
     /**
      * @scenario case=storage_failure
      *
-     * @effects storage_failure_returns_unavailable, failed_storage_creates_no_record
+     * @effects storage_failure_returns_retryable_error, failed_storage_creates_no_record
      */
-    public function database_failure_returns_503_and_does_not_claim_success(): void
+    public function database_failure_returns_retryable_500_and_does_not_claim_success(): void
     {
         $this->enableIntake();
         $service = Mockery::mock(ConsultationService::class);
@@ -179,8 +179,11 @@ class ConsultationIntakeTest extends ModuleTestCase
         $this->app->instance(ConsultationService::class, $service);
 
         $this->postConsultation($this->syntheticPayload(), 'synthetic-key-00000009')
-            ->assertStatus(503)
-            ->assertJsonPath('success', false);
+            ->assertStatus(500)
+            ->assertJsonPath('success', false)
+            ->assertJsonPath('errors.reason', 'temporary_failure')
+            ->assertJsonPath('errors.retryable', true)
+            ->assertJsonMissingPath('data');
         $this->assertDatabaseCount('raonslab_product_consultations', 0);
     }
 
@@ -239,14 +242,14 @@ class ConsultationIntakeTest extends ModuleTestCase
 
         for ($attempt = 1; $attempt <= 10; $attempt++) {
             $this->withServerVariables(['REMOTE_ADDR' => '198.51.100.77'])
-                ->withHeaders(['Origin' => 'http://localhost', 'Idempotency-Key' => sprintf('throttle-key-%08d', $attempt)])
-                ->postJson('/api/modules/raonslab-product/consultations', $this->syntheticPayload())
+                ->withHeaders(['Origin' => self::SECURE_ORIGIN, 'Idempotency-Key' => sprintf('throttle-key-%08d', $attempt)])
+                ->postJson(self::SECURE_ORIGIN.self::STORE_PATH, $this->syntheticPayload())
                 ->assertCreated();
         }
 
         $this->withServerVariables(['REMOTE_ADDR' => '198.51.100.77'])
-            ->withHeaders(['Origin' => 'http://localhost', 'Idempotency-Key' => 'throttle-key-00000011'])
-            ->postJson('/api/modules/raonslab-product/consultations', $this->syntheticPayload())
+            ->withHeaders(['Origin' => self::SECURE_ORIGIN, 'Idempotency-Key' => 'throttle-key-00000011'])
+            ->postJson(self::SECURE_ORIGIN.self::STORE_PATH, $this->syntheticPayload())
             ->assertStatus(429);
     }
 }

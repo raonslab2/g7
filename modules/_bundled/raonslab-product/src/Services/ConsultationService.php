@@ -7,6 +7,7 @@ use Illuminate\Database\QueryException;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use Modules\Raonslab\Product\Enums\ConsultationHistoryType;
 use Modules\Raonslab\Product\Enums\ConsultationMailStatus;
@@ -15,6 +16,7 @@ use Modules\Raonslab\Product\Exceptions\IdempotencyConflictException;
 use Modules\Raonslab\Product\Exceptions\InvalidStatusTransitionException;
 use Modules\Raonslab\Product\Models\Consultation;
 use Modules\Raonslab\Product\Repositories\Contracts\ConsultationRepositoryInterface;
+use Throwable;
 
 class ConsultationService
 {
@@ -76,8 +78,17 @@ class ConsultationService
         }
 
         if ($result->created) {
-            $this->notificationService->deliver($result->consultation);
-            $result->consultation->refresh();
+            // 커밋 이후 단계(알림·재조회) 실패가 이미 저장된 접수를 오류 응답으로 바꾸지 않게 합니다.
+            // 메일 상태는 알림 서비스가 기록한 값만 믿고, 여기서 성공으로 간주하지 않습니다.
+            try {
+                $this->notificationService->deliver($result->consultation);
+                $result->consultation->refresh();
+            } catch (Throwable $exception) {
+                Log::error('raonslab-product consultation post-commit step failed', [
+                    'reference' => $result->consultation->reference,
+                    'exception_class' => $exception::class,
+                ]);
+            }
         }
 
         return $result;

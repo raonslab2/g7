@@ -18,6 +18,7 @@
       "method": "GET",
       "auto_fetch": true,
       "auth_required": true,
+      "loading_strategy": "progressive",
       "params": {
         "status": "{{query.status ?? ''}}",
         "page": "{{query.page ?? 1}}",
@@ -34,9 +35,14 @@
       "fallback": {
         "data": {
           "data": [],
-          "current_page": 1,
-          "last_page": 1,
-          "total": 0
+          "meta": {
+            "current_page": 1,
+            "last_page": 1,
+            "per_page": 20,
+            "total": 0,
+            "from": null,
+            "to": null
+          }
         }
       }
     }
@@ -66,7 +72,8 @@
             "name": "Select",
             "props": {
               "value": "{{query.status ?? ''}}",
-              "className": "w-52 mb-4",
+              "aria-label": "처리 상태 필터 / Status filter",
+              "className": "w-full sm:w-52 mb-4",
               "options": [
                 {"label": "전체 상태 / All", "value": ""},
                 {"label": "신규 / NEW", "value": "NEW"},
@@ -78,66 +85,220 @@
             "actions": [
               {
                 "type": "change",
-                "handler": "replaceUrl",
+                "handler": "navigate",
+                "comment": "필터 변경은 목록을 다시 불러와야 하므로 replaceUrl(재조회 없음) 이 아니라 navigate. 다른 목록 상태(per_page)는 보존하고 페이지만 첫 페이지로 되돌린다.",
                 "params": {
+                  "path": "/admin/consultations",
                   "mergeQuery": true,
+                  "replace": true,
                   "query": {
                     "status": "{{$event.target.value}}",
-                    "page": 1
+                    "page": ""
                   }
                 }
               }
             ]
           },
           {
-            "id": "consultation_empty",
-            "type": "basic",
-            "name": "P",
-            "if": "{{(consultations?.data?.data ?? []).length === 0}}",
+            "id": "consultation_list_loading",
+            "type": "composite",
+            "name": "LoadingSpinner",
+            "if": "{{consultations == null || consultations?.$loading === true}}",
             "props": {
-              "className": "p-6 text-secondary"
-            },
-            "text": "접수된 상담이 없습니다. / No consultations found."
+              "size": "md",
+              "text": "상담 목록을 불러오는 중입니다. / Loading consultations…",
+              "className": "py-10"
+            }
           },
           {
-            "id": "consultation_row_{{idx}}",
+            "id": "consultation_list_error",
             "type": "basic",
             "name": "Div",
-            "iteration": {
-              "source": "{{consultations?.data?.data ?? []}}",
-              "item_var": "consultation",
-              "index_var": "idx"
-            },
+            "if": "{{consultations != null && consultations?.$loading !== true && _dataSourceErrors?.consultations != null}}",
             "props": {
-              "className": "mb-3 p-4 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg"
+              "className": "mb-4"
             },
-            "actions": [
-              {
-                "type": "click",
-                "handler": "navigate",
-                "params": {
-                  "path": "/admin/consultations/{{consultation.reference}}"
-                }
-              }
-            ],
             "children": [
               {
-                "type": "basic",
-                "name": "H2",
-                "props": {"className": "section-heading"},
-                "text": "{{consultation.contact_name ?? ''}} · {{consultation.company ?? '-'}}"
+                "type": "composite",
+                "name": "Alert",
+                "props": {
+                  "type": "error",
+                  "message": "상담 목록을 불러오지 못했습니다. 잠시 후 다시 시도해 주세요. / Couldn't load consultations. Please try again."
+                }
               },
               {
                 "type": "basic",
-                "name": "P",
-                "props": {"className": "text-sm text-secondary mt-1"},
-                "text": "{{consultation.reference ?? ''}} · {{consultation.status ?? ''}} · {{consultation.received_at ?? ''}}"
-              },
+                "name": "Button",
+                "props": {
+                  "type": "button",
+                  "className": "btn mt-3"
+                },
+                "actions": [
+                  {
+                    "type": "click",
+                    "handler": "refetchDataSource",
+                    "params": {
+                      "dataSourceId": "consultations"
+                    }
+                  }
+                ],
+                "children": [{"type": "basic", "name": "Span", "text": "다시 시도 / Retry"}]
+              }
+            ]
+          },
+          {
+            "id": "consultation_list_ready",
+            "type": "basic",
+            "name": "Div",
+            "if": "{{consultations != null && consultations?.$loading !== true && _dataSourceErrors?.consultations == null}}",
+            "children": [
               {
+                "id": "consultation_list_summary",
                 "type": "basic",
                 "name": "P",
-                "props": {"className": "text-sm text-secondary mt-1"},
-                "text": "{{consultation.email ?? ''}} · {{consultation.service_interest ?? '-'}} · mail: {{consultation.mail_status ?? ''}}"
+                "props": {
+                  "className": "text-sm text-secondary mb-3",
+                  "aria-live": "polite"
+                },
+                "text": "총 {{consultations?.data?.meta?.total ?? 0}}건 · {{consultations?.data?.meta?.current_page ?? 1}} / {{consultations?.data?.meta?.last_page ?? 1}} 페이지 · 페이지당 {{consultations?.data?.meta?.per_page ?? 20}}건 / Total {{consultations?.data?.meta?.total ?? 0}}"
+              },
+              {
+                "id": "consultation_empty",
+                "type": "composite",
+                "name": "EmptyState",
+                "if": "{{(consultations?.data?.meta?.total ?? 0) === 0}}",
+                "props": {
+                  "title": "접수된 상담이 없습니다. / No consultations found.",
+                  "description": "{{(query.status ?? '') !== '' ? '선택한 상태의 상담이 없습니다. 필터를 바꿔 보세요. / No consultations in this status.' : '새 상담이 접수되면 여기에 표시됩니다. / New consultations will appear here.'}}"
+                }
+              },
+              {
+                "id": "consultation_page_out_of_range",
+                "type": "basic",
+                "name": "Div",
+                "if": "{{(consultations?.data?.meta?.total ?? 0) > 0 && (consultations?.data?.data ?? []).length === 0}}",
+                "props": {
+                  "className": "mb-4"
+                },
+                "children": [
+                  {
+                    "type": "composite",
+                    "name": "Alert",
+                    "props": {
+                      "type": "info",
+                      "message": "이 페이지에는 상담이 없습니다. / This page has no consultations."
+                    }
+                  },
+                  {
+                    "type": "basic",
+                    "name": "Button",
+                    "props": {
+                      "type": "button",
+                      "className": "btn mt-3"
+                    },
+                    "actions": [
+                      {
+                        "type": "click",
+                        "handler": "navigate",
+                        "params": {
+                          "path": "/admin/consultations",
+                          "mergeQuery": true,
+                          "query": {
+                            "page": ""
+                          }
+                        }
+                      }
+                    ],
+                    "children": [{"type": "basic", "name": "Span", "text": "첫 페이지로 / First page"}]
+                  }
+                ]
+              },
+              {
+                "id": "consultation_row_{{idx}}",
+                "type": "basic",
+                "name": "Div",
+                "iteration": {
+                  "source": "{{consultations?.data?.data ?? []}}",
+                  "item_var": "consultation",
+                  "index_var": "idx"
+                },
+                "props": {
+                  "className": "mb-3 p-4 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg flex flex-col gap-3 md:flex-row md:items-center md:justify-between"
+                },
+                "children": [
+                  {
+                    "type": "basic",
+                    "name": "Div",
+                    "props": {"className": "min-w-0"},
+                    "children": [
+                      {
+                        "type": "basic",
+                        "name": "H2",
+                        "props": {"className": "section-heading break-words"},
+                        "text": "{{consultation.contact_name ?? ''}} · {{consultation.company ?? '-'}}"
+                      },
+                      {
+                        "type": "basic",
+                        "name": "P",
+                        "props": {"className": "text-sm text-secondary mt-1 break-all"},
+                        "text": "{{consultation.reference ?? ''}} · {{consultation.status ?? ''}} · {{consultation.received_at ?? ''}}"
+                      },
+                      {
+                        "type": "basic",
+                        "name": "P",
+                        "props": {"className": "text-sm text-secondary mt-1 break-all"},
+                        "text": "{{consultation.email ?? ''}} · {{consultation.service_interest ?? '-'}} · mail: {{consultation.mail_status ?? ''}}"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "basic",
+                    "name": "Button",
+                    "props": {
+                      "type": "button",
+                      "className": "btn shrink-0",
+                      "aria-label": "상담 상세 보기 {{consultation.reference ?? ''}} / Open consultation"
+                    },
+                    "actions": [
+                      {
+                        "type": "click",
+                        "handler": "navigate",
+                        "comment": "목록 컨텍스트(status/page/per_page)를 상세 URL 로 그대로 싣는다 — 상세의 목록 복귀가 같은 목록으로 돌아온다.",
+                        "params": {
+                          "path": "/admin/consultations/{{consultation.reference}}",
+                          "mergeQuery": true,
+                          "query": {}
+                        }
+                      }
+                    ],
+                    "children": [{"type": "basic", "name": "Span", "text": "상세 보기 / Open"}]
+                  }
+                ]
+              },
+              {
+                "id": "consultation_pagination",
+                "type": "composite",
+                "name": "Pagination",
+                "if": "{{((consultations?.data?.meta?.last_page ?? 1) > 1) || ((consultations?.data?.meta?.current_page ?? 1) > 1)}}",
+                "props": {
+                  "currentPage": "{{consultations?.data?.meta?.current_page ?? 1}}",
+                  "totalPages": "{{consultations?.data?.meta?.last_page ?? 1}}",
+                  "className": "flex justify-center mt-4"
+                },
+                "actions": [
+                  {
+                    "event": "onPageChange",
+                    "handler": "navigate",
+                    "params": {
+                      "path": "/admin/consultations",
+                      "mergeQuery": true,
+                      "query": {
+                        "page": "{{$args[0]}}"
+                      }
+                    }
+                  }
+                ]
               }
             ]
           }
