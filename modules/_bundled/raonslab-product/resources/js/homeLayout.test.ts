@@ -20,7 +20,7 @@ function walk(node: Node, visit: (n: Node) => void): void {
 }
 
 /** 검증된 RAON Hub 사례 섹션 주소. */
-const CASE_HREF = '#rh-cases';
+const CASE_HREF = '#rh-case';
 
 const home: Node = layout.injections[0].components[0];
 const nodes: Node[] = [];
@@ -42,9 +42,10 @@ describe('사업 홈 레이아웃 확장', () => {
     expect(layout.injections[0]).toMatchObject({ target_id: 'main_content', position: 'replace' });
   });
 
-  it('hero → RAON Hub 증거 → 구매 범위 → 문제 → 사례 → 절차 → 기술 → 상담 순서로 구성된다', () => {
+  it('7개 섹션: Hero → RAON Hub 증거 → 구매 범위 → 적합성·차이 → 사례 → 절차·신뢰 → 상담', () => {
     const sectionIds = (home.children ?? []).map((child) => child.props?.id).filter(Boolean);
-    expect(sectionIds).toEqual(['rh-hero', 'rh-proof', 'rh-services', 'rh-problem', 'rh-cases', 'rh-process', 'rh-tech', 'rh-consult']);
+    expect(sectionIds).toEqual(['rh-hero', 'rh-proof', 'rh-services', 'rh-fit', 'rh-case', 'rh-process', 'rh-consult']);
+    expect(home.children).toHaveLength(7);
   });
 
   it('홈 섹션 바로가기 바를 두지 않고, 홈 안의 이동 링크는 실제 섹션을 가리킨다', () => {
@@ -98,9 +99,9 @@ describe('사업 홈 레이아웃 확장', () => {
     expect(host?.text).toBeUndefined();
   });
 
-  it('기존 Community·검색·AI 작업공간 이동을 보존한다', () => {
+  it('커뮤니티 진입과 로그인 사용자의 AI 작업공간 진입을 보존한다(공지·질문·검색은 푸터가 담는다)', () => {
     const paths = nodes.flatMap((n) => n.actions ?? []).filter((a) => a.handler === 'navigate').map((a) => a.params?.path);
-    expect(paths).toEqual(expect.arrayContaining(['/board/community', '/board/notice', '/board/questions', '/search', '/ai']));
+    expect(paths).toEqual(expect.arrayContaining(['/board/community', '/ai', '/page/cases']));
     const ai = nodes.find((n) => n.actions?.some((a) => a.params?.path === '/ai'));
     expect((ai as Record<string, unknown>)?.if).toBe('{{_global.currentUser?.uuid}}');
   });
@@ -144,7 +145,7 @@ describe('시각 구조', () => {
 
   it('아이콘은 모두 장식으로 숨기고 FontAwesome solid 이름만 쓴다', () => {
     const icons = nodes.filter((n) => n.name === 'Icon');
-    expect(icons.length).toBeGreaterThanOrEqual(20);
+    expect(icons.length).toBeGreaterThanOrEqual(4);
     for (const icon of icons) {
       expect(icon.props?.['aria-hidden'], icon.id).toBe('true');
       expect(String(icon.props?.name)).toMatch(/^fa-[a-z-]+$/);
@@ -176,22 +177,31 @@ describe('시각 구조', () => {
     }
   });
 
-  it.each(['stock', 'hub'])('사례 %s 는 문제·구현·검증·한계 근거 레인을 순서대로 가진다', (name) => {
-    const lanes = childrenWith(byId(`raon_home_case_${name}_evidence`), 'rh-lane');
-    expect(lanes.map((l) => classOf(l).split(' ')[1])).toEqual(['rh-lane-problem', 'rh-lane-build', 'rh-lane-verified', 'rh-lane-limit']);
-    const texts = textsUnder(byId(`raon_home_case_${name}`));
-    for (const field of ['summary', 'problem', 'scope', 'flow', 'verified', 'unverified', 'fit']) {
-      expect(texts, field).toContain(key(`case_${name}_${field}`));
-    }
-    for (const lane of lanes) expect(lane.children?.[0]?.children?.[0]?.props?.['aria-hidden'], lane.id).toBe('true');
-    expect(textsUnder(lanes[2])).toContain(key(`case_${name}_verified`));
-    expect(textsUnder(lanes[3])).toContain(key(`case_${name}_unverified`));
+  it('공개 사례는 RAON Hub 하나이며 구성 → 검증됨 → 아직 미검증 → 기술 근거 순서다', () => {
+    const cases = childrenWith(byId('raon_home_case_list'), 'rh-case-item');
+    expect(cases.map((c) => c.id)).toEqual(['raon_home_case_hub']);
+    expect((cases[0].children ?? []).map((c) => c.id)).toEqual(['raon_home_case_hub_stack', 'raon_home_case_hub_verdict', 'raon_home_case_hub_foot']);
+    expect(textsUnder(byId('raon_home_case_hub_stack'))).toEqual(['g7', 'ext', 'ai'].map((k) => key(`case_stack_${k}`)));
+    const verdict = (byId('raon_home_case_hub_verdict')?.children ?? []).map((c) => textsUnder(c)[0]);
+    expect(verdict).toEqual([key('case_verified_title'), key('case_open_title')]);
+    expect([ko.home.case_verified_title, ko.home.case_open_title]).toEqual(['검증됨', '아직 미검증']);
+    expect([ko.home.case_verified1, ko.home.case_verified2, ko.home.case_verified3].join(' ')).toMatch(/회원·게시판·검색.*같은 요청.*코어 수정 0건/);
+    expect([ko.home.case_open1, ko.home.case_open2].join(' ')).toMatch(/외부 고객.*장기 운영.*상용 부하/);
+    const more = byId('raon_home_case_hub_more');
+    expect(more?.props?.href).toBe('/page/cases');
+    expect(more?.actions?.[0]?.params?.path).toBe('/page/cases');
   });
 
-  it('도입 절차 타임라인은 5단계이고 번호 표지는 장식이다', () => {
-    const steps = childrenWith(byId('raon_home_process_list'), 'rh-process-step');
-    expect(steps).toHaveLength(5);
-    for (const step of steps) expect(childrenWith(step, 'rh-process-node')[0]?.props?.['aria-hidden']).toBe('true');
+  it('MOBILE_STOCK 은 증거가 결합되기 전까지 홈에 공개 증거로 나오지 않는다', () => {
+    expect(JSON.stringify(layout)).not.toMatch(/MOBILE_STOCK|case_stock/);
+    for (const dict of [ko, en]) expect(JSON.stringify(dict.home)).not.toMatch(/MOBILE_STOCK|모의투자|paper-trading/i);
+  });
+
+  it('도입 절차는 범위 → 실행 → 검증 → 승인·복구 한 줄 타임라인이고, 신뢰는 원칙 세 줄이다', () => {
+    const steps = childrenWith(byId('raon_home_process_list'), 'rh-timeline-step');
+    expect(steps.map((step) => ko.home[textsUnder(step)[0].replace('$t:raonslab-product.home.', '')])).toEqual(['범위', '실행', '검증', '승인·복구']);
+    for (const step of steps) expect(childrenWith(step, 'rh-timeline-node')[0]?.props?.['aria-hidden']).toBe('true');
+    expect(byId('raon_home_trust_list')?.children).toHaveLength(3);
   });
 
   it('흐름 도식 문구 키는 단계 이름과 한 줄 설명뿐이다', () => {
@@ -200,62 +210,27 @@ describe('시각 구조', () => {
   });
 });
 
-describe('2차 시각 패스 — 사례·서비스·절차의 코드 네이티브 도식', () => {
+describe('시각 리듬 — 섹션마다 다른 형태', () => {
   const css = readFileSync(resolve(root, 'css/main.css'), 'utf8');
-  const pass2 = css.slice(css.indexOf('/* ── 2차 시각 패스'), css.indexOf('@media (prefers-reduced-motion'));
-  const literalTexts = (n?: Node) => textsUnder(n).filter((t) => !t.startsWith('$t:'));
+  const homeCss = css.slice(css.indexOf('/* 첫 화면: 문장과'), css.indexOf('/* ─── 정보·정책 상위 메뉴'));
 
-  it('두 사례는 서로 다른 미니 화면이다: MOBILE_STOCK 은 요청 로그 터미널, RAON Hub 는 상태 스트립 + 근거 레일', () => {
-    expect(classOf(byId('raon_home_case_stock'))).toContain('rh-case-log');
-    expect(classOf(byId('raon_home_case_stock_evidence'))).toContain('rh-evidence-log');
-    expect(classOf(byId('raon_home_case_hub'))).toContain('rh-case-rail');
-    expect(classOf(byId('raon_home_case_hub_evidence'))).toContain('rh-evidence-rail');
-    expect(classOf(byId('raon_home_case_hub_evidence'))).not.toContain('rh-evidence-log');
-
-    // 창 머리·상태 스트립은 근거 레인 바로 앞에 놓이는 장식이다
-    for (const [caseId, chromeId] of [['stock', 'raon_home_case_stock_bar'], ['hub', 'raon_home_case_hub_strip']]) {
-      const children = (byId(`raon_home_case_${caseId}`)?.children ?? []).map((c) => c.id);
-      expect(children).toEqual([`raon_home_case_${caseId}_header`, chromeId, `raon_home_case_${caseId}_evidence`]);
-      expect(byId(chromeId)?.props?.['aria-hidden']).toBe('true');
-    }
-    const segments = (byId('raon_home_case_hub_strip_bar')?.children ?? []).map((c) => classOf(c).split(' ')[1]);
-    expect(segments).toEqual(['rh-strip-seg-problem', 'rh-strip-seg-build', 'rh-strip-seg-verified', 'rh-strip-seg-limit']);
+  it('섹션마다 다른 형태를 쓴다: 흐름 · 증거 줄 · 3행 표 · 두 열 목록 · 구성+판정 · 타임라인 · 원칙 줄', () => {
+    const shapes = ['rh-flow-list', 'rh-proof-strip', 'rh-offers', 'rh-fit-grid', 'rh-verdict', 'rh-timeline', 'rh-trust-list'];
+    for (const shape of shapes) expect(nodes.some((n) => classOf(n).split(' ').includes(shape)), shape).toBe(true);
   });
 
-  it('장식 문구는 기존 사실 문구에 있는 식별자만 쓴다(새 주장·수치 없음)', () => {
-    expect(literalTexts(byId('raon_home_case_stock_bar'))).toEqual(['MOBILE_STOCK']);
-    expect(literalTexts(byId('raon_home_case_hub_strip'))).toEqual(['G7 7.0.11']);
-    expect(ko.home.case_stock_title).toContain('MOBILE_STOCK');
-    expect(en.home.case_stock_title).toContain('MOBILE_STOCK');
-    expect(ko.home.case_hub_summary).toContain('7.0.11');
-    expect(en.home.case_hub_summary).toContain('7.0.11');
-    for (const id of ['raon_home_services', 'raon_home_process']) expect(literalTexts(byId(id)), id).toEqual([]);
-  });
-
-  it('카드 수는 늘리지 않는다(사례 2 · 레인 4 · 구매 범위 3 · 절차 5)', () => {
-    expect(childrenWith(byId('raon_home_cases_list'), 'rh-case')).toHaveLength(2);
-    expect(childrenWith(byId('raon_home_services_list'), 'rh-offer')).toHaveLength(3);
-    expect(childrenWith(byId('raon_home_process_list'), 'rh-process-step')).toHaveLength(5);
-  });
-
-  it('절차 노드는 단계별 아이콘을 가지고, 검증 단계는 통과·실패·미검증 분기, 마지막 단계는 반복을 표시한다', () => {
-    const steps = childrenWith(byId('raon_home_process_list'), 'rh-process-step');
-    const icons = steps.map((step) => childrenWith(step, 'rh-process-node')[0]?.children?.map((c) => c.props?.name));
-    expect(icons).toEqual([['fa-comments'], ['fa-shield-halved'], ['fa-code'], ['fa-list-check'], ['fa-arrows-rotate']]);
-    expect(classOf(steps[3])).toContain('rh-process-step-verify');
-    const states = childrenWith(steps[3], 'rh-process-states')[0];
-    expect(states?.props?.['aria-hidden']).toBe('true');
-    expect((states?.children ?? []).map((c) => classOf(c).split(' ')[1])).toEqual(['rh-process-state-pass', 'rh-process-state-fail', 'rh-process-state-open']);
-    expect(classOf(steps[4])).toContain('rh-process-step-loop');
-  });
-
-
-  it('새 스타일은 이미지·SVG·glow·그림자·그라디언트·애니메이션 없이 테두리와 상태 색만 쓴다', () => {
-    expect(pass2.length).toBeGreaterThan(500);
-    expect(pass2).not.toMatch(/gradient|box-shadow|text-shadow|filter\s*:|url\(|<svg|animation|@keyframes|transform:\s*(?:scale|translate[XYZ3]?)\b/i);
-    // 색은 모두 기존 테마 토큰을 쓴다(라이트·다크 동시 대응)
-    expect(pass2.replace(/\/\*[\s\S]*?\*\//g, '')).not.toMatch(/#[0-9a-f]{3,8}\b|rgba?\(/i);
+  it('홈 스타일에는 이미지·SVG·glow·그림자·애니메이션이 없고 색은 테마 토큰만 쓴다', () => {
+    // 이번 판에서 새로 만든 형태 블록만 본다(상담 양식 패널의 기존 그림자는 대상이 아니다)
+    const body = homeCss.slice(homeCss.indexOf('/* 요청 → 결과 흐름'), homeCss.indexOf('/* 라벨·값 한 쌍'))
+      + homeCss.slice(homeCss.indexOf('/* ── 적합성·사례·절차'), homeCss.indexOf('@media (prefers-reduced-motion'));
+    expect(body.length).toBeGreaterThan(2000);
+    expect(body).not.toMatch(/gradient|box-shadow|text-shadow|filter\s*:|url\(|<svg|animation|@keyframes/i);
+    expect(body.replace(/\/\*[\s\S]*?\*\//g, '')).not.toMatch(/#[0-9a-f]{3,8}\b|rgba?\(/i);
     expect(css).toContain('@media (prefers-reduced-motion: reduce)');
+  });
+
+  it('사라진 장식(진행 막대·가짜 창 머리·상태 레인·섹션 바로가기)의 스타일이 남지 않는다', () => {
+    expect(css).not.toMatch(/\.rh-(subnav|log-bar|log-dots|strip-seg|run-row|scope-seg|lane|issue|principle|process-state)\b/);
   });
 });
 
@@ -272,16 +247,19 @@ describe('사용자 문구 정책', () => {
     }
   });
 
-  it('MOBILE_STOCK 은 실거래·수익·고객 납품을 주장하지 않는다', () => {
-    expect(ko.home.case_stock_unverified).toMatch(/실제 증권 거래/);
-    expect(`${ko.home.case_stock_summary}${ko.home.case_stock_verified}`).not.toMatch(/수익률|실거래 지원|고객사/);
+  it('다른 AI 도구의 무능을 주장하지 않고 RAON의 구축 책임으로 차별화한다', () => {
+    for (const dict of [ko, en]) {
+      const text = JSON.stringify(dict.home);
+      expect(text).not.toMatch(/ChatGPT|Claude|Copilot|Gemini|대화형 AI는|chat-style AI/i);
+    }
+    expect(ko.home.fit_note).toMatch(/RAON은 그 구축을 맡습니다/);
   });
 
-  it('G7 사례는 검증 근거와 미검증 범위를 함께 적는다', () => {
-    for (const token of ['J1~J10 PASS', 'A1~A10 PASS', '360/390/412', '후속 지시 PASS', '코어 수정 0건']) {
-      expect(ko.home.case_hub_verified).toContain(token);
+  it('홈 문구에는 원시 점검 코드·내부 모듈 ID·공급자 용어를 쓰지 않는다(상세는 사례 문서)', () => {
+    for (const dict of [ko, en]) {
+      const text = JSON.stringify(dict.home);
+      expect(text).not.toMatch(/\b[JA]\d+\b|J1~J10|A1~A10|raonslab-product|raonslab-ai-workspace|Provider|\b[0-9a-f]{12,40}\b/);
     }
-    expect(ko.home.case_hub_unverified).toMatch(/상용 트래픽/);
   });
 });
 
