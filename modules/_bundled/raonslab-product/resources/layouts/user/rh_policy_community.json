@@ -1,0 +1,942 @@
+{
+  "version": "1.0.0",
+  "layout_name": "rh_policy_community",
+  "extends": "_user_base",
+  "meta": {
+    "title": "$t:raonslab-product.nav.policy_community",
+    "description": "$t:raonslab-product.nav.policy_community_desc"
+  },
+  "slots": {
+    "content": [
+      {
+        "id": "rh_policy_community_root",
+        "comment": "RAON policy 문서: /policy/community",
+        "type": "basic",
+        "name": "Div",
+        "props": {
+          "className": "rh-doc",
+          "data-rh-doc": "policy",
+          "data-rh-page": "community"
+        },
+        "children": [
+          {
+            "id": "rh_policy_community_head",
+            "type": "basic",
+            "name": "Div",
+            "props": {
+              "className": "rh-doc-head"
+            },
+            "children": [
+              {
+                "id": "rh_policy_community_head_inner",
+                "type": "basic",
+                "name": "Div",
+                "props": {
+                  "className": "rh-shell rh-doc-head-inner"
+                },
+                "children": [
+                  {
+                    "id": "rh_policy_community_crumbs",
+                    "type": "basic",
+                    "name": "Nav",
+                    "props": {
+                      "className": "rh-crumbs",
+                      "aria-label": "$t:raonslab-product.doc.crumb_label"
+                    },
+                    "children": [
+                      {
+                        "id": "rh_policy_community_crumbs_list",
+                        "type": "basic",
+                        "name": "Ul",
+                        "props": {
+                          "className": "rh-crumbs-list"
+                        },
+                        "children": [
+                          {
+                            "id": "rh_policy_community_crumb_home",
+                            "type": "basic",
+                            "name": "Li",
+                            "props": {
+                              "className": "rh-crumb"
+                            },
+                            "children": [
+                              {
+                                "id": "rh_policy_community_crumb_home_link",
+                                "type": "basic",
+                                "name": "A",
+                                "props": {
+                                  "className": "rh-crumb-link",
+                                  "href": "/",
+                                  "data-rh-nav-path": "/"
+                                },
+                                "text": "$t:raonslab-product.doc.home",
+                                "actions": [
+                                  {
+                                    "type": "click",
+                                    "handler": "navigate",
+                                    "params": {
+                                      "path": "/"
+                                    }
+                                  }
+                                ]
+                              }
+                            ]
+                          },
+                          {
+                            "id": "rh_policy_community_crumb_group",
+                            "type": "basic",
+                            "name": "Li",
+                            "props": {
+                              "className": "rh-crumb"
+                            },
+                            "children": [
+                              {
+                                "id": "rh_policy_community_crumb_group_text",
+                                "type": "basic",
+                                "name": "Span",
+                                "props": {
+                                  "className": "rh-crumb-text"
+                                },
+                                "text": "$t:raonslab-product.nav.policy"
+                              }
+                            ]
+                          },
+                          {
+                            "id": "rh_policy_community_crumb_page",
+                            "type": "basic",
+                            "name": "Li",
+                            "props": {
+                              "className": "rh-crumb"
+                            },
+                            "children": [
+                              {
+                                "id": "rh_policy_community_crumb_page_text",
+                                "type": "basic",
+                                "name": "Span",
+                                "props": {
+                                  "className": "rh-crumb-text",
+                                  "aria-current": "page"
+                                },
+                                "text": "$t:raonslab-product.nav.policy_community"
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "id": "rh_policy_community_kicker",
+                    "type": "basic",
+                    "name": "P",
+                    "props": {
+                      "className": "rh-doc-kicker"
+                    },
+                    "text": "$t:raonslab-product.community.kicker"
+                  },
+                  {
+                    "id": "rh_policy_community_title",
+                    "type": "basic",
+                    "name": "H1",
+                    "props": {
+                      "className": "rh-doc-title",
+                      "id": "rh-doc-title",
+                      "tabIndex": -1
+                    },
+                    "text": "$t:raonslab-product.community.title"
+                  },
+                  {
+                    "id": "rh_policy_community_lede",
+                    "type": "basic",
+                    "name": "P",
+                    "props": {
+                      "className": "rh-doc-lede"
+                    },
+                    "text": "$t:raonslab-product.community.lede"
+                  },
+                  {
+                    "id": "rh_policy_community_meta",
+                    "type": "basic",
+                    "name": "Div",
+                    "props": {
+                      "className": "rh-doc-meta"
+                    },
+                    "children": [
+                      {
+                        "id": "rh_policy_community_meta_chip1",
+                        "type": "basic",
+                        "name": "Span",
+                        "props": {
+                          "className": "rh-chip",
+                          "data-status": "pending"
+                        },
+                        "text": "$t:raonslab-product.doc.status_draft"
+                      },
+                      {
+                        "id": "rh_policy_community_meta_updated",
+                        "type": "basic",
+                        "name": "Span",
+                        "props": {
+                          "className": "rh-doc-updated"
+                        },
+                        "text": "$t:raonslab-product.doc.updated"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "rh_policy_community_body",
+            "type": "basic",
+            "name": "Div",
+            "props": {
+              "className": "rh-shell rh-doc-body"
+            },
+            "children": [
+              {
+                "id": "rh_policy_community_aside",
+                "type": "basic",
+                "name": "Div",
+                "props": {
+                  "className": "rh-doc-aside"
+                },
+                "children": [
+                  {
+                    "id": "rh_policy_community_side_nav",
+                    "type": "basic",
+                    "name": "Nav",
+                    "props": {
+                      "className": "rh-side",
+                      "aria-label": "$t:raonslab-product.doc.policy_menu_label"
+                    },
+                    "children": [
+                      {
+                        "id": "rh_policy_community_side_label",
+                        "type": "basic",
+                        "name": "P",
+                        "props": {
+                          "className": "rh-side-label",
+                          "aria-hidden": "true"
+                        },
+                        "text": "$t:raonslab-product.nav.policy"
+                      },
+                      {
+                        "id": "rh_policy_community_side_list",
+                        "type": "basic",
+                        "name": "Ul",
+                        "props": {
+                          "className": "rh-side-list"
+                        },
+                        "children": [
+                          {
+                            "id": "rh_policy_community_side_privacy_item",
+                            "type": "basic",
+                            "name": "Li",
+                            "props": {
+                              "className": "rh-side-item"
+                            },
+                            "children": [
+                              {
+                                "id": "rh_policy_community_side_privacy",
+                                "type": "basic",
+                                "name": "A",
+                                "props": {
+                                  "className": "rh-side-link",
+                                  "href": "/policy/privacy",
+                                  "data-rh-nav-path": "/policy/privacy"
+                                },
+                                "text": "$t:raonslab-product.nav.policy_privacy",
+                                "actions": [
+                                  {
+                                    "type": "click",
+                                    "handler": "navigate",
+                                    "params": {
+                                      "path": "/policy/privacy"
+                                    }
+                                  }
+                                ]
+                              }
+                            ]
+                          },
+                          {
+                            "id": "rh_policy_community_side_community_item",
+                            "type": "basic",
+                            "name": "Li",
+                            "props": {
+                              "className": "rh-side-item"
+                            },
+                            "children": [
+                              {
+                                "id": "rh_policy_community_side_community",
+                                "type": "basic",
+                                "name": "A",
+                                "props": {
+                                  "className": "rh-side-link",
+                                  "href": "/policy/community",
+                                  "data-rh-nav-path": "/policy/community",
+                                  "aria-current": "page"
+                                },
+                                "text": "$t:raonslab-product.nav.policy_community",
+                                "actions": [
+                                  {
+                                    "type": "click",
+                                    "handler": "navigate",
+                                    "params": {
+                                      "path": "/policy/community"
+                                    }
+                                  }
+                                ]
+                              }
+                            ]
+                          },
+                          {
+                            "id": "rh_policy_community_side_ai_policy_item",
+                            "type": "basic",
+                            "name": "Li",
+                            "props": {
+                              "className": "rh-side-item"
+                            },
+                            "children": [
+                              {
+                                "id": "rh_policy_community_side_ai_policy",
+                                "type": "basic",
+                                "name": "A",
+                                "props": {
+                                  "className": "rh-side-link",
+                                  "href": "/policy/ai-workspace",
+                                  "data-rh-nav-path": "/policy/ai-workspace"
+                                },
+                                "text": "$t:raonslab-product.nav.policy_ai",
+                                "actions": [
+                                  {
+                                    "type": "click",
+                                    "handler": "navigate",
+                                    "params": {
+                                      "path": "/policy/ai-workspace"
+                                    }
+                                  }
+                                ]
+                              }
+                            ]
+                          },
+                          {
+                            "id": "rh_policy_community_side_oss_item",
+                            "type": "basic",
+                            "name": "Li",
+                            "props": {
+                              "className": "rh-side-item"
+                            },
+                            "children": [
+                              {
+                                "id": "rh_policy_community_side_oss",
+                                "type": "basic",
+                                "name": "A",
+                                "props": {
+                                  "className": "rh-side-link",
+                                  "href": "/policy/open-source",
+                                  "data-rh-nav-path": "/policy/open-source"
+                                },
+                                "text": "$t:raonslab-product.nav.policy_oss",
+                                "actions": [
+                                  {
+                                    "type": "click",
+                                    "handler": "navigate",
+                                    "params": {
+                                      "path": "/policy/open-source"
+                                    }
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "id": "rh_policy_community_toc_nav",
+                    "type": "basic",
+                    "name": "Nav",
+                    "props": {
+                      "className": "rh-toc",
+                      "aria-label": "$t:raonslab-product.doc.toc_title"
+                    },
+                    "children": [
+                      {
+                        "id": "rh_policy_community_toc_label",
+                        "type": "basic",
+                        "name": "P",
+                        "props": {
+                          "className": "rh-side-label",
+                          "aria-hidden": "true"
+                        },
+                        "text": "$t:raonslab-product.doc.toc_title"
+                      },
+                      {
+                        "id": "rh_policy_community_toc_list",
+                        "type": "basic",
+                        "name": "Ul",
+                        "props": {
+                          "className": "rh-toc-list"
+                        },
+                        "children": [
+                          {
+                            "id": "rh_policy_community_toc_account_item",
+                            "type": "basic",
+                            "name": "Li",
+                            "props": {
+                              "className": "rh-toc-item"
+                            },
+                            "children": [
+                              {
+                                "id": "rh_policy_community_toc_account",
+                                "type": "basic",
+                                "name": "A",
+                                "props": {
+                                  "className": "rh-toc-link",
+                                  "href": "#rh-doc-account",
+                                  "data-rh-anchor": "rh-doc-account"
+                                },
+                                "text": "$t:raonslab-product.community.toc_account"
+                              }
+                            ]
+                          },
+                          {
+                            "id": "rh_policy_community_toc_boards_item",
+                            "type": "basic",
+                            "name": "Li",
+                            "props": {
+                              "className": "rh-toc-item"
+                            },
+                            "children": [
+                              {
+                                "id": "rh_policy_community_toc_boards",
+                                "type": "basic",
+                                "name": "A",
+                                "props": {
+                                  "className": "rh-toc-link",
+                                  "href": "#rh-doc-boards",
+                                  "data-rh-anchor": "rh-doc-boards"
+                                },
+                                "text": "$t:raonslab-product.community.toc_boards"
+                              }
+                            ]
+                          },
+                          {
+                            "id": "rh_policy_community_toc_prohibited_item",
+                            "type": "basic",
+                            "name": "Li",
+                            "props": {
+                              "className": "rh-toc-item"
+                            },
+                            "children": [
+                              {
+                                "id": "rh_policy_community_toc_prohibited",
+                                "type": "basic",
+                                "name": "A",
+                                "props": {
+                                  "className": "rh-toc-link",
+                                  "href": "#rh-doc-prohibited",
+                                  "data-rh-anchor": "rh-doc-prohibited"
+                                },
+                                "text": "$t:raonslab-product.community.toc_prohibited"
+                              }
+                            ]
+                          },
+                          {
+                            "id": "rh_policy_community_toc_pending_item",
+                            "type": "basic",
+                            "name": "Li",
+                            "props": {
+                              "className": "rh-toc-item"
+                            },
+                            "children": [
+                              {
+                                "id": "rh_policy_community_toc_pending",
+                                "type": "basic",
+                                "name": "A",
+                                "props": {
+                                  "className": "rh-toc-link",
+                                  "href": "#rh-doc-pending",
+                                  "data-rh-anchor": "rh-doc-pending"
+                                },
+                                "text": "$t:raonslab-product.community.toc_pending"
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "id": "rh_policy_community_main",
+                "type": "basic",
+                "name": "Div",
+                "props": {
+                  "className": "rh-doc-main"
+                },
+                "children": [
+                  {
+                    "id": "rh_policy_community_sec_account",
+                    "type": "basic",
+                    "name": "Div",
+                    "props": {
+                      "className": "rh-doc-section",
+                      "id": "rh-doc-account",
+                      "role": "region",
+                      "aria-labelledby": "rh-doc-account-title"
+                    },
+                    "children": [
+                      {
+                        "id": "rh_policy_community_sec_account_title",
+                        "type": "basic",
+                        "name": "H2",
+                        "props": {
+                          "className": "rh-doc-h2",
+                          "id": "rh-doc-account-title",
+                          "tabIndex": -1
+                        },
+                        "text": "$t:raonslab-product.community.toc_account"
+                      },
+                      {
+                        "id": "rh_policy_community_account_list",
+                        "type": "basic",
+                        "name": "Ul",
+                        "props": {
+                          "className": "rh-doc-list"
+                        },
+                        "children": [
+                          {
+                            "id": "rh_policy_community_account_list_1",
+                            "type": "basic",
+                            "name": "Li",
+                            "props": {
+                              "className": "rh-doc-list-item"
+                            },
+                            "text": "$t:raonslab-product.community.account1"
+                          },
+                          {
+                            "id": "rh_policy_community_account_list_2",
+                            "type": "basic",
+                            "name": "Li",
+                            "props": {
+                              "className": "rh-doc-list-item"
+                            },
+                            "text": "$t:raonslab-product.community.account2"
+                          },
+                          {
+                            "id": "rh_policy_community_account_list_3",
+                            "type": "basic",
+                            "name": "Li",
+                            "props": {
+                              "className": "rh-doc-list-item"
+                            },
+                            "text": "$t:raonslab-product.community.account3"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "id": "rh_policy_community_sec_boards",
+                    "type": "basic",
+                    "name": "Div",
+                    "props": {
+                      "className": "rh-doc-section",
+                      "id": "rh-doc-boards",
+                      "role": "region",
+                      "aria-labelledby": "rh-doc-boards-title"
+                    },
+                    "children": [
+                      {
+                        "id": "rh_policy_community_sec_boards_title",
+                        "type": "basic",
+                        "name": "H2",
+                        "props": {
+                          "className": "rh-doc-h2",
+                          "id": "rh-doc-boards-title",
+                          "tabIndex": -1
+                        },
+                        "text": "$t:raonslab-product.community.toc_boards"
+                      },
+                      {
+                        "id": "rh_policy_community_board_list",
+                        "type": "basic",
+                        "name": "Ul",
+                        "props": {
+                          "className": "rh-doc-list"
+                        },
+                        "children": [
+                          {
+                            "id": "rh_policy_community_board_list_1",
+                            "type": "basic",
+                            "name": "Li",
+                            "props": {
+                              "className": "rh-doc-list-item"
+                            },
+                            "text": "$t:raonslab-product.community.board_notice"
+                          },
+                          {
+                            "id": "rh_policy_community_board_list_2",
+                            "type": "basic",
+                            "name": "Li",
+                            "props": {
+                              "className": "rh-doc-list-item"
+                            },
+                            "text": "$t:raonslab-product.community.board_questions"
+                          },
+                          {
+                            "id": "rh_policy_community_board_list_3",
+                            "type": "basic",
+                            "name": "Li",
+                            "props": {
+                              "className": "rh-doc-list-item"
+                            },
+                            "text": "$t:raonslab-product.community.board_community"
+                          }
+                        ]
+                      },
+                      {
+                        "id": "rh_policy_community_board_public",
+                        "type": "basic",
+                        "name": "P",
+                        "props": {
+                          "className": "rh-doc-copy rh-doc-aside-note"
+                        },
+                        "text": "$t:raonslab-product.community.board_public"
+                      }
+                    ]
+                  },
+                  {
+                    "id": "rh_policy_community_sec_prohibited",
+                    "type": "basic",
+                    "name": "Div",
+                    "props": {
+                      "className": "rh-doc-section",
+                      "id": "rh-doc-prohibited",
+                      "role": "region",
+                      "aria-labelledby": "rh-doc-prohibited-title"
+                    },
+                    "children": [
+                      {
+                        "id": "rh_policy_community_sec_prohibited_title",
+                        "type": "basic",
+                        "name": "H2",
+                        "props": {
+                          "className": "rh-doc-h2",
+                          "id": "rh-doc-prohibited-title",
+                          "tabIndex": -1
+                        },
+                        "text": "$t:raonslab-product.community.toc_prohibited"
+                      },
+                      {
+                        "id": "rh_policy_community_prohibited_list",
+                        "type": "basic",
+                        "name": "Ul",
+                        "props": {
+                          "className": "rh-doc-list rh-doc-list-no"
+                        },
+                        "children": [
+                          {
+                            "id": "rh_policy_community_prohibited_list_1",
+                            "type": "basic",
+                            "name": "Li",
+                            "props": {
+                              "className": "rh-doc-list-item"
+                            },
+                            "text": "$t:raonslab-product.community.prohibited1"
+                          },
+                          {
+                            "id": "rh_policy_community_prohibited_list_2",
+                            "type": "basic",
+                            "name": "Li",
+                            "props": {
+                              "className": "rh-doc-list-item"
+                            },
+                            "text": "$t:raonslab-product.community.prohibited2"
+                          },
+                          {
+                            "id": "rh_policy_community_prohibited_list_3",
+                            "type": "basic",
+                            "name": "Li",
+                            "props": {
+                              "className": "rh-doc-list-item"
+                            },
+                            "text": "$t:raonslab-product.community.prohibited3"
+                          },
+                          {
+                            "id": "rh_policy_community_prohibited_list_4",
+                            "type": "basic",
+                            "name": "Li",
+                            "props": {
+                              "className": "rh-doc-list-item"
+                            },
+                            "text": "$t:raonslab-product.community.prohibited4"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "id": "rh_policy_community_sec_pending",
+                    "type": "basic",
+                    "name": "Div",
+                    "props": {
+                      "className": "rh-doc-section",
+                      "id": "rh-doc-pending",
+                      "role": "region",
+                      "aria-labelledby": "rh-doc-pending-title"
+                    },
+                    "children": [
+                      {
+                        "id": "rh_policy_community_sec_pending_title",
+                        "type": "basic",
+                        "name": "H2",
+                        "props": {
+                          "className": "rh-doc-h2",
+                          "id": "rh-doc-pending-title",
+                          "tabIndex": -1
+                        },
+                        "text": "$t:raonslab-product.community.toc_pending"
+                      },
+                      {
+                        "id": "rh_policy_community_pending_rows",
+                        "type": "basic",
+                        "name": "Ul",
+                        "props": {
+                          "className": "rh-status-list"
+                        },
+                        "children": [
+                          {
+                            "id": "rh_policy_community_pending_rows_1",
+                            "type": "basic",
+                            "name": "Li",
+                            "props": {
+                              "className": "rh-status-row",
+                              "data-status": "pending"
+                            },
+                            "children": [
+                              {
+                                "id": "rh_policy_community_pending_rows_1_chip",
+                                "type": "basic",
+                                "name": "Span",
+                                "props": {
+                                  "className": "rh-chip",
+                                  "data-status": "pending"
+                                },
+                                "text": "$t:raonslab-product.doc.status_pending"
+                              },
+                              {
+                                "id": "rh_policy_community_pending_rows_1_body",
+                                "type": "basic",
+                                "name": "Div",
+                                "props": {
+                                  "className": "rh-status-body"
+                                },
+                                "children": [
+                                  {
+                                    "id": "rh_policy_community_pending_rows_1_title",
+                                    "type": "basic",
+                                    "name": "P",
+                                    "props": {
+                                      "className": "rh-status-title"
+                                    },
+                                    "text": "$t:raonslab-product.community.pending1"
+                                  }
+                                ]
+                              }
+                            ]
+                          },
+                          {
+                            "id": "rh_policy_community_pending_rows_2",
+                            "type": "basic",
+                            "name": "Li",
+                            "props": {
+                              "className": "rh-status-row",
+                              "data-status": "pending"
+                            },
+                            "children": [
+                              {
+                                "id": "rh_policy_community_pending_rows_2_chip",
+                                "type": "basic",
+                                "name": "Span",
+                                "props": {
+                                  "className": "rh-chip",
+                                  "data-status": "pending"
+                                },
+                                "text": "$t:raonslab-product.doc.status_pending"
+                              },
+                              {
+                                "id": "rh_policy_community_pending_rows_2_body",
+                                "type": "basic",
+                                "name": "Div",
+                                "props": {
+                                  "className": "rh-status-body"
+                                },
+                                "children": [
+                                  {
+                                    "id": "rh_policy_community_pending_rows_2_title",
+                                    "type": "basic",
+                                    "name": "P",
+                                    "props": {
+                                      "className": "rh-status-title"
+                                    },
+                                    "text": "$t:raonslab-product.community.pending2"
+                                  }
+                                ]
+                              }
+                            ]
+                          },
+                          {
+                            "id": "rh_policy_community_pending_rows_3",
+                            "type": "basic",
+                            "name": "Li",
+                            "props": {
+                              "className": "rh-status-row",
+                              "data-status": "pending"
+                            },
+                            "children": [
+                              {
+                                "id": "rh_policy_community_pending_rows_3_chip",
+                                "type": "basic",
+                                "name": "Span",
+                                "props": {
+                                  "className": "rh-chip",
+                                  "data-status": "pending"
+                                },
+                                "text": "$t:raonslab-product.doc.status_pending"
+                              },
+                              {
+                                "id": "rh_policy_community_pending_rows_3_body",
+                                "type": "basic",
+                                "name": "Div",
+                                "props": {
+                                  "className": "rh-status-body"
+                                },
+                                "children": [
+                                  {
+                                    "id": "rh_policy_community_pending_rows_3_title",
+                                    "type": "basic",
+                                    "name": "P",
+                                    "props": {
+                                      "className": "rh-status-title"
+                                    },
+                                    "text": "$t:raonslab-product.community.pending3"
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "id": "rh_policy_community_evidence",
+                    "type": "basic",
+                    "name": "Div",
+                    "props": {
+                      "className": "rh-doc-evidence",
+                      "role": "note"
+                    },
+                    "children": [
+                      {
+                        "id": "rh_policy_community_evidence_title",
+                        "type": "basic",
+                        "name": "P",
+                        "props": {
+                          "className": "rh-doc-evidence-title"
+                        },
+                        "text": "$t:raonslab-product.doc.evidence_title"
+                      },
+                      {
+                        "id": "rh_policy_community_evidence_list",
+                        "type": "basic",
+                        "name": "Ul",
+                        "props": {
+                          "className": "rh-doc-list rh-doc-list-quiet"
+                        },
+                        "children": [
+                          {
+                            "id": "rh_policy_community_evidence_list_1",
+                            "type": "basic",
+                            "name": "Li",
+                            "props": {
+                              "className": "rh-doc-list-item"
+                            },
+                            "text": "$t:raonslab-product.community.evidence1"
+                          },
+                          {
+                            "id": "rh_policy_community_evidence_list_2",
+                            "type": "basic",
+                            "name": "Li",
+                            "props": {
+                              "className": "rh-doc-list-item"
+                            },
+                            "text": "$t:raonslab-product.community.evidence2"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "id": "rh_policy_community_next",
+                    "type": "basic",
+                    "name": "Div",
+                    "props": {
+                      "className": "rh-doc-next"
+                    },
+                    "children": [
+                      {
+                        "id": "rh_policy_community_next_title",
+                        "type": "basic",
+                        "name": "P",
+                        "props": {
+                          "className": "rh-doc-next-title"
+                        },
+                        "text": "$t:raonslab-product.doc.next_title"
+                      },
+                      {
+                        "id": "rh_policy_community_next_actions",
+                        "type": "basic",
+                        "name": "Div",
+                        "props": {
+                          "className": "rh-doc-next-actions"
+                        },
+                        "children": [
+                          {
+                            "id": "rh_policy_community_next_1",
+                            "type": "basic",
+                            "name": "A",
+                            "props": {
+                              "className": "rh-doc-btn",
+                              "href": "/policy/privacy"
+                            },
+                            "text": "$t:raonslab-product.doc.next_privacy",
+                            "actions": [
+                              {
+                                "type": "click",
+                                "handler": "navigate",
+                                "params": {
+                                  "path": "/policy/privacy"
+                                }
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

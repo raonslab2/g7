@@ -2,6 +2,7 @@ import '../css/main.css';
 import { shouldApplyDarkDefault } from './theme';
 import { syncConsultationIslands } from './consultationForm';
 import { installHomePage, syncHomePage } from './homePage';
+import { installProductNav, syncProductNav } from './productNav';
 
 const COLOR_SCHEME_KEY = 'g7_color_scheme';
 
@@ -50,7 +51,7 @@ function removeTemplateAttribution(): void {
 
 let homeSyncQueued = false;
 
-/** 홈 문서 메타·상담 양식을 DOM 변화 직후 한 번만 동기화합니다. */
+/** 홈 문서 메타·상담 양식·상위 메뉴 현재 위치를 DOM 변화 직후 한 번만 동기화합니다. */
 function queueHomeSync(): void {
   if (homeSyncQueued) return;
   homeSyncQueued = true;
@@ -58,6 +59,7 @@ function queueHomeSync(): void {
     homeSyncQueued = false;
     syncHomePage();
     syncConsultationIslands();
+    syncProductNav();
   });
 }
 
@@ -67,6 +69,7 @@ const observer = new MutationObserver(() => {
 });
 observer.observe(document.documentElement, { childList: true, subtree: true });
 installHomePage();
+installProductNav();
 
 if (document.readyState === 'loading') {
   window.addEventListener('DOMContentLoaded', markProductRuntime, { once: true });

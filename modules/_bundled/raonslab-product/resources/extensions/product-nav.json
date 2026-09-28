@@ -1,0 +1,635 @@
+{
+  "target_layout": "_user_base",
+  "priority": 30,
+  "injections": [
+    {
+      "target_id": "main_content_area",
+      "position": "prepend_child",
+      "components": [
+        {
+          "id": "rh_gnav_root",
+          "comment": "RAON 정보·정책 상위 메뉴(클릭·키보드·터치 disclosure)",
+          "type": "basic",
+          "name": "Nav",
+          "props": {
+            "className": "rh-gnav",
+            "aria-label": "$t:raonslab-product.nav.label",
+            "data-rh-gnav": "true"
+          },
+          "children": [
+            {
+              "id": "rh_gnav_inner",
+              "type": "basic",
+              "name": "Div",
+              "props": {
+                "className": "rh-shell rh-gnav-inner"
+              },
+              "children": [
+                {
+                  "id": "rh_gnav_brand",
+                  "type": "basic",
+                  "name": "A",
+                  "props": {
+                    "className": "rh-gnav-brand",
+                    "href": "/",
+                    "data-rh-nav-path": "/"
+                  },
+                  "text": "$t:raonslab-product.nav.brand",
+                  "actions": [
+                    {
+                      "type": "click",
+                      "handler": "navigate",
+                      "params": {
+                        "path": "/"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "id": "rh_gnav_list",
+                  "type": "basic",
+                  "name": "Ul",
+                  "props": {
+                    "className": "rh-gnav-list"
+                  },
+                  "children": [
+                    {
+                      "id": "rh_gnav_info_group",
+                      "type": "basic",
+                      "name": "Li",
+                      "props": {
+                        "className": "rh-gnav-group",
+                        "data-rh-menu": "info"
+                      },
+                      "children": [
+                        {
+                          "id": "rh_gnav_info_trigger",
+                          "type": "basic",
+                          "name": "Button",
+                          "props": {
+                            "className": "rh-gnav-trigger",
+                            "type": "button",
+                            "id": "rh-gnav-info-trigger",
+                            "aria-expanded": "false",
+                            "aria-controls": "rh-gnav-info-panel",
+                            "data-rh-menu-trigger": "info"
+                          },
+                          "children": [
+                            {
+                              "id": "rh_gnav_info_trigger_label",
+                              "type": "basic",
+                              "name": "Span",
+                              "props": {
+                                "className": "rh-gnav-trigger-label"
+                              },
+                              "text": "$t:raonslab-product.nav.info"
+                            },
+                            {
+                              "id": "rh_gnav_info_trigger_caret",
+                              "type": "basic",
+                              "name": "Span",
+                              "props": {
+                                "className": "rh-gnav-caret",
+                                "aria-hidden": "true"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "id": "rh_gnav_info_panel",
+                          "type": "basic",
+                          "name": "Div",
+                          "props": {
+                            "className": "rh-gnav-panel",
+                            "id": "rh-gnav-info-panel",
+                            "hidden": true,
+                            "data-rh-menu-panel": "info"
+                          },
+                          "children": [
+                            {
+                              "id": "rh_gnav_info_list",
+                              "type": "basic",
+                              "name": "Ul",
+                              "props": {
+                                "className": "rh-gnav-menu",
+                                "aria-labelledby": "rh-gnav-info-trigger"
+                              },
+                              "children": [
+                                {
+                                  "id": "rh_gnav_info_services_item",
+                                  "type": "basic",
+                                  "name": "Li",
+                                  "props": {
+                                    "className": "rh-gnav-item"
+                                  },
+                                  "children": [
+                                    {
+                                      "id": "rh_gnav_info_services",
+                                      "type": "basic",
+                                      "name": "A",
+                                      "props": {
+                                        "className": "rh-gnav-link",
+                                        "href": "/info/services",
+                                        "data-rh-nav-path": "/info/services"
+                                      },
+                                      "children": [
+                                        {
+                                          "id": "rh_gnav_info_services_title",
+                                          "type": "basic",
+                                          "name": "Span",
+                                          "props": {
+                                            "className": "rh-gnav-link-title"
+                                          },
+                                          "text": "$t:raonslab-product.nav.info_services"
+                                        },
+                                        {
+                                          "id": "rh_gnav_info_services_desc",
+                                          "type": "basic",
+                                          "name": "Span",
+                                          "props": {
+                                            "className": "rh-gnav-link-desc"
+                                          },
+                                          "text": "$t:raonslab-product.nav.info_services_desc"
+                                        }
+                                      ],
+                                      "actions": [
+                                        {
+                                          "type": "click",
+                                          "handler": "navigate",
+                                          "params": {
+                                            "path": "/info/services"
+                                          }
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                },
+                                {
+                                  "id": "rh_gnav_info_cases_item",
+                                  "type": "basic",
+                                  "name": "Li",
+                                  "props": {
+                                    "className": "rh-gnav-item"
+                                  },
+                                  "children": [
+                                    {
+                                      "id": "rh_gnav_info_cases",
+                                      "type": "basic",
+                                      "name": "A",
+                                      "props": {
+                                        "className": "rh-gnav-link",
+                                        "href": "/info/cases",
+                                        "data-rh-nav-path": "/info/cases"
+                                      },
+                                      "children": [
+                                        {
+                                          "id": "rh_gnav_info_cases_title",
+                                          "type": "basic",
+                                          "name": "Span",
+                                          "props": {
+                                            "className": "rh-gnav-link-title"
+                                          },
+                                          "text": "$t:raonslab-product.nav.info_cases"
+                                        },
+                                        {
+                                          "id": "rh_gnav_info_cases_desc",
+                                          "type": "basic",
+                                          "name": "Span",
+                                          "props": {
+                                            "className": "rh-gnav-link-desc"
+                                          },
+                                          "text": "$t:raonslab-product.nav.info_cases_desc"
+                                        }
+                                      ],
+                                      "actions": [
+                                        {
+                                          "type": "click",
+                                          "handler": "navigate",
+                                          "params": {
+                                            "path": "/info/cases"
+                                          }
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                },
+                                {
+                                  "id": "rh_gnav_info_principles_item",
+                                  "type": "basic",
+                                  "name": "Li",
+                                  "props": {
+                                    "className": "rh-gnav-item"
+                                  },
+                                  "children": [
+                                    {
+                                      "id": "rh_gnav_info_principles",
+                                      "type": "basic",
+                                      "name": "A",
+                                      "props": {
+                                        "className": "rh-gnav-link",
+                                        "href": "/info/principles",
+                                        "data-rh-nav-path": "/info/principles"
+                                      },
+                                      "children": [
+                                        {
+                                          "id": "rh_gnav_info_principles_title",
+                                          "type": "basic",
+                                          "name": "Span",
+                                          "props": {
+                                            "className": "rh-gnav-link-title"
+                                          },
+                                          "text": "$t:raonslab-product.nav.info_principles"
+                                        },
+                                        {
+                                          "id": "rh_gnav_info_principles_desc",
+                                          "type": "basic",
+                                          "name": "Span",
+                                          "props": {
+                                            "className": "rh-gnav-link-desc"
+                                          },
+                                          "text": "$t:raonslab-product.nav.info_principles_desc"
+                                        }
+                                      ],
+                                      "actions": [
+                                        {
+                                          "type": "click",
+                                          "handler": "navigate",
+                                          "params": {
+                                            "path": "/info/principles"
+                                          }
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "id": "rh_gnav_policy_group",
+                      "type": "basic",
+                      "name": "Li",
+                      "props": {
+                        "className": "rh-gnav-group",
+                        "data-rh-menu": "policy"
+                      },
+                      "children": [
+                        {
+                          "id": "rh_gnav_policy_trigger",
+                          "type": "basic",
+                          "name": "Button",
+                          "props": {
+                            "className": "rh-gnav-trigger",
+                            "type": "button",
+                            "id": "rh-gnav-policy-trigger",
+                            "aria-expanded": "false",
+                            "aria-controls": "rh-gnav-policy-panel",
+                            "data-rh-menu-trigger": "policy"
+                          },
+                          "children": [
+                            {
+                              "id": "rh_gnav_policy_trigger_label",
+                              "type": "basic",
+                              "name": "Span",
+                              "props": {
+                                "className": "rh-gnav-trigger-label"
+                              },
+                              "text": "$t:raonslab-product.nav.policy"
+                            },
+                            {
+                              "id": "rh_gnav_policy_trigger_caret",
+                              "type": "basic",
+                              "name": "Span",
+                              "props": {
+                                "className": "rh-gnav-caret",
+                                "aria-hidden": "true"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "id": "rh_gnav_policy_panel",
+                          "type": "basic",
+                          "name": "Div",
+                          "props": {
+                            "className": "rh-gnav-panel",
+                            "id": "rh-gnav-policy-panel",
+                            "hidden": true,
+                            "data-rh-menu-panel": "policy"
+                          },
+                          "children": [
+                            {
+                              "id": "rh_gnav_policy_list",
+                              "type": "basic",
+                              "name": "Ul",
+                              "props": {
+                                "className": "rh-gnav-menu",
+                                "aria-labelledby": "rh-gnav-policy-trigger"
+                              },
+                              "children": [
+                                {
+                                  "id": "rh_gnav_policy_privacy_item",
+                                  "type": "basic",
+                                  "name": "Li",
+                                  "props": {
+                                    "className": "rh-gnav-item"
+                                  },
+                                  "children": [
+                                    {
+                                      "id": "rh_gnav_policy_privacy",
+                                      "type": "basic",
+                                      "name": "A",
+                                      "props": {
+                                        "className": "rh-gnav-link",
+                                        "href": "/policy/privacy",
+                                        "data-rh-nav-path": "/policy/privacy"
+                                      },
+                                      "children": [
+                                        {
+                                          "id": "rh_gnav_policy_privacy_title",
+                                          "type": "basic",
+                                          "name": "Span",
+                                          "props": {
+                                            "className": "rh-gnav-link-title"
+                                          },
+                                          "text": "$t:raonslab-product.nav.policy_privacy"
+                                        },
+                                        {
+                                          "id": "rh_gnav_policy_privacy_desc",
+                                          "type": "basic",
+                                          "name": "Span",
+                                          "props": {
+                                            "className": "rh-gnav-link-desc"
+                                          },
+                                          "text": "$t:raonslab-product.nav.policy_privacy_desc"
+                                        }
+                                      ],
+                                      "actions": [
+                                        {
+                                          "type": "click",
+                                          "handler": "navigate",
+                                          "params": {
+                                            "path": "/policy/privacy"
+                                          }
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                },
+                                {
+                                  "id": "rh_gnav_policy_community_item",
+                                  "type": "basic",
+                                  "name": "Li",
+                                  "props": {
+                                    "className": "rh-gnav-item"
+                                  },
+                                  "children": [
+                                    {
+                                      "id": "rh_gnav_policy_community",
+                                      "type": "basic",
+                                      "name": "A",
+                                      "props": {
+                                        "className": "rh-gnav-link",
+                                        "href": "/policy/community",
+                                        "data-rh-nav-path": "/policy/community"
+                                      },
+                                      "children": [
+                                        {
+                                          "id": "rh_gnav_policy_community_title",
+                                          "type": "basic",
+                                          "name": "Span",
+                                          "props": {
+                                            "className": "rh-gnav-link-title"
+                                          },
+                                          "text": "$t:raonslab-product.nav.policy_community"
+                                        },
+                                        {
+                                          "id": "rh_gnav_policy_community_desc",
+                                          "type": "basic",
+                                          "name": "Span",
+                                          "props": {
+                                            "className": "rh-gnav-link-desc"
+                                          },
+                                          "text": "$t:raonslab-product.nav.policy_community_desc"
+                                        }
+                                      ],
+                                      "actions": [
+                                        {
+                                          "type": "click",
+                                          "handler": "navigate",
+                                          "params": {
+                                            "path": "/policy/community"
+                                          }
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                },
+                                {
+                                  "id": "rh_gnav_policy_ai_policy_item",
+                                  "type": "basic",
+                                  "name": "Li",
+                                  "props": {
+                                    "className": "rh-gnav-item"
+                                  },
+                                  "children": [
+                                    {
+                                      "id": "rh_gnav_policy_ai_policy",
+                                      "type": "basic",
+                                      "name": "A",
+                                      "props": {
+                                        "className": "rh-gnav-link",
+                                        "href": "/policy/ai-workspace",
+                                        "data-rh-nav-path": "/policy/ai-workspace"
+                                      },
+                                      "children": [
+                                        {
+                                          "id": "rh_gnav_policy_ai_policy_title",
+                                          "type": "basic",
+                                          "name": "Span",
+                                          "props": {
+                                            "className": "rh-gnav-link-title"
+                                          },
+                                          "text": "$t:raonslab-product.nav.policy_ai"
+                                        },
+                                        {
+                                          "id": "rh_gnav_policy_ai_policy_desc",
+                                          "type": "basic",
+                                          "name": "Span",
+                                          "props": {
+                                            "className": "rh-gnav-link-desc"
+                                          },
+                                          "text": "$t:raonslab-product.nav.policy_ai_desc"
+                                        }
+                                      ],
+                                      "actions": [
+                                        {
+                                          "type": "click",
+                                          "handler": "navigate",
+                                          "params": {
+                                            "path": "/policy/ai-workspace"
+                                          }
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                },
+                                {
+                                  "id": "rh_gnav_policy_oss_item",
+                                  "type": "basic",
+                                  "name": "Li",
+                                  "props": {
+                                    "className": "rh-gnav-item"
+                                  },
+                                  "children": [
+                                    {
+                                      "id": "rh_gnav_policy_oss",
+                                      "type": "basic",
+                                      "name": "A",
+                                      "props": {
+                                        "className": "rh-gnav-link",
+                                        "href": "/policy/open-source",
+                                        "data-rh-nav-path": "/policy/open-source"
+                                      },
+                                      "children": [
+                                        {
+                                          "id": "rh_gnav_policy_oss_title",
+                                          "type": "basic",
+                                          "name": "Span",
+                                          "props": {
+                                            "className": "rh-gnav-link-title"
+                                          },
+                                          "text": "$t:raonslab-product.nav.policy_oss"
+                                        },
+                                        {
+                                          "id": "rh_gnav_policy_oss_desc",
+                                          "type": "basic",
+                                          "name": "Span",
+                                          "props": {
+                                            "className": "rh-gnav-link-desc"
+                                          },
+                                          "text": "$t:raonslab-product.nav.policy_oss_desc"
+                                        }
+                                      ],
+                                      "actions": [
+                                        {
+                                          "type": "click",
+                                          "handler": "navigate",
+                                          "params": {
+                                            "path": "/policy/open-source"
+                                          }
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "id": "rh_gnav_consult_item",
+                      "type": "basic",
+                      "name": "Li",
+                      "props": {
+                        "className": "rh-gnav-group rh-gnav-cta-item"
+                      },
+                      "children": [
+                        {
+                          "id": "rh_gnav_consult",
+                          "type": "basic",
+                          "name": "A",
+                          "props": {
+                            "className": "rh-gnav-cta",
+                            "href": "/#rh-consult"
+                          },
+                          "text": "$t:raonslab-product.nav.consult"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "target_id": "footer",
+      "position": "inject_props",
+      "props": {
+        "linkGroups": [
+          {
+            "title": "$t:raonslab-product.footer.community",
+            "links": [
+              {
+                "label": "$t:raonslab-product.footer.home",
+                "href": "/"
+              },
+              {
+                "label": "$t:raonslab-product.footer.notice",
+                "href": "/board/notice"
+              },
+              {
+                "label": "$t:raonslab-product.footer.questions",
+                "href": "/board/questions"
+              },
+              {
+                "label": "$t:raonslab-product.footer.board_community",
+                "href": "/board/community"
+              },
+              {
+                "label": "$t:raonslab-product.footer.search",
+                "href": "/search"
+              }
+            ]
+          },
+          {
+            "title": "$t:raonslab-product.nav.info",
+            "links": [
+              {
+                "label": "$t:raonslab-product.nav.info_services",
+                "href": "/info/services"
+              },
+              {
+                "label": "$t:raonslab-product.nav.info_cases",
+                "href": "/info/cases"
+              },
+              {
+                "label": "$t:raonslab-product.nav.info_principles",
+                "href": "/info/principles"
+              }
+            ]
+          },
+          {
+            "title": "$t:raonslab-product.nav.policy",
+            "links": [
+              {
+                "label": "$t:raonslab-product.nav.policy_privacy",
+                "href": "/policy/privacy"
+              },
+              {
+                "label": "$t:raonslab-product.nav.policy_community",
+                "href": "/policy/community"
+              },
+              {
+                "label": "$t:raonslab-product.nav.policy_ai",
+                "href": "/policy/ai-workspace"
+              },
+              {
+                "label": "$t:raonslab-product.nav.policy_oss",
+                "href": "/policy/open-source"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

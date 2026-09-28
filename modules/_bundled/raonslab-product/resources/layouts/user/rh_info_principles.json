@@ -1,0 +1,1140 @@
+{
+  "version": "1.0.0",
+  "layout_name": "rh_info_principles",
+  "extends": "_user_base",
+  "meta": {
+    "title": "$t:raonslab-product.nav.info_principles",
+    "description": "$t:raonslab-product.nav.info_principles_desc"
+  },
+  "slots": {
+    "content": [
+      {
+        "id": "rh_info_principles_root",
+        "comment": "RAON info 문서: /info/principles",
+        "type": "basic",
+        "name": "Div",
+        "props": {
+          "className": "rh-doc",
+          "data-rh-doc": "info",
+          "data-rh-page": "principles"
+        },
+        "children": [
+          {
+            "id": "rh_info_principles_head",
+            "type": "basic",
+            "name": "Div",
+            "props": {
+              "className": "rh-doc-head"
+            },
+            "children": [
+              {
+                "id": "rh_info_principles_head_inner",
+                "type": "basic",
+                "name": "Div",
+                "props": {
+                  "className": "rh-shell rh-doc-head-inner"
+                },
+                "children": [
+                  {
+                    "id": "rh_info_principles_crumbs",
+                    "type": "basic",
+                    "name": "Nav",
+                    "props": {
+                      "className": "rh-crumbs",
+                      "aria-label": "$t:raonslab-product.doc.crumb_label"
+                    },
+                    "children": [
+                      {
+                        "id": "rh_info_principles_crumbs_list",
+                        "type": "basic",
+                        "name": "Ul",
+                        "props": {
+                          "className": "rh-crumbs-list"
+                        },
+                        "children": [
+                          {
+                            "id": "rh_info_principles_crumb_home",
+                            "type": "basic",
+                            "name": "Li",
+                            "props": {
+                              "className": "rh-crumb"
+                            },
+                            "children": [
+                              {
+                                "id": "rh_info_principles_crumb_home_link",
+                                "type": "basic",
+                                "name": "A",
+                                "props": {
+                                  "className": "rh-crumb-link",
+                                  "href": "/",
+                                  "data-rh-nav-path": "/"
+                                },
+                                "text": "$t:raonslab-product.doc.home",
+                                "actions": [
+                                  {
+                                    "type": "click",
+                                    "handler": "navigate",
+                                    "params": {
+                                      "path": "/"
+                                    }
+                                  }
+                                ]
+                              }
+                            ]
+                          },
+                          {
+                            "id": "rh_info_principles_crumb_group",
+                            "type": "basic",
+                            "name": "Li",
+                            "props": {
+                              "className": "rh-crumb"
+                            },
+                            "children": [
+                              {
+                                "id": "rh_info_principles_crumb_group_text",
+                                "type": "basic",
+                                "name": "Span",
+                                "props": {
+                                  "className": "rh-crumb-text"
+                                },
+                                "text": "$t:raonslab-product.nav.info"
+                              }
+                            ]
+                          },
+                          {
+                            "id": "rh_info_principles_crumb_page",
+                            "type": "basic",
+                            "name": "Li",
+                            "props": {
+                              "className": "rh-crumb"
+                            },
+                            "children": [
+                              {
+                                "id": "rh_info_principles_crumb_page_text",
+                                "type": "basic",
+                                "name": "Span",
+                                "props": {
+                                  "className": "rh-crumb-text",
+                                  "aria-current": "page"
+                                },
+                                "text": "$t:raonslab-product.nav.info_principles"
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "id": "rh_info_principles_kicker",
+                    "type": "basic",
+                    "name": "P",
+                    "props": {
+                      "className": "rh-doc-kicker"
+                    },
+                    "text": "$t:raonslab-product.principles.kicker"
+                  },
+                  {
+                    "id": "rh_info_principles_title",
+                    "type": "basic",
+                    "name": "H1",
+                    "props": {
+                      "className": "rh-doc-title",
+                      "id": "rh-doc-title",
+                      "tabIndex": -1
+                    },
+                    "text": "$t:raonslab-product.principles.title"
+                  },
+                  {
+                    "id": "rh_info_principles_lede",
+                    "type": "basic",
+                    "name": "P",
+                    "props": {
+                      "className": "rh-doc-lede"
+                    },
+                    "text": "$t:raonslab-product.principles.lede"
+                  },
+                  {
+                    "id": "rh_info_principles_meta",
+                    "type": "basic",
+                    "name": "Div",
+                    "props": {
+                      "className": "rh-doc-meta"
+                    },
+                    "children": [
+                      {
+                        "id": "rh_info_principles_meta_chip1",
+                        "type": "basic",
+                        "name": "Span",
+                        "props": {
+                          "className": "rh-chip",
+                          "data-status": "confirmed"
+                        },
+                        "text": "$t:raonslab-product.doc.status_confirmed"
+                      },
+                      {
+                        "id": "rh_info_principles_meta_updated",
+                        "type": "basic",
+                        "name": "Span",
+                        "props": {
+                          "className": "rh-doc-updated"
+                        },
+                        "text": "$t:raonslab-product.doc.updated"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "rh_info_principles_body",
+            "type": "basic",
+            "name": "Div",
+            "props": {
+              "className": "rh-shell rh-doc-body"
+            },
+            "children": [
+              {
+                "id": "rh_info_principles_aside",
+                "type": "basic",
+                "name": "Div",
+                "props": {
+                  "className": "rh-doc-aside"
+                },
+                "children": [
+                  {
+                    "id": "rh_info_principles_side_nav",
+                    "type": "basic",
+                    "name": "Nav",
+                    "props": {
+                      "className": "rh-side",
+                      "aria-label": "$t:raonslab-product.doc.info_menu_label"
+                    },
+                    "children": [
+                      {
+                        "id": "rh_info_principles_side_label",
+                        "type": "basic",
+                        "name": "P",
+                        "props": {
+                          "className": "rh-side-label",
+                          "aria-hidden": "true"
+                        },
+                        "text": "$t:raonslab-product.nav.info"
+                      },
+                      {
+                        "id": "rh_info_principles_side_list",
+                        "type": "basic",
+                        "name": "Ul",
+                        "props": {
+                          "className": "rh-side-list"
+                        },
+                        "children": [
+                          {
+                            "id": "rh_info_principles_side_services_item",
+                            "type": "basic",
+                            "name": "Li",
+                            "props": {
+                              "className": "rh-side-item"
+                            },
+                            "children": [
+                              {
+                                "id": "rh_info_principles_side_services",
+                                "type": "basic",
+                                "name": "A",
+                                "props": {
+                                  "className": "rh-side-link",
+                                  "href": "/info/services",
+                                  "data-rh-nav-path": "/info/services"
+                                },
+                                "text": "$t:raonslab-product.nav.info_services",
+                                "actions": [
+                                  {
+                                    "type": "click",
+                                    "handler": "navigate",
+                                    "params": {
+                                      "path": "/info/services"
+                                    }
+                                  }
+                                ]
+                              }
+                            ]
+                          },
+                          {
+                            "id": "rh_info_principles_side_cases_item",
+                            "type": "basic",
+                            "name": "Li",
+                            "props": {
+                              "className": "rh-side-item"
+                            },
+                            "children": [
+                              {
+                                "id": "rh_info_principles_side_cases",
+                                "type": "basic",
+                                "name": "A",
+                                "props": {
+                                  "className": "rh-side-link",
+                                  "href": "/info/cases",
+                                  "data-rh-nav-path": "/info/cases"
+                                },
+                                "text": "$t:raonslab-product.nav.info_cases",
+                                "actions": [
+                                  {
+                                    "type": "click",
+                                    "handler": "navigate",
+                                    "params": {
+                                      "path": "/info/cases"
+                                    }
+                                  }
+                                ]
+                              }
+                            ]
+                          },
+                          {
+                            "id": "rh_info_principles_side_principles_item",
+                            "type": "basic",
+                            "name": "Li",
+                            "props": {
+                              "className": "rh-side-item"
+                            },
+                            "children": [
+                              {
+                                "id": "rh_info_principles_side_principles",
+                                "type": "basic",
+                                "name": "A",
+                                "props": {
+                                  "className": "rh-side-link",
+                                  "href": "/info/principles",
+                                  "data-rh-nav-path": "/info/principles",
+                                  "aria-current": "page"
+                                },
+                                "text": "$t:raonslab-product.nav.info_principles",
+                                "actions": [
+                                  {
+                                    "type": "click",
+                                    "handler": "navigate",
+                                    "params": {
+                                      "path": "/info/principles"
+                                    }
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "id": "rh_info_principles_toc_nav",
+                    "type": "basic",
+                    "name": "Nav",
+                    "props": {
+                      "className": "rh-toc",
+                      "aria-label": "$t:raonslab-product.doc.toc_title"
+                    },
+                    "children": [
+                      {
+                        "id": "rh_info_principles_toc_label",
+                        "type": "basic",
+                        "name": "P",
+                        "props": {
+                          "className": "rh-side-label",
+                          "aria-hidden": "true"
+                        },
+                        "text": "$t:raonslab-product.doc.toc_title"
+                      },
+                      {
+                        "id": "rh_info_principles_toc_list",
+                        "type": "basic",
+                        "name": "Ul",
+                        "props": {
+                          "className": "rh-toc-list"
+                        },
+                        "children": [
+                          {
+                            "id": "rh_info_principles_toc_api_item",
+                            "type": "basic",
+                            "name": "Li",
+                            "props": {
+                              "className": "rh-toc-item"
+                            },
+                            "children": [
+                              {
+                                "id": "rh_info_principles_toc_api",
+                                "type": "basic",
+                                "name": "A",
+                                "props": {
+                                  "className": "rh-toc-link",
+                                  "href": "#rh-doc-api",
+                                  "data-rh-anchor": "rh-doc-api"
+                                },
+                                "text": "$t:raonslab-product.principles.toc_api"
+                              }
+                            ]
+                          },
+                          {
+                            "id": "rh_info_principles_toc_access_item",
+                            "type": "basic",
+                            "name": "Li",
+                            "props": {
+                              "className": "rh-toc-item"
+                            },
+                            "children": [
+                              {
+                                "id": "rh_info_principles_toc_access",
+                                "type": "basic",
+                                "name": "A",
+                                "props": {
+                                  "className": "rh-toc-link",
+                                  "href": "#rh-doc-access",
+                                  "data-rh-anchor": "rh-doc-access"
+                                },
+                                "text": "$t:raonslab-product.principles.toc_access"
+                              }
+                            ]
+                          },
+                          {
+                            "id": "rh_info_principles_toc_verify_item",
+                            "type": "basic",
+                            "name": "Li",
+                            "props": {
+                              "className": "rh-toc-item"
+                            },
+                            "children": [
+                              {
+                                "id": "rh_info_principles_toc_verify",
+                                "type": "basic",
+                                "name": "A",
+                                "props": {
+                                  "className": "rh-toc-link",
+                                  "href": "#rh-doc-verify",
+                                  "data-rh-anchor": "rh-doc-verify"
+                                },
+                                "text": "$t:raonslab-product.principles.toc_verify"
+                              }
+                            ]
+                          },
+                          {
+                            "id": "rh_info_principles_toc_operate_item",
+                            "type": "basic",
+                            "name": "Li",
+                            "props": {
+                              "className": "rh-toc-item"
+                            },
+                            "children": [
+                              {
+                                "id": "rh_info_principles_toc_operate",
+                                "type": "basic",
+                                "name": "A",
+                                "props": {
+                                  "className": "rh-toc-link",
+                                  "href": "#rh-doc-operate",
+                                  "data-rh-anchor": "rh-doc-operate"
+                                },
+                                "text": "$t:raonslab-product.principles.toc_operate"
+                              }
+                            ]
+                          },
+                          {
+                            "id": "rh_info_principles_toc_internal_item",
+                            "type": "basic",
+                            "name": "Li",
+                            "props": {
+                              "className": "rh-toc-item"
+                            },
+                            "children": [
+                              {
+                                "id": "rh_info_principles_toc_internal",
+                                "type": "basic",
+                                "name": "A",
+                                "props": {
+                                  "className": "rh-toc-link",
+                                  "href": "#rh-doc-internal",
+                                  "data-rh-anchor": "rh-doc-internal"
+                                },
+                                "text": "$t:raonslab-product.principles.toc_internal"
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "id": "rh_info_principles_main",
+                "type": "basic",
+                "name": "Div",
+                "props": {
+                  "className": "rh-doc-main"
+                },
+                "children": [
+                  {
+                    "id": "rh_info_principles_sec_api",
+                    "type": "basic",
+                    "name": "Div",
+                    "props": {
+                      "className": "rh-doc-section",
+                      "id": "rh-doc-api",
+                      "role": "region",
+                      "aria-labelledby": "rh-doc-api-title"
+                    },
+                    "children": [
+                      {
+                        "id": "rh_info_principles_sec_api_title",
+                        "type": "basic",
+                        "name": "H2",
+                        "props": {
+                          "className": "rh-doc-h2",
+                          "id": "rh-doc-api-title",
+                          "tabIndex": -1
+                        },
+                        "text": "$t:raonslab-product.principles.toc_api"
+                      },
+                      {
+                        "id": "rh_info_principles_api_copy",
+                        "type": "basic",
+                        "name": "P",
+                        "props": {
+                          "className": "rh-doc-copy"
+                        },
+                        "text": "$t:raonslab-product.principles.api_copy"
+                      },
+                      {
+                        "id": "rh_info_principles_api_example",
+                        "type": "basic",
+                        "name": "P",
+                        "props": {
+                          "className": "rh-doc-copy rh-doc-aside-note"
+                        },
+                        "text": "$t:raonslab-product.principles.api_example"
+                      }
+                    ]
+                  },
+                  {
+                    "id": "rh_info_principles_sec_access",
+                    "type": "basic",
+                    "name": "Div",
+                    "props": {
+                      "className": "rh-doc-section",
+                      "id": "rh-doc-access",
+                      "role": "region",
+                      "aria-labelledby": "rh-doc-access-title"
+                    },
+                    "children": [
+                      {
+                        "id": "rh_info_principles_sec_access_title",
+                        "type": "basic",
+                        "name": "H2",
+                        "props": {
+                          "className": "rh-doc-h2",
+                          "id": "rh-doc-access-title",
+                          "tabIndex": -1
+                        },
+                        "text": "$t:raonslab-product.principles.toc_access"
+                      },
+                      {
+                        "id": "rh_info_principles_access_copy",
+                        "type": "basic",
+                        "name": "P",
+                        "props": {
+                          "className": "rh-doc-copy"
+                        },
+                        "text": "$t:raonslab-product.principles.access_copy"
+                      },
+                      {
+                        "id": "rh_info_principles_access_levels",
+                        "type": "basic",
+                        "name": "Ul",
+                        "props": {
+                          "className": "rh-flowline"
+                        },
+                        "children": [
+                          {
+                            "id": "rh_info_principles_access_levels_1",
+                            "type": "basic",
+                            "name": "Li",
+                            "props": {
+                              "className": "rh-flowline-step",
+                              "data-step": "1"
+                            },
+                            "children": [
+                              {
+                                "id": "rh_info_principles_access_levels_1_num",
+                                "type": "basic",
+                                "name": "Span",
+                                "props": {
+                                  "className": "rh-flowline-num",
+                                  "aria-hidden": "true"
+                                },
+                                "text": "01"
+                              },
+                              {
+                                "id": "rh_info_principles_access_levels_1_title",
+                                "type": "basic",
+                                "name": "P",
+                                "props": {
+                                  "className": "rh-flowline-title"
+                                },
+                                "text": "$t:raonslab-product.principles.level_public"
+                              },
+                              {
+                                "id": "rh_info_principles_access_levels_1_copy",
+                                "type": "basic",
+                                "name": "P",
+                                "props": {
+                                  "className": "rh-flowline-copy"
+                                },
+                                "text": "$t:raonslab-product.principles.level_public_copy"
+                              }
+                            ]
+                          },
+                          {
+                            "id": "rh_info_principles_access_levels_2",
+                            "type": "basic",
+                            "name": "Li",
+                            "props": {
+                              "className": "rh-flowline-step",
+                              "data-step": "2"
+                            },
+                            "children": [
+                              {
+                                "id": "rh_info_principles_access_levels_2_num",
+                                "type": "basic",
+                                "name": "Span",
+                                "props": {
+                                  "className": "rh-flowline-num",
+                                  "aria-hidden": "true"
+                                },
+                                "text": "02"
+                              },
+                              {
+                                "id": "rh_info_principles_access_levels_2_title",
+                                "type": "basic",
+                                "name": "P",
+                                "props": {
+                                  "className": "rh-flowline-title"
+                                },
+                                "text": "$t:raonslab-product.principles.level_member"
+                              },
+                              {
+                                "id": "rh_info_principles_access_levels_2_copy",
+                                "type": "basic",
+                                "name": "P",
+                                "props": {
+                                  "className": "rh-flowline-copy"
+                                },
+                                "text": "$t:raonslab-product.principles.level_member_copy"
+                              }
+                            ]
+                          },
+                          {
+                            "id": "rh_info_principles_access_levels_3",
+                            "type": "basic",
+                            "name": "Li",
+                            "props": {
+                              "className": "rh-flowline-step",
+                              "data-step": "3"
+                            },
+                            "children": [
+                              {
+                                "id": "rh_info_principles_access_levels_3_num",
+                                "type": "basic",
+                                "name": "Span",
+                                "props": {
+                                  "className": "rh-flowline-num",
+                                  "aria-hidden": "true"
+                                },
+                                "text": "03"
+                              },
+                              {
+                                "id": "rh_info_principles_access_levels_3_title",
+                                "type": "basic",
+                                "name": "P",
+                                "props": {
+                                  "className": "rh-flowline-title"
+                                },
+                                "text": "$t:raonslab-product.principles.level_approved"
+                              },
+                              {
+                                "id": "rh_info_principles_access_levels_3_copy",
+                                "type": "basic",
+                                "name": "P",
+                                "props": {
+                                  "className": "rh-flowline-copy"
+                                },
+                                "text": "$t:raonslab-product.principles.level_approved_copy"
+                              }
+                            ]
+                          },
+                          {
+                            "id": "rh_info_principles_access_levels_4",
+                            "type": "basic",
+                            "name": "Li",
+                            "props": {
+                              "className": "rh-flowline-step",
+                              "data-step": "4"
+                            },
+                            "children": [
+                              {
+                                "id": "rh_info_principles_access_levels_4_num",
+                                "type": "basic",
+                                "name": "Span",
+                                "props": {
+                                  "className": "rh-flowline-num",
+                                  "aria-hidden": "true"
+                                },
+                                "text": "04"
+                              },
+                              {
+                                "id": "rh_info_principles_access_levels_4_title",
+                                "type": "basic",
+                                "name": "P",
+                                "props": {
+                                  "className": "rh-flowline-title"
+                                },
+                                "text": "$t:raonslab-product.principles.level_admin"
+                              },
+                              {
+                                "id": "rh_info_principles_access_levels_4_copy",
+                                "type": "basic",
+                                "name": "P",
+                                "props": {
+                                  "className": "rh-flowline-copy"
+                                },
+                                "text": "$t:raonslab-product.principles.level_admin_copy"
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "id": "rh_info_principles_sec_verify",
+                    "type": "basic",
+                    "name": "Div",
+                    "props": {
+                      "className": "rh-doc-section",
+                      "id": "rh-doc-verify",
+                      "role": "region",
+                      "aria-labelledby": "rh-doc-verify-title"
+                    },
+                    "children": [
+                      {
+                        "id": "rh_info_principles_sec_verify_title",
+                        "type": "basic",
+                        "name": "H2",
+                        "props": {
+                          "className": "rh-doc-h2",
+                          "id": "rh-doc-verify-title",
+                          "tabIndex": -1
+                        },
+                        "text": "$t:raonslab-product.principles.toc_verify"
+                      },
+                      {
+                        "id": "rh_info_principles_verify_copy",
+                        "type": "basic",
+                        "name": "P",
+                        "props": {
+                          "className": "rh-doc-copy"
+                        },
+                        "text": "$t:raonslab-product.principles.verify_copy"
+                      },
+                      {
+                        "id": "rh_info_principles_verify_rows",
+                        "type": "basic",
+                        "name": "Ul",
+                        "props": {
+                          "className": "rh-status-list"
+                        },
+                        "children": [
+                          {
+                            "id": "rh_info_principles_verify_rows_1",
+                            "type": "basic",
+                            "name": "Li",
+                            "props": {
+                              "className": "rh-status-row",
+                              "data-status": "current"
+                            },
+                            "children": [
+                              {
+                                "id": "rh_info_principles_verify_rows_1_chip",
+                                "type": "basic",
+                                "name": "Span",
+                                "props": {
+                                  "className": "rh-chip",
+                                  "data-status": "current"
+                                },
+                                "text": "$t:raonslab-product.doc.status_current"
+                              },
+                              {
+                                "id": "rh_info_principles_verify_rows_1_body",
+                                "type": "basic",
+                                "name": "Div",
+                                "props": {
+                                  "className": "rh-status-body"
+                                },
+                                "children": [
+                                  {
+                                    "id": "rh_info_principles_verify_rows_1_title",
+                                    "type": "basic",
+                                    "name": "P",
+                                    "props": {
+                                      "className": "rh-status-title"
+                                    },
+                                    "text": "$t:raonslab-product.principles.verify_pass"
+                                  },
+                                  {
+                                    "id": "rh_info_principles_verify_rows_1_copy",
+                                    "type": "basic",
+                                    "name": "P",
+                                    "props": {
+                                      "className": "rh-status-copy"
+                                    },
+                                    "text": "$t:raonslab-product.principles.verify_pass_copy"
+                                  }
+                                ]
+                              }
+                            ]
+                          },
+                          {
+                            "id": "rh_info_principles_verify_rows_2",
+                            "type": "basic",
+                            "name": "Li",
+                            "props": {
+                              "className": "rh-status-row",
+                              "data-status": "excluded"
+                            },
+                            "children": [
+                              {
+                                "id": "rh_info_principles_verify_rows_2_chip",
+                                "type": "basic",
+                                "name": "Span",
+                                "props": {
+                                  "className": "rh-chip",
+                                  "data-status": "excluded"
+                                },
+                                "text": "$t:raonslab-product.doc.status_excluded"
+                              },
+                              {
+                                "id": "rh_info_principles_verify_rows_2_body",
+                                "type": "basic",
+                                "name": "Div",
+                                "props": {
+                                  "className": "rh-status-body"
+                                },
+                                "children": [
+                                  {
+                                    "id": "rh_info_principles_verify_rows_2_title",
+                                    "type": "basic",
+                                    "name": "P",
+                                    "props": {
+                                      "className": "rh-status-title"
+                                    },
+                                    "text": "$t:raonslab-product.principles.verify_fail"
+                                  },
+                                  {
+                                    "id": "rh_info_principles_verify_rows_2_copy",
+                                    "type": "basic",
+                                    "name": "P",
+                                    "props": {
+                                      "className": "rh-status-copy"
+                                    },
+                                    "text": "$t:raonslab-product.principles.verify_fail_copy"
+                                  }
+                                ]
+                              }
+                            ]
+                          },
+                          {
+                            "id": "rh_info_principles_verify_rows_3",
+                            "type": "basic",
+                            "name": "Li",
+                            "props": {
+                              "className": "rh-status-row",
+                              "data-status": "unverified"
+                            },
+                            "children": [
+                              {
+                                "id": "rh_info_principles_verify_rows_3_chip",
+                                "type": "basic",
+                                "name": "Span",
+                                "props": {
+                                  "className": "rh-chip",
+                                  "data-status": "unverified"
+                                },
+                                "text": "$t:raonslab-product.doc.status_unverified"
+                              },
+                              {
+                                "id": "rh_info_principles_verify_rows_3_body",
+                                "type": "basic",
+                                "name": "Div",
+                                "props": {
+                                  "className": "rh-status-body"
+                                },
+                                "children": [
+                                  {
+                                    "id": "rh_info_principles_verify_rows_3_title",
+                                    "type": "basic",
+                                    "name": "P",
+                                    "props": {
+                                      "className": "rh-status-title"
+                                    },
+                                    "text": "$t:raonslab-product.principles.verify_open"
+                                  },
+                                  {
+                                    "id": "rh_info_principles_verify_rows_3_copy",
+                                    "type": "basic",
+                                    "name": "P",
+                                    "props": {
+                                      "className": "rh-status-copy"
+                                    },
+                                    "text": "$t:raonslab-product.principles.verify_open_copy"
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "id": "rh_info_principles_sec_operate",
+                    "type": "basic",
+                    "name": "Div",
+                    "props": {
+                      "className": "rh-doc-section",
+                      "id": "rh-doc-operate",
+                      "role": "region",
+                      "aria-labelledby": "rh-doc-operate-title"
+                    },
+                    "children": [
+                      {
+                        "id": "rh_info_principles_sec_operate_title",
+                        "type": "basic",
+                        "name": "H2",
+                        "props": {
+                          "className": "rh-doc-h2",
+                          "id": "rh-doc-operate-title",
+                          "tabIndex": -1
+                        },
+                        "text": "$t:raonslab-product.principles.toc_operate"
+                      },
+                      {
+                        "id": "rh_info_principles_operate_copy",
+                        "type": "basic",
+                        "name": "P",
+                        "props": {
+                          "className": "rh-doc-copy"
+                        },
+                        "text": "$t:raonslab-product.principles.operate_copy"
+                      },
+                      {
+                        "id": "rh_info_principles_operate_report",
+                        "type": "basic",
+                        "name": "P",
+                        "props": {
+                          "className": "rh-doc-copy"
+                        },
+                        "text": "$t:raonslab-product.principles.operate_report"
+                      }
+                    ]
+                  },
+                  {
+                    "id": "rh_info_principles_sec_internal",
+                    "type": "basic",
+                    "name": "Div",
+                    "props": {
+                      "className": "rh-doc-section",
+                      "id": "rh-doc-internal",
+                      "role": "region",
+                      "aria-labelledby": "rh-doc-internal-title"
+                    },
+                    "children": [
+                      {
+                        "id": "rh_info_principles_sec_internal_title",
+                        "type": "basic",
+                        "name": "H2",
+                        "props": {
+                          "className": "rh-doc-h2",
+                          "id": "rh-doc-internal-title",
+                          "tabIndex": -1
+                        },
+                        "text": "$t:raonslab-product.principles.toc_internal"
+                      },
+                      {
+                        "id": "rh_info_principles_internal_copy",
+                        "type": "basic",
+                        "name": "P",
+                        "props": {
+                          "className": "rh-doc-copy"
+                        },
+                        "text": "$t:raonslab-product.principles.internal_copy"
+                      },
+                      {
+                        "id": "rh_info_principles_internal_list",
+                        "type": "basic",
+                        "name": "Ul",
+                        "props": {
+                          "className": "rh-doc-list rh-doc-list-quiet"
+                        },
+                        "children": [
+                          {
+                            "id": "rh_info_principles_internal_list_1",
+                            "type": "basic",
+                            "name": "Li",
+                            "props": {
+                              "className": "rh-doc-list-item"
+                            },
+                            "text": "$t:raonslab-product.principles.internal_g7"
+                          },
+                          {
+                            "id": "rh_info_principles_internal_list_2",
+                            "type": "basic",
+                            "name": "Li",
+                            "props": {
+                              "className": "rh-doc-list-item"
+                            },
+                            "text": "$t:raonslab-product.principles.internal_product"
+                          },
+                          {
+                            "id": "rh_info_principles_internal_list_3",
+                            "type": "basic",
+                            "name": "Li",
+                            "props": {
+                              "className": "rh-doc-list-item"
+                            },
+                            "text": "$t:raonslab-product.principles.internal_ai"
+                          },
+                          {
+                            "id": "rh_info_principles_internal_list_4",
+                            "type": "basic",
+                            "name": "Li",
+                            "props": {
+                              "className": "rh-doc-list-item"
+                            },
+                            "text": "$t:raonslab-product.principles.internal_agentopt"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "id": "rh_info_principles_evidence",
+                    "type": "basic",
+                    "name": "Div",
+                    "props": {
+                      "className": "rh-doc-evidence",
+                      "role": "note"
+                    },
+                    "children": [
+                      {
+                        "id": "rh_info_principles_evidence_title",
+                        "type": "basic",
+                        "name": "P",
+                        "props": {
+                          "className": "rh-doc-evidence-title"
+                        },
+                        "text": "$t:raonslab-product.doc.evidence_title"
+                      },
+                      {
+                        "id": "rh_info_principles_evidence_list",
+                        "type": "basic",
+                        "name": "Ul",
+                        "props": {
+                          "className": "rh-doc-list rh-doc-list-quiet"
+                        },
+                        "children": [
+                          {
+                            "id": "rh_info_principles_evidence_list_1",
+                            "type": "basic",
+                            "name": "Li",
+                            "props": {
+                              "className": "rh-doc-list-item"
+                            },
+                            "text": "$t:raonslab-product.principles.evidence1"
+                          },
+                          {
+                            "id": "rh_info_principles_evidence_list_2",
+                            "type": "basic",
+                            "name": "Li",
+                            "props": {
+                              "className": "rh-doc-list-item"
+                            },
+                            "text": "$t:raonslab-product.principles.evidence2"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "id": "rh_info_principles_next",
+                    "type": "basic",
+                    "name": "Div",
+                    "props": {
+                      "className": "rh-doc-next"
+                    },
+                    "children": [
+                      {
+                        "id": "rh_info_principles_next_title",
+                        "type": "basic",
+                        "name": "P",
+                        "props": {
+                          "className": "rh-doc-next-title"
+                        },
+                        "text": "$t:raonslab-product.doc.next_title"
+                      },
+                      {
+                        "id": "rh_info_principles_next_actions",
+                        "type": "basic",
+                        "name": "Div",
+                        "props": {
+                          "className": "rh-doc-next-actions"
+                        },
+                        "children": [
+                          {
+                            "id": "rh_info_principles_next_1",
+                            "type": "basic",
+                            "name": "A",
+                            "props": {
+                              "className": "rh-doc-btn rh-doc-btn-primary",
+                              "href": "/#rh-consult"
+                            },
+                            "text": "$t:raonslab-product.doc.next_consult"
+                          },
+                          {
+                            "id": "rh_info_principles_next_2",
+                            "type": "basic",
+                            "name": "A",
+                            "props": {
+                              "className": "rh-doc-btn",
+                              "href": "/policy/ai-workspace"
+                            },
+                            "text": "$t:raonslab-product.doc.next_ai_policy",
+                            "actions": [
+                              {
+                                "type": "click",
+                                "handler": "navigate",
+                                "params": {
+                                  "path": "/policy/ai-workspace"
+                                }
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
