@@ -1,0 +1,246 @@
+{
+  "version": "1.0.0",
+  "layout_name": "admin_consultation_detail",
+  "permissions": [
+    "raonslab-product.consultations.read"
+  ],
+  "extends": "_admin_base",
+  "meta": {
+    "title": "상담 상세 / Consultation detail"
+  },
+  "state": {
+    "note": "",
+    "status": "",
+    "closeOutcome": ""
+  },
+  "data_sources": [
+    {
+      "id": "consultation",
+      "label_key": "Consultation detail",
+      "type": "api",
+      "endpoint": "/api/modules/raonslab-product/admin/consultations/{{route.reference}}",
+      "method": "GET",
+      "auto_fetch": true,
+      "auth_required": true,
+      "errorHandling": {
+        "403": {
+          "handler": "showErrorPage",
+          "params": {"target": "content"}
+        }
+      },
+      "fallback": {"data": null}
+    }
+  ],
+  "slots": {
+    "content": [
+      {
+        "id": "consultation_detail_page",
+        "type": "basic",
+        "name": "Div",
+        "props": {"className": "admin-page-content-responsive"},
+        "children": [
+          {
+            "id": "consultation_detail_header",
+            "type": "composite",
+            "name": "PageHeader",
+            "props": {
+              "title": "상담 상세 / Consultation detail",
+              "description": "{{consultation?.data?.reference ?? ''}}"
+            },
+            "children": [
+              {
+                "type": "basic",
+                "name": "Button",
+                "props": {"className": "btn"},
+                "actions": [
+                  {
+                    "type": "click",
+                    "handler": "navigate",
+                    "params": {"path": "/admin/consultations"}
+                  }
+                ],
+                "children": [{"type": "basic", "name": "Span", "text": "목록 / Back"}]
+              }
+            ]
+          },
+          {
+            "id": "consultation_contact_card",
+            "type": "basic",
+            "name": "Div",
+            "props": {"className": "admin-card mb-4"},
+            "children": [
+              {"type": "basic", "name": "H2", "props": {"className": "section-heading"}, "text": "{{consultation?.data?.contact_name ?? ''}} · {{consultation?.data?.company ?? '-'}}"},
+              {"type": "basic", "name": "P", "text": "Email: {{consultation?.data?.email ?? ''}}"},
+              {"type": "basic", "name": "P", "text": "Phone: {{consultation?.data?.phone ?? '-'}}"},
+              {"type": "basic", "name": "P", "text": "Service: {{consultation?.data?.service_interest ?? '-'}}"},
+              {"type": "basic", "name": "P", "text": "Status: {{consultation?.data?.status ?? ''}} · Mail: {{consultation?.data?.mail_status ?? ''}}"},
+              {"type": "basic", "name": "P", "text": "Consent: {{consultation?.data?.privacy_consent_version ?? ''}} · {{consultation?.data?.privacy_consented_at ?? ''}}"}
+            ]
+          },
+          {
+            "id": "consultation_message_card",
+            "type": "basic",
+            "name": "Div",
+            "props": {"className": "admin-card mb-4"},
+            "children": [
+              {"type": "basic", "name": "H2", "props": {"className": "section-heading"}, "text": "문의 내용 / Message"},
+              {"type": "basic", "name": "P", "props": {"className": "whitespace-pre-wrap"}, "text": "{{consultation?.data?.message ?? ''}}"}
+            ]
+          },
+          {
+            "id": "consultation_status_card",
+            "type": "basic",
+            "name": "Div",
+            "props": {"className": "admin-card mb-4"},
+            "children": [
+              {"type": "basic", "name": "H2", "props": {"className": "section-heading"}, "text": "상태 처리 / Status"},
+              {
+                "id": "consultation_status_select",
+                "type": "composite",
+                "name": "Select",
+                "props": {
+                  "value": "{{_local.status || consultation?.data?.status || 'NEW'}}",
+                  "className": "w-full mb-3",
+                  "options": [
+                    {"label": "NEW", "value": "NEW"},
+                    {"label": "CONTACTED", "value": "CONTACTED"},
+                    {"label": "QUALIFIED", "value": "QUALIFIED"},
+                    {"label": "CLOSED", "value": "CLOSED"}
+                  ]
+                },
+                "actions": [
+                  {
+                    "type": "change",
+                    "handler": "setState",
+                    "params": {"target": "local", "status": "{{$event.target.value}}"}
+                  }
+                ]
+              },
+              {
+                "id": "consultation_close_outcome",
+                "type": "basic",
+                "name": "Input",
+                "if": "{{(_local.status || consultation?.data?.status) === 'CLOSED'}}",
+                "props": {
+                  "type": "text",
+                  "value": "{{_local.closeOutcome ?? ''}}",
+                  "placeholder": "종결 결과 / Close outcome",
+                  "className": "w-full mb-3"
+                },
+                "actions": [
+                  {
+                    "type": "change",
+                    "handler": "setState",
+                    "params": {"target": "local", "closeOutcome": "{{$event.target.value}}"}
+                  }
+                ]
+              },
+              {
+                "type": "basic",
+                "name": "Button",
+                "props": {"className": "btn btn-primary"},
+                "actions": [
+                  {
+                    "type": "click",
+                    "handler": "apiCall",
+                    "auth_required": true,
+                    "target": "/api/modules/raonslab-product/admin/consultations/{{route.reference}}/status",
+                    "params": {
+                      "method": "PATCH",
+                      "body": {
+                        "status": "{{_local.status || consultation?.data?.status}}",
+                        "close_outcome": "{{_local.closeOutcome || null}}"
+                      }
+                    },
+                    "onSuccess": [
+                      {"handler": "refetchDataSource", "params": {"dataSourceId": "consultation"}},
+                      {"handler": "toast", "params": {"type": "success", "message": "상태가 변경되었습니다."}}
+                    ],
+                    "onError": [
+                      {"handler": "toast", "params": {"type": "error", "message": "{{error.message ?? 'Status update failed'}}"}}
+                    ]
+                  }
+                ],
+                "children": [{"type": "basic", "name": "Span", "text": "상태 저장 / Save status"}]
+              }
+            ]
+          },
+          {
+            "id": "consultation_note_card",
+            "type": "basic",
+            "name": "Div",
+            "props": {"className": "admin-card mb-4"},
+            "children": [
+              {"type": "basic", "name": "H2", "props": {"className": "section-heading"}, "text": "내부 메모 / Internal note"},
+              {
+                "id": "consultation_note_input",
+                "type": "basic",
+                "name": "Textarea",
+                "props": {
+                  "rows": 5,
+                  "value": "{{_local.note ?? ''}}",
+                  "className": "w-full mb-3"
+                },
+                "actions": [
+                  {
+                    "type": "change",
+                    "handler": "setState",
+                    "params": {"target": "local", "note": "{{$event.target.value}}"}
+                  }
+                ]
+              },
+              {
+                "type": "basic",
+                "name": "Button",
+                "props": {"className": "btn btn-primary"},
+                "actions": [
+                  {
+                    "type": "click",
+                    "handler": "apiCall",
+                    "auth_required": true,
+                    "target": "/api/modules/raonslab-product/admin/consultations/{{route.reference}}/notes",
+                    "params": {"method": "POST", "body": {"note": "{{_local.note ?? ''}}"}},
+                    "onSuccess": [
+                      {"handler": "setState", "params": {"target": "local", "note": ""}},
+                      {"handler": "refetchDataSource", "params": {"dataSourceId": "consultation"}},
+                      {"handler": "toast", "params": {"type": "success", "message": "메모가 저장되었습니다."}}
+                    ],
+                    "onError": [
+                      {"handler": "toast", "params": {"type": "error", "message": "{{error.message ?? 'Note save failed'}}"}}
+                    ]
+                  }
+                ],
+                "children": [{"type": "basic", "name": "Span", "text": "메모 저장 / Save note"}]
+              }
+            ]
+          },
+          {
+            "id": "consultation_history_card",
+            "type": "basic",
+            "name": "Div",
+            "props": {"className": "admin-card"},
+            "children": [
+              {"type": "basic", "name": "H2", "props": {"className": "section-heading"}, "text": "변경 이력 / History"},
+              {
+                "id": "consultation_history_{{history_index}}",
+                "type": "basic",
+                "name": "Div",
+                "iteration": {
+                  "source": "{{consultation?.data?.history ?? []}}",
+                  "item_var": "history_item",
+                  "index_var": "history_index"
+                },
+                "props": {"className": "py-3 border-b border-gray-200 dark:border-gray-700"},
+                "children": [
+                  {"type": "basic", "name": "P", "text": "{{history_item.event_type ?? ''}} · {{history_item.from_status ?? '-'}} → {{history_item.to_status ?? '-'}}"},
+                  {"type": "basic", "name": "P", "props": {"className": "text-sm whitespace-pre-wrap"}, "text": "{{history_item.note ?? history_item.close_outcome ?? ''}}"},
+                  {"type": "basic", "name": "P", "props": {"className": "text-xs text-secondary"}, "text": "{{history_item.actor?.name ?? 'system'}} · {{history_item.created_at ?? ''}}"}
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

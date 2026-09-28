@@ -4,8 +4,8 @@ namespace Modules\Raonslab\Product\Tests\Feature;
 
 require_once __DIR__.'/../ModuleTestCase.php';
 
-use PHPUnit\Framework\Attributes\Test;
 use Modules\Raonslab\Product\Tests\ModuleTestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 class ProductLayerContractTest extends ModuleTestCase
 {

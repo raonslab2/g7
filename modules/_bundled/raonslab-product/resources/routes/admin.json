@@ -1,0 +1,21 @@
+{
+  "version": "1.0.0",
+  "routes": [
+    {
+      "path": "*/admin/consultations",
+      "layout": "admin_consultation_list",
+      "auth_required": true,
+      "meta": {
+        "title": "사업 상담 / Consultations"
+      }
+    },
+    {
+      "path": "*/admin/consultations/:reference",
+      "layout": "admin_consultation_detail",
+      "auth_required": true,
+      "meta": {
+        "title": "상담 상세 / Consultation detail"
+      }
+    }
+  ]
+}
