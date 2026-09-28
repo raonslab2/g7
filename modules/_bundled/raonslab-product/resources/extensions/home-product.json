@@ -1883,7 +1883,7 @@
                           "type": "basic",
                           "name": "Li",
                           "props": {
-                            "className": "rh-case",
+                            "className": "rh-case rh-case-log",
                             "aria-labelledby": "rh-case-stock-title"
                           },
                           "children": [
@@ -1972,12 +1972,83 @@
                               ]
                             },
                             {
+                              "id": "raon_home_case_stock_bar",
+                              "comment": "MOBILE_STOCK 요청 로그 창 머리(장식)",
+                              "type": "basic",
+                              "name": "Div",
+                              "props": {
+                                "className": "rh-log-bar",
+                                "aria-hidden": "true"
+                              },
+                              "children": [
+                                {
+                                  "id": "raon_home_case_stock_bar_dots",
+                                  "comment": "case stock bar dots",
+                                  "type": "basic",
+                                  "name": "Span",
+                                  "props": {
+                                    "className": "rh-log-dots"
+                                  },
+                                  "children": [
+                                    {
+                                      "id": "raon_home_case_stock_bar_dot1",
+                                      "comment": "case stock bar dot1",
+                                      "type": "basic",
+                                      "name": "Span",
+                                      "props": {
+                                        "className": "rh-log-dot"
+                                      }
+                                    },
+                                    {
+                                      "id": "raon_home_case_stock_bar_dot2",
+                                      "comment": "case stock bar dot2",
+                                      "type": "basic",
+                                      "name": "Span",
+                                      "props": {
+                                        "className": "rh-log-dot"
+                                      }
+                                    },
+                                    {
+                                      "id": "raon_home_case_stock_bar_dot3",
+                                      "comment": "case stock bar dot3",
+                                      "type": "basic",
+                                      "name": "Span",
+                                      "props": {
+                                        "className": "rh-log-dot"
+                                      }
+                                    }
+                                  ]
+                                },
+                                {
+                                  "id": "raon_home_case_stock_bar_icon",
+                                  "comment": "case stock bar icon",
+                                  "type": "basic",
+                                  "name": "Icon",
+                                  "props": {
+                                    "className": "rh-icon",
+                                    "name": "fa-terminal",
+                                    "aria-hidden": "true"
+                                  }
+                                },
+                                {
+                                  "id": "raon_home_case_stock_bar_title",
+                                  "comment": "case stock bar title",
+                                  "type": "basic",
+                                  "name": "Span",
+                                  "props": {
+                                    "className": "rh-log-title"
+                                  },
+                                  "text": "MOBILE_STOCK"
+                                }
+                              ]
+                            },
+                            {
                               "id": "raon_home_case_stock_evidence",
                               "comment": "case stock evidence",
                               "type": "basic",
                               "name": "Div",
                               "props": {
-                                "className": "rh-evidence"
+                                "className": "rh-evidence rh-evidence-log"
                               },
                               "children": [
                                 {
@@ -2281,7 +2352,7 @@
                           "type": "basic",
                           "name": "Li",
                           "props": {
-                            "className": "rh-case",
+                            "className": "rh-case rh-case-rail",
                             "aria-labelledby": "rh-case-hub-title"
                           },
                           "children": [
@@ -2370,12 +2441,103 @@
                               ]
                             },
                             {
+                              "id": "raon_home_case_hub_strip",
+                              "comment": "RAON Hub 근거 상태 스트립(장식)",
+                              "type": "basic",
+                              "name": "Div",
+                              "props": {
+                                "className": "rh-strip",
+                                "aria-hidden": "true"
+                              },
+                              "children": [
+                                {
+                                  "id": "raon_home_case_hub_strip_chip",
+                                  "comment": "case hub strip chip",
+                                  "type": "basic",
+                                  "name": "Span",
+                                  "props": {
+                                    "className": "rh-strip-chip"
+                                  },
+                                  "children": [
+                                    {
+                                      "id": "raon_home_case_hub_strip_icon",
+                                      "comment": "case hub strip icon",
+                                      "type": "basic",
+                                      "name": "Icon",
+                                      "props": {
+                                        "className": "rh-icon",
+                                        "name": "fa-diagram-project",
+                                        "aria-hidden": "true"
+                                      }
+                                    },
+                                    {
+                                      "id": "raon_home_case_hub_strip_version",
+                                      "comment": "case hub strip version",
+                                      "type": "basic",
+                                      "name": "Span",
+                                      "props": {
+                                        "className": "rh-strip-version"
+                                      },
+                                      "text": "G7 7.0.11"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "id": "raon_home_case_hub_strip_bar",
+                                  "comment": "case hub strip bar",
+                                  "type": "basic",
+                                  "name": "Span",
+                                  "props": {
+                                    "className": "rh-strip-bar"
+                                  },
+                                  "children": [
+                                    {
+                                      "id": "raon_home_case_hub_strip_problem",
+                                      "comment": "case hub strip problem",
+                                      "type": "basic",
+                                      "name": "Span",
+                                      "props": {
+                                        "className": "rh-strip-seg rh-strip-seg-problem"
+                                      }
+                                    },
+                                    {
+                                      "id": "raon_home_case_hub_strip_build",
+                                      "comment": "case hub strip build",
+                                      "type": "basic",
+                                      "name": "Span",
+                                      "props": {
+                                        "className": "rh-strip-seg rh-strip-seg-build"
+                                      }
+                                    },
+                                    {
+                                      "id": "raon_home_case_hub_strip_verified",
+                                      "comment": "case hub strip verified",
+                                      "type": "basic",
+                                      "name": "Span",
+                                      "props": {
+                                        "className": "rh-strip-seg rh-strip-seg-verified"
+                                      }
+                                    },
+                                    {
+                                      "id": "raon_home_case_hub_strip_limit",
+                                      "comment": "case hub strip limit",
+                                      "type": "basic",
+                                      "name": "Span",
+                                      "props": {
+                                        "className": "rh-strip-seg rh-strip-seg-limit"
+                                      }
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
                               "id": "raon_home_case_hub_evidence",
                               "comment": "case hub evidence",
                               "type": "basic",
                               "name": "Div",
                               "props": {
-                                "className": "rh-evidence"
+                                "className": "rh-evidence rh-evidence-rail"
                               },
                               "children": [
                                 {
@@ -2759,7 +2921,20 @@
                               "props": {
                                 "className": "rh-process-node",
                                 "aria-hidden": "true"
-                              }
+                              },
+                              "children": [
+                                {
+                                  "id": "raon_home_process_step1_icon",
+                                  "comment": "process step1 icon",
+                                  "type": "basic",
+                                  "name": "Icon",
+                                  "props": {
+                                    "className": "rh-icon",
+                                    "name": "fa-comments",
+                                    "aria-hidden": "true"
+                                  }
+                                }
+                              ]
                             },
                             {
                               "id": "raon_home_process_step1_body",
@@ -2811,7 +2986,20 @@
                               "props": {
                                 "className": "rh-process-node",
                                 "aria-hidden": "true"
-                              }
+                              },
+                              "children": [
+                                {
+                                  "id": "raon_home_process_step2_icon",
+                                  "comment": "process step2 icon",
+                                  "type": "basic",
+                                  "name": "Icon",
+                                  "props": {
+                                    "className": "rh-icon",
+                                    "name": "fa-shield-halved",
+                                    "aria-hidden": "true"
+                                  }
+                                }
+                              ]
                             },
                             {
                               "id": "raon_home_process_step2_body",
@@ -2863,7 +3051,20 @@
                               "props": {
                                 "className": "rh-process-node",
                                 "aria-hidden": "true"
-                              }
+                              },
+                              "children": [
+                                {
+                                  "id": "raon_home_process_step3_icon",
+                                  "comment": "process step3 icon",
+                                  "type": "basic",
+                                  "name": "Icon",
+                                  "props": {
+                                    "className": "rh-icon",
+                                    "name": "fa-code",
+                                    "aria-hidden": "true"
+                                  }
+                                }
+                              ]
                             },
                             {
                               "id": "raon_home_process_step3_body",
@@ -2904,7 +3105,7 @@
                           "type": "basic",
                           "name": "Li",
                           "props": {
-                            "className": "rh-process-step"
+                            "className": "rh-process-step rh-process-step-verify"
                           },
                           "children": [
                             {
@@ -2915,7 +3116,59 @@
                               "props": {
                                 "className": "rh-process-node",
                                 "aria-hidden": "true"
-                              }
+                              },
+                              "children": [
+                                {
+                                  "id": "raon_home_process_step4_icon",
+                                  "comment": "process step4 icon",
+                                  "type": "basic",
+                                  "name": "Icon",
+                                  "props": {
+                                    "className": "rh-icon",
+                                    "name": "fa-list-check",
+                                    "aria-hidden": "true"
+                                  }
+                                }
+                              ]
+                            },
+                            {
+                              "id": "raon_home_process_step4_states",
+                              "comment": "검증 결과 분기 표지(통과·실패·미검증, 장식)",
+                              "type": "basic",
+                              "name": "Span",
+                              "props": {
+                                "className": "rh-process-states",
+                                "aria-hidden": "true"
+                              },
+                              "children": [
+                                {
+                                  "id": "raon_home_process_step4_state_pass",
+                                  "comment": "process step4 state pass",
+                                  "type": "basic",
+                                  "name": "Span",
+                                  "props": {
+                                    "className": "rh-process-state rh-process-state-pass"
+                                  }
+                                },
+                                {
+                                  "id": "raon_home_process_step4_state_fail",
+                                  "comment": "process step4 state fail",
+                                  "type": "basic",
+                                  "name": "Span",
+                                  "props": {
+                                    "className": "rh-process-state rh-process-state-fail"
+                                  }
+                                },
+                                {
+                                  "id": "raon_home_process_step4_state_open",
+                                  "comment": "process step4 state open",
+                                  "type": "basic",
+                                  "name": "Span",
+                                  "props": {
+                                    "className": "rh-process-state rh-process-state-open"
+                                  }
+                                }
+                              ]
                             },
                             {
                               "id": "raon_home_process_step4_body",
@@ -2956,7 +3209,7 @@
                           "type": "basic",
                           "name": "Li",
                           "props": {
-                            "className": "rh-process-step"
+                            "className": "rh-process-step rh-process-step-loop"
                           },
                           "children": [
                             {
@@ -2967,7 +3220,20 @@
                               "props": {
                                 "className": "rh-process-node",
                                 "aria-hidden": "true"
-                              }
+                              },
+                              "children": [
+                                {
+                                  "id": "raon_home_process_step5_icon",
+                                  "comment": "process step5 icon",
+                                  "type": "basic",
+                                  "name": "Icon",
+                                  "props": {
+                                    "className": "rh-icon",
+                                    "name": "fa-arrows-rotate",
+                                    "aria-hidden": "true"
+                                  }
+                                }
+                              ]
                             },
                             {
                               "id": "raon_home_process_step5_body",
