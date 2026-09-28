@@ -279,6 +279,11 @@ async function layoutChecks(browser, vp) {
       processInColumn: nodes.every((b) => Math.abs(b.left - nodes[0].left) < 2),
       processCount: nodes.length,
       lanes: [...document.querySelectorAll('.rh-case')].map((c) => [...c.querySelectorAll('.rh-lane')].map((l) => l.className.split(' ')[1])),
+      stations: [...document.querySelector('.rh-case').querySelectorAll('.rh-lane-mark')].map(box),
+      boundary: getComputedStyle(document.querySelector('.rh-lane-limit')).borderLeftStyle + '/' + getComputedStyle(document.querySelector('.rh-lane-limit')).borderTopStyle,
+      runRows: [...document.querySelectorAll('.rh-run-row')].map((r) => r.querySelectorAll('.rh-mark').length),
+      loop: (() => { const b = box(document.querySelector('.rh-flow-loop')); return b ? Math.round(b.width) : 0; })(),
+      legendBottom: box(document.querySelector('.rh-legend'))?.bottom ?? Infinity,
       exposedIcons: [...document.querySelectorAll('.rh-home i')].filter((i) => i.getAttribute('aria-hidden') !== 'true' && !i.closest('[aria-hidden="true"]')).length,
       iconFont: icon ? getComputedStyle(icon, '::before').fontFamily : '',
       iconWidth: icon ? Math.round(icon.getBoundingClientRect().width) : 0,
@@ -288,7 +293,11 @@ async function layoutChecks(browser, vp) {
   assert(scope, '첫 화면에 H1·주 CTA·흐름 도식 첫 단계 노출', visual.h1Bottom <= visual.vh && visual.ctaBottom <= visual.vh && visual.stageBottoms[0] <= visual.vh, JSON.stringify({ vh: visual.vh, h1: visual.h1Bottom, cta: visual.ctaBottom, stage: visual.stageBottoms[0] }));
   if (mobileLayout) assert(scope, '작은 화면: 흐름 4단계 전체가 첫 화면 안', visual.stageBottoms.every((b) => b <= visual.vh), visual.stageBottoms.join(','));
   assert(scope, '흐름 도식 단계 이름 순서', JSON.stringify(visual.stageTexts) === JSON.stringify(['업무 입력', '에이전트 실행', '검증', '운영 결과']), visual.stageTexts.join(' → '));
-  assert(scope, `흐름 도식 방향(${mobileLayout ? '가로' : '세로'})`, mobileLayout ? visual.stagesInRow : visual.stagesInColumn);
+  assert(scope, '흐름 도식: 모든 폭에서 가로로 연결된 파이프라인', visual.stagesInRow);
+  assert(scope, '상태 레인 3줄·되돌림 루프 렌더', JSON.stringify(visual.runRows) === '[4,4,4]' && visual.loop > 20, `${visual.runRows} loop=${visual.loop}`);
+  const stationsRow = visual.stations.every((b) => Math.abs(b.top - visual.stations[0].top) < 2);
+  const stationsColumn = visual.stations.every((b) => Math.abs(b.left - visual.stations[0].left) < 2);
+  assert(scope, `사례 근거 레일 방향(${vp.width > 960 ? '가로' : '세로'})·한계 점선 경계`, visual.stations.length === 4 && (vp.width > 960 ? stationsRow : stationsColumn) && visual.boundary.includes('dashed'), visual.boundary);
   assert(scope, `도입 절차 타임라인 방향(${vp.width > 960 ? '가로' : '세로'})`, visual.processCount === 5 && (vp.width > 960 ? visual.processInRow : visual.processInColumn));
   const laneOrder = ['rh-lane-problem', 'rh-lane-build', 'rh-lane-verified', 'rh-lane-limit'];
   assert(scope, '사례 근거 패널: 문제·구현·검증·한계', visual.lanes.length === 2 && visual.lanes.every((l) => JSON.stringify(l) === JSON.stringify(laneOrder)), JSON.stringify(visual.lanes));
