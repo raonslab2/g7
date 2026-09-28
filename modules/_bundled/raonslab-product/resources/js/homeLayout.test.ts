@@ -186,6 +186,69 @@ describe('시각 구조', () => {
   });
 });
 
+describe('2차 시각 패스 — 사례·서비스·절차의 코드 네이티브 도식', () => {
+  const css = readFileSync(resolve(root, 'css/main.css'), 'utf8');
+  const pass2 = css.slice(css.indexOf('/* ── 2차 시각 패스'), css.indexOf('@media (prefers-reduced-motion'));
+  const literalTexts = (n?: Node) => textsUnder(n).filter((t) => !t.startsWith('$t:'));
+
+  it('두 사례는 서로 다른 미니 화면이다: MOBILE_STOCK 은 요청 로그 터미널, RAON Hub 는 상태 스트립 + 근거 레일', () => {
+    expect(classOf(byId('raon_home_case_stock'))).toContain('rh-case-log');
+    expect(classOf(byId('raon_home_case_stock_evidence'))).toContain('rh-evidence-log');
+    expect(classOf(byId('raon_home_case_hub'))).toContain('rh-case-rail');
+    expect(classOf(byId('raon_home_case_hub_evidence'))).toContain('rh-evidence-rail');
+    expect(classOf(byId('raon_home_case_hub_evidence'))).not.toContain('rh-evidence-log');
+
+    // 창 머리·상태 스트립은 근거 레인 바로 앞에 놓이는 장식이다
+    for (const [caseId, chromeId] of [['stock', 'raon_home_case_stock_bar'], ['hub', 'raon_home_case_hub_strip']]) {
+      const children = (byId(`raon_home_case_${caseId}`)?.children ?? []).map((c) => c.id);
+      expect(children).toEqual([`raon_home_case_${caseId}_header`, chromeId, `raon_home_case_${caseId}_evidence`]);
+      expect(byId(chromeId)?.props?.['aria-hidden']).toBe('true');
+    }
+    const segments = (byId('raon_home_case_hub_strip_bar')?.children ?? []).map((c) => classOf(c).split(' ')[1]);
+    expect(segments).toEqual(['rh-strip-seg-problem', 'rh-strip-seg-build', 'rh-strip-seg-verified', 'rh-strip-seg-limit']);
+  });
+
+  it('장식 문구는 기존 사실 문구에 있는 식별자만 쓴다(새 주장·수치 없음)', () => {
+    expect(literalTexts(byId('raon_home_case_stock_bar'))).toEqual(['MOBILE_STOCK']);
+    expect(literalTexts(byId('raon_home_case_hub_strip'))).toEqual(['G7 7.0.11']);
+    expect(ko.home.case_stock_title).toContain('MOBILE_STOCK');
+    expect(en.home.case_stock_title).toContain('MOBILE_STOCK');
+    expect(ko.home.case_hub_summary).toContain('7.0.11');
+    expect(en.home.case_hub_summary).toContain('7.0.11');
+    for (const id of ['raon_home_services', 'raon_home_process']) expect(literalTexts(byId(id)), id).toEqual([]);
+  });
+
+  it('카드 수는 늘리지 않는다(사례 2 · 레인 4 · 서비스 3 · 절차 5)', () => {
+    expect(childrenWith(byId('raon_home_cases_list'), 'rh-case')).toHaveLength(2);
+    expect(childrenWith(byId('raon_home_services_list'), 'rh-stage')).toHaveLength(3);
+    expect(childrenWith(byId('raon_home_process_list'), 'rh-process-step')).toHaveLength(5);
+  });
+
+  it('절차 노드는 단계별 아이콘을 가지고, 검증 단계는 통과·실패·미검증 분기, 마지막 단계는 반복을 표시한다', () => {
+    const steps = childrenWith(byId('raon_home_process_list'), 'rh-process-step');
+    const icons = steps.map((step) => childrenWith(step, 'rh-process-node')[0]?.children?.map((c) => c.props?.name));
+    expect(icons).toEqual([['fa-comments'], ['fa-shield-halved'], ['fa-code'], ['fa-list-check'], ['fa-arrows-rotate']]);
+    expect(classOf(steps[3])).toContain('rh-process-step-verify');
+    const states = childrenWith(steps[3], 'rh-process-states')[0];
+    expect(states?.props?.['aria-hidden']).toBe('true');
+    expect((states?.children ?? []).map((c) => classOf(c).split(' ')[1])).toEqual(['rh-process-state-pass', 'rh-process-state-fail', 'rh-process-state-open']);
+    expect(classOf(steps[4])).toContain('rh-process-step-loop');
+  });
+
+  it('서비스 단계 노드는 서로 다른 아이콘으로 구분된다', () => {
+    const icons = ['pilot', 'build', 'operate'].map((s) => byId(`raon_home_service_${s}_node`)?.children?.[0]?.props?.name);
+    expect(new Set(icons).size).toBe(3);
+  });
+
+  it('새 스타일은 이미지·SVG·glow·그림자·그라디언트·애니메이션 없이 테두리와 상태 색만 쓴다', () => {
+    expect(pass2.length).toBeGreaterThan(500);
+    expect(pass2).not.toMatch(/gradient|box-shadow|text-shadow|filter\s*:|url\(|<svg|animation|@keyframes|transform:\s*(?:scale|translate[XYZ3]?)\b/i);
+    // 색은 모두 기존 테마 토큰을 쓴다(라이트·다크 동시 대응)
+    expect(pass2.replace(/\/\*[\s\S]*?\*\//g, '')).not.toMatch(/#[0-9a-f]{3,8}\b|rgba?\(/i);
+    expect(css).toContain('@media (prefers-reduced-motion: reduce)');
+  });
+});
+
 describe('사용자 문구 정책', () => {
   const copies = [flatten(ko), flatten(en)].flatMap((dict) => Object.values(dict));
 
