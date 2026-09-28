@@ -125,9 +125,10 @@
 | actual cause | `LayoutExtensionService`는 `template_layout_extensions` 행을 (template, 확장 종류, `target_name`, 출처 종류, 출처 id) 키로 하나만 둔다. `product-nav.json`(priority 30: 상위 메뉴·footer)과 `public-commerce-chrome.json`(priority 400: 통화 교체)이 같은 `_user_base`를 target으로 해 나중 파일이 앞 행 내용을 통째로 덮어썼다. 배포 뒤 행은 `_user_base prio=400 inj=1 gnav=0`. |
 | evidence | 배포 후 served `page/show.json`에서 `rh_gnav_root` 0·`linkGroups` 0·`data-rh-commerce-suppressed` 1; `LayoutExtension` 행 조회(모듈당 target별 1행); `app/Services/LayoutExtensionService.php`의 `withTrashed()->where($attributes)` 키. |
 | resolution | fail-fast 롤백: revert `4d9856dc`(트리 = `390cdc7a`) push → runtime `pull --ff-only` → build(git status 0) → `module:update` 0.4.1→0.4.0 → 새 프로세스 route clear/cache → `g7-product-fpm`만 graceful reload → 14 routes·301 → 0.4.0 smoke **451 / 0**. Page DB 교체(6단계)는 실행 전이라 DB 변경 없음. 수정: 통화 교체 injection을 유일한 `_user_base` overlay인 `product-nav.json`에 합치고(생성기 소유) priority 400(> 이커머스 320)으로 올리고 `public-commerce-chrome.json`을 삭제. |
-| prevention rule | 모듈의 overlay manifest는 target layout마다 정확히 하나. 같은 target에 필요한 injection은 한 파일에 모으고 priority는 그 파일 전체에 대해 정한다. 배포 전 시뮬레이션은 설치 계약(`persistedOverlays`)이 고른 manifest만 적용하고 중복 target이면 시작하지 않는다. |
+| prevention rule | 배포 직후 browser smoke 전에 실제 저장된 overlay 행(`LayoutExtension`)과 served layout을 읽기 전용으로 확인한다. 모듈의 overlay manifest는 target layout마다 정확히 하나. 같은 target에 필요한 injection은 한 파일에 모으고 priority는 그 파일 전체에 대해 정한다. 배포 전 시뮬레이션은 설치 계약(`persistedOverlays`)이 고른 manifest만 적용하고 중복 target이면 시작하지 않는다. |
 | related regression test | `modules/_bundled/raonslab-product/resources/js/infoPolicy.test.ts`(`overlay 저장 계약(모듈 + target layout 당 1행)` — 실패 후보 재현 포함); `scripts/taxonomy.mjs --check`(중복 target이면 exit 1); `tests/browser/overlay-simulation.cjs` |
-| related commit/request_id | 실패 후보 `c64085b2`; 롤백 `4d9856dc`; 복원 `3996c8a0`; 수정 = 이 CASE를 포함한 commit; `req_04b635bdc600403cbf7a3795159ce168` |
+| verification after fix | 수정본 `888e11c2` 재배포: 새 백업 `g7-product-20260928T140533Z.tar.gz`(source-sha `4d9856dc`) → `module:update` 0.4.1 → 배포 후 persisted `_user_base` 행 1개(priority 400, injection 3개, `rh_gnav_root`·`linkGroups`·`data-rh-commerce-suppressed`)를 browser 전에 확인 → smoke(content gate off) 1256 / 0 → Page 교체 → smoke(content gate on) 1304 / 0. |
+| related commit/request_id | 실패 후보 `c64085b2`; 롤백 `4d9856dc`; 복원 `3996c8a0`; 수정 `888e11c2`; `req_04b635bdc600403cbf7a3795159ce168` |
 
 ## 권위 경로
 

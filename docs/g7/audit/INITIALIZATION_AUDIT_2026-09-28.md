@@ -27,17 +27,17 @@
 
 | slug | 그룹(0.4.1) | PUBLIC OUTPUT 제목(ko) | DB version / 출처 | published_at | 판정 |
 |---|---|---|---|---|---|
-| about | 정보 1 | 그누보드7 소개 | v1, PageSeeder 샘플 원문 | 00:59:16 | **P0** G7 홍보문을 회사 소개로 노출 |
+| about | 정보 1 | RAON Agent Factory 소개 | **v2**(2026-09-28 재배포, actor 1), v1 이력 유지 | 00:59:16 | **PASS** — 샘플 교체 완료(이전 P0) |
 | service | 정보 2 | 서비스 소개 | v1, RAON native | 18:44:35 | PASS(본문) / P2 H2·H3 중복 제목 |
 | cases | 정보 3 | 구현 사례 | v1, RAON native | 18:44:35 | PASS |
 | technology | 정보 4 | 기술·검증 원칙 | v1, RAON native | 18:44:35 | PASS |
-| faq | 정보 5 | 자주 묻는 질문 | v1, 샘플 원문 | 00:59:16 | **P0** 운영 시간·처리 기한·메일 발송 미검증 약속 |
-| contact | 정보 6 | 문의하기 | v1, 샘플 원문 | 00:59:16 | **P0** `[… 입력하세요.]` 자리표시자 |
+| faq | 정보 5 | 자주 묻는 질문 | **v2**(actor 1), v1 이력 유지 | 00:59:16 | **PASS** — 미검증 운영 약속 제거(이전 P0) |
+| contact | 정보 6 | 문의·상담 안내 | **v2**(actor 1), v1 이력 유지 | 00:59:16 | **PASS** — 자리표시자 제거(이전 P0) |
 | privacy | 정책 1 | 개인정보 처리 안내 | v4(= v4 스냅샷), 샘플 → RAON | 18:47:32 | PASS |
 | terms | 정책 2 | 서비스·커뮤니티 이용 원칙 | v2, 샘플 → RAON | 18:44:35 | PASS |
 | ai-workspace-policy | 정책 3 | AI 작업공간 접근·데이터·실행 권한 정책 | v1, RAON native | 18:44:35 | PASS |
 | open-source | 정책 4 | 오픈소스·라이선스 고지 | v1, RAON native | 18:44:35 | PASS |
-| refund | 정책 5 | 취소/반품/교환 정책 | v1, 샘플 원문 | 00:59:16 | **P0** 없는 쇼핑 정책 + 자리표시자 |
+| refund | 정책 5 | 결제·취소·환불 안내 | **v2**(actor 1), v1 이력 유지 | 00:59:16 | **PASS** — 쇼핑 정책·자리표시자 제거(이전 P0) |
 
 - 11개 모두 공개 API 200, 발행 상태. DB에 다른 Page 행 없음(기술 감사).
 - 샘플 4종의 v1 의미 지문(기술 감사) = `PageSeeder` 원문 재계산값: about `a422a20f…8338`, faq `7d1af3c3…979c`, contact `789463ce…eadd`, refund `473df9e9…e5fc` — 정확히 일치(PHPUnit으로 고정).
@@ -78,7 +78,7 @@
 | 모듈로 봇 footer 변경 가능? | 불가. `SeoConfigMerger` 병합 순서 모듈 → 플러그인 → 템플릿(최종 우선)이라 모듈 `seo-config.json`이 `footer_nav`를 덮지 못한다 |
 | 조치 | human footer는 0.4.1 분류(6+5)로 생성. smoke가 문구+목적지(렌더된 `linkGroups` prop)를 단언. 봇 footer는 §7 제안 |
 
-## 5. 0.4.1 source 변경 요약 (이 요청 — 1차 배포 실패·롤백, 수정본 미배포)
+## 5. 0.4.1 source 변경 요약 (이 요청 — 1차 배포 실패·롤백, 수정본 `888e11c2` 배포 완료)
 
 | 영역 | 변경 | 파일 |
 |---|---|---|
@@ -109,7 +109,11 @@
 | 1차 배포 gate 5 (`c64085b2`, content gate off) | runtime 0.4.1 | **1116 PASS / 140 FAIL** — 같은 `_user_base` overlay 파일 2개가 설치 시 덮어써짐(Troubleshooting CASE 9). 즉시 롤백 |
 | 롤백 검증 (`4d9856dc` = `390cdc7a` 트리, 0.4.0) | runtime | 14 routes, 301, 0.4.0 smoke **451 / 0**. Page DB 교체 미실행(about/faq/contact/refund v1 유지) |
 | 수정본 정적 계약 | manifest target 중복 검사·실패 후보 재현·시뮬레이션 계약 | vitest 77/77 PASS, `taxonomy:check` clean, 실패 후보 복원 시 3건 FAIL·check가 중복 보고 |
-| release gate | 수정본 배포 + DB 적용 뒤 smoke 1회(content gate on) | 미실행 |
+| 재배포 gate 5 (`888e11c2`, persisted overlay) | `LayoutExtension` 행·served `page/show.json` | PASS — sirsoft-basic(template 2)에 모듈 target별 1행, `_user_base` 행 id 41 priority 400 active, injection `main_content_area/prepend_child`·`footer/inject_props`·`header_currency_inject_anchor/replace`, `rh_gnav_root`·`linkGroups`(커뮤니티 5·정보 6·정책 5)·`data-rh-commerce-suppressed` 존재, 이커머스 선택기 0 |
+| 재배포 gate 6 smoke (content gate off) | runtime 0.4.1 | **1256 PASS / 0 FAIL** |
+| 재배포 Page 교체 | pack `88e7e7b0…85f7`, `--actor=1` | dry-run 4 `would_update` → apply 4 `updated` → replay 4 `already_applied`; 4개 모두 `current_version=2`, 발행 유지, versions 1·2, v2 작성자 1 |
+| release gate — 최종 smoke (content gate on) | 11 slug × 360/390/412/1280 + en + bot SEO 11 slug + legacy 301 | **1304 PASS / 0 FAIL** (content gate 48/48, bot SEO 44/44) |
+| 외부 검토 URL `203.245.29.156:58770` | about/faq/contact/refund × 1280/390, 일반 Chrome UA | 200, RAON 제목·본문, 샘플·자리표시자 없음, 1280 우측 sticky 메뉴 11개 taxonomy 순서·현재 위치, 390 닫힌 disclosure·같은 11개 링크, overflow 없음 |
 | ext:docgen `--check` | raonslab-product | 기존 문서 구조 미도입(F19) |
 | G7 AI 도구 | `docs/ai-tools/**` MCP·skills | source-review만, 연결·호출하지 않음 |
 
@@ -133,8 +137,8 @@
 
 | ID | 우선 | 층위 | 조치 | 담당 lane | 선행 |
 |---|---|---|---|---|---|
-| B1 | P0 | DB | about/faq/contact/refund content pack v1(`/tmp/rh-pack/pack.canonical.json`, SHA-256 `88e7e7b0…85f7`, envelope·pages 검증 통과)으로 `raonslab-product:remediate-info-pages "$PACK" --actor=… --sha256=88e7…85f7` 적용(dry-run → apply → 재실행 already_applied) | 콘텐츠·DB lane | B2, 백업, payload sha256 승인 |
-| B2 | P1 | RUNTIME | 0.4.1 수정본 재배포(1차 `c64085b2`는 gate 5 실패 후 롤백, CASE 9): `module:update` → 새 프로세스 `route:clear`/`route:cache` → `g7-product-fpm` reload → smoke(content gate off) | 배포 lane | source 리뷰 |
+| B1 | ~~P0~~ DONE | DB | about/faq/contact/refund content pack v1(`88e7e7b0…85f7`) 적용 완료 — 4개 v2, replay already_applied | 콘텐츠·DB lane | 완료 2026-09-28 |
+| B2 | ~~P1~~ DONE | RUNTIME | 0.4.1 수정본 `888e11c2` 재배포 완료(1차 `c64085b2`는 gate 5 실패 후 롤백, CASE 9). 백업 `g7-product-20260928T140533Z.tar.gz` | 배포 lane | 완료 2026-09-28 |
 | B3 | P1 | ADMIN CONFIG | 샘플 게시판 `new-board` 비활성화(게시물 0건 확인 후, 삭제 아님) | 관리 lane | — |
 | B4 | P1 | RUNTIME/ADMIN CONFIG | `APP_URL`·sitemap host 단일화 후 sitemap 재생성(중복·`localhost` 제거), 결제 미운영 동안 `/shop/products` sitemap 제외 여부 결정 | 배포 lane | — |
 | B5 | P1 | SOURCE(템플릿 upstream) | §7 제안 4건을 upstream 또는 템플릿 fork 정책으로 결정 | 제품·기술 결정 | — |
