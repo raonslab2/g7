@@ -1,8 +1,9 @@
 # RAON Agent Factory 제품 모듈
 
 G7 코어와 공식 `sirsoft-basic` 템플릿을 수정하지 않고 사업 홈, 제품 UX, 구축 상담 폐루프를 제공합니다.
-홈 교체와 공개 정보·정책 화면 7종은 Layout Extension과 모듈 route로 제공하고, 스타일과 런타임은
-공식 모듈 에셋 수명주기를 사용합니다. 신규 상담은 공개 비활성·항상 비밀·관리자 전용 G7 board에
+홈은 Layout Extension으로, 공개 정보·정책 문서 7종은 공식 `sirsoft-page`와 `/page/{slug}`로 제공합니다.
+이 모듈은 native Page 화면의 RAON navigation·presentation과 기존 URL 301 호환만 소유하며 본문·SEO·버전은
+Page 관리자와 DB가 소유합니다. 스타일과 런타임은 공식 모듈 에셋 수명주기를 사용합니다. 신규 상담은 공개 비활성·항상 비밀·관리자 전용 G7 board에
 공식 `PostService`로 저장하며 검색·알림·AI 작업공간으로 자동 전달하지 않습니다. 기존 product 상담
 테이블은 migration을 바꾸지 않고 legacy 감사 경계로만 남으며 데이터가 있으면 신규 접수를 닫습니다.
 
@@ -19,4 +20,12 @@ HTTPS 공개 설정을 운영자가 모두 제공한 뒤에만 `RAON_CONSULTATIO
 /usr/bin/php8.3 artisan module:activate raonslab-product
 ```
 
-제품 정의와 공개 전 조건은 [docs/README.md](docs/README.md)를 참고합니다.
+승인된 native Page export를 새 환경에 준비할 때는 먼저 dry-run하고, 같은 파일로 bootstrap합니다. 이 명령은
+기존 slug를 수정하지 않습니다.
+
+```bash
+/usr/bin/php8.3 artisan raonslab-product:bootstrap-pages /secure/approved-raon-pages.json --dry-run
+/usr/bin/php8.3 artisan raonslab-product:bootstrap-pages /secure/approved-raon-pages.json
+```
+
+제품 정의, native Page 운영 계약과 공개 전 조건은 [docs/README.md](docs/README.md)를 참고합니다.

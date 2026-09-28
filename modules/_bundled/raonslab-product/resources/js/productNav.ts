@@ -9,11 +9,26 @@
 
 const TRIGGER = '[data-rh-menu-trigger]';
 
-/** `/ko/info/services/` 같은 경로를 라우트 비교용 `/info/services` 로 정규화한다. */
+const PAGE_GROUPS: Record<string, 'info' | 'policy'> = {
+  service: 'info',
+  cases: 'info',
+  technology: 'info',
+  privacy: 'policy',
+  terms: 'policy',
+  'ai-workspace-policy': 'policy',
+  'open-source': 'policy',
+};
+
+/** `/ko/page/service/` 같은 경로에서 언어 prefix와 끝 슬래시를 제거한다. */
 export function normalizePath(pathname: string): string {
   const trimmed = pathname.replace(/\/+$/, '') || '/';
-  const match = trimmed.match(/^\/[a-z]{2}(?:-[A-Za-z]{2})?(\/(?:info|policy)\/.*)$/);
+  const match = trimmed.match(/^\/[a-z]{2}(?:-[A-Za-z]{2})?(\/.*)$/);
   return match ? match[1] : trimmed;
+}
+
+export function productPageGroup(pathname: string): 'info' | 'policy' | null {
+  const match = normalizePath(pathname).match(/^\/page\/([a-z0-9-]+)$/);
+  return match ? PAGE_GROUPS[match[1]] ?? null : null;
 }
 
 function panelOf(trigger: HTMLElement): HTMLElement | null {
@@ -128,7 +143,7 @@ export function syncProductNav(): void {
   if (lastPath !== null && lastPath !== path) closeAllMenus();
   lastPath = path;
 
-  document.querySelectorAll<HTMLAnchorElement>('.rh-gnav a[data-rh-nav-path], .rh-doc a[data-rh-nav-path]').forEach((link) => {
+  document.querySelectorAll<HTMLAnchorElement>('.rh-gnav a[data-rh-nav-path], .rh-native-side a[data-rh-nav-path]').forEach((link) => {
     const current = link.dataset.rhNavPath === path && path !== '/';
     if (current) {
       if (link.getAttribute('aria-current') !== 'page') link.setAttribute('aria-current', 'page');
@@ -140,7 +155,7 @@ export function syncProductNav(): void {
   document.querySelectorAll<HTMLElement>('.rh-gnav-group[data-rh-menu]').forEach((group) => {
     const trigger = group.querySelector<HTMLElement>(TRIGGER);
     if (!trigger) return;
-    const active = path.startsWith(`/${group.dataset.rhMenu}/`);
+    const active = productPageGroup(path) === group.dataset.rhMenu;
     if (active) trigger.dataset.current = 'true';
     else delete trigger.dataset.current;
   });

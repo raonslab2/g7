@@ -1,0 +1,88 @@
+{
+  "target_layout": "page/show",
+  "priority": 25,
+  "injections": [
+    {
+      "target_id": "page_content_card",
+      "position": "inject_props",
+      "props": {
+        "className": "{{['service','cases','technology','privacy','terms','ai-workspace-policy','open-source'].includes(page?.data?.slug) ? 'rh-native-page-card' : 'bg-white dark:bg-gray-800 rounded-lg shadow p-10'}}"
+      }
+    },
+    {
+      "target_id": "page_content_card",
+      "position": "prepend_child",
+      "components": [
+        {
+          "id": "rh_native_page_breadcrumb",
+          "type": "basic",
+          "name": "Nav",
+          "if": "{{['service','cases','technology','privacy','terms','ai-workspace-policy','open-source'].includes(page?.data?.slug)}}",
+          "props": {
+            "className": "rh-native-breadcrumb",
+            "aria-label": "$t:raonslab-product.native_page.breadcrumb_label"
+          },
+          "children": [
+            {
+              "type": "basic",
+              "name": "A",
+              "props": { "href": "/", "className": "rh-crumb-link" },
+              "text": "$t:raonslab-product.footer.home",
+              "actions": [{ "type": "click", "handler": "navigate", "params": { "path": "/" } }]
+            },
+            { "type": "basic", "name": "Span", "props": { "aria-hidden": "true" }, "text": "/" },
+            { "type": "basic", "name": "Span", "props": { "aria-current": "page" }, "text": "{{page?.data?.title ?? ''}}" }
+          ]
+        }
+      ]
+    },
+    {
+      "target_id": "page_html_content",
+      "position": "prepend",
+      "components": [
+        {
+          "id": "rh_native_page_side_navigation",
+          "type": "basic",
+          "name": "Nav",
+          "if": "{{['service','cases','technology','privacy','terms','ai-workspace-policy','open-source'].includes(page?.data?.slug)}}",
+          "props": {
+            "className": "rh-native-side",
+            "aria-label": "$t:raonslab-product.native_page.navigation_label"
+          },
+          "children": [
+            { "type": "basic", "name": "P", "props": { "className": "rh-side-label" }, "text": "$t:raonslab-product.nav.info" },
+            {
+              "type": "basic",
+              "name": "Ul",
+              "props": { "className": "rh-side-list" },
+              "children": [
+                { "type": "basic", "name": "Li", "children": [{ "type": "basic", "name": "A", "props": { "href": "/page/service", "className": "rh-side-link", "data-rh-nav-path": "/page/service" }, "text": "$t:raonslab-product.nav.info_services", "actions": [{ "type": "click", "handler": "navigate", "params": { "path": "/page/service" } }] }] },
+                { "type": "basic", "name": "Li", "children": [{ "type": "basic", "name": "A", "props": { "href": "/page/cases", "className": "rh-side-link", "data-rh-nav-path": "/page/cases" }, "text": "$t:raonslab-product.nav.info_cases", "actions": [{ "type": "click", "handler": "navigate", "params": { "path": "/page/cases" } }] }] },
+                { "type": "basic", "name": "Li", "children": [{ "type": "basic", "name": "A", "props": { "href": "/page/technology", "className": "rh-side-link", "data-rh-nav-path": "/page/technology" }, "text": "$t:raonslab-product.nav.info_principles", "actions": [{ "type": "click", "handler": "navigate", "params": { "path": "/page/technology" } }] }] }
+              ]
+            },
+            { "type": "basic", "name": "P", "props": { "className": "rh-side-label rh-native-side-policy-label" }, "text": "$t:raonslab-product.nav.policy" },
+            {
+              "type": "basic",
+              "name": "Ul",
+              "props": { "className": "rh-side-list" },
+              "children": [
+                { "type": "basic", "name": "Li", "children": [{ "type": "basic", "name": "A", "props": { "href": "/page/privacy", "className": "rh-side-link", "data-rh-nav-path": "/page/privacy" }, "text": "$t:raonslab-product.nav.policy_privacy", "actions": [{ "type": "click", "handler": "navigate", "params": { "path": "/page/privacy" } }] }] },
+                { "type": "basic", "name": "Li", "children": [{ "type": "basic", "name": "A", "props": { "href": "/page/terms", "className": "rh-side-link", "data-rh-nav-path": "/page/terms" }, "text": "$t:raonslab-product.nav.policy_community", "actions": [{ "type": "click", "handler": "navigate", "params": { "path": "/page/terms" } }] }] },
+                { "type": "basic", "name": "Li", "children": [{ "type": "basic", "name": "A", "props": { "href": "/page/ai-workspace-policy", "className": "rh-side-link", "data-rh-nav-path": "/page/ai-workspace-policy" }, "text": "$t:raonslab-product.nav.policy_ai", "actions": [{ "type": "click", "handler": "navigate", "params": { "path": "/page/ai-workspace-policy" } }] }] },
+                { "type": "basic", "name": "Li", "children": [{ "type": "basic", "name": "A", "props": { "href": "/page/open-source", "className": "rh-side-link", "data-rh-nav-path": "/page/open-source" }, "text": "$t:raonslab-product.nav.policy_oss", "actions": [{ "type": "click", "handler": "navigate", "params": { "path": "/page/open-source" } }] }] }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "target_id": "page_html_content",
+      "position": "inject_props",
+      "props": {
+        "className": "{{['service','cases','technology','privacy','terms','ai-workspace-policy','open-source'].includes(page?.data?.slug) ? 'rh-native-content' : 'text-gray-700 dark:text-gray-300'}}"
+      }
+    }
+  ]
+}
