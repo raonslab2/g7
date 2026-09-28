@@ -12,6 +12,7 @@ const en = readJson(resolve(root, 'lang/en.json'));
 const moduleManifest = readJson(resolve(root, '../module.json'));
 const compatibilityRoutes = readFileSync(resolve(root, '../src/routes/compatibility.php'), 'utf8');
 const redirectController = readFileSync(resolve(root, '../src/Http/Controllers/LegacyPageRedirectController.php'), 'utf8');
+const mainCss = readFileSync(resolve(root, 'css/main.css'), 'utf8');
 
 type Node = {
   name?: string;
@@ -72,7 +73,7 @@ describe('native Page 정보·정책 계약', () => {
     for (const legacy of Object.keys(LEGACY)) expect(navHrefs, legacy).not.toContain(legacy);
   });
 
-  it('공식 page/show overlay로 breadcrumb·side navigation·presentation card만 꾸민다', () => {
+  it('공식 page/show overlay의 breadcrumb를 responsive presentation invariant로 사용한다', () => {
     expect(nativePage.target_layout).toBe('page/show');
     expect(nativePage.injections.map((item: { target_id: string; position: string }) => [item.target_id, item.position])).toEqual([
       ['page_content_card', 'inject_props'],
@@ -81,10 +82,13 @@ describe('native Page 정보·정책 계약', () => {
     ]);
     expect(JSON.stringify(nativePage)).toContain('page?.data?.slug');
     expect(JSON.stringify(nativePage)).not.toContain('"content":');
-    expect(nativePage.injections[0].props.className).toContain('rh-native-page-card');
+    expect(JSON.stringify(nativePage.injections[1].components)).toContain('rh-native-breadcrumb');
     expect(nativePage.injections.some((injection: any) => (
       injection.target_id === 'page_html_content' && injection.position === 'inject_props'
     ))).toBe(false);
+    expect(mainCss).toContain('body.raon-product #main_content :has(> .rh-native-breadcrumb) {');
+    expect(mainCss).toContain('body.raon-product #main_content :has(> .rh-native-breadcrumb)::after {');
+    expect(mainCss).toContain('body.raon-product #main_content :has(> .rh-native-breadcrumb) #page_html_content {');
   });
 
   it('본문을 담았던 product route/layout/translation은 제거된다', () => {

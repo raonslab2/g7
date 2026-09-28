@@ -18,11 +18,19 @@ const PAGES = [
   ['ai-workspace-policy', '/policy/ai-workspace'],
   ['open-source', '/policy/open-source'],
 ];
+const USER_AGENTS = {
+  mobile: 'Mozilla/5.0 (Linux; Android 14; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Mobile Safari/537.36',
+  desktop: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36',
+};
 const results = [];
 const record = (scope, check, ok, detail = '') => results.push({ scope, check, status: ok ? 'PASS' : 'FAIL', detail: String(detail).slice(0, 300) });
 
 async function inspectPage(browser, viewport, slug, locale = 'ko') {
-  const context = await browser.newContext({ viewport, locale: locale === 'ko' ? 'ko-KR' : 'en-US' });
+  const context = await browser.newContext({
+    viewport,
+    locale: locale === 'ko' ? 'ko-KR' : 'en-US',
+    userAgent: viewport.width <= 412 ? USER_AGENTS.mobile : USER_AGENTS.desktop,
+  });
   await context.addInitScript((value) => localStorage.setItem('g7_locale', value), locale);
   const page = await context.newPage();
   const errors = [];
@@ -36,24 +44,38 @@ async function inspectPage(browser, viewport, slug, locale = 'ko') {
     const canonical = document.querySelector('link[rel="canonical"]')?.getAttribute('href') || '';
     const current = [...document.querySelectorAll('.rh-native-side [aria-current="page"]')]
       .map((node) => node.getAttribute('href'));
+    const breadcrumb = document.querySelector('.rh-native-breadcrumb');
+    const presentationHost = breadcrumb?.parentElement;
+    const content = document.querySelector('#page_html_content');
+    const hostAfter = presentationHost ? getComputedStyle(presentationHost, '::after') : null;
+    const contentStyle = content ? getComputedStyle(content) : null;
     return {
       title: document.querySelector('h1')?.textContent?.trim() || '',
       contentLength: document.querySelector('#page_html_content')?.textContent?.trim().length || 0,
       hardcodedBodyPresent: Boolean(document.querySelector('.rh-doc[data-rh-page]')),
+      humanAppDom: !navigator.userAgent.includes('HeadlessChrome') && Boolean(document.querySelector('#page_content_card')),
       horizontalOverflow: document.documentElement.scrollWidth > document.documentElement.clientWidth + 1,
       canonical,
       current,
       sidePosition: getComputedStyle(document.querySelector('.rh-native-side')).position,
-      presentationClassApplied: document.querySelector('#page_content_card')?.classList.contains('rh-native-page-card') === true,
+      presentationAnchorApplied: Boolean(
+        breadcrumb && presentationHost
+        && presentationHost.querySelector(':scope > .rh-native-breadcrumb') === breadcrumb
+      ),
+      clearfixApplied: hostAfter?.display === 'block' && hostAfter?.clear === 'both',
+      contentWrapApplied: contentStyle?.overflowWrap === 'break-word',
       links: [...document.querySelectorAll('.rh-gnav a, footer a')].map((node) => node.getAttribute('href')).filter(Boolean),
       expected: `/page/${expectedSlug}`,
     };
   }, slug);
   const scope = `${locale}/${viewport.width}/${slug}`;
   record(scope, 'HTTP 200', response?.status() === 200, response?.status());
+  record(scope, 'normal browser UA renders human app DOM', state.humanAppDom);
   record(scope, 'native title/content render', state.title.length > 0 && state.contentLength > 100, `${state.title}:${state.contentLength}`);
   record(scope, 'single native presentation', !state.hardcodedBodyPresent, 'legacy rh-doc shell absent');
-  record(scope, 'RAON presentation class reaches DOM', state.presentationClassApplied);
+  record(scope, 'breadcrumb anchors RAON presentation DOM', state.presentationAnchorApplied);
+  record(scope, 'presentation clearfix survives responsive props', state.clearfixApplied);
+  record(scope, 'native content wrapping survives responsive props', state.contentWrapApplied);
   record(scope, 'no horizontal overflow', !state.horizontalOverflow);
   record(scope, 'canonical native URL', state.canonical.endsWith(path), state.canonical);
   record(scope, 'side current link', state.current.includes(`/page/${slug}`), state.current.join(','));
@@ -83,7 +105,12 @@ async function inspectPage(browser, viewport, slug, locale = 'ko') {
     }
     for (const slug of ['service', 'privacy', 'terms']) await inspectPage(browser, VIEWPORTS[1], slug, 'en');
 
-    const regression = await browser.newPage();
+    const regressionContext = await browser.newContext({
+      viewport: VIEWPORTS[3],
+      locale: 'ko-KR',
+      userAgent: USER_AGENTS.desktop,
+    });
+    const regression = await regressionContext.newPage();
     for (const path of ['/', '/board/community', '/board/questions', '/login', '/ai']) {
       const response = await regression.goto(`${BASE}${path}`, { waitUntil: 'domcontentloaded', timeout: 30000 });
       record(`regression${path}`, 'critical route remains reachable', (response?.status() || 500) < 500, response?.status());
@@ -94,7 +121,7 @@ async function inspectPage(browser, viewport, slug, locale = 'ko') {
       return { status: response.status, enabled: body?.data?.intake_enabled };
     });
     record('regression/consultation', 'public intake remains fail-closed', intake.status === 200 && intake.enabled === false, JSON.stringify(intake));
-    await regression.close();
+    await regressionContext.close();
   } finally {
     await browser.close();
   }

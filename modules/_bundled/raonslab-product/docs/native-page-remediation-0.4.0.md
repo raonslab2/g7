@@ -10,7 +10,7 @@
 | --- | --- | --- |
 | 7개 제목·본문·발행·SEO·수정시각·version·attachment | `NATIVE_PAGE` | `PageService`, `/admin/pages`, `/api/modules/sirsoft-page/pages/{slug}`, `/page/{slug}` |
 | RAON header/footer 및 정보·정책 taxonomy | `NAVIGATION` | `/admin/menus`와 `g7_menus`는 admin sidebar 전용이고 `sirsoft-basic` public template이 소비하지 않음 |
-| breadcrumb·side navigation·dark neutral CSS·responsive behavior | `PRODUCT_UI` | `page/show` overlay가 실제 `page_content_card` DOM을 presentation anchor로 사용, G7/page core 수정 없음 |
+| breadcrumb·side navigation·dark neutral CSS·responsive behavior | `PRODUCT_UI` | `page/show` overlay가 직접 삽입한 `.rh-native-breadcrumb`를 breakpoint 불변 anchor로 사용, G7/page core 수정 없음 |
 | GDPR privacy 연결 | `SPECIAL_INTEGRATION` | plugin은 미설치. 설치 시 `privacy_policy_slug=privacy`가 `/page/privacy`를 소비하며 지금은 설정/DB 변경 없음 |
 
 ## canonical Page 계약
@@ -96,6 +96,7 @@ description으로 저장했다. 본문과 title은 native 다국어 필드다. �
   public API와 public page 검사에서 marker 0건, 임시 Sanctum token 0건을 확인했다.
 - source unit: 변경된 Vitest 1 file / 7 tests PASS(나머지 불변 4 files / 54 tests 기존 PASS 재사용);
   PHP focused 14 tests / 120 assertions PASS; production asset build PASS
-- presentation contract: `extension_point` props 주입을 제거하고 공식 overlay가 실제 basic `page_content_card`에
-  `rh-native-page-card`를 주입하도록 고정. browser smoke는 해당 DOM id/class를 직접 assertion한다.
+- presentation contract: `extension_point` props 주입을 사용하지 않고, responsive `className` 교체와 무관한
+  `.rh-native-breadcrumb` 부모 `:has(> .rh-native-breadcrumb)`에 card·clearfix·content style을 적용한다. browser
+  smoke는 360/390/412/1280에서 이 DOM anchor와 computed clearfix/content wrapping을 직접 assertion한다.
 - 최종 PHP focused tests, 360/390/412/1280 runtime browser smoke와 main/runtime SHA는 delivery 단계에서 확인한다.
