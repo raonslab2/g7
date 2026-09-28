@@ -1,5 +1,8 @@
 # RAON Agent Factory Q&A 콘텐츠
 
+> RC 주의: 현재 command는 독립 QA에서 rollback cascade와 delete/restore 알림 P1 blocker가 확인됐다.
+> 수정 후보와 독립 재승인 전에는 production에서 apply/rollback하지 않는다.
+
 ## 확인한 공식 계약
 
 - 런타임 read-only 확인: board ID `3`, slug `questions`, 이름 `질문과 답변`, 활성 상태, 답변글 사용, 최대 depth `5`, `created_at DESC`, desktop `20`/mobile `15`, category `[]`, 기존 게시글 `0`.
@@ -11,11 +14,15 @@
 
 `database/content/agent-factory-qa.v1.json`이 8개 질문·답변, 표시 순서, 답변 근거와 비공개 provenance 정의의 SSoT다. 공개 본문에는 개발용 표기를 넣지 않으며, 합성 운영 안내라는 사실은 각 행의 관리자 전용 `action_logs` provenance에 기록한다.
 
-적용 명령은 기존 활성 Q&A board와 기존 활성 super 관리자만 사용한다. 질문·답변은 공식 `PostService`로 만들고 알림은 발생시키지 않는다. provenance key + scenario key + content role로 식별하므로 제목이 바뀌어도 같은 행을 갱신하며, 중복 provenance가 있으면 쓰기 전에 중단한다.
+적용 명령은 기존 활성 Q&A board와 기존 활성 super 관리자만 사용한다. 질문·답변 쓰기는 공식
+`PostService`를 사용하고 provenance key + scenario key + content role로 식별하므로 제목이 바뀌어도
+같은 행을 갱신하며, 발견된 중복 provenance는 쓰기 전에 중단한다. 다만 현 RC는 rollback/reapply의
+알림을 완전히 억제하지 못하므로 “알림 미발송”을 충족한 것으로 판정하지 않는다.
 
 ## 적용과 식별
 
-Provider 단계에서는 아래 명령을 runtime에 실행하지 않는다. 통합 담당이 최신 main을 반영하고 공식 module lifecycle을 거친 뒤 G7 전용 runtime에서 수행한다.
+아래 명령은 사용 형태를 기록한 것이며 현재 RC에서는 실행 금지다. Q&A fix와 독립 QA 승인 뒤
+통합 담당이 최신 main과 공식 module lifecycle을 반영한 G7 전용 runtime에서만 수행한다.
 
 ```bash
 /usr/bin/php8.3 artisan raonslab-product:qa-content --dry-run
@@ -32,7 +39,9 @@ Provider 단계에서는 아래 명령을 runtime에 실행하지 않는다. 통
 /usr/bin/php8.3 artisan raonslab-product:qa-content --rollback --force
 ```
 
-롤백은 해당 provenance를 가진 질문 원글만 공식 삭제 흐름으로 처리하고 연결된 답변을 cascade soft-delete한다. 다른 게시판 데이터는 제목이 같아도 건드리지 않는다. 다시 적용하면 같은 provenance 행을 복원하므로 새 중복 행을 만들지 않는다.
+현 구현은 해당 provenance를 가진 질문 원글을 공식 삭제 흐름으로 처리하지만 `cascade_replies=true`가
+그 root 아래 provenance 없는 사용자 답글·댓글·첨부까지 soft-delete할 수 있다. 따라서 다른 게시글
+미영향 계약을 아직 충족하지 않으며, rollback은 fix와 독립 QA 전 production에서 실행하지 않는다.
 
 ## Review gate
 

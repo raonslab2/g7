@@ -19,12 +19,13 @@
 
 - Public: 사업 홈, 기존 Community/Notice/Q&A/Search, 상담 config 조회. 상담 제출은 same-origin, 유효한 동의 설정, `Idempotency-Key`가 모두 필요하다.
 - Auth: 기존 G7 회원·계정 URL을 유지한다. `/ai`는 별도 승인 사용자 흐름이며 일반 사용자에게 AI 실행 권한을 새로 열지 않는다.
-- Admin: `consultations.read`가 목록·상세를, `consultations.manage`가 메모·상태 변경을 허용한다. API가 401/403을 최종 집행한다.
+- Admin: 신규 상담은 공개 비활성·항상 비밀인 `raon-consultations` board에서 기존 admin 역할과 board 권한으로 조회·메모·상태를 처리한다. 과거 product admin API는 410과 공식 board admin 경로를 반환한다.
 
 ## IA·사용자 여정
 
 홈 순서는 Hero → 문제 → 세 상품 → 두 자체 구현 사례 → 도입 절차 → 기술·검증 원칙 → 구축 상담이다.
 상단 바로가기와 CTA는 같은 페이지 섹션으로 이동하며, 하단에서 기존 Community/Notice/Q&A/Search와 승인 사용자용 `/ai`로 이동한다.
+서비스·사례·원칙 3개 정보 화면과 개인정보·커뮤니티·AI 작업공간·오픈소스 4개 정책 화면은 직접 URL과 새로고침을 지원한다.
 
 상담 여정은 config 확인 → 접수 가능 시에만 입력 → 별도 개인정보 동의 → 제출 → 저장 성공 뒤 접수 번호 표시다.
 같은 내용 재시도는 같은 멱등성 키를 사용하고, 다른 내용에 같은 키가 쓰이면 409로 거부한다.
@@ -43,6 +44,6 @@
 
 ## Provider 경계
 
-- 이 모듈은 상담 전용 암호화 테이블만 소유한다. G7 회원·게시판·검색·알림 데이터와 AI_GCS/AgentOpt 데이터베이스에 직접 결합하지 않는다.
-- 상담 payload를 일반 게시판, 검색 인덱스, 범용 알림 payload 또는 AI 실행 요청으로 자동 전달하지 않는다.
+- 신규 상담은 G7 공식 `PostService`를 통해 공개 비활성·항상 비밀·관리자 전용 board에 저장한다. 기존 전용 상담 테이블은 migration을 바꾸지 않고 legacy 감사 대상으로만 유지한다.
+- 상담 payload를 일반 공개 게시판, 검색 인덱스, 범용 알림 payload 또는 AI 실행 요청으로 자동 전달하지 않는다.
 - G7 코어와 공식 템플릿은 수정하지 않고 Layout Extension, 모듈 route/config/middleware/provider, 공식 asset lifecycle을 사용한다.

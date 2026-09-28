@@ -8,6 +8,6 @@
 | MOBILE_STOCK 자체 구현 사례 | 모의투자 화면과 요청 단위 Provider 구현·검증 기록 | 실거래·투자 수익·외부 고객 납품 주장 금지 |
 | RAON Hub/GNUBOARD7 자체 구현 사례 | G7 확장 모듈, 기존 회원·게시판·검색·권한 보존, 검증 기록 | 고객 납품·상용 부하·장기 운영 주장 금지 |
 | 저장 뒤에만 접수 성공 | DB transaction 완료 뒤 201/200 응답, 저장 실패 503 테스트 | 메일 성공을 접수 성공 조건으로 표현하지 않음 |
-| 개인정보 보호 | encrypted cast, 전용 테이블, same-origin, RBAC, public response PII 제외 | HTTPS·정책 승인 전 실제 접수 금지 |
+| 개인정보 보호 | 공개 비활성·항상 비밀·관리자 전용 G7 board, same-origin, 검색·알림 차단, public response PII 제외 | HTTPS·정책·접근 통제 승인 전 실제 접수 금지; 기존 전용 테이블 행 존재 시 fail-closed |
 
 근거가 추가로 승인되기 전에는 고객명, 매출·수익, 가격, 기간, SLA, 담당 연락처를 공개 문구에 넣지 않는다.
