@@ -1,0 +1,107 @@
+/**
+ * 사업 홈 화면 보조 동작.
+ *
+ * - 홈이 렌더된 동안 문서 제목·설명을 홈 문구로 맞추고, 다른 화면으로 가면 원래 값으로 되돌린다.
+ * - 섹션 바로가기(`a[data-rh-jump]`)는 해시 변경 없이 스크롤·포커스만 옮긴다(라우터 재진입 방지).
+ */
+import { currentLocale, t } from './i18n';
+
+export interface DocumentMetaSnapshot {
+  title: string;
+  description: string | null;
+}
+
+/** 홈에 적용할 제목·설명. 번역 키가 풀리지 않으면 적용하지 않는다(키 노출 방지). */
+export function resolveHomeMeta(translate: (key: string) => string): DocumentMetaSnapshot | null {
+  const title = translate('home.meta_title');
+  const description = translate('home.meta_description');
+  if (title.startsWith('raonslab-product.') || description.startsWith('raonslab-product.')) return null;
+  return { title, description };
+}
+
+let original: DocumentMetaSnapshot | null = null;
+let appliedLocale: string | null = null;
+
+function descriptionTag(create: boolean): HTMLMetaElement | null {
+  let tag = document.head.querySelector<HTMLMetaElement>('meta[name="description"]');
+  if (!tag && create) {
+    tag = document.createElement('meta');
+    tag.name = 'description';
+    tag.dataset.rhCreated = 'true';
+    document.head.append(tag);
+  }
+  return tag;
+}
+
+function applyHomeMeta(): void {
+  const locale = currentLocale();
+  if (original && appliedLocale === locale && document.title !== original.title) return;
+  const meta = resolveHomeMeta(t);
+  if (!meta) return;
+  if (!original) {
+    original = { title: document.title, description: descriptionTag(false)?.content ?? null };
+  }
+  document.title = meta.title;
+  const tag = descriptionTag(true);
+  if (tag) tag.content = meta.description ?? '';
+  appliedLocale = locale;
+}
+
+function restoreMeta(): void {
+  if (!original) return;
+  document.title = original.title;
+  const tag = descriptionTag(false);
+  if (tag) {
+    if (original.description === null && tag.dataset.rhCreated === 'true') tag.remove();
+    else if (original.description !== null) tag.content = original.description;
+  }
+  original = null;
+  appliedLocale = null;
+}
+
+function prefersReducedMotion(): boolean {
+  return window.matchMedia?.('(prefers-reduced-motion: reduce)').matches ?? false;
+}
+
+export function jumpToSection(key: string): boolean {
+  const section = document.getElementById(`rh-${key}`);
+  if (!section) return false;
+  // 템플릿이 html 에 scroll-behavior: smooth 를 두므로 'auto' 로는 애니메이션이 꺼지지 않는다.
+  section.scrollIntoView({ behavior: (prefersReducedMotion() ? 'instant' : 'smooth') as ScrollBehavior, block: 'start' });
+  const heading = document.getElementById(`rh-${key}-title`);
+  (heading ?? section).focus({ preventScroll: true });
+  document.querySelectorAll<HTMLElement>('.rh-subnav-link').forEach((link) => {
+    if (link.dataset.rhJump === key) link.setAttribute('aria-current', 'true');
+    else link.removeAttribute('aria-current');
+  });
+  return true;
+}
+
+function onDocumentClick(event: MouseEvent): void {
+  if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+  const link = (event.target as Element | null)?.closest?.<HTMLAnchorElement>('a[data-rh-jump]');
+  if (!link || !link.closest('.rh-home')) return;
+  if (jumpToSection(link.dataset.rhJump ?? '')) event.preventDefault();
+}
+
+let homeSeen = false;
+
+/** DOM 변화마다 호출됩니다. */
+export function syncHomePage(): void {
+  const onHome = document.querySelector('.rh-home') !== null;
+  if (onHome) {
+    applyHomeMeta();
+    if (!homeSeen) {
+      homeSeen = true;
+      const hash = window.location.hash.replace(/^#rh-/, '');
+      if (hash !== window.location.hash && /^[a-z]+$/.test(hash)) window.setTimeout(() => jumpToSection(hash), 0);
+    }
+  } else {
+    homeSeen = false;
+    restoreMeta();
+  }
+}
+
+export function installHomePage(): void {
+  document.addEventListener('click', onDocumentClick);
+}
