@@ -164,6 +164,101 @@ class ConsultationAdminTest extends ModuleTestCase
             ->assertJsonValidationErrors(['close_outcome']);
     }
 
+    #[Test]
+    /**
+     * @scenario case=admin_pagination
+     *
+     * @effects admin_list_exposes_pagination_meta, admin_list_filter_works
+     */
+    public function list_exposes_total_page_and_per_page_for_navigation(): void
+    {
+        $first = $this->submit('admin-page-one-key');
+        $this->submit('admin-page-two-key');
+        $third = $this->submit('admin-page-three-key');
+        $third->forceFill(['status' => 'CONTACTED'])->save();
+
+        $page1 = $this->actingAs($this->admin)
+            ->getJson('/api/modules/raonslab-product/admin/consultations?per_page=2')
+            ->assertOk()
+            ->assertJsonCount(2, 'data.data')
+            ->assertJsonPath('data.meta.current_page', 1)
+            ->assertJsonPath('data.meta.last_page', 2)
+            ->assertJsonPath('data.meta.per_page', 2)
+            ->assertJsonPath('data.meta.total', 3)
+            ->assertJsonPath('data.meta.from', 1)
+            ->assertJsonPath('data.meta.to', 2);
+
+        $this->actingAs($this->admin)
+            ->getJson('/api/modules/raonslab-product/admin/consultations?per_page=2&page=2')
+            ->assertOk()
+            ->assertJsonCount(1, 'data.data')
+            ->assertJsonPath('data.meta.current_page', 2)
+            ->assertJsonPath('data.data.0.reference', $first->reference);
+
+        // 페이지 경계에서 행이 겹치거나 빠지지 않습니다.
+        $this->assertNotContains($first->reference, array_column($page1->json('data.data'), 'reference'));
+
+        $this->actingAs($this->admin)
+            ->getJson('/api/modules/raonslab-product/admin/consultations?status=NEW&per_page=1&page=2')
+            ->assertOk()
+            ->assertJsonPath('data.meta.total', 2)
+            ->assertJsonPath('data.meta.last_page', 2)
+            ->assertJsonCount(1, 'data.data');
+
+        // 범위를 벗어난 페이지는 빈 목록 + 총 건수로 응답해 화면이 "빈 페이지" 와 "상담 없음" 을 구분합니다.
+        $this->actingAs($this->admin)
+            ->getJson('/api/modules/raonslab-product/admin/consultations?per_page=2&page=9')
+            ->assertOk()
+            ->assertJsonCount(0, 'data.data')
+            ->assertJsonPath('data.meta.total', 3);
+    }
+
+    #[Test]
+    /**
+     * @scenario case=admin_read_manage_separation
+     *
+     * @effects server_abilities_reflect_manage_permission, next_status_from_server
+     */
+    public function abilities_and_next_status_come_from_the_server(): void
+    {
+        $consultation = $this->submit('admin-abilities-key');
+        $reader = $this->createAdminUser(['raonslab-product.consultations.read']);
+        $base = '/api/modules/raonslab-product/admin/consultations';
+
+        $this->actingAs($reader)->getJson($base)->assertJsonPath('data.abilities.can_manage', false);
+        $this->actingAs($reader)->getJson("{$base}/{$consultation->reference}")
+            ->assertJsonPath('data.abilities.can_manage', false)
+            ->assertJsonPath('data.next_status', 'CONTACTED');
+
+        $this->actingAs($this->admin)->getJson($base)->assertJsonPath('data.abilities.can_manage', true);
+        $this->actingAs($this->admin)->getJson("{$base}/{$consultation->reference}")
+            ->assertJsonPath('data.abilities.can_manage', true);
+
+        $this->actingAs($this->admin)
+            ->patchJson("{$base}/{$consultation->reference}/status", ['status' => 'CONTACTED'])
+            ->assertOk()
+            ->assertJsonPath('data.status', 'CONTACTED')
+            ->assertJsonPath('data.next_status', 'QUALIFIED')
+            ->assertJsonPath('data.abilities.can_manage', true);
+
+        $consultation->forceFill(['status' => 'CLOSED'])->save();
+        $this->actingAs($this->admin)->getJson("{$base}/{$consultation->reference}")
+            ->assertJsonPath('data.next_status', null);
+    }
+
+    #[Test]
+    /**
+     * @scenario case=admin_read
+     *
+     * @effects missing_consultation_returns_404
+     */
+    public function unknown_reference_returns_404_for_the_detail_screen(): void
+    {
+        $this->actingAs($this->admin)
+            ->getJson('/api/modules/raonslab-product/admin/consultations/RAON-DOES-NOT-EXIST')
+            ->assertNotFound();
+    }
+
     private function submit(string $key): Consultation
     {
         $this->postConsultation($this->syntheticPayload(), str_pad($key, 16, '-'))->assertCreated();

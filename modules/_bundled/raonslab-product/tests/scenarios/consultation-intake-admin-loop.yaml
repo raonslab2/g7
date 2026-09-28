@@ -2,12 +2,15 @@ feature: consultation_intake_admin_loop
 description: 익명 상담 접수부터 관리자 조회, 메모, 순차 상태 처리까지의 폐쇄 루프
 test_files:
   - modules/_bundled/raonslab-product/tests/Feature/ConsultationIntakeTest.php
+  - modules/_bundled/raonslab-product/tests/Feature/ConsultationIntakeHardeningTest.php
   - modules/_bundled/raonslab-product/tests/Feature/ConsultationAdminTest.php
   - modules/_bundled/raonslab-product/tests/Unit/ConsultationContractTest.php
 
 axes:
   case:
     - config_fail_closed
+    - https_fail_closed
+    - url_scheme_policy
     - request_guards
     - validation_failure
     - first_submission
@@ -21,6 +24,7 @@ axes:
     - admin_authorization
     - admin_read_manage_separation
     - admin_read
+    - admin_pagination
     - admin_mutation
     - invalid_status_transition
     - module_registration
@@ -29,6 +33,12 @@ axes:
 effects:
   - config_exposes_disabled_values
   - intake_fails_closed
+  - plain_http_request_keeps_intake_closed
+  - untrusted_forwarded_proto_ignored
+  - public_site_url_must_be_https
+  - untrusted_policy_url_rejected
+  - untrusted_url_not_published
+  - contact_urls_must_be_https
   - same_origin_enforced
   - idempotency_key_required
   - invalid_consent_rejected
@@ -41,8 +51,12 @@ effects:
   - single_record_preserved
   - idempotency_conflict_rejected
   - record_persists_across_queries
-  - storage_failure_returns_unavailable
+  - storage_failure_returns_retryable_error
   - failed_storage_creates_no_record
+  - server_failure_logged_without_pii
+  - server_failure_distinct_from_disabled
+  - post_commit_failure_keeps_success
+  - mail_not_reported_as_sent
   - log_mailer_not_marked_sent
   - mail_failure_recorded_separately
   - stored_submission_remains_successful
@@ -53,6 +67,10 @@ effects:
   - manage_permission_required_for_mutations
   - admin_list_filter_works
   - admin_detail_contains_pii_for_authorized_user
+  - missing_consultation_returns_404
+  - admin_list_exposes_pagination_meta
+  - server_abilities_reflect_manage_permission
+  - next_status_from_server
   - internal_note_history_preserved
   - ordered_status_history_preserved
   - close_outcome_preserved
@@ -64,3 +82,10 @@ effects:
   - admin_menu_registered
   - public_guards_registered
   - admin_layout_contract_validated
+  - list_pagination_controls_declared
+  - list_context_preserved
+  - list_rows_keyboard_accessible
+  - list_states_distinct
+  - detail_mutations_gated_by_server_ability
+  - detail_submit_disabled_while_pending
+  - detail_404_handled

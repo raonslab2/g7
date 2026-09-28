@@ -20,6 +20,11 @@ abstract class ModuleTestCase extends TestCase
 {
     use RefreshDatabase;
 
+    /** 접수는 https 요청에서만 열리므로 합성 요청은 https 로 보냅니다. */
+    protected const SECURE_ORIGIN = 'https://localhost';
+
+    protected const STORE_PATH = '/api/modules/raonslab-product/consultations';
+
     /**
      * 이 모듈의 집중 테스트는 코어 + 자기 additive migration만 필요합니다.
      * 루트 TestCase의 전체 번들 마이그레이션 등록을 우회해 테스트 순환을 줄입니다.
@@ -47,6 +52,7 @@ abstract class ModuleTestCase extends TestCase
     protected function enableIntake(): void
     {
         config([
+            'app.url' => 'https://consult.example.test',
             'raonslab-product-consultations.enabled' => true,
             'raonslab-product-consultations.consent_version' => 'synthetic-test-v1',
             'raonslab-product-consultations.privacy_copy' => 'Synthetic test privacy notice.',
@@ -85,12 +91,17 @@ abstract class ModuleTestCase extends TestCase
         ], $overrides);
     }
 
-    protected function postConsultation(array $payload, string $key, string $origin = 'http://localhost')
+    protected function postConsultation(array $payload, string $key, string $origin = self::SECURE_ORIGIN)
     {
         return $this->withHeaders([
             'Origin' => $origin,
             'Idempotency-Key' => $key,
-        ])->postJson('/api/modules/raonslab-product/consultations', $payload);
+        ])->postJson(self::SECURE_ORIGIN.self::STORE_PATH, $payload);
+    }
+
+    protected function getSecureConfig()
+    {
+        return $this->getJson(self::SECURE_ORIGIN.self::STORE_PATH.'/config');
     }
 
     protected function createAdminUser(array $permissions): User

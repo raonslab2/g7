@@ -2,10 +2,10 @@
 
 namespace Modules\Raonslab\Product\Http\Requests;
 
-use App\Helpers\ResponseHelper;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Validation\Rule;
+use Modules\Raonslab\Product\Http\Middleware\EnsureConsultationIntakeEnabled;
 use Modules\Raonslab\Product\Services\ConsultationConfigService;
 
 class StoreConsultationRequest extends FormRequest
@@ -17,8 +17,8 @@ class StoreConsultationRequest extends FormRequest
 
     protected function prepareForValidation(): void
     {
-        if (! app(ConsultationConfigService::class)->isIntakeEnabled()) {
-            throw new HttpResponseException(ResponseHelper::error('errors.503.message', 503));
+        if (! app(ConsultationConfigService::class)->isIntakeEnabled($this)) {
+            throw new HttpResponseException(EnsureConsultationIntakeEnabled::disabledResponse());
         }
 
         $this->merge([
