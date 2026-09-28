@@ -4,170 +4,71 @@ namespace Modules\Raonslab\Product\Tests\Feature;
 
 require_once __DIR__.'/../ModuleTestCase.php';
 
-use App\Models\User;
-use Illuminate\Support\Facades\DB;
-use Modules\Raonslab\Product\Models\Consultation;
 use Modules\Raonslab\Product\Tests\ModuleTestCase;
+use Modules\Sirsoft\Board\Models\Comment;
+use Modules\Sirsoft\Board\Models\Post;
 use PHPUnit\Framework\Attributes\Test;
 
 class ConsultationAdminTest extends ModuleTestCase
 {
-    private User $admin;
-
-    protected function setUp(): void
+    #[Test]
+    public function public_board_list_detail_feed_and_search_do_not_expose_consultations(): void
     {
-        parent::setUp();
         $this->enableIntake();
-        $this->admin = $this->createAdminUser([
-            'raonslab-product.consultations.read',
-            'raonslab-product.consultations.manage',
-        ]);
+        $receipt = $this->postConsultation($this->syntheticPayload(), 'synthetic-public-denial')
+            ->assertCreated()->json('data.reference');
+        $post = Post::where('title', $receipt)->sole();
+
+        $this->getJson('/api/modules/sirsoft-board/boards')->assertOk()
+            ->assertJsonMissing(['slug' => 'raon-consultations']);
+        $this->getJson('/api/modules/sirsoft-board/boards/board-menu')->assertOk()
+            ->assertJsonMissing(['slug' => 'raon-consultations']);
+        $this->getJson('/api/modules/sirsoft-board/boards/raon-consultations')->assertNotFound();
+        $this->getJson('/api/modules/sirsoft-board/boards/raon-consultations/posts')->assertUnauthorized();
+        $this->getJson("/api/modules/sirsoft-board/boards/raon-consultations/posts/{$post->id}")->assertUnauthorized();
+        $this->getJson('/api/modules/sirsoft-board/boards/posts/recent')->assertOk()
+            ->assertJsonMissing(['title' => $receipt]);
+        $this->getJson('/api/search?q=synthetic%40example.test&type=posts')->assertOk()
+            ->assertJsonMissing(['title' => $receipt]);
     }
 
     #[Test]
-    /**
-     * @scenario case=admin_authorization
-     *
-     * @effects admin_auth_required, admin_permission_required
-     */
-    public function guest_and_regular_user_cannot_access_admin_api(): void
+    public function authorized_admin_uses_official_board_read_reply_and_category_status_contracts(): void
     {
-        $this->getJson('/api/modules/raonslab-product/admin/consultations')->assertUnauthorized();
+        $this->enableIntake();
+        $receipt = $this->postConsultation($this->syntheticPayload(), 'synthetic-admin-flow')
+            ->assertCreated()->json('data.reference');
+        $post = Post::where('title', $receipt)->sole();
+        $admin = $this->createAdminUser([]);
 
-        $this->actingAs($this->createRegularUser())
+        $this->actingAs($admin)
+            ->getJson('/api/modules/sirsoft-board/admin/board/raon-consultations/posts')
+            ->assertOk()->assertJsonPath('data.data.0.title', $receipt)
+            ->assertJsonPath('data.data.0.content_preview', '');
+
+        $this->actingAs($admin)
+            ->getJson("/api/modules/sirsoft-board/admin/board/raon-consultations/posts/{$post->id}")
+            ->assertOk()->assertJsonPath('data.title', $receipt)
+            ->assertJsonPath('data.category', 'NEW');
+
+        $this->actingAs($admin)
+            ->postJson("/api/modules/sirsoft-board/admin/board/raon-consultations/posts/{$post->id}/comments", [
+                'content' => 'Synthetic administrator response.',
+                'is_secret' => true,
+            ])->assertCreated();
+
+        $this->actingAs($admin)
+            ->putJson("/api/modules/sirsoft-board/admin/board/raon-consultations/posts/{$post->id}", [
+                'category' => 'CONTACTED',
+            ])->assertOk()->assertJsonPath('data.category', 'CONTACTED');
+
+        $this->assertSame('CONTACTED', $post->fresh()->category);
+        $this->assertSame('Synthetic administrator response.', Comment::where('post_id', $post->id)->sole()->content);
+
+        $this->actingAs($admin)
             ->getJson('/api/modules/raonslab-product/admin/consultations')
-            ->assertForbidden();
-    }
-
-    #[Test]
-    /**
-     * @scenario case=admin_read_manage_separation
-     *
-     * @effects read_permission_allows_queries, manage_permission_required_for_mutations
-     */
-    public function read_only_admin_can_query_but_cannot_add_notes_or_change_status(): void
-    {
-        $consultation = $this->submit('admin-read-only-key');
-        $reader = $this->createAdminUser([
-            'raonslab-product.consultations.read',
-        ]);
-
-        $this->actingAs($reader)
-            ->getJson('/api/modules/raonslab-product/admin/consultations')
-            ->assertOk();
-
-        $this->actingAs($reader)
-            ->getJson("/api/modules/raonslab-product/admin/consultations/{$consultation->reference}")
-            ->assertOk();
-
-        $this->actingAs($reader)
-            ->postJson("/api/modules/raonslab-product/admin/consultations/{$consultation->reference}/notes", [
-                'note' => 'This must not be stored.',
-            ])->assertForbidden();
-
-        $this->actingAs($reader)
-            ->patchJson("/api/modules/raonslab-product/admin/consultations/{$consultation->reference}/status", [
-                'status' => 'CONTACTED',
-            ])->assertForbidden();
-
-        $this->assertDatabaseCount('raonslab_product_consultation_histories', 1);
-    }
-
-    #[Test]
-    /**
-     * @scenario case=admin_read
-     *
-     * @effects admin_list_filter_works, admin_detail_contains_pii_for_authorized_user
-     */
-    public function admin_can_list_filter_and_view_consultation(): void
-    {
-        $new = $this->submit('admin-list-new-key');
-        $contacted = $this->submit('admin-list-contacted-key');
-        $contacted->forceFill(['status' => 'CONTACTED'])->save();
-
-        $this->actingAs($this->admin)
-            ->getJson('/api/modules/raonslab-product/admin/consultations?status=CONTACTED')
-            ->assertOk()
-            ->assertJsonCount(1, 'data.data')
-            ->assertJsonPath('data.data.0.reference', $contacted->reference);
-
-        $this->actingAs($this->admin)
-            ->getJson('/api/modules/raonslab-product/admin/consultations/'.$new->reference)
-            ->assertOk()
-            ->assertJsonPath('data.email', 'synthetic@example.test')
-            ->assertJsonPath('data.message', 'This is synthetic consultation data used only by automated tests.')
-            ->assertJsonPath('data.history.0.event_type', 'CREATED');
-    }
-
-    #[Test]
-    /**
-     * @scenario case=admin_mutation
-     *
-     * @effects internal_note_history_preserved, ordered_status_history_preserved, close_outcome_preserved, admin_sensitive_fields_encrypted
-     */
-    public function note_and_ordered_status_changes_are_preserved_in_history(): void
-    {
-        $consultation = $this->submit('admin-history-key');
-
-        $this->actingAs($this->admin)
-            ->postJson("/api/modules/raonslab-product/admin/consultations/{$consultation->reference}/notes", [
-                'note' => 'Synthetic internal note.',
-            ])
-            ->assertOk()
-            ->assertJsonPath('data.history.1.event_type', 'NOTE_ADDED');
-
-        foreach (['CONTACTED', 'QUALIFIED'] as $status) {
-            $this->actingAs($this->admin)
-                ->patchJson("/api/modules/raonslab-product/admin/consultations/{$consultation->reference}/status", [
-                    'status' => $status,
-                ])->assertOk()->assertJsonPath('data.status', $status);
-        }
-
-        $this->actingAs($this->admin)
-            ->patchJson("/api/modules/raonslab-product/admin/consultations/{$consultation->reference}/status", [
-                'status' => 'CLOSED',
-                'close_outcome' => 'Synthetic outcome',
-            ])->assertOk()
-            ->assertJsonPath('data.status', 'CLOSED')
-            ->assertJsonPath('data.close_outcome', 'Synthetic outcome');
-
-        $this->assertDatabaseCount('raonslab_product_consultation_histories', 5);
-        $rawNote = DB::table('raonslab_product_consultation_histories')
-            ->where('event_type', 'NOTE_ADDED')->value('note');
-        $this->assertNotSame('Synthetic internal note.', $rawNote);
-        $this->assertNotSame(
-            'Synthetic outcome',
-            DB::table('raonslab_product_consultations')->value('close_outcome'),
-        );
-    }
-
-    #[Test]
-    /**
-     * @scenario case=invalid_status_transition
-     *
-     * @effects invalid_status_transition_rejected, close_requires_outcome
-     */
-    public function status_cannot_skip_steps_and_closed_requires_outcome(): void
-    {
-        $consultation = $this->submit('admin-invalid-status-key');
-
-        $this->actingAs($this->admin)
-            ->patchJson("/api/modules/raonslab-product/admin/consultations/{$consultation->reference}/status", [
-                'status' => 'QUALIFIED',
-            ])->assertStatus(422);
-
-        $consultation->forceFill(['status' => 'QUALIFIED'])->save();
-        $this->actingAs($this->admin)
-            ->patchJson("/api/modules/raonslab-product/admin/consultations/{$consultation->reference}/status", [
-                'status' => 'CLOSED',
-            ])->assertStatus(422)
-            ->assertJsonValidationErrors(['close_outcome']);
-    }
-
-    private function submit(string $key): Consultation
-    {
-        $this->postConsultation($this->syntheticPayload(), str_pad($key, 16, '-'))->assertCreated();
-
-        return Consultation::query()->latest('id')->firstOrFail();
+            ->assertStatus(410)
+            ->assertJsonPath('errors.deprecated', true)
+            ->assertJsonPath('errors.admin_path', '/admin/board/raon-consultations');
     }
 }

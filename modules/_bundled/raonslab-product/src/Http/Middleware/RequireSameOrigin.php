@@ -14,7 +14,10 @@ class RequireSameOrigin
         $origin = trim((string) $request->headers->get('Origin', ''));
         $expected = $request->getSchemeAndHttpHost();
 
-        if ($origin === '' || ! hash_equals($this->normalizeOrigin($expected), $this->normalizeOrigin($origin))) {
+        if (! $request->isSecure()
+            || $origin === ''
+            || ! str_starts_with(strtolower($origin), 'https://')
+            || ! hash_equals($this->normalizeOrigin($expected), $this->normalizeOrigin($origin))) {
             return ResponseHelper::forbidden('auth.permission_denied');
         }
 

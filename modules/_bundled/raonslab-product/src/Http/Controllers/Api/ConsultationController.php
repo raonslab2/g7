@@ -5,6 +5,7 @@ namespace Modules\Raonslab\Product\Http\Controllers\Api;
 use App\Helpers\ResponseHelper;
 use App\Http\Controllers\Api\Base\PublicBaseController;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use Modules\Raonslab\Product\Exceptions\IdempotencyConflictException;
 use Modules\Raonslab\Product\Http\Requests\StoreConsultationRequest;
 use Modules\Raonslab\Product\Services\ConsultationConfigService;
@@ -20,21 +21,20 @@ class ConsultationController extends PublicBaseController
         parent::__construct();
     }
 
-    public function config(): JsonResponse
+    public function config(Request $request): JsonResponse
     {
-        return ResponseHelper::success('common.success', $this->configService->publicConfig());
+        return ResponseHelper::success('common.success', $this->configService->publicConfig($request));
     }
 
     public function store(StoreConsultationRequest $request): JsonResponse
     {
         try {
             $result = $this->consultationService->submit($request->validated());
-            $consultation = $result->consultation;
 
             return ResponseHelper::success('common.success', [
-                'reference' => $consultation->reference,
-                'status' => $consultation->status->value,
-                'received_at' => $consultation->created_at?->toIso8601String(),
+                'reference' => $result->reference,
+                'status' => $result->post->category,
+                'received_at' => $result->post->created_at?->toIso8601String(),
             ], $result->created ? 201 : 200);
         } catch (IdempotencyConflictException) {
             return ResponseHelper::error('common.failed', 409);

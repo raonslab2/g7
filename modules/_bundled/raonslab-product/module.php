@@ -6,6 +6,8 @@ use App\Extension\AbstractModule;
 use Modules\Raonslab\Product\Http\Middleware\EnsureConsultationIntakeEnabled;
 use Modules\Raonslab\Product\Http\Middleware\RequireSameOrigin;
 use Modules\Raonslab\Product\Listeners\ApplyHomeSeoMeta;
+use Modules\Raonslab\Product\Services\ConsultationBoardProvisioner;
+use Throwable;
 
 /**
  * RAON 제품 서비스 모듈
@@ -28,47 +30,14 @@ class Module extends AbstractModule
         ];
     }
 
-    public function getPermissions(): array
+    public function install(): bool
     {
-        return [
-            'name' => ['ko' => 'RAON 사업 상담', 'en' => 'RAON Consultations'],
-            'description' => ['ko' => '사업 상담 접수 관리', 'en' => 'Manage business consultations'],
-            'categories' => [[
-                'identifier' => 'consultations',
-                'resource_route_key' => 'consultation',
-                'owner_key' => null,
-                'name' => ['ko' => '사업 상담', 'en' => 'Consultations'],
-                'description' => ['ko' => '사업 상담 조회 및 처리', 'en' => 'View and process consultations'],
-                'permissions' => [
-                    [
-                        'action' => 'read',
-                        'name' => ['ko' => '상담 조회', 'en' => 'View consultations'],
-                        'description' => ['ko' => '상담 목록과 상세 조회', 'en' => 'View consultation list and details'],
-                        'type' => 'admin',
-                        'roles' => ['admin'],
-                    ],
-                    [
-                        'action' => 'manage',
-                        'name' => ['ko' => '상담 처리', 'en' => 'Manage consultations'],
-                        'description' => ['ko' => '내부 메모와 상태 변경', 'en' => 'Add notes and change status'],
-                        'type' => 'admin',
-                        'roles' => ['admin'],
-                    ],
-                ],
-            ]],
-        ];
+        return $this->provisionConsultationBoard();
     }
 
-    public function getAdminMenus(): array
+    public function activate(): bool
     {
-        return [[
-            'name' => ['ko' => '사업 상담', 'en' => 'Consultations'],
-            'slug' => 'raonslab-product-consultations',
-            'url' => '/admin/consultations',
-            'icon' => 'fas fa-comments',
-            'order' => 80,
-            'permission' => 'raonslab-product.consultations.read',
-        ]];
+        return $this->provisionConsultationBoard();
     }
 
     public function getMiddleware(): array
@@ -86,5 +55,16 @@ class Module extends AbstractModule
                 'targets' => ['api.modules.raonslab-product.consultations.store'],
             ],
         ];
+    }
+
+    private function provisionConsultationBoard(): bool
+    {
+        try {
+            app(ConsultationBoardProvisioner::class)->ensureReady();
+
+            return true;
+        } catch (Throwable) {
+            return $this->failWith(__('common.failed'));
+        }
     }
 }

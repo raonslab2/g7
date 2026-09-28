@@ -10,13 +10,25 @@ use Modules\Raonslab\Product\Http\Requests\Admin\AddConsultationNoteRequest;
 use Modules\Raonslab\Product\Http\Requests\Admin\ConsultationListRequest;
 use Modules\Raonslab\Product\Http\Requests\Admin\UpdateConsultationStatusRequest;
 use Modules\Raonslab\Product\Models\Consultation;
-use Modules\Raonslab\Product\Services\ConsultationService;
 
 class ConsultationController extends AdminBaseController
 {
-    public function __construct(private ConsultationService $consultationService)
+    public function __construct()
     {
         parent::__construct();
+    }
+
+    /**
+     * @deprecated 상담 처리는 sirsoft-board 관리자 게시판에서 수행합니다.
+     */
+    public function deprecated(): JsonResponse
+    {
+        return $this->error('common.failed', 410, [
+            'deprecated' => true,
+            'board_slug' => (string) config('raonslab-product-consultations.board_slug'),
+            'admin_path' => '/admin/board/'.rawurlencode((string) config('raonslab-product-consultations.board_slug')),
+            'read_only_legacy' => true,
+        ]);
     }
 
     public function index(ConsultationListRequest $request): JsonResponse
