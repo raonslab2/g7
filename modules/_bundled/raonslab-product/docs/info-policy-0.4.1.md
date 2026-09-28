@@ -56,24 +56,43 @@
 1. 콘텐츠 pack을 승인하고 파일 전체 SHA-256을 기록한다. 이번 pack: `raon-native-pages-wave2-2026-09-28`, 51,412 bytes,
    SHA-256 `88e7e7b0e18dca947f0251ce6dd217e0f0a0c0aa73e6161dbf4c1882b0ac85f7`, 현재 위치 `/tmp/rh-pack/pack.canonical.json`
    (운영자 전용 보안 경로로 옮긴 경우 아래 경로만 바꾸고 SHA-256은 그대로 대조한다).
-2. 공식 백업.
-3. source 반영 뒤 `module:build raonslab-product --production`(이미 커밋된 dist와 같아야 함), `module:update raonslab-product --force`.
+2. 공식 백업과 새 archive 검증(배포 전, runtime HEAD `390cdc7a379e1f2b9c8e3991b241edcc59dbdd71` 상태에서):
+
+   ```bash
+   sudo systemctl start g7-product-backup.service          # oneshot, /home/mrdev/git/g7/scripts/g7-backup.sh
+   A=$(ls -t /var/backups/g7-product/g7-product-*.tar.gz | head -1)   # 방금 만든 archive인지 시각 확인
+   sha256sum -c "$A.sha256"                                # 외부 SHA-256
+   T=$(mktemp -d); tar -xzf "$A" -C "$T"
+   (cd "$T" && sha256sum -c SHA256SUMS)                    # 내부 SHA-256(database.sql.gz·migration-status.txt·persistent-files.tar.gz·source-sha.txt)
+   cat "$T/source-sha.txt"                                 # 390cdc7a379e1f2b9c8e3991b241edcc59dbdd71 이어야 한다
+   rm -rf "$T"
+   ```
+
+3. source 반영은 push → main 통합 → runtime `git pull --ff-only`만 쓴다(runtime checkout에서 직접 수정·commit 금지):
+
+   ```bash
+   git -C /home/mrdev/git/g7 pull --ff-only                # HEAD = 통합된 main commit
+   cd /home/mrdev/git/g7
+   /usr/bin/php8.3 artisan module:build raonslab-product --production
+   git status --porcelain                                  # 비어 있어야 한다(커밋된 dist와 동일). 무엇이든 나오면 중단
+   /usr/bin/php8.3 artisan module:update raonslab-product --force
+   ```
 4. 새 PHP 프로세스에서 `route:clear` → `route:cache`, `g7-product-fpm.service`만 graceful reload(Troubleshooting CASE 1).
 5. `route:list --name=raonslab-product.compatibility` 14개와 legacy 301 1건 확인.
 6. `G7_SMOKE_CONTENT_GATE=0 node modules/_bundled/raonslab-product/tests/browser/info-policy-smoke.cjs` — UI 계약 확인.
-7. 샘플 Page 교체(같은 파일·같은 SHA-256, actor는 활성 최고 관리자 ID 또는 정확한 email):
+7. 샘플 Page 교체(같은 파일·같은 SHA-256, actor는 활성 최고 관리자 ID 1 — 기존 Page 기록자와 같은 관리자, 명령이 활성·최고 관리자 여부를 다시 확인):
 
    ```bash
    cd /home/mrdev/git/g7
    PACK=/tmp/rh-pack/pack.canonical.json
    PACK_SHA256=88e7e7b0e18dca947f0251ce6dd217e0f0a0c0aa73e6161dbf4c1882b0ac85f7
    sha256sum "$PACK"   # 위 값과 같아야 한다
-   /usr/bin/php8.3 artisan raonslab-product:remediate-info-pages "$PACK" --actor=SUPER_ADMIN_ID --sha256="$PACK_SHA256" --dry-run
+   /usr/bin/php8.3 artisan raonslab-product:remediate-info-pages "$PACK" --actor=1 --sha256="$PACK_SHA256" --dry-run
    #   기대: pack_sha256: 88e7…85f7 (matches approved) / pack_id: raon-native-pages-wave2-2026-09-28
    #         base_commit: 390cdc7a…dd71 / about·faq·contact·refund: would_update
-   /usr/bin/php8.3 artisan raonslab-product:remediate-info-pages "$PACK" --actor=SUPER_ADMIN_ID --sha256="$PACK_SHA256"
+   /usr/bin/php8.3 artisan raonslab-product:remediate-info-pages "$PACK" --actor=1 --sha256="$PACK_SHA256"
    #   기대: 4개 updated
-   /usr/bin/php8.3 artisan raonslab-product:remediate-info-pages "$PACK" --actor=SUPER_ADMIN_ID --sha256="$PACK_SHA256"
+   /usr/bin/php8.3 artisan raonslab-product:remediate-info-pages "$PACK" --actor=1 --sha256="$PACK_SHA256"
    #   기대: 4개 already_applied (쓰기 없음)
    ```
 
@@ -82,14 +101,22 @@
 
 ## 롤백
 
-- source: 0.4.0 태그/커밋으로 되돌리고 3~5단계 반복. `public-commerce-chrome.json` 제거로 통화 선택기가 복구된다.
-- data: 각 Page가 배포한 목표 지문·`current_version=2` 그대로일 때만 관리자 버전 복원으로 v1을 복원(새 version 생성, 이력 삭제 없음). 이후 관리자 편집이 있으면 수동 검토.
+- source: 롤백 기준 commit은 `390cdc7a379e1f2b9c8e3991b241edcc59dbdd71`(raonslab-product 0.4.0). 0.4.1 commit들을 되돌리는 revert를 main에 push한 뒤
+  runtime에서 `git pull --ff-only` → `module:build raonslab-product --production` 후 `git status --porcelain` 비어 있음 확인 →
+  `module:update raonslab-product --force` → 4~5단계(route clear/cache, FPM reload, 14 routes·301 확인). `public-commerce-chrome.json`이 사라지면서 통화 선택기가 복구된다.
+- data: 각 Page가 배포한 목표 지문·`current_version=2` 그대로일 때만 관리자 버전 복원으로 v1 내용을 복원한다. 복원은 이력을 지우지 않고
+  **새 version v3**(내용 = v1 샘플)를 만든다. 그 뒤 같은 pack으로 이 명령을 다시 실행하면 `current_version=3`이라 `unexpected_version:3` conflict로
+  **의도적으로 거부**한다(샘플 v1 전제만 자동 교체). 다시 적용하려면 새 검토·새 사전 조건이 필요하다. 이후 관리자 편집이 있으면 수동 검토.
 
 ## 검증 기록(source 턴)
 
 - 콘텐츠 pack `raon-native-pages-wave2-2026-09-28`(SHA-256 `88e7e7b0e18dca947f0251ce6dd217e0f0a0c0aa73e6161dbf4c1882b0ac85f7`, 51,412 bytes)은 DB 없이 `NativePageContentPack::fromFile`(승인 SHA-256·감사 base_commit 대조)과 `InfoPageRemediator` pages 검증을 통과했고(한 글자 다른 SHA-256은 거부), 4개 목표 지문이 모두 원문 지문과 다르며, smoke content gate 정규식에 걸리는 문구가 없다. 본문은 저장소에 복사하지 않았다.
 
-- vitest 74/74, phpunit(ProductLayerContract·NativePageBootstrap command/unit·InfoPageRemediation) 22 tests / 225 assertions PASS.
+- vitest 74/74 PASS.
+- phpunit, worktree 고정(현 HEAD 후보 코드, 명령·환경은 `docs/g7/audit/INITIALIZATION_AUDIT_2026-09-28.md` §6.1): `InfoPageRemediationCommandTest`의
+  신규 2건 `apply_requires_the_approved_whole_file_sha256`·`pack_envelope_is_validated_before_any_page_is_read` → **2 tests / 15 assertions PASS**.
+- phpunit, 이전 실행(worktree 고정 아님 — base_path·`App\`는 운영 checkout의 동일 코어 commit, 모듈 클래스는 worktree):
+  ProductLayerContract·NativePageBootstrap command/unit·InfoPageRemediation 나머지 8건 포함 24 tests / 253 assertions PASS. 변경 없는 테스트라 고정 재실행하지 않았다.
 - 증거 분류
   | 실행 | 결과 | 분류 |
   | --- | --- | --- |

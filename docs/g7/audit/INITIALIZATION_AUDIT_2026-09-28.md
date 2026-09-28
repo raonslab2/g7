@@ -98,7 +98,8 @@
 | 검증 | 범위 | 결과 |
 |---|---|---|
 | vitest | 모듈 전체 5파일(분류 드리프트·IA 순서·footer/드롭다운/문서 메뉴 일치·ko/en 키·overlay 계약·CSS 계약·통화 억제·disclosure 키보드) | 74/74 PASS. 분류 순서를 바꾸고 재생성하지 않으면 2건 FAIL 확인(드리프트 검출) |
-| phpunit | ProductLayerContract, NativePageBootstrap command·unit, InfoPageRemediationCommand(8) | 22 tests / 225 assertions PASS (DB `g7_product_test`) |
+| phpunit — worktree 고정 실행(현 HEAD 후보 코드) | `InfoPageRemediationCommandTest`의 `aa09b6d3` 신규 2건(`apply_requires_the_approved_whole_file_sha256`, `pack_envelope_is_validated_before_any_page_is_read`)만. 명령·환경은 §6.1 | **2 tests / 15 assertions PASS**(9 + 6), 474 s, exit 0 |
+| phpunit — 이전 실행(worktree 고정 아님) | ProductLayerContract, NativePageBootstrap command·unit, InfoPageRemediationCommand 나머지 8건 | `aa09b6d3` 이후 24 tests / 253 assertions PASS. 이 실행은 `base_path()`·`App\`·`Tests\`가 운영 checkout(동일 commit `390cdc7a` 코어)에서, 모듈 클래스는 worktree에서 로드됐다 → **worktree 고정 재실행 안 함**(변경 없는 테스트, 분류: PASS-UNPINNED) |
 | phpunit 저장소 계약 | ChangelogParser, SeoNodeKeyParity | PASS |
 | phpunit 저장소 계약 | ViteOutDirContract, NoSourcemapArtifacts | 이 실행에서 `base_path()`가 운영 checkout으로 해석되어 운영 파일을 검사함 → main의 `emptyOutDir: true`(0.4.1이 수정)와 ai-workspace 활성 `.map`(F18) 검출. worktree의 추적 vite config는 모두 `false` 확인 |
 | browser smoke(새 버전) × live 0.4.0 | 11 slug × 4 viewport + en 4 + bot SEO + legacy 301 | 476 PASS / 356 FAIL — `EXPECTED_FAIL_PREDEPLOY`(결함 검출력 확인, release gate 아님, 재실행 안 함) |
@@ -108,6 +109,13 @@
 | release gate | 배포 + DB 적용 뒤 smoke 1회(content gate on) | 미실행 |
 | ext:docgen `--check` | raonslab-product | 기존 문서 구조 미도입(F19) |
 | G7 AI 도구 | `docs/ai-tools/**` MCP·skills | source-review만, 연결·호출하지 않음 |
+
+### 6.1 worktree 고정 PHPUnit 실행 기록
+
+- 명령(요청 worktree에서 1회, 분리 프로세스): `/tmp/uxr/phpt-pinned.sh --stop-on-error --stop-on-failure --log-junit /tmp/uxr/new2-junit.xml --filter "/::(apply_requires_the_approved_whole_file_sha256|pack_envelope_is_validated_before_any_page_is_read)$/" modules/_bundled/raonslab-product/tests/Feature/InfoPageRemediationCommandTest.php`
+- 환경: PHP 8.3.35, PHPUnit 11.5.56, `APP_ENV=testing`, DB `g7_product_test`(운영 DB 미접촉, `tests/bootstrap.php` 동일 DB 이름 가드 통과). 제3자 패키지만 runtime `vendor/`에서 로드하고, 임시 autoload shim이 `App\`·`Database\`·`Tests\`·composer `files` helper를 worktree로 고정했으며 `base_path()` = worktree. probe로 `App\Extension\ModuleManager`·`Tests\TestCase`·helper·`InfoPageRemediator`·`NativePageContentPack`·`PageService`가 모두 worktree 파일임을 확인. shim·`.env`(운영 DB *이름*만)·`.env.testing` 사본은 실행 후 삭제.
+- 대상 코드: HEAD `dc8ac2e8` + 테스트 파일의 명령 명시 등록(이 실행 직후 같은 내용으로 commit). 제품 코드는 `dc8ac2e8`와 동일.
+- 고정 실행에서 드러난 harness 사실(제품 결함 아님): ① vendor 없는 worktree에서는 `app/Support/SampleData/bootstrap.php`가 Faker 부재로 판단해 `FakerShim`을 alias → shim이 실제 Faker를 먼저 로드해 해소 ② 활성 설치본이 없는 base path에서는 Artisan이 provider 등록보다 먼저 생성돼 `commands()`가 반영되지 않음 → 신규 테스트가 명령을 console kernel에 명시 등록 ③ 테스트 1건마다 전체 G7 migration(약 4분).
 
 ## 7. 기본 템플릿 제한과 최소 upstream 제안 (템플릿 직접 패치 금지)
 
@@ -131,7 +139,7 @@
 | B7 | P2 | DB | `service` 본문 H2 "업무 한 개 실증" ↔ 카드 H3 "01 업무 한 개 실증" 중복 제거(PageService 편집, 별도 승인) | 콘텐츠 lane | B1 이후 |
 | B8 | P2 | RUNTIME | `raonslab-ai-workspace` 활성 dist `.map` 제거(`--production` 재빌드 + update) | 해당 모듈 lane | — |
 | B9 | P2 | SOURCE | `raonslab-product` `ext:docgen --init` 문서 구조 도입 | 모듈 lane | — |
-| B10 | P2 | SOURCE | 테스트 harness: worktree 실행 시 `base_path()`가 운영 checkout으로 추론되는 문제 — worktree 전용 vendor 또는 `APP_BASE_PATH` 고정 | 기술 lane | — |
+| B10 | P2 | SOURCE | 테스트 harness: vendor 없는 worktree에서 기본 실행은 `base_path()`·`App\`를 운영 checkout으로 해석한다(§6.1 shim으로 우회). 고정 실행 시 `NativePageBootstrapCommandTest`도 같은 명령 등록 의존(활성 설치본 필요)을 가질 것으로 보이나 **미검증** — 같은 명시 등록 적용 여부 결정, 테스트당 전체 migration 비용 축소 | 기술 lane | — |
 
 ## 9. 진실성 경계 (B1 payload 검토 기준)
 

@@ -9,9 +9,11 @@ use App\Models\User;
 use Illuminate\Auth\Events\Login;
 use Illuminate\Console\Command;
 use Illuminate\Console\OutputStyle;
+use Illuminate\Contracts\Console\Kernel as ConsoleKernel;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Event;
+use Modules\Raonslab\Product\Console\Commands\RemediateInfoPagesCommand;
 use Modules\Raonslab\Product\Providers\ProductServiceProvider;
 use Modules\Raonslab\Product\Services\InfoPageRemediator;
 use Modules\Raonslab\Product\Services\NativePageContentPack;
@@ -42,6 +44,9 @@ class InfoPageRemediationCommandTest extends PageModuleTestCase
         static::$migrated = false;
         parent::setUp();
         $this->app->register(ProductServiceProvider::class);
+        // 활성 설치본이 없는 base path(요청 worktree 등)에서는 Artisan 이 provider 등록보다 먼저 만들어져
+        // provider 의 commands() 가 반영되지 않는다. 설치 상태와 무관하게 명령을 명시 등록한다.
+        $this->app->make(ConsoleKernel::class)->registerCommand($this->app->make(RemediateInfoPagesCommand::class));
 
         Page::whereIn('slug', self::SLUGS)->get()->each->forceDelete();
         $this->runPageSeeder();
