@@ -25,20 +25,11 @@ const USER_AGENTS = {
 const results = [];
 const record = (scope, check, ok, detail = '') => results.push({ scope, check, status: ok ? 'PASS' : 'FAIL', detail: String(detail).slice(0, 300) });
 
-async function inspectPage(browser, viewport, slug, locale = 'ko') {
-  const context = await browser.newContext({
-    viewport,
-    locale: locale === 'ko' ? 'ko-KR' : 'en-US',
-    userAgent: viewport.width <= 412 ? USER_AGENTS.mobile : USER_AGENTS.desktop,
-  });
-  await context.addInitScript((value) => localStorage.setItem('g7_locale', value), locale);
-  const page = await context.newPage();
-  const errors = [];
-  page.on('pageerror', (error) => errors.push(error.message));
-  page.on('console', (message) => { if (message.type() === 'error') errors.push(message.text()); });
-
+async function inspectNativePage(page, viewport, slug, locale, errors) {
+  errors.length = 0;
   const path = `/page/${slug}`;
-  const response = await page.goto(`${BASE}${path}`, { waitUntil: 'networkidle', timeout: 30000 });
+  const localeQuery = locale === 'ko' ? '' : `?locale=${locale}`;
+  const response = await page.goto(`${BASE}${path}${localeQuery}`, { waitUntil: 'networkidle', timeout: 30000 });
   await page.waitForSelector('.rh-native-breadcrumb', { timeout: 15000 });
   const state = await page.evaluate((expectedSlug) => {
     const canonical = document.querySelector('link[rel="canonical"]')?.getAttribute('href') || '';
@@ -82,13 +73,80 @@ async function inspectPage(browser, viewport, slug, locale = 'ko') {
   record(scope, 'responsive side navigation', viewport.width <= 412 ? state.sidePosition === 'static' : state.sidePosition === 'sticky', state.sidePosition);
   record(scope, 'nav/footer contain no legacy document URL', !state.links.some((href) => /^\/(info|policy)\//.test(href)), state.links.filter((href) => /^\/(info|policy)\//.test(href)).join(','));
   record(scope, 'no browser errors', errors.length === 0, errors.join(' | '));
-  await context.close();
+}
+
+async function inspectRegressionRoutes(page) {
+  for (const path of ['/', '/board/community', '/board/questions', '/login', '/ai']) {
+    const response = await page.goto(`${BASE}${path}`, { waitUntil: 'domcontentloaded', timeout: 30000 });
+    record(`regression${path}`, 'critical route remains reachable', (response?.status() || 500) < 500, response?.status());
+  }
+}
+
+async function inspectViewport(browser, viewport) {
+  const context = await browser.newContext({
+    viewport,
+    locale: 'ko-KR',
+    userAgent: viewport.width <= 412 ? USER_AGENTS.mobile : USER_AGENTS.desktop,
+  });
+  await context.addInitScript(() => {
+    if (!localStorage.getItem('g7_locale')) localStorage.setItem('g7_locale', 'ko');
+  });
+  const page = await context.newPage();
+  const errors = [];
+  page.on('pageerror', (error) => errors.push(error.message));
+  page.on('console', (message) => { if (message.type() === 'error') errors.push(message.text()); });
+
+  try {
+    for (const [slug] of PAGES) await inspectNativePage(page, viewport, slug, 'ko', errors);
+
+    if (viewport.width === 390) {
+      await page.evaluate(() => localStorage.setItem('g7_locale', 'en'));
+      for (const slug of ['service', 'privacy', 'terms']) {
+        await inspectNativePage(page, viewport, slug, 'en', errors);
+      }
+    }
+
+    if (viewport.width === 1280) await inspectRegressionRoutes(page);
+  } finally {
+    await context.close();
+  }
+}
+
+async function inspectConsultationConfig(api) {
+  const response = await api.get('/api/modules/raonslab-product/consultations/config');
+  const status = response.status();
+  const contentType = response.headers()['content-type'] || '';
+  const rawBody = await response.text();
+  let body = null;
+  let parseError = '';
+
+  if (/^application\/json(?:;|$)/i.test(contentType)) {
+    try {
+      body = JSON.parse(rawBody);
+    } catch (error) {
+      parseError = error instanceof Error ? error.message : String(error);
+    }
+  } else {
+    parseError = `expected application/json, received ${contentType || 'no content-type'}`;
+  }
+
+  const diagnostic = `status=${status} content-type=${contentType || 'none'}`;
+  record('regression/consultation', 'config HTTP 200', status === 200, diagnostic);
+  record('regression/consultation', 'config response is JSON', parseError === '', parseError || diagnostic);
+  record(
+    'regression/consultation',
+    'public intake remains fail-closed',
+    status === 200 && parseError === '' && body?.data?.intake_enabled === false,
+    parseError || JSON.stringify({ status, intake_enabled: body?.data?.intake_enabled }),
+  );
 }
 
 (async () => {
   const browser = await chromium.launch({ headless: true });
   try {
     const api = await request.newContext({ baseURL: BASE });
+    await inspectConsultationConfig(api);
+
     for (const [slug, legacy] of PAGES) {
       const response = await api.get(`${legacy}?from=smoke`, { maxRedirects: 0 });
       record(`redirect/${slug}`, 'legacy URL is 301', response.status() === 301, response.status());
@@ -100,28 +158,7 @@ async function inspectPage(browser, viewport, slug, locale = 'ko') {
     }
     await api.dispose();
 
-    for (const viewport of VIEWPORTS) {
-      for (const [slug] of PAGES) await inspectPage(browser, viewport, slug, 'ko');
-    }
-    for (const slug of ['service', 'privacy', 'terms']) await inspectPage(browser, VIEWPORTS[1], slug, 'en');
-
-    const regressionContext = await browser.newContext({
-      viewport: VIEWPORTS[3],
-      locale: 'ko-KR',
-      userAgent: USER_AGENTS.desktop,
-    });
-    const regression = await regressionContext.newPage();
-    for (const path of ['/', '/board/community', '/board/questions', '/login', '/ai']) {
-      const response = await regression.goto(`${BASE}${path}`, { waitUntil: 'domcontentloaded', timeout: 30000 });
-      record(`regression${path}`, 'critical route remains reachable', (response?.status() || 500) < 500, response?.status());
-    }
-    const intake = await regression.evaluate(async () => {
-      const response = await fetch('/api/modules/raonslab-product/consultations/config');
-      const body = await response.json();
-      return { status: response.status, enabled: body?.data?.intake_enabled };
-    });
-    record('regression/consultation', 'public intake remains fail-closed', intake.status === 200 && intake.enabled === false, JSON.stringify(intake));
-    await regressionContext.close();
+    for (const viewport of VIEWPORTS) await inspectViewport(browser, viewport);
   } finally {
     await browser.close();
   }

@@ -99,4 +99,8 @@ description으로 저장했다. 본문과 title은 native 다국어 필드다. �
 - presentation contract: `extension_point` props 주입을 사용하지 않고, responsive `className` 교체와 무관한
   `.rh-native-breadcrumb` 부모 `:has(> .rh-native-breadcrumb)`에 card·clearfix·content style을 적용한다. browser
   smoke는 360/390/412/1280에서 이 DOM anchor와 computed clearfix/content wrapping을 직접 assertion한다.
+- 첫 delivery smoke는 제품 응답 결함이 아니라 페이지별 새 browser context가 만든 API burst 뒤 상담 config가
+  HTTP 429 HTML을 반환해 실패했고, 지침대로 source와 module을 0.3.1로 롤백했다. 후속 smoke는 viewport별 context/page
+  하나에서 7개 Page를 순차 탐색하고, 상담 config를 navigation 전에 1회 요청해 status·content type·JSON을 각각
+  검사한다. throttle 우회나 완화는 하지 않으며 runtime 재검증은 독립 gate 뒤 delivery 단계에 남긴다.
 - 최종 PHP focused tests, 360/390/412/1280 runtime browser smoke와 main/runtime SHA는 delivery 단계에서 확인한다.

@@ -10,9 +10,13 @@ const nativePage = readJson(resolve(root, 'extensions/native-page.json'));
 const ko = readJson(resolve(root, 'lang/ko.json'));
 const en = readJson(resolve(root, 'lang/en.json'));
 const moduleManifest = readJson(resolve(root, '../module.json'));
+const componentManifest = readJson(resolve(root, '../components.json'));
+const composerManifest = readJson(resolve(root, '../composer.json'));
+const packageManifest = readJson(resolve(root, '../package.json'));
 const compatibilityRoutes = readFileSync(resolve(root, '../src/routes/compatibility.php'), 'utf8');
 const redirectController = readFileSync(resolve(root, '../src/Http/Controllers/LegacyPageRedirectController.php'), 'utf8');
 const mainCss = readFileSync(resolve(root, 'css/main.css'), 'utf8');
+const browserSmoke = readFileSync(resolve(root, '../tests/browser/info-policy-smoke.cjs'), 'utf8');
 
 type Node = {
   name?: string;
@@ -106,7 +110,21 @@ describe('native Page 정보·정책 계약', () => {
 
   it('모듈은 검증한 sirsoft-page 계약을 명시한다', () => {
     expect(moduleManifest.version).toBe('0.4.0');
+    expect(componentManifest.version).toBe(moduleManifest.version);
+    expect(composerManifest.version).toBe(moduleManifest.version);
+    expect(packageManifest.version).toBe(moduleManifest.version);
     expect(moduleManifest.dependencies.modules['sirsoft-page']).toBe('>=1.1.2');
+  });
+
+  it('runtime smoke는 viewport별 한 context를 재사용하고 상담 설정을 안전하게 먼저 확인한다', () => {
+    expect(browserSmoke.match(/browser\.newContext\(/g)).toHaveLength(1);
+    expect(browserSmoke).toContain('for (const [slug] of PAGES) await inspectNativePage(page, viewport, slug');
+    expect(browserSmoke.indexOf('await inspectConsultationConfig(api)')).toBeLessThan(
+      browserSmoke.indexOf('for (const [slug, legacy] of PAGES)'),
+    );
+    expect(browserSmoke).toContain("response.headers()['content-type']");
+    expect(browserSmoke).toContain('const rawBody = await response.text()');
+    expect(browserSmoke).not.toContain('await response.json()');
   });
 
   it('기존 URL 7개를 native slug로 명시적으로 매핑하고 locale 경로도 받는다', () => {
