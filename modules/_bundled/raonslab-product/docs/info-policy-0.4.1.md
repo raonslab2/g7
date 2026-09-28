@@ -31,17 +31,23 @@
 
 `raonslab-product:remediate-info-pages {payload} --actor=ID|email [--dry-run]`
 
-payload(저장소에 두지 않음, 보안 경로의 JSON):
+payload는 콘텐츠 lane의 content pack v1 envelope다(저장소에 두지 않음, 보안 경로의 JSON):
 
 ```json
 {
-  "about":   { "title": {"ko": "…", "en": "…"}, "content": {"ko": "<…>", "en": "<…>"}, "content_mode": "html",
-               "seo_meta": {"title": "…", "description": "…", "keywords": "…(선택)"} },
-  "faq":     { … }, "contact": { … }, "refund": { … }
+  "schema": "raonslab-product.native-page-content-pack.v1",
+  "pack_id": "…",
+  "base_commit": "<40자 commit SHA>",
+  "pages": {
+    "about":   { "title": {"ko": "…", "en": "…"}, "content": {"ko": "<…>", "en": "<…>"}, "content_mode": "html",
+                 "published": true, "seo_meta": {"title": "…", "description": "…", "keywords": "…(선택)"} },
+    "faq": { … }, "contact": { … }, "refund": { … }
+  }
 }
 ```
 
-- 정확히 4개 slug, ko·en 필수, `content_mode=html`, `published` 필드 금지(발행 상태 불변), `입력하세요`·`DEMO/MOCK/SANDBOX/TEST` 문구 거부.
+- envelope 키는 정확히 4개, `schema` 일치, `base_commit`은 40자 hex. 명령은 `payload_sha256`·`schema`·`pack_id`·`base_commit`을 출력하므로 승인된 SHA-256과 대조한다.
+- `pages`는 정확히 4개 slug, ko·en 필수, `content_mode=html`, `published`는 `true`만 허용(현재 상태 선언일 뿐 `updatePage`로 넘기지 않아 발행 상태 불변), `입력하세요`·`DEMO/MOCK/SANDBOX/TEST` 문구 거부.
 - 하나의 외부 transaction에서 4행을 `lockForUpdate`로 잠그고 먼저 모두 분류한다.
   - 현재 의미 지문 = 목표 지문 → `already_applied`
   - 발행 상태 + `current_version=1` + 감사 지문(`InfoPageRemediator::SOURCE_FINGERPRINTS`) 일치 → 교체 대상
@@ -66,6 +72,8 @@ payload(저장소에 두지 않음, 보안 경로의 JSON):
 - data: 각 Page가 배포한 목표 지문·`current_version=2` 그대로일 때만 관리자 버전 복원으로 v1을 복원(새 version 생성, 이력 삭제 없음). 이후 관리자 편집이 있으면 수동 검토.
 
 ## 검증 기록(source 턴)
+
+- 콘텐츠 pack `raon-native-pages-wave2-2026-09-28`(SHA-256 `88e7e7b0e18dca947f0251ce6dd217e0f0a0c0aa73e6161dbf4c1882b0ac85f7`, 51,412 bytes)은 DB 없이 명령의 payload 검증기를 통과했고, 4개 목표 지문이 모두 원문 지문과 다르며, smoke content gate 정규식에 걸리는 문구가 없다. 본문은 저장소에 복사하지 않았다.
 
 - vitest 74/74, phpunit(ProductLayerContract·NativePageBootstrap command/unit·InfoPageRemediation) 22 tests / 225 assertions PASS.
 - 새 smoke를 live 0.4.0에 실행: 476 PASS / 356 FAIL(이번 변경이 고치는 결함을 모두 검출). 같은 smoke를 live 런타임 위에 0.4.1 layout·asset·번역을 클라이언트에서만 겹쳐 실행: 1208 PASS / 0 FAIL(content gate off), content gate on이면 샘플 4개 × 4 viewport 16건만 FAIL — DB 교체 전 예상 상태.

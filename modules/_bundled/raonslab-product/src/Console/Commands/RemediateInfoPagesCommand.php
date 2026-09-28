@@ -18,7 +18,7 @@ class RemediateInfoPagesCommand extends Command
     use ActsAsPageActor;
 
     protected $signature = 'raonslab-product:remediate-info-pages
-        {payload : Absolute path to the approved about/faq/contact/refund JSON payload}
+        {payload : Absolute path to the approved raonslab-product.native-page-content-pack.v1 JSON (about/faq/contact/refund)}
         {--actor= : Active super administrator ID or exact email for Page attribution}
         {--dry-run : Lock and classify all four Pages, report, and write nothing}';
 
@@ -46,6 +46,11 @@ class RemediateInfoPagesCommand extends Command
                 throw new JsonException('The payload root must be an object.');
             }
             $this->line('payload_sha256: '.hash_file('sha256', $path));
+            foreach (['schema', 'pack_id', 'base_commit'] as $field) {
+                if (is_string($payload[$field] ?? null)) {
+                    $this->line("{$field}: {$payload[$field]}");
+                }
+            }
 
             $results = $this->asPageActor(
                 $actor,

@@ -17,7 +17,8 @@ use RuntimeException;
  *
  * - 하나의 외부 transaction 안에서 4개 행을 모두 잠그고 분류한 뒤에만 쓴다. 하나라도 충돌이면 전부 중단한다.
  * - 쓰기는 PageService::updatePage() 로만 한다(버전 스냅샷·훅·권한 스코프 유지). raw SQL·Model save 없음.
- * - 발행 상태는 바꾸지 않는다. payload 에 published 를 넣을 수 없다.
+ * - payload 는 `raonslab-product.native-page-content-pack.v1` envelope(schema·pack_id·base_commit·pages)이다.
+ * - 발행 상태는 바꾸지 않는다. page 의 `published` 는 true 만 허용하는 사전 조건 선언이며 updatePage 로 넘기지 않는다.
  * - module install/update 가 호출하지 않는다. 명시적 CLI 명령에서만 실행된다.
  */
 class InfoPageRemediator
@@ -25,6 +26,9 @@ class InfoPageRemediator
     public const FINGERPRINT_NAMESPACE = 'g7-page-sample-v1';
 
     public const REQUIRED_VERSION = 1;
+
+    /** 콘텐츠 lane 이 만드는 승인 payload 의 envelope 스키마 */
+    public const PACK_SCHEMA = 'raonslab-product.native-page-content-pack.v1';
 
     /**
      * 기술 감사(2026-09-28)가 운영 DB 의 v1 스냅샷에서 계산하고, sirsoft-page PageSeeder 원문으로 재현한 지문.
@@ -85,7 +89,7 @@ class InfoPageRemediator
     }
 
     /**
-     * @param  array<string, mixed>  $payload
+     * @param  array<string, mixed>  $payload  content pack envelope
      * @return array<string, string> slug => already_applied|would_update|updated
      *
      * @throws InvalidArgumentException payload 가 계약을 어기면
@@ -196,22 +200,44 @@ class InfoPageRemediator
      */
     private function validatedPayload(array $payload): array
     {
-        $actualSlugs = array_keys($payload);
+        if (array_diff(array_keys($payload), ['schema', 'pack_id', 'base_commit', 'pages']) !== []
+            || count($payload) !== 4) {
+            throw new InvalidArgumentException('The content pack must contain exactly schema, pack_id, base_commit and pages.');
+        }
+        if (($payload['schema'] ?? null) !== self::PACK_SCHEMA) {
+            throw new InvalidArgumentException('Unsupported content pack schema; expected '.self::PACK_SCHEMA.'.');
+        }
+        if (! is_string($payload['pack_id']) || trim($payload['pack_id']) === '' || mb_strlen($payload['pack_id']) > 100) {
+            throw new InvalidArgumentException('The content pack pack_id is invalid.');
+        }
+        if (! is_string($payload['base_commit']) || preg_match('/^[0-9a-f]{40}$/', $payload['base_commit']) !== 1) {
+            throw new InvalidArgumentException('The content pack base_commit must be a 40-character commit SHA.');
+        }
+        if (! is_array($payload['pages'])) {
+            throw new InvalidArgumentException('The content pack pages must be an object.');
+        }
+        $pages = $payload['pages'];
+
+        $actualSlugs = array_keys($pages);
         $expectedSlugs = array_keys(self::SOURCE_FINGERPRINTS);
         sort($actualSlugs);
         sort($expectedSlugs);
         if ($actualSlugs !== $expectedSlugs) {
-            throw new InvalidArgumentException('The payload must contain exactly: '.implode(', ', array_keys(self::SOURCE_FINGERPRINTS)).'.');
+            throw new InvalidArgumentException('The content pack pages must contain exactly: '.implode(', ', array_keys(self::SOURCE_FINGERPRINTS)).'.');
         }
 
         $targets = [];
         foreach (array_keys(self::SOURCE_FINGERPRINTS) as $slug) {
-            $page = $payload[$slug];
+            $page = $pages[$slug];
             if (! is_array($page)) {
                 throw new InvalidArgumentException("Page payload [{$slug}] must be an object.");
             }
-            if (array_diff(array_keys($page), ['title', 'content', 'content_mode', 'seo_meta'])) {
-                throw new InvalidArgumentException("Page payload [{$slug}] contains an unsupported field (published state is never changed).");
+            if (array_diff(array_keys($page), ['title', 'content', 'content_mode', 'published', 'seo_meta'])) {
+                throw new InvalidArgumentException("Page payload [{$slug}] contains an unsupported field.");
+            }
+            // 발행 상태는 바꾸지 않는다. 선언이 있다면 현재 상태(발행)와 같아야 한다.
+            if (array_key_exists('published', $page) && $page['published'] !== true) {
+                throw new InvalidArgumentException("Page payload [{$slug}.published] may only declare true; publish state is never changed.");
             }
             if (($page['content_mode'] ?? null) !== 'html') {
                 throw new InvalidArgumentException("Page payload [{$slug}.content_mode] must be html.");

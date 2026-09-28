@@ -89,6 +89,8 @@ class InfoPageRemediationCommandTest extends PageModuleTestCase
             $this->assertStringContainsString("{$slug}: would_update", $output);
         }
         $this->assertStringContainsString('payload_sha256: ', $output);
+        $this->assertStringContainsString('schema: '.InfoPageRemediator::PACK_SCHEMA, $output);
+        $this->assertStringContainsString('pack_id: synthetic-pack', $output);
         $this->assertSame($before, $this->state());
     }
 
@@ -115,8 +117,8 @@ class InfoPageRemediationCommandTest extends PageModuleTestCase
             $this->assertSame($publishedAt[$slug], (string) $page->published_at, $slug);
             $this->assertSame($this->actor->id, (int) $page->updated_by, $slug);
             $this->assertSame($this->actor->id, (int) $version->created_by, $slug);
-            $this->assertSame($this->approved()[$slug]['title'], $page->title, $slug);
-            $this->assertSame($this->approved()[$slug]['seo_meta'], $page->seo_meta, $slug);
+            $this->assertSame($this->approved()['pages'][$slug]['title'], $page->title, $slug);
+            $this->assertSame($this->approved()['pages'][$slug]['seo_meta'], $page->seo_meta, $slug);
             $this->assertSame($page->content, $version->content, $slug);
         }
         $this->assertSame($versionRowsBefore + 4, PageVersion::count());
@@ -205,15 +207,24 @@ class InfoPageRemediationCommandTest extends PageModuleTestCase
         $blockedAdmin = User::factory()->create(['is_super' => true, 'blocked_at' => now()]);
         $valid = $this->approved();
 
+        $pages = $valid['pages'];
+        $pack = fn (array $override): array => array_replace_recursive($valid, $override);
+
         $invalid = [
-            'missing slug' => array_diff_key($valid, ['refund' => true]),
-            'extra slug' => $valid + ['terms' => $valid['about']],
-            'published field' => array_replace_recursive($valid, ['faq' => ['published' => false]]),
-            'placeholder text' => array_replace_recursive($valid, ['contact' => ['content' => ['ko' => '<p>[연락처 정보를 입력하세요.]</p>']]]),
-            'development label' => array_replace_recursive($valid, ['about' => ['title' => ['en' => 'About TEST']]]),
-            'text mode' => array_replace_recursive($valid, ['refund' => ['content_mode' => 'text']]),
-            'missing seo title' => array_replace_recursive($valid, ['faq' => ['seo_meta' => ['title' => '']]]),
-            'extra locale' => array_replace_recursive($valid, ['about' => ['title' => ['ja' => '概要']]]),
+            'bare page map without envelope' => $pages,
+            'unknown schema' => $pack(['schema' => 'raonslab-product.native-page-content-pack.v0']),
+            'missing pack_id' => array_diff_key($valid, ['pack_id' => true]),
+            'short base_commit' => $pack(['base_commit' => 'abc123']),
+            'extra envelope key' => $valid + ['notes' => 'x'],
+            'missing slug' => ['pages' => array_diff_key($pages, ['refund' => true])] + $valid,
+            'extra slug' => ['pages' => $pages + ['terms' => $pages['about']]] + $valid,
+            'unpublish request' => $pack(['pages' => ['faq' => ['published' => false]]]),
+            'placeholder text' => $pack(['pages' => ['contact' => ['content' => ['ko' => '<p>[연락처 정보를 입력하세요.]</p>']]]]),
+            'development label' => $pack(['pages' => ['about' => ['title' => ['en' => 'About TEST']]]]),
+            'text mode' => $pack(['pages' => ['refund' => ['content_mode' => 'text']]]),
+            'missing seo title' => $pack(['pages' => ['faq' => ['seo_meta' => ['title' => '']]]]),
+            'extra locale' => $pack(['pages' => ['about' => ['title' => ['ja' => '概要']]]]),
+            'unknown page field' => $pack(['pages' => ['about' => ['slug' => 'about-us']]]),
         ];
 
         foreach ($invalid as $case => $payload) {
@@ -279,20 +290,30 @@ class InfoPageRemediationCommandTest extends PageModuleTestCase
             ]])->all();
     }
 
-    /** @return array<string, array<string, mixed>> */
+    /**
+     * 콘텐츠 lane 의 content pack v1 과 같은 envelope 에 합성 본문을 담는다.
+     *
+     * @return array<string, mixed>
+     */
     private function approved(): array
     {
-        $payload = [];
+        $pages = [];
         foreach (self::SLUGS as $slug) {
-            $payload[$slug] = [
+            $pages[$slug] = [
                 'title' => ['ko' => "{$slug} 승인 제목", 'en' => "{$slug} approved title"],
                 'content' => ['ko' => "<p>{$slug} 승인 본문</p>", 'en' => "<p>{$slug} approved body</p>"],
                 'content_mode' => 'html',
-                'seo_meta' => ['title' => "{$slug} SEO", 'description' => "{$slug} approved description"],
+                'published' => true,
+                'seo_meta' => ['title' => "{$slug} SEO", 'description' => "{$slug} approved description", 'keywords' => "{$slug}, synthetic"],
             ];
         }
 
-        return $payload;
+        return [
+            'base_commit' => str_repeat('a', 40),
+            'pack_id' => 'synthetic-pack',
+            'pages' => $pages,
+            'schema' => InfoPageRemediator::PACK_SCHEMA,
+        ];
     }
 
     private function payloadFile(?array $payload = null): string
