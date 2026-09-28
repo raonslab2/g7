@@ -60,12 +60,14 @@
 
    ```bash
    sudo systemctl start g7-product-backup.service          # oneshot, /home/mrdev/git/g7/scripts/g7-backup.sh
-   A=$(ls -t /var/backups/g7-product/g7-product-*.tar.gz | head -1)   # 방금 만든 archive인지 시각 확인
-   sha256sum -c "$A.sha256"                                # 외부 SHA-256
-   T=$(mktemp -d); tar -xzf "$A" -C "$T"
-   (cd "$T" && sha256sum -c SHA256SUMS)                    # 내부 SHA-256(database.sql.gz·migration-status.txt·persistent-files.tar.gz·source-sha.txt)
-   cat "$T/source-sha.txt"                                 # 390cdc7a379e1f2b9c8e3991b241edcc59dbdd71 이어야 한다
-   rm -rf "$T"
+   # /var/backups/g7-product 는 root:root 0700, 백업 umask 077 → 아래 확인은 모두 root 권한으로 실행한다
+   A=$(sudo sh -c 'ls -t /var/backups/g7-product/g7-product-*.tar.gz | head -1')   # 방금 만든 archive인지 시각 확인
+   sudo ls -l --time-style=full-iso "$A" "$A.sha256"
+   sudo sha256sum -c "$A.sha256"                           # 외부 SHA-256
+   T=$(sudo mktemp -d); sudo tar -xzf "$A" -C "$T"
+   sudo sh -c "cd '$T' && sha256sum -c SHA256SUMS"         # 내부 SHA-256(database.sql.gz·migration-status.txt·persistent-files.tar.gz·source-sha.txt)
+   sudo cat "$T/source-sha.txt"                            # 390cdc7a379e1f2b9c8e3991b241edcc59dbdd71 이어야 한다
+   sudo rm -rf "$T"
    ```
 
 3. source 반영은 push → main 통합 → runtime `git pull --ff-only`만 쓴다(runtime checkout에서 직접 수정·commit 금지):
