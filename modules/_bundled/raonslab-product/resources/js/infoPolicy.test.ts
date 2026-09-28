@@ -120,8 +120,12 @@ describe('native Page 정보·정책 계약', () => {
     expect(browserSmoke.match(/browser\.newContext\(/g)).toHaveLength(1);
     expect(browserSmoke).toContain('for (const [slug] of PAGES) await inspectNativePage(page, viewport, slug');
     expect(browserSmoke.indexOf('await inspectConsultationConfig(api)')).toBeLessThan(
-      browserSmoke.indexOf('for (const [slug, legacy] of PAGES)'),
+      browserSmoke.indexOf('await inspectLegacyRedirect(api, firstSlug, firstLegacy)'),
     );
+    expect(browserSmoke).toContain("['artisan', 'route:list', '--name=raonslab-product.compatibility', '--json']");
+    expect(browserSmoke).toContain('Googlebot/2.1');
+    expect(browserSmoke).toContain("headers['x-seo-cache']");
+    expect(browserSmoke).not.toContain("document.querySelector('link[rel=\"canonical\"]')");
     expect(browserSmoke).toContain("response.headers()['content-type']");
     expect(browserSmoke).toContain('const rawBody = await response.text()');
     expect(browserSmoke).not.toContain('await response.json()');

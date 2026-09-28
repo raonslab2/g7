@@ -1,8 +1,12 @@
 #!/usr/bin/env node
 /** Focused runtime smoke for RAON native sirsoft-page documents. */
+const { spawnSync } = require('node:child_process');
+const { resolve } = require('node:path');
 const { chromium, request } = require('playwright');
 
 const BASE = (process.env.G7_BASE_URL || 'http://127.0.0.1:18770').replace(/\/$/, '');
+const REPO_ROOT = resolve(__dirname, '../../../../..');
+const PHP_BINARY = process.env.G7_PHP_BINARY || '/usr/bin/php8.3';
 const VIEWPORTS = [
   { name: '360', width: 360, height: 780 },
   { name: '390', width: 390, height: 844 },
@@ -22,8 +26,51 @@ const USER_AGENTS = {
   mobile: 'Mozilla/5.0 (Linux; Android 14; Pixel 7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Mobile Safari/537.36',
   desktop: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36',
 };
+const SEO_BOT_USER_AGENT = 'Googlebot/2.1 (+http://www.google.com/bot.html)';
 const results = [];
 const record = (scope, check, ok, detail = '') => results.push({ scope, check, status: ok ? 'PASS' : 'FAIL', detail: String(detail).slice(0, 300) });
+
+function inspectRouteList() {
+  const expectedNames = PAGES.flatMap(([, legacy]) => {
+    const suffix = legacy.slice(1).replaceAll('/', '.');
+    return [
+      `raonslab-product.compatibility.${suffix}`,
+      `raonslab-product.compatibility.localized.${suffix}`,
+    ];
+  });
+  const command = spawnSync(
+    PHP_BINARY,
+    ['artisan', 'route:list', '--name=raonslab-product.compatibility', '--json'],
+    { cwd: REPO_ROOT, encoding: 'utf8', timeout: 30000 },
+  );
+  let routes = [];
+  let parseError = '';
+
+  if (command.error) {
+    parseError = command.error.message;
+  } else if (command.status !== 0) {
+    parseError = `exit=${command.status} stderr=${command.stderr.trim() || 'none'}`;
+  } else {
+    try {
+      routes = JSON.parse(command.stdout);
+      if (!Array.isArray(routes)) parseError = 'route:list JSON root is not an array';
+    } catch (error) {
+      parseError = `invalid route:list JSON: ${error instanceof Error ? error.message : String(error)}`;
+    }
+  }
+
+  const names = Array.isArray(routes) ? routes.map((route) => route.name).filter(Boolean) : [];
+  const missing = expectedNames.filter((name) => !names.includes(name));
+  const ok = parseError === '' && names.length === expectedNames.length && missing.length === 0;
+  record(
+    'preflight/routes',
+    '14 compatibility routes are active',
+    ok,
+    parseError || `count=${names.length} missing=${missing.join(',') || 'none'}`,
+  );
+
+  return ok;
+}
 
 function inspectRedirectLocation(scope, location, expectedPathAndSearch, targetCheck) {
   let resolved = null;
@@ -52,6 +99,63 @@ function inspectRedirectLocation(scope, location, expectedPathAndSearch, targetC
     resolved !== null && `${resolved.pathname}${resolved.search}` === expectedPathAndSearch,
     parseError || `actual=${resolved?.pathname}${resolved?.search} expected=${expectedPathAndSearch}`,
   );
+
+  return resolved?.origin === expectedOrigin
+    && `${resolved.pathname}${resolved.search}` === expectedPathAndSearch;
+}
+
+async function inspectLegacyRedirect(api, slug, legacy, localized = false) {
+  const scope = localized ? `redirect/en/${slug}` : `redirect/${slug}`;
+  const requestPath = localized
+    ? `/en${legacy}?from=smoke&locale=ko`
+    : `${legacy}?from=smoke`;
+  const expected = localized
+    ? `/page/${slug}?from=smoke&locale=en`
+    : `/page/${slug}?from=smoke`;
+  const response = await api.get(requestPath, { maxRedirects: 0 });
+  const statusOk = response.status() === 301;
+  record(scope, localized ? 'localized legacy URL is 301' : 'legacy URL is 301', statusOk, response.status());
+  const locationOk = inspectRedirectLocation(
+    scope,
+    response.headers().location,
+    expected,
+    localized ? 'localized canonical uses locale query' : 'location preserves query and targets canonical',
+  );
+
+  return statusOk && locationOk;
+}
+
+async function inspectBotSeo(api, slug) {
+  const path = `/page/${slug}`;
+  const response = await api.get(path, { headers: { 'User-Agent': SEO_BOT_USER_AGENT } });
+  const status = response.status();
+  const headers = response.headers();
+  const contentType = headers['content-type'] || '';
+  const seoCache = headers['x-seo-cache'] || '';
+  const body = await response.text();
+  const canonicalTag = (body.match(/<link\b[^>]*>/gi) || [])
+    .find((tag) => /\brel\s*=\s*["']canonical["']/i.test(tag));
+  const href = canonicalTag?.match(/\bhref\s*=\s*(["'])(.*?)\1/i)?.[2] || '';
+  let canonical = null;
+  let parseError = '';
+
+  if (!href) {
+    parseError = 'missing canonical link in bot/server HTML';
+  } else {
+    try {
+      canonical = new URL(href, BASE);
+    } catch (error) {
+      parseError = `invalid canonical URL: ${error instanceof Error ? error.message : String(error)}`;
+    }
+  }
+
+  const scope = `seo/${slug}`;
+  const expectedOrigin = new URL(BASE).origin;
+  const diagnostic = `status=${status} content-type=${contentType || 'none'} x-seo-cache=${seoCache || 'none'}`;
+  record(scope, 'bot/server SEO response is HTML 200', status === 200 && /^text\/html(?:;|$)/i.test(contentType), diagnostic);
+  record(scope, 'bot request used authoritative SEO renderer', /^(HIT|MISS)$/.test(seoCache), diagnostic);
+  record(scope, 'canonical is present and same-origin', canonical?.origin === expectedOrigin, parseError || `actual=${canonical?.origin} expected=${expectedOrigin}`);
+  record(scope, 'canonical targets exact native URL', canonical !== null && `${canonical.pathname}${canonical.search}` === path, parseError || `actual=${canonical?.pathname}${canonical?.search} expected=${path}`);
 }
 
 async function inspectNativePage(page, viewport, slug, locale, errors) {
@@ -61,7 +165,6 @@ async function inspectNativePage(page, viewport, slug, locale, errors) {
   const response = await page.goto(`${BASE}${path}${localeQuery}`, { waitUntil: 'networkidle', timeout: 30000 });
   await page.waitForSelector('.rh-native-breadcrumb', { timeout: 15000 });
   const state = await page.evaluate((expectedSlug) => {
-    const canonical = document.querySelector('link[rel="canonical"]')?.getAttribute('href') || '';
     const current = [...document.querySelectorAll('.rh-native-side [aria-current="page"]')]
       .map((node) => node.getAttribute('href'));
     const breadcrumb = document.querySelector('.rh-native-breadcrumb');
@@ -75,7 +178,6 @@ async function inspectNativePage(page, viewport, slug, locale, errors) {
       hardcodedBodyPresent: Boolean(document.querySelector('.rh-doc[data-rh-page]')),
       humanAppDom: !navigator.userAgent.includes('HeadlessChrome') && Boolean(document.querySelector('#page_content_card')),
       horizontalOverflow: document.documentElement.scrollWidth > document.documentElement.clientWidth + 1,
-      canonical,
       current,
       sidePosition: getComputedStyle(document.querySelector('.rh-native-side')).position,
       presentationAnchorApplied: Boolean(
@@ -97,7 +199,6 @@ async function inspectNativePage(page, viewport, slug, locale, errors) {
   record(scope, 'presentation clearfix survives responsive props', state.clearfixApplied);
   record(scope, 'native content wrapping survives responsive props', state.contentWrapApplied);
   record(scope, 'no horizontal overflow', !state.horizontalOverflow);
-  record(scope, 'canonical native URL', state.canonical.endsWith(path), state.canonical);
   record(scope, 'side current link', state.current.includes(`/page/${slug}`), state.current.join(','));
   record(scope, 'responsive side navigation', viewport.width <= 412 ? state.sidePosition === 'static' : state.sidePosition === 'sticky', state.sidePosition);
   record(scope, 'nav/footer contain no legacy document URL', !state.links.some((href) => /^\/(info|policy)\//.test(href)), state.links.filter((href) => /^\/(info|policy)\//.test(href)).join(','));
@@ -168,38 +269,32 @@ async function inspectConsultationConfig(api) {
     status === 200 && parseError === '' && body?.data?.intake_enabled === false,
     parseError || JSON.stringify({ status, intake_enabled: body?.data?.intake_enabled }),
   );
+
+  return status === 200 && parseError === '' && body?.data?.intake_enabled === false;
 }
 
 (async () => {
-  const browser = await chromium.launch({ headless: true });
+  const routesActive = inspectRouteList();
+  const api = await request.newContext({ baseURL: BASE });
+  let browser = null;
   try {
-    const api = await request.newContext({ baseURL: BASE });
-    await inspectConsultationConfig(api);
+    const consultationReady = await inspectConsultationConfig(api);
+    const [firstSlug, firstLegacy] = PAGES[0];
+    const firstRedirectActive = await inspectLegacyRedirect(api, firstSlug, firstLegacy);
 
-    for (const [slug, legacy] of PAGES) {
-      const response = await api.get(`${legacy}?from=smoke`, { maxRedirects: 0 });
-      record(`redirect/${slug}`, 'legacy URL is 301', response.status() === 301, response.status());
-      inspectRedirectLocation(
-        `redirect/${slug}`,
-        response.headers().location,
-        `/page/${slug}?from=smoke`,
-        'location preserves query and targets canonical',
-      );
+    if (routesActive && consultationReady && firstRedirectActive) {
+      for (const [slug, legacy] of PAGES) {
+        if (slug !== firstSlug) await inspectLegacyRedirect(api, slug, legacy);
+        await inspectLegacyRedirect(api, slug, legacy, true);
+      }
+      for (const [slug] of PAGES) await inspectBotSeo(api, slug);
 
-      const localized = await api.get(`/en${legacy}?from=smoke&locale=ko`, { maxRedirects: 0 });
-      record(`redirect/en/${slug}`, 'localized legacy URL is 301', localized.status() === 301, localized.status());
-      inspectRedirectLocation(
-        `redirect/en/${slug}`,
-        localized.headers().location,
-        `/page/${slug}?from=smoke&locale=en`,
-        'localized canonical uses locale query',
-      );
+      browser = await chromium.launch({ headless: true });
+      for (const viewport of VIEWPORTS) await inspectViewport(browser, viewport);
     }
-    await api.dispose();
-
-    for (const viewport of VIEWPORTS) await inspectViewport(browser, viewport);
   } finally {
-    await browser.close();
+    await api.dispose();
+    if (browser) await browser.close();
   }
 
   console.table(results);
