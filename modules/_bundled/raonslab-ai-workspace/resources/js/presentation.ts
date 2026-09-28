@@ -1,4 +1,5 @@
 export const TERMINAL_STATES = new Set(['COMPLETED', 'FAILED', 'CANCELLED', 'INTERRUPTED']);
+export type FailureKind = 'network' | 'permission' | 'service' | 'request';
 
 type IdempotencyCrypto = {
     randomUUID?: () => string;
@@ -78,6 +79,100 @@ export function eventLabel(event: Record<string, unknown>): string {
     if (raw === 'REQUEST.COMPLETED') return labels.COMPLETED;
     if (raw === 'REQUEST.FAILED') return labels.FAILED;
     return labels[raw] ?? '작업 상태가 갱신되었습니다.';
+}
+
+function objectValue(value: unknown): Record<string, unknown> {
+    return value !== null && typeof value === 'object' && !Array.isArray(value)
+        ? value as Record<string, unknown>
+        : {};
+}
+
+function compactText(value: unknown): string {
+    return typeof value === 'string' ? value.trim() : '';
+}
+
+export function questionText(value: unknown): string {
+    if (typeof value === 'string') return value.trim();
+    if (Array.isArray(value)) {
+        return value.map(questionText).filter(Boolean).join('\n\n');
+    }
+
+    const source = objectValue(value);
+    const questions = objectValue(source.params).questions;
+    if (Array.isArray(questions)) {
+        return questions.map((raw) => {
+            const question = objectValue(raw);
+            const heading = compactText(question.header);
+            const prompt = compactText(question.question);
+            const options = Array.isArray(question.options)
+                ? question.options.map((rawOption) => {
+                    if (typeof rawOption === 'string') return rawOption.trim();
+                    const option = objectValue(rawOption);
+                    const label = compactText(option.label);
+                    const description = compactText(option.description);
+                    return label && description ? `${label} — ${description}` : label;
+                }).filter(Boolean)
+                : [];
+            return [heading, prompt, options.length ? `선택: ${options.join(' / ')}` : ''].filter(Boolean).join('\n');
+        }).filter(Boolean).join('\n\n');
+    }
+
+    return compactText(source.question) || compactText(source.message) || compactText(source.text);
+}
+
+export function hasMeaningfulQuestion(value: unknown): boolean {
+    return questionText(value) !== '';
+}
+
+/**
+ * Only fields intended as customer-facing prose are selected. Unknown objects
+ * are never serialized because they may contain credentials, paths or native
+ * Provider payloads.
+ */
+export function resultText(request: Record<string, unknown>): string {
+    const value = request.final_result ?? request.result;
+    if (value == null && request.error != null) {
+        const error = objectValue(request.error);
+        return compactText(error.user_message)
+            || compactText(error.display_message)
+            || '작업을 완료하지 못했습니다. 안전하게 다시 시도할 수 있습니다.';
+    }
+    if (typeof value === 'string') return value.trim();
+    if (value == null) return '';
+    const source = objectValue(value);
+    const text = [source.text, source.summary, source.message, source.output, source.final_answer]
+        .map(compactText)
+        .find(Boolean);
+    return text ?? 'AI가 작업 결과를 반환했지만 표시할 요약이 없습니다.';
+}
+
+export function latestEventSequence(request: Record<string, unknown>): number {
+    const nested = Number(objectValue(request.status).last_event_sequence);
+    const direct = Number(request.last_event_sequence);
+    if (Number.isSafeInteger(nested) && nested > 0) return nested;
+    if (Number.isSafeInteger(direct) && direct > 0) return direct;
+    return 0;
+}
+
+export function followUpEndpoint(state: unknown): 'messages' | 'resume' {
+    return ['FAILED', 'CANCELLED', 'INTERRUPTED'].includes(String(state ?? '').toUpperCase())
+        ? 'resume'
+        : 'messages';
+}
+
+export function isTerminalEvent(event: Record<string, unknown>): boolean {
+    const raw = String(event.event_type ?? event.type ?? event.status ?? '').toUpperCase();
+    const persisted = String(objectValue(event.payload).state ?? '').toUpperCase();
+    if (raw === 'REQUEST.STATE') return TERMINAL_STATES.has(persisted);
+    return [...TERMINAL_STATES].some((state) => raw === state || raw === `REQUEST.${state}`);
+}
+
+export function classifyFailure(status: number, code: string): FailureKind {
+    const normalized = code.toUpperCase();
+    if (status === 0 || normalized === 'NETWORK_ERROR') return 'network';
+    if ([401, 403, 404].includes(status)) return 'permission';
+    if ([502, 503, 504].includes(status) || ['AIGCS_UNAVAILABLE', 'AIGCS_NOT_CONFIGURED', 'AIGCS_INVALID_RESPONSE'].includes(normalized)) return 'service';
+    return 'request';
 }
 
 export function titleOf(request: Record<string, unknown>): string {

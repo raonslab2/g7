@@ -162,15 +162,29 @@ class AiGcsV2Adapter
 
     private function throwForResponse(Response $response): never
     {
-        $payload = $response->json();
-        $detail = is_array($payload) ? ($payload['detail'] ?? $payload['message'] ?? null) : null;
-        $message = is_string($detail) && $detail !== ''
-            ? $detail
-            : 'AI 서비스 요청을 처리하지 못했습니다.';
         $status = in_array($response->status(), [400, 401, 403, 404, 409, 422, 429], true)
             ? $response->status()
             : 502;
 
-        throw new AiGcsException($message, $status, 'AIGCS_HTTP_'.$response->status());
+        throw new AiGcsException(
+            $this->customerMessageForStatus($response->status()),
+            $status,
+            'AIGCS_HTTP_'.$response->status()
+        );
+    }
+
+    /**
+     * Upstream detail can contain Provider payloads, shell text or private
+     * paths. Only stable, user-actionable messages cross the G7 boundary.
+     */
+    private function customerMessageForStatus(int $status): string
+    {
+        return match ($status) {
+            401 => '로그인 상태를 확인해 주세요.',
+            403, 404 => '이 요청을 실행하거나 볼 권한이 없습니다.',
+            400, 409, 422 => '요청 내용이나 현재 상태를 확인한 뒤 다시 시도해 주세요.',
+            429 => '요청이 많아 잠시 지연되고 있습니다. 잠시 후 다시 시도해 주세요.',
+            default => 'AI 서비스를 현재 사용할 수 없습니다. 잠시 후 다시 시도해 주세요.',
+        };
     }
 }
