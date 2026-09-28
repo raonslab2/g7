@@ -5,6 +5,7 @@ namespace Modules\Raonslab\Product;
 use App\Extension\AbstractModule;
 use Modules\Raonslab\Product\Http\Middleware\EnsureConsultationIntakeEnabled;
 use Modules\Raonslab\Product\Http\Middleware\RequireSameOrigin;
+use Modules\Raonslab\Product\Listeners\ApplyHomeSeoMeta;
 
 /**
  * RAON 제품 서비스 모듈
@@ -13,6 +14,13 @@ use Modules\Raonslab\Product\Http\Middleware\RequireSameOrigin;
  */
 class Module extends AbstractModule
 {
+    public function getHookListeners(): array
+    {
+        return [
+            ApplyHomeSeoMeta::class,
+        ];
+    }
+
     public function getConfig(): array
     {
         return [

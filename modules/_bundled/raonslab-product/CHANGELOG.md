@@ -14,6 +14,10 @@
 - 모듈 SEO 설정을 통해 제품 CSS를 봇 렌더에도 연결하고 홈 title·description을 화면 수명주기에 맞게 적용
 - `raonslab-ai-workspace`가 소비하던 기존 제품 모듈 표면은 변경하지 않은 additive 기능이므로 해당 모듈의 최소 의존 버전은 유지
 
+### Fixed
+
+- 제품 홈을 대체하는 layout에 module-owned SEO title/description을 연결해 봇 렌더도 빈 title로 남지 않도록 수정
+
 ### Security
 
 - 상담 개인정보를 일반 게시판·검색·알림·AI 흐름과 분리하고, 저장 성공 전 성공 응답을 금지

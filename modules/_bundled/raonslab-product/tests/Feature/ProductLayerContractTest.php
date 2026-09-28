@@ -4,6 +4,7 @@ namespace Modules\Raonslab\Product\Tests\Feature;
 
 require_once __DIR__.'/../ModuleTestCase.php';
 
+use Modules\Raonslab\Product\Listeners\ApplyHomeSeoMeta;
 use Modules\Raonslab\Product\Tests\ModuleTestCase;
 use PHPUnit\Framework\Attributes\Test;
 
@@ -32,5 +33,26 @@ class ProductLayerContractTest extends ModuleTestCase
             $copy = strtoupper((string) file_get_contents($path));
             $this->assertDoesNotMatchRegularExpression('/\b(DEMO|MOCK|SANDBOX|TEST)\b/', $copy);
         }
+    }
+
+    #[Test]
+    public function home_seo_meta_uses_the_module_owned_localized_config(): void
+    {
+        $listener = new ApplyHomeSeoMeta;
+        $meta = $listener->applyHomeMeta(
+            ['title' => '', 'description' => '', 'og' => [], 'twitter' => []],
+            ['layoutName' => 'home', 'locale' => 'ko']
+        );
+
+        $this->assertStringStartsWith('RAON Agent Factory', $meta['title']);
+        $this->assertStringContainsString('업무 분석', $meta['description']);
+        $this->assertSame($meta['title'], $meta['og']['title']);
+        $this->assertSame($meta['description'], $meta['twitter']['description']);
+
+        $unrelated = $listener->applyHomeMeta(
+            ['title' => '게시판'],
+            ['layoutName' => 'board_list', 'locale' => 'ko']
+        );
+        $this->assertSame(['title' => '게시판'], $unrelated);
     }
 }
