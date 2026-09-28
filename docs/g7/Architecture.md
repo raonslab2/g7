@@ -49,6 +49,8 @@ G7은 AI_GCS/AgentOpt DB, SQLite, filesystem, provider session을 읽지 않는�
 
 제품 기능은 Module → Plugin → Template → Hook/Event → Adapter/config 순으로 공식 확장점을 우선한다. 불가피한 core patch는 별도 inventory, upstream 충돌 분석, rollback을 남기기 전에는 허용하지 않는다.
 
+운영 장애의 판정·복구·재발 방지 규칙은 [프로젝트 트러블슈팅](Troubleshooting.md)에 기록한다.
+
 ## 주요 런타임 흐름
 
 ### Native web
