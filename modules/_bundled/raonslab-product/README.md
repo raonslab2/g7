@@ -7,8 +7,8 @@ G7 코어와 공식 `sirsoft-basic` 템플릿을 수정하지 않고 사업 홈,
 테이블은 migration을 바꾸지 않고 legacy 감사 경계로만 남으며 데이터가 있으면 신규 접수를 닫습니다.
 
 기존 `questions` 게시판에는 source-controlled Q&A 콘텐츠 명령으로 합성 운영 안내 8개와 depth-1 답변
-8개를 적용할 수 있습니다. 이 명령은 독립 QA의 rollback·notification blocker가 해결되고 다시 승인되기
-전에는 production에서 실행하지 않습니다.
+8개를 적용할 수 있습니다. rollback 소유권·알림 억제·topology·동시 실행 보강과 focused regression은
+PASS했으며, fixed candidate 독립 QA와 delivery preflight 승인 전에는 production에서 실행하지 않습니다.
 
 온라인 접수는 기본적으로 닫혀 있습니다. 승인된 개인정보 동의 문안·정책 URL·보관 안내·담당 정보와
 HTTPS 공개 설정을 운영자가 모두 제공한 뒤에만 `RAON_CONSULTATION_INTAKE_ENABLED=true`로 엽니다.

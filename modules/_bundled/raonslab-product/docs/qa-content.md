@@ -1,7 +1,7 @@
 # RAON Agent Factory Q&A 콘텐츠
 
-> RC 상태: rollback 범위·알림 억제·topology·동시 실행 보강 patch를 통합했다. 이 문서의 focused
-> 검증과 별도 독립 QA가 승인되기 전에는 production에서 apply/rollback하지 않는다.
+> RC 상태: rollback 범위·알림 억제·topology·동시 실행 보강 patch와 focused 검증은 PASS했다.
+> fixed candidate 독립 QA와 delivery preflight가 승인되기 전에는 production에서 apply/rollback하지 않는다.
 
 ## 확인한 공식 계약
 
@@ -20,7 +20,7 @@
 
 ## 적용과 식별
 
-아래 명령은 사용 형태를 기록한 것이며 현재 RC에서는 실행 금지다. Q&A fix와 독립 QA 승인 뒤
+아래 명령은 사용 형태를 기록한 것이며 현재 RC에서는 실행 금지다. fixed candidate 독립 QA와 preflight 승인 뒤
 통합 담당이 최신 main과 공식 module lifecycle을 반영한 G7 전용 runtime에서만 수행한다.
 
 ```bash
@@ -51,4 +51,4 @@
 - 공개 목록·상세·통합 검색과 mobile page size 15
 - 답변부터 원글까지 provenance 한정 rollback과 재적용
 
-Production build, broad/full regression과 360/390/412/desktop 브라우저 smoke는 Provider 단계에서 수행하지 않는다. 통합 담당이 통합 뒤 각 1회 수행한다.
+이 PHP/JSON-only fix에서는 f755의 production asset을 그대로 재사용하며 build를 반복하지 않았다. Q&A focused 11 tests/220 assertions, consultation 계약 15 tests/102 assertions와 product Vitest 92/92는 final combined source에서 각각 정확히 1회 PASS했다. broad/core/full/browser/runtime 검증은 이 RC 준비 범위에서 수행하지 않았으며 fixed candidate 독립 QA와 delivery preflight 뒤 별도 gate로 남는다.

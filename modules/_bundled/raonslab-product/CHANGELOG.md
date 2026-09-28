@@ -14,6 +14,11 @@
 - 신규 상담 저장을 별도 product 테이블에서 G7 공식 `PostService`와 항상 비밀·관리자 전용인 비활성 board로 전환
 - 기존 product 상담 admin API를 410 안내로 전환하고 상담 운영 화면을 공식 board admin으로 일원화
 
+### Fixed
+
+- Q&A rollback이 provenance가 소유하지 않은 답글·댓글·첨부·신고가 있으면 아무 행도 변경하지 않고 중단하도록 보강
+- Q&A apply/rollback의 provenance 한정 알림 억제, topology 검증과 동시 실행 잠금으로 중복·오염을 fail-closed 처리
+
 ### Security
 
 - 상담 board의 공개 활성화·일반 사용자 권한·검색 색인·게시글 알림·파일 업로드를 차단하고, 분류 실패 시에도 검색 비색인을 우선
