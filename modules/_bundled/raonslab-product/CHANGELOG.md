@@ -8,6 +8,7 @@
 - 승인된 외부 Page JSON과 명시적 활성 관리자 attribution을 받아 누락 slug만 공식 Page 서비스로 원자적 생성하고 기존 관리자 편집본은 항상 보존하는 재현 가능 bootstrap 명령 추가
 - product navigation과 footer를 canonical `/page/{slug}`로 연결하고 native `page/show` 확장 지점에서 RAON breadcrumb·side navigation·dark neutral presentation 유지
 - `/info/*`, `/policy/*` 호환 URL은 query string을 보존하는 301로 canonical Page에 연결하고, 과거 지원 locale prefix는 G7의 `locale` query 계약으로 변환
+- 배포 browser smoke는 viewport별 browser session을 재사용하고 상담 설정을 먼저 검사해 공용 API 요청 burst를 줄이며, 비-JSON 오류 응답도 상태와 content type으로 명확히 보고
 
 ### Removed
 
