@@ -14,6 +14,8 @@
 - 상담 PII는 공개 비활성 private board와 관리자 권한 안에만 두며 검색·일반 알림·AI 요청으로 자동 전달하지 않습니다.
 - 기존 product 상담 테이블 migration은 immutable로 유지하고, legacy 행이 있으면 신규 board 접수를 fail-closed 처리합니다.
 - 공개 접수는 승인된 개인정보 설정과 HTTPS 운영 경로가 준비되기 전까지 fail-closed 상태로 둡니다.
+  남은 조건은 `raonslab-product:consultation-readiness`, 저장 경로는 롤백 리허설 `raonslab-product:consultation-rehearsal` 로 확인합니다 ([활성화 절차](docs/consultation-activation.md)).
+- 관리자 "사업 상담" 메뉴는 `getAdminMenus()` 로 비공개 상담 게시판을 가리킵니다. 선언을 비우면 코어 데이터 손실 방어 때문에 옛 메뉴 행이 정리되지 않습니다.
 - G7, AI_GCS, AgentOpt 데이터베이스를 연결하거나 외부 서비스 secret을 포함하지 않습니다.
 
 ## 반영과 검증

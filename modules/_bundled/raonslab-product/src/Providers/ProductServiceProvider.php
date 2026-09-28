@@ -4,6 +4,8 @@ namespace Modules\Raonslab\Product\Providers;
 
 use App\Extension\BaseModuleServiceProvider;
 use Modules\Raonslab\Product\Adapters\G7BoardConsultationAdapter;
+use Modules\Raonslab\Product\Console\Commands\ConsultationReadinessCommand;
+use Modules\Raonslab\Product\Console\Commands\ConsultationRehearsalCommand;
 use Modules\Raonslab\Product\Console\Commands\SeedQaContentCommand;
 use Modules\Raonslab\Product\Contracts\ConsultationBoardGateway;
 
@@ -17,6 +19,8 @@ class ProductServiceProvider extends BaseModuleServiceProvider
 
     protected array $commands = [
         SeedQaContentCommand::class,
+        ConsultationReadinessCommand::class,
+        ConsultationRehearsalCommand::class,
     ];
 
     public function boot(): void

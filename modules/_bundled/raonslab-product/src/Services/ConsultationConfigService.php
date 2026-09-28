@@ -27,21 +27,45 @@ class ConsultationConfigService
         ];
     }
 
+    /** 공개 접수를 열기 전 운영자 승인이 필요한 설정 키 */
+    public const APPROVAL_KEYS = ['consent_version', 'privacy_copy', 'privacy_policy_url', 'privacy_contact', 'retention_notice'];
+
     public function isIntakeEnabled(Request $request): bool
     {
-        if (config('raonslab-product-consultations.enabled') !== true || $this->legacyAudit->hasData()) {
+        if (config('raonslab-product-consultations.enabled') !== true) {
             return false;
         }
 
-        foreach (['consent_version', 'privacy_copy', 'privacy_policy_url', 'privacy_contact', 'retention_notice'] as $key) {
-            if ($this->value($key) === '') {
-                return false;
-            }
+        return ! in_array(false, $this->readinessChecks($request->isSecure()), true);
+    }
+
+    /**
+     * 공개 접수 게이트의 조건별 충족 여부를 돌려줍니다. 값 자체는 싣지 않습니다.
+     *
+     * isIntakeEnabled()와 준비 상태 점검 명령이 같은 판정을 공유하는 단일 지점입니다.
+     *
+     * @param  bool|null  $requestSecure  HTTP 요청 문맥이 없으면 null (요청 HTTPS 조건 생략)
+     * @return array<string, bool>
+     */
+    public function readinessChecks(?bool $requestSecure = null): array
+    {
+        $checks = [
+            'enabled_flag' => config('raonslab-product-consultations.enabled') === true,
+            'legacy_table_empty' => ! $this->legacyAudit->hasData(),
+        ];
+
+        foreach (self::APPROVAL_KEYS as $key) {
+            $checks["{$key}_set"] = $this->value($key) !== '';
         }
 
-        return $this->isTrustedHttpsUrl((string) config('app.url'))
-            && $this->isTrustedHttpsUrl($this->value('privacy_policy_url'))
-            && $request->isSecure();
+        $checks['app_url_https'] = $this->isTrustedHttpsUrl((string) config('app.url'));
+        $checks['privacy_policy_url_https'] = $this->isTrustedHttpsUrl($this->value('privacy_policy_url'));
+
+        if ($requestSecure !== null) {
+            $checks['request_https'] = $requestSecure;
+        }
+
+        return $checks;
     }
 
     public function consentVersion(): string

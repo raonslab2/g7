@@ -34,6 +34,26 @@ class Module extends AbstractModule
         ];
     }
 
+    /**
+     * 관리자 "사업 상담" 메뉴는 비공개 상담 게시판의 관리자 화면을 가리킵니다.
+     *
+     * 0.3.0에서 선언을 비우자 코어의 데이터 손실 방어로 기존 메뉴 행이 정리되지 않고
+     * 폐기된 /admin/consultations(410 API)를 계속 가리켰습니다. 같은 slug를 다시 선언해
+     * 기존 행의 URL을 동기화합니다.
+     */
+    public function getAdminMenus(): array
+    {
+        return [
+            [
+                'name' => ['ko' => '사업 상담', 'en' => 'Consultations'],
+                'slug' => 'raonslab-product-consultations',
+                'url' => '/admin/board/'.rawurlencode((string) config('raonslab-product-consultations.board_slug', 'raon-consultations')),
+                'icon' => 'fas fa-comments',
+                'order' => 80,
+            ],
+        ];
+    }
+
     public function install(): bool
     {
         return $this->provisionConsultationBoard();

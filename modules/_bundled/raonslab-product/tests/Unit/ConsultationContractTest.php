@@ -19,7 +19,10 @@ class ConsultationContractTest extends ModuleTestCase
     {
         $module = new Module;
         $this->assertTrue($module->install());
-        $this->assertSame([], $module->getAdminMenus());
+        $menus = $module->getAdminMenus();
+        $this->assertCount(1, $menus);
+        $this->assertSame('raonslab-product-consultations', $menus[0]['slug']);
+        $this->assertSame('/admin/board/raon-consultations', $menus[0]['url']);
         $this->assertSame([], $module->getPermissions());
 
         $middleware = collect($module->getMiddleware())->keyBy('class');
