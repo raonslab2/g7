@@ -2496,6 +2496,95 @@ body.raon-product #page_html_content .rh-status-list:not(:has(.rh-status-copy)) 
   display: none !important;
 }
 
+/*
+ * 모바일 드로어 문서 메뉴 — sirsoft-basic `mobile_nav_drawer` 끝에 붙는 이 모듈 소유 섹션.
+ * 템플릿의 마지막 두 섹션(쇼핑 → 정보/정책)을 이 노드를 구조 앵커로 삼아 숨긴다. 드로어 직계 자식 중
+ * 이 노드 바로 앞 두 칸만 대상이므로 언어·회원·게시판 섹션은 그대로 남는다. 템플릿 구조 계약은
+ * infoPolicy.test.ts 가 잠근다(구조가 바뀌면 테스트가 실패해야 하며 임의 섹션을 숨기지 않는다).
+ */
+#mobile_nav_drawer > :has(+ [data-rh-mobile-drawer-docs]),
+#mobile_nav_drawer > :has(+ * + [data-rh-mobile-drawer-docs]) {
+  display: none !important;
+}
+
+.rh-drawer-docs {
+  display: grid;
+  min-width: 0;
+  gap: 1rem;
+}
+
+.rh-drawer-docs .rh-drawer-label {
+  margin: 0 0 .35rem;
+  padding: 0 .75rem;
+  color: #6b7280;
+  font-size: .75rem;
+  font-weight: 600;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+}
+
+.rh-drawer-docs .rh-drawer-list {
+  display: grid;
+  min-width: 0;
+  gap: .1rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.rh-drawer-docs .rh-drawer-link {
+  display: flex;
+  min-width: 0;
+  min-height: 44px;
+  align-items: center;
+  border-radius: .5rem;
+  padding: .45rem .75rem;
+  color: #374151;
+  font-size: .875rem;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+  text-decoration: none;
+}
+
+.rh-drawer-docs .rh-drawer-link:hover {
+  background: #f3f4f6;
+  color: #111827;
+}
+
+.rh-drawer-docs .rh-drawer-link[aria-current='page'] {
+  background: #f3f4f6;
+  color: #111827;
+  font-weight: 600;
+  box-shadow: inset 3px 0 0 #3d5467;
+}
+
+.rh-drawer-docs .rh-drawer-link:focus-visible {
+  outline: 2px solid #2f4a60;
+  outline-offset: 2px;
+}
+
+html.dark .rh-drawer-docs .rh-drawer-label {
+  color: #9ca3af;
+}
+
+html.dark .rh-drawer-docs .rh-drawer-link {
+  color: #d1d5db;
+}
+
+html.dark .rh-drawer-docs .rh-drawer-link:hover,
+html.dark .rh-drawer-docs .rh-drawer-link[aria-current='page'] {
+  background: #374151;
+  color: #ffffff;
+}
+
+html.dark .rh-drawer-docs .rh-drawer-link[aria-current='page'] {
+  box-shadow: inset 3px 0 0 #a9bccd;
+}
+
+html.dark .rh-drawer-docs .rh-drawer-link:focus-visible {
+  outline-color: #d3dfeb;
+}
+
 /* 데스크톱 우측 문서 메뉴 — DOM 은 본문 뒤, 화면은 오른쪽 열 */
 .rh-native-side {
   display: none;

@@ -16,7 +16,7 @@ const { resolve } = require('node:path');
 const MODULE_ROOT = resolve(__dirname, '../..');
 const MODULE_ID = 'raonslab-product';
 /** 런타임 응답에서 걷어 낼 이 모듈의 이전 overlay 노드(구 버전이 주입한 것). */
-const PREVIOUS_NODE_IDS = ['rh_native_page_breadcrumb', 'rh_native_page_side_navigation', 'rh_native_page_docnav'];
+const PREVIOUS_NODE_IDS = ['rh_native_page_breadcrumb', 'rh_native_page_side_navigation', 'rh_native_page_docnav', 'rh_mobile_drawer_docs'];
 
 function walk(list, visit) {
   if (!Array.isArray(list)) return;

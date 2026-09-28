@@ -1,21 +1,24 @@
-import { existsSync, readFileSync } from 'node:fs';
+import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 // @ts-expect-error — 생성 스크립트는 빌드 대상이 아닌 Node ESM 이다.
 import {
   applyProductNav,
+  buildMobileDrawerInjection,
   buildNativePage,
   CURRENCY_SUPPRESSION_INJECTION,
   ECOMMERCE_CURRENCY_PRIORITY,
   extensionManifests,
   generated,
+  MOBILE_DRAWER_SECTION_ID,
+  MOBILE_DRAWER_TARGET,
   persistedOverlays,
   serialize,
   taxonomySlugs,
   USER_BASE_OVERLAY_PRIORITY,
 } from '../../scripts/taxonomy.mjs';
 import taxonomy from '../taxonomy/info-policy.json';
-import { closeDocnav, installProductNav, normalizePath, productPageGroup, setDocnavOpen } from './productNav';
+import { closeDocnav, installProductNav, normalizePath, productPageGroup, setDocnavOpen, syncProductNav } from './productNav';
 
 const root = resolve(__dirname, '..');
 const readText = (path: string) => readFileSync(path, 'utf8');
@@ -34,6 +37,8 @@ const mainCss = readText(resolve(root, 'css/main.css'));
 const indexTs = readText(resolve(root, 'js/index.ts'));
 const browserSmoke = readText(resolve(root, '../tests/browser/info-policy-smoke.cjs'));
 const viteConfig = readText(resolve(root, '../vite.config.ts'));
+const repoRoot = resolve(root, '../../../..');
+const stockUserBase = readJson(resolve(repoRoot, 'templates/_bundled/sirsoft-basic/layouts/_user_base.json'));
 
 type Node = {
   id?: string;
@@ -262,6 +267,7 @@ describe('공개 쇼핑·통화 노출 억제', () => {
       ['main_content_area', 'prepend_child'],
       ['footer', 'inject_props'],
       ['header_currency_inject_anchor', 'replace'],
+      ['mobile_nav_drawer', 'append_child'],
     ]);
     const currency = nav.injections[2];
     expect(currency.components).toHaveLength(1);
@@ -351,6 +357,149 @@ describe('모바일 문서 메뉴 키보드 계약', () => {
   });
 });
 
+describe('모바일 드로어 문서 섹션', () => {
+  const drawerInjections = nav.injections.filter((injection: { target_id: string }) => injection.target_id === MOBILE_DRAWER_TARGET);
+  const section = findById(nav, MOBILE_DRAWER_SECTION_ID) as Node;
+  const textOf = (value: unknown) => collect(value).map((node) => node.text ?? '').join(' ');
+  const stockDrawer = findById(stockUserBase, 'mobile_nav_drawer') as Node;
+  const stockChildren = (stockDrawer?.children ?? []) as Array<Node & { iteration?: unknown }>;
+
+  it('생성기가 드로어 끝에 소유 섹션 하나만 append_child 한다(드리프트 포함)', () => {
+    expect(drawerInjections).toHaveLength(1);
+    expect(drawerInjections[0]).toEqual(buildMobileDrawerInjection(taxonomy));
+    expect(drawerInjections[0].position).toBe('append_child');
+    expect(drawerInjections[0].components).toHaveLength(1);
+    expect(section.name).toBe('Nav');
+    expect(section.props).toMatchObject({ 'aria-label': '$t:raonslab-product.nav.label', 'data-rh-mobile-drawer-docs': 'true' });
+    expect(section.if).toBeUndefined();
+    expect(collect(nav).filter((node) => node.id === MOBILE_DRAWER_SECTION_ID)).toHaveLength(1);
+  });
+
+  it('11개 문서를 정보·정책 순서로 담고 ko/en 라벨 키를 쓴다', () => {
+    expect(hrefs(section)).toEqual(ALL_PATHS);
+    const labels = collect(section).filter((node) => node.name === 'P');
+    expect(labels.map((node) => node.text)).toEqual(['$t:raonslab-product.nav.info', '$t:raonslab-product.nav.policy']);
+    const lists = collect(section).filter((node) => node.name === 'Ul');
+    expect(lists.map((node) => node.props?.['aria-labelledby'])).toEqual(['rh-drawer-docs-info-label', 'rh-drawer-docs-policy-label']);
+    expect(labels.map((node) => node.props?.id)).toEqual(['rh-drawer-docs-info-label', 'rh-drawer-docs-policy-label']);
+    expect(hrefs(lists[0])).toEqual(paths(APPROVED.info));
+    expect(hrefs(lists[1])).toEqual(paths(APPROVED.policy));
+    const koFlat = flatten(ko);
+    const enFlat = flatten(en);
+    for (const text of collect(section).map((node) => node.text).filter(Boolean)) {
+      const key = String(text).replace('$t:raonslab-product.', '');
+      expect(koFlat[key], key).toBeTruthy();
+      expect(enFlat[key], key).toBeTruthy();
+    }
+  });
+
+  it('링크는 href·현재 위치 표식 경로를 갖고, 선택 시 드로어를 닫은 뒤 같은 경로로 이동한다', () => {
+    const links = collect(section).filter((node) => node.name === 'A') as Array<Node & { actions: Array<{ handler: string; actions: Array<{ handler: string; params: Record<string, unknown> }> }> }>;
+    expect(links).toHaveLength(11);
+    for (const link of links) {
+      expect(link.props?.className).toBe('rh-drawer-link');
+      expect(link.props?.['data-rh-nav-path']).toBe(link.props?.href);
+      expect(link.actions[0].handler).toBe('sequence');
+      expect(link.actions[0].actions).toEqual([
+        { handler: 'setState', params: { target: 'global', mobileMenuOpen: false } },
+        { handler: 'navigate', params: { path: link.props?.href } },
+      ]);
+    }
+  });
+
+  it('현재 문서 링크에만 aria-current="page" 를 단다', () => {
+    const fake = (path: string) => {
+      const attrs: Record<string, string> = path === '/page/privacy' ? {} : { 'aria-current': 'page' };
+      return {
+        dataset: { rhNavPath: path },
+        attrs,
+        getAttribute: (name: string) => attrs[name] ?? null,
+        setAttribute: (name: string, value: string) => { attrs[name] = value; },
+        hasAttribute: (name: string) => name in attrs,
+        removeAttribute: (name: string) => { delete attrs[name]; },
+      };
+    };
+    const links = ALL_PATHS.map(fake);
+    const selectors: string[] = [];
+    vi.stubGlobal('window', { location: { pathname: '/page/privacy/' } });
+    vi.stubGlobal('document', {
+      querySelectorAll: (selector: string) => {
+        selectors.push(selector);
+        return selector.includes('a.rh-drawer-link[data-rh-nav-path]') ? links : [];
+      },
+    });
+    syncProductNav();
+    vi.unstubAllGlobals();
+    expect(selectors[0]).toContain('a.rh-drawer-link[data-rh-nav-path]');
+    expect(links.filter((link) => link.attrs['aria-current'] === 'page').map((link) => link.dataset.rhNavPath)).toEqual(['/page/privacy']);
+  });
+
+  it('번들 sirsoft-basic 드로어의 마지막 두 섹션은 무조건 렌더되는 쇼핑 → 정보/정책이다(아니면 숨김 규칙 무효)', () => {
+    expect(stockDrawer, 'sirsoft-basic _user_base 에 mobile_nav_drawer 가 없다').toBeTruthy();
+    expect(stockChildren.length).toBeGreaterThanOrEqual(3);
+    const [shop, info] = stockChildren.slice(-2);
+    expect(textOf(shop)).toContain('$t:user.nav.shop');
+    expect(textOf(shop)).not.toContain('$t:user.footer.info');
+    expect(textOf(info)).toContain('$t:user.footer.info');
+    expect(textOf(info)).toContain('$t:user.footer.policy');
+    expect(textOf(info)).not.toContain('$t:user.nav.shop');
+    for (const node of [shop, info]) {
+      expect(node.if).toBeUndefined();
+      expect(node.iteration).toBeUndefined();
+      expect(node.name).toBe('Div');
+    }
+    // 숨기지 않을 섹션(언어·회원·게시판)은 그 앞에 있다
+    const preserved = stockChildren.slice(0, -2);
+    expect(preserved.some((node) => node.id === 'mobile_drawer_prefs')).toBe(true);
+    expect(preserved.some((node) => textOf(node).includes('$t:user.nav.boards'))).toBe(true);
+    expect(preserved.some((node) => textOf(node).includes('$t:auth.login'))).toBe(true);
+    expect(preserved.some((node) => textOf(node).includes('{{_global.currentUser?.name}}'))).toBe(true);
+  });
+
+  it('다른 번들 확장은 드로어에 주입하지 않아 소유 섹션 바로 앞이 템플릿 섹션으로 유지된다', () => {
+    const offenders: string[] = [];
+    for (const kind of ['modules', 'plugins']) {
+      const base = resolve(repoRoot, kind, '_bundled');
+      for (const id of readdirSync(base)) {
+        const dir = resolve(base, id, 'resources/extensions');
+        if (!existsSync(dir)) continue;
+        for (const file of readdirSync(dir).filter((name) => name.endsWith('.json'))) {
+          if (kind === 'modules' && id === 'raonslab-product') continue;
+          if (readText(resolve(dir, file)).includes(`"${MOBILE_DRAWER_TARGET}"`)) offenders.push(`${id}/${file}`);
+        }
+      }
+    }
+    expect(offenders).toEqual([]);
+  });
+
+  it('CSS 숨김 규칙은 #mobile_nav_drawer 직계 자식 중 소유 섹션 바로 앞 두 칸만 대상으로 한다', () => {
+    const rules = [...mainCss.matchAll(/([^{}]+)\{([^{}]*)\}/g)]
+      .filter((match) => match[1].includes('data-rh-mobile-drawer-docs') || match[1].includes('#mobile_nav_drawer'));
+    const selectors = rules.flatMap((match) => match[1].replace(/\/\*[\s\S]*?\*\//g, '').split(',').map((item) => item.trim()));
+    expect(selectors).toEqual([
+      '#mobile_nav_drawer > :has(+ [data-rh-mobile-drawer-docs])',
+      '#mobile_nav_drawer > :has(+ * + [data-rh-mobile-drawer-docs])',
+    ]);
+    expect(rules[0][2]).toContain('display: none !important;');
+    // 드로어 섹션 스타일은 소유 클래스 아래로만 한정한다
+    for (const match of mainCss.matchAll(/([^{}]+)\{/g)) {
+      if (!match[1].includes('rh-drawer-')) continue;
+      for (const selector of match[1].replace(/\/\*[\s\S]*?\*\//g, '').split(',').map((item) => item.trim())) {
+        expect(selector, selector).toMatch(/^(html\.dark )?\.rh-drawer-docs\b/);
+      }
+    }
+    expect(mainCss).toMatch(/\.rh-drawer-docs \.rh-drawer-link \{[^}]*min-height: 44px;[^}]*overflow-wrap: anywhere;/);
+  });
+
+  it('오프라인 시뮬레이션은 이전 소유 노드를 걷어 내고 같은 저장 계약으로 다시 적용한다', () => {
+    const simulation = readText(resolve(root, '../tests/browser/overlay-simulation.cjs'));
+    expect(simulation).toContain("'rh_mobile_drawer_docs'");
+    const drawerSimulation = readText(resolve(root, '../tests/browser/mobile-drawer-simulation.cjs'));
+    expect(drawerSimulation).toContain('patchMergedLayout(body, overlays)');
+    expect(drawerSimulation).toContain("only stock shop + info/policy hidden");
+  });
+});
+
 describe('기존 계약 유지', () => {
   it('본문을 담았던 product route/layout/translation은 제거된 상태를 유지한다', () => {
     expect(existsSync(resolve(root, 'routes/user.json'))).toBe(false);
@@ -367,7 +516,7 @@ describe('기존 계약 유지', () => {
   });
 
   it('모듈 버전 메타데이터가 함께 움직이고 sirsoft-page 계약을 명시한다', () => {
-    expect(moduleManifest.version).toBe('0.4.1');
+    expect(moduleManifest.version).toBe('0.4.2');
     expect(componentManifest.version).toBe(moduleManifest.version);
     expect(composerManifest.version).toBe(moduleManifest.version);
     expect(packageManifest.version).toBe(moduleManifest.version);

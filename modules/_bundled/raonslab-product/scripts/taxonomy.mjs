@@ -4,7 +4,7 @@
  *
  * - native-page.json 은 분류에서 전체를 생성한다(breadcrumb·모바일 문서 메뉴·데스크톱 우측 메뉴).
  * - product-nav.json 은 이 모듈의 유일한 `_user_base` overlay 다. 상위 드롭다운 두 목록, product footer 의
- *   정보·정책 linkGroups, 공개 통화 선택기 교체 injection, overlay priority 를 생성한다.
+ *   정보·정책 linkGroups, 모바일 드로어 문서 섹션, 공개 통화 선택기 교체 injection, overlay priority 를 생성한다.
  *   G7 은 (template, 확장 종류, target layout, 출처) 마다 overlay 행을 하나만 저장하므로 같은 target 에
  *   파일을 둘 두면 나중 파일이 앞 파일을 덮어쓴다 — `persistedOverlays()` 가 그 계약을 재현한다.
  *
@@ -45,6 +45,14 @@ export const CURRENCY_SUPPRESSION_INJECTION = {
     },
   ],
 };
+
+/**
+ * 모바일 드로어(sirsoft-basic `_user_base` 의 `mobile_nav_drawer`) 끝에 붙이는 문서 섹션.
+ * 템플릿의 마지막 두 섹션(쇼핑 → 정보/정책)은 CSS 가 이 노드를 구조 앵커로 삼아 숨긴다(main.css).
+ * 템플릿 구조가 바뀌면 계약 테스트(infoPolicy.test.ts)가 실패해야 하며, 임의 섹션을 숨기지 않는다.
+ */
+export const MOBILE_DRAWER_TARGET = 'mobile_nav_drawer';
+export const MOBILE_DRAWER_SECTION_ID = 'rh_mobile_drawer_docs';
 
 const t = (key) => `$t:raonslab-product.${key}`;
 const pagePath = (item) => `/page/${item.slug}`;
@@ -245,6 +253,68 @@ function gnavItem(group, item) {
   };
 }
 
+/** 모바일 드로어 문서 섹션 injection 을 분류에서 만든다. 링크 선택 시 드로어를 닫고 이동한다. */
+export function buildMobileDrawerInjection(taxonomy) {
+  const children = taxonomy.groups.flatMap((group) => [
+    {
+      id: `rh_mobile_drawer_${group.key}_label`,
+      type: 'basic',
+      name: 'P',
+      props: { className: 'rh-drawer-label', id: `rh-drawer-docs-${group.key}-label` },
+      text: t(group.label),
+    },
+    {
+      id: `rh_mobile_drawer_${group.key}_list`,
+      type: 'basic',
+      name: 'Ul',
+      props: { className: 'rh-drawer-list', 'aria-labelledby': `rh-drawer-docs-${group.key}-label` },
+      children: group.items.map((item) => ({
+        id: `rh_mobile_drawer_${group.key}_${item.key}_item`,
+        type: 'basic',
+        name: 'Li',
+        children: [
+          {
+            id: `rh_mobile_drawer_${group.key}_${item.key}`,
+            type: 'basic',
+            name: 'A',
+            props: { className: 'rh-drawer-link', href: pagePath(item), 'data-rh-nav-path': pagePath(item) },
+            text: t(item.label),
+            actions: [
+              {
+                type: 'click',
+                handler: 'sequence',
+                actions: [
+                  { handler: 'setState', params: { target: 'global', mobileMenuOpen: false } },
+                  { handler: 'navigate', params: { path: pagePath(item) } },
+                ],
+              },
+            ],
+          },
+        ],
+      })),
+    },
+  ]);
+
+  return {
+    target_id: MOBILE_DRAWER_TARGET,
+    position: 'append_child',
+    components: [
+      {
+        id: MOBILE_DRAWER_SECTION_ID,
+        comment: '모바일 드로어의 정보·정책 문서 메뉴. 바로 앞 템플릿 쇼핑·정보/정책 섹션은 main.css 가 숨긴다.',
+        type: 'basic',
+        name: 'Nav',
+        props: {
+          className: 'rh-drawer-docs px-4 py-4 border-b border-gray-200 dark:border-gray-700',
+          'aria-label': t('nav.label'),
+          'data-rh-mobile-drawer-docs': 'true',
+        },
+        children,
+      },
+    ],
+  };
+}
+
 function findNode(value, id) {
   if (Array.isArray(value)) {
     for (const child of value) {
@@ -291,8 +361,9 @@ export function applyProductNav(productNav, taxonomy) {
 
   next.priority = USER_BASE_OVERLAY_PRIORITY;
   next.injections = [
-    ...next.injections.filter((injection) => injection.target_id !== CURRENCY_SUPPRESSION_INJECTION.target_id),
+    ...next.injections.filter((injection) => ![CURRENCY_SUPPRESSION_INJECTION.target_id, MOBILE_DRAWER_TARGET].includes(injection.target_id)),
     structuredClone(CURRENCY_SUPPRESSION_INJECTION),
+    buildMobileDrawerInjection(taxonomy),
   ];
 
   return next;

@@ -857,6 +857,496 @@
           }
         }
       ]
+    },
+    {
+      "target_id": "mobile_nav_drawer",
+      "position": "append_child",
+      "components": [
+        {
+          "id": "rh_mobile_drawer_docs",
+          "comment": "모바일 드로어의 정보·정책 문서 메뉴. 바로 앞 템플릿 쇼핑·정보/정책 섹션은 main.css 가 숨긴다.",
+          "type": "basic",
+          "name": "Nav",
+          "props": {
+            "className": "rh-drawer-docs px-4 py-4 border-b border-gray-200 dark:border-gray-700",
+            "aria-label": "$t:raonslab-product.nav.label",
+            "data-rh-mobile-drawer-docs": "true"
+          },
+          "children": [
+            {
+              "id": "rh_mobile_drawer_info_label",
+              "type": "basic",
+              "name": "P",
+              "props": {
+                "className": "rh-drawer-label",
+                "id": "rh-drawer-docs-info-label"
+              },
+              "text": "$t:raonslab-product.nav.info"
+            },
+            {
+              "id": "rh_mobile_drawer_info_list",
+              "type": "basic",
+              "name": "Ul",
+              "props": {
+                "className": "rh-drawer-list",
+                "aria-labelledby": "rh-drawer-docs-info-label"
+              },
+              "children": [
+                {
+                  "id": "rh_mobile_drawer_info_about_item",
+                  "type": "basic",
+                  "name": "Li",
+                  "children": [
+                    {
+                      "id": "rh_mobile_drawer_info_about",
+                      "type": "basic",
+                      "name": "A",
+                      "props": {
+                        "className": "rh-drawer-link",
+                        "href": "/page/about",
+                        "data-rh-nav-path": "/page/about"
+                      },
+                      "text": "$t:raonslab-product.nav.info_about",
+                      "actions": [
+                        {
+                          "type": "click",
+                          "handler": "sequence",
+                          "actions": [
+                            {
+                              "handler": "setState",
+                              "params": {
+                                "target": "global",
+                                "mobileMenuOpen": false
+                              }
+                            },
+                            {
+                              "handler": "navigate",
+                              "params": {
+                                "path": "/page/about"
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "rh_mobile_drawer_info_services_item",
+                  "type": "basic",
+                  "name": "Li",
+                  "children": [
+                    {
+                      "id": "rh_mobile_drawer_info_services",
+                      "type": "basic",
+                      "name": "A",
+                      "props": {
+                        "className": "rh-drawer-link",
+                        "href": "/page/service",
+                        "data-rh-nav-path": "/page/service"
+                      },
+                      "text": "$t:raonslab-product.nav.info_services",
+                      "actions": [
+                        {
+                          "type": "click",
+                          "handler": "sequence",
+                          "actions": [
+                            {
+                              "handler": "setState",
+                              "params": {
+                                "target": "global",
+                                "mobileMenuOpen": false
+                              }
+                            },
+                            {
+                              "handler": "navigate",
+                              "params": {
+                                "path": "/page/service"
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "rh_mobile_drawer_info_cases_item",
+                  "type": "basic",
+                  "name": "Li",
+                  "children": [
+                    {
+                      "id": "rh_mobile_drawer_info_cases",
+                      "type": "basic",
+                      "name": "A",
+                      "props": {
+                        "className": "rh-drawer-link",
+                        "href": "/page/cases",
+                        "data-rh-nav-path": "/page/cases"
+                      },
+                      "text": "$t:raonslab-product.nav.info_cases",
+                      "actions": [
+                        {
+                          "type": "click",
+                          "handler": "sequence",
+                          "actions": [
+                            {
+                              "handler": "setState",
+                              "params": {
+                                "target": "global",
+                                "mobileMenuOpen": false
+                              }
+                            },
+                            {
+                              "handler": "navigate",
+                              "params": {
+                                "path": "/page/cases"
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "rh_mobile_drawer_info_principles_item",
+                  "type": "basic",
+                  "name": "Li",
+                  "children": [
+                    {
+                      "id": "rh_mobile_drawer_info_principles",
+                      "type": "basic",
+                      "name": "A",
+                      "props": {
+                        "className": "rh-drawer-link",
+                        "href": "/page/technology",
+                        "data-rh-nav-path": "/page/technology"
+                      },
+                      "text": "$t:raonslab-product.nav.info_principles",
+                      "actions": [
+                        {
+                          "type": "click",
+                          "handler": "sequence",
+                          "actions": [
+                            {
+                              "handler": "setState",
+                              "params": {
+                                "target": "global",
+                                "mobileMenuOpen": false
+                              }
+                            },
+                            {
+                              "handler": "navigate",
+                              "params": {
+                                "path": "/page/technology"
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "rh_mobile_drawer_info_faq_item",
+                  "type": "basic",
+                  "name": "Li",
+                  "children": [
+                    {
+                      "id": "rh_mobile_drawer_info_faq",
+                      "type": "basic",
+                      "name": "A",
+                      "props": {
+                        "className": "rh-drawer-link",
+                        "href": "/page/faq",
+                        "data-rh-nav-path": "/page/faq"
+                      },
+                      "text": "$t:raonslab-product.nav.info_faq",
+                      "actions": [
+                        {
+                          "type": "click",
+                          "handler": "sequence",
+                          "actions": [
+                            {
+                              "handler": "setState",
+                              "params": {
+                                "target": "global",
+                                "mobileMenuOpen": false
+                              }
+                            },
+                            {
+                              "handler": "navigate",
+                              "params": {
+                                "path": "/page/faq"
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "rh_mobile_drawer_info_contact_item",
+                  "type": "basic",
+                  "name": "Li",
+                  "children": [
+                    {
+                      "id": "rh_mobile_drawer_info_contact",
+                      "type": "basic",
+                      "name": "A",
+                      "props": {
+                        "className": "rh-drawer-link",
+                        "href": "/page/contact",
+                        "data-rh-nav-path": "/page/contact"
+                      },
+                      "text": "$t:raonslab-product.nav.info_contact",
+                      "actions": [
+                        {
+                          "type": "click",
+                          "handler": "sequence",
+                          "actions": [
+                            {
+                              "handler": "setState",
+                              "params": {
+                                "target": "global",
+                                "mobileMenuOpen": false
+                              }
+                            },
+                            {
+                              "handler": "navigate",
+                              "params": {
+                                "path": "/page/contact"
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "rh_mobile_drawer_policy_label",
+              "type": "basic",
+              "name": "P",
+              "props": {
+                "className": "rh-drawer-label",
+                "id": "rh-drawer-docs-policy-label"
+              },
+              "text": "$t:raonslab-product.nav.policy"
+            },
+            {
+              "id": "rh_mobile_drawer_policy_list",
+              "type": "basic",
+              "name": "Ul",
+              "props": {
+                "className": "rh-drawer-list",
+                "aria-labelledby": "rh-drawer-docs-policy-label"
+              },
+              "children": [
+                {
+                  "id": "rh_mobile_drawer_policy_privacy_item",
+                  "type": "basic",
+                  "name": "Li",
+                  "children": [
+                    {
+                      "id": "rh_mobile_drawer_policy_privacy",
+                      "type": "basic",
+                      "name": "A",
+                      "props": {
+                        "className": "rh-drawer-link",
+                        "href": "/page/privacy",
+                        "data-rh-nav-path": "/page/privacy"
+                      },
+                      "text": "$t:raonslab-product.nav.policy_privacy",
+                      "actions": [
+                        {
+                          "type": "click",
+                          "handler": "sequence",
+                          "actions": [
+                            {
+                              "handler": "setState",
+                              "params": {
+                                "target": "global",
+                                "mobileMenuOpen": false
+                              }
+                            },
+                            {
+                              "handler": "navigate",
+                              "params": {
+                                "path": "/page/privacy"
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "rh_mobile_drawer_policy_community_item",
+                  "type": "basic",
+                  "name": "Li",
+                  "children": [
+                    {
+                      "id": "rh_mobile_drawer_policy_community",
+                      "type": "basic",
+                      "name": "A",
+                      "props": {
+                        "className": "rh-drawer-link",
+                        "href": "/page/terms",
+                        "data-rh-nav-path": "/page/terms"
+                      },
+                      "text": "$t:raonslab-product.nav.policy_community",
+                      "actions": [
+                        {
+                          "type": "click",
+                          "handler": "sequence",
+                          "actions": [
+                            {
+                              "handler": "setState",
+                              "params": {
+                                "target": "global",
+                                "mobileMenuOpen": false
+                              }
+                            },
+                            {
+                              "handler": "navigate",
+                              "params": {
+                                "path": "/page/terms"
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "rh_mobile_drawer_policy_ai_policy_item",
+                  "type": "basic",
+                  "name": "Li",
+                  "children": [
+                    {
+                      "id": "rh_mobile_drawer_policy_ai_policy",
+                      "type": "basic",
+                      "name": "A",
+                      "props": {
+                        "className": "rh-drawer-link",
+                        "href": "/page/ai-workspace-policy",
+                        "data-rh-nav-path": "/page/ai-workspace-policy"
+                      },
+                      "text": "$t:raonslab-product.nav.policy_ai",
+                      "actions": [
+                        {
+                          "type": "click",
+                          "handler": "sequence",
+                          "actions": [
+                            {
+                              "handler": "setState",
+                              "params": {
+                                "target": "global",
+                                "mobileMenuOpen": false
+                              }
+                            },
+                            {
+                              "handler": "navigate",
+                              "params": {
+                                "path": "/page/ai-workspace-policy"
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "rh_mobile_drawer_policy_oss_item",
+                  "type": "basic",
+                  "name": "Li",
+                  "children": [
+                    {
+                      "id": "rh_mobile_drawer_policy_oss",
+                      "type": "basic",
+                      "name": "A",
+                      "props": {
+                        "className": "rh-drawer-link",
+                        "href": "/page/open-source",
+                        "data-rh-nav-path": "/page/open-source"
+                      },
+                      "text": "$t:raonslab-product.nav.policy_oss",
+                      "actions": [
+                        {
+                          "type": "click",
+                          "handler": "sequence",
+                          "actions": [
+                            {
+                              "handler": "setState",
+                              "params": {
+                                "target": "global",
+                                "mobileMenuOpen": false
+                              }
+                            },
+                            {
+                              "handler": "navigate",
+                              "params": {
+                                "path": "/page/open-source"
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "id": "rh_mobile_drawer_policy_refund_item",
+                  "type": "basic",
+                  "name": "Li",
+                  "children": [
+                    {
+                      "id": "rh_mobile_drawer_policy_refund",
+                      "type": "basic",
+                      "name": "A",
+                      "props": {
+                        "className": "rh-drawer-link",
+                        "href": "/page/refund",
+                        "data-rh-nav-path": "/page/refund"
+                      },
+                      "text": "$t:raonslab-product.nav.policy_refund",
+                      "actions": [
+                        {
+                          "type": "click",
+                          "handler": "sequence",
+                          "actions": [
+                            {
+                              "handler": "setState",
+                              "params": {
+                                "target": "global",
+                                "mobileMenuOpen": false
+                              }
+                            },
+                            {
+                              "handler": "navigate",
+                              "params": {
+                                "path": "/page/refund"
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
     }
   ]
 }

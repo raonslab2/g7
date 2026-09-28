@@ -22,6 +22,8 @@
 
 ## 기본 템플릿 제한(모듈로 해결 불가, 템플릿 직접 패치 금지)
 
+> 0.4.2: 모바일 드로어의 쇼핑·정보/정책 두 행은 드로어 컨테이너(`mobile_nav_drawer`) 끝 주입 + 구조 앵커 CSS 로 해소했다 — [mobile-drawer-0.4.2.md](mobile-drawer-0.4.2.md).
+
 | 표면 | 현재 | 원인 | 최소 upstream 제안 |
 | --- | --- | --- | --- |
 | 모바일 드로어 "정보·정책" 목록 | G7 기본 6개 링크(회사소개·이용약관…) | `_user_base.json` 해당 섹션에 `id`가 없어 Layout Extension 대상이 될 수 없음 | 섹션에 `id`(예: `mobile_drawer_info_policy`)를 부여하거나 Footer와 같은 `linkGroups`형 prop을 받는 composite로 추출 |

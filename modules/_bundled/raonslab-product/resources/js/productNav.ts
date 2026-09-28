@@ -6,6 +6,7 @@
  * - 현재 주소에 해당하는 링크에 aria-current="page", 그 그룹 버튼에 data-current 를 단다(직접 진입·새로고침 포함).
  * - 문서 목차(`a[data-rh-anchor]`)는 해시 변경 없이 스크롤·포커스만 옮긴다(라우터 재진입 방지).
  * - 모바일 문서 메뉴(`[data-rh-docnav-toggle]`)는 기본 닫힘 disclosure 다. Escape 는 닫고 토글로 포커스를 돌린다.
+ * - 모바일 드로어 문서 섹션(`a.rh-drawer-link`)도 같은 현재 위치 표시를 받는다.
  * - 문서 분류는 resources/taxonomy/info-policy.json 단일 출처에서 읽는다.
  */
 
@@ -174,7 +175,7 @@ export function syncProductNav(): void {
   }
   lastPath = path;
 
-  document.querySelectorAll<HTMLAnchorElement>('.rh-gnav a[data-rh-nav-path], a.rh-side-link[data-rh-nav-path]').forEach((link) => {
+  document.querySelectorAll<HTMLAnchorElement>('.rh-gnav a[data-rh-nav-path], a.rh-side-link[data-rh-nav-path], a.rh-drawer-link[data-rh-nav-path]').forEach((link) => {
     const current = link.dataset.rhNavPath === path && path !== '/';
     if (current) {
       if (link.getAttribute('aria-current') !== 'page') link.setAttribute('aria-current', 'page');
