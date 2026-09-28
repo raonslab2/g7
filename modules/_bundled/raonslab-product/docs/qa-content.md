@@ -9,9 +9,11 @@
 
 ## Evidence pack과 구현 계획
 
-`database/content/agent-factory-qa.v1.json`이 8개 질문·답변, 표시 순서, 답변 근거와 비공개 provenance 정의의 SSoT다. 공개 본문에는 개발용 표기를 넣지 않으며, 합성 운영 안내라는 사실은 각 행의 관리자 전용 `action_logs` provenance에 기록한다.
+`database/content/agent-factory-qa.v1.json`이 8개 질문·답변, 표시 순서, 답변 근거와 비공개 provenance 정의의 SSoT다. 모든 질문 제목은 공개 화면에서 `[자주 묻는 질문]`으로 표시해 실제 고객 문의로 오인되지 않게 한다. 공개 본문에는 개발용 표기를 넣지 않으며, 합성 운영 안내라는 사실은 각 행의 관리자 전용 `action_logs` provenance에도 기록한다.
 
-적용 명령은 기존 활성 Q&A board와 기존 활성 super 관리자만 사용한다. 질문·답변은 공식 `PostService`로 만들고 알림은 발생시키지 않는다. provenance key + scenario key + content role로 식별하므로 제목이 바뀌어도 같은 행을 갱신하며, 중복 provenance가 있으면 쓰기 전에 중단한다.
+적용 명령은 기존 활성 Q&A board와 기존 활성 super 관리자만 사용한다. 질문·답변은 공식 `PostService`로 만들고, 제품 모듈의 provenance 한정 알림 필터가 큐 실행 시에도 생성·삭제·복원 알림을 중단한다. 이 필터는 다른 게시글의 알림에는 관여하지 않는다. provenance key + scenario key + content role로 식별하므로 제목이 바뀌어도 같은 행을 갱신한다. 중복 provenance, 잘못된 marker, 질문 `parent_id/depth`, 답변의 부모/depth가 발견되면 자동 보정하지 않고 쓰기 전에 중단한다.
+
+같은 provenance의 변경 명령은 cache atomic lock으로 직렬화한다. 잠금을 얻지 못한 동시 apply/rollback은 어떤 행도 바꾸지 않고 실패한다.
 
 ## 적용과 식별
 
@@ -32,14 +34,17 @@ Provider 단계에서는 아래 명령을 runtime에 실행하지 않는다. 통
 /usr/bin/php8.3 artisan raonslab-product:qa-content --rollback --force
 ```
 
-롤백은 해당 provenance를 가진 질문 원글만 공식 삭제 흐름으로 처리하고 연결된 답변을 cascade soft-delete한다. 다른 게시판 데이터는 제목이 같아도 건드리지 않는다. 다시 적용하면 같은 provenance 행을 복원하므로 새 중복 행을 만들지 않는다.
+롤백은 트랜잭션 안에서 먼저 provenance 질문과 답변의 실제 답글 트리, 댓글, 첨부와 신고 interaction을 공식 board 모델 계약으로 검사한다. provenance가 소유하지 않은 답글이나 댓글·첨부·신고가 하나라도 있으면 전체 롤백을 중단하며 어떤 행도 삭제하지 않는다. 안전할 때만 provenance 답변부터 질문 순서로 각각 공식 `PostService`를 호출하고 `cascade_replies=false`를 전달한다. 다른 게시판 데이터는 제목이 같아도 건드리지 않는다. 다시 적용하면 같은 provenance 행을 복원하므로 새 중복 행을 만들지 않는다.
 
 ## Review gate
 
 - fixture 8건과 근거 경로, 금지 문구 정적 검사
 - dry-run 무변경, 첫 적용 16행, 두 번째 적용 신규 0/중복 0
 - 질문 8 + 답변 8, published, category null, 답변 parent/depth 계약
+- topology 변조와 동시 provenance lock 충돌의 fail-closed 처리
+- 외부 답글·댓글·첨부가 있을 때 rollback 0 mutation
+- provenance 게시글 delete/restore 알림 0, 일반 게시글 알림 필터 불변
 - 공개 목록·상세·통합 검색과 mobile page size 15
-- provenance 한정 rollback과 재적용
+- 답변부터 원글까지 provenance 한정 rollback과 재적용
 
 Production build, broad/full regression과 360/390/412/desktop 브라우저 smoke는 Provider 단계에서 수행하지 않는다. 통합 담당이 통합 뒤 각 1회 수행한다.

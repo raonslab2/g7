@@ -6,6 +6,7 @@ use App\Extension\AbstractModule;
 use Modules\Raonslab\Product\Http\Middleware\EnsureConsultationIntakeEnabled;
 use Modules\Raonslab\Product\Http\Middleware\RequireSameOrigin;
 use Modules\Raonslab\Product\Listeners\ApplyHomeSeoMeta;
+use Modules\Raonslab\Product\Listeners\SuppressQaContentNotifications;
 
 /**
  * RAON 제품 서비스 모듈
@@ -18,6 +19,7 @@ class Module extends AbstractModule
     {
         return [
             ApplyHomeSeoMeta::class,
+            SuppressQaContentNotifications::class,
         ];
     }
 
