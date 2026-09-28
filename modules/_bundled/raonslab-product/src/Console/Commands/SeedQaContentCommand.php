@@ -6,15 +6,21 @@ use App\Enums\UserStatus;
 use App\Models\User;
 use Illuminate\Console\Command;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\DB;
 use Modules\Sirsoft\Board\Enums\PostStatus;
+use Modules\Sirsoft\Board\Enums\ReportType;
 use Modules\Sirsoft\Board\Enums\TriggerType;
 use Modules\Sirsoft\Board\Models\Board;
 use Modules\Sirsoft\Board\Models\Post;
+use Modules\Sirsoft\Board\Models\Report;
 use Modules\Sirsoft\Board\Services\PostService;
 use RuntimeException;
 
 class SeedQaContentCommand extends Command
 {
+    private const LOCK_SECONDS = 300;
+
     protected $signature = 'raonslab-product:qa-content
         {--board=questions : Existing Q&A board slug}
         {--author= : Existing active super administrator UUID}
@@ -34,51 +40,83 @@ class SeedQaContentCommand extends Command
         try {
             $fixture = $this->loadFixture();
             $board = $this->resolveBoard($fixture);
-            $existing = $this->indexedProvenancePosts($board, $fixture);
-            $this->assertNoDuplicates($existing, $fixture);
-
-            if ($this->option('rollback')) {
-                return $this->rollback($board, $fixture, $existing);
-            }
-
-            $author = $this->resolveAuthor();
-            $plan = $this->buildPlan($fixture, $existing);
-
-            $this->line(sprintf(
-                '%s board=%s(%d) author=%s(%d) questions=%d answers=%d create=%d update=%d restore=%d unchanged=%d duplicates=0',
-                $this->option('dry-run') ? '[dry-run]' : '[apply]',
-                $board->slug,
-                $board->id,
-                $author->name,
-                $author->id,
-                count($fixture['scenarios']),
-                count($fixture['scenarios']),
-                $plan['create'],
-                $plan['update'],
-                $plan['restore'],
-                $plan['unchanged'],
-            ));
-
             if ($this->option('dry-run')) {
-                return self::SUCCESS;
+                return $this->executeOperation($board, $fixture, false);
             }
 
             $this->guardProductionWrite();
-            $stats = $this->apply($board, $author, $fixture, $existing);
-            $this->info(sprintf(
-                'Q&A content applied: created=%d updated=%d restored=%d unchanged=%d duplicates=0',
-                $stats['created'],
-                $stats['updated'],
-                $stats['restored'],
-                $stats['unchanged'],
-            ));
+            $lock = Cache::lock(self::lockName((string) $fixture['provenance']['key']), self::LOCK_SECONDS);
+            if (! $lock->get()) {
+                throw new RuntimeException('Another Q&A provenance operation is already running; no rows were changed.');
+            }
 
-            return self::SUCCESS;
+            try {
+                return $this->executeOperation($board, $fixture, true);
+            } finally {
+                $lock->release();
+            }
         } catch (\Throwable $e) {
             $this->error($e->getMessage());
 
             return self::FAILURE;
         }
+    }
+
+    /** @internal Stable only for identifying the distributed operation lock in focused tests. */
+    public static function lockName(string $provenanceKey): string
+    {
+        return 'raonslab-product:qa-content:'.hash('sha256', $provenanceKey);
+    }
+
+    /** @param array<string, mixed> $fixture */
+    private function executeOperation(Board $board, array $fixture, bool $mutate): int
+    {
+        $existing = $this->indexedProvenancePosts($board, $fixture);
+        $this->assertNoDuplicates($existing, $fixture);
+        $this->assertProvenanceTopology($existing, $fixture);
+
+        if ($this->option('rollback')) {
+            return $this->rollback($board, $fixture, $existing, $mutate);
+        }
+
+        $author = $this->resolveAuthor();
+        $plan = $this->buildPlan($fixture, $existing);
+
+        $this->line(sprintf(
+            '%s board=%s(%d) author=%s(%d) questions=%d answers=%d create=%d update=%d restore=%d unchanged=%d duplicates=0',
+            $mutate ? '[apply]' : '[dry-run]',
+            $board->slug,
+            $board->id,
+            $author->name,
+            $author->id,
+            count($fixture['scenarios']),
+            count($fixture['scenarios']),
+            $plan['create'],
+            $plan['update'],
+            $plan['restore'],
+            $plan['unchanged'],
+        ));
+
+        if (! $mutate) {
+            return self::SUCCESS;
+        }
+
+        $stats = DB::transaction(function () use ($board, $author, $fixture): array {
+            $fresh = $this->indexedProvenancePosts($board, $fixture, true);
+            $this->assertNoDuplicates($fresh, $fixture);
+            $this->assertProvenanceTopology($fresh, $fixture);
+
+            return $this->apply($board, $author, $fixture, $fresh);
+        });
+        $this->info(sprintf(
+            'Q&A content applied: created=%d updated=%d restored=%d unchanged=%d duplicates=0',
+            $stats['created'],
+            $stats['updated'],
+            $stats['restored'],
+            $stats['unchanged'],
+        ));
+
+        return self::SUCCESS;
     }
 
     /** @return array<string, mixed> */
@@ -154,25 +192,39 @@ class SeedQaContentCommand extends Command
      * @param  array<string, mixed>  $fixture
      * @return array<string, Collection<int, Post>>
      */
-    private function indexedProvenancePosts(Board $board, array $fixture): array
+    private function indexedProvenancePosts(Board $board, array $fixture, bool $forUpdate = false): array
     {
         $key = (string) $fixture['provenance']['key'];
-        $posts = Post::withTrashed()
+        $expectedIndexes = collect($fixture['scenarios'])->flatMap(fn (array $scenario): array => [
+            $scenario['key'].':question',
+            $scenario['key'].':answer',
+        ])->flip();
+        $query = Post::withTrashed()
             ->where('board_id', $board->id)
-            ->where('action_logs', 'like', '%'.$key.'%')
-            ->get();
+            ->where('action_logs', 'like', '%'.$key.'%');
+        if ($forUpdate) {
+            $query->lockForUpdate();
+        }
+        $posts = $query->get();
 
         $indexed = [];
         foreach ($posts as $post) {
-            foreach ($post->action_logs ?? [] as $log) {
-                if (($log['provenance_key'] ?? null) !== $key) {
-                    continue;
-                }
-                $index = ($log['scenario_key'] ?? '').':'.($log['content_role'] ?? '');
-                $indexed[$index] ??= collect();
-                $indexed[$index]->push($post);
-                break;
+            $markers = collect($post->action_logs ?? [])->filter(
+                fn (array $log): bool => ($log['provenance_key'] ?? null) === $key
+            );
+            if ($markers->count() !== 1) {
+                throw new RuntimeException("Provenance post {$post->id} must carry exactly one marker for {$key}.");
             }
+
+            $marker = $markers->first();
+            $index = ($marker['scenario_key'] ?? '').':'.($marker['content_role'] ?? '');
+            if (! $expectedIndexes->has($index)
+                || ($marker['provenance_kind'] ?? null) !== $fixture['provenance']['kind']) {
+                throw new RuntimeException("Provenance post {$post->id} has an invalid scenario, role, or kind.");
+            }
+
+            $indexed[$index] ??= collect();
+            $indexed[$index]->push($post);
         }
 
         return $indexed;
@@ -187,6 +239,27 @@ class SeedQaContentCommand extends Command
                 if (($existing[$index] ?? collect())->count() > 1) {
                     throw new RuntimeException("Duplicate provenance rows found for {$index}; resolve them before applying.");
                 }
+            }
+        }
+    }
+
+    /** @param array<string, Collection<int, Post>> $existing @param array<string, mixed> $fixture */
+    private function assertProvenanceTopology(array $existing, array $fixture): void
+    {
+        foreach ($fixture['scenarios'] as $scenario) {
+            /** @var Post|null $question */
+            $question = ($existing[$scenario['key'].':question'] ?? collect())->first();
+            /** @var Post|null $answer */
+            $answer = ($existing[$scenario['key'].':answer'] ?? collect())->first();
+
+            if ($question && ($question->parent_id !== null || (int) $question->depth !== 0)) {
+                throw new RuntimeException("Topology mismatch for question {$question->id}; expected parent_id=null and depth=0.");
+            }
+            if ($answer && ! $question) {
+                throw new RuntimeException("Topology mismatch for answer {$answer->id}; its provenance question is missing.");
+            }
+            if ($answer && ((int) $answer->parent_id !== (int) $question?->id || (int) $answer->depth !== 1)) {
+                throw new RuntimeException("Topology mismatch for answer {$answer->id}; expected its provenance question parent and depth=1.");
             }
         }
     }
@@ -273,6 +346,7 @@ class SeedQaContentCommand extends Command
                 $data,
                 options: ['skip_notification' => true],
             );
+            $this->assertWrittenTopology($post, $role, $parentId);
             $stats['created']++;
 
             return $post;
@@ -284,12 +358,24 @@ class SeedQaContentCommand extends Command
 
         if ($this->contentDiffers($post, $scenario, $role, $fixture, $parentId, $author->id)) {
             $post = $this->postService->updatePost($board->slug, $post->id, $data);
+            $this->assertWrittenTopology($post, $role, $parentId);
             $stats['updated']++;
         } elseif (! $post->wasRecentlyCreated && ! $post->trashed()) {
             $stats['unchanged']++;
         }
 
         return $post;
+    }
+
+    private function assertWrittenTopology(Post $post, string $role, ?int $parentId): void
+    {
+        $valid = $role === 'question'
+            ? $post->parent_id === null && (int) $post->depth === 0
+            : (int) $post->parent_id === (int) $parentId && (int) $post->depth === 1;
+
+        if (! $valid) {
+            throw new RuntimeException("PostService returned invalid {$role} topology for post {$post->id}.");
+        }
     }
 
     /** @param array<string, mixed> $scenario @param array<string, mixed> $fixture @return array<string, mixed> */
@@ -369,40 +455,156 @@ class SeedQaContentCommand extends Command
     }
 
     /** @param array<string, mixed> $fixture @param array<string, Collection<int, Post>> $existing */
-    private function rollback(Board $board, array $fixture, array $existing): int
+    private function rollback(Board $board, array $fixture, array $existing, bool $mutate): int
     {
-        $roots = collect($fixture['scenarios'])
-            ->map(fn (array $scenario) => ($existing[$scenario['key'].':question'] ?? collect())->first())
-            ->filter(fn (?Post $post): bool => $post !== null && ! $post->trashed());
-        $activeRows = collect($existing)->flatten()->filter(fn (Post $post): bool => ! $post->trashed())->count();
+        if (! $mutate) {
+            $this->assertRollbackSafe($existing, $fixture);
+            $roots = $this->activeRolePosts($existing, $fixture, 'question');
+            $activeRows = collect($existing)->flatten()->filter(fn (Post $post): bool => ! $post->trashed())->count();
 
-        $this->line(sprintf(
-            '%s board=%s(%d) roots=%d rows=%d provenance=%s',
-            $this->option('dry-run') ? '[dry-run rollback]' : '[rollback]',
-            $board->slug,
-            $board->id,
-            $roots->count(),
-            $activeRows,
-            $fixture['provenance']['key'],
-        ));
+            $this->line(sprintf(
+                '[dry-run rollback] board=%s(%d) roots=%d rows=%d provenance=%s',
+                $board->slug,
+                $board->id,
+                $roots->count(),
+                $activeRows,
+                $fixture['provenance']['key'],
+            ));
 
-        if ($this->option('dry-run')) {
             return self::SUCCESS;
         }
 
-        $this->guardProductionWrite();
-        foreach ($roots as $post) {
-            $this->postService->deletePost(
-                $board->slug,
-                $post->id,
-                TriggerType::System->value,
-                ['skip_notification' => true, 'cascade_replies' => true],
-            );
-        }
+        $stats = DB::transaction(function () use ($board, $fixture): array {
+            $fresh = $this->indexedProvenancePosts($board, $fixture, true);
+            $this->assertNoDuplicates($fresh, $fixture);
+            $this->assertProvenanceTopology($fresh, $fixture);
+            $this->assertRollbackSafe($fresh, $fixture, true);
 
-        $this->info("Q&A content rolled back: roots={$roots->count()} rows={$activeRows}");
+            $answers = $this->activeRolePosts($fresh, $fixture, 'answer');
+            $roots = $this->activeRolePosts($fresh, $fixture, 'question');
+            $activeRows = collect($fresh)->flatten()->filter(fn (Post $post): bool => ! $post->trashed())->count();
+
+            foreach ($answers->concat($roots) as $post) {
+                $this->postService->deletePost(
+                    $board->slug,
+                    $post->id,
+                    TriggerType::System->value,
+                    ['skip_notification' => true, 'cascade_replies' => false],
+                );
+            }
+
+            return ['roots' => $roots->count(), 'rows' => $activeRows];
+        });
+
+        $this->line(sprintf(
+            '[rollback] board=%s(%d) roots=%d rows=%d provenance=%s',
+            $board->slug,
+            $board->id,
+            $stats['roots'],
+            $stats['rows'],
+            $fixture['provenance']['key'],
+        ));
+        $this->info("Q&A content rolled back: roots={$stats['roots']} rows={$stats['rows']}");
 
         return self::SUCCESS;
+    }
+
+    /**
+     * @param  array<string, Collection<int, Post>>  $existing
+     * @param  array<string, mixed>  $fixture
+     * @return Collection<int, Post>
+     */
+    private function activeRolePosts(array $existing, array $fixture, string $role): Collection
+    {
+        return collect($fixture['scenarios'])
+            ->map(fn (array $scenario) => ($existing[$scenario['key'].':'.$role] ?? collect())->first())
+            ->filter(fn (?Post $post): bool => $post !== null && ! $post->trashed())
+            ->values();
+    }
+
+    /** @param array<string, Collection<int, Post>> $existing @param array<string, mixed> $fixture */
+    private function assertRollbackSafe(array $existing, array $fixture, bool $forUpdate = false): void
+    {
+        $owned = collect($existing)->flatten()->keyBy(fn (Post $post): int => (int) $post->id);
+
+        foreach ($fixture['scenarios'] as $scenario) {
+            /** @var Post|null $question */
+            $question = ($existing[$scenario['key'].':question'] ?? collect())->first();
+            /** @var Post|null $answer */
+            $answer = ($existing[$scenario['key'].':answer'] ?? collect())->first();
+
+            if ($question) {
+                $descendants = $this->descendantsUsingOfficialRelation($question, $forUpdate);
+                $allowed = $answer ? [(int) $answer->id] : [];
+                $external = $descendants->reject(fn (Post $post): bool => in_array((int) $post->id, $allowed, true));
+                if ($external->isNotEmpty()) {
+                    throw new RuntimeException('Rollback blocked by non-owned descendant post(s): '.$external->pluck('id')->join(', ').'. No rows were changed.');
+                }
+            }
+
+            if ($answer && $this->descendantsUsingOfficialRelation($answer, $forUpdate)->isNotEmpty()) {
+                throw new RuntimeException("Rollback blocked by descendant(s) of owned answer {$answer->id}. No rows were changed.");
+            }
+        }
+
+        foreach ($owned as $post) {
+            $comments = $post->comments()->withTrashed();
+            $attachments = $post->attachments()->withTrashed();
+            if ($forUpdate) {
+                $comments->lockForUpdate();
+                $attachments->lockForUpdate();
+            }
+            $commentIds = $comments->pluck('id');
+            $attachmentIds = $attachments->pluck('id');
+            if ($commentIds->isNotEmpty()) {
+                throw new RuntimeException("Rollback blocked by comment(s) on post {$post->id}: ".$commentIds->join(', ').'. No rows were changed.');
+            }
+            if ($attachmentIds->isNotEmpty()) {
+                throw new RuntimeException("Rollback blocked by attachment(s) on post {$post->id}: ".$attachmentIds->join(', ').'. No rows were changed.');
+            }
+        }
+
+        if ($owned->isNotEmpty()) {
+            $reports = Report::withTrashed()
+                ->where('board_id', $owned->first()->board_id)
+                ->where('target_type', ReportType::Post->value)
+                ->whereIn('target_id', $owned->keys());
+            if ($forUpdate) {
+                $reports->lockForUpdate();
+            }
+            $reportIds = $reports->pluck('id');
+            if ($reportIds->isNotEmpty()) {
+                throw new RuntimeException('Rollback blocked by report interaction(s): '.$reportIds->join(', ').'. No rows were changed.');
+            }
+        }
+    }
+
+    /** @return Collection<int, Post> */
+    private function descendantsUsingOfficialRelation(Post $root, bool $forUpdate): Collection
+    {
+        $descendants = collect();
+        $pending = collect([$root]);
+        $seen = [(int) $root->id => true];
+
+        while ($pending->isNotEmpty()) {
+            /** @var Post $parent */
+            $parent = $pending->shift();
+            $children = $parent->replies()->withTrashed()->where('board_id', $root->board_id);
+            if ($forUpdate) {
+                $children->lockForUpdate();
+            }
+
+            foreach ($children->get() as $child) {
+                if (isset($seen[(int) $child->id])) {
+                    continue;
+                }
+                $seen[(int) $child->id] = true;
+                $descendants->push($child);
+                $pending->push($child);
+            }
+        }
+
+        return $descendants;
     }
 
     private function guardProductionWrite(): void
