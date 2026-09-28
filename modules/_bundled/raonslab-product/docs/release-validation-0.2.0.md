@@ -6,7 +6,7 @@
 - backend/admin: Request `req_a30d92279a0f4971a2f7035047edfbdb`, commit `3f4c1006c9f28230a84aaa52c24d08bdfc87078c`
 - public homepage: Request `req_dc31fb01ab554bc0927c48f75301cda0`, commit `5de15afa65fddbaae20f0968767f3742ab34ccb7`
 - integration owner: Request `req_7130b85d2da44007867b9b9322c97140`
-- integration implementation SHA: `PENDING_IMPLEMENTATION_COMMIT`
+- integration implementation SHA: `8d6d21610ec1178469fdc53059a669b7e3ea87b3`
 
 변경 경계는 `modules/_bundled/raonslab-product`뿐이다. 코어 patch는 허용하지 않는다.
 
