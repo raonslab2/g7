@@ -79,7 +79,28 @@ description으로 저장했다. 본문과 title은 native 다국어 필드다. �
 ## 운영과 rollback
 
 - 편집·발행·attachment·version 조회/restore는 `/admin/pages`만 사용한다. 코드 배포 없이 public render에 반영된다.
+- 0.4.0 module update 뒤에는 **별도 PHP 프로세스**에서 아래 route cache lifecycle을 실행한다. update 프로세스는
+  파일 교체 전에 0.3.1 `ProductServiceProvider` 클래스를 이미 로드하며, 같은 프로세스의 route rebuild가 새 provider
+  method를 다시 선언할 수 없어 root compatibility route를 누락한 cache를 만들 수 있다. route source/redirect
+  controller 결함이 아니라 same-process PHP class lifetime을 고려하지 않은 delivery lifecycle 누락이다.
+
+  ```bash
+  /usr/bin/php8.3 artisan route:clear
+  /usr/bin/php8.3 artisan route:cache
+  sudo systemctl reload g7-product-fpm.service
+  /usr/bin/php8.3 artisan route:list --name=raonslab-product.compatibility --json
+  curl -fsS -D - -o /dev/null 'http://127.0.0.1:18770/info/services?from=smoke'
+  ```
+
+  `route:list`는 plain/localized 합계 14개를 반환하고 실제 GET은 same-origin `/page/service?from=smoke` 301이어야 한다.
+  FPM은 이 설치가 소유한 `g7-product-fpm.service`만 graceful reload한다. nginx, queue, AI Workspace, AI_GCS,
+  AgentOpt는 재시작하지 않는다. committed smoke도 이 두 조건을 full browser loop 전에 fail-fast로 검사한다.
+- canonical의 authoritative surface는 normal human SPA DOM이 아니라 `SeoMiddleware`가 bot에 반환하는 server-rendered
+  HTML이다. human SPA는 본래 canonical link를 만들지 않는다. smoke는 human DOM의 responsive UI와 별도로 Googlebot
+  요청 7회에서 `X-SEO-Cache: HIT|MISS`, same-origin 및 exact `/page/{slug}` canonical을 검사한다.
 - 소스 rollback은 0.3.1 commit으로 module lifecycle update 후 기존 URL route를 되돌릴 수 있다.
+- route를 포함한 release rollback 뒤에도 위 route clear/cache와 G7 전용 FPM reload를 같은 순서로 적용한 다음
+  `route:list`와 legacy URL을 확인한다.
 - 데이터 rollback은 변경 전 공식 backup archive를 격리 복원 절차에 투입하거나 각 Page의 이전 version을
   `/admin/pages`에서 restore한다. raw SQL write는 사용하지 않는다.
 - bootstrap 자체의 rollback은 생성된 다섯 Page를 admin에서 제거하고 `privacy`·`terms`의 v1을 restore하는 방식이다.
@@ -103,4 +124,7 @@ description으로 저장했다. 본문과 title은 native 다국어 필드다. �
   HTTP 429 HTML을 반환해 실패했고, 지침대로 source와 module을 0.3.1로 롤백했다. 후속 smoke는 viewport별 context/page
   하나에서 7개 Page를 순차 탐색하고, 상담 config를 navigation 전에 1회 요청해 status·content type·JSON을 각각
   검사한다. throttle 우회나 완화는 하지 않으며 runtime 재검증은 독립 gate 뒤 delivery 단계에 남긴다.
+- 두 번째 delivery는 integrated tree/build/module update까지 성공했지만 legacy plain/localized 14개가 모두 404이고
+  human SPA canonical 31건이 없어 380 PASS / 73 FAIL로 rollback했다. 전자는 같은 update 프로세스에 남은 이전 provider
+  class로 route cache를 구운 lifecycle 누락이고, 후자는 bot 전용인 G7 SEO 계약을 human DOM에 잘못 적용한 smoke 결함이다.
 - 최종 PHP focused tests, 360/390/412/1280 runtime browser smoke와 main/runtime SHA는 delivery 단계에서 확인한다.
