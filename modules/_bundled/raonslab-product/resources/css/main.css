@@ -1787,6 +1787,328 @@ textarea.rh-input {
   }
 }
 
+/* ── 2차 시각 패스: 사례는 서로 다른 코드 네이티브 미니 화면으로 읽힌다 ──
+   MOBILE_STOCK = 요청 로그 터미널(행 번호·상태 태그), RAON Hub = 상태 스트립 + 근거 레일.
+   이미지·SVG·glow 없이 테두리·등폭 글꼴·상태 색만 쓴다. 장식 요소는 모두 aria-hidden. */
+.rh-home {
+  --rh-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace;
+}
+
+/* MOBILE_STOCK: 요청 로그 터미널 */
+.rh-log-bar {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  gap: .65rem;
+  border-bottom: 1px solid var(--rh-border);
+  padding: .6rem 1.25rem;
+  color: var(--rh-muted);
+  background: var(--rh-panel-bar);
+  font: 600 .76rem/1.2 var(--rh-mono);
+  letter-spacing: .04em;
+}
+
+.rh-log-dots {
+  display: inline-flex;
+  flex: 0 0 auto;
+  gap: .3rem;
+}
+
+.rh-log-dot {
+  width: .45rem;
+  height: .45rem;
+  border: 1px solid var(--rh-border-strong);
+  border-radius: 50%;
+}
+
+.rh-log-title {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.rh-evidence.rh-evidence-log {
+  counter-reset: rh-log;
+  grid-template-columns: minmax(0, 1fr);
+  background: var(--rh-panel);
+}
+
+.rh-evidence-log .rh-lane {
+  counter-increment: rh-log;
+  display: grid;
+  grid-template-columns: 2.25rem 8.5rem minmax(0, 1fr);
+  column-gap: 1rem;
+  align-items: start;
+  border-top: 1px dashed var(--rh-border);
+  border-left: 2px solid transparent;
+  padding: 1rem 1.25rem 1rem .75rem;
+  background: none;
+}
+
+.rh-evidence-log .rh-lane:first-child {
+  border-top: 0;
+}
+
+/* 행 번호 거터(마지막 행 포함 — 레일용 last-child 숨김 규칙을 되돌린다) */
+.rh-evidence-log .rh-lane::before,
+.rh-evidence-log .rh-lane:last-child::before {
+  display: block;
+  position: static;
+  grid-column: 1;
+  grid-row: 1 / span 2;
+  border: 0;
+  color: var(--rh-muted);
+  font: 600 .78rem/1.75 var(--rh-mono);
+  text-align: right;
+  content: counter(rh-log, decimal-leading-zero);
+}
+
+.rh-evidence-log .rh-lane::after {
+  display: none;
+}
+
+.rh-evidence-log .rh-lane-head {
+  display: flex;
+  grid-column: 2;
+  flex-direction: row;
+  align-items: center;
+  gap: .5rem;
+}
+
+/* 좁은 화면 레일 규칙(표지를 1열에 세로로 고정)은 로그 행에 적용하지 않는다 */
+.rh-evidence-log .rh-lane-mark {
+  --rh-station: 1.5rem;
+  grid-row: auto;
+  grid-column: auto;
+  border-radius: .35rem;
+  font-size: .68rem;
+}
+
+.rh-evidence-log .rh-lane-label {
+  display: block;
+  grid-column: auto;
+  min-height: 0;
+  font: 700 .76rem/1.3 var(--rh-mono);
+  letter-spacing: .02em;
+}
+
+.rh-evidence-log .rh-lane > :not(.rh-lane-head) {
+  grid-column: 3;
+}
+
+.rh-evidence-log .rh-lane > .rh-fact-value:first-of-type {
+  margin-top: 0;
+}
+
+.rh-evidence-log .rh-lane-sub {
+  margin-top: .7rem;
+  border-top: 0;
+  border-left: 1px solid var(--rh-border);
+  padding: 0 0 0 .8rem;
+}
+
+.rh-evidence-log .rh-lane-verified {
+  border-left-color: var(--rh-ok);
+  background: var(--rh-ok-tint);
+}
+
+.rh-evidence-log .rh-lane-limit {
+  border-top: 1px dashed var(--rh-warn);
+  border-left: 2px dashed var(--rh-warn);
+  background: none;
+}
+
+/* RAON Hub: 상태 스트립(확장 기반 버전 + 네 구간 상태) + 근거 레일 */
+.rh-strip {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  gap: 1rem;
+  border-bottom: 1px solid var(--rh-border);
+  padding: .6rem 1.25rem;
+  background: var(--rh-panel-bar);
+}
+
+.rh-strip-chip {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: .45rem;
+  border: 1px solid var(--rh-border-strong);
+  border-radius: .4rem;
+  padding: .15rem .55rem;
+  color: var(--rh-text-soft);
+  font: 600 .74rem/1.4 var(--rh-mono);
+}
+
+.rh-strip-bar {
+  display: grid;
+  flex: 1 1 auto;
+  min-width: 0;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: .25rem;
+}
+
+.rh-strip-seg {
+  height: .4rem;
+  border: 1px solid var(--rh-border-strong);
+  border-radius: 999px;
+}
+
+.rh-strip-seg-problem {
+  border-color: var(--rh-muted);
+  background: var(--rh-muted);
+}
+
+.rh-strip-seg-build {
+  border-color: var(--rh-accent);
+  background: var(--rh-accent);
+}
+
+.rh-strip-seg-verified {
+  border-color: var(--rh-ok);
+  background: var(--rh-ok);
+}
+
+/* 한계 구간은 채우지 않는다(확인 범위 밖) */
+.rh-strip-seg-limit {
+  border-style: dashed;
+  border-color: var(--rh-warn);
+  background: none;
+}
+
+.rh-evidence-rail .rh-lane-label {
+  font-family: var(--rh-mono);
+}
+
+/* 서비스: 실증은 점선 노드(시험), 구축은 실선, 운영은 채운 노드. 산출물은 체크 표지 */
+.rh-stage-pilot .rh-stage-node {
+  border-style: dashed;
+}
+
+.rh-stage-build .rh-stage-node {
+  border-color: var(--rh-accent);
+  border-width: 1.5px;
+}
+
+.rh-stage .rh-checklist > li {
+  padding-left: 1.45rem;
+}
+
+.rh-stage .rh-checklist > li::before {
+  top: .5em;
+  width: .5rem;
+  height: .28rem;
+  border-bottom: 1.5px solid var(--rh-ok);
+  border-left: 1.5px solid var(--rh-ok);
+  background: none;
+  transform: rotate(-45deg);
+}
+
+/* 도입 절차: 아이콘 노드 + 순번 배지, 검증 단계의 결과 분기, 마지막 단계는 반복 */
+.rh-process-node {
+  font-size: .9rem;
+}
+
+.rh-process-node::before {
+  position: absolute;
+  top: -.4rem;
+  right: -.6rem;
+  min-width: 1.15rem;
+  border: 1px solid var(--rh-border-strong);
+  border-radius: 999px;
+  padding: 0 .2rem;
+  color: var(--rh-text-soft);
+  background: var(--rh-bg);
+  font: 700 .64rem/1rem var(--rh-mono);
+  text-align: center;
+}
+
+.rh-process-step:last-child .rh-process-node::before {
+  border-color: var(--rh-primary-bg);
+}
+
+.rh-process-states {
+  position: absolute;
+  z-index: 1;
+  top: 2.6rem;
+  left: 0;
+  display: flex;
+  width: 2.25rem;
+  justify-content: center;
+  gap: .2rem;
+  padding: .1rem 0;
+  background: var(--rh-bg);
+}
+
+.rh-process-state {
+  width: .45rem;
+  height: .45rem;
+  border-radius: 50%;
+}
+
+.rh-process-state-pass {
+  background: var(--rh-ok);
+}
+
+.rh-process-state-fail {
+  border: 1.5px solid var(--rh-danger);
+}
+
+.rh-process-state-open {
+  border: 1.5px dashed var(--rh-warn);
+}
+
+.rh-process-step-verify .rh-process-node {
+  border-color: var(--rh-ok);
+  color: var(--rh-ok);
+}
+
+@media (max-width: 960px) {
+  .rh-process-states {
+    top: 2.55rem;
+  }
+
+  .rh-process-step-verify .rh-process-body {
+    padding-bottom: .35rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .rh-log-bar,
+  .rh-strip {
+    padding: .55rem 1.1rem;
+  }
+
+  /* 좁은 화면: 거터 | (태그 → 본문) */
+  .rh-evidence-log .rh-lane {
+    grid-template-columns: 1.6rem minmax(0, 1fr);
+    column-gap: .7rem;
+    row-gap: .5rem;
+    padding: .9rem 1.1rem .9rem .55rem;
+  }
+
+  .rh-evidence-log .rh-lane-head,
+  .rh-evidence-log .rh-lane > :not(.rh-lane-head) {
+    grid-column: 2;
+  }
+
+  .rh-evidence-log .rh-lane::before {
+    grid-row: 1;
+    line-height: 1.5rem;
+  }
+
+  .rh-strip {
+    flex-wrap: wrap;
+    gap: .5rem .75rem;
+  }
+
+  .rh-strip-bar {
+    flex-basis: 100%;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html:has(.rh-home) {
     scroll-behavior: auto !important;
