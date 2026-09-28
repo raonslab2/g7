@@ -6,6 +6,7 @@ use App\Extension\AbstractModule;
 use Modules\Raonslab\Product\Http\Middleware\EnsureConsultationIntakeEnabled;
 use Modules\Raonslab\Product\Http\Middleware\RequireSameOrigin;
 use Modules\Raonslab\Product\Listeners\ApplyHomeSeoMeta;
+use Modules\Raonslab\Product\Listeners\ExcludeConsultationPostsFromSearch;
 use Modules\Raonslab\Product\Services\ConsultationBoardProvisioner;
 use Throwable;
 
@@ -20,6 +21,7 @@ class Module extends AbstractModule
     {
         return [
             ApplyHomeSeoMeta::class,
+            ExcludeConsultationPostsFromSearch::class,
         ];
     }
 

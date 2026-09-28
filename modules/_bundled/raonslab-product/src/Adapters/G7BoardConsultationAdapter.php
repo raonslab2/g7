@@ -30,7 +30,7 @@ class G7BoardConsultationAdapter implements ConsultationBoardGateway
         string $ipAddress,
         ConsultationStatus $status,
     ): ConsultationSubmissionResult {
-        $board = $this->provisioner->ensureReady();
+        $board = $this->provisioner->requireReady();
 
         return DB::transaction(function () use ($board, $reference, $payloadHash, $content, $ipAddress, $status) {
             $this->boards->query()->whereKey($board->id)->lockForUpdate()->firstOrFail();

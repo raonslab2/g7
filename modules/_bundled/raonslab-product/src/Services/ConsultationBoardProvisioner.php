@@ -15,6 +15,29 @@ class ConsultationBoardProvisioner
 
     public function ensureReady(): Board
     {
+        $slug = $this->validatedSlug();
+
+        $board = $this->boardService->getBoardBySlug($slug, checkScope: false)
+            ?? $this->boardService->createBoard($this->definition($slug));
+
+        return $this->validateBoard($board);
+    }
+
+    /**
+     * 요청 경로에서는 게시판을 만들거나 고치지 않고 준비 상태만 확인합니다.
+     */
+    public function requireReady(): Board
+    {
+        $board = $this->boardService->getBoardBySlug($this->validatedSlug(), checkScope: false);
+        if (! $board instanceof Board) {
+            throw new RuntimeException(__('common.failed'));
+        }
+
+        return $this->validateBoard($board);
+    }
+
+    private function validatedSlug(): string
+    {
         if ($this->legacyAudit->hasData()) {
             throw new RuntimeException(__('common.failed'));
         }
@@ -24,9 +47,11 @@ class ConsultationBoardProvisioner
             throw new RuntimeException(__('common.failed'));
         }
 
-        $board = $this->boardService->getBoardBySlug($slug, checkScope: false)
-            ?? $this->boardService->createBoard($this->definition($slug));
+        return $slug;
+    }
 
+    private function validateBoard(Board $board): Board
+    {
         if ($board->is_active
             || $board->secret_mode->value !== 'always'
             || ! $board->use_comment
