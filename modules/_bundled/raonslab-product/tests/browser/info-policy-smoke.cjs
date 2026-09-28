@@ -25,6 +25,35 @@ const USER_AGENTS = {
 const results = [];
 const record = (scope, check, ok, detail = '') => results.push({ scope, check, status: ok ? 'PASS' : 'FAIL', detail: String(detail).slice(0, 300) });
 
+function inspectRedirectLocation(scope, location, expectedPathAndSearch, targetCheck) {
+  let resolved = null;
+  let parseError = '';
+
+  if (!location) {
+    parseError = 'missing Location header';
+  } else {
+    try {
+      resolved = new URL(location, BASE);
+    } catch (error) {
+      parseError = `invalid Location header: ${error instanceof Error ? error.message : String(error)}`;
+    }
+  }
+
+  const expectedOrigin = new URL(BASE).origin;
+  record(
+    scope,
+    'location remains same-origin',
+    resolved?.origin === expectedOrigin,
+    parseError || `actual=${resolved?.origin} expected=${expectedOrigin}`,
+  );
+  record(
+    scope,
+    targetCheck,
+    resolved !== null && `${resolved.pathname}${resolved.search}` === expectedPathAndSearch,
+    parseError || `actual=${resolved?.pathname}${resolved?.search} expected=${expectedPathAndSearch}`,
+  );
+}
+
 async function inspectNativePage(page, viewport, slug, locale, errors) {
   errors.length = 0;
   const path = `/page/${slug}`;
@@ -150,11 +179,21 @@ async function inspectConsultationConfig(api) {
     for (const [slug, legacy] of PAGES) {
       const response = await api.get(`${legacy}?from=smoke`, { maxRedirects: 0 });
       record(`redirect/${slug}`, 'legacy URL is 301', response.status() === 301, response.status());
-      record(`redirect/${slug}`, 'location preserves query and targets canonical', response.headers().location === `/page/${slug}?from=smoke`, response.headers().location);
+      inspectRedirectLocation(
+        `redirect/${slug}`,
+        response.headers().location,
+        `/page/${slug}?from=smoke`,
+        'location preserves query and targets canonical',
+      );
 
       const localized = await api.get(`/en${legacy}?from=smoke&locale=ko`, { maxRedirects: 0 });
       record(`redirect/en/${slug}`, 'localized legacy URL is 301', localized.status() === 301, localized.status());
-      record(`redirect/en/${slug}`, 'localized canonical uses locale query', localized.headers().location === `/page/${slug}?from=smoke&locale=en`, localized.headers().location);
+      inspectRedirectLocation(
+        `redirect/en/${slug}`,
+        localized.headers().location,
+        `/page/${slug}?from=smoke&locale=en`,
+        'localized canonical uses locale query',
+      );
     }
     await api.dispose();
 
