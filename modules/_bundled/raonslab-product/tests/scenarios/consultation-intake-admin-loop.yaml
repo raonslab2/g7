@@ -19,6 +19,7 @@ axes:
     - mail_failure
     - public_throttle
     - admin_authorization
+    - admin_read_manage_separation
     - admin_read
     - admin_mutation
     - invalid_status_transition
@@ -48,6 +49,8 @@ effects:
   - public_rate_limit_enforced
   - admin_auth_required
   - admin_permission_required
+  - read_permission_allows_queries
+  - manage_permission_required_for_mutations
   - admin_list_filter_works
   - admin_detail_contains_pii_for_authorized_user
   - internal_note_history_preserved

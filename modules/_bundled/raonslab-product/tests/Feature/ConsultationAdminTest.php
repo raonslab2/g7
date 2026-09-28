@@ -41,6 +41,40 @@ class ConsultationAdminTest extends ModuleTestCase
 
     #[Test]
     /**
+     * @scenario case=admin_read_manage_separation
+     *
+     * @effects read_permission_allows_queries, manage_permission_required_for_mutations
+     */
+    public function read_only_admin_can_query_but_cannot_add_notes_or_change_status(): void
+    {
+        $consultation = $this->submit('admin-read-only-key');
+        $reader = $this->createAdminUser([
+            'raonslab-product.consultations.read',
+        ]);
+
+        $this->actingAs($reader)
+            ->getJson('/api/modules/raonslab-product/admin/consultations')
+            ->assertOk();
+
+        $this->actingAs($reader)
+            ->getJson("/api/modules/raonslab-product/admin/consultations/{$consultation->reference}")
+            ->assertOk();
+
+        $this->actingAs($reader)
+            ->postJson("/api/modules/raonslab-product/admin/consultations/{$consultation->reference}/notes", [
+                'note' => 'This must not be stored.',
+            ])->assertForbidden();
+
+        $this->actingAs($reader)
+            ->patchJson("/api/modules/raonslab-product/admin/consultations/{$consultation->reference}/status", [
+                'status' => 'CONTACTED',
+            ])->assertForbidden();
+
+        $this->assertDatabaseCount('raonslab_product_consultation_histories', 1);
+    }
+
+    #[Test]
+    /**
      * @scenario case=admin_read
      *
      * @effects admin_list_filter_works, admin_detail_contains_pii_for_authorized_user
