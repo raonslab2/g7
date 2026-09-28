@@ -2,7 +2,7 @@
  * 사업 홈 화면 보조 동작.
  *
  * - 홈이 렌더된 동안 문서 제목·설명을 홈 문구로 맞추고, 다른 화면으로 가면 원래 값으로 되돌린다.
- * - 섹션 바로가기(`a[data-rh-jump]`)는 해시 변경 없이 스크롤·포커스만 옮긴다(라우터 재진입 방지).
+ * - 홈 안의 섹션 이동 링크(`a[data-rh-jump]`)는 해시 변경 없이 스크롤·포커스만 옮긴다(라우터 재진입 방지).
  */
 import { currentLocale, t } from './i18n';
 
@@ -70,10 +70,6 @@ export function jumpToSection(key: string): boolean {
   section.scrollIntoView({ behavior: (prefersReducedMotion() ? 'instant' : 'smooth') as ScrollBehavior, block: 'start' });
   const heading = document.getElementById(`rh-${key}-title`);
   (heading ?? section).focus({ preventScroll: true });
-  document.querySelectorAll<HTMLElement>('.rh-subnav-link').forEach((link) => {
-    if (link.dataset.rhJump === key) link.setAttribute('aria-current', 'true');
-    else link.removeAttribute('aria-current');
-  });
   return true;
 }
 

@@ -19,6 +19,9 @@ function walk(node: Node, visit: (n: Node) => void): void {
   node.children?.forEach((child) => walk(child, visit));
 }
 
+/** 검증된 RAON Hub 사례 섹션 주소. */
+const CASE_HREF = '#rh-cases';
+
 const home: Node = layout.injections[0].components[0];
 const nodes: Node[] = [];
 walk(home, (n) => nodes.push(n));
@@ -44,20 +47,36 @@ describe('사업 홈 레이아웃 확장', () => {
     expect(sectionIds).toEqual(['rh-hero', 'rh-problem', 'rh-services', 'rh-cases', 'rh-process', 'rh-tech', 'rh-consult']);
   });
 
-  it('IA 바로가기는 실제 섹션을 가리킨다(빈 메뉴 없음)', () => {
-    const jumps = nodes.filter((n) => n.props?.['data-rh-jump']).map((n) => n.props?.href);
-    expect(new Set(jumps)).toEqual(new Set(['#rh-services', '#rh-cases', '#rh-process', '#rh-tech', '#rh-consult']));
+  it('홈 섹션 바로가기 바를 두지 않고, 홈 안의 이동 링크는 실제 섹션을 가리킨다', () => {
+    expect(nodes.some((n) => classOf(n).includes('rh-subnav'))).toBe(false);
+    const jumps = nodes.filter((n) => n.props?.['data-rh-jump']);
+    expect(jumps.length).toBeGreaterThan(0);
     const ids = new Set(nodes.map((n) => n.props?.id));
-    for (const href of jumps) expect(ids.has(String(href).slice(1))).toBe(true);
+    for (const link of jumps) {
+      expect(link.props?.href).toBe(`#rh-${link.props?.['data-rh-jump']}`);
+      expect(ids.has(String(link.props?.href).slice(1)), String(link.props?.href)).toBe(true);
+    }
   });
 
-  it('주 CTA 는 상담, 보조 CTA 는 사례로 이동한다', () => {
-    const primary = nodes.find((n) => n.id === 'raon_home_cta_primary');
-    const secondary = nodes.find((n) => n.id === 'raon_home_cta_secondary');
-    expect(primary?.props?.href).toBe('#rh-consult');
-    expect(secondary?.props?.href).toBe('#rh-cases');
-    expect(ko.home.cta_primary).toBe('AI 에이전트 구축 상담');
-    expect(ko.home.cta_secondary).toBe('자체 구현 사례 보기');
+  it('접수 전(기본)에는 사례·도입 절차가, 접수 열림에서만 상담이 주 행동이다', () => {
+    const closed = byId('raon_home_actions_closed');
+    const open = byId('raon_home_actions_open');
+    expect(closed?.props?.['data-rh-intake-show']).toBe('closed');
+    expect(open?.props?.['data-rh-intake-show']).toBe('open');
+    const hrefs = (n?: Node) => (n?.children ?? []).map((c) => [classOf(c).includes('rh-action-primary') ? 'primary' : 'secondary', c.props?.href]);
+    expect(hrefs(closed)).toEqual([['primary', CASE_HREF], ['secondary', '#rh-process']]);
+    expect(hrefs(open)).toEqual([['primary', '#rh-consult'], ['secondary', CASE_HREF]]);
+    expect(ko.home.cta_case).toBe('검증된 RAON Hub 사례 보기');
+    expect(ko.home.cta_process).toBe('도입 절차 보기');
+    // 닫힌 상태에서 상담(준비 상태 확인 포함)을 고객 행동으로 내세우지 않는다
+    const closedCopy = textsUnder(closed).map((ref) => ko.home[ref.replace('$t:raonslab-product.home.', '')]).join(' ');
+    expect(closedCopy).not.toMatch(/상담|준비 상태/);
+  });
+
+  it('Hero 제목은 승인된 문장 그대로이고, 보조 문장은 한 번만 쓴다', () => {
+    expect(ko.home.title).toBe('기업 업무에 맞는 AI 에이전트, 구축부터 실행·검증·운영까지.');
+    expect(ko.home.lede).toBe('반복 업무 하나를, 기존 시스템에서 실제로 실행되는 AI 흐름으로.');
+    expect(JSON.stringify(layout).match(/home\.lede\b/g)).toHaveLength(1);
   });
 
   it('등록된 기본 컴포넌트만 사용한다(미등록 컴포넌트는 렌더되지 않는다)', () => {
@@ -102,34 +121,20 @@ describe('사업 홈 레이아웃 확장', () => {
 describe('시각 구조', () => {
   const key = (k: string) => `$t:raonslab-product.home.${k}`;
 
-  it('hero 흐름 도식은 업무 입력 → 에이전트 실행 → 검증 → 운영 결과 노드 파이프라인이다', () => {
+  it('hero 흐름 도식은 업무 입력 → 제한된 실행 → 검증 → 결과 4단계뿐이다', () => {
     const flow = byId('raon_home_flow');
     expect(flow?.props).toMatchObject({ role: 'group', 'aria-labelledby': 'rh-flow-label' });
     const steps = childrenWith(byId('raon_home_flow_list'), 'rh-flow-step');
-    const stages = steps.map((step) => textsUnder(step).find((t) => t.includes('visual_stage_')));
-    expect(stages).toEqual(['input', 'run', 'verify', 'result'].map((s) => key(`visual_stage_${s}`)));
-    const glyphs = steps.map((step) => classOf(childrenWith(step, 'rh-flow-node')[0]?.children?.[0]));
-    expect(glyphs).toEqual(['input', 'run', 'verify', 'result'].map((s) => `rh-glyph rh-glyph-${s}`));
+    expect(steps.map((step) => textsUnder(step)[0])).toEqual(['input', 'run', 'verify', 'result'].map((s) => key(`visual_stage_${s}`)));
+    expect(['input', 'run', 'verify', 'result'].map((s) => ko.home[`visual_stage_${s}`])).toEqual(['업무 입력', '제한된 실행', '검증', '결과']);
     for (const step of steps) {
       expect(childrenWith(step, 'rh-flow-node')[0]?.props?.['aria-hidden']).toBe('true');
-      expect(textsUnder(step).some((t) => /flow_\w+_copy$/.test(t))).toBe(true);
+      expect(textsUnder(step)).toHaveLength(2);
     }
-  });
-
-  it('상태 레인은 통과만 운영 결과까지 가고, 미검증은 멈추며, 실패는 되돌림 루프로 돌아간다', () => {
-    const rows = byId('raon_home_flow_rows');
-    expect(rows?.props?.['aria-hidden']).toBe('true');
-    const marks = childrenWith(rows, 'rh-run-row').map((row) => (row.children ?? []).map((m) => classOf(m).replace('rh-mark rh-mark-', '')));
-    expect(marks).toEqual([
-      ['done', 'done', 'pass', 'out'],
-      ['done', 'done', 'open', 'none'],
-      ['done', 'done', 'fail', 'none'],
-    ]);
-    expect(childrenWith(rows, 'rh-flow-loop')).toHaveLength(1);
-    const legend = textsUnder(byId('raon_home_flow_legend'));
-    expect(legend).toEqual(['pass', 'fail', 'open'].map((s) => key(`visual_status_${s}`)));
-    // 도식에는 숫자 문구가 없다(근거 없는 수치 금지)
-    expect(textsUnder(byId('raon_home_flow')).filter((t) => !t.startsWith('$t:'))).toEqual([]);
+    // 진행률 막대·상태 점·창 장식·숫자 문구가 없다
+    const classes = nodes.filter((n) => n.id?.startsWith('raon_home_flow')).map(classOf).join(' ');
+    expect(classes).not.toMatch(/rh-(run-row|mark|legend|scope|log|flow-bar|flow-marks)/);
+    expect(textsUnder(flow).filter((t) => !t.startsWith('$t:'))).toEqual([]);
   });
 
   it('hero 는 copy 가 먼저, 흐름 도식이 뒤에 온다(작은 화면 첫 화면 순서)', () => {
@@ -177,12 +182,9 @@ describe('시각 구조', () => {
     for (const step of steps) expect(childrenWith(step, 'rh-process-node')[0]?.props?.['aria-hidden']).toBe('true');
   });
 
-  it('새 문구는 시각 전용 단계 이름 키만 추가한다', () => {
+  it('흐름 도식 문구 키는 단계 이름과 한 줄 설명뿐이다', () => {
     const visualKeys = Object.keys(ko.home).filter((k) => k.startsWith('visual_'));
-    expect(visualKeys.sort()).toEqual([
-      'visual_stage_input', 'visual_stage_result', 'visual_stage_run', 'visual_stage_verify',
-      'visual_status_fail', 'visual_status_open', 'visual_status_pass',
-    ]);
+    expect(visualKeys.sort()).toEqual(['visual_stage_input', 'visual_stage_result', 'visual_stage_run', 'visual_stage_verify']);
   });
 });
 
@@ -272,5 +274,44 @@ describe('사용자 문구 정책', () => {
       expect(ko.home.case_hub_verified).toContain(token);
     }
     expect(ko.home.case_hub_unverified).toMatch(/상용 트래픽/);
+  });
+});
+
+describe('홈 탐색 압축과 상담 접수 상태 표시', () => {
+  const css = readFileSync(resolve(root, 'css/main.css'), 'utf8');
+  const nav = JSON.parse(readFileSync(resolve(root, 'extensions/product-nav.json'), 'utf8'));
+  const findNav = (value: unknown, id: string): Node | null => {
+    if (Array.isArray(value)) {
+      for (const child of value) {
+        const found = findNav(child, id);
+        if (found) return found;
+      }
+      return null;
+    }
+    if (!value || typeof value !== 'object') return null;
+    if ((value as Node).id === id) return value as Node;
+    for (const child of Object.values(value)) {
+      const found = findNav(child, id);
+      if (found) return found;
+    }
+    return null;
+  };
+
+  it('상위 메뉴의 상담 진입점은 클릭 전에 접수 전 상태를 링크 이름 안에 표시한다', () => {
+    const cta = findNav(nav, 'rh_gnav_consult');
+    expect(cta?.props?.href).toBe('/#rh-consult');
+    const state = cta?.children?.find((child) => child.props?.['data-rh-intake-show'] === 'closed');
+    expect(state?.text).toBe('$t:raonslab-product.nav.consult_closed');
+    expect(ko.nav.consult_closed).toBe('접수 준비 중');
+    expect(en.nav.consult_closed).toBeTruthy();
+  });
+
+  it('상태 표시는 열림이 확인된 경우에만 닫힘 요소를 숨긴다(기본은 닫힘)', () => {
+    expect(css).toContain("html:not([data-rh-intake='open']) [data-rh-intake-show='open'],\nhtml[data-rh-intake='open'] [data-rh-intake-show='closed'] {\n  display: none !important;");
+  });
+
+  it('모바일·태블릿 홈에서는 제품 바를 겹쳐 두지 않는다(드로어 문서 섹션이 같은 분류를 담는다)', () => {
+    expect(css).toMatch(/@media \(max-width: 1023px\) \{\n {2}body\.raon-product:has\(\.rh-home\) \.rh-gnav \{\n {4}display: none;/);
+    expect(css).not.toMatch(/\.rh-subnav/);
   });
 });

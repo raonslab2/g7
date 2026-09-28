@@ -160,78 +160,16 @@ html:not(.dark) body.raon-product:has(.rh-native-breadcrumb) {
   outline: none;
 }
 
-/* 섹션 바로가기 */
-.rh-subnav {
-  border-bottom: 1px solid var(--rh-border);
-  background: var(--rh-bg);
-}
-
-.rh-subnav-list {
-  display: flex;
-  gap: .25rem;
-  overflow-x: auto;
-  scrollbar-width: none;
-  -webkit-overflow-scrolling: touch;
-}
-
-.rh-subnav-list::-webkit-scrollbar {
-  display: none;
-}
-
-.rh-subnav-item {
-  flex: 0 0 auto;
-}
-
-.rh-subnav-link {
-  display: inline-flex;
-  min-height: 44px;
-  align-items: center;
-  border-bottom: 2px solid transparent;
-  padding: 0 .85rem;
-  color: var(--rh-muted);
-  font-size: .9rem;
-  font-weight: 600;
-  text-decoration: none;
-  white-space: nowrap;
-}
-
-.rh-subnav-link:hover {
-  color: var(--rh-text);
-  border-bottom-color: var(--rh-border-strong);
-}
-
-.rh-subnav-link[aria-current='true'] {
-  color: var(--rh-text);
-  border-bottom-color: var(--rh-accent);
-}
-
-/* 첫 화면: 은은한 격자 배경 레이어 + 코드 기반 작업 흐름 도식 */
+/* 첫 화면: 문장과 요청→결과 흐름 하나. 상태별 행동은 상담 접수 상태가 고른다(intakeState.ts). */
 .rh-hero {
-  position: relative;
-  isolation: isolate;
-  padding: 4.5rem 0 4.25rem;
+  padding: 4rem 0 3.5rem;
   border-bottom: 1px solid var(--rh-border);
   background: linear-gradient(180deg, var(--rh-hero-top) 0%, var(--rh-bg) 100%);
 }
 
-.rh-hero::before {
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  background-image:
-    linear-gradient(var(--rh-grid-line) 1px, transparent 1px),
-    linear-gradient(90deg, var(--rh-grid-line) 1px, transparent 1px);
-  background-position: center top;
-  background-size: 48px 48px;
-  content: '';
-  pointer-events: none;
-  -webkit-mask-image: linear-gradient(180deg, #000 0%, transparent 88%);
-  mask-image: linear-gradient(180deg, #000 0%, transparent 88%);
-}
-
 .rh-hero-grid {
   display: grid;
-  grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
   gap: 3.5rem;
   align-items: center;
 }
@@ -244,7 +182,7 @@ html:not(.dark) body.raon-product:has(.rh-native-breadcrumb) {
   display: inline-flex;
   align-items: center;
   gap: .6rem;
-  margin-bottom: 1.25rem;
+  margin-bottom: 1.1rem;
   color: var(--rh-accent);
   font-size: .8rem;
   font-weight: 700;
@@ -262,7 +200,7 @@ html:not(.dark) body.raon-product:has(.rh-native-breadcrumb) {
 .rh-title {
   max-width: 16em;
   color: var(--rh-text);
-  font-size: clamp(2rem, 4.4vw, 3.3rem);
+  font-size: clamp(2rem, 4.2vw, 3.2rem);
   font-weight: 750;
   letter-spacing: -.035em;
   line-height: 1.16;
@@ -270,21 +208,18 @@ html:not(.dark) body.raon-product:has(.rh-native-breadcrumb) {
 }
 
 .rh-lede {
-  max-width: 36em;
-  margin-top: 1.4rem;
+  max-width: 34em;
+  margin-top: 1.25rem;
   color: var(--rh-text-soft);
   font-size: clamp(1.02rem, 1.6vw, 1.15rem);
-  line-height: 1.75;
+  line-height: 1.7;
   word-break: keep-all;
 }
 
-.rh-concept {
-  margin-top: 1rem;
-  border-left: 2px solid var(--rh-border-strong);
-  padding-left: .85rem;
-  color: var(--rh-muted);
-  font-size: .95rem;
-  word-break: keep-all;
+/* 상담 접수 상태별 요소: 열림이 확인되기 전(기본·실패)에는 닫힘 쪽만 보인다 */
+html:not([data-rh-intake='open']) [data-rh-intake-show='open'],
+html[data-rh-intake='open'] [data-rh-intake-show='closed'] {
+  display: none !important;
 }
 
 .rh-actions {
@@ -341,300 +276,79 @@ html:not(.dark) body.raon-product:has(.rh-native-breadcrumb) {
   line-height: 1;
 }
 
+/* 요청 → 결과 흐름: 크고 단순한 4단계. 진행률·가짜 창 장식·상태 점을 두지 않는다 */
 .rh-flow {
   min-width: 0;
-  overflow: hidden;
   border: 1px solid var(--rh-border);
-  border-radius: 1rem;
-  background: var(--rh-panel);
-  box-shadow: var(--rh-shadow-lg);
-}
-
-.rh-flow-bar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-  border-bottom: 1px solid var(--rh-border);
-  padding: .8rem 1.25rem;
-  background: var(--rh-panel-bar);
+  border-radius: 14px;
+  padding: 1.5rem 1.6rem;
+  background: var(--rh-surface);
 }
 
 .rh-flow-label {
-  color: var(--rh-text-soft);
-  font-size: .82rem;
+  margin-bottom: .75rem;
+  color: var(--rh-muted);
+  font-size: .85rem;
   font-weight: 700;
-  letter-spacing: .02em;
 }
 
-.rh-flow-marks {
-  display: inline-flex;
-  flex: 0 0 auto;
-  gap: .3rem;
-}
-
-.rh-flow-mark {
-  width: .45rem;
-  height: .45rem;
-  border-radius: 50%;
-  background: var(--rh-border-strong);
-}
-
-.rh-flow-canvas {
-  --rh-node: 3.5rem;
-  padding: 1.6rem 1.25rem 1.2rem;
-}
-
-/* 단계 노드: 가로 파이프라인(모든 화면 폭에서 연결 유지) */
 .rh-flow-list {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
 }
 
 .rh-flow-step {
   position: relative;
   display: grid;
-  min-width: 0;
-  justify-items: center;
-  row-gap: .65rem;
-  text-align: center;
+  grid-template-columns: 3rem minmax(0, 1fr);
+  column-gap: 1rem;
+  align-items: center;
+  padding: .55rem 0;
 }
 
-.rh-flow-step::before {
+/* 단계 사이 연결선: 이 단계 표지 아래에서 다음 단계 표지 위까지 */
+.rh-flow-step:not(:last-child)::after {
   position: absolute;
-  top: calc(var(--rh-node) / 2);
-  right: calc(-50% + var(--rh-node) / 2 + .3rem);
-  left: calc(50% + var(--rh-node) / 2 + .3rem);
-  height: 1px;
-  background: var(--rh-border-strong);
+  top: calc(50% + 1.5rem);
+  left: calc(1.5rem - 1px);
+  height: calc(100% - 3rem);
+  border-left: 2px solid var(--rh-border-strong);
   content: '';
-}
-
-.rh-flow-step::after {
-  position: absolute;
-  top: calc(var(--rh-node) / 2 - 3px);
-  right: calc(-50% + var(--rh-node) / 2 + .3rem);
-  width: 7px;
-  height: 7px;
-  border-top: 1px solid var(--rh-border-strong);
-  border-right: 1px solid var(--rh-border-strong);
-  transform: rotate(45deg);
-  content: '';
-}
-
-.rh-flow-step:last-child::before,
-.rh-flow-step:last-child::after {
-  display: none;
 }
 
 .rh-flow-node {
-  display: inline-flex;
-  width: var(--rh-node);
-  height: var(--rh-node);
-  align-items: center;
-  justify-content: center;
-}
-
-/* 단계마다 다른 모양: 입력=겹친 문서, 실행=궤도, 검증=관문(마름모), 결과=채워진 산출물 */
-.rh-glyph {
-  display: inline-flex;
-  width: 76%;
-  height: 76%;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid var(--rh-border-strong);
-  color: var(--rh-accent);
-  background: var(--rh-bg);
-  font-size: calc(var(--rh-node) * .28);
-}
-
-.rh-glyph-input {
-  border-radius: .4rem;
-  box-shadow:
-    4px -4px 0 -1px var(--rh-panel),
-    4px -4px 0 0 var(--rh-border-strong),
-    8px -8px 0 -1px var(--rh-panel),
-    8px -8px 0 0 var(--rh-border);
-  transform: translate(-3px, 3px);
-}
-
-.rh-glyph-run {
-  width: 66%;
-  height: 66%;
-  border-radius: 50%;
-  outline: 1px dashed var(--rh-border-strong);
-  outline-offset: 4px;
-}
-
-.rh-glyph-verify {
-  width: 60%;
-  height: 60%;
-  border-color: var(--rh-ok);
-  border-radius: .3rem;
-  color: var(--rh-ok);
-  transform: rotate(45deg);
-}
-
-.rh-glyph-verify .rh-icon {
-  transform: rotate(-45deg);
-}
-
-.rh-glyph-result {
-  border-color: var(--rh-primary-bg);
-  border-radius: .55rem;
-  color: var(--rh-primary-fg);
-  background: var(--rh-primary-bg);
-}
-
-.rh-flow-body {
   display: grid;
-  min-width: 0;
-  justify-items: center;
+  grid-row: 1 / span 2;
+  width: 3rem;
+  height: 3rem;
+  place-items: center;
+  border: 1px solid var(--rh-border-strong);
+  border-radius: 50%;
+  background: var(--rh-bg);
+  color: var(--rh-accent);
+  font-size: 1.15rem;
+}
+
+.rh-flow-step-result .rh-flow-node {
+  border-color: var(--rh-ok);
+  color: var(--rh-ok);
 }
 
 .rh-flow-stage {
+  grid-column: 2;
   color: var(--rh-text);
-  font-size: .84rem;
+  font-size: 1.12rem;
   font-weight: 700;
   line-height: 1.35;
+}
+
+.rh-flow-copy {
+  grid-column: 2;
+  color: var(--rh-muted);
+  font-size: .92rem;
+  line-height: 1.45;
   word-break: keep-all;
 }
 
-/* 단계 설명은 보조기기용으로 유지(도식이 시각 정보를 맡는다) */
-.rh-flow-copy {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
-  clip: rect(0 0 0 0);
-  white-space: nowrap;
-}
-
-/* 상태 레인: 통과만 운영 결과까지, 미검증은 멈추고, 실패는 실행으로 되돌아간다(예시 도식) */
-.rh-run-rows {
-  position: relative;
-  display: grid;
-  gap: .55rem;
-  margin-top: 1.35rem;
-  border-top: 1px dashed var(--rh-border);
-  padding: 1rem 0 1.6rem;
-}
-
-.rh-run-row {
-  position: relative;
-  display: grid;
-  height: 1.25rem;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  align-items: center;
-  justify-items: center;
-}
-
-.rh-run-row::before {
-  position: absolute;
-  top: 50%;
-  right: 12.5%;
-  left: 12.5%;
-  height: 1px;
-  background: var(--rh-border-strong);
-  content: '';
-}
-
-.rh-run-row-open::before,
-.rh-run-row-fail::before {
-  right: 37.5%;
-}
-
-.rh-mark {
-  position: relative;
-  z-index: 1;
-  display: inline-flex;
-  width: 1.1rem;
-  height: 1.1rem;
-  flex: 0 0 auto;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  font-size: .58rem;
-  line-height: 1;
-}
-
-.rh-mark-done {
-  width: .55rem;
-  height: .55rem;
-  background: var(--rh-muted);
-}
-
-.rh-mark-pass {
-  color: var(--rh-bg);
-  background: var(--rh-ok);
-}
-
-.rh-mark-fail {
-  border: 1.5px solid var(--rh-danger);
-  color: var(--rh-danger);
-  background: var(--rh-panel);
-}
-
-.rh-mark-open {
-  border: 1.5px dashed var(--rh-warn);
-  background: var(--rh-panel);
-}
-
-.rh-mark-out {
-  width: .95rem;
-  height: .95rem;
-  border-radius: .2rem;
-  background: var(--rh-primary-bg);
-}
-
-.rh-mark-none {
-  visibility: hidden;
-}
-
-/* 실패 → 실행으로 되돌림 루프(검증 열 → 실행 열) */
-.rh-flow-loop {
-  position: absolute;
-  right: 37.5%;
-  bottom: .5rem;
-  left: 37.5%;
-  height: 1.725rem;
-  border: 1px dashed var(--rh-danger);
-  border-top: 0;
-  border-radius: 0 0 .6rem .6rem;
-}
-
-.rh-flow-loop::after {
-  position: absolute;
-  top: .55rem;
-  left: -4px;
-  width: 7px;
-  height: 7px;
-  border-top: 1px solid var(--rh-danger);
-  border-left: 1px solid var(--rh-danger);
-  transform: rotate(45deg);
-  content: '';
-}
-
-.rh-legend {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: .4rem 1.2rem;
-  margin-top: .35rem;
-}
-
-.rh-legend-item {
-  display: inline-flex;
-  align-items: center;
-  gap: .45rem;
-}
-
-.rh-legend-text {
-  color: var(--rh-muted);
-  font-size: .8rem;
-}
-
-/* 공통 섹션 */
 .rh-section {
   padding: 5rem 0;
   border-bottom: 1px solid var(--rh-border);
@@ -1678,13 +1392,8 @@ textarea.rh-input {
     width: calc(100% - 2rem);
   }
 
-  .rh-subnav-list {
-    width: 100%;
-    padding: 0 .5rem;
-  }
-
   .rh-hero {
-    padding: 1.75rem 0 2.5rem;
+    padding: 1.5rem 0 2rem;
   }
 
   .rh-hero-grid {
@@ -1706,11 +1415,6 @@ textarea.rh-input {
     line-height: 1.65;
   }
 
-  .rh-concept {
-    margin-top: .75rem;
-    font-size: .9rem;
-  }
-
   .rh-actions {
     flex-direction: column;
     gap: .6rem;
@@ -1721,31 +1425,34 @@ textarea.rh-input {
     width: 100%;
   }
 
-  /* 작은 화면: 같은 가로 파이프라인을 축소(세로 나열로 바꾸지 않는다) */
-  .rh-flow-bar {
-    padding: .65rem 1rem;
-  }
-
-  .rh-flow-canvas {
-    --rh-node: 2.75rem;
-    padding: 1.1rem .5rem 1rem;
+  .rh-flow {
+    padding: 1rem 1.1rem;
   }
 
   .rh-flow-step {
-    row-gap: .5rem;
-    padding: 0 .15rem;
+    grid-template-columns: 2.5rem minmax(0, 1fr);
+    column-gap: .85rem;
+    padding: .4rem 0;
+  }
+
+  .rh-flow-step:not(:last-child)::after {
+    top: calc(50% + 1.25rem);
+    left: calc(1.25rem - 1px);
+    height: calc(100% - 2.5rem);
+  }
+
+  .rh-flow-node {
+    width: 2.5rem;
+    height: 2.5rem;
+    font-size: 1rem;
   }
 
   .rh-flow-stage {
-    color: var(--rh-text-soft);
-    font-size: .76rem;
-    font-weight: 650;
-    line-height: 1.3;
+    font-size: 1.02rem;
   }
 
-  .rh-run-rows {
-    margin-top: 1rem;
-    padding-top: .8rem;
+  .rh-flow-copy {
+    font-size: .86rem;
   }
 
   .rh-section {
@@ -2321,6 +2028,30 @@ textarea.rh-input {
 
 .rh-gnav-cta:hover {
   border-color: var(--rh-accent);
+}
+
+.rh-gnav-cta {
+  gap: .55rem;
+}
+
+/* 접수 상태를 클릭 전에 알린다(링크 이름에 포함). 표시 여부는 [data-rh-intake-show] 규칙이 정한다 */
+.rh-gnav-cta-state {
+  border: 1px solid var(--rh-border-strong);
+  border-radius: 999px;
+  padding: .05rem .55rem;
+  color: var(--rh-warn);
+  font-size: .78rem;
+  font-weight: 600;
+}
+
+/*
+ * 홈(모바일·태블릿, 템플릿 portable 구간 0~1023px): 템플릿 헤더 + 드로어가 유일한 탐색이다.
+ * 정보·정책 문서는 드로어 문서 섹션(0.4.2, 같은 분류 단일 출처)이 담으므로 제품 바를 겹쳐 두지 않는다.
+ */
+@media (max-width: 1023px) {
+  body.raon-product:has(.rh-home) .rh-gnav {
+    display: none;
+  }
 }
 
 /* ─── 정보·정책 안내 문서 ─────────────────────────────── */

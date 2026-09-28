@@ -738,13 +738,34 @@
                       "children": [
                         {
                           "id": "rh_gnav_consult",
+                          "comment": "접수 상태는 상담 config 응답이 정한다(intakeState.ts). 확인 전·실패 시에는 닫힘 표시가 기본이다.",
                           "type": "basic",
                           "name": "A",
                           "props": {
                             "className": "rh-gnav-cta",
                             "href": "/#rh-consult"
                           },
-                          "text": "$t:raonslab-product.nav.consult"
+                          "children": [
+                            {
+                              "id": "rh_gnav_consult_label",
+                              "type": "basic",
+                              "name": "Span",
+                              "props": {
+                                "className": "rh-gnav-cta-label"
+                              },
+                              "text": "$t:raonslab-product.nav.consult"
+                            },
+                            {
+                              "id": "rh_gnav_consult_state",
+                              "type": "basic",
+                              "name": "Span",
+                              "props": {
+                                "className": "rh-gnav-cta-state",
+                                "data-rh-intake-show": "closed"
+                              },
+                              "text": "$t:raonslab-product.nav.consult_closed"
+                            }
+                          ]
                         }
                       ]
                     }

@@ -516,7 +516,7 @@ describe('기존 계약 유지', () => {
   });
 
   it('모듈 버전 메타데이터가 함께 움직이고 sirsoft-page 계약을 명시한다', () => {
-    expect(moduleManifest.version).toBe('0.4.2');
+    expect(moduleManifest.version).toBe('0.5.0');
     expect(componentManifest.version).toBe(moduleManifest.version);
     expect(composerManifest.version).toBe(moduleManifest.version);
     expect(packageManifest.version).toBe(moduleManifest.version);

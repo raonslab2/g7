@@ -22,6 +22,7 @@ import {
   validateDraft,
 } from './consultation';
 import { currentLocale, t } from './i18n';
+import { intakeStateOf, needsIntakeState, publishIntakeState } from './intakeState';
 
 type View = 'loading' | 'unavailable' | 'form' | 'success';
 type BannerKind = 'error' | 'warn' | 'ok';
@@ -85,7 +86,7 @@ async function fetchWithTimeout(url: string, init: RequestInit, timeoutMs: numbe
   }
 }
 
-async function loadConfig(): Promise<IntakeConfig | null> {
+async function fetchConfig(): Promise<IntakeConfig | null> {
   try {
     const response = await fetchWithTimeout(`${CONSULTATION_API}/config`, { headers: requestHeaders(false) }, CONFIG_TIMEOUT_MS);
     if (!response.ok) return null;
@@ -93,6 +94,18 @@ async function loadConfig(): Promise<IntakeConfig | null> {
   } catch {
     return null;
   }
+}
+
+let configInFlight: Promise<IntakeConfig | null> | null = null;
+
+/** 동시에 들어온 확인은 한 요청으로 합치고, 결과를 화면의 접수 상태 표시에 반영한다. */
+function loadConfig(): Promise<IntakeConfig | null> {
+  configInFlight ??= fetchConfig().then((config) => {
+    configInFlight = null;
+    publishIntakeState(intakeStateOf(config));
+    return config;
+  });
+  return configInFlight;
 }
 
 function formatReceivedAt(value: string): string {
@@ -528,4 +541,6 @@ export function syncConsultationIslands(): void {
   document.querySelectorAll<HTMLElement>('[data-rh-consult]').forEach((host) => {
     if (host.dataset[MOUNTED] !== 'true') mount(host);
   });
+  // 상담 양식이 없는 화면(상위 메뉴만 있는 문서 화면)에서도 접수 상태를 한 번 확인한다.
+  if (configInFlight === null && needsIntakeState()) void loadConfig();
 }

@@ -8,7 +8,6 @@
       "components": [
         {
           "id": "raon_home",
-          "comment": "RAON Agent Factory 사업 홈 루트",
           "type": "basic",
           "name": "Div",
           "props": {
@@ -16,146 +15,7 @@
           },
           "children": [
             {
-              "id": "raon_home_subnav",
-              "comment": "홈 섹션 바로가기(IA)",
-              "type": "basic",
-              "name": "Nav",
-              "props": {
-                "className": "rh-subnav",
-                "aria-label": "$t:raonslab-product.home.nav_label"
-              },
-              "children": [
-                {
-                  "id": "raon_home_subnav_inner",
-                  "comment": "바로가기 목록",
-                  "type": "basic",
-                  "name": "Ul",
-                  "props": {
-                    "className": "rh-shell rh-subnav-list"
-                  },
-                  "children": [
-                    {
-                      "id": "raon_home_subnav_services_item",
-                      "comment": "services 바로가기 항목",
-                      "type": "basic",
-                      "name": "Li",
-                      "props": {
-                        "className": "rh-subnav-item"
-                      },
-                      "children": [
-                        {
-                          "id": "raon_home_subnav_services",
-                          "comment": "services 섹션으로 이동",
-                          "type": "basic",
-                          "name": "A",
-                          "props": {
-                            "className": "rh-subnav-link",
-                            "href": "#rh-services",
-                            "data-rh-jump": "services"
-                          },
-                          "text": "$t:raonslab-product.home.nav_services"
-                        }
-                      ]
-                    },
-                    {
-                      "id": "raon_home_subnav_cases_item",
-                      "comment": "cases 바로가기 항목",
-                      "type": "basic",
-                      "name": "Li",
-                      "props": {
-                        "className": "rh-subnav-item"
-                      },
-                      "children": [
-                        {
-                          "id": "raon_home_subnav_cases",
-                          "comment": "cases 섹션으로 이동",
-                          "type": "basic",
-                          "name": "A",
-                          "props": {
-                            "className": "rh-subnav-link",
-                            "href": "#rh-cases",
-                            "data-rh-jump": "cases"
-                          },
-                          "text": "$t:raonslab-product.home.nav_cases"
-                        }
-                      ]
-                    },
-                    {
-                      "id": "raon_home_subnav_process_item",
-                      "comment": "process 바로가기 항목",
-                      "type": "basic",
-                      "name": "Li",
-                      "props": {
-                        "className": "rh-subnav-item"
-                      },
-                      "children": [
-                        {
-                          "id": "raon_home_subnav_process",
-                          "comment": "process 섹션으로 이동",
-                          "type": "basic",
-                          "name": "A",
-                          "props": {
-                            "className": "rh-subnav-link",
-                            "href": "#rh-process",
-                            "data-rh-jump": "process"
-                          },
-                          "text": "$t:raonslab-product.home.nav_process"
-                        }
-                      ]
-                    },
-                    {
-                      "id": "raon_home_subnav_tech_item",
-                      "comment": "tech 바로가기 항목",
-                      "type": "basic",
-                      "name": "Li",
-                      "props": {
-                        "className": "rh-subnav-item"
-                      },
-                      "children": [
-                        {
-                          "id": "raon_home_subnav_tech",
-                          "comment": "tech 섹션으로 이동",
-                          "type": "basic",
-                          "name": "A",
-                          "props": {
-                            "className": "rh-subnav-link",
-                            "href": "#rh-tech",
-                            "data-rh-jump": "tech"
-                          },
-                          "text": "$t:raonslab-product.home.nav_tech"
-                        }
-                      ]
-                    },
-                    {
-                      "id": "raon_home_subnav_consult_item",
-                      "comment": "consult 바로가기 항목",
-                      "type": "basic",
-                      "name": "Li",
-                      "props": {
-                        "className": "rh-subnav-item"
-                      },
-                      "children": [
-                        {
-                          "id": "raon_home_subnav_consult",
-                          "comment": "consult 섹션으로 이동",
-                          "type": "basic",
-                          "name": "A",
-                          "props": {
-                            "className": "rh-subnav-link",
-                            "href": "#rh-consult",
-                            "data-rh-jump": "consult"
-                          },
-                          "text": "$t:raonslab-product.home.nav_consult"
-                        }
-                      ]
-                    }
-                  ]
-                }
-              ]
-            },
-            {
               "id": "raon_home_hero",
-              "comment": "hero",
               "type": "basic",
               "name": "Div",
               "props": {
@@ -167,7 +27,6 @@
               "children": [
                 {
                   "id": "raon_home_hero_inner",
-                  "comment": "hero inner",
                   "type": "basic",
                   "name": "Div",
                   "props": {
@@ -176,7 +35,6 @@
                   "children": [
                     {
                       "id": "raon_home_hero_copy",
-                      "comment": "첫 화면 문구",
                       "type": "basic",
                       "name": "Div",
                       "props": {
@@ -185,7 +43,6 @@
                       "children": [
                         {
                           "id": "raon_home_brand",
-                          "comment": "브랜드명",
                           "type": "basic",
                           "name": "P",
                           "props": {
@@ -195,18 +52,17 @@
                         },
                         {
                           "id": "raon_home_title",
-                          "comment": "주제목",
                           "type": "basic",
                           "name": "H1",
                           "props": {
                             "className": "rh-title",
-                            "id": "rh-hero-title"
+                            "id": "rh-hero-title",
+                            "tabIndex": -1
                           },
                           "text": "$t:raonslab-product.home.title"
                         },
                         {
                           "id": "raon_home_lede",
-                          "comment": "설명",
                           "type": "basic",
                           "name": "P",
                           "props": {
@@ -215,47 +71,74 @@
                           "text": "$t:raonslab-product.home.lede"
                         },
                         {
-                          "id": "raon_home_concept",
-                          "comment": "보조 콘셉트",
-                          "type": "basic",
-                          "name": "P",
-                          "props": {
-                            "className": "rh-concept"
-                          },
-                          "text": "$t:raonslab-product.home.concept"
-                        },
-                        {
-                          "id": "raon_home_actions",
-                          "comment": "주요 행동 유도",
+                          "id": "raon_home_actions_closed",
                           "type": "basic",
                           "name": "Div",
+                          "comment": "상담 접수가 열렸다고 확인되기 전(기본·실패 포함)의 행동. 표시는 intakeState.ts 가 정한다.",
                           "props": {
-                            "className": "rh-actions"
+                            "className": "rh-actions",
+                            "data-rh-intake-show": "closed"
                           },
                           "children": [
                             {
-                              "id": "raon_home_cta_primary",
-                              "comment": "구축 상담 섹션으로 이동(주 CTA)",
+                              "id": "raon_home_cta_case",
                               "type": "basic",
                               "name": "A",
+                              "comment": "접수 전(기본): 검증된 사례가 주 행동",
+                              "props": {
+                                "className": "rh-action rh-action-primary",
+                                "href": "#rh-cases",
+                                "data-rh-jump": "cases"
+                              },
+                              "text": "$t:raonslab-product.home.cta_case"
+                            },
+                            {
+                              "id": "raon_home_cta_process",
+                              "type": "basic",
+                              "name": "A",
+                              "comment": "접수 전(기본): 도입 절차가 보조 행동",
+                              "props": {
+                                "className": "rh-action",
+                                "href": "#rh-process",
+                                "data-rh-jump": "process"
+                              },
+                              "text": "$t:raonslab-product.home.cta_process"
+                            }
+                          ]
+                        },
+                        {
+                          "id": "raon_home_actions_open",
+                          "type": "basic",
+                          "name": "Div",
+                          "comment": "상담 config 가 접수 열림으로 확인된 경우에만 보인다.",
+                          "props": {
+                            "className": "rh-actions",
+                            "data-rh-intake-show": "open"
+                          },
+                          "children": [
+                            {
+                              "id": "raon_home_cta_consult",
+                              "type": "basic",
+                              "name": "A",
+                              "comment": "접수 열림: 상담이 주 행동",
                               "props": {
                                 "className": "rh-action rh-action-primary",
                                 "href": "#rh-consult",
                                 "data-rh-jump": "consult"
                               },
-                              "text": "$t:raonslab-product.home.cta_primary"
+                              "text": "$t:raonslab-product.home.cta_consult"
                             },
                             {
-                              "id": "raon_home_cta_secondary",
-                              "comment": "구현 사례 섹션으로 이동(보조 CTA)",
+                              "id": "raon_home_cta_case_open",
                               "type": "basic",
                               "name": "A",
+                              "comment": "접수 열림: 사례가 보조 행동",
                               "props": {
                                 "className": "rh-action",
                                 "href": "#rh-cases",
                                 "data-rh-jump": "cases"
                               },
-                              "text": "$t:raonslab-product.home.cta_secondary"
+                              "text": "$t:raonslab-product.home.cta_case"
                             }
                           ]
                         }
@@ -263,7 +146,6 @@
                     },
                     {
                       "id": "raon_home_flow",
-                      "comment": "업무 입력 → 에이전트 실행 → 검증 → 운영 결과 흐름 도식(코드 기반)",
                       "type": "basic",
                       "name": "Div",
                       "props": {
@@ -273,705 +155,216 @@
                       },
                       "children": [
                         {
-                          "id": "raon_home_flow_bar",
-                          "comment": "flow bar",
+                          "id": "raon_home_flow_label",
                           "type": "basic",
-                          "name": "Div",
+                          "name": "P",
                           "props": {
-                            "className": "rh-flow-bar"
+                            "className": "rh-flow-label",
+                            "id": "rh-flow-label"
                           },
-                          "children": [
-                            {
-                              "id": "raon_home_flow_label",
-                              "comment": "flow label",
-                              "type": "basic",
-                              "name": "P",
-                              "props": {
-                                "className": "rh-flow-label",
-                                "id": "rh-flow-label"
-                              },
-                              "text": "$t:raonslab-product.home.flow_label"
-                            },
-                            {
-                              "id": "raon_home_flow_marks",
-                              "comment": "flow marks",
-                              "type": "basic",
-                              "name": "Span",
-                              "props": {
-                                "className": "rh-flow-marks",
-                                "aria-hidden": "true"
-                              },
-                              "children": [
-                                {
-                                  "id": "raon_home_flow_mark1",
-                                  "comment": "flow mark1",
-                                  "type": "basic",
-                                  "name": "Span",
-                                  "props": {
-                                    "className": "rh-flow-mark"
-                                  }
-                                },
-                                {
-                                  "id": "raon_home_flow_mark2",
-                                  "comment": "flow mark2",
-                                  "type": "basic",
-                                  "name": "Span",
-                                  "props": {
-                                    "className": "rh-flow-mark"
-                                  }
-                                },
-                                {
-                                  "id": "raon_home_flow_mark3",
-                                  "comment": "flow mark3",
-                                  "type": "basic",
-                                  "name": "Span",
-                                  "props": {
-                                    "className": "rh-flow-mark"
-                                  }
-                                }
-                              ]
-                            }
-                          ]
+                          "text": "$t:raonslab-product.home.flow_label"
                         },
                         {
-                          "id": "raon_home_flow_canvas",
-                          "comment": "flow canvas",
+                          "id": "raon_home_flow_list",
                           "type": "basic",
-                          "name": "Div",
+                          "name": "Ul",
                           "props": {
-                            "className": "rh-flow-canvas"
+                            "className": "rh-flow-list"
                           },
                           "children": [
                             {
-                              "id": "raon_home_flow_list",
-                              "comment": "flow list",
+                              "id": "raon_home_flow_input",
                               "type": "basic",
-                              "name": "Ul",
+                              "name": "Li",
                               "props": {
-                                "className": "rh-flow-list"
+                                "className": "rh-flow-step rh-flow-step-input"
                               },
                               "children": [
                                 {
-                                  "id": "raon_home_flow_connect",
-                                  "comment": "flow connect",
-                                  "type": "basic",
-                                  "name": "Li",
-                                  "props": {
-                                    "className": "rh-flow-step rh-flow-step-input"
-                                  },
-                                  "children": [
-                                    {
-                                      "id": "raon_home_flow_connect_node",
-                                      "comment": "flow connect node",
-                                      "type": "basic",
-                                      "name": "Span",
-                                      "props": {
-                                        "className": "rh-flow-node",
-                                        "aria-hidden": "true"
-                                      },
-                                      "children": [
-                                        {
-                                          "id": "raon_home_flow_connect_glyph",
-                                          "comment": "flow connect glyph",
-                                          "type": "basic",
-                                          "name": "Span",
-                                          "props": {
-                                            "className": "rh-glyph rh-glyph-input"
-                                          },
-                                          "children": [
-                                            {
-                                              "id": "raon_home_flow_connect_icon",
-                                              "comment": "flow connect icon",
-                                              "type": "basic",
-                                              "name": "Icon",
-                                              "props": {
-                                                "className": "rh-icon",
-                                                "name": "fa-inbox",
-                                                "aria-hidden": "true"
-                                              }
-                                            }
-                                          ]
-                                        }
-                                      ]
-                                    },
-                                    {
-                                      "id": "raon_home_flow_connect_body",
-                                      "comment": "flow connect body",
-                                      "type": "basic",
-                                      "name": "Span",
-                                      "props": {
-                                        "className": "rh-flow-body"
-                                      },
-                                      "children": [
-                                        {
-                                          "id": "raon_home_flow_connect_stage",
-                                          "comment": "flow connect stage",
-                                          "type": "basic",
-                                          "name": "Span",
-                                          "props": {
-                                            "className": "rh-flow-stage"
-                                          },
-                                          "text": "$t:raonslab-product.home.visual_stage_input"
-                                        },
-                                        {
-                                          "id": "raon_home_flow_connect_copy",
-                                          "comment": "flow connect copy",
-                                          "type": "basic",
-                                          "name": "Span",
-                                          "props": {
-                                            "className": "rh-flow-copy"
-                                          },
-                                          "text": "$t:raonslab-product.home.flow_connect_copy"
-                                        }
-                                      ]
-                                    }
-                                  ]
-                                },
-                                {
-                                  "id": "raon_home_flow_run",
-                                  "comment": "flow run",
-                                  "type": "basic",
-                                  "name": "Li",
-                                  "props": {
-                                    "className": "rh-flow-step rh-flow-step-run"
-                                  },
-                                  "children": [
-                                    {
-                                      "id": "raon_home_flow_run_node",
-                                      "comment": "flow run node",
-                                      "type": "basic",
-                                      "name": "Span",
-                                      "props": {
-                                        "className": "rh-flow-node",
-                                        "aria-hidden": "true"
-                                      },
-                                      "children": [
-                                        {
-                                          "id": "raon_home_flow_run_glyph",
-                                          "comment": "flow run glyph",
-                                          "type": "basic",
-                                          "name": "Span",
-                                          "props": {
-                                            "className": "rh-glyph rh-glyph-run"
-                                          },
-                                          "children": [
-                                            {
-                                              "id": "raon_home_flow_run_icon",
-                                              "comment": "flow run icon",
-                                              "type": "basic",
-                                              "name": "Icon",
-                                              "props": {
-                                                "className": "rh-icon",
-                                                "name": "fa-gears",
-                                                "aria-hidden": "true"
-                                              }
-                                            }
-                                          ]
-                                        }
-                                      ]
-                                    },
-                                    {
-                                      "id": "raon_home_flow_run_body",
-                                      "comment": "flow run body",
-                                      "type": "basic",
-                                      "name": "Span",
-                                      "props": {
-                                        "className": "rh-flow-body"
-                                      },
-                                      "children": [
-                                        {
-                                          "id": "raon_home_flow_run_stage",
-                                          "comment": "flow run stage",
-                                          "type": "basic",
-                                          "name": "Span",
-                                          "props": {
-                                            "className": "rh-flow-stage"
-                                          },
-                                          "text": "$t:raonslab-product.home.visual_stage_run"
-                                        },
-                                        {
-                                          "id": "raon_home_flow_run_copy",
-                                          "comment": "flow run copy",
-                                          "type": "basic",
-                                          "name": "Span",
-                                          "props": {
-                                            "className": "rh-flow-copy"
-                                          },
-                                          "text": "$t:raonslab-product.home.flow_run_copy"
-                                        }
-                                      ]
-                                    }
-                                  ]
-                                },
-                                {
-                                  "id": "raon_home_flow_verify",
-                                  "comment": "flow verify",
-                                  "type": "basic",
-                                  "name": "Li",
-                                  "props": {
-                                    "className": "rh-flow-step rh-flow-step-verify"
-                                  },
-                                  "children": [
-                                    {
-                                      "id": "raon_home_flow_verify_node",
-                                      "comment": "flow verify node",
-                                      "type": "basic",
-                                      "name": "Span",
-                                      "props": {
-                                        "className": "rh-flow-node",
-                                        "aria-hidden": "true"
-                                      },
-                                      "children": [
-                                        {
-                                          "id": "raon_home_flow_verify_glyph",
-                                          "comment": "flow verify glyph",
-                                          "type": "basic",
-                                          "name": "Span",
-                                          "props": {
-                                            "className": "rh-glyph rh-glyph-verify"
-                                          },
-                                          "children": [
-                                            {
-                                              "id": "raon_home_flow_verify_icon",
-                                              "comment": "flow verify icon",
-                                              "type": "basic",
-                                              "name": "Icon",
-                                              "props": {
-                                                "className": "rh-icon",
-                                                "name": "fa-check",
-                                                "aria-hidden": "true"
-                                              }
-                                            }
-                                          ]
-                                        }
-                                      ]
-                                    },
-                                    {
-                                      "id": "raon_home_flow_verify_body",
-                                      "comment": "flow verify body",
-                                      "type": "basic",
-                                      "name": "Span",
-                                      "props": {
-                                        "className": "rh-flow-body"
-                                      },
-                                      "children": [
-                                        {
-                                          "id": "raon_home_flow_verify_stage",
-                                          "comment": "flow verify stage",
-                                          "type": "basic",
-                                          "name": "Span",
-                                          "props": {
-                                            "className": "rh-flow-stage"
-                                          },
-                                          "text": "$t:raonslab-product.home.visual_stage_verify"
-                                        },
-                                        {
-                                          "id": "raon_home_flow_verify_copy",
-                                          "comment": "flow verify copy",
-                                          "type": "basic",
-                                          "name": "Span",
-                                          "props": {
-                                            "className": "rh-flow-copy"
-                                          },
-                                          "text": "$t:raonslab-product.home.flow_verify_copy"
-                                        }
-                                      ]
-                                    }
-                                  ]
-                                },
-                                {
-                                  "id": "raon_home_flow_operate",
-                                  "comment": "flow operate",
-                                  "type": "basic",
-                                  "name": "Li",
-                                  "props": {
-                                    "className": "rh-flow-step rh-flow-step-result"
-                                  },
-                                  "children": [
-                                    {
-                                      "id": "raon_home_flow_operate_node",
-                                      "comment": "flow operate node",
-                                      "type": "basic",
-                                      "name": "Span",
-                                      "props": {
-                                        "className": "rh-flow-node",
-                                        "aria-hidden": "true"
-                                      },
-                                      "children": [
-                                        {
-                                          "id": "raon_home_flow_operate_glyph",
-                                          "comment": "flow operate glyph",
-                                          "type": "basic",
-                                          "name": "Span",
-                                          "props": {
-                                            "className": "rh-glyph rh-glyph-result"
-                                          },
-                                          "children": [
-                                            {
-                                              "id": "raon_home_flow_operate_icon",
-                                              "comment": "flow operate icon",
-                                              "type": "basic",
-                                              "name": "Icon",
-                                              "props": {
-                                                "className": "rh-icon",
-                                                "name": "fa-chart-line",
-                                                "aria-hidden": "true"
-                                              }
-                                            }
-                                          ]
-                                        }
-                                      ]
-                                    },
-                                    {
-                                      "id": "raon_home_flow_operate_body",
-                                      "comment": "flow operate body",
-                                      "type": "basic",
-                                      "name": "Span",
-                                      "props": {
-                                        "className": "rh-flow-body"
-                                      },
-                                      "children": [
-                                        {
-                                          "id": "raon_home_flow_operate_stage",
-                                          "comment": "flow operate stage",
-                                          "type": "basic",
-                                          "name": "Span",
-                                          "props": {
-                                            "className": "rh-flow-stage"
-                                          },
-                                          "text": "$t:raonslab-product.home.visual_stage_result"
-                                        },
-                                        {
-                                          "id": "raon_home_flow_operate_copy",
-                                          "comment": "flow operate copy",
-                                          "type": "basic",
-                                          "name": "Span",
-                                          "props": {
-                                            "className": "rh-flow-copy"
-                                          },
-                                          "text": "$t:raonslab-product.home.flow_operate_copy"
-                                        }
-                                      ]
-                                    }
-                                  ]
-                                }
-                              ]
-                            },
-                            {
-                              "id": "raon_home_flow_rows",
-                              "comment": "flow rows",
-                              "type": "basic",
-                              "name": "Div",
-                              "props": {
-                                "className": "rh-run-rows",
-                                "aria-hidden": "true"
-                              },
-                              "children": [
-                                {
-                                  "id": "raon_home_flow_row_pass",
-                                  "comment": "flow row pass",
-                                  "type": "basic",
-                                  "name": "Div",
-                                  "props": {
-                                    "className": "rh-run-row rh-run-row-pass"
-                                  },
-                                  "children": [
-                                    {
-                                      "id": "raon_home_flow_row_pass_1",
-                                      "comment": "flow row pass 1",
-                                      "type": "basic",
-                                      "name": "Span",
-                                      "props": {
-                                        "className": "rh-mark rh-mark-done"
-                                      }
-                                    },
-                                    {
-                                      "id": "raon_home_flow_row_pass_2",
-                                      "comment": "flow row pass 2",
-                                      "type": "basic",
-                                      "name": "Span",
-                                      "props": {
-                                        "className": "rh-mark rh-mark-done"
-                                      }
-                                    },
-                                    {
-                                      "id": "raon_home_flow_row_pass_3",
-                                      "comment": "flow row pass 3",
-                                      "type": "basic",
-                                      "name": "Span",
-                                      "props": {
-                                        "className": "rh-mark rh-mark-pass"
-                                      },
-                                      "children": [
-                                        {
-                                          "id": "raon_home_flow_row_pass_3_icon",
-                                          "comment": "flow row pass 3 icon",
-                                          "type": "basic",
-                                          "name": "Icon",
-                                          "props": {
-                                            "className": "rh-icon",
-                                            "name": "fa-check",
-                                            "aria-hidden": "true"
-                                          }
-                                        }
-                                      ]
-                                    },
-                                    {
-                                      "id": "raon_home_flow_row_pass_4",
-                                      "comment": "flow row pass 4",
-                                      "type": "basic",
-                                      "name": "Span",
-                                      "props": {
-                                        "className": "rh-mark rh-mark-out"
-                                      }
-                                    }
-                                  ]
-                                },
-                                {
-                                  "id": "raon_home_flow_row_open",
-                                  "comment": "flow row open",
-                                  "type": "basic",
-                                  "name": "Div",
-                                  "props": {
-                                    "className": "rh-run-row rh-run-row-open"
-                                  },
-                                  "children": [
-                                    {
-                                      "id": "raon_home_flow_row_open_1",
-                                      "comment": "flow row open 1",
-                                      "type": "basic",
-                                      "name": "Span",
-                                      "props": {
-                                        "className": "rh-mark rh-mark-done"
-                                      }
-                                    },
-                                    {
-                                      "id": "raon_home_flow_row_open_2",
-                                      "comment": "flow row open 2",
-                                      "type": "basic",
-                                      "name": "Span",
-                                      "props": {
-                                        "className": "rh-mark rh-mark-done"
-                                      }
-                                    },
-                                    {
-                                      "id": "raon_home_flow_row_open_3",
-                                      "comment": "flow row open 3",
-                                      "type": "basic",
-                                      "name": "Span",
-                                      "props": {
-                                        "className": "rh-mark rh-mark-open"
-                                      }
-                                    },
-                                    {
-                                      "id": "raon_home_flow_row_open_4",
-                                      "comment": "flow row open 4",
-                                      "type": "basic",
-                                      "name": "Span",
-                                      "props": {
-                                        "className": "rh-mark rh-mark-none"
-                                      }
-                                    }
-                                  ]
-                                },
-                                {
-                                  "id": "raon_home_flow_row_fail",
-                                  "comment": "flow row fail",
-                                  "type": "basic",
-                                  "name": "Div",
-                                  "props": {
-                                    "className": "rh-run-row rh-run-row-fail"
-                                  },
-                                  "children": [
-                                    {
-                                      "id": "raon_home_flow_row_fail_1",
-                                      "comment": "flow row fail 1",
-                                      "type": "basic",
-                                      "name": "Span",
-                                      "props": {
-                                        "className": "rh-mark rh-mark-done"
-                                      }
-                                    },
-                                    {
-                                      "id": "raon_home_flow_row_fail_2",
-                                      "comment": "flow row fail 2",
-                                      "type": "basic",
-                                      "name": "Span",
-                                      "props": {
-                                        "className": "rh-mark rh-mark-done"
-                                      }
-                                    },
-                                    {
-                                      "id": "raon_home_flow_row_fail_3",
-                                      "comment": "flow row fail 3",
-                                      "type": "basic",
-                                      "name": "Span",
-                                      "props": {
-                                        "className": "rh-mark rh-mark-fail"
-                                      },
-                                      "children": [
-                                        {
-                                          "id": "raon_home_flow_row_fail_3_icon",
-                                          "comment": "flow row fail 3 icon",
-                                          "type": "basic",
-                                          "name": "Icon",
-                                          "props": {
-                                            "className": "rh-icon",
-                                            "name": "fa-xmark",
-                                            "aria-hidden": "true"
-                                          }
-                                        }
-                                      ]
-                                    },
-                                    {
-                                      "id": "raon_home_flow_row_fail_4",
-                                      "comment": "flow row fail 4",
-                                      "type": "basic",
-                                      "name": "Span",
-                                      "props": {
-                                        "className": "rh-mark rh-mark-none"
-                                      }
-                                    }
-                                  ]
-                                },
-                                {
-                                  "id": "raon_home_flow_loop",
-                                  "comment": "flow loop",
+                                  "id": "raon_home_flow_input_node",
                                   "type": "basic",
                                   "name": "Span",
                                   "props": {
-                                    "className": "rh-flow-loop"
-                                  }
+                                    "className": "rh-flow-node",
+                                    "aria-hidden": "true"
+                                  },
+                                  "children": [
+                                    {
+                                      "id": "raon_home_flow_input_icon",
+                                      "type": "basic",
+                                      "name": "Icon",
+                                      "props": {
+                                        "className": "rh-icon",
+                                        "name": "fa-inbox",
+                                        "aria-hidden": "true"
+                                      }
+                                    }
+                                  ]
+                                },
+                                {
+                                  "id": "raon_home_flow_input_stage",
+                                  "type": "basic",
+                                  "name": "Span",
+                                  "props": {
+                                    "className": "rh-flow-stage"
+                                  },
+                                  "text": "$t:raonslab-product.home.visual_stage_input"
+                                },
+                                {
+                                  "id": "raon_home_flow_input_copy",
+                                  "type": "basic",
+                                  "name": "Span",
+                                  "props": {
+                                    "className": "rh-flow-copy"
+                                  },
+                                  "text": "$t:raonslab-product.home.flow_input_copy"
                                 }
                               ]
                             },
                             {
-                              "id": "raon_home_flow_legend",
-                              "comment": "flow legend",
+                              "id": "raon_home_flow_run",
                               "type": "basic",
-                              "name": "Ul",
+                              "name": "Li",
                               "props": {
-                                "className": "rh-legend"
+                                "className": "rh-flow-step rh-flow-step-run"
                               },
                               "children": [
                                 {
-                                  "id": "raon_home_flow_legend_pass",
-                                  "comment": "flow legend pass",
+                                  "id": "raon_home_flow_run_node",
                                   "type": "basic",
-                                  "name": "Li",
+                                  "name": "Span",
                                   "props": {
-                                    "className": "rh-legend-item"
+                                    "className": "rh-flow-node",
+                                    "aria-hidden": "true"
                                   },
                                   "children": [
                                     {
-                                      "id": "raon_home_flow_legend_pass_mark",
-                                      "comment": "flow legend pass mark",
+                                      "id": "raon_home_flow_run_icon",
                                       "type": "basic",
-                                      "name": "Span",
+                                      "name": "Icon",
                                       "props": {
-                                        "className": "rh-mark rh-mark-pass",
-                                        "aria-hidden": "true"
-                                      },
-                                      "children": [
-                                        {
-                                          "id": "raon_home_flow_legend_pass_icon",
-                                          "comment": "flow legend pass icon",
-                                          "type": "basic",
-                                          "name": "Icon",
-                                          "props": {
-                                            "className": "rh-icon",
-                                            "name": "fa-check",
-                                            "aria-hidden": "true"
-                                          }
-                                        }
-                                      ]
-                                    },
-                                    {
-                                      "id": "raon_home_flow_legend_pass_text",
-                                      "comment": "flow legend pass text",
-                                      "type": "basic",
-                                      "name": "Span",
-                                      "props": {
-                                        "className": "rh-legend-text"
-                                      },
-                                      "text": "$t:raonslab-product.home.visual_status_pass"
-                                    }
-                                  ]
-                                },
-                                {
-                                  "id": "raon_home_flow_legend_fail",
-                                  "comment": "flow legend fail",
-                                  "type": "basic",
-                                  "name": "Li",
-                                  "props": {
-                                    "className": "rh-legend-item"
-                                  },
-                                  "children": [
-                                    {
-                                      "id": "raon_home_flow_legend_fail_mark",
-                                      "comment": "flow legend fail mark",
-                                      "type": "basic",
-                                      "name": "Span",
-                                      "props": {
-                                        "className": "rh-mark rh-mark-fail",
-                                        "aria-hidden": "true"
-                                      },
-                                      "children": [
-                                        {
-                                          "id": "raon_home_flow_legend_fail_icon",
-                                          "comment": "flow legend fail icon",
-                                          "type": "basic",
-                                          "name": "Icon",
-                                          "props": {
-                                            "className": "rh-icon",
-                                            "name": "fa-xmark",
-                                            "aria-hidden": "true"
-                                          }
-                                        }
-                                      ]
-                                    },
-                                    {
-                                      "id": "raon_home_flow_legend_fail_text",
-                                      "comment": "flow legend fail text",
-                                      "type": "basic",
-                                      "name": "Span",
-                                      "props": {
-                                        "className": "rh-legend-text"
-                                      },
-                                      "text": "$t:raonslab-product.home.visual_status_fail"
-                                    }
-                                  ]
-                                },
-                                {
-                                  "id": "raon_home_flow_legend_open",
-                                  "comment": "flow legend open",
-                                  "type": "basic",
-                                  "name": "Li",
-                                  "props": {
-                                    "className": "rh-legend-item"
-                                  },
-                                  "children": [
-                                    {
-                                      "id": "raon_home_flow_legend_open_mark",
-                                      "comment": "flow legend open mark",
-                                      "type": "basic",
-                                      "name": "Span",
-                                      "props": {
-                                        "className": "rh-mark rh-mark-open",
+                                        "className": "rh-icon",
+                                        "name": "fa-shield-halved",
                                         "aria-hidden": "true"
                                       }
-                                    },
-                                    {
-                                      "id": "raon_home_flow_legend_open_text",
-                                      "comment": "flow legend open text",
-                                      "type": "basic",
-                                      "name": "Span",
-                                      "props": {
-                                        "className": "rh-legend-text"
-                                      },
-                                      "text": "$t:raonslab-product.home.visual_status_open"
                                     }
                                   ]
+                                },
+                                {
+                                  "id": "raon_home_flow_run_stage",
+                                  "type": "basic",
+                                  "name": "Span",
+                                  "props": {
+                                    "className": "rh-flow-stage"
+                                  },
+                                  "text": "$t:raonslab-product.home.visual_stage_run"
+                                },
+                                {
+                                  "id": "raon_home_flow_run_copy",
+                                  "type": "basic",
+                                  "name": "Span",
+                                  "props": {
+                                    "className": "rh-flow-copy"
+                                  },
+                                  "text": "$t:raonslab-product.home.flow_run_copy"
+                                }
+                              ]
+                            },
+                            {
+                              "id": "raon_home_flow_verify",
+                              "type": "basic",
+                              "name": "Li",
+                              "props": {
+                                "className": "rh-flow-step rh-flow-step-verify"
+                              },
+                              "children": [
+                                {
+                                  "id": "raon_home_flow_verify_node",
+                                  "type": "basic",
+                                  "name": "Span",
+                                  "props": {
+                                    "className": "rh-flow-node",
+                                    "aria-hidden": "true"
+                                  },
+                                  "children": [
+                                    {
+                                      "id": "raon_home_flow_verify_icon",
+                                      "type": "basic",
+                                      "name": "Icon",
+                                      "props": {
+                                        "className": "rh-icon",
+                                        "name": "fa-list-check",
+                                        "aria-hidden": "true"
+                                      }
+                                    }
+                                  ]
+                                },
+                                {
+                                  "id": "raon_home_flow_verify_stage",
+                                  "type": "basic",
+                                  "name": "Span",
+                                  "props": {
+                                    "className": "rh-flow-stage"
+                                  },
+                                  "text": "$t:raonslab-product.home.visual_stage_verify"
+                                },
+                                {
+                                  "id": "raon_home_flow_verify_copy",
+                                  "type": "basic",
+                                  "name": "Span",
+                                  "props": {
+                                    "className": "rh-flow-copy"
+                                  },
+                                  "text": "$t:raonslab-product.home.flow_verify_copy"
+                                }
+                              ]
+                            },
+                            {
+                              "id": "raon_home_flow_result",
+                              "type": "basic",
+                              "name": "Li",
+                              "props": {
+                                "className": "rh-flow-step rh-flow-step-result"
+                              },
+                              "children": [
+                                {
+                                  "id": "raon_home_flow_result_node",
+                                  "type": "basic",
+                                  "name": "Span",
+                                  "props": {
+                                    "className": "rh-flow-node",
+                                    "aria-hidden": "true"
+                                  },
+                                  "children": [
+                                    {
+                                      "id": "raon_home_flow_result_icon",
+                                      "type": "basic",
+                                      "name": "Icon",
+                                      "props": {
+                                        "className": "rh-icon",
+                                        "name": "fa-flag-checkered",
+                                        "aria-hidden": "true"
+                                      }
+                                    }
+                                  ]
+                                },
+                                {
+                                  "id": "raon_home_flow_result_stage",
+                                  "type": "basic",
+                                  "name": "Span",
+                                  "props": {
+                                    "className": "rh-flow-stage"
+                                  },
+                                  "text": "$t:raonslab-product.home.visual_stage_result"
+                                },
+                                {
+                                  "id": "raon_home_flow_result_copy",
+                                  "type": "basic",
+                                  "name": "Span",
+                                  "props": {
+                                    "className": "rh-flow-copy"
+                                  },
+                                  "text": "$t:raonslab-product.home.flow_result_copy"
                                 }
                               ]
                             }
