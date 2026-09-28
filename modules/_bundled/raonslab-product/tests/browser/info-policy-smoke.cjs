@@ -5,6 +5,8 @@
  * - 문서 목록·순서는 resources/taxonomy/info-policy.json 단일 출처에서 읽는다.
  * - human DOM 은 명시한 일반 Chrome UA 로만 본다. HeadlessChrome UA 는 SeoMiddleware 가 봇으로 보고
  *   서버 렌더 HTML(React 없음)을 주므로 human 검증에 쓰면 거짓 실패/거짓 통과가 난다.
+ * - 배포 전 구 런타임(0.4.0)에 실행하면 새 표현·샘플 본문 때문에 실패하는 것이 정상이다(EXPECTED_FAIL_PREDEPLOY).
+ *   release gate 는 배포 + DB 적용 뒤 1회 실행이다.
  * - G7_SMOKE_CONTENT_GATE=0 이면 about/faq/contact/refund 본문 교체 전 단계로 보고 샘플 문구 검사를 건너뛴다.
  */
 const { spawnSync } = require('node:child_process');
@@ -24,6 +26,7 @@ const TAXONOMY = require('../../resources/taxonomy/info-policy.json');
 const DOC_GROUPS = Object.fromEntries(TAXONOMY.groups.map((group) => [group.key, group.items.map((item) => item.slug)]));
 const DOC_SLUGS = TAXONOMY.groups.flatMap((group) => group.items.map((item) => item.slug));
 const CONTENT_GATE = process.env.G7_SMOKE_CONTENT_GATE !== '0';
+const PRESENTATION_WAIT_MS = Number(process.env.G7_SMOKE_PRESENTATION_WAIT_MS || 3000);
 const SAMPLE_TEXT = /입력하세요|그누보드7에 오신 것을 환영합니다|평일 오전 9시|영업일 내|\b(DEMO|MOCK|SANDBOX|TEST)\b/;
 /** Legacy compatibility routes exist only for the seven 0.4.0 native documents. */
 const PAGES = [
@@ -177,7 +180,8 @@ async function inspectNativePage(page, viewport, slug, locale, errors) {
   const localeQuery = locale === 'ko' ? '' : `?locale=${locale}`;
   const desktop = viewport.width >= 1024;
   const response = await page.goto(`${BASE}${path}${localeQuery}`, { waitUntil: 'networkidle', timeout: 30000 });
-  const presented = await page.waitForSelector('.rh-native-breadcrumb', { timeout: 15000 }).then(() => true, () => false);
+  // networkidle 뒤에는 레이아웃이 이미 렌더됐어야 한다. 짧고 고정된 대기만 두고 없으면 FAIL 로 기록한다.
+  const presented = await page.waitForSelector('.rh-native-breadcrumb', { timeout: PRESENTATION_WAIT_MS }).then(() => true, () => false);
   record(`${locale}/${viewport.width}/${slug}`, 'RAON document presentation is applied', presented, presented ? '' : 'no .rh-native-breadcrumb');
   if (!presented) return;
   const state = await page.evaluate(({ expectedSlug, groups, sampleSource }) => {

@@ -97,7 +97,7 @@
 | actual cause | `sirsoft-page`는 공개 목록 API를 두지 않으며 G7 Menu는 관리자 sidebar 전용이다. 분류(그룹·순서·짧은 라벨·설명)는 제품 소유 데이터인데 단일 출처 없이 복제돼 드리프트가 생겼다. |
 | evidence | `docs/extension/menus.md`; `modules/_bundled/sirsoft-page/AGENTS.md`; 0.4.0 `native-page.json`·`product-nav.json`·`productNav.ts`; 360/390/412/1280 human DOM 측정(0.4.0: 1280에서 스크롤 후 문서 메뉴 top 음수). |
 | resolution | `resources/taxonomy/info-policy.json`을 단일 출처로 두고 `scripts/taxonomy.mjs`가 extension JSON의 분류 종속 부분을 생성한다. `productNav.ts`와 browser smoke는 같은 JSON을 읽는다. 문서 메뉴는 grid 오른쪽 열(DOM은 본문 뒤) + 실제 sticky, 모바일은 기본 닫힘 disclosure다. |
-| prevention rule | 분류를 바꿀 때는 JSON만 고치고 `npm run taxonomy:sync`를 실행한다. vitest 드리프트 테스트가 커밋된 extension JSON과 생성 결과의 바이트 불일치를 실패로 본다. Page 제목·본문·SEO는 계속 Page DB가 정본이다. |
+| prevention rule | 배포 전 구 런타임에 새 smoke를 돌리면 새 표현 부재로 실패하는 것이 정상(`EXPECTED_FAIL_PREDEPLOY`)이며 반복 실행하지 않는다. smoke는 표현 부재를 짧은 고정 대기(기본 3초) 뒤 FAIL로 기록하고 진행한다. 분류를 바꿀 때는 JSON만 고치고 `npm run taxonomy:sync`를 실행한다. vitest 드리프트 테스트가 커밋된 extension JSON과 생성 결과의 바이트 불일치를 실패로 본다. Page 제목·본문·SEO는 계속 Page DB가 정본이다. |
 | related regression test | `modules/_bundled/raonslab-product/resources/js/infoPolicy.test.ts`; `modules/_bundled/raonslab-product/tests/Feature/ProductLayerContractTest.php`; `info-policy-smoke.cjs` |
 | related commit/request_id | 0.4.1 source commit; `req_04b635bdc600403cbf7a3795159ce168` |
 

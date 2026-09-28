@@ -8,7 +8,7 @@
 | 이 문서와 함께 바뀐 source | `raonslab-product 0.4.1` (request `req_04b635bdc600403cbf7a3795159ce168`) — **미배포** |
 | 근거 요청 | UX 감사(이 요청), 기술 감사 `req_3f95be490cb44061be39e563598fe52d`, 콘텐츠 감사 `req_9160cea72adc49aabbcbcc3f5edab73a` |
 
-분류 키: `PASS` 확인됨 · `P0` 공개 신뢰·법적 위험 즉시 조치 · `P1` 이번 릴리스 안에서 조치 · `P2` 후속 · `EXPECTED` 의도된 상태 · `NA` 해당 없음 · `UNVERIFIED` 증거 부족.
+분류 키: `PASS` 확인됨 · `EXPECTED_FAIL_PREDEPLOY` 배포 전 구 런타임에서 실패가 정상인 검사 · `P0` 공개 신뢰·법적 위험 즉시 조치 · `P1` 이번 릴리스 안에서 조치 · `P2` 후속 · `EXPECTED` 의도된 상태 · `NA` 해당 없음 · `UNVERIFIED` 증거 부족.
 층위 키: **SOURCE MAIN**(main 커밋의 파일) · **RUNTIME**(실행 중 코드·설정·빌드 산출물) · **DB**(운영 DB 행) · **ADMIN CONFIG**(`storage/app/settings/*.json`·관리자 화면 값) · **PUBLIC OUTPUT**(브라우저·봇이 받는 응답).
 
 > DB 층위 수치는 기술 감사의 읽기 전용 조회 결과를 인용했다. 이 요청은 운영 DB에 쓰지 않았고, Page 행은 공개 API로만 재확인했다.
@@ -101,9 +101,11 @@
 | phpunit | ProductLayerContract, NativePageBootstrap command·unit, InfoPageRemediationCommand(8) | 22 tests / 225 assertions PASS (DB `g7_product_test`) |
 | phpunit 저장소 계약 | ChangelogParser, SeoNodeKeyParity | PASS |
 | phpunit 저장소 계약 | ViteOutDirContract, NoSourcemapArtifacts | 이 실행에서 `base_path()`가 운영 checkout으로 해석되어 운영 파일을 검사함 → main의 `emptyOutDir: true`(0.4.1이 수정)와 ai-workspace 활성 `.map`(F18) 검출. worktree의 추적 vite config는 모두 `false` 확인 |
-| browser smoke(새 버전) × live 0.4.0 | 11 slug × 4 viewport + en 4 + bot SEO + legacy 301 | 476 PASS / 356 FAIL — 이번 결함을 모두 검출 |
+| browser smoke(새 버전) × live 0.4.0 | 11 slug × 4 viewport + en 4 + bot SEO + legacy 301 | 476 PASS / 356 FAIL — `EXPECTED_FAIL_PREDEPLOY`(결함 검출력 확인, release gate 아님, 재실행 안 함) |
 | browser smoke × 0.4.1 클라이언트 오버레이 | 동일, content gate off | 1208 PASS / 0 FAIL |
-| 〃 content gate on | 동일 | 1240 PASS / 16 FAIL = 샘플 4 slug × 4 viewport(DB 교체 전 예상) |
+| 〃 content gate on | 동일 | 1240 PASS / 16 FAIL = 샘플 4 slug × 4 viewport — `EXPECTED_FAIL_PREDEPLOY`(DB 교체 전) |
+| content pack 오프라인 검증 | `/tmp/rh-pack/pack.canonical.json` → `NativePageContentPack`(SHA-256·envelope·base_commit) + pages 검증 | PASS, SHA 한 글자 변경은 거부 |
+| release gate | 배포 + DB 적용 뒤 smoke 1회(content gate on) | 미실행 |
 | ext:docgen `--check` | raonslab-product | 기존 문서 구조 미도입(F19) |
 | G7 AI 도구 | `docs/ai-tools/**` MCP·skills | source-review만, 연결·호출하지 않음 |
 

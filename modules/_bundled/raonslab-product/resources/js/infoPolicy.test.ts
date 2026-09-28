@@ -343,6 +343,10 @@ describe('기존 계약 유지', () => {
     expect(browserSmoke).toContain("'footer link text and href follow taxonomy'");
     expect(browserSmoke).toContain("'Powered by attribution remains'");
     expect(browserSmoke).toContain("'Escape closes document menu and returns focus'");
+    // 표현 부재는 짧은 고정 대기 뒤 FAIL 로 기록하고 계속 진행한다(구 런타임에서 페이지마다 15초 대기 금지).
+    expect(browserSmoke).toContain("waitForSelector('.rh-native-breadcrumb', { timeout: PRESENTATION_WAIT_MS })");
+    expect(browserSmoke).toContain("'RAON document presentation is applied'");
+    expect(browserSmoke).not.toContain("waitForSelector('.rh-native-breadcrumb', { timeout: 15000 })");
     expect(browserSmoke.indexOf('await inspectConsultationConfig(api)')).toBeLessThan(
       browserSmoke.indexOf('await inspectLegacyRedirect(api, firstSlug, firstLegacy)'),
     );

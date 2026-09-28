@@ -90,4 +90,12 @@
 - 콘텐츠 pack `raon-native-pages-wave2-2026-09-28`(SHA-256 `88e7e7b0e18dca947f0251ce6dd217e0f0a0c0aa73e6161dbf4c1882b0ac85f7`, 51,412 bytes)은 DB 없이 `NativePageContentPack::fromFile`(승인 SHA-256·감사 base_commit 대조)과 `InfoPageRemediator` pages 검증을 통과했고(한 글자 다른 SHA-256은 거부), 4개 목표 지문이 모두 원문 지문과 다르며, smoke content gate 정규식에 걸리는 문구가 없다. 본문은 저장소에 복사하지 않았다.
 
 - vitest 74/74, phpunit(ProductLayerContract·NativePageBootstrap command/unit·InfoPageRemediation) 22 tests / 225 assertions PASS.
-- 새 smoke를 live 0.4.0에 실행: 476 PASS / 356 FAIL(이번 변경이 고치는 결함을 모두 검출). 같은 smoke를 live 런타임 위에 0.4.1 layout·asset·번역을 클라이언트에서만 겹쳐 실행: 1208 PASS / 0 FAIL(content gate off), content gate on이면 샘플 4개 × 4 viewport 16건만 FAIL — DB 교체 전 예상 상태.
+- 증거 분류
+  | 실행 | 결과 | 분류 |
+  | --- | --- | --- |
+  | 새 smoke × 배포 전 live 0.4.0 | 476 PASS / 356 FAIL(새 표현 부재·샘플 본문) | `EXPECTED_FAIL_PREDEPLOY` — 결함 검출력 확인용, release gate 아님, 재실행하지 않음 |
+  | 새 smoke × live 위 0.4.1 클라이언트 오버레이(content gate off) | 1208 PASS / 0 FAIL | 배포 전 긍정 증거 |
+  | 〃 content gate on | 16 FAIL = 샘플 4 slug × 4 viewport | `EXPECTED_FAIL_PREDEPLOY`(DB 교체 전) |
+  | 새 smoke × 배포 + DB 적용 후 runtime | 미실행 | release gate — 배포 순서 8단계에서 1회 |
+- smoke는 networkidle 뒤 `.rh-native-breadcrumb`를 짧은 고정 시간(`G7_SMOKE_PRESENTATION_WAIT_MS`, 기본 3000ms)만 기다리고, 없으면
+  `RAON document presentation is applied` FAIL을 기록한 뒤 다음 페이지로 진행한다.
