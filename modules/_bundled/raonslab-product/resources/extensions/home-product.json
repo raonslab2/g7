@@ -8,141 +8,2280 @@
       "components": [
         {
           "id": "raon_home",
-          "comment": "RAON Hub 제품 홈 루트",
+          "comment": "RAON Agent Factory 사업 홈 루트",
           "type": "basic",
           "name": "Div",
-          "props": { "className": "rh-home" },
+          "props": {
+            "className": "rh-home"
+          },
           "children": [
             {
-              "id": "raon_home_shell",
-              "comment": "홈 콘텐츠 폭과 모바일 여백",
+              "id": "raon_home_subnav",
+              "comment": "홈 섹션 바로가기(IA)",
               "type": "basic",
-              "name": "Div",
-              "props": { "className": "rh-shell" },
+              "name": "Nav",
+              "props": {
+                "className": "rh-subnav",
+                "aria-label": "$t:raonslab-product.home.nav_label"
+              },
               "children": [
                 {
-                  "id": "raon_home_eyebrow",
-                  "comment": "제품 카테고리 라벨",
+                  "id": "raon_home_subnav_inner",
+                  "comment": "바로가기 목록",
                   "type": "basic",
-                  "name": "Div",
-                  "props": { "className": "rh-eyebrow" },
-                  "text": "$t:raonslab-product.home.eyebrow"
-                },
-                {
-                  "id": "raon_home_title",
-                  "comment": "제품 핵심 가치 제목",
-                  "type": "basic",
-                  "name": "H1",
-                  "props": { "className": "rh-title" },
-                  "text": "$t:raonslab-product.home.title"
-                },
-                {
-                  "id": "raon_home_lede",
-                  "comment": "제품 설명",
-                  "type": "basic",
-                  "name": "P",
-                  "props": { "className": "rh-lede" },
-                  "text": "$t:raonslab-product.home.lede"
-                },
-                {
-                  "id": "raon_home_actions",
-                  "comment": "핵심 사용자 여정 진입점",
-                  "type": "basic",
-                  "name": "Div",
-                  "props": { "className": "rh-actions" },
+                  "name": "Ul",
+                  "props": {
+                    "className": "rh-shell rh-subnav-list"
+                  },
                   "children": [
                     {
-                      "id": "raon_home_community",
-                      "comment": "커뮤니티 이동",
+                      "id": "raon_home_subnav_services_item",
+                      "comment": "services 바로가기 항목",
                       "type": "basic",
-                      "name": "Button",
-                      "props": { "className": "rh-action rh-action-primary" },
-                      "actions": [{ "type": "click", "handler": "navigate", "params": { "path": "/boards" } }],
-                      "text": "$t:raonslab-product.home.community_action"
+                      "name": "Li",
+                      "props": {
+                        "className": "rh-subnav-item"
+                      },
+                      "children": [
+                        {
+                          "id": "raon_home_subnav_services",
+                          "comment": "services 섹션으로 이동",
+                          "type": "basic",
+                          "name": "A",
+                          "props": {
+                            "className": "rh-subnav-link",
+                            "href": "#rh-services",
+                            "data-rh-jump": "services"
+                          },
+                          "text": "$t:raonslab-product.home.nav_services"
+                        }
+                      ]
                     },
                     {
-                      "id": "raon_home_search",
-                      "comment": "통합 검색 이동",
+                      "id": "raon_home_subnav_cases_item",
+                      "comment": "cases 바로가기 항목",
                       "type": "basic",
-                      "name": "Button",
-                      "props": { "className": "rh-action" },
-                      "actions": [{ "type": "click", "handler": "navigate", "params": { "path": "/search" } }],
-                      "text": "$t:raonslab-product.home.search_action"
+                      "name": "Li",
+                      "props": {
+                        "className": "rh-subnav-item"
+                      },
+                      "children": [
+                        {
+                          "id": "raon_home_subnav_cases",
+                          "comment": "cases 섹션으로 이동",
+                          "type": "basic",
+                          "name": "A",
+                          "props": {
+                            "className": "rh-subnav-link",
+                            "href": "#rh-cases",
+                            "data-rh-jump": "cases"
+                          },
+                          "text": "$t:raonslab-product.home.nav_cases"
+                        }
+                      ]
                     },
                     {
-                      "id": "raon_home_profile",
-                      "comment": "로그인 사용자의 프로필 이동",
+                      "id": "raon_home_subnav_process_item",
+                      "comment": "process 바로가기 항목",
                       "type": "basic",
-                      "name": "Button",
-                      "if": "{{_global.currentUser?.uuid}}",
-                      "props": { "className": "rh-action" },
-                      "actions": [{ "type": "click", "handler": "navigate", "params": { "path": "/mypage/profile" } }],
-                      "text": "$t:raonslab-product.home.profile_action"
+                      "name": "Li",
+                      "props": {
+                        "className": "rh-subnav-item"
+                      },
+                      "children": [
+                        {
+                          "id": "raon_home_subnav_process",
+                          "comment": "process 섹션으로 이동",
+                          "type": "basic",
+                          "name": "A",
+                          "props": {
+                            "className": "rh-subnav-link",
+                            "href": "#rh-process",
+                            "data-rh-jump": "process"
+                          },
+                          "text": "$t:raonslab-product.home.nav_process"
+                        }
+                      ]
                     },
                     {
-                      "id": "raon_home_ai",
-                      "comment": "로그인 사용자의 AI 작업공간 이동",
+                      "id": "raon_home_subnav_tech_item",
+                      "comment": "tech 바로가기 항목",
                       "type": "basic",
-                      "name": "Button",
-                      "if": "{{_global.currentUser?.uuid}}",
-                      "props": { "className": "rh-action" },
-                      "actions": [{ "type": "click", "handler": "navigate", "params": { "path": "/ai" } }],
-                      "text": "$t:raonslab-product.home.ai_action"
+                      "name": "Li",
+                      "props": {
+                        "className": "rh-subnav-item"
+                      },
+                      "children": [
+                        {
+                          "id": "raon_home_subnav_tech",
+                          "comment": "tech 섹션으로 이동",
+                          "type": "basic",
+                          "name": "A",
+                          "props": {
+                            "className": "rh-subnav-link",
+                            "href": "#rh-tech",
+                            "data-rh-jump": "tech"
+                          },
+                          "text": "$t:raonslab-product.home.nav_tech"
+                        }
+                      ]
                     },
                     {
-                      "id": "raon_home_register",
-                      "comment": "비회원 가입 이동",
+                      "id": "raon_home_subnav_consult_item",
+                      "comment": "consult 바로가기 항목",
                       "type": "basic",
-                      "name": "Button",
-                      "if": "{{!_global.currentUser?.uuid}}",
-                      "props": { "className": "rh-action" },
-                      "actions": [{ "type": "click", "handler": "navigate", "params": { "path": "/register" } }],
-                      "text": "$t:raonslab-product.home.register_action"
+                      "name": "Li",
+                      "props": {
+                        "className": "rh-subnav-item"
+                      },
+                      "children": [
+                        {
+                          "id": "raon_home_subnav_consult",
+                          "comment": "consult 섹션으로 이동",
+                          "type": "basic",
+                          "name": "A",
+                          "props": {
+                            "className": "rh-subnav-link",
+                            "href": "#rh-consult",
+                            "data-rh-jump": "consult"
+                          },
+                          "text": "$t:raonslab-product.home.nav_consult"
+                        }
+                      ]
                     }
                   ]
-                },
+                }
+              ]
+            },
+            {
+              "id": "raon_home_hero",
+              "comment": "첫 화면(브랜드·핵심 가치·CTA)",
+              "type": "basic",
+              "name": "Div",
+              "props": {
+                "className": "rh-hero",
+                "id": "rh-hero",
+                "role": "region",
+                "aria-labelledby": "rh-hero-title"
+              },
+              "children": [
                 {
-                  "id": "raon_home_capabilities",
-                  "comment": "서비스 기능 요약",
+                  "id": "raon_home_hero_inner",
+                  "comment": "첫 화면 콘텐츠 폭",
                   "type": "basic",
                   "name": "Div",
-                  "props": { "className": "rh-grid" },
+                  "props": {
+                    "className": "rh-shell rh-hero-grid"
+                  },
                   "children": [
                     {
-                      "id": "raon_home_card_community",
-                      "comment": "커뮤니티 기능 카드",
+                      "id": "raon_home_hero_copy",
+                      "comment": "첫 화면 문구",
                       "type": "basic",
                       "name": "Div",
-                      "props": { "className": "rh-card" },
+                      "props": {
+                        "className": "rh-hero-copy"
+                      },
                       "children": [
-                        { "id": "raon_home_card_community_kicker", "comment": "커뮤니티 카드 라벨", "type": "basic", "name": "Div", "props": { "className": "rh-card-kicker" }, "text": "$t:raonslab-product.home.community_kicker" },
-                        { "id": "raon_home_card_community_title", "comment": "커뮤니티 카드 제목", "type": "basic", "name": "H2", "props": { "className": "rh-card-title" }, "text": "$t:raonslab-product.home.community_title" },
-                        { "id": "raon_home_card_community_copy", "comment": "커뮤니티 카드 설명", "type": "basic", "name": "P", "props": { "className": "rh-card-copy" }, "text": "$t:raonslab-product.home.community_copy" }
+                        {
+                          "id": "raon_home_brand",
+                          "comment": "브랜드명",
+                          "type": "basic",
+                          "name": "P",
+                          "props": {
+                            "className": "rh-brand"
+                          },
+                          "text": "$t:raonslab-product.home.brand"
+                        },
+                        {
+                          "id": "raon_home_title",
+                          "comment": "주제목",
+                          "type": "basic",
+                          "name": "H1",
+                          "props": {
+                            "className": "rh-title",
+                            "id": "rh-hero-title"
+                          },
+                          "text": "$t:raonslab-product.home.title"
+                        },
+                        {
+                          "id": "raon_home_lede",
+                          "comment": "설명",
+                          "type": "basic",
+                          "name": "P",
+                          "props": {
+                            "className": "rh-lede"
+                          },
+                          "text": "$t:raonslab-product.home.lede"
+                        },
+                        {
+                          "id": "raon_home_concept",
+                          "comment": "보조 콘셉트",
+                          "type": "basic",
+                          "name": "P",
+                          "props": {
+                            "className": "rh-concept"
+                          },
+                          "text": "$t:raonslab-product.home.concept"
+                        },
+                        {
+                          "id": "raon_home_actions",
+                          "comment": "주요 행동 유도",
+                          "type": "basic",
+                          "name": "Div",
+                          "props": {
+                            "className": "rh-actions"
+                          },
+                          "children": [
+                            {
+                              "id": "raon_home_cta_primary",
+                              "comment": "구축 상담 섹션으로 이동(주 CTA)",
+                              "type": "basic",
+                              "name": "A",
+                              "props": {
+                                "className": "rh-action rh-action-primary",
+                                "href": "#rh-consult",
+                                "data-rh-jump": "consult"
+                              },
+                              "text": "$t:raonslab-product.home.cta_primary"
+                            },
+                            {
+                              "id": "raon_home_cta_secondary",
+                              "comment": "구현 사례 섹션으로 이동(보조 CTA)",
+                              "type": "basic",
+                              "name": "A",
+                              "props": {
+                                "className": "rh-action",
+                                "href": "#rh-cases",
+                                "data-rh-jump": "cases"
+                              },
+                              "text": "$t:raonslab-product.home.cta_secondary"
+                            }
+                          ]
+                        }
                       ]
                     },
                     {
-                      "id": "raon_home_card_notice",
-                      "comment": "알림과 탐색 기능 카드",
+                      "id": "raon_home_flow",
+                      "comment": "에이전트 작업 흐름 요약",
                       "type": "basic",
                       "name": "Div",
-                      "props": { "className": "rh-card" },
+                      "props": {
+                        "className": "rh-flow",
+                        "role": "group",
+                        "aria-labelledby": "rh-flow-label"
+                      },
                       "children": [
-                        { "id": "raon_home_card_notice_kicker", "comment": "알림 카드 라벨", "type": "basic", "name": "Div", "props": { "className": "rh-card-kicker" }, "text": "$t:raonslab-product.home.notice_kicker" },
-                        { "id": "raon_home_card_notice_title", "comment": "알림 카드 제목", "type": "basic", "name": "H2", "props": { "className": "rh-card-title" }, "text": "$t:raonslab-product.home.notice_title" },
-                        { "id": "raon_home_card_notice_copy", "comment": "알림 카드 설명", "type": "basic", "name": "P", "props": { "className": "rh-card-copy" }, "text": "$t:raonslab-product.home.notice_copy" }
+                        {
+                          "id": "raon_home_flow_label",
+                          "comment": "작업 흐름 제목",
+                          "type": "basic",
+                          "name": "P",
+                          "props": {
+                            "className": "rh-flow-label",
+                            "id": "rh-flow-label"
+                          },
+                          "text": "$t:raonslab-product.home.flow_label"
+                        },
+                        {
+                          "id": "raon_home_flow_list",
+                          "comment": "작업 흐름 단계",
+                          "type": "basic",
+                          "name": "Ul",
+                          "props": {
+                            "className": "rh-flow-list"
+                          },
+                          "children": [
+                            {
+                              "id": "raon_home_flow_connect",
+                              "comment": "작업 흐름 connect 단계",
+                              "type": "basic",
+                              "name": "Li",
+                              "props": {
+                                "className": "rh-flow-step"
+                              },
+                              "children": [
+                                {
+                                  "id": "raon_home_flow_connect_title",
+                                  "comment": "connect 단계 이름",
+                                  "type": "basic",
+                                  "name": "Span",
+                                  "props": {
+                                    "className": "rh-flow-title"
+                                  },
+                                  "text": "$t:raonslab-product.home.flow_connect_title"
+                                },
+                                {
+                                  "id": "raon_home_flow_connect_copy",
+                                  "comment": "connect 단계 설명",
+                                  "type": "basic",
+                                  "name": "Span",
+                                  "props": {
+                                    "className": "rh-flow-copy"
+                                  },
+                                  "text": "$t:raonslab-product.home.flow_connect_copy"
+                                }
+                              ]
+                            },
+                            {
+                              "id": "raon_home_flow_run",
+                              "comment": "작업 흐름 run 단계",
+                              "type": "basic",
+                              "name": "Li",
+                              "props": {
+                                "className": "rh-flow-step"
+                              },
+                              "children": [
+                                {
+                                  "id": "raon_home_flow_run_title",
+                                  "comment": "run 단계 이름",
+                                  "type": "basic",
+                                  "name": "Span",
+                                  "props": {
+                                    "className": "rh-flow-title"
+                                  },
+                                  "text": "$t:raonslab-product.home.flow_run_title"
+                                },
+                                {
+                                  "id": "raon_home_flow_run_copy",
+                                  "comment": "run 단계 설명",
+                                  "type": "basic",
+                                  "name": "Span",
+                                  "props": {
+                                    "className": "rh-flow-copy"
+                                  },
+                                  "text": "$t:raonslab-product.home.flow_run_copy"
+                                }
+                              ]
+                            },
+                            {
+                              "id": "raon_home_flow_verify",
+                              "comment": "작업 흐름 verify 단계",
+                              "type": "basic",
+                              "name": "Li",
+                              "props": {
+                                "className": "rh-flow-step"
+                              },
+                              "children": [
+                                {
+                                  "id": "raon_home_flow_verify_title",
+                                  "comment": "verify 단계 이름",
+                                  "type": "basic",
+                                  "name": "Span",
+                                  "props": {
+                                    "className": "rh-flow-title"
+                                  },
+                                  "text": "$t:raonslab-product.home.flow_verify_title"
+                                },
+                                {
+                                  "id": "raon_home_flow_verify_copy",
+                                  "comment": "verify 단계 설명",
+                                  "type": "basic",
+                                  "name": "Span",
+                                  "props": {
+                                    "className": "rh-flow-copy"
+                                  },
+                                  "text": "$t:raonslab-product.home.flow_verify_copy"
+                                }
+                              ]
+                            },
+                            {
+                              "id": "raon_home_flow_operate",
+                              "comment": "작업 흐름 operate 단계",
+                              "type": "basic",
+                              "name": "Li",
+                              "props": {
+                                "className": "rh-flow-step"
+                              },
+                              "children": [
+                                {
+                                  "id": "raon_home_flow_operate_title",
+                                  "comment": "operate 단계 이름",
+                                  "type": "basic",
+                                  "name": "Span",
+                                  "props": {
+                                    "className": "rh-flow-title"
+                                  },
+                                  "text": "$t:raonslab-product.home.flow_operate_title"
+                                },
+                                {
+                                  "id": "raon_home_flow_operate_copy",
+                                  "comment": "operate 단계 설명",
+                                  "type": "basic",
+                                  "name": "Span",
+                                  "props": {
+                                    "className": "rh-flow-copy"
+                                  },
+                                  "text": "$t:raonslab-product.home.flow_operate_copy"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "raon_home_problem",
+              "comment": "문제 정의",
+              "type": "basic",
+              "name": "Div",
+              "props": {
+                "className": "rh-section",
+                "id": "rh-problem",
+                "role": "region",
+                "aria-labelledby": "rh-problem-title"
+              },
+              "children": [
+                {
+                  "id": "raon_home_problem_inner",
+                  "comment": "문제 정의 콘텐츠 폭",
+                  "type": "basic",
+                  "name": "Div",
+                  "props": {
+                    "className": "rh-shell"
+                  },
+                  "children": [
+                    {
+                      "id": "raon_home_problem_head",
+                      "comment": "문제 정의 머리글",
+                      "type": "basic",
+                      "name": "Div",
+                      "props": {
+                        "className": "rh-section-head"
+                      },
+                      "children": [
+                        {
+                          "id": "raon_home_problem_kicker",
+                          "comment": "문제 정의 라벨",
+                          "type": "basic",
+                          "name": "P",
+                          "props": {
+                            "className": "rh-kicker"
+                          },
+                          "text": "$t:raonslab-product.home.problem_kicker"
+                        },
+                        {
+                          "id": "raon_home_problem_title",
+                          "comment": "문제 정의 제목",
+                          "type": "basic",
+                          "name": "H2",
+                          "props": {
+                            "className": "rh-h2",
+                            "id": "rh-problem-title",
+                            "tabIndex": -1
+                          },
+                          "text": "$t:raonslab-product.home.problem_title"
+                        },
+                        {
+                          "id": "raon_home_problem_lede",
+                          "comment": "문제 정의 설명",
+                          "type": "basic",
+                          "name": "P",
+                          "props": {
+                            "className": "rh-section-lede"
+                          },
+                          "text": "$t:raonslab-product.home.problem_lede"
+                        }
                       ]
                     },
                     {
-                      "id": "raon_home_card_ai",
-                      "comment": "AI 작업 공간 예고 카드",
+                      "id": "raon_home_problem_list",
+                      "comment": "문제 목록",
+                      "type": "basic",
+                      "name": "Ul",
+                      "props": {
+                        "className": "rh-grid rh-grid-3"
+                      },
+                      "children": [
+                        {
+                          "id": "raon_home_problem_access",
+                          "comment": "문제: access",
+                          "type": "basic",
+                          "name": "Li",
+                          "props": {
+                            "className": "rh-card"
+                          },
+                          "children": [
+                            {
+                              "id": "raon_home_problem_access_title",
+                              "comment": "문제 access 제목",
+                              "type": "basic",
+                              "name": "H3",
+                              "props": {
+                                "className": "rh-h3"
+                              },
+                              "text": "$t:raonslab-product.home.problem_access_title"
+                            },
+                            {
+                              "id": "raon_home_problem_access_copy",
+                              "comment": "문제 access 설명",
+                              "type": "basic",
+                              "name": "P",
+                              "props": {
+                                "className": "rh-card-copy"
+                              },
+                              "text": "$t:raonslab-product.home.problem_access_copy"
+                            }
+                          ]
+                        },
+                        {
+                          "id": "raon_home_problem_verify",
+                          "comment": "문제: verify",
+                          "type": "basic",
+                          "name": "Li",
+                          "props": {
+                            "className": "rh-card"
+                          },
+                          "children": [
+                            {
+                              "id": "raon_home_problem_verify_title",
+                              "comment": "문제 verify 제목",
+                              "type": "basic",
+                              "name": "H3",
+                              "props": {
+                                "className": "rh-h3"
+                              },
+                              "text": "$t:raonslab-product.home.problem_verify_title"
+                            },
+                            {
+                              "id": "raon_home_problem_verify_copy",
+                              "comment": "문제 verify 설명",
+                              "type": "basic",
+                              "name": "P",
+                              "props": {
+                                "className": "rh-card-copy"
+                              },
+                              "text": "$t:raonslab-product.home.problem_verify_copy"
+                            }
+                          ]
+                        },
+                        {
+                          "id": "raon_home_problem_operate",
+                          "comment": "문제: operate",
+                          "type": "basic",
+                          "name": "Li",
+                          "props": {
+                            "className": "rh-card"
+                          },
+                          "children": [
+                            {
+                              "id": "raon_home_problem_operate_title",
+                              "comment": "문제 operate 제목",
+                              "type": "basic",
+                              "name": "H3",
+                              "props": {
+                                "className": "rh-h3"
+                              },
+                              "text": "$t:raonslab-product.home.problem_operate_title"
+                            },
+                            {
+                              "id": "raon_home_problem_operate_copy",
+                              "comment": "문제 operate 설명",
+                              "type": "basic",
+                              "name": "P",
+                              "props": {
+                                "className": "rh-card-copy"
+                              },
+                              "text": "$t:raonslab-product.home.problem_operate_copy"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "raon_home_services",
+              "comment": "제공 서비스",
+              "type": "basic",
+              "name": "Div",
+              "props": {
+                "className": "rh-section",
+                "id": "rh-services",
+                "role": "region",
+                "aria-labelledby": "rh-services-title"
+              },
+              "children": [
+                {
+                  "id": "raon_home_services_inner",
+                  "comment": "제공 서비스 콘텐츠 폭",
+                  "type": "basic",
+                  "name": "Div",
+                  "props": {
+                    "className": "rh-shell"
+                  },
+                  "children": [
+                    {
+                      "id": "raon_home_services_head",
+                      "comment": "제공 서비스 머리글",
                       "type": "basic",
                       "name": "Div",
-                      "props": { "className": "rh-card" },
+                      "props": {
+                        "className": "rh-section-head"
+                      },
                       "children": [
-                        { "id": "raon_home_card_ai_kicker", "comment": "AI 카드 라벨", "type": "basic", "name": "Div", "props": { "className": "rh-card-kicker" }, "text": "$t:raonslab-product.home.ai_kicker" },
-                        { "id": "raon_home_card_ai_title", "comment": "AI 카드 제목", "type": "basic", "name": "H2", "props": { "className": "rh-card-title" }, "text": "$t:raonslab-product.home.ai_title" },
-                        { "id": "raon_home_card_ai_copy", "comment": "AI 카드 설명", "type": "basic", "name": "P", "props": { "className": "rh-card-copy" }, "text": "$t:raonslab-product.home.ai_copy" },
-                        { "id": "raon_home_card_ai_action", "comment": "AI 작업공간 이동", "type": "basic", "name": "Button", "if": "{{_global.currentUser?.uuid}}", "props": { "className": "rh-card-link" }, "actions": [{ "type": "click", "handler": "navigate", "params": { "path": "/ai" } }], "text": "$t:raonslab-product.home.ai_action" }
+                        {
+                          "id": "raon_home_services_kicker",
+                          "comment": "제공 서비스 라벨",
+                          "type": "basic",
+                          "name": "P",
+                          "props": {
+                            "className": "rh-kicker"
+                          },
+                          "text": "$t:raonslab-product.home.services_kicker"
+                        },
+                        {
+                          "id": "raon_home_services_title",
+                          "comment": "제공 서비스 제목",
+                          "type": "basic",
+                          "name": "H2",
+                          "props": {
+                            "className": "rh-h2",
+                            "id": "rh-services-title",
+                            "tabIndex": -1
+                          },
+                          "text": "$t:raonslab-product.home.services_title"
+                        },
+                        {
+                          "id": "raon_home_services_lede",
+                          "comment": "제공 서비스 설명",
+                          "type": "basic",
+                          "name": "P",
+                          "props": {
+                            "className": "rh-section-lede"
+                          },
+                          "text": "$t:raonslab-product.home.services_lede"
+                        }
+                      ]
+                    },
+                    {
+                      "id": "raon_home_services_list",
+                      "comment": "서비스 3종",
+                      "type": "basic",
+                      "name": "Ul",
+                      "props": {
+                        "className": "rh-grid rh-grid-3"
+                      },
+                      "children": [
+                        {
+                          "id": "raon_home_service_pilot",
+                          "comment": "서비스: pilot",
+                          "type": "basic",
+                          "name": "Li",
+                          "props": {
+                            "className": "rh-card rh-service"
+                          },
+                          "children": [
+                            {
+                              "id": "raon_home_service_pilot_step",
+                              "comment": "서비스 pilot 순번",
+                              "type": "basic",
+                              "name": "Span",
+                              "props": {
+                                "className": "rh-step",
+                                "aria-hidden": "true"
+                              },
+                              "text": "$t:raonslab-product.home.service_pilot_step"
+                            },
+                            {
+                              "id": "raon_home_service_pilot_title",
+                              "comment": "서비스 pilot 이름",
+                              "type": "basic",
+                              "name": "H3",
+                              "props": {
+                                "className": "rh-h3"
+                              },
+                              "text": "$t:raonslab-product.home.service_pilot_title"
+                            },
+                            {
+                              "id": "raon_home_service_pilot_copy",
+                              "comment": "서비스 pilot 설명",
+                              "type": "basic",
+                              "name": "P",
+                              "props": {
+                                "className": "rh-card-copy"
+                              },
+                              "text": "$t:raonslab-product.home.service_pilot_copy"
+                            },
+                            {
+                              "id": "raon_home_service_pilot_items",
+                              "comment": "서비스 pilot 산출물",
+                              "type": "basic",
+                              "name": "Ul",
+                              "props": {
+                                "className": "rh-checklist"
+                              },
+                              "children": [
+                                {
+                                  "id": "raon_home_service_pilot_item1",
+                                  "comment": "서비스 pilot 산출물 1",
+                                  "type": "basic",
+                                  "name": "Li",
+                                  "text": "$t:raonslab-product.home.service_pilot_item1"
+                                },
+                                {
+                                  "id": "raon_home_service_pilot_item2",
+                                  "comment": "서비스 pilot 산출물 2",
+                                  "type": "basic",
+                                  "name": "Li",
+                                  "text": "$t:raonslab-product.home.service_pilot_item2"
+                                },
+                                {
+                                  "id": "raon_home_service_pilot_item3",
+                                  "comment": "서비스 pilot 산출물 3",
+                                  "type": "basic",
+                                  "name": "Li",
+                                  "text": "$t:raonslab-product.home.service_pilot_item3"
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "id": "raon_home_service_build",
+                          "comment": "서비스: build",
+                          "type": "basic",
+                          "name": "Li",
+                          "props": {
+                            "className": "rh-card rh-service"
+                          },
+                          "children": [
+                            {
+                              "id": "raon_home_service_build_step",
+                              "comment": "서비스 build 순번",
+                              "type": "basic",
+                              "name": "Span",
+                              "props": {
+                                "className": "rh-step",
+                                "aria-hidden": "true"
+                              },
+                              "text": "$t:raonslab-product.home.service_build_step"
+                            },
+                            {
+                              "id": "raon_home_service_build_title",
+                              "comment": "서비스 build 이름",
+                              "type": "basic",
+                              "name": "H3",
+                              "props": {
+                                "className": "rh-h3"
+                              },
+                              "text": "$t:raonslab-product.home.service_build_title"
+                            },
+                            {
+                              "id": "raon_home_service_build_copy",
+                              "comment": "서비스 build 설명",
+                              "type": "basic",
+                              "name": "P",
+                              "props": {
+                                "className": "rh-card-copy"
+                              },
+                              "text": "$t:raonslab-product.home.service_build_copy"
+                            },
+                            {
+                              "id": "raon_home_service_build_items",
+                              "comment": "서비스 build 산출물",
+                              "type": "basic",
+                              "name": "Ul",
+                              "props": {
+                                "className": "rh-checklist"
+                              },
+                              "children": [
+                                {
+                                  "id": "raon_home_service_build_item1",
+                                  "comment": "서비스 build 산출물 1",
+                                  "type": "basic",
+                                  "name": "Li",
+                                  "text": "$t:raonslab-product.home.service_build_item1"
+                                },
+                                {
+                                  "id": "raon_home_service_build_item2",
+                                  "comment": "서비스 build 산출물 2",
+                                  "type": "basic",
+                                  "name": "Li",
+                                  "text": "$t:raonslab-product.home.service_build_item2"
+                                },
+                                {
+                                  "id": "raon_home_service_build_item3",
+                                  "comment": "서비스 build 산출물 3",
+                                  "type": "basic",
+                                  "name": "Li",
+                                  "text": "$t:raonslab-product.home.service_build_item3"
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "id": "raon_home_service_operate",
+                          "comment": "서비스: operate",
+                          "type": "basic",
+                          "name": "Li",
+                          "props": {
+                            "className": "rh-card rh-service"
+                          },
+                          "children": [
+                            {
+                              "id": "raon_home_service_operate_step",
+                              "comment": "서비스 operate 순번",
+                              "type": "basic",
+                              "name": "Span",
+                              "props": {
+                                "className": "rh-step",
+                                "aria-hidden": "true"
+                              },
+                              "text": "$t:raonslab-product.home.service_operate_step"
+                            },
+                            {
+                              "id": "raon_home_service_operate_title",
+                              "comment": "서비스 operate 이름",
+                              "type": "basic",
+                              "name": "H3",
+                              "props": {
+                                "className": "rh-h3"
+                              },
+                              "text": "$t:raonslab-product.home.service_operate_title"
+                            },
+                            {
+                              "id": "raon_home_service_operate_copy",
+                              "comment": "서비스 operate 설명",
+                              "type": "basic",
+                              "name": "P",
+                              "props": {
+                                "className": "rh-card-copy"
+                              },
+                              "text": "$t:raonslab-product.home.service_operate_copy"
+                            },
+                            {
+                              "id": "raon_home_service_operate_items",
+                              "comment": "서비스 operate 산출물",
+                              "type": "basic",
+                              "name": "Ul",
+                              "props": {
+                                "className": "rh-checklist"
+                              },
+                              "children": [
+                                {
+                                  "id": "raon_home_service_operate_item1",
+                                  "comment": "서비스 operate 산출물 1",
+                                  "type": "basic",
+                                  "name": "Li",
+                                  "text": "$t:raonslab-product.home.service_operate_item1"
+                                },
+                                {
+                                  "id": "raon_home_service_operate_item2",
+                                  "comment": "서비스 operate 산출물 2",
+                                  "type": "basic",
+                                  "name": "Li",
+                                  "text": "$t:raonslab-product.home.service_operate_item2"
+                                },
+                                {
+                                  "id": "raon_home_service_operate_item3",
+                                  "comment": "서비스 operate 산출물 3",
+                                  "type": "basic",
+                                  "name": "Li",
+                                  "text": "$t:raonslab-product.home.service_operate_item3"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "raon_home_cases",
+              "comment": "구현 사례",
+              "type": "basic",
+              "name": "Div",
+              "props": {
+                "className": "rh-section",
+                "id": "rh-cases",
+                "role": "region",
+                "aria-labelledby": "rh-cases-title"
+              },
+              "children": [
+                {
+                  "id": "raon_home_cases_inner",
+                  "comment": "구현 사례 콘텐츠 폭",
+                  "type": "basic",
+                  "name": "Div",
+                  "props": {
+                    "className": "rh-shell"
+                  },
+                  "children": [
+                    {
+                      "id": "raon_home_cases_head",
+                      "comment": "구현 사례 머리글",
+                      "type": "basic",
+                      "name": "Div",
+                      "props": {
+                        "className": "rh-section-head"
+                      },
+                      "children": [
+                        {
+                          "id": "raon_home_cases_kicker",
+                          "comment": "구현 사례 라벨",
+                          "type": "basic",
+                          "name": "P",
+                          "props": {
+                            "className": "rh-kicker"
+                          },
+                          "text": "$t:raonslab-product.home.cases_kicker"
+                        },
+                        {
+                          "id": "raon_home_cases_title",
+                          "comment": "구현 사례 제목",
+                          "type": "basic",
+                          "name": "H2",
+                          "props": {
+                            "className": "rh-h2",
+                            "id": "rh-cases-title",
+                            "tabIndex": -1
+                          },
+                          "text": "$t:raonslab-product.home.cases_title"
+                        },
+                        {
+                          "id": "raon_home_cases_lede",
+                          "comment": "구현 사례 설명",
+                          "type": "basic",
+                          "name": "P",
+                          "props": {
+                            "className": "rh-section-lede"
+                          },
+                          "text": "$t:raonslab-product.home.cases_lede"
+                        }
+                      ]
+                    },
+                    {
+                      "id": "raon_home_cases_list",
+                      "comment": "사례 목록",
+                      "type": "basic",
+                      "name": "Ul",
+                      "props": {
+                        "className": "rh-cases"
+                      },
+                      "children": [
+                        {
+                          "id": "raon_home_case_stock",
+                          "comment": "MOBILE_STOCK 사례",
+                          "type": "basic",
+                          "name": "Li",
+                          "props": {
+                            "className": "rh-case",
+                            "aria-labelledby": "rh-case-stock-title"
+                          },
+                          "children": [
+                            {
+                              "id": "raon_home_case_stock_header",
+                              "comment": "MOBILE_STOCK 사례 머리글",
+                              "type": "basic",
+                              "name": "Div",
+                              "props": {
+                                "className": "rh-case-head"
+                              },
+                              "children": [
+                                {
+                                  "id": "raon_home_case_stock_badge",
+                                  "comment": "MOBILE_STOCK 사례 구분 표시",
+                                  "type": "basic",
+                                  "name": "Span",
+                                  "props": {
+                                    "className": "rh-badge"
+                                  },
+                                  "text": "$t:raonslab-product.home.case_badge"
+                                },
+                                {
+                                  "id": "raon_home_case_stock_title",
+                                  "comment": "MOBILE_STOCK 사례 제목",
+                                  "type": "basic",
+                                  "name": "H3",
+                                  "props": {
+                                    "className": "rh-h3 rh-case-title",
+                                    "id": "rh-case-stock-title"
+                                  },
+                                  "text": "$t:raonslab-product.home.case_stock_title"
+                                },
+                                {
+                                  "id": "raon_home_case_stock_summary",
+                                  "comment": "MOBILE_STOCK 사례 요약",
+                                  "type": "basic",
+                                  "name": "P",
+                                  "props": {
+                                    "className": "rh-card-copy"
+                                  },
+                                  "text": "$t:raonslab-product.home.case_stock_summary"
+                                }
+                              ]
+                            },
+                            {
+                              "id": "raon_home_case_stock_facts",
+                              "comment": "MOBILE_STOCK 사례 항목(문제/범위/흐름/검증/미검증/적용)",
+                              "type": "basic",
+                              "name": "Div",
+                              "props": {
+                                "className": "rh-case-facts"
+                              },
+                              "children": [
+                                {
+                                  "id": "raon_home_case_stock_problem",
+                                  "comment": "MOBILE_STOCK 사례 problem",
+                                  "type": "basic",
+                                  "name": "Div",
+                                  "props": {
+                                    "className": "rh-fact rh-fact-problem"
+                                  },
+                                  "children": [
+                                    {
+                                      "id": "raon_home_case_stock_problem_label",
+                                      "comment": "problem 라벨",
+                                      "type": "basic",
+                                      "name": "P",
+                                      "props": {
+                                        "className": "rh-fact-label"
+                                      },
+                                      "text": "$t:raonslab-product.home.case_label_problem"
+                                    },
+                                    {
+                                      "id": "raon_home_case_stock_problem_value",
+                                      "comment": "problem 내용",
+                                      "type": "basic",
+                                      "name": "P",
+                                      "props": {
+                                        "className": "rh-fact-value"
+                                      },
+                                      "text": "$t:raonslab-product.home.case_stock_problem"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "id": "raon_home_case_stock_scope",
+                                  "comment": "MOBILE_STOCK 사례 scope",
+                                  "type": "basic",
+                                  "name": "Div",
+                                  "props": {
+                                    "className": "rh-fact rh-fact-scope"
+                                  },
+                                  "children": [
+                                    {
+                                      "id": "raon_home_case_stock_scope_label",
+                                      "comment": "scope 라벨",
+                                      "type": "basic",
+                                      "name": "P",
+                                      "props": {
+                                        "className": "rh-fact-label"
+                                      },
+                                      "text": "$t:raonslab-product.home.case_label_scope"
+                                    },
+                                    {
+                                      "id": "raon_home_case_stock_scope_value",
+                                      "comment": "scope 내용",
+                                      "type": "basic",
+                                      "name": "P",
+                                      "props": {
+                                        "className": "rh-fact-value"
+                                      },
+                                      "text": "$t:raonslab-product.home.case_stock_scope"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "id": "raon_home_case_stock_flow",
+                                  "comment": "MOBILE_STOCK 사례 flow",
+                                  "type": "basic",
+                                  "name": "Div",
+                                  "props": {
+                                    "className": "rh-fact rh-fact-flow"
+                                  },
+                                  "children": [
+                                    {
+                                      "id": "raon_home_case_stock_flow_label",
+                                      "comment": "flow 라벨",
+                                      "type": "basic",
+                                      "name": "P",
+                                      "props": {
+                                        "className": "rh-fact-label"
+                                      },
+                                      "text": "$t:raonslab-product.home.case_label_flow"
+                                    },
+                                    {
+                                      "id": "raon_home_case_stock_flow_value",
+                                      "comment": "flow 내용",
+                                      "type": "basic",
+                                      "name": "P",
+                                      "props": {
+                                        "className": "rh-fact-value"
+                                      },
+                                      "text": "$t:raonslab-product.home.case_stock_flow"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "id": "raon_home_case_stock_verified",
+                                  "comment": "MOBILE_STOCK 사례 verified",
+                                  "type": "basic",
+                                  "name": "Div",
+                                  "props": {
+                                    "className": "rh-fact rh-fact-verified"
+                                  },
+                                  "children": [
+                                    {
+                                      "id": "raon_home_case_stock_verified_label",
+                                      "comment": "verified 라벨",
+                                      "type": "basic",
+                                      "name": "P",
+                                      "props": {
+                                        "className": "rh-fact-label"
+                                      },
+                                      "text": "$t:raonslab-product.home.case_label_verified"
+                                    },
+                                    {
+                                      "id": "raon_home_case_stock_verified_value",
+                                      "comment": "verified 내용",
+                                      "type": "basic",
+                                      "name": "P",
+                                      "props": {
+                                        "className": "rh-fact-value"
+                                      },
+                                      "text": "$t:raonslab-product.home.case_stock_verified"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "id": "raon_home_case_stock_unverified",
+                                  "comment": "MOBILE_STOCK 사례 unverified",
+                                  "type": "basic",
+                                  "name": "Div",
+                                  "props": {
+                                    "className": "rh-fact rh-fact-unverified"
+                                  },
+                                  "children": [
+                                    {
+                                      "id": "raon_home_case_stock_unverified_label",
+                                      "comment": "unverified 라벨",
+                                      "type": "basic",
+                                      "name": "P",
+                                      "props": {
+                                        "className": "rh-fact-label"
+                                      },
+                                      "text": "$t:raonslab-product.home.case_label_unverified"
+                                    },
+                                    {
+                                      "id": "raon_home_case_stock_unverified_value",
+                                      "comment": "unverified 내용",
+                                      "type": "basic",
+                                      "name": "P",
+                                      "props": {
+                                        "className": "rh-fact-value"
+                                      },
+                                      "text": "$t:raonslab-product.home.case_stock_unverified"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "id": "raon_home_case_stock_fit",
+                                  "comment": "MOBILE_STOCK 사례 fit",
+                                  "type": "basic",
+                                  "name": "Div",
+                                  "props": {
+                                    "className": "rh-fact rh-fact-fit"
+                                  },
+                                  "children": [
+                                    {
+                                      "id": "raon_home_case_stock_fit_label",
+                                      "comment": "fit 라벨",
+                                      "type": "basic",
+                                      "name": "P",
+                                      "props": {
+                                        "className": "rh-fact-label"
+                                      },
+                                      "text": "$t:raonslab-product.home.case_label_fit"
+                                    },
+                                    {
+                                      "id": "raon_home_case_stock_fit_value",
+                                      "comment": "fit 내용",
+                                      "type": "basic",
+                                      "name": "P",
+                                      "props": {
+                                        "className": "rh-fact-value"
+                                      },
+                                      "text": "$t:raonslab-product.home.case_stock_fit"
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "id": "raon_home_case_hub",
+                          "comment": "RAON Hub/GNUBOARD7 사례",
+                          "type": "basic",
+                          "name": "Li",
+                          "props": {
+                            "className": "rh-case",
+                            "aria-labelledby": "rh-case-hub-title"
+                          },
+                          "children": [
+                            {
+                              "id": "raon_home_case_hub_header",
+                              "comment": "RAON Hub/GNUBOARD7 사례 머리글",
+                              "type": "basic",
+                              "name": "Div",
+                              "props": {
+                                "className": "rh-case-head"
+                              },
+                              "children": [
+                                {
+                                  "id": "raon_home_case_hub_badge",
+                                  "comment": "RAON Hub/GNUBOARD7 사례 구분 표시",
+                                  "type": "basic",
+                                  "name": "Span",
+                                  "props": {
+                                    "className": "rh-badge"
+                                  },
+                                  "text": "$t:raonslab-product.home.case_badge"
+                                },
+                                {
+                                  "id": "raon_home_case_hub_title",
+                                  "comment": "RAON Hub/GNUBOARD7 사례 제목",
+                                  "type": "basic",
+                                  "name": "H3",
+                                  "props": {
+                                    "className": "rh-h3 rh-case-title",
+                                    "id": "rh-case-hub-title"
+                                  },
+                                  "text": "$t:raonslab-product.home.case_hub_title"
+                                },
+                                {
+                                  "id": "raon_home_case_hub_summary",
+                                  "comment": "RAON Hub/GNUBOARD7 사례 요약",
+                                  "type": "basic",
+                                  "name": "P",
+                                  "props": {
+                                    "className": "rh-card-copy"
+                                  },
+                                  "text": "$t:raonslab-product.home.case_hub_summary"
+                                }
+                              ]
+                            },
+                            {
+                              "id": "raon_home_case_hub_facts",
+                              "comment": "RAON Hub/GNUBOARD7 사례 항목(문제/범위/흐름/검증/미검증/적용)",
+                              "type": "basic",
+                              "name": "Div",
+                              "props": {
+                                "className": "rh-case-facts"
+                              },
+                              "children": [
+                                {
+                                  "id": "raon_home_case_hub_problem",
+                                  "comment": "RAON Hub/GNUBOARD7 사례 problem",
+                                  "type": "basic",
+                                  "name": "Div",
+                                  "props": {
+                                    "className": "rh-fact rh-fact-problem"
+                                  },
+                                  "children": [
+                                    {
+                                      "id": "raon_home_case_hub_problem_label",
+                                      "comment": "problem 라벨",
+                                      "type": "basic",
+                                      "name": "P",
+                                      "props": {
+                                        "className": "rh-fact-label"
+                                      },
+                                      "text": "$t:raonslab-product.home.case_label_problem"
+                                    },
+                                    {
+                                      "id": "raon_home_case_hub_problem_value",
+                                      "comment": "problem 내용",
+                                      "type": "basic",
+                                      "name": "P",
+                                      "props": {
+                                        "className": "rh-fact-value"
+                                      },
+                                      "text": "$t:raonslab-product.home.case_hub_problem"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "id": "raon_home_case_hub_scope",
+                                  "comment": "RAON Hub/GNUBOARD7 사례 scope",
+                                  "type": "basic",
+                                  "name": "Div",
+                                  "props": {
+                                    "className": "rh-fact rh-fact-scope"
+                                  },
+                                  "children": [
+                                    {
+                                      "id": "raon_home_case_hub_scope_label",
+                                      "comment": "scope 라벨",
+                                      "type": "basic",
+                                      "name": "P",
+                                      "props": {
+                                        "className": "rh-fact-label"
+                                      },
+                                      "text": "$t:raonslab-product.home.case_label_scope"
+                                    },
+                                    {
+                                      "id": "raon_home_case_hub_scope_value",
+                                      "comment": "scope 내용",
+                                      "type": "basic",
+                                      "name": "P",
+                                      "props": {
+                                        "className": "rh-fact-value"
+                                      },
+                                      "text": "$t:raonslab-product.home.case_hub_scope"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "id": "raon_home_case_hub_flow",
+                                  "comment": "RAON Hub/GNUBOARD7 사례 flow",
+                                  "type": "basic",
+                                  "name": "Div",
+                                  "props": {
+                                    "className": "rh-fact rh-fact-flow"
+                                  },
+                                  "children": [
+                                    {
+                                      "id": "raon_home_case_hub_flow_label",
+                                      "comment": "flow 라벨",
+                                      "type": "basic",
+                                      "name": "P",
+                                      "props": {
+                                        "className": "rh-fact-label"
+                                      },
+                                      "text": "$t:raonslab-product.home.case_label_flow"
+                                    },
+                                    {
+                                      "id": "raon_home_case_hub_flow_value",
+                                      "comment": "flow 내용",
+                                      "type": "basic",
+                                      "name": "P",
+                                      "props": {
+                                        "className": "rh-fact-value"
+                                      },
+                                      "text": "$t:raonslab-product.home.case_hub_flow"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "id": "raon_home_case_hub_verified",
+                                  "comment": "RAON Hub/GNUBOARD7 사례 verified",
+                                  "type": "basic",
+                                  "name": "Div",
+                                  "props": {
+                                    "className": "rh-fact rh-fact-verified"
+                                  },
+                                  "children": [
+                                    {
+                                      "id": "raon_home_case_hub_verified_label",
+                                      "comment": "verified 라벨",
+                                      "type": "basic",
+                                      "name": "P",
+                                      "props": {
+                                        "className": "rh-fact-label"
+                                      },
+                                      "text": "$t:raonslab-product.home.case_label_verified"
+                                    },
+                                    {
+                                      "id": "raon_home_case_hub_verified_value",
+                                      "comment": "verified 내용",
+                                      "type": "basic",
+                                      "name": "P",
+                                      "props": {
+                                        "className": "rh-fact-value"
+                                      },
+                                      "text": "$t:raonslab-product.home.case_hub_verified"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "id": "raon_home_case_hub_unverified",
+                                  "comment": "RAON Hub/GNUBOARD7 사례 unverified",
+                                  "type": "basic",
+                                  "name": "Div",
+                                  "props": {
+                                    "className": "rh-fact rh-fact-unverified"
+                                  },
+                                  "children": [
+                                    {
+                                      "id": "raon_home_case_hub_unverified_label",
+                                      "comment": "unverified 라벨",
+                                      "type": "basic",
+                                      "name": "P",
+                                      "props": {
+                                        "className": "rh-fact-label"
+                                      },
+                                      "text": "$t:raonslab-product.home.case_label_unverified"
+                                    },
+                                    {
+                                      "id": "raon_home_case_hub_unverified_value",
+                                      "comment": "unverified 내용",
+                                      "type": "basic",
+                                      "name": "P",
+                                      "props": {
+                                        "className": "rh-fact-value"
+                                      },
+                                      "text": "$t:raonslab-product.home.case_hub_unverified"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "id": "raon_home_case_hub_fit",
+                                  "comment": "RAON Hub/GNUBOARD7 사례 fit",
+                                  "type": "basic",
+                                  "name": "Div",
+                                  "props": {
+                                    "className": "rh-fact rh-fact-fit"
+                                  },
+                                  "children": [
+                                    {
+                                      "id": "raon_home_case_hub_fit_label",
+                                      "comment": "fit 라벨",
+                                      "type": "basic",
+                                      "name": "P",
+                                      "props": {
+                                        "className": "rh-fact-label"
+                                      },
+                                      "text": "$t:raonslab-product.home.case_label_fit"
+                                    },
+                                    {
+                                      "id": "raon_home_case_hub_fit_value",
+                                      "comment": "fit 내용",
+                                      "type": "basic",
+                                      "name": "P",
+                                      "props": {
+                                        "className": "rh-fact-value"
+                                      },
+                                      "text": "$t:raonslab-product.home.case_hub_fit"
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "raon_home_process",
+              "comment": "도입 절차",
+              "type": "basic",
+              "name": "Div",
+              "props": {
+                "className": "rh-section",
+                "id": "rh-process",
+                "role": "region",
+                "aria-labelledby": "rh-process-title"
+              },
+              "children": [
+                {
+                  "id": "raon_home_process_inner",
+                  "comment": "도입 절차 콘텐츠 폭",
+                  "type": "basic",
+                  "name": "Div",
+                  "props": {
+                    "className": "rh-shell"
+                  },
+                  "children": [
+                    {
+                      "id": "raon_home_process_head",
+                      "comment": "도입 절차 머리글",
+                      "type": "basic",
+                      "name": "Div",
+                      "props": {
+                        "className": "rh-section-head"
+                      },
+                      "children": [
+                        {
+                          "id": "raon_home_process_kicker",
+                          "comment": "도입 절차 라벨",
+                          "type": "basic",
+                          "name": "P",
+                          "props": {
+                            "className": "rh-kicker"
+                          },
+                          "text": "$t:raonslab-product.home.process_kicker"
+                        },
+                        {
+                          "id": "raon_home_process_title",
+                          "comment": "도입 절차 제목",
+                          "type": "basic",
+                          "name": "H2",
+                          "props": {
+                            "className": "rh-h2",
+                            "id": "rh-process-title",
+                            "tabIndex": -1
+                          },
+                          "text": "$t:raonslab-product.home.process_title"
+                        }
+                      ]
+                    },
+                    {
+                      "id": "raon_home_process_list",
+                      "comment": "도입 단계",
+                      "type": "basic",
+                      "name": "Ul",
+                      "props": {
+                        "className": "rh-process"
+                      },
+                      "children": [
+                        {
+                          "id": "raon_home_process_step1",
+                          "comment": "도입 1단계",
+                          "type": "basic",
+                          "name": "Li",
+                          "props": {
+                            "className": "rh-process-step"
+                          },
+                          "children": [
+                            {
+                              "id": "raon_home_process_step1_body",
+                              "comment": "1단계 내용",
+                              "type": "basic",
+                              "name": "Div",
+                              "props": {
+                                "className": "rh-process-body"
+                              },
+                              "children": [
+                                {
+                                  "id": "raon_home_process_step1_title",
+                                  "comment": "1단계 제목",
+                                  "type": "basic",
+                                  "name": "H3",
+                                  "props": {
+                                    "className": "rh-h3"
+                                  },
+                                  "text": "$t:raonslab-product.home.process_step1_title"
+                                },
+                                {
+                                  "id": "raon_home_process_step1_copy",
+                                  "comment": "1단계 설명",
+                                  "type": "basic",
+                                  "name": "P",
+                                  "props": {
+                                    "className": "rh-card-copy"
+                                  },
+                                  "text": "$t:raonslab-product.home.process_step1_copy"
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "id": "raon_home_process_step2",
+                          "comment": "도입 2단계",
+                          "type": "basic",
+                          "name": "Li",
+                          "props": {
+                            "className": "rh-process-step"
+                          },
+                          "children": [
+                            {
+                              "id": "raon_home_process_step2_body",
+                              "comment": "2단계 내용",
+                              "type": "basic",
+                              "name": "Div",
+                              "props": {
+                                "className": "rh-process-body"
+                              },
+                              "children": [
+                                {
+                                  "id": "raon_home_process_step2_title",
+                                  "comment": "2단계 제목",
+                                  "type": "basic",
+                                  "name": "H3",
+                                  "props": {
+                                    "className": "rh-h3"
+                                  },
+                                  "text": "$t:raonslab-product.home.process_step2_title"
+                                },
+                                {
+                                  "id": "raon_home_process_step2_copy",
+                                  "comment": "2단계 설명",
+                                  "type": "basic",
+                                  "name": "P",
+                                  "props": {
+                                    "className": "rh-card-copy"
+                                  },
+                                  "text": "$t:raonslab-product.home.process_step2_copy"
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "id": "raon_home_process_step3",
+                          "comment": "도입 3단계",
+                          "type": "basic",
+                          "name": "Li",
+                          "props": {
+                            "className": "rh-process-step"
+                          },
+                          "children": [
+                            {
+                              "id": "raon_home_process_step3_body",
+                              "comment": "3단계 내용",
+                              "type": "basic",
+                              "name": "Div",
+                              "props": {
+                                "className": "rh-process-body"
+                              },
+                              "children": [
+                                {
+                                  "id": "raon_home_process_step3_title",
+                                  "comment": "3단계 제목",
+                                  "type": "basic",
+                                  "name": "H3",
+                                  "props": {
+                                    "className": "rh-h3"
+                                  },
+                                  "text": "$t:raonslab-product.home.process_step3_title"
+                                },
+                                {
+                                  "id": "raon_home_process_step3_copy",
+                                  "comment": "3단계 설명",
+                                  "type": "basic",
+                                  "name": "P",
+                                  "props": {
+                                    "className": "rh-card-copy"
+                                  },
+                                  "text": "$t:raonslab-product.home.process_step3_copy"
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "id": "raon_home_process_step4",
+                          "comment": "도입 4단계",
+                          "type": "basic",
+                          "name": "Li",
+                          "props": {
+                            "className": "rh-process-step"
+                          },
+                          "children": [
+                            {
+                              "id": "raon_home_process_step4_body",
+                              "comment": "4단계 내용",
+                              "type": "basic",
+                              "name": "Div",
+                              "props": {
+                                "className": "rh-process-body"
+                              },
+                              "children": [
+                                {
+                                  "id": "raon_home_process_step4_title",
+                                  "comment": "4단계 제목",
+                                  "type": "basic",
+                                  "name": "H3",
+                                  "props": {
+                                    "className": "rh-h3"
+                                  },
+                                  "text": "$t:raonslab-product.home.process_step4_title"
+                                },
+                                {
+                                  "id": "raon_home_process_step4_copy",
+                                  "comment": "4단계 설명",
+                                  "type": "basic",
+                                  "name": "P",
+                                  "props": {
+                                    "className": "rh-card-copy"
+                                  },
+                                  "text": "$t:raonslab-product.home.process_step4_copy"
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "id": "raon_home_process_step5",
+                          "comment": "도입 5단계",
+                          "type": "basic",
+                          "name": "Li",
+                          "props": {
+                            "className": "rh-process-step"
+                          },
+                          "children": [
+                            {
+                              "id": "raon_home_process_step5_body",
+                              "comment": "5단계 내용",
+                              "type": "basic",
+                              "name": "Div",
+                              "props": {
+                                "className": "rh-process-body"
+                              },
+                              "children": [
+                                {
+                                  "id": "raon_home_process_step5_title",
+                                  "comment": "5단계 제목",
+                                  "type": "basic",
+                                  "name": "H3",
+                                  "props": {
+                                    "className": "rh-h3"
+                                  },
+                                  "text": "$t:raonslab-product.home.process_step5_title"
+                                },
+                                {
+                                  "id": "raon_home_process_step5_copy",
+                                  "comment": "5단계 설명",
+                                  "type": "basic",
+                                  "name": "P",
+                                  "props": {
+                                    "className": "rh-card-copy"
+                                  },
+                                  "text": "$t:raonslab-product.home.process_step5_copy"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "raon_home_tech",
+              "comment": "기술·검증 원칙",
+              "type": "basic",
+              "name": "Div",
+              "props": {
+                "className": "rh-section",
+                "id": "rh-tech",
+                "role": "region",
+                "aria-labelledby": "rh-tech-title"
+              },
+              "children": [
+                {
+                  "id": "raon_home_tech_inner",
+                  "comment": "기술·검증 원칙 콘텐츠 폭",
+                  "type": "basic",
+                  "name": "Div",
+                  "props": {
+                    "className": "rh-shell"
+                  },
+                  "children": [
+                    {
+                      "id": "raon_home_tech_head",
+                      "comment": "기술·검증 원칙 머리글",
+                      "type": "basic",
+                      "name": "Div",
+                      "props": {
+                        "className": "rh-section-head"
+                      },
+                      "children": [
+                        {
+                          "id": "raon_home_tech_kicker",
+                          "comment": "기술·검증 원칙 라벨",
+                          "type": "basic",
+                          "name": "P",
+                          "props": {
+                            "className": "rh-kicker"
+                          },
+                          "text": "$t:raonslab-product.home.tech_kicker"
+                        },
+                        {
+                          "id": "raon_home_tech_title",
+                          "comment": "기술·검증 원칙 제목",
+                          "type": "basic",
+                          "name": "H2",
+                          "props": {
+                            "className": "rh-h2",
+                            "id": "rh-tech-title",
+                            "tabIndex": -1
+                          },
+                          "text": "$t:raonslab-product.home.tech_title"
+                        },
+                        {
+                          "id": "raon_home_tech_lede",
+                          "comment": "기술·검증 원칙 설명",
+                          "type": "basic",
+                          "name": "P",
+                          "props": {
+                            "className": "rh-section-lede"
+                          },
+                          "text": "$t:raonslab-product.home.tech_lede"
+                        }
+                      ]
+                    },
+                    {
+                      "id": "raon_home_tech_list",
+                      "comment": "원칙 목록",
+                      "type": "basic",
+                      "name": "Ul",
+                      "props": {
+                        "className": "rh-grid rh-grid-tech"
+                      },
+                      "children": [
+                        {
+                          "id": "raon_home_tech_connect",
+                          "comment": "원칙: connect",
+                          "type": "basic",
+                          "name": "Li",
+                          "props": {
+                            "className": "rh-card rh-principle"
+                          },
+                          "children": [
+                            {
+                              "id": "raon_home_tech_connect_title",
+                              "comment": "원칙 connect 제목",
+                              "type": "basic",
+                              "name": "H3",
+                              "props": {
+                                "className": "rh-h3"
+                              },
+                              "text": "$t:raonslab-product.home.tech_connect_title"
+                            },
+                            {
+                              "id": "raon_home_tech_connect_copy",
+                              "comment": "원칙 connect 설명",
+                              "type": "basic",
+                              "name": "P",
+                              "props": {
+                                "className": "rh-card-copy"
+                              },
+                              "text": "$t:raonslab-product.home.tech_connect_copy"
+                            }
+                          ]
+                        },
+                        {
+                          "id": "raon_home_tech_permission",
+                          "comment": "원칙: permission",
+                          "type": "basic",
+                          "name": "Li",
+                          "props": {
+                            "className": "rh-card rh-principle"
+                          },
+                          "children": [
+                            {
+                              "id": "raon_home_tech_permission_title",
+                              "comment": "원칙 permission 제목",
+                              "type": "basic",
+                              "name": "H3",
+                              "props": {
+                                "className": "rh-h3"
+                              },
+                              "text": "$t:raonslab-product.home.tech_permission_title"
+                            },
+                            {
+                              "id": "raon_home_tech_permission_copy",
+                              "comment": "원칙 permission 설명",
+                              "type": "basic",
+                              "name": "P",
+                              "props": {
+                                "className": "rh-card-copy"
+                              },
+                              "text": "$t:raonslab-product.home.tech_permission_copy"
+                            }
+                          ]
+                        },
+                        {
+                          "id": "raon_home_tech_observe",
+                          "comment": "원칙: observe",
+                          "type": "basic",
+                          "name": "Li",
+                          "props": {
+                            "className": "rh-card rh-principle"
+                          },
+                          "children": [
+                            {
+                              "id": "raon_home_tech_observe_title",
+                              "comment": "원칙 observe 제목",
+                              "type": "basic",
+                              "name": "H3",
+                              "props": {
+                                "className": "rh-h3"
+                              },
+                              "text": "$t:raonslab-product.home.tech_observe_title"
+                            },
+                            {
+                              "id": "raon_home_tech_observe_copy",
+                              "comment": "원칙 observe 설명",
+                              "type": "basic",
+                              "name": "P",
+                              "props": {
+                                "className": "rh-card-copy"
+                              },
+                              "text": "$t:raonslab-product.home.tech_observe_copy"
+                            }
+                          ]
+                        },
+                        {
+                          "id": "raon_home_tech_verify",
+                          "comment": "원칙: verify",
+                          "type": "basic",
+                          "name": "Li",
+                          "props": {
+                            "className": "rh-card rh-principle"
+                          },
+                          "children": [
+                            {
+                              "id": "raon_home_tech_verify_title",
+                              "comment": "원칙 verify 제목",
+                              "type": "basic",
+                              "name": "H3",
+                              "props": {
+                                "className": "rh-h3"
+                              },
+                              "text": "$t:raonslab-product.home.tech_verify_title"
+                            },
+                            {
+                              "id": "raon_home_tech_verify_copy",
+                              "comment": "원칙 verify 설명",
+                              "type": "basic",
+                              "name": "P",
+                              "props": {
+                                "className": "rh-card-copy"
+                              },
+                              "text": "$t:raonslab-product.home.tech_verify_copy"
+                            }
+                          ]
+                        },
+                        {
+                          "id": "raon_home_tech_report",
+                          "comment": "원칙: report",
+                          "type": "basic",
+                          "name": "Li",
+                          "props": {
+                            "className": "rh-card rh-principle"
+                          },
+                          "children": [
+                            {
+                              "id": "raon_home_tech_report_title",
+                              "comment": "원칙 report 제목",
+                              "type": "basic",
+                              "name": "H3",
+                              "props": {
+                                "className": "rh-h3"
+                              },
+                              "text": "$t:raonslab-product.home.tech_report_title"
+                            },
+                            {
+                              "id": "raon_home_tech_report_copy",
+                              "comment": "원칙 report 설명",
+                              "type": "basic",
+                              "name": "P",
+                              "props": {
+                                "className": "rh-card-copy"
+                              },
+                              "text": "$t:raonslab-product.home.tech_report_copy"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "raon_home_consult",
+              "comment": "구축 상담",
+              "type": "basic",
+              "name": "Div",
+              "props": {
+                "className": "rh-section rh-section-consult",
+                "id": "rh-consult",
+                "role": "region",
+                "aria-labelledby": "rh-consult-title"
+              },
+              "children": [
+                {
+                  "id": "raon_home_consult_inner",
+                  "comment": "구축 상담 콘텐츠 폭",
+                  "type": "basic",
+                  "name": "Div",
+                  "props": {
+                    "className": "rh-shell"
+                  },
+                  "children": [
+                    {
+                      "id": "raon_home_consult_grid",
+                      "comment": "상담 안내와 양식 배치",
+                      "type": "basic",
+                      "name": "Div",
+                      "props": {
+                        "className": "rh-consult-grid"
+                      },
+                      "children": [
+                        {
+                          "id": "raon_home_consult_intro",
+                          "comment": "상담 안내",
+                          "type": "basic",
+                          "name": "Div",
+                          "props": {
+                            "className": "rh-consult-intro"
+                          },
+                          "children": [
+                            {
+                              "id": "raon_home_consult_head",
+                              "comment": "구축 상담 머리글",
+                              "type": "basic",
+                              "name": "Div",
+                              "props": {
+                                "className": "rh-section-head"
+                              },
+                              "children": [
+                                {
+                                  "id": "raon_home_consult_kicker",
+                                  "comment": "구축 상담 라벨",
+                                  "type": "basic",
+                                  "name": "P",
+                                  "props": {
+                                    "className": "rh-kicker"
+                                  },
+                                  "text": "$t:raonslab-product.home.consult_kicker"
+                                },
+                                {
+                                  "id": "raon_home_consult_title",
+                                  "comment": "구축 상담 제목",
+                                  "type": "basic",
+                                  "name": "H2",
+                                  "props": {
+                                    "className": "rh-h2",
+                                    "id": "rh-consult-title",
+                                    "tabIndex": -1
+                                  },
+                                  "text": "$t:raonslab-product.home.consult_title"
+                                },
+                                {
+                                  "id": "raon_home_consult_lede",
+                                  "comment": "구축 상담 설명",
+                                  "type": "basic",
+                                  "name": "P",
+                                  "props": {
+                                    "className": "rh-section-lede"
+                                  },
+                                  "text": "$t:raonslab-product.home.consult_lede"
+                                }
+                              ]
+                            },
+                            {
+                              "id": "raon_home_consult_prepare_title",
+                              "comment": "준비 내용 제목",
+                              "type": "basic",
+                              "name": "H3",
+                              "props": {
+                                "className": "rh-h3"
+                              },
+                              "text": "$t:raonslab-product.home.consult_prepare_title"
+                            },
+                            {
+                              "id": "raon_home_consult_prepare",
+                              "comment": "준비 내용 목록",
+                              "type": "basic",
+                              "name": "Ul",
+                              "props": {
+                                "className": "rh-checklist"
+                              },
+                              "children": [
+                                {
+                                  "id": "raon_home_consult_prepare1",
+                                  "comment": "준비 내용 1",
+                                  "type": "basic",
+                                  "name": "Li",
+                                  "text": "$t:raonslab-product.home.consult_prepare1"
+                                },
+                                {
+                                  "id": "raon_home_consult_prepare2",
+                                  "comment": "준비 내용 2",
+                                  "type": "basic",
+                                  "name": "Li",
+                                  "text": "$t:raonslab-product.home.consult_prepare2"
+                                },
+                                {
+                                  "id": "raon_home_consult_prepare3",
+                                  "comment": "준비 내용 3",
+                                  "type": "basic",
+                                  "name": "Li",
+                                  "text": "$t:raonslab-product.home.consult_prepare3"
+                                }
+                              ]
+                            },
+                            {
+                              "id": "raon_home_consult_account_note",
+                              "comment": "가입과 AI 권한 구분 안내",
+                              "type": "basic",
+                              "name": "P",
+                              "props": {
+                                "className": "rh-note"
+                              },
+                              "text": "$t:raonslab-product.home.consult_account_note"
+                            }
+                          ]
+                        },
+                        {
+                          "id": "raon_home_consult_form_host",
+                          "comment": "상담 양식 호스트 — 양식 상태는 모듈 전역 에셋이 담당",
+                          "type": "basic",
+                          "name": "Div",
+                          "props": {
+                            "className": "rh-consult-panel",
+                            "data-rh-consult": "true",
+                            "aria-live": "polite"
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "raon_home_more",
+              "comment": "보조 이동(커뮤니티·공지·Q&A·검색)",
+              "type": "basic",
+              "name": "Div",
+              "props": {
+                "className": "rh-more"
+              },
+              "children": [
+                {
+                  "id": "raon_home_more_inner",
+                  "comment": "보조 이동 콘텐츠 폭",
+                  "type": "basic",
+                  "name": "Div",
+                  "props": {
+                    "className": "rh-shell rh-more-inner"
+                  },
+                  "children": [
+                    {
+                      "id": "raon_home_more_label",
+                      "comment": "보조 이동 제목",
+                      "type": "basic",
+                      "name": "P",
+                      "props": {
+                        "className": "rh-more-label"
+                      },
+                      "text": "$t:raonslab-product.home.more_label"
+                    },
+                    {
+                      "id": "raon_home_more_links",
+                      "comment": "보조 이동 목록",
+                      "type": "basic",
+                      "name": "Div",
+                      "props": {
+                        "className": "rh-more-links"
+                      },
+                      "children": [
+                        {
+                          "id": "raon_home_more_community",
+                          "comment": "커뮤니티 게시판 이동",
+                          "type": "basic",
+                          "name": "Button",
+                          "props": {
+                            "className": "rh-more-link",
+                            "type": "button"
+                          },
+                          "actions": [
+                            {
+                              "type": "click",
+                              "handler": "navigate",
+                              "params": {
+                                "path": "/board/community"
+                              }
+                            }
+                          ],
+                          "text": "$t:raonslab-product.home.more_community"
+                        },
+                        {
+                          "id": "raon_home_more_notice",
+                          "comment": "공지사항 이동",
+                          "type": "basic",
+                          "name": "Button",
+                          "props": {
+                            "className": "rh-more-link",
+                            "type": "button"
+                          },
+                          "actions": [
+                            {
+                              "type": "click",
+                              "handler": "navigate",
+                              "params": {
+                                "path": "/board/notice"
+                              }
+                            }
+                          ],
+                          "text": "$t:raonslab-product.home.more_notice"
+                        },
+                        {
+                          "id": "raon_home_more_questions",
+                          "comment": "질문과 답변 이동",
+                          "type": "basic",
+                          "name": "Button",
+                          "props": {
+                            "className": "rh-more-link",
+                            "type": "button"
+                          },
+                          "actions": [
+                            {
+                              "type": "click",
+                              "handler": "navigate",
+                              "params": {
+                                "path": "/board/questions"
+                              }
+                            }
+                          ],
+                          "text": "$t:raonslab-product.home.more_questions"
+                        },
+                        {
+                          "id": "raon_home_more_search",
+                          "comment": "통합 검색 이동",
+                          "type": "basic",
+                          "name": "Button",
+                          "props": {
+                            "className": "rh-more-link",
+                            "type": "button"
+                          },
+                          "actions": [
+                            {
+                              "type": "click",
+                              "handler": "navigate",
+                              "params": {
+                                "path": "/search"
+                              }
+                            }
+                          ],
+                          "text": "$t:raonslab-product.home.more_search"
+                        },
+                        {
+                          "id": "raon_home_more_ai",
+                          "comment": "로그인 사용자의 AI 작업공간 이동(권한은 작업공간이 판정)",
+                          "type": "basic",
+                          "name": "Button",
+                          "props": {
+                            "className": "rh-more-link",
+                            "type": "button"
+                          },
+                          "actions": [
+                            {
+                              "type": "click",
+                              "handler": "navigate",
+                              "params": {
+                                "path": "/ai"
+                              }
+                            }
+                          ],
+                          "if": "{{_global.currentUser?.uuid}}",
+                          "text": "$t:raonslab-product.home.more_ai"
+                        }
                       ]
                     }
                   ]

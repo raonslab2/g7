@@ -1,5 +1,7 @@
 import '../css/main.css';
 import { shouldApplyDarkDefault } from './theme';
+import { syncConsultationIslands } from './consultationForm';
+import { installHomePage, syncHomePage } from './homePage';
 
 const COLOR_SCHEME_KEY = 'g7_color_scheme';
 
@@ -46,8 +48,25 @@ function removeTemplateAttribution(): void {
   });
 }
 
-const observer = new MutationObserver(removeTemplateAttribution);
+let homeSyncQueued = false;
+
+/** 홈 문서 메타·상담 양식을 DOM 변화 직후 한 번만 동기화합니다. */
+function queueHomeSync(): void {
+  if (homeSyncQueued) return;
+  homeSyncQueued = true;
+  window.requestAnimationFrame(() => {
+    homeSyncQueued = false;
+    syncHomePage();
+    syncConsultationIslands();
+  });
+}
+
+const observer = new MutationObserver(() => {
+  removeTemplateAttribution();
+  queueHomeSync();
+});
 observer.observe(document.documentElement, { childList: true, subtree: true });
+installHomePage();
 
 if (document.readyState === 'loading') {
   window.addEventListener('DOMContentLoaded', markProductRuntime, { once: true });
@@ -56,3 +75,4 @@ if (document.readyState === 'loading') {
 }
 
 removeTemplateAttribution();
+queueHomeSync();
