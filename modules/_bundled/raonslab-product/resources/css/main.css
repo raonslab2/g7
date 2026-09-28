@@ -416,16 +416,6 @@ html[data-rh-intake='open'] [data-rh-intake-show='closed'] {
   word-break: keep-all;
 }
 
-.rh-step {
-  display: block;
-  margin-bottom: .6rem;
-  color: var(--rh-accent);
-  font-size: .8rem;
-  font-variant-numeric: tabular-nums;
-  font-weight: 700;
-  letter-spacing: .04em;
-}
-
 .rh-checklist {
   display: grid;
   gap: .45rem;
@@ -448,6 +438,138 @@ html[data-rh-intake='open'] [data-rh-intake-show='closed'] {
   height: 1px;
   background: var(--rh-accent);
   content: '';
+}
+
+/* RAON Hub 증거 줄: 카드가 아니라 구분선으로 나눈 한 줄 영수증 */
+.rh-proof {
+  padding: 2.75rem 0;
+}
+
+.rh-proof .rh-section-head {
+  margin-bottom: 1.25rem;
+}
+
+.rh-proof-strip {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  border-top: 2px solid var(--rh-ok);
+  border-bottom: 1px solid var(--rh-border);
+}
+
+.rh-proof-item {
+  display: grid;
+  align-content: start;
+  gap: .35rem;
+  border-left: 1px solid var(--rh-border);
+  padding: 1rem 1.25rem 1.1rem;
+}
+
+.rh-proof-item:first-child {
+  border-left: 0;
+  padding-left: 0;
+}
+
+.rh-proof-label {
+  color: var(--rh-muted);
+  font-size: .8rem;
+  font-weight: 700;
+}
+
+.rh-proof-value {
+  color: var(--rh-text);
+  font-size: .98rem;
+  font-weight: 600;
+  line-height: 1.5;
+  word-break: keep-all;
+}
+
+.rh-proof-item-scope .rh-proof-value {
+  color: var(--rh-text-soft);
+  font-weight: 500;
+}
+
+.rh-text-link {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  margin-top: .5rem;
+  color: var(--rh-accent);
+  font-weight: 650;
+  text-decoration: underline;
+  text-underline-offset: .22em;
+}
+
+.rh-text-link:hover {
+  color: var(--rh-text);
+}
+
+/* 구매 범위: 3행 비교(행 제목 | 입력 | 결과물 | 고객 준비) */
+.rh-offers {
+  display: grid;
+  border-top: 1px solid var(--rh-border-strong);
+}
+
+.rh-offer {
+  display: grid;
+  grid-template-columns: minmax(0, .8fr) repeat(3, minmax(0, 1fr));
+  align-items: start;
+  gap: 1.25rem;
+  border-bottom: 1px solid var(--rh-border);
+  padding: 1.1rem 0;
+}
+
+.rh-offer-title {
+  color: var(--rh-text);
+  font-size: 1.08rem;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.rh-offer-fact {
+  display: grid;
+  gap: .2rem;
+}
+
+.rh-offer-label {
+  color: var(--rh-muted);
+  font-size: .78rem;
+  font-weight: 700;
+}
+
+.rh-offer-value {
+  color: var(--rh-text-soft);
+  font-size: .95rem;
+  line-height: 1.5;
+  word-break: keep-all;
+}
+
+@media (max-width: 960px) {
+  .rh-proof-strip {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .rh-proof-item {
+    grid-template-columns: 5.5rem minmax(0, 1fr);
+    gap: .75rem;
+    border-top: 1px solid var(--rh-border);
+    border-left: 0;
+    padding: .7rem 0;
+  }
+
+  .rh-proof-item:first-child {
+    border-top: 0;
+  }
+
+  .rh-offer {
+    grid-template-columns: minmax(0, 1fr);
+    gap: .35rem;
+    padding: 1rem 0;
+  }
+
+  .rh-offer-fact {
+    grid-template-columns: 5.5rem minmax(0, 1fr);
+    gap: .75rem;
+  }
 }
 
 /* 아이콘 타일(문제·기술 원칙·근거 레인 공통) */
@@ -491,127 +613,6 @@ html[data-rh-intake='open'] [data-rh-intake-show='closed'] {
   border-radius: .6rem;
   color: var(--rh-warn);
   font-size: .95rem;
-}
-
-/* 서비스: 실증 → 구축 → 운영으로 이어지는 단계 트랙 */
-.rh-track {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-}
-
-.rh-stage {
-  display: flex;
-  min-width: 0;
-  flex-direction: column;
-}
-
-.rh-stage-rail {
-  display: flex;
-  align-items: center;
-  gap: .75rem;
-  margin-bottom: 1.25rem;
-  padding-right: .75rem;
-}
-
-.rh-stage-node {
-  display: inline-flex;
-  flex: 0 0 auto;
-  width: 3rem;
-  height: 3rem;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid var(--rh-border-strong);
-  border-radius: 50%;
-  color: var(--rh-accent);
-  background: var(--rh-surface);
-  font-size: 1.05rem;
-}
-
-.rh-stage-line {
-  position: relative;
-  flex: 1 1 auto;
-  height: 1px;
-  background: var(--rh-border-strong);
-}
-
-/* 다음 단계를 가리키는 화살촉 */
-.rh-stage-line::after {
-  position: absolute;
-  top: -3px;
-  right: 0;
-  width: 7px;
-  height: 7px;
-  border-top: 1px solid var(--rh-border-strong);
-  border-right: 1px solid var(--rh-border-strong);
-  transform: rotate(45deg);
-  content: '';
-}
-
-/* 운영 단계는 끝나지 않고 이어진다: 점선, 화살촉 없음 */
-.rh-stage-operate .rh-stage-line {
-  height: 0;
-  border-top: 1px dashed var(--rh-border-strong);
-  background: none;
-}
-
-.rh-stage-operate .rh-stage-line::after {
-  display: none;
-}
-
-.rh-stage-body {
-  display: flex;
-  flex: 1 1 auto;
-  min-width: 0;
-  flex-direction: column;
-  margin-right: 1rem;
-  border: 1px solid var(--rh-border);
-  border-radius: .85rem;
-  padding: 1.4rem;
-  background: var(--rh-surface);
-  box-shadow: var(--rh-shadow);
-}
-
-.rh-stage:last-child .rh-stage-body {
-  margin-right: 0;
-}
-
-.rh-stage-pilot .rh-stage-body {
-  border-style: dashed;
-  border-color: var(--rh-border-strong);
-  background: transparent;
-  box-shadow: none;
-}
-
-.rh-stage-operate .rh-stage-body {
-  border-color: var(--rh-border-strong);
-  background: var(--rh-surface-2);
-}
-
-.rh-stage-operate .rh-stage-node {
-  border-color: var(--rh-primary-bg);
-  color: var(--rh-primary-fg);
-  background: var(--rh-primary-bg);
-}
-
-/* 범위가 넓어지는 정도(장식) */
-.rh-scope {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: .25rem;
-  margin-top: auto;
-  padding-top: 1.35rem;
-}
-
-.rh-scope-seg {
-  height: .25rem;
-  border-radius: 999px;
-  background: var(--rh-border);
-}
-
-.rh-scope-1 .rh-scope-seg:nth-child(-n + 1),
-.rh-scope-2 .rh-scope-seg:nth-child(-n + 2),
-.rh-scope-3 .rh-scope-seg {
-  background: var(--rh-accent);
 }
 
 /* 구현 사례: 문제 → 구현 → 검증 → 한계 정거장 레일. 모양·위치·경계선으로 구분 */
@@ -1238,53 +1239,6 @@ textarea.rh-input {
     margin-bottom: 0;
   }
 
-  /* 단계 트랙·타임라인은 세로 레일로 전환 */
-  .rh-track {
-    grid-template-columns: minmax(0, 1fr);
-  }
-
-  .rh-stage {
-    display: grid;
-    grid-template-columns: 3rem minmax(0, 1fr);
-    column-gap: 1rem;
-  }
-
-  .rh-stage-rail {
-    flex-direction: column;
-    gap: .5rem;
-    margin-bottom: 0;
-    padding-right: 0;
-  }
-
-  .rh-stage-line {
-    width: 1px;
-    height: auto;
-    min-height: 1.5rem;
-  }
-
-  .rh-stage-line::after {
-    top: auto;
-    right: -3px;
-    bottom: 0;
-    transform: rotate(135deg);
-  }
-
-  .rh-stage-operate .rh-stage-line {
-    width: 0;
-    height: auto;
-    border-top: 0;
-    border-left: 1px dashed var(--rh-border-strong);
-  }
-
-  .rh-stage-body {
-    margin-right: 0;
-    margin-bottom: 1rem;
-  }
-
-  .rh-stage:last-child .rh-stage-body {
-    margin-bottom: 0;
-  }
-
   .rh-case-head {
     grid-template-columns: minmax(0, 1fr);
   }
@@ -1465,21 +1419,6 @@ textarea.rh-input {
 
   .rh-issue {
     padding: 1.2rem 1.1rem;
-  }
-
-  .rh-stage {
-    grid-template-columns: 2.5rem minmax(0, 1fr);
-    column-gap: .8rem;
-  }
-
-  .rh-stage-node {
-    width: 2.5rem;
-    height: 2.5rem;
-    font-size: .95rem;
-  }
-
-  .rh-stage-body {
-    padding: 1.15rem;
   }
 
   .rh-evidence {
@@ -1698,30 +1637,6 @@ textarea.rh-input {
 
 .rh-evidence-rail .rh-lane-label {
   font-family: var(--rh-mono);
-}
-
-/* 서비스: 실증은 점선 노드(시험), 구축은 실선, 운영은 채운 노드. 산출물은 체크 표지 */
-.rh-stage-pilot .rh-stage-node {
-  border-style: dashed;
-}
-
-.rh-stage-build .rh-stage-node {
-  border-color: var(--rh-accent);
-  border-width: 1.5px;
-}
-
-.rh-stage .rh-checklist > li {
-  padding-left: 1.45rem;
-}
-
-.rh-stage .rh-checklist > li::before {
-  top: .5em;
-  width: .5rem;
-  height: .28rem;
-  border-bottom: 1.5px solid var(--rh-ok);
-  border-left: 1.5px solid var(--rh-ok);
-  background: none;
-  transform: rotate(-45deg);
 }
 
 /* 도입 절차: 아이콘 노드 + 순번 배지, 검증 단계의 결과 분기, 마지막 단계는 반복 */

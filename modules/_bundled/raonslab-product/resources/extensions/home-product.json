@@ -377,6 +377,567 @@
               ]
             },
             {
+              "id": "raon_home_proof",
+              "type": "basic",
+              "name": "Div",
+              "comment": "RAON Hub 공개 증거. 2026-09-28 내부 검증(docs/g7/E2E.md)으로 확인된 사실만 쓴다.",
+              "props": {
+                "className": "rh-section rh-proof",
+                "id": "rh-proof",
+                "role": "region",
+                "aria-labelledby": "rh-proof-title"
+              },
+              "children": [
+                {
+                  "id": "raon_home_proof_inner",
+                  "type": "basic",
+                  "name": "Div",
+                  "props": {
+                    "className": "rh-shell"
+                  },
+                  "children": [
+                    {
+                      "id": "raon_home_proof_head",
+                      "type": "basic",
+                      "name": "Div",
+                      "props": {
+                        "className": "rh-section-head"
+                      },
+                      "children": [
+                        {
+                          "id": "raon_home_proof_kicker",
+                          "type": "basic",
+                          "name": "P",
+                          "props": {
+                            "className": "rh-kicker"
+                          },
+                          "text": "$t:raonslab-product.home.proof_kicker"
+                        },
+                        {
+                          "id": "raon_home_proof_title",
+                          "type": "basic",
+                          "name": "H2",
+                          "props": {
+                            "className": "rh-h2",
+                            "id": "rh-proof-title",
+                            "tabIndex": -1
+                          },
+                          "text": "$t:raonslab-product.home.proof_title"
+                        }
+                      ]
+                    },
+                    {
+                      "id": "raon_home_proof_list",
+                      "type": "basic",
+                      "name": "Ul",
+                      "props": {
+                        "className": "rh-proof-strip"
+                      },
+                      "children": [
+                        {
+                          "id": "raon_home_proof_run",
+                          "type": "basic",
+                          "name": "Li",
+                          "props": {
+                            "className": "rh-proof-item rh-proof-item-run"
+                          },
+                          "children": [
+                            {
+                              "id": "raon_home_proof_run_label",
+                              "type": "basic",
+                              "name": "Span",
+                              "props": {
+                                "className": "rh-proof-label"
+                              },
+                              "text": "$t:raonslab-product.home.proof_run_label"
+                            },
+                            {
+                              "id": "raon_home_proof_run_value",
+                              "type": "basic",
+                              "name": "Span",
+                              "props": {
+                                "className": "rh-proof-value"
+                              },
+                              "text": "$t:raonslab-product.home.proof_run_value"
+                            }
+                          ]
+                        },
+                        {
+                          "id": "raon_home_proof_verify",
+                          "type": "basic",
+                          "name": "Li",
+                          "props": {
+                            "className": "rh-proof-item rh-proof-item-verify"
+                          },
+                          "children": [
+                            {
+                              "id": "raon_home_proof_verify_label",
+                              "type": "basic",
+                              "name": "Span",
+                              "props": {
+                                "className": "rh-proof-label"
+                              },
+                              "text": "$t:raonslab-product.home.proof_verify_label"
+                            },
+                            {
+                              "id": "raon_home_proof_verify_value",
+                              "type": "basic",
+                              "name": "Span",
+                              "props": {
+                                "className": "rh-proof-value"
+                              },
+                              "text": "$t:raonslab-product.home.proof_verify_value"
+                            }
+                          ]
+                        },
+                        {
+                          "id": "raon_home_proof_extend",
+                          "type": "basic",
+                          "name": "Li",
+                          "props": {
+                            "className": "rh-proof-item rh-proof-item-extend"
+                          },
+                          "children": [
+                            {
+                              "id": "raon_home_proof_extend_label",
+                              "type": "basic",
+                              "name": "Span",
+                              "props": {
+                                "className": "rh-proof-label"
+                              },
+                              "text": "$t:raonslab-product.home.proof_extend_label"
+                            },
+                            {
+                              "id": "raon_home_proof_extend_value",
+                              "type": "basic",
+                              "name": "Span",
+                              "props": {
+                                "className": "rh-proof-value"
+                              },
+                              "text": "$t:raonslab-product.home.proof_extend_value"
+                            }
+                          ]
+                        },
+                        {
+                          "id": "raon_home_proof_scope",
+                          "type": "basic",
+                          "name": "Li",
+                          "props": {
+                            "className": "rh-proof-item rh-proof-item-scope"
+                          },
+                          "children": [
+                            {
+                              "id": "raon_home_proof_scope_label",
+                              "type": "basic",
+                              "name": "Span",
+                              "props": {
+                                "className": "rh-proof-label"
+                              },
+                              "text": "$t:raonslab-product.home.proof_scope_label"
+                            },
+                            {
+                              "id": "raon_home_proof_scope_value",
+                              "type": "basic",
+                              "name": "Span",
+                              "props": {
+                                "className": "rh-proof-value"
+                              },
+                              "text": "$t:raonslab-product.home.proof_scope_value"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "id": "raon_home_proof_more",
+                      "type": "basic",
+                      "name": "A",
+                      "comment": "사례 구조로 이동",
+                      "props": {
+                        "className": "rh-text-link",
+                        "href": "#rh-cases",
+                        "data-rh-jump": "cases"
+                      },
+                      "text": "$t:raonslab-product.home.proof_more"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "raon_home_services",
+              "type": "basic",
+              "name": "Div",
+              "comment": "구매 범위 3행. 가격·기간·성과 수치는 쓰지 않는다.",
+              "props": {
+                "className": "rh-section",
+                "id": "rh-services",
+                "role": "region",
+                "aria-labelledby": "rh-services-title"
+              },
+              "children": [
+                {
+                  "id": "raon_home_services_inner",
+                  "type": "basic",
+                  "name": "Div",
+                  "props": {
+                    "className": "rh-shell"
+                  },
+                  "children": [
+                    {
+                      "id": "raon_home_services_head",
+                      "type": "basic",
+                      "name": "Div",
+                      "props": {
+                        "className": "rh-section-head"
+                      },
+                      "children": [
+                        {
+                          "id": "raon_home_services_kicker",
+                          "type": "basic",
+                          "name": "P",
+                          "props": {
+                            "className": "rh-kicker"
+                          },
+                          "text": "$t:raonslab-product.home.services_kicker"
+                        },
+                        {
+                          "id": "raon_home_services_title",
+                          "type": "basic",
+                          "name": "H2",
+                          "props": {
+                            "className": "rh-h2",
+                            "id": "rh-services-title",
+                            "tabIndex": -1
+                          },
+                          "text": "$t:raonslab-product.home.services_title"
+                        }
+                      ]
+                    },
+                    {
+                      "id": "raon_home_services_list",
+                      "type": "basic",
+                      "name": "Ul",
+                      "props": {
+                        "className": "rh-offers"
+                      },
+                      "children": [
+                        {
+                          "id": "raon_home_service_pilot",
+                          "type": "basic",
+                          "name": "Li",
+                          "props": {
+                            "className": "rh-offer rh-offer-pilot"
+                          },
+                          "children": [
+                            {
+                              "id": "raon_home_service_pilot_title",
+                              "type": "basic",
+                              "name": "H3",
+                              "props": {
+                                "className": "rh-offer-title"
+                              },
+                              "text": "$t:raonslab-product.home.service_pilot_title"
+                            },
+                            {
+                              "id": "raon_home_service_pilot_input",
+                              "type": "basic",
+                              "name": "P",
+                              "props": {
+                                "className": "rh-offer-fact rh-offer-fact-input"
+                              },
+                              "children": [
+                                {
+                                  "id": "raon_home_service_pilot_input_label",
+                                  "type": "basic",
+                                  "name": "Span",
+                                  "props": {
+                                    "className": "rh-offer-label"
+                                  },
+                                  "text": "$t:raonslab-product.home.offer_label_input"
+                                },
+                                {
+                                  "id": "raon_home_service_pilot_input_value",
+                                  "type": "basic",
+                                  "name": "Span",
+                                  "props": {
+                                    "className": "rh-offer-value"
+                                  },
+                                  "text": "$t:raonslab-product.home.service_pilot_input"
+                                }
+                              ]
+                            },
+                            {
+                              "id": "raon_home_service_pilot_output",
+                              "type": "basic",
+                              "name": "P",
+                              "props": {
+                                "className": "rh-offer-fact rh-offer-fact-output"
+                              },
+                              "children": [
+                                {
+                                  "id": "raon_home_service_pilot_output_label",
+                                  "type": "basic",
+                                  "name": "Span",
+                                  "props": {
+                                    "className": "rh-offer-label"
+                                  },
+                                  "text": "$t:raonslab-product.home.offer_label_output"
+                                },
+                                {
+                                  "id": "raon_home_service_pilot_output_value",
+                                  "type": "basic",
+                                  "name": "Span",
+                                  "props": {
+                                    "className": "rh-offer-value"
+                                  },
+                                  "text": "$t:raonslab-product.home.service_pilot_output"
+                                }
+                              ]
+                            },
+                            {
+                              "id": "raon_home_service_pilot_prereq",
+                              "type": "basic",
+                              "name": "P",
+                              "props": {
+                                "className": "rh-offer-fact rh-offer-fact-prereq"
+                              },
+                              "children": [
+                                {
+                                  "id": "raon_home_service_pilot_prereq_label",
+                                  "type": "basic",
+                                  "name": "Span",
+                                  "props": {
+                                    "className": "rh-offer-label"
+                                  },
+                                  "text": "$t:raonslab-product.home.offer_label_prereq"
+                                },
+                                {
+                                  "id": "raon_home_service_pilot_prereq_value",
+                                  "type": "basic",
+                                  "name": "Span",
+                                  "props": {
+                                    "className": "rh-offer-value"
+                                  },
+                                  "text": "$t:raonslab-product.home.service_pilot_prereq"
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "id": "raon_home_service_build",
+                          "type": "basic",
+                          "name": "Li",
+                          "props": {
+                            "className": "rh-offer rh-offer-build"
+                          },
+                          "children": [
+                            {
+                              "id": "raon_home_service_build_title",
+                              "type": "basic",
+                              "name": "H3",
+                              "props": {
+                                "className": "rh-offer-title"
+                              },
+                              "text": "$t:raonslab-product.home.service_build_title"
+                            },
+                            {
+                              "id": "raon_home_service_build_input",
+                              "type": "basic",
+                              "name": "P",
+                              "props": {
+                                "className": "rh-offer-fact rh-offer-fact-input"
+                              },
+                              "children": [
+                                {
+                                  "id": "raon_home_service_build_input_label",
+                                  "type": "basic",
+                                  "name": "Span",
+                                  "props": {
+                                    "className": "rh-offer-label"
+                                  },
+                                  "text": "$t:raonslab-product.home.offer_label_input"
+                                },
+                                {
+                                  "id": "raon_home_service_build_input_value",
+                                  "type": "basic",
+                                  "name": "Span",
+                                  "props": {
+                                    "className": "rh-offer-value"
+                                  },
+                                  "text": "$t:raonslab-product.home.service_build_input"
+                                }
+                              ]
+                            },
+                            {
+                              "id": "raon_home_service_build_output",
+                              "type": "basic",
+                              "name": "P",
+                              "props": {
+                                "className": "rh-offer-fact rh-offer-fact-output"
+                              },
+                              "children": [
+                                {
+                                  "id": "raon_home_service_build_output_label",
+                                  "type": "basic",
+                                  "name": "Span",
+                                  "props": {
+                                    "className": "rh-offer-label"
+                                  },
+                                  "text": "$t:raonslab-product.home.offer_label_output"
+                                },
+                                {
+                                  "id": "raon_home_service_build_output_value",
+                                  "type": "basic",
+                                  "name": "Span",
+                                  "props": {
+                                    "className": "rh-offer-value"
+                                  },
+                                  "text": "$t:raonslab-product.home.service_build_output"
+                                }
+                              ]
+                            },
+                            {
+                              "id": "raon_home_service_build_prereq",
+                              "type": "basic",
+                              "name": "P",
+                              "props": {
+                                "className": "rh-offer-fact rh-offer-fact-prereq"
+                              },
+                              "children": [
+                                {
+                                  "id": "raon_home_service_build_prereq_label",
+                                  "type": "basic",
+                                  "name": "Span",
+                                  "props": {
+                                    "className": "rh-offer-label"
+                                  },
+                                  "text": "$t:raonslab-product.home.offer_label_prereq"
+                                },
+                                {
+                                  "id": "raon_home_service_build_prereq_value",
+                                  "type": "basic",
+                                  "name": "Span",
+                                  "props": {
+                                    "className": "rh-offer-value"
+                                  },
+                                  "text": "$t:raonslab-product.home.service_build_prereq"
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "id": "raon_home_service_operate",
+                          "type": "basic",
+                          "name": "Li",
+                          "props": {
+                            "className": "rh-offer rh-offer-operate"
+                          },
+                          "children": [
+                            {
+                              "id": "raon_home_service_operate_title",
+                              "type": "basic",
+                              "name": "H3",
+                              "props": {
+                                "className": "rh-offer-title"
+                              },
+                              "text": "$t:raonslab-product.home.service_operate_title"
+                            },
+                            {
+                              "id": "raon_home_service_operate_input",
+                              "type": "basic",
+                              "name": "P",
+                              "props": {
+                                "className": "rh-offer-fact rh-offer-fact-input"
+                              },
+                              "children": [
+                                {
+                                  "id": "raon_home_service_operate_input_label",
+                                  "type": "basic",
+                                  "name": "Span",
+                                  "props": {
+                                    "className": "rh-offer-label"
+                                  },
+                                  "text": "$t:raonslab-product.home.offer_label_input"
+                                },
+                                {
+                                  "id": "raon_home_service_operate_input_value",
+                                  "type": "basic",
+                                  "name": "Span",
+                                  "props": {
+                                    "className": "rh-offer-value"
+                                  },
+                                  "text": "$t:raonslab-product.home.service_operate_input"
+                                }
+                              ]
+                            },
+                            {
+                              "id": "raon_home_service_operate_output",
+                              "type": "basic",
+                              "name": "P",
+                              "props": {
+                                "className": "rh-offer-fact rh-offer-fact-output"
+                              },
+                              "children": [
+                                {
+                                  "id": "raon_home_service_operate_output_label",
+                                  "type": "basic",
+                                  "name": "Span",
+                                  "props": {
+                                    "className": "rh-offer-label"
+                                  },
+                                  "text": "$t:raonslab-product.home.offer_label_output"
+                                },
+                                {
+                                  "id": "raon_home_service_operate_output_value",
+                                  "type": "basic",
+                                  "name": "Span",
+                                  "props": {
+                                    "className": "rh-offer-value"
+                                  },
+                                  "text": "$t:raonslab-product.home.service_operate_output"
+                                }
+                              ]
+                            },
+                            {
+                              "id": "raon_home_service_operate_prereq",
+                              "type": "basic",
+                              "name": "P",
+                              "props": {
+                                "className": "rh-offer-fact rh-offer-fact-prereq"
+                              },
+                              "children": [
+                                {
+                                  "id": "raon_home_service_operate_prereq_label",
+                                  "type": "basic",
+                                  "name": "Span",
+                                  "props": {
+                                    "className": "rh-offer-label"
+                                  },
+                                  "text": "$t:raonslab-product.home.offer_label_prereq"
+                                },
+                                {
+                                  "id": "raon_home_service_operate_prereq_value",
+                                  "type": "basic",
+                                  "name": "Span",
+                                  "props": {
+                                    "className": "rh-offer-value"
+                                  },
+                                  "text": "$t:raonslab-product.home.service_operate_prereq"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
               "id": "raon_home_problem",
               "comment": "problem",
               "type": "basic",
@@ -608,586 +1169,6 @@
                                 "className": "rh-card-copy"
                               },
                               "text": "$t:raonslab-product.home.problem_operate_copy"
-                            }
-                          ]
-                        }
-                      ]
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "id": "raon_home_services",
-              "comment": "services",
-              "type": "basic",
-              "name": "Div",
-              "props": {
-                "className": "rh-section",
-                "id": "rh-services",
-                "role": "region",
-                "aria-labelledby": "rh-services-title"
-              },
-              "children": [
-                {
-                  "id": "raon_home_services_inner",
-                  "comment": "services inner",
-                  "type": "basic",
-                  "name": "Div",
-                  "props": {
-                    "className": "rh-shell"
-                  },
-                  "children": [
-                    {
-                      "id": "raon_home_services_head",
-                      "comment": "services head",
-                      "type": "basic",
-                      "name": "Div",
-                      "props": {
-                        "className": "rh-section-head"
-                      },
-                      "children": [
-                        {
-                          "id": "raon_home_services_kicker",
-                          "comment": "services kicker",
-                          "type": "basic",
-                          "name": "P",
-                          "props": {
-                            "className": "rh-kicker"
-                          },
-                          "text": "$t:raonslab-product.home.services_kicker"
-                        },
-                        {
-                          "id": "raon_home_services_title",
-                          "comment": "services title",
-                          "type": "basic",
-                          "name": "H2",
-                          "props": {
-                            "className": "rh-h2",
-                            "id": "rh-services-title",
-                            "tabIndex": -1
-                          },
-                          "text": "$t:raonslab-product.home.services_title"
-                        },
-                        {
-                          "id": "raon_home_services_lede",
-                          "comment": "services lede",
-                          "type": "basic",
-                          "name": "P",
-                          "props": {
-                            "className": "rh-section-lede"
-                          },
-                          "text": "$t:raonslab-product.home.services_lede"
-                        }
-                      ]
-                    },
-                    {
-                      "id": "raon_home_services_list",
-                      "comment": "services list",
-                      "type": "basic",
-                      "name": "Ul",
-                      "props": {
-                        "className": "rh-track"
-                      },
-                      "children": [
-                        {
-                          "id": "raon_home_service_pilot",
-                          "comment": "service pilot",
-                          "type": "basic",
-                          "name": "Li",
-                          "props": {
-                            "className": "rh-stage rh-stage-pilot"
-                          },
-                          "children": [
-                            {
-                              "id": "raon_home_service_pilot_rail",
-                              "comment": "service pilot rail",
-                              "type": "basic",
-                              "name": "Div",
-                              "props": {
-                                "className": "rh-stage-rail",
-                                "aria-hidden": "true"
-                              },
-                              "children": [
-                                {
-                                  "id": "raon_home_service_pilot_node",
-                                  "comment": "service pilot node",
-                                  "type": "basic",
-                                  "name": "Span",
-                                  "props": {
-                                    "className": "rh-stage-node"
-                                  },
-                                  "children": [
-                                    {
-                                      "id": "raon_home_service_pilot_icon",
-                                      "comment": "service pilot icon",
-                                      "type": "basic",
-                                      "name": "Icon",
-                                      "props": {
-                                        "className": "rh-icon",
-                                        "name": "fa-flask",
-                                        "aria-hidden": "true"
-                                      }
-                                    }
-                                  ]
-                                },
-                                {
-                                  "id": "raon_home_service_pilot_line",
-                                  "comment": "service pilot line",
-                                  "type": "basic",
-                                  "name": "Span",
-                                  "props": {
-                                    "className": "rh-stage-line"
-                                  }
-                                }
-                              ]
-                            },
-                            {
-                              "id": "raon_home_service_pilot_body",
-                              "comment": "service pilot body",
-                              "type": "basic",
-                              "name": "Div",
-                              "props": {
-                                "className": "rh-stage-body"
-                              },
-                              "children": [
-                                {
-                                  "id": "raon_home_service_pilot_step",
-                                  "comment": "service pilot step",
-                                  "type": "basic",
-                                  "name": "Span",
-                                  "props": {
-                                    "className": "rh-step",
-                                    "aria-hidden": "true"
-                                  },
-                                  "text": "$t:raonslab-product.home.service_pilot_step"
-                                },
-                                {
-                                  "id": "raon_home_service_pilot_title",
-                                  "comment": "service pilot title",
-                                  "type": "basic",
-                                  "name": "H3",
-                                  "props": {
-                                    "className": "rh-h3"
-                                  },
-                                  "text": "$t:raonslab-product.home.service_pilot_title"
-                                },
-                                {
-                                  "id": "raon_home_service_pilot_copy",
-                                  "comment": "service pilot copy",
-                                  "type": "basic",
-                                  "name": "P",
-                                  "props": {
-                                    "className": "rh-card-copy"
-                                  },
-                                  "text": "$t:raonslab-product.home.service_pilot_copy"
-                                },
-                                {
-                                  "id": "raon_home_service_pilot_items",
-                                  "comment": "서비스 pilot 산출물",
-                                  "type": "basic",
-                                  "name": "Ul",
-                                  "props": {
-                                    "className": "rh-checklist"
-                                  },
-                                  "children": [
-                                    {
-                                      "id": "raon_home_service_pilot_item1",
-                                      "comment": "서비스 pilot 산출물 1",
-                                      "type": "basic",
-                                      "name": "Li",
-                                      "text": "$t:raonslab-product.home.service_pilot_item1"
-                                    },
-                                    {
-                                      "id": "raon_home_service_pilot_item2",
-                                      "comment": "서비스 pilot 산출물 2",
-                                      "type": "basic",
-                                      "name": "Li",
-                                      "text": "$t:raonslab-product.home.service_pilot_item2"
-                                    },
-                                    {
-                                      "id": "raon_home_service_pilot_item3",
-                                      "comment": "서비스 pilot 산출물 3",
-                                      "type": "basic",
-                                      "name": "Li",
-                                      "text": "$t:raonslab-product.home.service_pilot_item3"
-                                    }
-                                  ]
-                                },
-                                {
-                                  "id": "raon_home_service_pilot_scope",
-                                  "comment": "service pilot scope",
-                                  "type": "basic",
-                                  "name": "Span",
-                                  "props": {
-                                    "className": "rh-scope rh-scope-1",
-                                    "aria-hidden": "true"
-                                  },
-                                  "children": [
-                                    {
-                                      "id": "raon_home_service_pilot_scope1",
-                                      "comment": "service pilot scope1",
-                                      "type": "basic",
-                                      "name": "Span",
-                                      "props": {
-                                        "className": "rh-scope-seg"
-                                      }
-                                    },
-                                    {
-                                      "id": "raon_home_service_pilot_scope2",
-                                      "comment": "service pilot scope2",
-                                      "type": "basic",
-                                      "name": "Span",
-                                      "props": {
-                                        "className": "rh-scope-seg"
-                                      }
-                                    },
-                                    {
-                                      "id": "raon_home_service_pilot_scope3",
-                                      "comment": "service pilot scope3",
-                                      "type": "basic",
-                                      "name": "Span",
-                                      "props": {
-                                        "className": "rh-scope-seg"
-                                      }
-                                    }
-                                  ]
-                                }
-                              ]
-                            }
-                          ]
-                        },
-                        {
-                          "id": "raon_home_service_build",
-                          "comment": "service build",
-                          "type": "basic",
-                          "name": "Li",
-                          "props": {
-                            "className": "rh-stage rh-stage-build"
-                          },
-                          "children": [
-                            {
-                              "id": "raon_home_service_build_rail",
-                              "comment": "service build rail",
-                              "type": "basic",
-                              "name": "Div",
-                              "props": {
-                                "className": "rh-stage-rail",
-                                "aria-hidden": "true"
-                              },
-                              "children": [
-                                {
-                                  "id": "raon_home_service_build_node",
-                                  "comment": "service build node",
-                                  "type": "basic",
-                                  "name": "Span",
-                                  "props": {
-                                    "className": "rh-stage-node"
-                                  },
-                                  "children": [
-                                    {
-                                      "id": "raon_home_service_build_icon",
-                                      "comment": "service build icon",
-                                      "type": "basic",
-                                      "name": "Icon",
-                                      "props": {
-                                        "className": "rh-icon",
-                                        "name": "fa-screwdriver-wrench",
-                                        "aria-hidden": "true"
-                                      }
-                                    }
-                                  ]
-                                },
-                                {
-                                  "id": "raon_home_service_build_line",
-                                  "comment": "service build line",
-                                  "type": "basic",
-                                  "name": "Span",
-                                  "props": {
-                                    "className": "rh-stage-line"
-                                  }
-                                }
-                              ]
-                            },
-                            {
-                              "id": "raon_home_service_build_body",
-                              "comment": "service build body",
-                              "type": "basic",
-                              "name": "Div",
-                              "props": {
-                                "className": "rh-stage-body"
-                              },
-                              "children": [
-                                {
-                                  "id": "raon_home_service_build_step",
-                                  "comment": "service build step",
-                                  "type": "basic",
-                                  "name": "Span",
-                                  "props": {
-                                    "className": "rh-step",
-                                    "aria-hidden": "true"
-                                  },
-                                  "text": "$t:raonslab-product.home.service_build_step"
-                                },
-                                {
-                                  "id": "raon_home_service_build_title",
-                                  "comment": "service build title",
-                                  "type": "basic",
-                                  "name": "H3",
-                                  "props": {
-                                    "className": "rh-h3"
-                                  },
-                                  "text": "$t:raonslab-product.home.service_build_title"
-                                },
-                                {
-                                  "id": "raon_home_service_build_copy",
-                                  "comment": "service build copy",
-                                  "type": "basic",
-                                  "name": "P",
-                                  "props": {
-                                    "className": "rh-card-copy"
-                                  },
-                                  "text": "$t:raonslab-product.home.service_build_copy"
-                                },
-                                {
-                                  "id": "raon_home_service_build_items",
-                                  "comment": "서비스 build 산출물",
-                                  "type": "basic",
-                                  "name": "Ul",
-                                  "props": {
-                                    "className": "rh-checklist"
-                                  },
-                                  "children": [
-                                    {
-                                      "id": "raon_home_service_build_item1",
-                                      "comment": "서비스 build 산출물 1",
-                                      "type": "basic",
-                                      "name": "Li",
-                                      "text": "$t:raonslab-product.home.service_build_item1"
-                                    },
-                                    {
-                                      "id": "raon_home_service_build_item2",
-                                      "comment": "서비스 build 산출물 2",
-                                      "type": "basic",
-                                      "name": "Li",
-                                      "text": "$t:raonslab-product.home.service_build_item2"
-                                    },
-                                    {
-                                      "id": "raon_home_service_build_item3",
-                                      "comment": "서비스 build 산출물 3",
-                                      "type": "basic",
-                                      "name": "Li",
-                                      "text": "$t:raonslab-product.home.service_build_item3"
-                                    }
-                                  ]
-                                },
-                                {
-                                  "id": "raon_home_service_build_scope",
-                                  "comment": "service build scope",
-                                  "type": "basic",
-                                  "name": "Span",
-                                  "props": {
-                                    "className": "rh-scope rh-scope-2",
-                                    "aria-hidden": "true"
-                                  },
-                                  "children": [
-                                    {
-                                      "id": "raon_home_service_build_scope1",
-                                      "comment": "service build scope1",
-                                      "type": "basic",
-                                      "name": "Span",
-                                      "props": {
-                                        "className": "rh-scope-seg"
-                                      }
-                                    },
-                                    {
-                                      "id": "raon_home_service_build_scope2",
-                                      "comment": "service build scope2",
-                                      "type": "basic",
-                                      "name": "Span",
-                                      "props": {
-                                        "className": "rh-scope-seg"
-                                      }
-                                    },
-                                    {
-                                      "id": "raon_home_service_build_scope3",
-                                      "comment": "service build scope3",
-                                      "type": "basic",
-                                      "name": "Span",
-                                      "props": {
-                                        "className": "rh-scope-seg"
-                                      }
-                                    }
-                                  ]
-                                }
-                              ]
-                            }
-                          ]
-                        },
-                        {
-                          "id": "raon_home_service_operate",
-                          "comment": "service operate",
-                          "type": "basic",
-                          "name": "Li",
-                          "props": {
-                            "className": "rh-stage rh-stage-operate"
-                          },
-                          "children": [
-                            {
-                              "id": "raon_home_service_operate_rail",
-                              "comment": "service operate rail",
-                              "type": "basic",
-                              "name": "Div",
-                              "props": {
-                                "className": "rh-stage-rail",
-                                "aria-hidden": "true"
-                              },
-                              "children": [
-                                {
-                                  "id": "raon_home_service_operate_node",
-                                  "comment": "service operate node",
-                                  "type": "basic",
-                                  "name": "Span",
-                                  "props": {
-                                    "className": "rh-stage-node"
-                                  },
-                                  "children": [
-                                    {
-                                      "id": "raon_home_service_operate_icon",
-                                      "comment": "service operate icon",
-                                      "type": "basic",
-                                      "name": "Icon",
-                                      "props": {
-                                        "className": "rh-icon",
-                                        "name": "fa-arrows-rotate",
-                                        "aria-hidden": "true"
-                                      }
-                                    }
-                                  ]
-                                },
-                                {
-                                  "id": "raon_home_service_operate_line",
-                                  "comment": "service operate line",
-                                  "type": "basic",
-                                  "name": "Span",
-                                  "props": {
-                                    "className": "rh-stage-line"
-                                  }
-                                }
-                              ]
-                            },
-                            {
-                              "id": "raon_home_service_operate_body",
-                              "comment": "service operate body",
-                              "type": "basic",
-                              "name": "Div",
-                              "props": {
-                                "className": "rh-stage-body"
-                              },
-                              "children": [
-                                {
-                                  "id": "raon_home_service_operate_step",
-                                  "comment": "service operate step",
-                                  "type": "basic",
-                                  "name": "Span",
-                                  "props": {
-                                    "className": "rh-step",
-                                    "aria-hidden": "true"
-                                  },
-                                  "text": "$t:raonslab-product.home.service_operate_step"
-                                },
-                                {
-                                  "id": "raon_home_service_operate_title",
-                                  "comment": "service operate title",
-                                  "type": "basic",
-                                  "name": "H3",
-                                  "props": {
-                                    "className": "rh-h3"
-                                  },
-                                  "text": "$t:raonslab-product.home.service_operate_title"
-                                },
-                                {
-                                  "id": "raon_home_service_operate_copy",
-                                  "comment": "service operate copy",
-                                  "type": "basic",
-                                  "name": "P",
-                                  "props": {
-                                    "className": "rh-card-copy"
-                                  },
-                                  "text": "$t:raonslab-product.home.service_operate_copy"
-                                },
-                                {
-                                  "id": "raon_home_service_operate_items",
-                                  "comment": "서비스 operate 산출물",
-                                  "type": "basic",
-                                  "name": "Ul",
-                                  "props": {
-                                    "className": "rh-checklist"
-                                  },
-                                  "children": [
-                                    {
-                                      "id": "raon_home_service_operate_item1",
-                                      "comment": "서비스 operate 산출물 1",
-                                      "type": "basic",
-                                      "name": "Li",
-                                      "text": "$t:raonslab-product.home.service_operate_item1"
-                                    },
-                                    {
-                                      "id": "raon_home_service_operate_item2",
-                                      "comment": "서비스 operate 산출물 2",
-                                      "type": "basic",
-                                      "name": "Li",
-                                      "text": "$t:raonslab-product.home.service_operate_item2"
-                                    },
-                                    {
-                                      "id": "raon_home_service_operate_item3",
-                                      "comment": "서비스 operate 산출물 3",
-                                      "type": "basic",
-                                      "name": "Li",
-                                      "text": "$t:raonslab-product.home.service_operate_item3"
-                                    }
-                                  ]
-                                },
-                                {
-                                  "id": "raon_home_service_operate_scope",
-                                  "comment": "service operate scope",
-                                  "type": "basic",
-                                  "name": "Span",
-                                  "props": {
-                                    "className": "rh-scope rh-scope-3",
-                                    "aria-hidden": "true"
-                                  },
-                                  "children": [
-                                    {
-                                      "id": "raon_home_service_operate_scope1",
-                                      "comment": "service operate scope1",
-                                      "type": "basic",
-                                      "name": "Span",
-                                      "props": {
-                                        "className": "rh-scope-seg"
-                                      }
-                                    },
-                                    {
-                                      "id": "raon_home_service_operate_scope2",
-                                      "comment": "service operate scope2",
-                                      "type": "basic",
-                                      "name": "Span",
-                                      "props": {
-                                        "className": "rh-scope-seg"
-                                      }
-                                    },
-                                    {
-                                      "id": "raon_home_service_operate_scope3",
-                                      "comment": "service operate scope3",
-                                      "type": "basic",
-                                      "name": "Span",
-                                      "props": {
-                                        "className": "rh-scope-seg"
-                                      }
-                                    }
-                                  ]
-                                }
-                              ]
                             }
                           ]
                         }

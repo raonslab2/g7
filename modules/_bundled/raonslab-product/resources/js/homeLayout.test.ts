@@ -42,9 +42,9 @@ describe('사업 홈 레이아웃 확장', () => {
     expect(layout.injections[0]).toMatchObject({ target_id: 'main_content', position: 'replace' });
   });
 
-  it('hero → 문제 → 서비스 → 사례 → 절차 → 기술 → 상담 순서로 구성된다', () => {
+  it('hero → RAON Hub 증거 → 구매 범위 → 문제 → 사례 → 절차 → 기술 → 상담 순서로 구성된다', () => {
     const sectionIds = (home.children ?? []).map((child) => child.props?.id).filter(Boolean);
-    expect(sectionIds).toEqual(['rh-hero', 'rh-problem', 'rh-services', 'rh-cases', 'rh-process', 'rh-tech', 'rh-consult']);
+    expect(sectionIds).toEqual(['rh-hero', 'rh-proof', 'rh-services', 'rh-problem', 'rh-cases', 'rh-process', 'rh-tech', 'rh-consult']);
   });
 
   it('홈 섹션 바로가기 바를 두지 않고, 홈 안의 이동 링크는 실제 섹션을 가리킨다', () => {
@@ -152,16 +152,28 @@ describe('시각 구조', () => {
     }
   });
 
-  it('서비스는 실증 → 구축 → 운영 단계 트랙이며 범위 표시가 1→3 으로 넓어진다', () => {
-    const stages = childrenWith(byId('raon_home_services_list'), 'rh-stage');
-    expect(stages.map((s) => s.id)).toEqual(['raon_home_service_pilot', 'raon_home_service_build', 'raon_home_service_operate']);
-    stages.forEach((stage, index) => {
-      const rail = childrenWith(stage, 'rh-stage-rail')[0];
-      expect(rail?.props?.['aria-hidden']).toBe('true');
-      const scope = nodes.find((n) => n.id === `${stage.id}_scope`);
-      expect(classOf(scope)).toContain(`rh-scope-${index + 1}`);
-      expect(scope?.props?.['aria-hidden']).toBe('true');
-    });
+  it('RAON Hub 증거 줄은 Hero 바로 다음이며 실제 실행·검증·확장 방식·범위 네 칸이다', () => {
+    expect(home.children?.[1]?.id).toBe('raon_home_proof');
+    const items = childrenWith(byId('raon_home_proof_list'), 'rh-proof-item');
+    expect(items.map((item) => textsUnder(item))).toEqual(['run', 'verify', 'extend', 'scope'].map((k) => [key(`proof_${k}_label`), key(`proof_${k}_value`)]));
+    expect(['run', 'verify', 'extend', 'scope'].map((k) => ko.home[`proof_${k}_label`])).toEqual(['실제 실행', '검증', '확장 방식', '범위']);
+    const copy = [ko, en].flatMap((dict) => Object.entries(dict.home).filter(([k]) => k.startsWith('proof_')).map(([, v]) => String(v)));
+    for (const text of copy) {
+      // 원시 커밋 해시·내부 점검 코드·테스트 명령·공급자/세션 용어를 쓰지 않는다
+      expect(text).not.toMatch(/\b[0-9a-f]{7,40}\b|\b[JA]\d+\b|phpunit|vitest|npm |artisan|Provider|session|세션/i);
+    }
+    expect(ko.home.proof_scope_value).toMatch(/미검증/);
+  });
+
+  it('구매 범위는 실증 → 구축 → 운영·개선 3행이고 각 행은 입력·결과물·고객 준비를 한 줄씩 가진다', () => {
+    const rows = childrenWith(byId('raon_home_services_list'), 'rh-offer');
+    expect(rows.map((row) => row.id)).toEqual(['raon_home_service_pilot', 'raon_home_service_build', 'raon_home_service_operate']);
+    expect(['pilot', 'build', 'operate'].map((row) => ko.home[`service_${row}_title`])).toEqual(['업무 한 개 실증', '맞춤 Agent 구축', '운영·개선']);
+    for (const row of rows) {
+      const facts = childrenWith(row, 'rh-offer-fact');
+      expect(facts.map((fact) => textsUnder(fact)[0])).toEqual(['input', 'output', 'prereq'].map((f) => key(`offer_label_${f}`)));
+      for (const fact of facts) expect(ko.home[textsUnder(fact)[1].replace('$t:raonslab-product.home.', '')].length).toBeLessThanOrEqual(24);
+    }
   });
 
   it.each(['stock', 'hub'])('사례 %s 는 문제·구현·검증·한계 근거 레인을 순서대로 가진다', (name) => {
@@ -220,9 +232,9 @@ describe('2차 시각 패스 — 사례·서비스·절차의 코드 네이티�
     for (const id of ['raon_home_services', 'raon_home_process']) expect(literalTexts(byId(id)), id).toEqual([]);
   });
 
-  it('카드 수는 늘리지 않는다(사례 2 · 레인 4 · 서비스 3 · 절차 5)', () => {
+  it('카드 수는 늘리지 않는다(사례 2 · 레인 4 · 구매 범위 3 · 절차 5)', () => {
     expect(childrenWith(byId('raon_home_cases_list'), 'rh-case')).toHaveLength(2);
-    expect(childrenWith(byId('raon_home_services_list'), 'rh-stage')).toHaveLength(3);
+    expect(childrenWith(byId('raon_home_services_list'), 'rh-offer')).toHaveLength(3);
     expect(childrenWith(byId('raon_home_process_list'), 'rh-process-step')).toHaveLength(5);
   });
 
@@ -237,10 +249,6 @@ describe('2차 시각 패스 — 사례·서비스·절차의 코드 네이티�
     expect(classOf(steps[4])).toContain('rh-process-step-loop');
   });
 
-  it('서비스 단계 노드는 서로 다른 아이콘으로 구분된다', () => {
-    const icons = ['pilot', 'build', 'operate'].map((s) => byId(`raon_home_service_${s}_node`)?.children?.[0]?.props?.name);
-    expect(new Set(icons).size).toBe(3);
-  });
 
   it('새 스타일은 이미지·SVG·glow·그림자·그라디언트·애니메이션 없이 테두리와 상태 색만 쓴다', () => {
     expect(pass2.length).toBeGreaterThan(500);
