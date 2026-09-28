@@ -78,7 +78,7 @@
 | 모듈로 봇 footer 변경 가능? | 불가. `SeoConfigMerger` 병합 순서 모듈 → 플러그인 → 템플릿(최종 우선)이라 모듈 `seo-config.json`이 `footer_nav`를 덮지 못한다 |
 | 조치 | human footer는 0.4.1 분류(6+5)로 생성. smoke가 문구+목적지(렌더된 `linkGroups` prop)를 단언. 봇 footer는 §7 제안 |
 
-## 5. 0.4.1 source 변경 요약 (이 요청, 미배포)
+## 5. 0.4.1 source 변경 요약 (이 요청 — 1차 배포 실패·롤백, 수정본 미배포)
 
 | 영역 | 변경 | 파일 |
 |---|---|---|
@@ -88,7 +88,7 @@
 | 문서 화면 | 11 slug 공통 breadcrumb(홈/분류/문서), 모바일 disclosure(본문 위), 데스크톱 우측 메뉴(append_child, DOM 본문 뒤) | `resources/extensions/native-page.json`(생성) |
 | 동작 | 분류 JSON에서 현재 그룹 판정, disclosure 토글·Escape 포커스 복귀·경로 변경 시 닫힘 | `resources/js/productNav.ts` |
 | 표현 | grid 2열 + sticky, overflow 제거, 목록 표식 정리, 발행일 숨김, 상태 행 격자 | `resources/css/main.css` |
-| 커머스 억제 | 통화 선택기 앵커 교체(priority 400) | `resources/extensions/public-commerce-chrome.json` |
+| 커머스 억제 | 통화 선택기 앵커 교체 injection을 유일한 `_user_base` overlay에 포함(overlay priority 400 > 이커머스 320) | `resources/extensions/product-nav.json`(생성기 `scripts/taxonomy.mjs`) |
 | attribution | Powered by 숨김 코드 제거 | `resources/js/index.ts` |
 | 샘플 Page 교체 | 운영자 전용 명령·서비스·충돌 예외·actor trait | `src/Services/InfoPageRemediator.php`, `src/Console/Commands/RemediateInfoPagesCommand.php`, `src/Console/Concerns/ActsAsPageActor.php`, `src/Exceptions/InfoPageRemediationConflict.php` |
 | 빌드 규정 | `emptyOutDir: false` | `vite.config.ts` |
@@ -106,7 +106,10 @@
 | browser smoke × 0.4.1 클라이언트 오버레이 | 동일, content gate off | 1208 PASS / 0 FAIL |
 | 〃 content gate on | 동일 | 1240 PASS / 16 FAIL = 샘플 4 slug × 4 viewport — `EXPECTED_FAIL_PREDEPLOY`(DB 교체 전) |
 | content pack 오프라인 검증 | `/tmp/rh-pack/pack.canonical.json` → `NativePageContentPack`(SHA-256·envelope·base_commit) + pages 검증 | PASS, SHA 한 글자 변경은 거부 |
-| release gate | 배포 + DB 적용 뒤 smoke 1회(content gate on) | 미실행 |
+| 1차 배포 gate 5 (`c64085b2`, content gate off) | runtime 0.4.1 | **1116 PASS / 140 FAIL** — 같은 `_user_base` overlay 파일 2개가 설치 시 덮어써짐(Troubleshooting CASE 9). 즉시 롤백 |
+| 롤백 검증 (`4d9856dc` = `390cdc7a` 트리, 0.4.0) | runtime | 14 routes, 301, 0.4.0 smoke **451 / 0**. Page DB 교체 미실행(about/faq/contact/refund v1 유지) |
+| 수정본 정적 계약 | manifest target 중복 검사·실패 후보 재현·시뮬레이션 계약 | vitest 77/77 PASS, `taxonomy:check` clean, 실패 후보 복원 시 3건 FAIL·check가 중복 보고 |
+| release gate | 수정본 배포 + DB 적용 뒤 smoke 1회(content gate on) | 미실행 |
 | ext:docgen `--check` | raonslab-product | 기존 문서 구조 미도입(F19) |
 | G7 AI 도구 | `docs/ai-tools/**` MCP·skills | source-review만, 연결·호출하지 않음 |
 
@@ -131,7 +134,7 @@
 | ID | 우선 | 층위 | 조치 | 담당 lane | 선행 |
 |---|---|---|---|---|---|
 | B1 | P0 | DB | about/faq/contact/refund content pack v1(`/tmp/rh-pack/pack.canonical.json`, SHA-256 `88e7e7b0…85f7`, envelope·pages 검증 통과)으로 `raonslab-product:remediate-info-pages "$PACK" --actor=… --sha256=88e7…85f7` 적용(dry-run → apply → 재실행 already_applied) | 콘텐츠·DB lane | B2, 백업, payload sha256 승인 |
-| B2 | P1 | RUNTIME | 0.4.1 배포: `module:update` → 새 프로세스 `route:clear`/`route:cache` → `g7-product-fpm` reload → smoke(content gate off) | 배포 lane | source 리뷰 |
+| B2 | P1 | RUNTIME | 0.4.1 수정본 재배포(1차 `c64085b2`는 gate 5 실패 후 롤백, CASE 9): `module:update` → 새 프로세스 `route:clear`/`route:cache` → `g7-product-fpm` reload → smoke(content gate off) | 배포 lane | source 리뷰 |
 | B3 | P1 | ADMIN CONFIG | 샘플 게시판 `new-board` 비활성화(게시물 0건 확인 후, 삭제 아님) | 관리 lane | — |
 | B4 | P1 | RUNTIME/ADMIN CONFIG | `APP_URL`·sitemap host 단일화 후 sitemap 재생성(중복·`localhost` 제거), 결제 미운영 동안 `/shop/products` sitemap 제외 여부 결정 | 배포 lane | — |
 | B5 | P1 | SOURCE(템플릿 upstream) | §7 제안 4건을 upstream 또는 템플릿 fork 정책으로 결정 | 제품·기술 결정 | — |

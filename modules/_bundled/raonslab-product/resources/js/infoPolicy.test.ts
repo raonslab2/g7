@@ -2,7 +2,18 @@ import { existsSync, readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 // @ts-expect-error — 생성 스크립트는 빌드 대상이 아닌 Node ESM 이다.
-import { applyProductNav, buildNativePage, generated, serialize, taxonomySlugs } from '../../scripts/taxonomy.mjs';
+import {
+  applyProductNav,
+  buildNativePage,
+  CURRENCY_SUPPRESSION_INJECTION,
+  ECOMMERCE_CURRENCY_PRIORITY,
+  extensionManifests,
+  generated,
+  persistedOverlays,
+  serialize,
+  taxonomySlugs,
+  USER_BASE_OVERLAY_PRIORITY,
+} from '../../scripts/taxonomy.mjs';
 import taxonomy from '../taxonomy/info-policy.json';
 import { closeDocnav, installProductNav, normalizePath, productPageGroup, setDocnavOpen } from './productNav';
 
@@ -11,7 +22,6 @@ const readText = (path: string) => readFileSync(path, 'utf8');
 const readJson = (path: string) => JSON.parse(readText(path));
 const nav = readJson(resolve(root, 'extensions/product-nav.json'));
 const nativePage = readJson(resolve(root, 'extensions/native-page.json'));
-const commerceChrome = readJson(resolve(root, 'extensions/public-commerce-chrome.json'));
 const ko = readJson(resolve(root, 'lang/ko.json'));
 const en = readJson(resolve(root, 'lang/en.json'));
 const moduleManifest = readJson(resolve(root, '../module.json'));
@@ -208,14 +218,56 @@ describe('page/show overlay 계약', () => {
   });
 });
 
+describe('overlay 저장 계약(모듈 + target layout 당 1행)', () => {
+  const manifests = extensionManifests() as Array<{ file: string; content: { target_layout?: string } }>;
+
+  it('이 모듈의 extension manifest 는 target layout 마다 정확히 하나다', () => {
+    const targets = manifests.map((manifest) => manifest.content.target_layout);
+    expect(new Set(targets).size, targets.join(',')).toBe(targets.length);
+    expect(persistedOverlays(manifests).overwritten).toEqual([]);
+    expect(manifests.map((manifest) => manifest.file).sort()).toEqual(['home-product.json', 'native-page.json', 'product-nav.json']);
+    expect(existsSync(resolve(root, 'extensions/public-commerce-chrome.json'))).toBe(false);
+  });
+
+  it('실패한 0.4.1 후보(같은 _user_base 에 파일 2개)를 덮어쓰기로 판정한다', () => {
+    const failedCandidate = [
+      { file: 'product-nav.json', content: { target_layout: '_user_base', priority: 30, injections: nav.injections.slice(0, 2) } },
+      {
+        file: 'public-commerce-chrome.json',
+        content: { target_layout: '_user_base', priority: 400, injections: [CURRENCY_SUPPRESSION_INJECTION] },
+      },
+      { file: 'native-page.json', content: nativePage },
+    ];
+    const { byTarget, overwritten } = persistedOverlays(failedCandidate);
+    expect(overwritten).toEqual([{ target: '_user_base', lost: 'product-nav.json', kept: 'public-commerce-chrome.json' }]);
+    // 운영에서 관찰한 결과와 같다: 저장된 _user_base 행에는 통화 교체만 남고 상위 메뉴·footer 가 사라졌다.
+    expect(byTarget.get('_user_base').content.injections.map((injection: { target_id: string }) => injection.target_id))
+      .toEqual(['header_currency_inject_anchor']);
+  });
+
+  it('배포 전 브라우저 시뮬레이션은 같은 저장 계약만 적용하고 중복 target 이면 거부한다', () => {
+    const simulation = readText(resolve(root, '../tests/browser/overlay-simulation.cjs'));
+    expect(simulation).toContain('persistedOverlays(extensionManifests())');
+    expect(simulation).toContain('simulation refused: duplicate target layout');
+    expect(simulation).toContain("overlays.get(target)?.content");
+  });
+});
+
 describe('공개 쇼핑·통화 노출 억제', () => {
-  it('통화 선택기는 이커머스 주입(priority 320) 뒤에 같은 id 의 빈 앵커로 교체된다', () => {
-    expect(commerceChrome.target_layout).toBe('_user_base');
-    expect(commerceChrome.priority).toBeGreaterThan(320);
-    expect(commerceChrome.injections).toHaveLength(1);
-    expect(commerceChrome.injections[0]).toMatchObject({ target_id: 'header_currency_inject_anchor', position: 'replace' });
-    expect(commerceChrome.injections[0].components[0].id).toBe('header_currency_inject_anchor');
-    expect(commerceChrome.injections[0].components[0].children).toBeUndefined();
+  it('단일 _user_base overlay 가 상위 메뉴·footer·통화 교체를 모두 담고 이커머스(320) 뒤에 적용된다', () => {
+    expect(nav.target_layout).toBe('_user_base');
+    expect(nav.priority).toBe(USER_BASE_OVERLAY_PRIORITY);
+    expect(nav.priority).toBeGreaterThan(ECOMMERCE_CURRENCY_PRIORITY);
+    expect(nav.injections.map((injection: { target_id: string; position: string }) => [injection.target_id, injection.position])).toEqual([
+      ['main_content_area', 'prepend_child'],
+      ['footer', 'inject_props'],
+      ['header_currency_inject_anchor', 'replace'],
+    ]);
+    const currency = nav.injections[2];
+    expect(currency.components).toHaveLength(1);
+    expect(currency.components[0].id).toBe('header_currency_inject_anchor');
+    expect(currency.components[0].children).toBeUndefined();
+    expect(currency).toEqual(CURRENCY_SUPPRESSION_INJECTION);
   });
 
   it('Powered by 그누보드7 표기는 숨기지 않는다', () => {

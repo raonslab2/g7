@@ -7,7 +7,9 @@
 | 11개 문서의 제목·본문·SEO·version·발행 | `sirsoft-page` Page DB (`/admin/pages`) | 없음. 교체 명령은 `PageService::updatePage()`만 호출 |
 | 그룹·순서·짧은 라벨·설명 | `resources/taxonomy/info-policy.json` | 단일 출처. `scripts/taxonomy.mjs`가 extension JSON 생성 |
 | 상위 메뉴·product footer·문서 메뉴·breadcrumb | 생성된 `resources/extensions/{product-nav,native-page}.json` | 직접 수정 금지(`npm run taxonomy:check`, vitest 드리프트 테스트) |
-| 통화 선택기 숨김 | `resources/extensions/public-commerce-chrome.json` | `_user_base`의 `header_currency_inject_anchor`를 빈 앵커로 교체(priority 400 > 이커머스 320) |
+| 통화 선택기 숨김 | 생성된 `resources/extensions/product-nav.json`의 세 번째 injection | `_user_base`의 `header_currency_inject_anchor`를 빈 앵커로 교체. overlay priority 400 > 이커머스 320 |
+
+**overlay 저장 계약:** G7은 (template, 확장 종류, target layout, 출처) 마다 overlay 행을 하나만 저장한다. 이 모듈은 target layout마다 manifest를 정확히 하나 둔다(`home`·`page/show`·`_user_base`). 같은 target에 파일을 둘 두면 설치 시 뒤 파일이 앞 파일을 덮어쓴다 — 0.4.1 1차 배포 실패 원인(Troubleshooting CASE 9). `taxonomy:check`와 vitest가 중복을 막는다.
 
 승인된 IA: 정보 `about, service, cases, technology, faq, contact` / 정책 `privacy, terms, ai-workspace-policy, open-source, refund`.
 
@@ -101,6 +103,21 @@
    `conflict`가 하나라도 나오면 아무것도 쓰지 않은 상태이므로 원인(관리자 편집·version·비발행)을 확인하기 전 재시도하지 않는다.
 8. `node modules/_bundled/raonslab-product/tests/browser/info-policy-smoke.cjs`(content gate 포함) 1회.
 
+## 1차 배포 기록 (2026-09-28, 실패·롤백)
+
+| 단계 | 결과 |
+| --- | --- |
+| push | `origin/main` `390cdc7a` → `c64085b2`(fast-forward) |
+| 백업 | `/var/backups/g7-product/g7-product-20260928T135307Z.tar.gz`, 외부 SHA-256 `b9ca15c1…3b6e` OK, 내부 `SHA256SUMS` 4개 OK, `source-sha.txt` = `390cdc7a…` |
+| runtime | `pull --ff-only` → `c64085b2`, build 후 git status 0, `module:update` 0.4.0 → 0.4.1 |
+| route/FPM | route clear/cache(새 프로세스), `g7-product-fpm`만 graceful reload(USR2, master PID 유지), 14 routes, 301 확인 |
+| gate 5 smoke(content gate off) | **1116 PASS / 140 FAIL** — 상위 드롭다운 비어 있음·footer G7 기본. 같은 `_user_base` overlay 파일 2개 덮어쓰기 |
+| 롤백 | revert `4d9856dc`(트리 = `390cdc7a`) push → `pull --ff-only` → build(git status 0) → `module:update` 0.4.1 → 0.4.0 → route clear/cache → FPM graceful reload → 14 routes·301 → 0.4.0 smoke **451 / 0** |
+| DB | Page 교체 명령 미실행. about·faq·contact·refund v1, version 행 1개씩 유지 |
+
+수정(이 문서와 같은 commit): 통화 교체를 `product-nav.json`으로 합치고 `public-commerce-chrome.json` 삭제, 중복 target 회귀 검사와
+설치 계약을 따르는 시뮬레이션(`tests/browser/overlay-simulation.cjs`) 추가. 재배포는 위 순서를 새 백업부터 다시 수행한다.
+
 ## 롤백
 
 - source: 롤백 기준 commit은 `390cdc7a379e1f2b9c8e3991b241edcc59dbdd71`(raonslab-product 0.4.0). 0.4.1 commit들을 되돌리는 revert를 main에 push한 뒤
@@ -114,7 +131,7 @@
 
 - 콘텐츠 pack `raon-native-pages-wave2-2026-09-28`(SHA-256 `88e7e7b0e18dca947f0251ce6dd217e0f0a0c0aa73e6161dbf4c1882b0ac85f7`, 51,412 bytes)은 DB 없이 `NativePageContentPack::fromFile`(승인 SHA-256·감사 base_commit 대조)과 `InfoPageRemediator` pages 검증을 통과했고(한 글자 다른 SHA-256은 거부), 4개 목표 지문이 모두 원문 지문과 다르며, smoke content gate 정규식에 걸리는 문구가 없다. 본문은 저장소에 복사하지 않았다.
 
-- vitest 74/74 PASS.
+- vitest 77/77 PASS(수정본: overlay 저장 계약 3건 추가). 실패 후보 manifest를 복원하면 3건 FAIL, `taxonomy:check`가 `_user_base` 중복을 보고.
 - phpunit, worktree 고정(현 HEAD 후보 코드, 명령·환경은 `docs/g7/audit/INITIALIZATION_AUDIT_2026-09-28.md` §6.1): `InfoPageRemediationCommandTest`의
   신규 2건 `apply_requires_the_approved_whole_file_sha256`·`pack_envelope_is_validated_before_any_page_is_read` → **2 tests / 15 assertions PASS**.
 - phpunit, 이전 실행(worktree 고정 아님 — base_path·`App\`는 운영 checkout의 동일 코어 commit, 모듈 클래스는 worktree):

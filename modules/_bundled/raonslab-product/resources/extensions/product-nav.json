@@ -1,6 +1,6 @@
 {
   "target_layout": "_user_base",
-  "priority": 30,
+  "priority": 400,
   "injections": [
     {
       "target_id": "main_content_area",
@@ -842,6 +842,21 @@
           }
         ]
       }
+    },
+    {
+      "target_id": "header_currency_inject_anchor",
+      "position": "replace",
+      "components": [
+        {
+          "id": "header_currency_inject_anchor",
+          "type": "basic",
+          "name": "Div",
+          "props": {
+            "className": "hidden",
+            "data-rh-commerce-suppressed": "currency"
+          }
+        }
+      ]
     }
   ]
 }

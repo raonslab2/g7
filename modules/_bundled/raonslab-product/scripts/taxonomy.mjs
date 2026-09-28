@@ -3,12 +3,15 @@
  * 정보·정책 문서 분류(resources/taxonomy/info-policy.json)를 Layout Extension JSON 에 반영한다.
  *
  * - native-page.json 은 분류에서 전체를 생성한다(breadcrumb·모바일 문서 메뉴·데스크톱 우측 메뉴).
- * - product-nav.json 은 상위 드롭다운 두 목록과 product footer 의 정보·정책 linkGroups 만 교체한다.
+ * - product-nav.json 은 이 모듈의 유일한 `_user_base` overlay 다. 상위 드롭다운 두 목록, product footer 의
+ *   정보·정책 linkGroups, 공개 통화 선택기 교체 injection, overlay priority 를 생성한다.
+ *   G7 은 (template, 확장 종류, target layout, 출처) 마다 overlay 행을 하나만 저장하므로 같은 target 에
+ *   파일을 둘 두면 나중 파일이 앞 파일을 덮어쓴다 — `persistedOverlays()` 가 그 계약을 재현한다.
  *
  * 사용: `node scripts/taxonomy.mjs` (쓰기) / `node scripts/taxonomy.mjs --check` (불일치 시 exit 1).
  * vitest 드리프트 테스트가 같은 함수를 호출해 커밋된 JSON 과 비교한다.
  */
-import { readFileSync, writeFileSync } from 'node:fs';
+import { readdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -16,6 +19,32 @@ const moduleRoot = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 export const TAXONOMY_PATH = resolve(moduleRoot, 'resources/taxonomy/info-policy.json');
 export const NATIVE_PAGE_PATH = resolve(moduleRoot, 'resources/extensions/native-page.json');
 export const PRODUCT_NAV_PATH = resolve(moduleRoot, 'resources/extensions/product-nav.json');
+export const EXTENSIONS_DIR = resolve(moduleRoot, 'resources/extensions');
+
+/**
+ * `_user_base` overlay priority. 이커머스 통화 선택기(header-currency-selector-user.json, priority 320)가
+ * 앵커에 append_child 된 뒤에 교체해야 하므로 320 보다 커야 한다. 같은 `_user_base` 에 주입하는 다른 번들
+ * overlay 가 없어 상위 메뉴(main_content_area prepend_child)·footer(inject_props) 결과는 순서와 무관하다.
+ */
+export const USER_BASE_OVERLAY_PRIORITY = 400;
+export const ECOMMERCE_CURRENCY_PRIORITY = 320;
+
+/** 공개 통화·배송국가 선택기를 같은 id 의 빈 앵커로 교체한다(온라인 결제를 받지 않는 사이트). */
+export const CURRENCY_SUPPRESSION_INJECTION = {
+  target_id: 'header_currency_inject_anchor',
+  position: 'replace',
+  components: [
+    {
+      id: 'header_currency_inject_anchor',
+      type: 'basic',
+      name: 'Div',
+      props: {
+        className: 'hidden',
+        'data-rh-commerce-suppressed': 'currency',
+      },
+    },
+  ],
+};
 
 const t = (key) => `$t:raonslab-product.${key}`;
 const pagePath = (item) => `/page/${item.slug}`;
@@ -260,7 +289,39 @@ export function applyProductNav(productNav, taxonomy) {
     }
   }
 
+  next.priority = USER_BASE_OVERLAY_PRIORITY;
+  next.injections = [
+    ...next.injections.filter((injection) => injection.target_id !== CURRENCY_SUPPRESSION_INJECTION.target_id),
+    structuredClone(CURRENCY_SUPPRESSION_INJECTION),
+  ];
+
   return next;
+}
+
+/**
+ * G7 설치 계약: LayoutExtensionService 는 (template, 확장 종류, target_name, 출처 종류, 출처 id) 를 키로
+ * overlay 행을 하나만 둔다. 파일을 이름순으로 등록할 때 같은 target 의 뒤 파일이 앞 행을 덮어쓴다.
+ * 반환값은 target_layout 별로 실제 저장되는 overlay 와 덮어써진 파일 목록이다.
+ *
+ * @param {Array<{file: string, content: any}>} manifests
+ */
+export function persistedOverlays(manifests) {
+  const byTarget = new Map();
+  const overwritten = [];
+  for (const manifest of [...manifests].sort((a, b) => a.file.localeCompare(b.file))) {
+    const target = manifest.content?.target_layout;
+    if (!target) continue;
+    if (byTarget.has(target)) overwritten.push({ target, lost: byTarget.get(target).file, kept: manifest.file });
+    byTarget.set(target, manifest);
+  }
+  return { byTarget, overwritten };
+}
+
+/** 이 모듈의 overlay manifest 목록(resources/extensions/*.json). */
+export function extensionManifests(dir = EXTENSIONS_DIR) {
+  return readdirSync(dir)
+    .filter((name) => name.endsWith('.json'))
+    .map((name) => ({ file: name, content: JSON.parse(readFileSync(resolve(dir, name), 'utf8')) }));
 }
 
 export const serialize = (value) => `${JSON.stringify(value, null, 2)}\n`;
@@ -288,6 +349,11 @@ if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.ur
       writeFileSync(path, content);
       console.log(`updated: ${path}`);
     }
+  }
+  const { overwritten } = persistedOverlays(extensionManifests());
+  for (const item of overwritten) {
+    drift = true;
+    console.error(`duplicate target_layout ${item.target}: ${item.kept} would overwrite ${item.lost}`);
   }
   if (drift) process.exit(1);
 }

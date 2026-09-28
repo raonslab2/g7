@@ -30,8 +30,8 @@ function markProductRuntime(): void {
 
 /**
  * 온라인 결제를 받지 않는 제품 화면에서 템플릿의 쇼핑·장바구니·주문조회 진입점을 숨깁니다.
- * "Powered by 그누보드7" 표기는 오픈소스 고지로 유지합니다. 통화 선택기는 public-commerce-chrome.json
- * Layout Extension 이 공식 확장 지점에서 제거합니다.
+ * "Powered by 그누보드7" 표기는 오픈소스 고지로 유지합니다. 통화 선택기는 product-nav.json(이 모듈의 유일한
+ * `_user_base` overlay)의 replace injection 이 공식 확장 지점에서 제거합니다.
  */
 function hideCommerceEntryPoints(): void {
   document.querySelectorAll<HTMLElement>('#mobile_cart_btn, [data-testid="nav-shop"]').forEach((node) => {
