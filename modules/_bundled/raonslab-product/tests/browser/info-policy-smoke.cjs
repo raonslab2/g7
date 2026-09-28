@@ -29,7 +29,7 @@ async function inspectPage(browser, viewport, slug, locale = 'ko') {
   page.on('pageerror', (error) => errors.push(error.message));
   page.on('console', (message) => { if (message.type() === 'error') errors.push(message.text()); });
 
-  const path = `${locale === 'ko' ? '' : '/en'}/page/${slug}`;
+  const path = `/page/${slug}`;
   const response = await page.goto(`${BASE}${path}`, { waitUntil: 'networkidle', timeout: 30000 });
   await page.waitForSelector('.rh-native-breadcrumb', { timeout: 15000 });
   const state = await page.evaluate((expectedSlug) => {
@@ -38,12 +38,13 @@ async function inspectPage(browser, viewport, slug, locale = 'ko') {
       .map((node) => node.getAttribute('href'));
     return {
       title: document.querySelector('h1')?.textContent?.trim() || '',
-      contentLength: document.querySelector('.rh-native-content')?.textContent?.trim().length || 0,
+      contentLength: document.querySelector('#page_html_content')?.textContent?.trim().length || 0,
       hardcodedBodyPresent: Boolean(document.querySelector('.rh-doc[data-rh-page]')),
       horizontalOverflow: document.documentElement.scrollWidth > document.documentElement.clientWidth + 1,
       canonical,
       current,
       sidePosition: getComputedStyle(document.querySelector('.rh-native-side')).position,
+      presentationClassApplied: document.querySelector('#page_content_card')?.classList.contains('rh-native-page-card') === true,
       links: [...document.querySelectorAll('.rh-gnav a, footer a')].map((node) => node.getAttribute('href')).filter(Boolean),
       expected: `/page/${expectedSlug}`,
     };
@@ -52,6 +53,7 @@ async function inspectPage(browser, viewport, slug, locale = 'ko') {
   record(scope, 'HTTP 200', response?.status() === 200, response?.status());
   record(scope, 'native title/content render', state.title.length > 0 && state.contentLength > 100, `${state.title}:${state.contentLength}`);
   record(scope, 'single native presentation', !state.hardcodedBodyPresent, 'legacy rh-doc shell absent');
+  record(scope, 'RAON presentation class reaches DOM', state.presentationClassApplied);
   record(scope, 'no horizontal overflow', !state.horizontalOverflow);
   record(scope, 'canonical native URL', state.canonical.endsWith(path), state.canonical);
   record(scope, 'side current link', state.current.includes(`/page/${slug}`), state.current.join(','));
@@ -70,9 +72,9 @@ async function inspectPage(browser, viewport, slug, locale = 'ko') {
       record(`redirect/${slug}`, 'legacy URL is 301', response.status() === 301, response.status());
       record(`redirect/${slug}`, 'location preserves query and targets canonical', response.headers().location === `/page/${slug}?from=smoke`, response.headers().location);
 
-      const localized = await api.get(`/en${legacy}`, { maxRedirects: 0 });
+      const localized = await api.get(`/en${legacy}?from=smoke&locale=ko`, { maxRedirects: 0 });
       record(`redirect/en/${slug}`, 'localized legacy URL is 301', localized.status() === 301, localized.status());
-      record(`redirect/en/${slug}`, 'localized canonical target', localized.headers().location === `/en/page/${slug}`, localized.headers().location);
+      record(`redirect/en/${slug}`, 'localized canonical uses locale query', localized.headers().location === `/page/${slug}?from=smoke&locale=en`, localized.headers().location);
     }
     await api.dispose();
 
@@ -89,7 +91,7 @@ async function inspectPage(browser, viewport, slug, locale = 'ko') {
     const intake = await regression.evaluate(async () => {
       const response = await fetch('/api/modules/raonslab-product/consultations/config');
       const body = await response.json();
-      return { status: response.status, enabled: body?.data?.enabled };
+      return { status: response.status, enabled: body?.data?.intake_enabled };
     });
     record('regression/consultation', 'public intake remains fail-closed', intake.status === 200 && intake.enabled === false, JSON.stringify(intake));
     await regression.close();

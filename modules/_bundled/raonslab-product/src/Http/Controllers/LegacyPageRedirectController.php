@@ -12,11 +12,18 @@ class LegacyPageRedirectController
     {
         $slug = (string) $request->route('native_slug');
         $locale = $request->route('locale');
-        $prefix = is_string($locale) && $locale !== '' ? '/'.$locale : '';
-        $target = $prefix.'/page/'.$slug;
+        $target = '/page/'.$slug;
+        $query = $request->query();
 
-        if ($query = $request->getQueryString()) {
-            $target .= '?'.$query;
+        if (is_string($locale) && $locale !== '') {
+            unset($query['locale']);
+            if ($locale !== (string) $request->route('native_default_locale', 'ko')) {
+                $query['locale'] = $locale;
+            }
+        }
+
+        if ($query !== []) {
+            $target .= '?'.http_build_query($query, '', '&', PHP_QUERY_RFC3986);
         }
 
         return redirect()->to($target, 301);

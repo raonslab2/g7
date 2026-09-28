@@ -2,6 +2,7 @@
 
 namespace Modules\Raonslab\Product\Services;
 
+use Illuminate\Database\ConnectionInterface;
 use InvalidArgumentException;
 use Modules\Sirsoft\Page\Services\PageService;
 
@@ -10,6 +11,10 @@ use Modules\Sirsoft\Page\Services\PageService;
  */
 class NativePageBootstrapper
 {
+    private const CONTENT_MAX_LENGTH = 16777215;
+
+    private const TITLE_MAX_LENGTH = 255;
+
     public const SLUGS = [
         'service',
         'cases',
@@ -20,7 +25,23 @@ class NativePageBootstrapper
         'open-source',
     ];
 
-    public function __construct(private PageService $pageService) {}
+    /** @var array<int, string> */
+    private array $supportedLocales;
+
+    /**
+     * @param  array<int, string>|null  $supportedLocales  Test seam; production uses the active G7 locales.
+     */
+    public function __construct(
+        private PageService $pageService,
+        private ConnectionInterface $connection,
+        ?array $supportedLocales = null,
+    ) {
+        $this->supportedLocales = array_values(array_filter(
+            $supportedLocales ?? config('app.supported_locales', ['ko', 'en']),
+            fn (mixed $locale): bool => is_string($locale)
+                && preg_match('/^[a-z]{2}(?:-[A-Za-z]{2})?$/', $locale) === 1,
+        ));
+    }
 
     /**
      * @param  array<string, mixed>  $payload
@@ -29,26 +50,29 @@ class NativePageBootstrapper
     public function bootstrap(array $payload, bool $dryRun = false): array
     {
         $pages = $this->validatedPages($payload);
-        $results = [];
 
-        foreach ($pages as $slug => $page) {
-            if ($this->pageService->slugExists($slug)) {
-                $results[$slug] = 'preserved_existing';
+        return $this->connection->transaction(function () use ($pages, $dryRun): array {
+            $results = [];
 
-                continue;
+            foreach ($pages as $slug => $page) {
+                if ($this->pageService->slugExists($slug)) {
+                    $results[$slug] = 'preserved_existing';
+
+                    continue;
+                }
+
+                if ($dryRun) {
+                    $results[$slug] = 'would_create';
+
+                    continue;
+                }
+
+                $this->pageService->createPage(['slug' => $slug, ...$page]);
+                $results[$slug] = 'created';
             }
 
-            if ($dryRun) {
-                $results[$slug] = 'would_create';
-
-                continue;
-            }
-
-            $this->pageService->createPage(['slug' => $slug, ...$page]);
-            $results[$slug] = 'created';
-        }
-
-        return $results;
+            return $results;
+        });
     }
 
     /**
@@ -73,8 +97,22 @@ class NativePageBootstrapper
                 throw new InvalidArgumentException("Page payload [{$slug}] must be an object.");
             }
 
-            $title = $this->localizedStrings($page['title'] ?? null, $slug, 'title', allowEmpty: false);
-            $content = $this->localizedStrings($page['content'] ?? null, $slug, 'content', allowEmpty: false);
+            if (array_diff(array_keys($page), ['title', 'content', 'content_mode', 'published', 'seo_meta'])) {
+                throw new InvalidArgumentException("Page payload [{$slug}] contains an unsupported field.");
+            }
+
+            $title = $this->localizedStrings(
+                $page['title'] ?? null,
+                $slug,
+                'title',
+                self::TITLE_MAX_LENGTH,
+            );
+            $content = $this->localizedStrings(
+                $page['content'] ?? null,
+                $slug,
+                'content',
+                self::CONTENT_MAX_LENGTH,
+            );
             $mode = $page['content_mode'] ?? 'html';
             if (! in_array($mode, ['html', 'text'], true)) {
                 throw new InvalidArgumentException("Page payload [{$slug}.content_mode] is invalid.");
@@ -111,20 +149,25 @@ class NativePageBootstrapper
         return $pages;
     }
 
-    /** @return array{ko: string, en: string} */
-    private function localizedStrings(mixed $value, string $slug, string $field, bool $allowEmpty): array
+    /** @return array<string, string> */
+    private function localizedStrings(mixed $value, string $slug, string $field, int $maxLength): array
     {
-        if (! is_array($value) || array_diff(array_keys($value), ['ko', 'en'])) {
-            throw new InvalidArgumentException("Page payload [{$slug}.{$field}] must contain only ko and en strings.");
+        if (! is_array($value) || array_diff(array_keys($value), $this->supportedLocales)) {
+            throw new InvalidArgumentException("Page payload [{$slug}.{$field}] contains an unsupported locale.");
         }
 
-        foreach (['ko', 'en'] as $locale) {
-            if (! array_key_exists($locale, $value) || ! is_string($value[$locale])
-                || (! $allowEmpty && trim($value[$locale]) === '')) {
+        foreach (['ko', 'en'] as $requiredLocale) {
+            if (! array_key_exists($requiredLocale, $value)) {
+                throw new InvalidArgumentException("Page payload [{$slug}.{$field}.{$requiredLocale}] is required.");
+            }
+        }
+
+        foreach ($value as $locale => $localizedValue) {
+            if (! is_string($localizedValue) || trim($localizedValue) === '' || mb_strlen($localizedValue) > $maxLength) {
                 throw new InvalidArgumentException("Page payload [{$slug}.{$field}.{$locale}] is invalid.");
             }
         }
 
-        return ['ko' => $value['ko'], 'en' => $value['en']];
+        return $value;
     }
 }

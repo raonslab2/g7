@@ -72,16 +72,19 @@ describe('native Page 정보·정책 계약', () => {
     for (const legacy of Object.keys(LEGACY)) expect(navHrefs, legacy).not.toContain(legacy);
   });
 
-  it('공식 page/show 확장 지점에서 breadcrumb·side navigation·본문 class만 꾸민다', () => {
+  it('공식 page/show overlay로 breadcrumb·side navigation·presentation card만 꾸민다', () => {
     expect(nativePage.target_layout).toBe('page/show');
     expect(nativePage.injections.map((item: { target_id: string; position: string }) => [item.target_id, item.position])).toEqual([
       ['page_content_card', 'inject_props'],
       ['page_content_card', 'prepend_child'],
       ['page_html_content', 'prepend'],
-      ['page_html_content', 'inject_props'],
     ]);
     expect(JSON.stringify(nativePage)).toContain('page?.data?.slug');
     expect(JSON.stringify(nativePage)).not.toContain('"content":');
+    expect(nativePage.injections[0].props.className).toContain('rh-native-page-card');
+    expect(nativePage.injections.some((injection: any) => (
+      injection.target_id === 'page_html_content' && injection.position === 'inject_props'
+    ))).toBe(false);
   });
 
   it('본문을 담았던 product route/layout/translation은 제거된다', () => {
@@ -107,7 +110,10 @@ describe('native Page 정보·정책 계약', () => {
       expect(compatibilityRoutes).toContain(`'${legacy.slice(1)}' => '${canonical.slice('/page/'.length)}'`);
     }
     expect(compatibilityRoutes).toContain("Route::get('/{locale}/'.$legacyPath");
+    expect(compatibilityRoutes).toContain("config('app.supported_locales'");
     expect(redirectController).toContain('redirect()->to($target, 301)');
+    expect(redirectController).toContain("$query['locale'] = $locale");
+    expect(redirectController).not.toContain("$prefix.'/page/'");
   });
 
   it('ko/en presentation key 집합은 같고 본문 문구는 남지 않는다', () => {
@@ -118,10 +124,9 @@ describe('native Page 정보·정책 계약', () => {
 });
 
 describe('현재 위치 경로 정규화', () => {
-  it('끝 슬래시와 언어 prefix를 제거하고 canonical group을 판정한다', () => {
+  it('clean URL의 끝 슬래시를 제거하고 canonical group을 판정한다', () => {
     expect(normalizePath('/page/service/')).toBe('/page/service');
-    expect(normalizePath('/ko/page/privacy')).toBe('/page/privacy');
-    expect(normalizePath('/en-US/page/cases')).toBe('/page/cases');
+    expect(normalizePath('/board/notice')).toBe('/board/notice');
     expect(productPageGroup('/page/technology')).toBe('info');
     expect(productPageGroup('/page/terms')).toBe('policy');
     expect(productPageGroup('/board/notice')).toBeNull();

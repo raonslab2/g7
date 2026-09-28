@@ -24,8 +24,8 @@ HTTPS 공개 설정을 운영자가 모두 제공한 뒤에만 `RAON_CONSULTATIO
 기존 slug를 수정하지 않습니다.
 
 ```bash
-/usr/bin/php8.3 artisan raonslab-product:bootstrap-pages /secure/approved-raon-pages.json --dry-run
-/usr/bin/php8.3 artisan raonslab-product:bootstrap-pages /secure/approved-raon-pages.json
+/usr/bin/php8.3 artisan raonslab-product:bootstrap-pages /secure/approved-raon-pages.json --actor=SUPER_ADMIN_ID --dry-run
+/usr/bin/php8.3 artisan raonslab-product:bootstrap-pages /secure/approved-raon-pages.json --actor=SUPER_ADMIN_ID
 ```
 
 제품 정의, native Page 운영 계약과 공개 전 조건은 [docs/README.md](docs/README.md)를 참고합니다.

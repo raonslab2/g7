@@ -19,11 +19,9 @@ const PAGE_GROUPS: Record<string, 'info' | 'policy'> = {
   'open-source': 'policy',
 };
 
-/** `/ko/page/service/` 같은 경로에서 언어 prefix와 끝 슬래시를 제거한다. */
+/** G7의 clean URL에서 비교에 불필요한 끝 슬래시만 제거한다. */
 export function normalizePath(pathname: string): string {
-  const trimmed = pathname.replace(/\/+$/, '') || '/';
-  const match = trimmed.match(/^\/[a-z]{2}(?:-[A-Za-z]{2})?(\/.*)$/);
-  return match ? match[1] : trimmed;
+  return pathname.replace(/\/+$/, '') || '/';
 }
 
 export function productPageGroup(pathname: string): 'info' | 'policy' | null {

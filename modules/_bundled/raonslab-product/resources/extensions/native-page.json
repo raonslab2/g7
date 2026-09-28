@@ -76,13 +76,6 @@
           ]
         }
       ]
-    },
-    {
-      "target_id": "page_html_content",
-      "position": "inject_props",
-      "props": {
-        "className": "{{['service','cases','technology','privacy','terms','ai-workspace-policy','open-source'].includes(page?.data?.slug) ? 'rh-native-content' : 'text-gray-700 dark:text-gray-300'}}"
-      }
     }
   ]
 }

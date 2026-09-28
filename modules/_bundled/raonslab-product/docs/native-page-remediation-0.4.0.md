@@ -10,7 +10,7 @@
 | --- | --- | --- |
 | 7개 제목·본문·발행·SEO·수정시각·version·attachment | `NATIVE_PAGE` | `PageService`, `/admin/pages`, `/api/modules/sirsoft-page/pages/{slug}`, `/page/{slug}` |
 | RAON header/footer 및 정보·정책 taxonomy | `NAVIGATION` | `/admin/menus`와 `g7_menus`는 admin sidebar 전용이고 `sirsoft-basic` public template이 소비하지 않음 |
-| breadcrumb·side navigation·dark neutral CSS·responsive behavior | `PRODUCT_UI` | `page/show` layout overlay와 module asset으로 유지, G7/page core 수정 없음 |
+| breadcrumb·side navigation·dark neutral CSS·responsive behavior | `PRODUCT_UI` | `page/show` overlay가 실제 `page_content_card` DOM을 presentation anchor로 사용, G7/page core 수정 없음 |
 | GDPR privacy 연결 | `SPECIAL_INTEGRATION` | plugin은 미설치. 설치 시 `privacy_policy_slug=privacy`가 `/page/privacy`를 소비하며 지금은 설정/DB 변경 없음 |
 
 ## canonical Page 계약
@@ -25,8 +25,10 @@
 | AI 작업공간 권한 정책 | `ai-workspace-policy` | `/policy/ai-workspace` |
 | 오픈소스·라이선스 고지 | `open-source` | `/policy/open-source` |
 
-이전 URL과 locale prefix URL은 query string을 보존하는 HTTP 301만 반환한다. canonical, sitemap, public API,
-product navigation과 footer의 대상은 모두 `/page/{slug}` 하나다. thin shell과 duplicate canonical은 두지 않는다.
+이전 URL은 query string을 보존하는 HTTP 301만 반환한다. 과거 route manifest가 허용했던 locale prefix는 현재
+활성 `supported_locales`만 받고, 경로 prefix를 만들지 않고 G7 SEO locale 계약인 `?locale=en`으로 변환한다.
+기본 locale은 clean URL로 합쳐 중복 canonical을 만들지 않는다. canonical, sitemap, public API, product
+navigation과 footer의 대상은 모두 `/page/{slug}` 하나다. thin shell은 두지 않는다.
 
 ## one-time bootstrap 안전성
 
@@ -44,15 +46,19 @@ product navigation과 footer의 대상은 모두 `/page/{slug}` 하나다. thin 
 보안 경로의 JSON으로 export한 뒤 아래 공식 bootstrap 명령을 사용한다.
 
 ```bash
-/usr/bin/php8.3 artisan raonslab-product:bootstrap-pages /secure/approved-raon-pages.json --dry-run
-/usr/bin/php8.3 artisan raonslab-product:bootstrap-pages /secure/approved-raon-pages.json
+/usr/bin/php8.3 artisan raonslab-product:bootstrap-pages /secure/approved-raon-pages.json --actor=SUPER_ADMIN_ID --dry-run
+/usr/bin/php8.3 artisan raonslab-product:bootstrap-pages /secure/approved-raon-pages.json --actor=SUPER_ADMIN_ID
 ```
 
 payload root는 아래 7개 slug를 정확히 한 번씩 가져야 하며 각 값은 `title.ko/en`, `content.ko/en`,
 `content_mode`, boolean `published`, flat `seo_meta.{title,description,keywords}` 계약을 따른다. 본문 payload는
-repository에 포함하지 않는다. 명령은 payload 전체를 먼저 검증하고 각 slug에 `PageService::slugExists()`를
-호출한다. 존재하는 slug는 `preserved_existing`으로 끝내며 `updatePage()`를 호출하는 경로가 없다. 누락분만
-super admin attribution으로 `PageService::createPage()`를 호출해 v1 snapshot을 만든다.
+repository에 포함하지 않는다. 명령은 활성 G7 locale과 공식 Page request 한도에 맞춰 payload 전체를 먼저
+검증한다(title 255, content 16,777,215, SEO 255/500/500). `--actor`는 ID 또는 정확한
+email로 지정한 활성 super admin만 허용하며, 세션·cookie·remember token과
+login/logout event를 만들지 않는 CLI 전용 in-memory attribution guard를 사용한다. 각 slug에
+`PageService::slugExists()`를 호출하고, 존재하는 slug는 `preserved_existing`으로 끝내며 `updatePage()`를 호출하는
+경로가 없다. 누락분의 v1 snapshot 생성 전체는 하나의 외부 DB transaction으로 묶여 일부 실패 시 7개가 모두
+rollback된다.
 
 SEO metadata는 sirsoft-page admin 계약이 flat string만 허용하므로 ko/en 설명을 함께 담은 중립적인 단일 title과
 description으로 저장했다. 본문과 title은 native 다국어 필드다. 회사·담당자·보관기간 등 미확정 값은 만들지 않았고
@@ -88,5 +94,8 @@ description으로 저장했다. 본문과 title은 native 다국어 필드다. �
   일치했다. API에 version 삭제 계약이 없어 exact marker·slug·version·current baseline sentinel을 확인한 뒤 해당
   임시 v3 snapshot만 Eloquent transaction으로 제거했다(raw SQL write 없음). 전체 DB text/json column 검사,
   public API와 public page 검사에서 marker 0건, 임시 Sanctum token 0건을 확인했다.
-- source unit: Vitest 5 files / 61 tests PASS; PHP focused 8 tests / 67 assertions PASS; production asset build PASS
+- source unit: 변경된 Vitest 1 file / 7 tests PASS(나머지 불변 4 files / 54 tests 기존 PASS 재사용);
+  PHP focused 14 tests / 120 assertions PASS; production asset build PASS
+- presentation contract: `extension_point` props 주입을 제거하고 공식 overlay가 실제 basic `page_content_card`에
+  `rh-native-page-card`를 주입하도록 고정. browser smoke는 해당 DOM id/class를 직접 assertion한다.
 - 최종 PHP focused tests, 360/390/412/1280 runtime browser smoke와 main/runtime SHA는 delivery 단계에서 확인한다.

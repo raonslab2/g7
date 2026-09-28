@@ -2335,11 +2335,13 @@ body.raon-product #main_content:has(.rh-native-breadcrumb) .max-w-3xl {
 body.raon-product #main_content :has(> .rh-native-breadcrumb) {
   min-width: 0;
   overflow: hidden;
+  overflow-wrap: break-word;
   border: 1px solid var(--rh-border);
   border-radius: 12px;
   padding: clamp(1.25rem, 3vw, 2.5rem);
   background: var(--rh-bg);
   color: var(--rh-text);
+  line-height: 1.65;
   box-shadow: var(--rh-shadow-lg);
 }
 
@@ -2365,14 +2367,7 @@ body.raon-product #main_content :has(> .rh-native-breadcrumb) {
   margin-top: 1rem;
 }
 
-.rh-native-content {
-  min-width: 0;
-  overflow-wrap: break-word;
-  color: var(--rh-text-soft);
-  line-height: 1.65;
-}
-
-.rh-native-content::after {
+.rh-native-page-card::after {
   display: block;
   clear: both;
   content: '';

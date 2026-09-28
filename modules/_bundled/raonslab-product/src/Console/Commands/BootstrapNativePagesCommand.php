@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Auth;
 use JsonException;
+use Modules\Raonslab\Product\Auth\NativePageActorGuard;
 use Modules\Raonslab\Product\Services\NativePageBootstrapper;
 use Throwable;
 
@@ -14,6 +15,7 @@ class BootstrapNativePagesCommand extends Command
 {
     protected $signature = 'raonslab-product:bootstrap-pages
         {payload : Absolute path to the approved native Page JSON export}
+        {--actor= : Active super administrator ID or exact email for Page attribution}
         {--dry-run : Validate and report without creating missing Pages}';
 
     protected $description = 'Create missing RAON native Pages without updating any existing slug';
@@ -33,15 +35,19 @@ class BootstrapNativePagesCommand extends Command
                 throw new JsonException('The payload root must be an object.');
             }
 
-            if (! $this->option('dry-run')) {
-                $admin = User::where('is_super', true)->first();
-                if (! $admin) {
-                    $this->error('A super administrator is required for Page version attribution.');
+            $actor = $this->resolveActor((string) $this->option('actor'));
+            if (! $actor) {
+                $this->error('The actor must identify an active super administrator by ID or exact email.');
 
-                    return self::FAILURE;
-                }
-                Auth::login($admin);
+                return self::FAILURE;
             }
+
+            $auth = Auth::getFacadeRoot();
+            $previousGuard = $auth->getDefaultDriver();
+            $guardName = 'raonslab-native-page-bootstrap';
+            config(["auth.guards.{$guardName}" => ['driver' => $guardName]]);
+            $auth->extend($guardName, fn () => new NativePageActorGuard($actor));
+            $auth->shouldUse($guardName);
 
             $results = $bootstrapper->bootstrap($payload, (bool) $this->option('dry-run'));
             foreach ($results as $slug => $status) {
@@ -53,9 +59,35 @@ class BootstrapNativePagesCommand extends Command
 
             return self::FAILURE;
         } finally {
-            Auth::logout();
+            if (isset($auth, $previousGuard)) {
+                $auth->shouldUse($previousGuard);
+                $auth->forgetGuards();
+                config()->offsetUnset("auth.guards.{$guardName}");
+            }
         }
 
         return self::SUCCESS;
+    }
+
+    private function resolveActor(string $identifier): ?User
+    {
+        if ($identifier === '') {
+            return null;
+        }
+
+        $query = User::query();
+        if (ctype_digit($identifier)) {
+            $query->whereKey((int) $identifier);
+        } elseif (filter_var($identifier, FILTER_VALIDATE_EMAIL)) {
+            $query->where('email', $identifier);
+        } else {
+            return null;
+        }
+
+        return $query
+            ->where('is_super', true)
+            ->whereNull('blocked_at')
+            ->whereNull('withdrawn_at')
+            ->first();
     }
 }

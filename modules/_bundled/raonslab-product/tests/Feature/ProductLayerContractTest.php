@@ -24,9 +24,17 @@ class ProductLayerContractTest extends ModuleTestCase
         $this->assertSame('>=1.1.2', $manifest['dependencies']['modules']['sirsoft-page']);
         $this->assertSame('page/show', $extension['target_layout']);
         $this->assertSame(
-            ['page_content_card', 'page_content_card', 'page_html_content', 'page_html_content'],
+            ['page_content_card', 'page_content_card', 'page_html_content'],
             array_column($extension['injections'], 'target_id')
         );
+        $this->assertStringContainsString(
+            'rh-native-page-card',
+            $extension['injections'][0]['props']['className'],
+        );
+        $this->assertFalse(collect($extension['injections'])->contains(
+            fn (array $injection): bool => $injection['target_id'] === 'page_html_content'
+                && $injection['position'] === 'inject_props',
+        ));
         $this->assertFileDoesNotExist(
             $moduleRoot.'/resources/routes/user.json'
         );
@@ -49,6 +57,8 @@ class ProductLayerContractTest extends ModuleTestCase
     #[Test]
     public function legacy_information_and_policy_urls_redirect_permanently_to_native_pages(): void
     {
+        config(['app.locale' => 'ko', 'app.supported_locales' => ['ko', 'en']]);
+
         $routes = [
             '/info/services' => '/page/service',
             '/info/cases' => '/page/cases',
@@ -64,10 +74,18 @@ class ProductLayerContractTest extends ModuleTestCase
                 ->assertStatus(301)
                 ->assertRedirect($canonical.'?source=legacy');
 
-            $this->get('/en'.$legacy)
+            $this->get('/en'.$legacy.'?source=legacy&locale=ko')
                 ->assertStatus(301)
-                ->assertRedirect('/en'.$canonical);
+                ->assertRedirect($canonical.'?source=legacy&locale=en');
+
+            $this->get('/ko'.$legacy.'?source=legacy&locale=en')
+                ->assertStatus(301)
+                ->assertRedirect($canonical.'?source=legacy');
         }
+
+        $response = $this->get('/fr/info/services');
+        $this->assertNotSame(301, $response->getStatusCode());
+        $this->assertNotSame(301, $this->get('/info/services/extra')->getStatusCode());
     }
 
     #[Test]

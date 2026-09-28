@@ -5,9 +5,9 @@
 ### Changed
 
 - 정보·정책 문서 7종의 제목·본문·발행·SEO·수정시각·version 원본을 `sirsoft-page >=1.1.2`로 전환
-- 승인된 외부 Page JSON을 받아 누락 slug만 공식 `PageService`로 생성하고 기존 관리자 편집본은 항상 보존하는 재현 가능 bootstrap 명령 추가
+- 승인된 외부 Page JSON과 명시적 활성 관리자 attribution을 받아 누락 slug만 공식 Page 서비스로 원자적 생성하고 기존 관리자 편집본은 항상 보존하는 재현 가능 bootstrap 명령 추가
 - product navigation과 footer를 canonical `/page/{slug}`로 연결하고 native `page/show` 확장 지점에서 RAON breadcrumb·side navigation·dark neutral presentation 유지
-- `/info/*`, `/policy/*` 및 locale prefix 호환 URL은 query string을 보존하는 301로 canonical Page에 연결
+- `/info/*`, `/policy/*` 호환 URL은 query string을 보존하는 301로 canonical Page에 연결하고, 과거 지원 locale prefix는 G7의 `locale` query 계약으로 변환
 
 ### Removed
 
