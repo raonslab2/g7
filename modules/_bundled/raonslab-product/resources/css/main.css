@@ -47,7 +47,9 @@ body.raon-product #desktop_header button:has(.fa-shopping-bag) {
 /* 디자인 토큰은 사업 홈·상위 메뉴·안내 문서가 공유한다 */
 .rh-home,
 .rh-gnav,
-.rh-doc {
+.rh-doc,
+.rh-native-page-card,
+body.raon-product:has(.rh-native-breadcrumb) {
   --rh-bg: #121416;
   --rh-bg-alt: #16191c;
   --rh-surface: #1b1f23;
@@ -88,7 +90,9 @@ body.raon-product #desktop_header button:has(.fa-shopping-bag) {
 
 html:not(.dark) .rh-home,
 html:not(.dark) .rh-gnav,
-html:not(.dark) .rh-doc {
+html:not(.dark) .rh-doc,
+html:not(.dark) .rh-native-page-card,
+html:not(.dark) body.raon-product:has(.rh-native-breadcrumb) {
   --rh-bg: #f5f6f7;
   --rh-bg-alt: #eceef0;
   --rh-surface: #ffffff;
@@ -2321,6 +2325,60 @@ textarea.rh-input {
 
 /* ─── 정보·정책 안내 문서 ─────────────────────────────── */
 
+/* 본문은 sirsoft-page가 소유한다. 이 블록은 공식 page/show 확장 지점의 표현만 담당한다. */
+body.raon-product #main_content:has(.rh-native-breadcrumb) > div,
+body.raon-product #main_content:has(.rh-native-breadcrumb) .max-w-3xl {
+  max-width: 78rem;
+}
+
+body.raon-product #main_content :has(> .rh-native-breadcrumb) {
+  min-width: 0;
+  overflow: hidden;
+  overflow-wrap: break-word;
+  border: 1px solid var(--rh-border);
+  border-radius: 12px;
+  padding: clamp(1.25rem, 3vw, 2.5rem);
+  background: var(--rh-bg);
+  color: var(--rh-text);
+  line-height: 1.65;
+  box-shadow: var(--rh-shadow-lg);
+}
+
+.rh-native-breadcrumb {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: .5rem;
+  margin-bottom: 1rem;
+  color: var(--rh-muted);
+  font-size: .84rem;
+}
+
+.rh-native-side {
+  position: sticky;
+  top: 1rem;
+  float: left;
+  width: 220px;
+  margin: 0 2.5rem 2rem 0;
+}
+
+.rh-native-side-policy-label {
+  margin-top: 1rem;
+}
+
+body.raon-product #main_content :has(> .rh-native-breadcrumb)::after {
+  display: block;
+  clear: both;
+  content: '';
+}
+
+body.raon-product #main_content :has(> .rh-native-breadcrumb) #page_html_content {
+  min-width: 0;
+  overflow-wrap: break-word;
+  color: var(--rh-text-soft);
+  line-height: 1.65;
+}
+
 /* 템플릿 본문 컨테이너의 좌우 여백을 문서 화면에서만 걷어 내 머리 배경을 가로 끝까지 채운다 */
 body.raon-product #main_content:has(.rh-doc) {
   max-width: none !important;
@@ -2866,6 +2924,23 @@ body.raon-product #main_content:has(.rh-doc) {
 }
 
 @media (max-width: 960px) {
+  .rh-native-side {
+    position: static;
+    float: none;
+    width: auto;
+    margin: 0 0 1.5rem;
+  }
+
+  .rh-native-side .rh-side-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .35rem;
+  }
+
+  .rh-native-side .rh-side-link {
+    border: 1px solid var(--rh-border);
+  }
+
   .rh-doc-body {
     grid-template-columns: minmax(0, 1fr);
     gap: 1.75rem;

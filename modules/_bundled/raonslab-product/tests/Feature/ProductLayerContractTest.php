@@ -11,6 +11,84 @@ use PHPUnit\Framework\Attributes\Test;
 class ProductLayerContractTest extends ModuleTestCase
 {
     #[Test]
+    public function information_and_policy_documents_use_native_page_contract(): void
+    {
+        $moduleRoot = dirname(__DIR__, 2);
+        $manifest = json_decode((string) file_get_contents(
+            $moduleRoot.'/module.json'
+        ), true, flags: JSON_THROW_ON_ERROR);
+        $extension = json_decode((string) file_get_contents(
+            $moduleRoot.'/resources/extensions/native-page.json'
+        ), true, flags: JSON_THROW_ON_ERROR);
+
+        $this->assertSame('>=1.1.2', $manifest['dependencies']['modules']['sirsoft-page']);
+        $this->assertSame('page/show', $extension['target_layout']);
+        $this->assertSame(
+            ['page_content_card', 'page_content_card', 'page_html_content'],
+            array_column($extension['injections'], 'target_id')
+        );
+        $this->assertStringContainsString(
+            'rh-native-page-card',
+            $extension['injections'][0]['props']['className'],
+        );
+        $this->assertFalse(collect($extension['injections'])->contains(
+            fn (array $injection): bool => $injection['target_id'] === 'page_html_content'
+                && $injection['position'] === 'inject_props',
+        ));
+        $this->assertFileDoesNotExist(
+            $moduleRoot.'/resources/routes/user.json'
+        );
+
+        foreach ([
+            'rh_info_services.json',
+            'rh_info_cases.json',
+            'rh_info_principles.json',
+            'rh_policy_privacy.json',
+            'rh_policy_community.json',
+            'rh_policy_ai_workspace.json',
+            'rh_policy_open_source.json',
+        ] as $layout) {
+            $this->assertFileDoesNotExist(
+                $moduleRoot.'/resources/layouts/user/'.$layout
+            );
+        }
+    }
+
+    #[Test]
+    public function legacy_information_and_policy_urls_redirect_permanently_to_native_pages(): void
+    {
+        config(['app.locale' => 'ko', 'app.supported_locales' => ['ko', 'en']]);
+
+        $routes = [
+            '/info/services' => '/page/service',
+            '/info/cases' => '/page/cases',
+            '/info/principles' => '/page/technology',
+            '/policy/privacy' => '/page/privacy',
+            '/policy/community' => '/page/terms',
+            '/policy/ai-workspace' => '/page/ai-workspace-policy',
+            '/policy/open-source' => '/page/open-source',
+        ];
+
+        foreach ($routes as $legacy => $canonical) {
+            $this->get($legacy.'?source=legacy')
+                ->assertStatus(301)
+                ->assertRedirect($canonical.'?source=legacy');
+
+            $this->get('/en'.$legacy.'?source=legacy&locale=ko')
+                ->assertStatus(301)
+                ->assertRedirect($canonical.'?source=legacy&locale=en');
+
+            $this->get('/ko'.$legacy.'?source=legacy&locale=en')
+                ->assertStatus(301)
+                ->assertRedirect($canonical.'?source=legacy');
+        }
+
+        $response = $this->get('/fr/info/services');
+        $this->assertNotSame(301, $response->getStatusCode());
+        $this->assertNotSame(301, $this->get('/info/services/extra')->getStatusCode());
+    }
+
+    #[Test]
     public function home_extension_replaces_only_the_home_content_host(): void
     {
         $path = base_path('modules/_bundled/raonslab-product/resources/extensions/home-product.json');

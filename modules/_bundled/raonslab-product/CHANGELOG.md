@@ -1,5 +1,24 @@
 # 변경 이력
 
+## [0.4.0] - 2026-09-28
+
+### Changed
+
+- 정보·정책 문서 7종의 제목·본문·발행·SEO·수정시각·version 원본을 `sirsoft-page >=1.1.2`로 전환
+- 승인된 외부 Page JSON과 명시적 활성 관리자 attribution을 받아 누락 slug만 공식 Page 서비스로 원자적 생성하고 기존 관리자 편집본은 항상 보존하는 재현 가능 bootstrap 명령 추가
+- product navigation과 footer를 canonical `/page/{slug}`로 연결하고 native `page/show` 확장 지점에서 RAON breadcrumb·side navigation·dark neutral presentation 유지
+- `/info/*`, `/policy/*` 호환 URL은 query string을 보존하는 301로 canonical Page에 연결하고, 과거 지원 locale prefix는 G7의 `locale` query 계약으로 변환
+
+### Removed
+
+- product 소스가 중복 소유하던 문서 layout 7개, 공개 route manifest와 ko/en 본문·SEO 번역 키 제거
+
+### Compatibility
+
+- G7 Menu는 관리자 sidebar 전용이고 public user template이 소비하지 않으므로 public taxonomy는 product navigation에 유지
+- 미설치 상태인 `sirsoft-gdpr`는 변경하지 않음. 설치 시 기본 `privacy_policy_slug=privacy`가 canonical `/page/privacy`를 소비하는 latent 계약만 검증
+- `raonslab-ai-workspace`, 상담·board 공개 API에는 변경이 없으며 상담 intake 기본값은 계속 비활성
+
 ## [0.3.1] - 2026-09-28
 
 ### Added
