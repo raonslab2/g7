@@ -7,6 +7,7 @@
 - public homepage: Request `req_dc31fb01ab554bc0927c48f75301cda0`, commit `5de15afa65fddbaae20f0968767f3742ab34ccb7`
 - integration owner: Request `req_7130b85d2da44007867b9b9322c97140`
 - integration implementation SHA: `8d6d21610ec1178469fdc53059a669b7e3ea87b3`
+- runtime correction SHA: `f4813e992356d4b0a525a02c9b7c0cbe6619ff5d`
 
 변경 경계는 `modules/_bundled/raonslab-product`뿐이다. 코어 patch는 허용하지 않는다.
 
@@ -25,6 +26,7 @@
 | 기존 AI Adapter | PASS | frontend 5/5, backend 4 tests / 11 assertions |
 | migration down/up | PASS | 보호된 testing DB에서 product migration rollback 후 재적용, 최종 batch 2/Ran 확인 |
 | 정적 gate | PASS | JSON, PHP lint, `git diff --check`, module-only patch inventory, 정규식 secret scan, Composer validation |
+| SEO correction focused test | PASS | `ProductLayerContractTest` 3 tests / 10 assertions |
 | 상담 실제 public 접수 | SKIPPED | HTTP 공개 검수 환경이므로 의도적으로 disabled |
 | restart persistence | UNVERIFIED | 실제 고객/production DB를 사용하지 않고 protected test DB까지만 검증 |
 
@@ -49,4 +51,17 @@
 GD가 없는 환경에서 `UploadedFile::fake()->image()`가 실패한 건은 PASS로 바꾸지 않고
 `SKIPPED_ENVIRONMENT`로 기록했다. 테스트 자체나 관련 source가 바뀌지 않은 영역은 중복 실행하지 않았다.
 
-main SHA, runtime module/asset identity, 실제 URL, rollback archive는 배포 후 완료 보고에 기록한다.
+## 배포 검증
+
+- runtime source: `f4813e992356d4b0a525a02c9b7c0cbe6619ff5d`
+- module: active/bundled 모두 `0.2.0`; manifest SHA-256 `7ba65cc1f385902b83c616298104eb19a90d09af7f73e2da44469ce0849ca40f`
+- served/active CSS SHA-256: `26f9be6f5a83593c33eefef0e9182f48ebe7ab831d387c2a938946600ebe8634`
+- served/active JS SHA-256: `f0b3b72bab7f7091a7cb782b415e5cb129d05099fe32c365b830e8709af51798`
+- migration: `2026_09_28_000001_create_raonslab_product_consultation_tables`, production batch 7/Ran
+- URL: `http://127.0.0.1:18770/`, `http://203.245.29.156:58770/`
+- public config: 양쪽 모두 200 + `intake_enabled=false`; 빈 payload POST 503, wrong-origin POST 403, guest admin 401
+- bot render: 양쪽 모두 title/description/product CSS PASS
+- user-agent browser smoke: local/external × 390/1280 4/4 PASS; title/meta/CSS/CTA/overflow 0/disabled UI/PII input 0
+- 첫 live full harness: 136 PASS, 1 setup SKIPPED, 2 FAIL(config GET 일시 429, bot title 공백). bot title은 후속 수정했고 config는 60/min route 확인과 연속 5회 200으로 재검증했다.
+- 잘못된 기본 HeadlessChrome UA를 쓴 focused smoke 2회는 G7 bot 경로로 분류되어 FAIL했다. 정상 모바일/데스크톱 UA를 명시한 위 4/4 결과로 교정했으며 이 실패 시도도 삭제하지 않는다.
+- rollback archive: `/var/backups/g7-product/g7-product-20260928T061417Z.tar.gz`, SHA-256 `89a8595722701a7be5b9b50400bd96dbfceac9393dec4a91aa8747271012f80b`, source `460d45a247fc5dbdf6194ea0d4a3fc445c33fb59`
