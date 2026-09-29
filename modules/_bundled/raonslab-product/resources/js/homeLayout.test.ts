@@ -7,7 +7,7 @@ const layout = JSON.parse(readFileSync(resolve(root, 'extensions/home-product.js
 const ko = JSON.parse(readFileSync(resolve(root, 'lang/ko.json'), 'utf8'));
 const en = JSON.parse(readFileSync(resolve(root, 'lang/en.json'), 'utf8'));
 
-type Node = { id?: string; name?: string; text?: string; props?: Record<string, unknown>; children?: Node[]; actions?: Array<{ handler: string; params?: { path?: string } }> };
+type Node = { id?: string; name?: string; text?: string; condition?: string; if?: string; props?: Record<string, unknown>; children?: Node[]; actions?: Array<{ handler: string; params?: { path?: string } }> };
 
 const byId = (id: string): Node | undefined => nodes.find((n) => n.id === id);
 const classOf = (n?: Node): string => String(n?.props?.className ?? '');
@@ -92,11 +92,11 @@ describe('사업 홈 레이아웃 확장', () => {
     expect(new Set(ids).size).toBe(ids.length);
   });
 
-  it('상담 양식 호스트는 자식 없이 선언된다(모듈 에셋이 소유)', () => {
+  it('상담 양식 호스트는 정적 닫힘 안내 한 개만 조건부로 선언한다(양식은 모듈 에셋이 소유)', () => {
     const host = nodes.find((n) => n.props?.['data-rh-consult']);
-    expect(host).toBeDefined();
-    expect(host?.children).toBeUndefined();
+    expect(host?.id).toBe('raon_home_consult_form_host');
     expect(host?.text).toBeUndefined();
+    expect(host?.children?.map((c) => [c.id, c.condition])).toEqual([['raon_home_consult_static_closed', '{{_local.raonStaticClosedFallback}}']]);
   });
 
   it('커뮤니티 진입과 로그인 사용자의 AI 작업공간 진입을 보존한다(공지·질문·검색은 푸터가 담는다)', () => {
@@ -365,5 +365,69 @@ describe('홈 탐색 압축과 상담 접수 상태 표시', () => {
   it('모바일·태블릿 홈에서는 제품 바를 겹쳐 두지 않는다(드로어 문서 섹션이 같은 분류를 담는다)', () => {
     expect(css).toMatch(/@media \(max-width: 1023px\) \{\n {2}body\.raon-product:has\(\.rh-home\) \.rh-gnav \{\n {4}display: none;/);
     expect(css).not.toMatch(/\.rh-subnav/);
+  });
+});
+
+describe('봇·정적 렌더의 닫힘 표면(F4)', () => {
+  const STATIC_FLAG = '_local.raonStaticClosedFallback';
+
+  /** SEO 렌더러와 같은 규칙(if/condition)으로 표시 여부를 가린다. 이 레이아웃이 쓰는 두 형태만 해석한다. */
+  function visible(node: Node, isStatic: boolean): boolean {
+    const expr = node.condition ?? node.if;
+    if (expr === undefined) return true;
+    if (expr === `{{${STATIC_FLAG}}}`) return isStatic;
+    if (expr === `{{!${STATIC_FLAG}}}`) return !isStatic;
+    return true; // 다른 조건(로그인 등)은 이 검사 대상이 아니다
+  }
+  function render(node: Node, isStatic: boolean): Node | null {
+    if (!visible(node, isStatic)) return null;
+    return { ...node, children: node.children?.map((c) => render(c, isStatic)).filter((c): c is Node => c !== null) };
+  }
+  const collect = (root: Node | null): Node[] => { const out: Node[] = []; if (root) walk(root, (n) => out.push(n)); return out; };
+  const tr = (ref?: string) => (ref ? ko.consult[ref.replace('$t:raonslab-product.consult.', '')] : undefined);
+
+  it('정적 표시는 조건 두 곳에만 쓰이고, 열림 묶음의 SPA 상태 속성은 유지된다', () => {
+    const uses = nodes.filter((n) => JSON.stringify([n.condition, n.if]).includes('raonStaticClosedFallback')).map((n) => [n.id, n.condition]);
+    expect(uses).toEqual([
+      ['raon_home_actions_open', '{{!_local.raonStaticClosedFallback}}'],
+      ['raon_home_consult_static_closed', '{{_local.raonStaticClosedFallback}}'],
+    ]);
+    expect(byId('raon_home_actions_open')?.props?.['data-rh-intake-show']).toBe('open');
+    expect(byId('raon_home_actions_closed')?.props?.['data-rh-intake-show']).toBe('closed');
+    expect(byId('raon_home_actions_closed')?.condition).toBeUndefined();
+  });
+
+  it('정적 컨텍스트: 열림 묶음·상담 CTA 가 없고 닫힘 Hero 는 사례·도입 절차 두 행동뿐이다', () => {
+    const out = collect(render(home, true));
+    expect(out.some((n) => n.id === 'raon_home_actions_open')).toBe(false);
+    expect(out.filter((n) => n.props?.href === '#rh-consult' && classOf(n).includes('rh-action'))).toEqual([]);
+    const groups = out.filter((n) => n.props?.['data-rh-intake-show']);
+    expect(groups.map((g) => g.id)).toEqual(['raon_home_actions_closed']);
+    expect((groups[0].children ?? []).map((c) => [classOf(c).includes('rh-action-primary') ? 'primary' : 'secondary', c.props?.href, c.text])).toEqual([
+      ['primary', '#rh-case', '$t:raonslab-product.home.cta_case'],
+      ['secondary', '#rh-process', '$t:raonslab-product.home.cta_process'],
+    ]);
+  });
+
+  it('정적 컨텍스트: 상담 패널은 기존 접수 준비 중 제목·안내를 싣고 입력·연락 수단이 0개다', () => {
+    const panel = collect(render(byId('raon_home_consult_form_host') as Node, true));
+    const block = panel.find((n) => n.id === 'raon_home_consult_static_closed');
+    expect(classOf(block)).toBe('rh-state rh-consult-static-closed');
+    expect(block?.children?.map((c) => [c.name, classOf(c), c.text])).toEqual([
+      ['H3', 'rh-state-title', '$t:raonslab-product.consult.unavailable_title'],
+      ['P', 'rh-state-copy', '$t:raonslab-product.consult.unavailable_copy'],
+    ]);
+    expect(tr(block?.children?.[0].text)).toBe('온라인 상담 접수 준비 중입니다');
+    expect(tr(block?.children?.[1].text)).toMatch(/개인정보를 수집하지 않습니다/);
+    expect(en.consult.unavailable_title).toBeTruthy();
+    expect(panel.filter((n) => /^(Form|Input|Textarea|Select|Button|A|Checkbox|FileInput|PasswordInput)$/.test(String(n.name)))).toEqual([]);
+    expect(JSON.stringify(panel)).not.toMatch(/mailto:|tel:|@|href/);
+  });
+
+  it('기본(사람 화면) 컨텍스트: 열림·닫힘 묶음이 모두 남아 상태 전환이 그대로이고 정적 안내는 없다', () => {
+    const out = collect(render(home, false));
+    expect(out.filter((n) => n.props?.['data-rh-intake-show']).map((g) => g.id)).toEqual(['raon_home_actions_closed', 'raon_home_actions_open']);
+    expect(out.some((n) => n.id === 'raon_home_consult_static_closed')).toBe(false);
+    expect(out.find((n) => n.id === 'raon_home_consult_form_host')?.children).toEqual([]);
   });
 });

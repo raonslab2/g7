@@ -156,4 +156,31 @@ class ProductLayerContractTest extends ModuleTestCase
         );
         $this->assertSame(['title' => '게시판'], $unrelated);
     }
+
+    #[Test]
+    public function home_seo_context_is_marked_static_closed_only_for_the_home_layout(): void
+    {
+        $listener = new ApplyHomeSeoMeta;
+        $this->assertSame(
+            ['method' => 'markHomeStaticContext', 'priority' => 10, 'type' => 'filter'],
+            ApplyHomeSeoMeta::getSubscribedHooks()['core.seo.filter_context'],
+        );
+        $this->assertSame('applyHomeMeta', ApplyHomeSeoMeta::getSubscribedHooks()['core.seo.filter_meta']['method']);
+
+        $home = $listener->markHomeStaticContext(
+            ['_local' => ['kept' => 1], '_global' => ['x' => 'y']],
+            ['layoutName' => 'home', 'locale' => 'ko'],
+        );
+        $this->assertTrue($home['_local']['raonStaticClosedFallback']);
+        $this->assertSame(1, $home['_local']['kept']);
+        $this->assertSame(['x' => 'y'], $home['_global']);
+        $this->assertTrue($listener->markHomeStaticContext([], ['layoutName' => 'home'])['_local']['raonStaticClosedFallback']);
+
+        // 홈이 아닌 컨텍스트는 그대로(직렬화 결과까지 동일) 돌려준다
+        foreach (['page/show', 'board_list', 'home_extra', null] as $layoutName) {
+            $context = ['_local' => ['a' => [1, 2]], 'route' => ['slug' => 'cases'], 'query' => []];
+            $result = $listener->markHomeStaticContext($context, ['layoutName' => $layoutName]);
+            $this->assertSame(serialize($context), serialize($result));
+        }
+    }
 }

@@ -110,6 +110,7 @@
                           "id": "raon_home_actions_open",
                           "type": "basic",
                           "name": "Div",
+                          "condition": "{{!_local.raonStaticClosedFallback}}",
                           "comment": "상담 config 가 접수 열림으로 확인된 경우에만 보인다.",
                           "props": {
                             "className": "rh-actions",
@@ -2037,12 +2038,44 @@
                           "id": "raon_home_consult_form_host",
                           "type": "basic",
                           "name": "Div",
-                          "comment": "상담 양식 호스트 — 접수 상태·양식은 모듈 전역 에셋이 담당",
+                          "comment": "상담 양식 호스트 — 접수 상태·양식은 모듈 전역 에셋이 담당. 봇·정적 렌더(ApplyHomeSeoMeta 가 _local.raonStaticClosedFallback 표시)에서만 닫힘 안내를 정적으로 싣는다(입력 필드 없음).",
                           "props": {
                             "className": "rh-consult-panel",
                             "data-rh-consult": "true",
                             "aria-live": "polite"
-                          }
+                          },
+                          "children": [
+                            {
+                              "id": "raon_home_consult_static_closed",
+                              "type": "basic",
+                              "name": "Div",
+                              "condition": "{{_local.raonStaticClosedFallback}}",
+                              "comment": "정적 닫힘 안내(F4). 입력·연락처·대체 채널 없음. 사람 화면에서는 조건이 거짓이라 렌더되지 않고 consultationForm.ts 가 상태를 채운다.",
+                              "props": {
+                                "className": "rh-state rh-consult-static-closed"
+                              },
+                              "children": [
+                                {
+                                  "id": "raon_home_consult_static_closed_title",
+                                  "type": "basic",
+                                  "name": "H3",
+                                  "props": {
+                                    "className": "rh-state-title"
+                                  },
+                                  "text": "$t:raonslab-product.consult.unavailable_title"
+                                },
+                                {
+                                  "id": "raon_home_consult_static_closed_copy",
+                                  "type": "basic",
+                                  "name": "P",
+                                  "props": {
+                                    "className": "rh-state-copy"
+                                  },
+                                  "text": "$t:raonslab-product.consult.unavailable_copy"
+                                }
+                              ]
+                            }
+                          ]
                         }
                       ]
                     },

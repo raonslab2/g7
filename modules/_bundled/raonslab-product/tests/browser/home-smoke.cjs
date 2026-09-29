@@ -335,6 +335,8 @@ async function layoutChecks(browser, vp) {
       hubRoleTop: top('.rh-proof-case-hub .rh-proof-case-role'),
       roles: [...document.querySelectorAll('.rh-proof-case-role')].filter(shown).map((el) => el.textContent.trim()),
       sectionHeights: [...document.querySelectorAll('.rh-home > [role=region]')].map((el) => `${el.id.replace('rh-', '')} ${Math.round(el.getBoundingClientRect().height)}`).join(' · '),
+      staticClosed: document.querySelectorAll('.rh-consult-static-closed').length,
+      intakeGroups: document.querySelectorAll('.rh-hero [data-rh-intake-show]').length,
       symphony: (document.querySelector('.rh-home').innerText.match(/Symphony/g) ?? []).length,
       // 행동 유형 = 보이는 행동 링크의 목적지 종류. 상담 양식의 "다시 확인" 같은 상태 버튼은 행동 링크가 아니다.
       ctaTypes: new Set([...document.querySelectorAll('.rh-home a.rh-action')].filter(shown).map((a) => a.getAttribute('href'))).size,
@@ -345,6 +347,7 @@ async function layoutChecks(browser, vp) {
   record(scope, `측정: 섹션 높이 ${closed.sectionHeights}`, 'INFO');
   assert(scope, '두 사례 모두 무엇을 입증하는지 한 줄 표시', closed.roles.length === 2 && /지금 보고 계신 이 사이트/.test(closed.roles[0]) && /실주문 차단 검증/.test(closed.roles[1]), JSON.stringify(closed.roles));
   assert(scope, '"이 사이트가 RAON Hub" 문구가 y<1,000 안', closed.hubRoleTop !== null && closed.hubRoleTop < 1000, closed.hubRoleTop);
+  assert(scope, '사람 화면: 봇용 정적 닫힘 안내 없음·Hero 상태 묶음 두 개 유지(상태 전환은 JS)', closed.staticClosed === 0 && closed.intakeGroups === 2, `${closed.staticClosed}/${closed.intakeGroups}`);
   assert(scope, '화면 속 앱 이름 Symphony 를 홈에서 한 번만 설명', closed.symphony === 1, closed.symphony);
   assert(scope, 'MOBILE_STOCK 필수 캡션 표시', closed.caption === '모의투자 · 자체 제품 · 예시 데이터', closed.caption);
   assert(scope, '홈 글자 1,580자 이하', closed.chars <= 1580, closed.chars);
