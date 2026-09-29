@@ -200,6 +200,53 @@ async function overflow(page) {
   });
 }
 
+const SHOT_SHA256 = '4fa8b7a705bede727aa21f4ba7a089466b2455b15051f2c660adcbeafa3e30de';
+
+/** MOBILE_STOCK 화면: 표시 폭·비율, 원본 열기 링크의 주소·바이트, 390 에서 키보드·탭 동작 */
+async function shotLinkChecks(page, vp, scope) {
+  const m = await page.evaluate(() => {
+    const img = document.querySelector('.rh-shot-img');
+    const link = img?.closest('a[data-rh-asset-link]');
+    const r = img?.getBoundingClientRect();
+    return {
+      width: r ? Math.round(r.width * 10) / 10 : 0,
+      height: r ? Math.round(r.height * 10) / 10 : 0,
+      src: img?.getAttribute('src') ?? '',
+      href: link?.getAttribute('href') ?? '',
+      label: link?.getAttribute('aria-label') ?? '',
+      alt: img?.getAttribute('alt') ?? '',
+      caption: document.querySelector('.rh-shot-caption')?.textContent.trim() ?? '',
+      images: document.querySelectorAll('.rh-home img').length,
+    };
+  });
+  record(scope, `측정: MOBILE_STOCK 화면 ${m.width}×${m.height}px`, 'INFO');
+  if (vp.mobile) assert(scope, 'MOBILE_STOCK 화면 표시 폭 150px 이상', m.width >= 150, m.width);
+  assert(scope, 'MOBILE_STOCK 화면 원본 비율 유지(자르지 않음)', m.width > 0 && Math.abs(m.height / m.width - 1760 / 780) < 0.02, `${m.width}×${m.height}`);
+  assert(scope, '홈 이미지 1장', m.images === 1, m.images);
+  assert(scope, '원본 열기 링크: 이미지와 같은 자산 주소·접근 가능한 이름·대체 텍스트 유지', m.href !== '' && m.href === m.src && m.label === 'MOBILE_STOCK 화면 원본 크기로 보기' && m.alt.includes('예시 데이터'), JSON.stringify(m));
+  if (!m.href) return;
+  const res = await fetch(new URL(m.href, BASE));
+  const buf = Buffer.from(await res.arrayBuffer());
+  const sha = require('node:crypto').createHash('sha256').update(buf).digest('hex');
+  assert(scope, '원본 주소 200·sha256 불변', res.status === 200 && sha === SHOT_SHA256, `${res.status} ${sha} ${m.href}`);
+  if (vp.name !== 'mobile-390') return;
+  const target = new URL(m.href, BASE).href;
+  // 키보드: 링크에 포커스 → Enter
+  await page.locator('a[data-rh-asset-link]').focus();
+  const focused = await page.evaluate(() => document.activeElement?.matches('a[data-rh-asset-link]') ?? false);
+  const [kbResp] = await Promise.all([page.waitForNavigation({ timeout: 10000 }).catch(() => null), page.keyboard.press('Enter')]);
+  assert(scope, '원본 열기: 키보드 Enter 로 같은 원본(200) 열림', focused && page.url() === target && kbResp?.status() === 200, `${focused} ${page.url()} ${kbResp?.status()}`);
+  await page.goBack({ waitUntil: 'networkidle' });
+  await page.waitForSelector('.rh-home a[data-rh-asset-link][href]', { timeout: 15000 });
+  // 탭
+  await page.locator('a[data-rh-asset-link]').scrollIntoViewIfNeeded();
+  const [tapResp] = await Promise.all([page.waitForNavigation({ timeout: 10000 }).catch(() => null), page.locator('a[data-rh-asset-link]').tap()]);
+  assert(scope, '원본 열기: 탭으로 같은 원본(200) 열림', page.url() === target && tapResp?.status() === 200, `${page.url()} ${tapResp?.status()}`);
+  await page.goBack({ waitUntil: 'networkidle' });
+  await page.waitForSelector('.rh-home', { timeout: 15000 });
+  await page.waitForFunction(() => document.documentElement.dataset.rhIntake !== undefined, null, { timeout: 15000 });
+}
+
 async function contrastReport(page) {
   return page.evaluate(() => {
     function rgb(str) {
@@ -285,18 +332,28 @@ async function layoutChecks(browser, vp) {
       msPreviewTop: top('.rh-proof-case-ms'),
       caption: document.querySelector('.rh-shot-caption')?.textContent.trim() ?? '',
       caseTop: top('#rh-case'),
+      hubRoleTop: top('.rh-proof-case-hub .rh-proof-case-role'),
+      roles: [...document.querySelectorAll('.rh-proof-case-role')].filter(shown).map((el) => el.textContent.trim()),
+      sectionHeights: [...document.querySelectorAll('.rh-home > [role=region]')].map((el) => `${el.id.replace('rh-', '')} ${Math.round(el.getBoundingClientRect().height)}`).join(' · '),
+      symphony: (document.querySelector('.rh-home').innerText.match(/Symphony/g) ?? []).length,
       // 행동 유형 = 보이는 행동 링크의 목적지 종류. 상담 양식의 "다시 확인" 같은 상태 버튼은 행동 링크가 아니다.
       ctaTypes: new Set([...document.querySelectorAll('.rh-home a.rh-action')].filter(shown).map((a) => a.getAttribute('href'))).size,
     };
   });
   record(scope, `측정: 높이 ${closed.height}px · 글자 ${closed.chars} · 증거 ${closed.proofTop}px · MOBILE_STOCK 미리보기 ${closed.msPreviewTop}px · 사례 상세 ${closed.caseTop}px (${(closed.caseTop / closed.vh).toFixed(2)}화면)`, 'INFO');
   assert(scope, '두 제품 증거(MOBILE_STOCK 화면 포함)가 2화면 안에서 시작', closed.msPreviewTop !== null && closed.msPreviewTop <= closed.vh * 2, `${closed.msPreviewTop}/${closed.vh * 2}`);
+  record(scope, `측정: 섹션 높이 ${closed.sectionHeights}`, 'INFO');
+  assert(scope, '두 사례 모두 무엇을 입증하는지 한 줄 표시', closed.roles.length === 2 && /지금 보고 계신 이 사이트/.test(closed.roles[0]) && /실주문 차단 검증/.test(closed.roles[1]), JSON.stringify(closed.roles));
+  assert(scope, '"이 사이트가 RAON Hub" 문구가 y<1,000 안', closed.hubRoleTop !== null && closed.hubRoleTop < 1000, closed.hubRoleTop);
+  assert(scope, '화면 속 앱 이름 Symphony 를 홈에서 한 번만 설명', closed.symphony === 1, closed.symphony);
   assert(scope, 'MOBILE_STOCK 필수 캡션 표시', closed.caption === '모의투자 · 자체 제품 · 예시 데이터', closed.caption);
   assert(scope, '홈 글자 1,580자 이하', closed.chars <= 1580, closed.chars);
   await page.locator('.rh-proof-case-ms').scrollIntoViewIfNeeded();
   await page.waitForFunction(() => { const img = document.querySelector('.rh-shot-img'); return !!img && img.complete && img.naturalWidth > 0; }, null, { timeout: 10000 }).catch(() => {});
   const shot = await page.evaluate(() => { const img = document.querySelector('.rh-shot-img'); return { src: img?.getAttribute('src') ?? '', w: img?.naturalWidth ?? 0, alt: img?.getAttribute('alt') ?? '' }; });
   assert(scope, 'MOBILE_STOCK 화면 이미지 로드(코어 자산 URL·대체 텍스트)', shot.w === 780 && shot.src.includes('resources') && shot.alt.includes('예시 데이터'), JSON.stringify(shot));
+  if (SHOTS) await page.locator('#rh-proof').screenshot({ path: path.join(SHOTS, `${scope}-proof.png`) });
+  await shotLinkChecks(page, vp, scope);
   await page.evaluate(() => window.scrollTo(0, 0));
   assert(scope, '접수 닫힘이 클릭 전에 확정된다', closed.intake === 'closed', closed.intake);
   assert(scope, '닫힘: 주 행동 사례, 보조 행동 도입 절차', JSON.stringify(closed.heroCtas) === JSON.stringify([['primary', '#rh-case'], ['secondary', '#rh-process']]), JSON.stringify(closed.heroCtas));
@@ -305,7 +362,7 @@ async function layoutChecks(browser, vp) {
   else assert(scope, '데스크톱: 상담 진입점에 접수 준비 중 표시', closed.gnavShown && /접수 준비 중/.test(closed.gnavCta ?? ''), closed.gnavCta);
   assert(scope, 'RAON Hub 증거가 첫 화면 안에서 시작', closed.proofTop !== null && closed.proofTop < closed.vh, `${closed.proofTop}/${closed.vh}`);
   assert(scope, '행동 유형 2개 이하', closed.ctaTypes <= 2, closed.ctaTypes);
-  // 목표는 약 5,800px. 0.5.0 E 실측 5,925px 로 목표를 약 2% 넘는다 — 사실 항목을 빼지 않는 한 상한 6,000px 로 회귀만 막는다.
+  // 목표는 약 5,800px. 0.5.0 E 실측 5,925px, 0.5.1(사례 역할 줄·화면 152px) 실측 5,996px — 상한 6,000px 로 회귀만 막는다(완화하지 않는다).
   if (vp.name === 'mobile-390') assert(scope, '390px 전체 높이 6,000px 이하(목표 약 5,800)', closed.height <= 6000, closed.height);
 
   // 2) 접수 열림 계약 스텁 — 상담이 주 행동이 되고 양식이 뜬다
@@ -604,14 +661,16 @@ async function navigationChecks(browser) {
   if (page.configThrottled()) record(scope, `상담 config 429 ${page.configThrottled()}회(스모크 요청량으로 인한 분당 제한)`, 'INFO');
   await page.close();
 
-  // 사례 기술 근거 링크 → 사례 문서
+  // 사례 상세 링크 → 사례 문서
   {
     const p = await context.newPage();
     await p.goto(`${BASE}/`, { waitUntil: 'networkidle' });
     await p.waitForSelector('.rh-home');
+    const label = (await p.locator('#rh-case .rh-case-foot a[href="/page/cases"]').innerText()).trim();
+    assert(scope, '사례 상세 링크 문구가 도착지를 말한다', label === '사례 상세 보기', label);
     await p.click('#rh-case .rh-case-foot a[href="/page/cases"]');
     await p.waitForURL('**/page/cases');
-    assert(scope, '사례 → 기술 근거(/page/cases) 이동', new URL(p.url()).pathname === '/page/cases');
+    assert(scope, '사례 → 사례 상세(/page/cases) 이동', new URL(p.url()).pathname === '/page/cases');
     await p.close();
   }
 

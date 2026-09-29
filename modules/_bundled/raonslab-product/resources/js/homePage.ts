@@ -5,6 +5,8 @@
  * - 홈 안의 섹션 이동 링크(`a[data-rh-jump]`)는 해시 변경 없이 스크롤·포커스만 옮긴다(라우터 재진입 방지).
  * - 모듈 동봉 이미지(`img[data-rh-asset]`)의 주소는 `G7Core.asset.module` 로 만든다. 서버의 자산 URL 모드
  *   (확장자 경로 / `?file=` 쿼리)를 코어가 알고 있으므로 이 모듈은 주소를 문자열로 조립하지 않는다.
+ * - 원본 열기 링크(`a[data-rh-asset-link]`)는 안쪽 이미지와 같은 주소를 href 로 받는다. 주소를 못 만들면
+ *   href 를 두지 않는다(가짜 링크를 만들지 않는다).
  */
 import { currentLocale, t } from './i18n';
 
@@ -100,11 +102,13 @@ export function resolveModuleAssetUrl(asset: AssetApi | undefined, path: string)
   }
 }
 
-function hydrateModuleImages(): void {
+export function hydrateModuleImages(root: ParentNode = document): void {
   const asset = (window as unknown as { G7Core?: { asset?: AssetApi } }).G7Core?.asset;
-  document.querySelectorAll<HTMLImageElement>('.rh-home img[data-rh-asset]').forEach((img) => {
+  root.querySelectorAll<HTMLImageElement>('.rh-home img[data-rh-asset]').forEach((img) => {
     const url = resolveModuleAssetUrl(asset, img.dataset.rhAsset ?? '');
     if (url && img.getAttribute('src') !== url) img.setAttribute('src', url);
+    const link = img.closest<HTMLAnchorElement>('a[data-rh-asset-link]');
+    if (link && url && link.getAttribute('href') !== url) link.setAttribute('href', url);
   });
 }
 

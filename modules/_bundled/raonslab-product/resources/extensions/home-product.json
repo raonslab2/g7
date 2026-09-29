@@ -460,13 +460,14 @@
                                   "text": "$t:raonslab-product.home.proof_hub_name"
                                 },
                                 {
-                                  "id": "raon_home_proof_hub_kind",
+                                  "id": "raon_home_proof_hub_role",
                                   "type": "basic",
                                   "name": "P",
+                                  "comment": "이 사례가 무엇을 입증하는지 한 줄(F1). 지금 보는 사이트가 RAON Hub 라는 사실과 확장 방식만 쓴다.",
                                   "props": {
-                                    "className": "rh-proof-case-kind"
+                                    "className": "rh-proof-case-role"
                                   },
-                                  "text": "$t:raonslab-product.home.proof_hub_kind"
+                                  "text": "$t:raonslab-product.home.proof_hub_role"
                                 }
                               ]
                             },
@@ -535,34 +536,6 @@
                                   ]
                                 },
                                 {
-                                  "id": "raon_home_proof_extend",
-                                  "type": "basic",
-                                  "name": "Li",
-                                  "props": {
-                                    "className": "rh-proof-item rh-proof-item-extend"
-                                  },
-                                  "children": [
-                                    {
-                                      "id": "raon_home_proof_extend_label",
-                                      "type": "basic",
-                                      "name": "Span",
-                                      "props": {
-                                        "className": "rh-proof-label"
-                                      },
-                                      "text": "$t:raonslab-product.home.proof_extend_label"
-                                    },
-                                    {
-                                      "id": "raon_home_proof_extend_value",
-                                      "type": "basic",
-                                      "name": "Span",
-                                      "props": {
-                                        "className": "rh-proof-value"
-                                      },
-                                      "text": "$t:raonslab-product.home.proof_extend_value"
-                                    }
-                                  ]
-                                },
-                                {
                                   "id": "raon_home_proof_scope",
                                   "type": "basic",
                                   "name": "Li",
@@ -612,19 +585,32 @@
                               },
                               "children": [
                                 {
-                                  "id": "raon_home_proof_ms_shot_img",
+                                  "id": "raon_home_proof_ms_shot_link",
                                   "type": "basic",
-                                  "name": "Img",
-                                  "comment": "src 는 homePage.ts 가 G7Core.asset.module 로 채운다(자산 URL 이중 모드 대응). 출처: resources/assets/cases/PROVENANCE.json",
+                                  "name": "A",
+                                  "comment": "같은 자산 원본을 연다(F2). href 는 homePage.ts 가 안쪽 이미지의 data-rh-asset 으로 G7Core.asset.module 주소를 만들어 채운다 — 자산 경로 참조는 이미지 하나만 둔다.",
                                   "props": {
-                                    "className": "rh-shot-img",
-                                    "alt": "$t:raonslab-product.home.ms_shot_alt",
-                                    "width": 390,
-                                    "height": 880,
-                                    "loading": "lazy",
-                                    "decoding": "async",
-                                    "data-rh-asset": "resources/assets/cases/mobile-stock-public-case-01-new-paper-account-390x844.png"
-                                  }
+                                    "className": "rh-shot-link",
+                                    "data-rh-asset-link": "true",
+                                    "aria-label": "$t:raonslab-product.home.ms_shot_open"
+                                  },
+                                  "children": [
+                                    {
+                                      "id": "raon_home_proof_ms_shot_img",
+                                      "type": "basic",
+                                      "name": "Img",
+                                      "comment": "src 는 homePage.ts 가 G7Core.asset.module 로 채운다(자산 URL 이중 모드 대응). 출처: resources/assets/cases/PROVENANCE.json",
+                                      "props": {
+                                        "className": "rh-shot-img",
+                                        "alt": "$t:raonslab-product.home.ms_shot_alt",
+                                        "width": 390,
+                                        "height": 880,
+                                        "loading": "lazy",
+                                        "decoding": "async",
+                                        "data-rh-asset": "resources/assets/cases/mobile-stock-public-case-01-new-paper-account-390x844.png"
+                                      }
+                                    }
+                                  ]
                                 },
                                 {
                                   "id": "raon_home_proof_ms_shot_caption",
@@ -670,6 +656,16 @@
                                         "className": "rh-proof-case-kind"
                                       },
                                       "text": "$t:raonslab-product.home.proof_ms_kind"
+                                    },
+                                    {
+                                      "id": "raon_home_proof_ms_role",
+                                      "type": "basic",
+                                      "name": "P",
+                                      "comment": "이 사례가 무엇을 입증하는지 한 줄(F1). AI 분석·실거래·수익·고객 운영을 암시하지 않는다.",
+                                      "props": {
+                                        "className": "rh-proof-case-role"
+                                      },
+                                      "text": "$t:raonslab-product.home.proof_ms_role"
                                     }
                                   ]
                                 },
@@ -700,24 +696,24 @@
                                       "text": "$t:raonslab-product.home.proof_ms_point3"
                                     }
                                   ]
+                                },
+                                {
+                                  "id": "raon_home_proof_more",
+                                  "type": "basic",
+                                  "name": "A",
+                                  "comment": "두 사례의 검증 범위로 이동. 화면 이미지 옆의 남는 세로 공간에 둔다(휴대폰 높이 순증 억제).",
+                                  "props": {
+                                    "className": "rh-text-link",
+                                    "href": "#rh-case",
+                                    "data-rh-jump": "case"
+                                  },
+                                  "text": "$t:raonslab-product.home.proof_more"
                                 }
                               ]
                             }
                           ]
                         }
                       ]
-                    },
-                    {
-                      "id": "raon_home_proof_more",
-                      "type": "basic",
-                      "name": "A",
-                      "comment": "두 사례의 검증 범위로 이동",
-                      "props": {
-                        "className": "rh-text-link",
-                        "href": "#rh-case",
-                        "data-rh-jump": "case"
-                      },
-                      "text": "$t:raonslab-product.home.proof_more"
                     }
                   ]
                 }
@@ -1503,7 +1499,7 @@
                                   "id": "raon_home_case_hub_more",
                                   "type": "basic",
                                   "name": "A",
-                                  "comment": "기술 근거(점검 항목·모듈 구성)는 사례 문서가 담는다.",
+                                  "comment": "사례 상세(점검 항목·모듈 구성)는 사례 문서가 담는다. 링크 문구는 도착지(사례 상세)를 그대로 말한다.",
                                   "props": {
                                     "className": "rh-text-link",
                                     "href": "/page/cases"

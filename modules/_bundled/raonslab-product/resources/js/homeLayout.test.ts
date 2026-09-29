@@ -153,11 +153,13 @@ describe('시각 구조', () => {
     }
   });
 
-  it('RAON Hub 증거 줄은 Hero 바로 다음이며 실제 실행·검증·확장 방식·범위 네 칸이다', () => {
+  it('RAON Hub 증거 줄은 Hero 바로 다음이며 실제 실행·검증·범위 세 칸이다(확장 방식은 역할 줄이 말한다)', () => {
     expect(home.children?.[1]?.id).toBe('raon_home_proof');
     const items = childrenWith(byId('raon_home_proof_list'), 'rh-proof-item');
-    expect(items.map((item) => textsUnder(item))).toEqual(['run', 'verify', 'extend', 'scope'].map((k) => [key(`proof_${k}_label`), key(`proof_${k}_value`)]));
-    expect(['run', 'verify', 'extend', 'scope'].map((k) => ko.home[`proof_${k}_label`])).toEqual(['실제 실행', '검증', '확장 방식', '범위']);
+    expect(items.map((item) => textsUnder(item))).toEqual(['run', 'verify', 'scope'].map((k) => [key(`proof_${k}_label`), key(`proof_${k}_value`)]));
+    expect(['run', 'verify', 'scope'].map((k) => ko.home[`proof_${k}_label`])).toEqual(['실제 실행', '검증', '범위']);
+    expect(ko.home.proof_extend_label).toBeUndefined();
+    expect(ko.home.proof_hub_role).toMatch(/기존 서비스에 .*확장/);
     const copy = [ko, en].flatMap((dict) => Object.entries(dict.home).filter(([k]) => k.startsWith('proof_')).map(([, v]) => String(v)));
     for (const text of copy) {
       // 원시 커밋 해시·내부 점검 코드·테스트 명령·공급자/세션 용어를 쓰지 않는다
@@ -193,6 +195,53 @@ describe('시각 구조', () => {
     const more = byId('raon_home_case_hub_more');
     expect(more?.props?.href).toBe('/page/cases');
     expect(more?.actions?.[0]?.params?.path).toBe('/page/cases');
+    // 링크 문구는 도착지(사례 상세 문서)를 그대로 말한다 — "기술 근거" 로 부르지 않는다
+    expect(more?.text).toBe(key('case_more'));
+    expect(ko.home.case_more).toBe('사례 상세 보기');
+    expect(en.home.case_more).toBe('See case details');
+  });
+
+  it('두 증거 사례는 각각 무엇을 입증하는지 한 줄을 이름 아래에 가진다', () => {
+    expect((byId('raon_home_proof_hub_head')?.children ?? []).map((c) => c.id)).toEqual(['raon_home_proof_hub_name', 'raon_home_proof_hub_role']);
+    expect((byId('raon_home_proof_ms_head')?.children ?? []).map((c) => c.id)).toEqual(['raon_home_proof_ms_name', 'raon_home_proof_ms_kind', 'raon_home_proof_ms_role']);
+    for (const id of ['raon_home_proof_hub_role', 'raon_home_proof_ms_role']) expect(classOf(byId(id))).toBe('rh-proof-case-role');
+    expect(ko.home.proof_hub_role).toBe('지금 보고 계신 이 사이트입니다. 기존 서비스에 AI 요청·결과·후속 지시 흐름을 확장했습니다.');
+    expect(ko.home.proof_ms_role).toBe('업무 흐름 구현과 실주문 차단 검증을 보여 주는 자체 개발 사례입니다.');
+    expect(en.home.proof_hub_role).toMatch(/site you are viewing/);
+    // 역할 줄이 사례 종류 줄을 대신한다(순증 억제) — 옛 키가 남지 않는다
+    expect(ko.home.proof_hub_kind).toBeUndefined();
+    for (const dict of [ko, en]) {
+      const roles = `${dict.home.proof_hub_role}\n${dict.home.proof_ms_role}`;
+      // 자율 개발 전체·고객 운영·AI 분석·실거래·수익을 암시하지 않는다
+      expect(roles).not.toMatch(/자율|스스로|자동으로 개발|autonom|고객사|고객 운영|customer|AI 분석|AI analy|실거래|live trad|수익|profit|invest/i);
+    }
+  });
+
+  it('MOBILE_STOCK 화면은 같은 자산 원본을 여는 링크 안의 이미지 하나다(뷰어 의존성 없음)', () => {
+    const link = byId('raon_home_proof_ms_shot_link');
+    expect(link?.name).toBe('A');
+    expect(link?.props?.['data-rh-asset-link']).toBe('true');
+    expect(link?.props?.['aria-label']).toBe(key('ms_shot_open'));
+    // href 는 런타임이 코어 자산 API 로 채운다 — 레이아웃에 주소를 조립하지 않는다
+    expect(link?.props?.href).toBeUndefined();
+    expect(link?.props?.target).toBeUndefined();
+    expect(link?.actions).toBeUndefined();
+    expect(link?.children?.map((c) => c.id)).toEqual(['raon_home_proof_ms_shot_img']);
+    expect((byId('raon_home_proof_ms_shot')?.children ?? []).map((c) => c.id)).toEqual(['raon_home_proof_ms_shot_link', 'raon_home_proof_ms_shot_caption']);
+    expect(ko.home.ms_shot_open).toBe('MOBILE_STOCK 화면 원본 크기로 보기');
+  });
+
+  it('휴대폰에서도 화면 이미지 열 폭은 150px 이상이고 원본 비율(780×1760)을 자르지 않는다', () => {
+    const css = readFileSync(resolve(root, 'css/main.css'), 'utf8');
+    const columns = [...css.matchAll(/\.rh-proof-case-ms \{\n\s*grid-template-columns: ([\d.]+)rem/g)].map((m) => Number(m[1]) * 16);
+    expect(columns.length).toBe(2);
+    for (const px of columns) expect(px).toBeGreaterThanOrEqual(150);
+    const img = css.slice(css.indexOf('.rh-shot-img {'), css.indexOf('}', css.indexOf('.rh-shot-img {')));
+    expect(img).toMatch(/width: 100%/);
+    expect(img).toMatch(/height: auto/);
+    expect(img).toMatch(/aspect-ratio: 390 \/ 880/);
+    expect(390 / 880).toBeCloseTo(780 / 1760, 6);
+    expect(img).not.toMatch(/object-fit: cover|max-height/);
   });
 
   it('증거 섹션이 두 제품을 미리 보여 준다: RAON Hub 사실 줄 + MOBILE_STOCK 화면·캡션·범위 세 줄', () => {
@@ -205,6 +254,10 @@ describe('시각 구조', () => {
     expect(img?.props?.alt).toBe(key('ms_shot_alt'));
     expect(textsUnder(byId('raon_home_proof_ms_shot'))).toContain(key('ms_caption'));
     expect(byId('raon_home_proof_ms_points')?.children).toHaveLength(3);
+    // 두 사례 검증 범위 이동 링크는 MOBILE_STOCK 본문 끝(화면 이미지 옆 남는 공간)에 한 번만 둔다
+    expect((byId('raon_home_proof_ms_body')?.children ?? []).map((c) => c.id)).toEqual(['raon_home_proof_ms_head', 'raon_home_proof_ms_points', 'raon_home_proof_more']);
+    expect(byId('raon_home_proof_more')?.props).toMatchObject({ href: CASE_HREF, 'data-rh-jump': 'case' });
+    expect((byId('raon_home_proof_inner')?.children ?? []).map((c) => c.id)).toEqual(['raon_home_proof_head', 'raon_home_proof_cases']);
     // 증거 섹션 안에서 새 섹션을 만들지 않는다
     expect(home.children).toHaveLength(7);
   });

@@ -1,5 +1,5 @@
-import { describe, expect, it } from 'vitest';
-import { resolveHomeMeta, resolveModuleAssetUrl } from './homePage';
+import { afterEach, describe, expect, it } from 'vitest';
+import { hydrateModuleImages, resolveHomeMeta, resolveModuleAssetUrl } from './homePage';
 
 describe('홈 문서 메타', () => {
   it('번역된 제목·설명을 돌려준다', () => {
@@ -26,5 +26,39 @@ describe('모듈 동봉 이미지 주소', () => {
     expect(resolveModuleAssetUrl({ module: () => '//evil.example/x.png' }, PATH)).toBeNull();
     expect(resolveModuleAssetUrl({ module: () => { throw new Error('x'); } }, PATH)).toBeNull();
     expect(resolveModuleAssetUrl({ module: (id, p) => `/api/modules/assets/${id}/${p}` }, '../secret.png')).toBeNull();
+  });
+});
+
+describe('원본 열기 링크', () => {
+  const PATH = 'resources/assets/cases/mobile-stock-public-case-01-new-paper-account-390x844.png';
+
+  function fakeShot(withLink: boolean) {
+    const attrs = { img: {} as Record<string, string>, link: {} as Record<string, string> };
+    const link = withLink ? { getAttribute: (k: string) => attrs.link[k] ?? null, setAttribute: (k: string, v: string) => { attrs.link[k] = v; } } : null;
+    const img = {
+      dataset: { rhAsset: PATH },
+      getAttribute: (k: string) => attrs.img[k] ?? null,
+      setAttribute: (k: string, v: string) => { attrs.img[k] = v; },
+      closest: () => link,
+    };
+    return { attrs, root: { querySelectorAll: () => [img] } as unknown as ParentNode };
+  }
+
+  afterEach(() => { delete (globalThis as { window?: unknown }).window; });
+
+  it('이미지와 같은 코어 자산 주소를 링크 href 로 쓴다', () => {
+    (globalThis as { window?: unknown }).window = { G7Core: { asset: { module: (id: string, p: string) => `/api/modules/assets/${id}/${p}` } } };
+    const { attrs, root } = fakeShot(true);
+    hydrateModuleImages(root);
+    expect(attrs.img.src).toBe(`/api/modules/assets/raonslab-product/${PATH}`);
+    expect(attrs.link.href).toBe(attrs.img.src);
+  });
+
+  it('주소를 만들 수 없으면 링크에 href 를 두지 않는다', () => {
+    (globalThis as { window?: unknown }).window = {};
+    const { attrs, root } = fakeShot(true);
+    hydrateModuleImages(root);
+    expect(attrs.img.src).toBeUndefined();
+    expect(attrs.link.href).toBeUndefined();
   });
 });

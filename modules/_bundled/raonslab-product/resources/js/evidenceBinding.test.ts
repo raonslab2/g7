@@ -83,4 +83,29 @@ describe('MOBILE_STOCK 공개 사례 이미지 출처 결합', () => {
     expect(ko.home.case_ms_open1).toBe('AI 분석 기능');
     expect(ko.home.case_ms_note).toMatch(/예시 데이터/);
   });
+
+  it('화면 속 앱 이름 Symphony 는 홈 문구에서 정확히 한 번 설명된다', () => {
+    for (const dict of [ko, en]) {
+      const hits = Object.entries(dict.home).filter(([, value]) => /Symphony/.test(String(value)));
+      expect(hits.map(([k]) => k)).toEqual(['proof_ms_kind']);
+      expect(String(hits[0][1]).match(/Symphony/g)).toHaveLength(1);
+    }
+    expect(layout.match(/home\.proof_ms_kind\b/g)).toHaveLength(1);
+  });
+
+  it('원본 열기 링크는 같은 이미지 하나를 감싸고 새 자산 경로를 만들지 않는다', () => {
+    const json = JSON.parse(layout);
+    const find = (node: unknown, id: string): Record<string, unknown> | null => {
+      if (Array.isArray(node)) { for (const child of node) { const hit = find(child, id); if (hit) return hit; } return null; }
+      if (!node || typeof node !== 'object') return null;
+      if ((node as { id?: string }).id === id) return node as Record<string, unknown>;
+      for (const child of Object.values(node)) { const hit = find(child, id); if (hit) return hit; }
+      return null;
+    };
+    const link = find(json, 'raon_home_proof_ms_shot_link') as { children?: Array<{ name?: string; props?: Record<string, unknown> }>; props?: Record<string, unknown> };
+    expect(link.children).toHaveLength(1);
+    expect(link.children?.[0].name).toBe('Img');
+    expect(link.children?.[0].props?.['data-rh-asset']).toBe(`resources/assets/cases/${FILE}`);
+    expect(JSON.stringify(link.props)).not.toMatch(/resources\/assets|https?:|\.png/);
+  });
 });
