@@ -18,19 +18,56 @@
 
 ## 모듈 밖에서 함께 반영된 것 — Page 콘텐츠 (CODEX, 독립)
 
-native Page 는 모듈 0.5.1 이 바꾸지 않는다. CODEX Request `req_63add39eb40b4acdbb2e15adc294897a` 가 PageService 공식 경로로 변경했다(raw SQL 없음). 아래는 그 Request 의 보고를 옮긴 기록이며, 이 모듈 Request 에서 다시 측정하지 않았다.
+native Page 는 모듈 0.5.1 이 바꾸지 않는다. CODEX Request `req_63add39eb40b4acdbb2e15adc294897a` 가 PageService 공식 경로로 변경했다(raw SQL 없음). 모듈 쪽 Request 는 `req_f327b70159d943aca01d2f3e3e04bb56` 이다.
+
+### 현재 최종 상태 (배포 후, 2026-09-29)
+
+| Page | id | 현재 버전 | PageVersion | 활동 로그 | 전체 콘텐츠 hash (sha256) |
+|---|---|---|---|---|---|
+| cases | 8 | v3 | 370 | 532 | `4018a2971ed50359a4ea1f56ffbf632e527d1f32a6cbb15633b9a7e520891920` |
+| service | 7 | v3 | 371 | 533 | `2d19f76b64f14e42f43eea578b456ae362a6e6c8db00b94ad3bc01e09ddb1fe8` |
+| contact | 6 | **v4** | **376** | **535** | `35c23542c42f78e03dff8ebbbc83b970e411aed861a4139d5fdfd403d52bb402` |
+
+**전체 콘텐츠 hash 계산 방식** (모듈 Request 에서 세 값 모두 그대로 재현함):
+
+1. `Modules\Sirsoft\Page\Models\Page` 를 Eloquent 로 읽어 **cast 가 적용된 값**으로 `title`·`content`·`content_mode`·`published`·`seo_meta` 다섯 필드를 모은다(`title`·`content` 는 `AsUnicodeJson`, `seo_meta` 는 `array` cast).
+2. 배열을 재귀적으로 정렬한다 — **연관 배열은 키 순서로 정렬, 리스트(`array_is_list`)는 원래 순서 유지**.
+3. `json_encode(…, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES)` 결과 문자열의 SHA-256.
+
+DB 컬럼 원문이나 Page API 응답을 그대로 해시하면 다른 값이 나온다. 비교할 때는 반드시 위 방식을 쓴다.
+
+**contact v3 → v4** (PageVersion 372 → 376, 2026-09-29 05:55:21 UTC, 활동 로그 535 `page.update`, `changes_summary.changed_fields = ["content"]`, `title`·`seo_meta` 불변). 바뀐 문장은 ko/en 각 한 곳이다. 링크 주소(`/#rh-consult`)는 같고, 링크 문구가 "신청" 이 아니라 "안내·현재 상태 확인" 을 말하도록 바뀌었다.
+
+| 로케일 | v3 (전) | v4 (후) |
+|---|---|---|
+| ko | `AI 에이전트 구축 상담은 홈의 <a href="/#rh-consult">구축 상담</a> 영역에서 신청합니다.` | `AI 에이전트 구축 상담 안내와 현재 접수 상태는 홈의 <a href="/#rh-consult">상담 안내·현재 상태 보기</a> 영역에서 확인합니다.` |
+| en | `Request an AI agent build consultation through the <a href="/#rh-consult">consultation</a> section on the home page.` | `AI agent build consultation guidance and the current intake status are available in <a href="/#rh-consult">consultation guidance &amp; current status</a> on the home page.` |
+
+뒤따르는 문장("온라인 접수는 … 개인정보도 수집하지 않습니다." / "Online intake opens only after … no personal information is collected.")은 두 버전이 같다.
+
+**v4 반영 뒤 공식 백업**: `/var/backups/g7-product/g7-product-20260929T055917Z.tar.gz`, sha256 `24735f5e22b65c3daa73196ef372fed8f1bad48a1427148b9de691445f92aa3c`. 바깥 checksum·내부 `SHA256SUMS` 통과, `source-sha.txt` = `4cbd9da7a1d3cc63ce6bf6f44049eb80bb0df2b7`, DB 덤프에 PageVersion `(376,6,4…)` 포함.
+
+### 이력 — v2 → v3 (CODEX 최초 변경)
 
 | Page | id | 버전 | 전체 콘텐츠 hash (sha256, 전→후) |
 |---|---|---|---|
 | cases | 8 | v2 → v3 | `d87826d056f5cdcd6bfd062fd8380126628f4c2c3b4418fe528e3a1b712a1d2a` → `4018a2971ed50359a4ea1f56ffbf632e527d1f32a6cbb15633b9a7e520891920` |
 | service | 7 | v2 → v3 | `af76d119f866d2037be3410c7423d92723da21d0e170e3852467562b0180f325` → `2d19f76b64f14e42f43eea578b456ae362a6e6c8db00b94ad3bc01e09ddb1fe8` |
-| contact | 6 | v2 → v3 | `936137cab8d98d0138656ea6a1a0e0224a708f0b81c192f313dc4c8fc1589b1e` → `42712b0f43231bc4776cdb18defd04d9f7853b67a9e4f632bc2284dc35dbddb3` |
+| contact | 6 | v2 → v3 | `936137cab8d98d0138656ea6a1a0e0224a708f0b81c192f313dc4c8fc1589b1e` → `42712b0f43231bc4776cdb18defd04d9f7853b67a9e4f632bc2284dc35dbddb3` (현재는 v4로 대체됨) |
 
 - PageVersion 370/371/372, 활동 로그 532/533/534.
-- 백업 `/var/backups/g7-product/g7-product-20260929T050602Z.tar.gz` (sha256 `6b9f84e9eac52995503420823d8e02db82d59970980ae2a326a0fabf364866ba`).
+- 당시 백업 `/var/backups/g7-product/g7-product-20260929T050602Z.tar.gz` (sha256 `6b9f84e9eac52995503420823d8e02db82d59970980ae2a326a0fabf364866ba`) — v3 이전 상태.
 - 실제 Page 390/1280 이동 6건 PASS, 상담 닫힘 유지.
 
 상담 접수는 닫힘 그대로다(`intake_enabled=false`). 연락처·대체 채널을 만들지 않았다.
+
+### 알려진 별도 문제 (V2.1 회귀 아님) — en 390 Page 화면의 문서 가로 폭
+
+- 관측: en 390 에서 `/page/contact`·`/page/cases`·`/page/service` 모두 `document.scrollWidth` 494 (뷰포트 390, +104px). 세 Page 본문 카드(`.rh-native-page-card`) 안의 보이는 요소는 넘침 0 이다. ko 390 은 390 으로 넘침이 없다. Page 내용이 바뀌지 않은 cases/service 에서도 같으므로 contact v4 콘텐츠 결함이 아니다.
+- 처음에는 닫힌 모바일 드로어(`#mobile_nav_drawer`) 때문으로 보였다. 격리 측정(요소를 하나씩 숨겨 `scrollWidth` 재측정)에서는 드로어를 숨겨도 494 그대로였고, **제품 모듈 상위 메뉴의 상담 항목(`#rh_gnav_consult_item`, en 문구 "Intake not open yet" 포함)** 을 숨기면 390 으로 돌아왔다. 드로어는 `position: fixed` 로 넓어진 문서 오른쪽 끝(left 494)에 놓일 뿐 원인이 아니다.
+- 이 항목은 0.5.0 A(`33490607`)에서 들어왔고 0.5.1 은 `product-nav.json`·관련 CSS·`nav.*` 문구를 바꾸지 않았다(`git diff 664c36ba 4cbd9da7`) — 0.5.1 회귀가 아니다.
+- 분류: **별도 P1, 현재 Page 콘텐츠·V2.1 변경 범위 밖**. 무해하다고 판정하지 않았고, 이번 릴리스에서 고치지 않는다(수정은 제품 상위 메뉴의 좁은 폭 줄바꿈/축약을 별도 Request 로).
+- 경위와 재발 방지: `docs/g7/Troubleshooting.md` CASE 10.
 
 ## F4 원인과 수정 방식
 
@@ -65,7 +102,7 @@ native Page 는 모듈 0.5.1 이 바꾸지 않는다. CODEX Request `req_63add39
 | F4 후 홈 스모크 360/390/412/1280 레이아웃(사람 화면: 정적 안내 0 · Hero 상태 묶음 2) | PASS 180 · FAIL 0 |
 | PHPUnit `ProductLayerContractTest` | 공식 명령 미실행 — `ModuleTestCase` 가 `RefreshDatabase`(테스트 DB 마이그레이션)를 요구하고 이번 지시가 마이그레이션을 금지한다. 대신 런타임 vendor 오토로더(읽기 전용)로 SEO 관련 두 테스트 메서드(`home_seo_meta_uses_the_module_owned_localized_config`, `home_seo_context_is_marked_static_closed_only_for_the_home_layout`)를 앱 부팅·DB 없이 직접 실행: PASS 2/2(단언 20) |
 | 실제 SEO 렌더(F4) | 아래 "F4 실제 렌더 검증" PASS |
-| 배포 런타임 | 미배포 후보 |
+| 배포 런타임 | 배포 완료(2026-09-29): main·런타임 `4cbd9da7`, 활성 모듈 0.5.1(번들=활성 해시 동일), 훅 캐시에 `core.seo.filter_context`. 외부 `http://203.245.29.156:58770` 사람 390/1280 스모크 PASS 92 · FAIL 0(390 높이 5,996px, 화면 152×343px, 원본 200·sha256 `4fa8b7a7…`, Enter·탭 동작), 봇 ko `/`·en `/?locale=en` 각각 MISS→HIT 바이트 동일·실패 0, 상담 `intake_enabled=false`. 배포 전 백업 `g7-product-20260929T054554Z.tar.gz`(sha256 `ad0798246fd140b4d6915730a6615f8cc7998a071244a963733aa25fa7aa88fc`). 증거 `/home/mrdev/g7-evidence/home-v2.1-0.5.1-delivery/` |
 
 `raonslab-ai-workspace` 의 `raonslab-product` 의존 제약은 공개 API·Service·라우트 변경이 없어 그대로 둔다(홈 표현만 변경).
 
@@ -106,7 +143,7 @@ native Page 는 모듈 0.5.1 이 바꾸지 않는다. CODEX Request `req_63add39
 9. **외부 봇 화면**: 7 직후 외부 공개 주소로
    `G7_BASE_URL=<외부 주소> node modules/_bundled/raonslab-product/tests/browser/seo-static-closed.cjs ko` (요청 `/`),
    `… seo-static-closed.cjs en` (요청 `/?locale=en`). 둘 다 첫 응답 MISS → 둘째 HIT, 바이트 동일, 실패 0 이어야 한다. 누가 먼저 홈을 요청해 첫 응답이 HIT 이면 7 을 다시 하고 곧바로 재실행한다.
-10. **Page v3 재확인**: PageService/관리 API 로 cases id 8 · service id 7 · contact id 6 이 각각 v3 이고 전체 콘텐츠 hash 가 위 표의 "후" 값과 같은지, PageVersion 370/371/372 와 활동 로그 532/533/534 가 그대로인지 확인한다.
+10. **Page 재확인**: cases id 8 · service id 7 · contact id 6 의 현재 버전·PageVersion·활동 로그·전체 콘텐츠 hash 가 위 "현재 최종 상태" 표와 같은지 확인한다(hash 는 위 계산 방식으로). 배포 당시 기준은 v3 세 개(370/371/372, 532/533/534)였고, 배포 뒤 contact 가 v4(376, 535)로 바뀌었다.
 11. **상담 닫힘 확인**: `/usr/bin/php8.3 artisan raonslab-product:consultation-readiness` 로 접수 닫힘(`intake_enabled=false`)을, 공개 `GET /api/modules/raonslab-product/consultations/config` 응답이 열림 설정을 내주지 않는지(`enabled: false` 또는 접수 불가 응답)를 확인한다. 이번 배포에서 열지 않는다.
 12. **실패 시**: 5–11 중 하나라도 실패하면 전달을 멈추고 아래 롤백 여부를 판단한다. 이번 범위에서는 **자동 롤백하지 않는다**.
 

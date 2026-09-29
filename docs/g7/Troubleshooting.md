@@ -1,7 +1,8 @@
 # GNUBOARD7 프로젝트 트러블슈팅
 
-이 문서는 RAON Hub 운영에서 재발 가능성이 확인된 사례만 기록한다. 현재 기준은 main/runtime
-`390cdc7a379e1f2b9c8e3991b241edcc59dbdd71`, `raonslab-product 0.4.0`이며 CASE 5~8은 source `raonslab-product 0.4.1` 변경과 함께 기록했다.
+이 문서는 RAON Hub 운영에서 재발 가능성이 확인된 사례만 기록한다. 현재 기준은 `raonslab-product 0.5.1`이며,
+source 계보는 0.5.1 제품 배포 커밋 `4cbd9da7a1d3cc63ce6bf6f44049eb80bb0df2b7`(main·runtime 일치)과 그 뒤의 문서 전용 커밋이다.
+CASE 1~4는 `390cdc7a`(0.4.0), CASE 5~9는 0.4.1, CASE 10은 0.5.1(HOME V2.1) 시점에 기록했다.
 
 ## CASE 1 — Native Page 배포 뒤 legacy route 404
 
@@ -129,6 +130,20 @@
 | related regression test | `modules/_bundled/raonslab-product/resources/js/infoPolicy.test.ts`(`overlay 저장 계약(모듈 + target layout 당 1행)` — 실패 후보 재현 포함); `scripts/taxonomy.mjs --check`(중복 target이면 exit 1); `tests/browser/overlay-simulation.cjs` |
 | verification after fix | 수정본 `888e11c2` 재배포: 새 백업 `g7-product-20260928T140533Z.tar.gz`(source-sha `4d9856dc`) → `module:update` 0.4.1 → 배포 후 persisted `_user_base` 행 1개(priority 400, injection 3개, `rh_gnav_root`·`linkGroups`·`data-rh-commerce-suppressed`)를 browser 전에 확인 → smoke(content gate off) 1256 / 0 → Page 교체 → smoke(content gate on) 1304 / 0. |
 | related commit/request_id | 실패 후보 `c64085b2`; 롤백 `4d9856dc`; 복원 `3996c8a0`; 수정 `888e11c2`; `req_04b635bdc600403cbf7a3795159ce168` |
+
+## CASE 10 — Page 콘텐츠 변경이 모바일 가로 넘침을 만든 것으로 오인
+
+| 필드 | 내용 |
+|---|---|
+| CASE ID / date | `G7-HOME-V21-001` / 2026-09-29 KST |
+| symptom | HOME V2.1 배포 뒤 contact Page를 v3→v4(PageVersion 376, 활동 535)로 고친 직후, en 390 `/page/contact`에서 `document.scrollWidth` 494(뷰포트 390, +104px)가 측정됐다. contact 본문을 방금 바꿨기 때문에 Page 변경이 넘침을 만든 것처럼 보였다. |
+| wrong initial assumption | ① 문서 전체 폭이 넘치면 방금 바꾼 Page 본문이 원인이다. ② 넘친 요소 목록 맨 앞의 닫힌 모바일 드로어(`#mobile_nav_drawer`, right 814)가 문서 폭을 넓힌다. |
+| actual cause | 소유 표면(Page 본문 카드 `.rh-native-page-card`) 안의 보이는 요소는 넘침 0이었다. 내용이 바뀌지 않은 `/page/cases`·`/page/service`도 똑같이 494였다. 요소를 하나씩 숨겨 다시 재면, 드로어를 숨겨도 494 그대로였다. 제품 모듈 상위 메뉴의 상담 항목 `#rh_gnav_consult_item`(en 문구 "Intake not open yet" 포함, `flex` 목록에서 줄바꿈 없이 right 494)을 숨기면 390으로 돌아왔다. 드로어는 `position: fixed`라 넓어진 문서 끝(left 494)에 놓일 뿐 원인이 아니다. ko 390은 넘침 0이다. 이 항목은 0.5.0 A(`33490607`)에서 들어왔고 0.5.1은 `product-nav.json`·관련 CSS·`nav.*` 문구를 바꾸지 않았다. |
+| evidence | 외부 `http://203.245.29.156:58770`, 390 모바일 Chrome UA, `?locale=en`. 세 Page 모두 `scrollWidth` 494, 본문 카드 넘침 0, 드로어 제외 시 넘친 요소는 `#rh_gnav_consult_item`/`#rh_gnav_consult`/`#rh_gnav_consult_state`뿐, 드로어 숨김 494 / 상담 항목 숨김 390. 측정 스크립트·결과: `/home/mrdev/g7-evidence/home-v2.1-0.5.1-delivery/{drawer.cjs,gnav.cjs,en390-scrollwidth-isolation.json}`(저장소 밖 운영 증거). |
+| resolution | Page 데이터는 롤백하지 않았다(contact v4 유지). 문서 폭 문제는 **별도 P1, 현재 Page 콘텐츠·V2.1 변경 범위 밖**으로 분류했다. 무해하다고 판정하지 않았다. 수정(제품 상위 메뉴의 좁은 폭 줄바꿈/축약)은 별도 Request로 한다. |
+| prevention rule | 넘침은 두 층을 함께 잰다. (1) 문서 전체(`scrollWidth` 대 뷰포트) (2) 이번에 바꾼 소유 표면(예: Page 본문 카드) 안의 보이는 요소. 넘치면 넘친 요소를 이름으로 뽑는다. 목록 맨 앞 요소를 원인으로 단정하지 말고, 후보를 하나씩 숨겨 다시 재서 원인을 확정한다. 바꾸지 않은 형제 화면(같은 셸의 다른 Page)에서도 재현되는지 본다. 화면 밖(off-canvas)·셸 요소 때문에 Page 데이터를 되돌리지 않는다. 반대로 소유 표면만 재고 문서 폭을 무시하지도 않는다. |
+| related regression test | `modules/_bundled/raonslab-product/tests/browser/home-smoke.cjs`(홈 가로 넘침 0: 360/390/412/1280, 영어 긴 문구 넘침 0), `modules/_bundled/raonslab-product/tests/browser/info-policy-smoke.cjs`(문서 화면), `modules/_bundled/raonslab-product/tests/browser/mobile-drawer-simulation.cjs`(드로어 계약). en 390 Page 화면의 상위 메뉴 폭은 아직 회귀 검사로 고정되지 않았다(후속 P1). |
+| related commit/request_id | 제품 배포 `4cbd9da7a1d3cc63ce6bf6f44049eb80bb0df2b7`(0.5.1: `6b79d16e`·`07e3671e`·`4cbd9da7`); 상위 메뉴 상담 항목 도입 `33490607`(0.5.0 A); Page 변경 `req_63add39eb40b4acdbb2e15adc294897a`; 모듈·배포·측정 `req_f327b70159d943aca01d2f3e3e04bb56`; 릴리스 노트 `modules/_bundled/raonslab-product/docs/home-v2.1-0.5.1.md` |
 
 ## 권위 경로
 
