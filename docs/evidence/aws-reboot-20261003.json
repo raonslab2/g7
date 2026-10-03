@@ -1,0 +1,310 @@
+{
+  "checked_at": "2026-10-03T11:39:41.220045+00:00",
+  "boot_id": "878532cd-e57b-4cff-b8e1-bb20a74a77c7",
+  "AI_GCS": {
+    "health": {
+      "status": "ok",
+      "dispatcher_concurrency": 2,
+      "provider_capacities": {
+        "CODEX": 2,
+        "CLAUDE": 0
+      },
+      "backend_sha": "4c5a1b919eace0440777eaebeef669d2ad319385",
+      "web_sha": "9f119ad6c069f9a940c809aa989919c70d3d9fee",
+      "release": "4c5a1b91-9f119ad6"
+    },
+    "persistence": {
+      "request_id": "req_3bfab0bae26b4ae6b889ad30262f9f8f",
+      "native_session_id": "01a10123-dcfa-7963-b68e-ef177b5bd785",
+      "native_turn_id": "01a10123-dd60-7af0-ae27-1b01c29075ac",
+      "event_count": 216,
+      "result_sha256": "6d2f21f07c1341ce116988ad490535a4031bb6b91142fdae532500b55ee7a41f",
+      "proof_sha256": "0d97f8236d1067a33d954b3b8b8185091b83409dc26f50974a2f78c3fc7a2a77",
+      "commits": [
+        {
+          "sha": "d1b958889f75658b4044ded27c68b1885dd01854",
+          "subject": "docs: record AWS V2 provider closed loop proof",
+          "author": "raonslab2",
+          "authored_at": "2026-10-03T09:43:10+00:00"
+        }
+      ]
+    },
+    "sse_ordered": true,
+    "web": {
+      "status": 200,
+      "content_type": "text/html; charset=utf-8",
+      "bytes": 569
+    }
+  },
+  "MOBILE_STOCK": {
+    "public_web": "200",
+    "web_health": "ok",
+    "api_health": {
+      "status": "ok",
+      "database": "connected",
+      "broker": "mock-sandbox"
+    },
+    "trading_health": {
+      "status": "ready",
+      "paper_trading": true,
+      "live_trading": false,
+      "account_mode": "PAPER",
+      "capabilities": {
+        "market_data": {
+          "quote_read": true
+        },
+        "paper": {
+          "account_read": true,
+          "holdings_read": true,
+          "order": true,
+          "cancel": true,
+          "fills_read": true
+        },
+        "live": {
+          "order": false
+        }
+      },
+      "broker": "mock-sandbox",
+      "outbox_pending": 0,
+      "outbox_failed": 0
+    },
+    "systemd": "active",
+    "enabled": "enabled",
+    "db": {
+      "users": 2,
+      "orders": 0,
+      "migration": "0036_decision_lab_s0_evaluations"
+    },
+    "isolated_qa_persistence": {
+      "order_id": "16ab4499-2100-5fe6-99bb-4c946ed32486",
+      "status": "FILLED",
+      "filled_quantity": 1,
+      "integrity": "ok"
+    },
+    "isolated_qa_real_codex_analysis": {
+      "analysis_id": "35a1f38e-880b-400b-a9ca-cceb09c006ec",
+      "status": "PARTIAL",
+      "request_id": "req_996dfc99a9e744d58b7c32b0271ccb36"
+    },
+    "boot_id": "878532cd-e57b-4cff-b8e1-bb20a74a77c7"
+  },
+  "G7": {
+    "checks": {
+      "admin_http": true,
+      "database": true,
+      "lead_persisted": true,
+      "lead_private": true,
+      "lead_status": true,
+      "public_intake_disabled": true
+    },
+    "lead_id": 2,
+    "reference": "RAON-93AE41D9FB3E808FBAD7203315",
+    "boot_id": "878532cd-e57b-4cff-b8e1-bb20a74a77c7"
+  },
+  "public_web": {
+    "stock": {
+      "status": 200,
+      "content_type": "text/html",
+      "bytes": 537
+    },
+    "g7": {
+      "status": 200,
+      "content_type": "text/html; charset=utf-8",
+      "bytes": 26210
+    }
+  },
+  "services": {
+    "nginx": {
+      "active": "active",
+      "enabled": "enabled"
+    },
+    "agentopt-v2": {
+      "active": "active",
+      "enabled": "enabled"
+    },
+    "ssh.socket": {
+      "active": "active",
+      "enabled": "enabled"
+    },
+    "docker": {
+      "active": "active",
+      "enabled": "enabled"
+    },
+    "mobile-stock": {
+      "active": "active",
+      "enabled": "enabled"
+    },
+    "mariadb": {
+      "active": "active",
+      "enabled": "enabled"
+    },
+    "g7-product-fpm": {
+      "active": "active",
+      "enabled": "enabled"
+    },
+    "g7-product-web": {
+      "active": "active",
+      "enabled": "enabled"
+    },
+    "g7-product-queue": {
+      "active": "active",
+      "enabled": "enabled"
+    },
+    "agentopt-v2-health.timer": {
+      "active": "active",
+      "enabled": "enabled"
+    },
+    "g7-product-scheduler.timer": {
+      "active": "active",
+      "enabled": "enabled"
+    },
+    "g7-product-backup.timer": {
+      "active": "active",
+      "enabled": "enabled"
+    }
+  },
+  "listeners": [
+    {
+      "address": "127.0.0.54",
+      "port": 53
+    },
+    {
+      "address": "127.0.0.1",
+      "port": 15432
+    },
+    {
+      "address": "127.0.0.1",
+      "port": 8610
+    },
+    {
+      "address": "127.0.0.1",
+      "port": 18102
+    },
+    {
+      "address": "127.0.0.1",
+      "port": 18103
+    },
+    {
+      "address": "0.0.0.0",
+      "port": 80
+    },
+    {
+      "address": "0.0.0.0",
+      "port": 22
+    },
+    {
+      "address": "127.0.0.1",
+      "port": 34203
+    },
+    {
+      "address": "127.0.0.1",
+      "port": 19174
+    },
+    {
+      "address": "127.0.0.1",
+      "port": 18770
+    },
+    {
+      "address": "127.0.0.53%lo",
+      "port": 53
+    },
+    {
+      "address": "127.0.0.1",
+      "port": 3306
+    },
+    {
+      "address": "[::]",
+      "port": 80
+    },
+    {
+      "address": "[::]",
+      "port": 22
+    }
+  ],
+  "browser": {
+    "AI_GCS": {
+      "url": "http://3.34.73.254/",
+      "status": 200,
+      "body_text_length": 2867,
+      "horizontal_overflow": false,
+      "page_errors": [],
+      "server_errors": []
+    },
+    "MOBILE_STOCK": {
+      "url": "http://3.34.73.254/stock/",
+      "status": 200,
+      "body_text_length": 170,
+      "horizontal_overflow": false,
+      "page_errors": [],
+      "server_errors": []
+    },
+    "G7": {
+      "url": "http://g7.3.34.73.254.sslip.io/",
+      "status": 200,
+      "body_text_length": 2573,
+      "horizontal_overflow": false,
+      "page_errors": [],
+      "server_errors": []
+    }
+  },
+  "git_heads": {
+    "AI_GCS_V2": "9dc828aaefe082d866a118c691e86e9f8d73c9cf",
+    "MOBILE_STOCK": "0049803f34ba3bf212b17e49ed526125bb63e23f",
+    "G7": "89a85f519acc408473e6995cd9ff4ee861b77b9c",
+    "AgentOpt_V2": "4c5a1b919eace0440777eaebeef669d2ad319385"
+  },
+  "existing_db_migration": "DEFERRED_BY_USER_BACKUP_TO_FOLLOW",
+  "product_blockers": [
+    "MOBILE_STOCK: KIS demo/read-only keys absent; public market/order E2E cannot pass",
+    "G7: existing native Page bodies await deferred source DB backup",
+    "G7: public Contact retains HTTPS and approved privacy readiness gates"
+  ],
+  "previous_boot_id": "0eb15a28-dbec-4b00-ad17-236db3e0ddd5",
+  "new_isolated_qa_paper_order": {
+    "scope": "ISOLATED_QA_MOCK_NOT_PUBLIC",
+    "boot_id": "878532cd-e57b-4cff-b8e1-bb20a74a77c7",
+    "order_id": "d048ec69-c56b-5c0c-9be4-232af703fa64",
+    "status": "FILLED",
+    "live_order_enabled": false,
+    "snapshot_provider_mode": "MOCK"
+  },
+  "new_private_verification_lead": {
+    "scope": "synthetic_internal_service_not_public_contact",
+    "bootId": "878532cd-e57b-4cff-b8e1-bb20a74a77c7",
+    "leadId": 4,
+    "status": "NEW",
+    "admin_http": true
+  },
+  "provider_probe": {
+    "request_id": "req_40ddd66c69e545228be3fe282f2b6460",
+    "state": "COMPLETED",
+    "native_session_id": "01a10190-3fe4-7a23-8770-5a2858846ac4",
+    "native_turn_id": "01a10190-4047-7132-8c5b-86d1599aa360",
+    "approval_requests": 0,
+    "policy": {
+      "sandbox": "danger-full-access",
+      "approval_policy": "never",
+      "approvals_reviewer": "user"
+    },
+    "commands": [
+      {
+        "provider": "CODEX",
+        "sequence": 32,
+        "command": "/bin/bash -lc \"systemctl is-active agentopt-v2 nginx mobile-stock g7-product-fpm g7-product-web g7-product-queue\ncurl --fail --silent http://127.0.0.1:8610/health\nprintf \\\"AWS_MULTI_PRODUCT_PROVIDER_OK\\\\n\\\"\"",
+        "exit_code": 0,
+        "status": "completed",
+        "output_excerpt": "active\nactive\nactive\nactive\nactive\nactive\n{\"status\":\"ok\",\"dispatcher_concurrency\":2,\"provider_capacities\":{\"CODEX\":2,\"CLAUDE\":0},\"backend_sha\":\"4c5a1b919eace0440777eaebeef669d2ad319385\",\"web_sha\":\"9f119ad6c069f9a940c809aa989919c70d3d9fee\",\"release\":\"4c5a1b91-9f119ad6\"}AWS_MULTI_PRODUCT_PROVIDER_OK\n",
+        "output_truncated": false,
+        "looks_like_test": false,
+        "source": "native_command_event"
+      }
+    ]
+  },
+  "reboot_verified": true,
+  "operational_reboot_status": "PASS",
+  "verdicts": {
+    "AI_GCS_V2": "PASS",
+    "MOBILE_STOCK": "FAIL_PRODUCT_E2E_BLOCKED",
+    "G7": "FAIL_PRODUCT_E2E_BLOCKED"
+  }
+}
