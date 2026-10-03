@@ -1,0 +1,22 @@
+[Unit]
+Description=GNUBOARD7 product PHP-FPM pool
+After=network.target mariadb.service
+Wants=mariadb.service
+
+[Service]
+Type=simple
+RuntimeDirectory=g7-product-fpm
+RuntimeDirectoryMode=0755
+ExecStart=/usr/sbin/php-fpm8.3 --nodaemonize --fpm-config /srv/g7/current/deploy/aws/php-fpm.conf
+ExecReload=/bin/kill -USR2 $MAINPID
+Restart=on-failure
+RestartSec=3s
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=full
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectControlGroups=true
+
+[Install]
+WantedBy=multi-user.target

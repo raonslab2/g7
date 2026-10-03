@@ -1,0 +1,11 @@
+[Unit]
+Description=Run GNUBOARD7 product scheduler every minute
+
+[Timer]
+OnCalendar=*-*-* *:*:00
+Persistent=true
+AccuracySec=1s
+Unit=g7-product-scheduler.service
+
+[Install]
+WantedBy=timers.target

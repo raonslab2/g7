@@ -1,0 +1,6 @@
+[Unit]
+Description=G7 AWS persistent database and file backup
+After=mariadb.service
+[Service]
+Type=oneshot
+ExecStart=/bin/bash /srv/g7/current/deploy/aws/backup.sh

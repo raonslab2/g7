@@ -1,0 +1,46 @@
+{
+  "checked_at": "2026-10-03T11:18:11.631876+00:00",
+  "source_main": "c9e93660870901db12c4d69d525073f6e72c9fa9",
+  "runtime_url": "http://g7.3.34.73.254.sslip.io/",
+  "runtime_path": "/srv/g7/current",
+  "persistent_storage": "/var/lib/g7/storage",
+  "database": "g7_product (MariaDB loopback)",
+  "home_http": 200,
+  "mobile_390": {
+    "rendered": true,
+    "horizontal_overflow": false,
+    "page_errors": []
+  },
+  "lead": {
+    "id": 2,
+    "reference": "RAON-93AE41D9FB3E808FBAD7203315",
+    "synthetic_operational_data": true,
+    "public_submit": false,
+    "admin_native_board_http": 200,
+    "status_transitions": [
+      "NEW",
+      "CONTACTED",
+      "QUALIFIED",
+      "CLOSED"
+    ],
+    "restart_persistence": true
+  },
+  "intake_enabled": false,
+  "services": [
+    "g7-product-fpm",
+    "g7-product-web",
+    "g7-product-queue",
+    "g7-product-scheduler.timer",
+    "g7-product-backup.timer"
+  ],
+  "ports": {
+    "18770": "127.0.0.1",
+    "3306": "127.0.0.1"
+  },
+  "reboot": "awaiting shared operator reboot receipt",
+  "blockers": [
+    "Existing database/content migration deferred by user; native Pages not restored",
+    "Public Contact requires approved privacy configuration and HTTPS; fail-closed retained"
+  ],
+  "overall": "PARTIAL_DEPLOYMENT_NOT_FULL_PRODUCT_PASS"
+}
