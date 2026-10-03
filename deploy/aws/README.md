@@ -29,3 +29,11 @@ curl -f http://g7.3.34.73.254.sslip.io/
 ```
 
 공개 business Page 전체 및 공개 Contact의 E2E 완료는 기존 콘텐츠 이관·운영 HTTPS·승인된 개인정보 설정이 필요하다.
+
+부팅 후 새로운 비식별 내부 검증 lead 한 건 생성·관리자 조회:
+
+```bash
+php /srv/g7/current/deploy/aws/create-boot-verification-lead.php
+```
+
+부팅 ID에 따른 멱등키를 사용하므로 같은 부팅에서 재실행해도 새 행을 늘리지 않는다. 기존 lead 2는 그대로 유지한다. 공식 FormRequest 입력 규칙과 ConsultationService를 재사용하며 합성 동의 버전은 CLI 메모리에만 적용한다. 공개 HTTP 접수 게이트와 운영 개인정보 설정은 바꾸지 않는다. 공개 Contact E2E 성공으로 해석하지 않는다.
