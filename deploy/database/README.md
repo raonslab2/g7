@@ -1,5 +1,7 @@
 # G7 DB 구조 스냅샷
 
+**데이터까지 필요한 경우 [G7 전체 백업](full-backup-20261004/README.md)을 사용한다.** 전체 DB와 `.env`·`storage/app`을 포함한 암호화 archive이며, 아래 SQL은 구조 확인용이다.
+
 [`g7-schema.sql`](g7-schema.sql)은 2026-10-04에 1PC의 `g7_product`에서 추출한 **데이터 없는 구조 전용 SQL**이다. AWS에서 확보한 소스와 함께 DB 구조를 확인하거나 빈 검토용 DB를 만들 때 사용한다.
 
 | 항목 | 값 |
