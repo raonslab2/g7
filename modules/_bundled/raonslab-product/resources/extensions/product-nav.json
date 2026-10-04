@@ -865,6 +865,50 @@
       }
     },
     {
+      "target_id": "mobile_header_left",
+      "position": "replace",
+      "components": [
+        {
+          "id": "mobile_header_left",
+          "type": "basic",
+          "name": "A",
+          "props": {
+            "href": "/",
+            "aria-label": "RAON Agent Factory",
+            "className": "rh-header-wordmark"
+          },
+          "children": [
+            {
+              "type": "basic",
+              "name": "Span",
+              "props": {
+                "className": "rh-header-wordmark-main",
+                "aria-hidden": true
+              },
+              "text": "RAON"
+            },
+            {
+              "type": "basic",
+              "name": "Span",
+              "props": {
+                "className": "rh-header-wordmark-sub",
+                "aria-hidden": true
+              },
+              "text": "AGENT FACTORY"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "target_id": "desktop_header",
+      "position": "inject_props",
+      "props": {
+        "logo": "",
+        "siteName": "RAON\nAGENT FACTORY"
+      }
+    },
+    {
       "target_id": "header_currency_inject_anchor",
       "position": "replace",
       "components": [

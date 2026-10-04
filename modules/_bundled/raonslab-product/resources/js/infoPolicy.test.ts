@@ -266,10 +266,12 @@ describe('공개 쇼핑·통화 노출 억제', () => {
     expect(nav.injections.map((injection: { target_id: string; position: string }) => [injection.target_id, injection.position])).toEqual([
       ['main_content_area', 'prepend_child'],
       ['footer', 'inject_props'],
+      ['mobile_header_left', 'replace'],
+      ['desktop_header', 'inject_props'],
       ['header_currency_inject_anchor', 'replace'],
       ['mobile_nav_drawer', 'append_child'],
     ]);
-    const currency = nav.injections[2];
+    const currency = nav.injections.find((i: { target_id: string }) => i.target_id === 'header_currency_inject_anchor');
     expect(currency.components).toHaveLength(1);
     expect(currency.components[0].id).toBe('header_currency_inject_anchor');
     expect(currency.components[0].children).toBeUndefined();
@@ -516,7 +518,7 @@ describe('기존 계약 유지', () => {
   });
 
   it('모듈 버전 메타데이터가 함께 움직이고 sirsoft-page 계약을 명시한다', () => {
-    expect(moduleManifest.version).toBe('0.5.1');
+    expect(moduleManifest.version).toBe('0.5.2');
     expect(componentManifest.version).toBe(moduleManifest.version);
     expect(composerManifest.version).toBe(moduleManifest.version);
     expect(packageManifest.version).toBe(moduleManifest.version);
