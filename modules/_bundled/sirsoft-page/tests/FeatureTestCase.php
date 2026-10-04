@@ -59,6 +59,10 @@ abstract class FeatureTestCase extends ModuleTestCase
                 ->name('api.modules.sirsoft-page.')
                 ->middleware('api')
                 ->group($apiRoutesFile);
+
+            // These routes are added after the application booted. Model/resource
+            // URL generation must see the same name lookup as the production router.
+            Route::getRoutes()->refreshNameLookups();
         }
     }
 }
