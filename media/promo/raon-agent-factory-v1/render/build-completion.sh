@@ -29,7 +29,7 @@ for c in "${CHORDS[@]}"; do
   i=$((i+1))
 done
 mix=""; for j in $(seq 0 $((i-1))); do mix+="[c$j]"; done
-"$FF" -loglevel error -y "${inputs[@]}" -filter_complex "${filters}${mix}amix=inputs=$i:normalize=0,lowpass=f=1400,aecho=0.8:0.7:60|140:0.25|0.18,atrim=0:$DUR,afade=t=in:d=2,afade=t=out:st=$((DUR-4)):d=4,loudnorm=I=-22:TP=-2:LRA=7" -ar 48000 -c:a pcm_s16le "$OUT/work/music.wav"
+"$FF" -loglevel error -y "${inputs[@]}" -filter_complex "${filters}${mix}amix=inputs=$i:normalize=0,lowpass=f=1400,aecho=0.8:0.7:60|140:0.25|0.18,atrim=0:$DUR,afade=t=in:d=2,afade=t=out:st=$((DUR-4)):d=4,loudnorm=I=-14:TP=-1.5:LRA=7" -ar 48000 -c:a pcm_s16le "$OUT/work/music.wav"
 
 # 3) 마스터 합성: 자막 번인 버전 + clean 버전 (둘 다 음악 베드 포함, 내레이션 트랙 미포함)
 FONTS=/usr/share/fonts/opentype/noto

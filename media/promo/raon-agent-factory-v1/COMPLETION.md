@@ -32,7 +32,7 @@ python3 media/promo/raon-agent-factory-v1/render/verify.py /path/outside-git
 
 ## 최종 검증
 
-- 두 최종 MP4 모두 88.000초, 30fps, H.264/yuv420p. 가로 1920×1080, 세로 1080×1920. AAC 48kHz 스테레오 음악, peak -13.2dB.
+- 두 최종 MP4 모두 88.000초, 30fps, H.264/yuv420p. 가로 1920×1080, 세로 1080×1920. AAC 48kHz 스테레오 음악, peak -5.2dB.
 - FFmpeg 전체 영상·오디오 디코딩 오류 없음.
 - 실제 브라우저 1440×900 / 390×844에서 재생 시간이 증가했고, 25/43/56/64/77/86초 구간 이동·디코딩 성공. 음성 내레이션은 없음.
 - 원천 마스킹 이미지 21개 OCR와 최종 영상에서 추출한 장면별 26개 프레임 OCR에서 대상 식별자 패턴 미검출. 26개 최종 프레임을 시각 확인하여 자막·주요 제목 잘림 없음. 모든 5,280프레임을 사람이 개별 검토한 것은 아니며, 전체 디코딩과 고정 캡처/합성기 검사 및 장면별 샘플 검토를 수행했다.
@@ -40,3 +40,9 @@ python3 media/promo/raon-agent-factory-v1/render/verify.py /path/outside-git
 - 증거: `video-probe.json`, `playback.json`, `asset-ocr.json`, `frame-ocr.json`, `contact-*.jpg`, `SHA256SUMS`.
 
 Release 초안 태그: `promo-raon-agent-factory-v1`. 가로·세로 자막판과 clean판, 썸네일, SHA256SUMS를 보관한다. 공개 배포와 사이트 삽입은 수행하지 않았다.
+
+## 음악 음량 보정
+
+음악이 작게 들린다는 사용자 피드백에 따라 기존 음악을 측정 기반 2-pass -14 LUFS 목표로 보정했다. 네 MP4 모두 평균 -23.7dB → -15.6dB(약 +8.1dB), 최대 -13.2dB → -5.2dB이다. 영상 스트림은 재인코딩하지 않았고 보정 전후 스트림 SHA-256이 같다. 이전 네 영상은 서버의 비공개 `before-audio-fix` 보관 위치에 유지한다. 측정과 스트림 동일성은 `evidence/audio-fix.json`에 기록한다. 앞으로의 완료판 빌드도 -14 LUFS 목표를 사용한다.
+
+이전 브라우저 검증은 자동재생을 위해 음소거 상태였다. 수정 검증은 음소거 해제와 volume=1 상태로 실행하고 기록한다. 자동재생 허용 플래그는 검증용 브라우저에만 적용한다. 헤드리스 검증은 실제 사람의 스피커 청취 평가를 대신하지 않는다. 음성 내레이션은 추가하지 않았다.
