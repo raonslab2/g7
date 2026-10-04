@@ -7,6 +7,10 @@ set -euo pipefail
 HERE="$(cd "$(dirname "$0")" && pwd)"
 OUT="${1:?out_dir}"
 FF="${FFMPEG:-ffmpeg}"; FP="${FFPROBE:-ffprobe}"
+if [ -e "$OUT/RAON_AGENT_FACTORY_PROMO_V1_16x9.mp4" ]; then
+  echo "Existing masters found; use a new output directory to preserve them" >&2
+  exit 1
+fi
 mkdir -p "$OUT/work"
 DUR=88
 
@@ -45,6 +49,14 @@ done
 # 4) 썸네일(엔딩 카피 프레임)과 기준 프레임
 node "$HERE/render-completion.mjs" stills h "$OUT/work/thumb" 86.4
 "$FF" -loglevel error -y -i "$OUT/work/thumb/16x9-t86.4.jpg" -vf scale=1280:720 -q:v 3 "$OUT/RAON_AGENT_FACTORY_PROMO_V1_thumbnail.jpg"
+
+# Approved licensed soundtrack. Original MP3 stays outside Git.
+TRACK="${INSPIRED_MP3:-$OUT/work/Inspired.mp3}"
+if [ ! -f "$TRACK" ]; then
+  curl --fail --location --silent --show-error https://incompetech.com/music/royalty-free/mp3-royaltyfree/Inspired.mp3 -o "$TRACK"
+fi
+printf '%s  %s\n' '40b1af74145cedac77814d060155ad4658e04efa14d1b649decedc98fbb25f69' "$TRACK" | sha256sum --check --status
+python3 "$HERE/use_licensed_music.py" "$OUT" "$TRACK"
 
 # 5) 검증 출력
 for f in "$OUT"/RAON_AGENT_FACTORY_PROMO_V1_*.mp4; do
