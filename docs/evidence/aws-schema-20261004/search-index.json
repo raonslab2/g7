@@ -1,0 +1,245 @@
+{
+    "driver": "mysql-fulltext",
+    "results": [
+        {
+            "driver": "mysql-fulltext",
+            "identifier": "g7_boards.ft_boards_name",
+            "status": "healthy",
+            "status_label": "정상",
+            "measurement": "1\/1 행이 자기 자신을 찾음",
+            "details": {
+                "table": "g7_boards",
+                "index": "ft_boards_name",
+                "columns": [
+                    "name"
+                ],
+                "parser": null,
+                "probed": 1,
+                "found": 1
+            }
+        },
+        {
+            "driver": "mysql-fulltext",
+            "identifier": "g7_boards_report_logs.ft_boards_report_logs_snapshot",
+            "status": "skipped",
+            "status_label": "판정 불가",
+            "measurement": "색인 컬럼에 내용이 있는 행이 없습니다",
+            "details": {
+                "table": "g7_boards_report_logs",
+                "index": "ft_boards_report_logs_snapshot",
+                "columns": [
+                    "snapshot"
+                ],
+                "parser": null,
+                "probed": 0,
+                "found": 0
+            }
+        },
+        {
+            "driver": "mysql-fulltext",
+            "identifier": "g7_board_posts.ft_board_posts_title_content",
+            "status": "healthy",
+            "status_label": "정상",
+            "measurement": "3\/3 행이 자기 자신을 찾음",
+            "details": {
+                "table": "g7_board_posts",
+                "index": "ft_board_posts_title_content",
+                "columns": [
+                    "title",
+                    "content"
+                ],
+                "parser": null,
+                "probed": 3,
+                "found": 3
+            }
+        },
+        {
+            "driver": "mysql-fulltext",
+            "identifier": "g7_ecommerce_brands.ft_ecommerce_brands_name",
+            "status": "skipped",
+            "status_label": "판정 불가",
+            "measurement": "색인 컬럼에 내용이 있는 행이 없습니다",
+            "details": {
+                "table": "g7_ecommerce_brands",
+                "index": "ft_ecommerce_brands_name",
+                "columns": [
+                    "name"
+                ],
+                "parser": null,
+                "probed": 0,
+                "found": 0
+            }
+        },
+        {
+            "driver": "mysql-fulltext",
+            "identifier": "g7_ecommerce_categories.ft_ecommerce_categories_description",
+            "status": "skipped",
+            "status_label": "판정 불가",
+            "measurement": "색인 컬럼에 내용이 있는 행이 없습니다",
+            "details": {
+                "table": "g7_ecommerce_categories",
+                "index": "ft_ecommerce_categories_description",
+                "columns": [
+                    "description"
+                ],
+                "parser": null,
+                "probed": 0,
+                "found": 0
+            }
+        },
+        {
+            "driver": "mysql-fulltext",
+            "identifier": "g7_ecommerce_categories.ft_ecommerce_categories_name",
+            "status": "skipped",
+            "status_label": "판정 불가",
+            "measurement": "색인 컬럼에 내용이 있는 행이 없습니다",
+            "details": {
+                "table": "g7_ecommerce_categories",
+                "index": "ft_ecommerce_categories_name",
+                "columns": [
+                    "name"
+                ],
+                "parser": null,
+                "probed": 0,
+                "found": 0
+            }
+        },
+        {
+            "driver": "mysql-fulltext",
+            "identifier": "g7_ecommerce_products.ft_ecommerce_products_description",
+            "status": "skipped",
+            "status_label": "판정 불가",
+            "measurement": "색인 컬럼에 내용이 있는 행이 없습니다",
+            "details": {
+                "table": "g7_ecommerce_products",
+                "index": "ft_ecommerce_products_description",
+                "columns": [
+                    "description"
+                ],
+                "parser": null,
+                "probed": 0,
+                "found": 0
+            }
+        },
+        {
+            "driver": "mysql-fulltext",
+            "identifier": "g7_ecommerce_products.ft_ecommerce_products_name",
+            "status": "skipped",
+            "status_label": "판정 불가",
+            "measurement": "색인 컬럼에 내용이 있는 행이 없습니다",
+            "details": {
+                "table": "g7_ecommerce_products",
+                "index": "ft_ecommerce_products_name",
+                "columns": [
+                    "name"
+                ],
+                "parser": null,
+                "probed": 0,
+                "found": 0
+            }
+        },
+        {
+            "driver": "mysql-fulltext",
+            "identifier": "g7_ecommerce_product_common_infos.ft_ecommerce_product_common_infos_content",
+            "status": "skipped",
+            "status_label": "판정 불가",
+            "measurement": "색인 컬럼에 내용이 있는 행이 없습니다",
+            "details": {
+                "table": "g7_ecommerce_product_common_infos",
+                "index": "ft_ecommerce_product_common_infos_content",
+                "columns": [
+                    "content"
+                ],
+                "parser": null,
+                "probed": 0,
+                "found": 0
+            }
+        },
+        {
+            "driver": "mysql-fulltext",
+            "identifier": "g7_ecommerce_product_common_infos.ft_ecommerce_product_common_infos_name",
+            "status": "skipped",
+            "status_label": "판정 불가",
+            "measurement": "색인 컬럼에 내용이 있는 행이 없습니다",
+            "details": {
+                "table": "g7_ecommerce_product_common_infos",
+                "index": "ft_ecommerce_product_common_infos_name",
+                "columns": [
+                    "name"
+                ],
+                "parser": null,
+                "probed": 0,
+                "found": 0
+            }
+        },
+        {
+            "driver": "mysql-fulltext",
+            "identifier": "g7_ecommerce_promotion_coupons.ft_ecommerce_promotion_coupons_description",
+            "status": "skipped",
+            "status_label": "판정 불가",
+            "measurement": "색인 컬럼에 내용이 있는 행이 없습니다",
+            "details": {
+                "table": "g7_ecommerce_promotion_coupons",
+                "index": "ft_ecommerce_promotion_coupons_description",
+                "columns": [
+                    "description"
+                ],
+                "parser": null,
+                "probed": 0,
+                "found": 0
+            }
+        },
+        {
+            "driver": "mysql-fulltext",
+            "identifier": "g7_ecommerce_promotion_coupons.ft_ecommerce_promotion_coupons_name",
+            "status": "skipped",
+            "status_label": "판정 불가",
+            "measurement": "색인 컬럼에 내용이 있는 행이 없습니다",
+            "details": {
+                "table": "g7_ecommerce_promotion_coupons",
+                "index": "ft_ecommerce_promotion_coupons_name",
+                "columns": [
+                    "name"
+                ],
+                "parser": null,
+                "probed": 0,
+                "found": 0
+            }
+        },
+        {
+            "driver": "mysql-fulltext",
+            "identifier": "g7_pages.ft_pages_content",
+            "status": "healthy",
+            "status_label": "정상",
+            "measurement": "5\/5 행이 자기 자신을 찾음",
+            "details": {
+                "table": "g7_pages",
+                "index": "ft_pages_content",
+                "columns": [
+                    "content"
+                ],
+                "parser": null,
+                "probed": 5,
+                "found": 5
+            }
+        },
+        {
+            "driver": "mysql-fulltext",
+            "identifier": "g7_pages.ft_pages_title",
+            "status": "degraded",
+            "status_label": "부분",
+            "measurement": "4\/5 행이 자기 자신을 찾음",
+            "details": {
+                "table": "g7_pages",
+                "index": "ft_pages_title",
+                "columns": [
+                    "title"
+                ],
+                "parser": null,
+                "probed": 5,
+                "found": 4
+            }
+        }
+    ],
+    "repair": null
+}

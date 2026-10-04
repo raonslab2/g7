@@ -1,0 +1,89 @@
+{
+  "request_id": "req_41e74bafa2b44e5a933342c7cc5f8c3a",
+  "snapshot_sha": "ca273d16a21abbfa1221c9e65c4c6ff23376bd8f",
+  "initial_runtime_sha": "89a85f519acc408473e6995cd9ff4ee861b77b9c",
+  "engine": "10.11.14-MariaDB-0ubuntu0.24.04.1",
+  "database": "g7_product",
+  "table_count": 109,
+  "charset": "utf8mb4",
+  "collation": "utf8mb4_unicode_ci",
+  "migration_rows": 215,
+  "migration_max_batch": 5,
+  "backup": {
+    "directory": "/var/backups/g7-product",
+    "prechange_stamp": "20261004T030756Z",
+    "directory_mode": "0700",
+    "file_modes": "0600",
+    "gzip_integrity": true,
+    "sha256_checks": true,
+    "isolated_restore": {
+      "tables": 109,
+      "migrations": 215,
+      "users": 1,
+      "posts": 3,
+      "pages": 6,
+      "critical_table_checksums_match": true
+    },
+    "post_verification_stamp": "20261004T031514Z"
+  },
+  "ngram": {
+    "definitions": 14,
+    "raw_import_error": 1128,
+    "raw_import_continued": false,
+    "transformed_reference_tables": 111,
+    "transformed_reference_rows": 0,
+    "native_default_parser_indexes": 14,
+    "equivalent_cjk_substring_search": false,
+    "isolated_default_parser_probe": {
+      "english_token_matches": 1,
+      "korean_whole_token_matches": 1,
+      "korean_internal_substring_matches": 0
+    }
+  },
+  "production_mutations": {
+    "ddl": 0,
+    "deleted_existing_rows": 0,
+    "initialized_existing_rows": 0,
+    "migration_history_manual_edits": 0,
+    "synthetic_private_leads_added": 1
+  },
+  "preservation": {
+    "users_checksum": 469352840,
+    "pages_checksum": 1441658100,
+    "migrations_checksum": 3283684926,
+    "existing_posts_sha256": "6c153e9081768c0b08bbb2fb4ff61f7d113657f6ee2e5ab3a72a820a95993b53",
+    "existing_posts_match_backup": true
+  },
+  "generated_expression_equivalence_cases": 3,
+  "tests": {
+    "installation_smoke": {
+      "tests": 2,
+      "assertions": 29
+    },
+    "search_unit": {
+      "tests": 67,
+      "assertions": 131,
+      "skipped": 2,
+      "skip_reason": "Two non-FULLTEXT-driver cases are inapplicable on MariaDB; MATCH cases ran"
+    },
+    "consultation_operations": {
+      "tests": 7,
+      "assertions": 60
+    },
+    "consultation_admin": {
+      "tests": 2,
+      "assertions": 27
+    }
+  },
+  "blockers": [
+    "Original business Page content absent: public Page APIs 404 despite SPA HTML 200",
+    "Public Contact HTTPS and approved privacy configuration are not established; public intake not tested as success"
+  ],
+  "original_1pc_data_restored": false,
+  "verification_tools": {
+    "original_snapshot_unchanged": true,
+    "fulltext_definitions_preserved": 14,
+    "overwrite_guard": true,
+    "identifier_guards": true
+  }
+}

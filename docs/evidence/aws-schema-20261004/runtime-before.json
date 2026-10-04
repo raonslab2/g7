@@ -1,0 +1,38 @@
+{
+    "checks": {
+        "production_database_read": true,
+        "production_database_write": true,
+        "mariadb": true,
+        "ngram_disabled": true,
+        "/api/admin/auth/user": true,
+        "/api/admin/users": true,
+        "/api/admin/settings": true,
+        "/api/modules/sirsoft-page/admin/pages": true,
+        "/api/modules/sirsoft-board/admin/board/raon-consultations/posts": true
+    },
+    "admin_statuses": {
+        "/api/admin/auth/user": 200,
+        "/api/admin/users": 200,
+        "/api/admin/settings": 200,
+        "/api/modules/sirsoft-page/admin/pages": 200,
+        "/api/modules/sirsoft-board/admin/board/raon-consultations/posts": 200
+    },
+    "public_page_api_statuses": {
+        "about": 404,
+        "service": 404,
+        "cases": 404,
+        "technology": 404,
+        "faq": 404,
+        "contact": 404,
+        "privacy": 404,
+        "terms": 404
+    },
+    "row_counts": {
+        "users": 1,
+        "pages": 6,
+        "board_posts": 3,
+        "migrations": 215,
+        "jobs": 0,
+        "failed_jobs": 0
+    }
+}
