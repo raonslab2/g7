@@ -1,0 +1,31 @@
+{
+  "verified_runtime_sha": "99ff180c14e09422b967b646e13eb23849e3e83b",
+  "verified_remote_main_sha": "99ff180c14e09422b967b646e13eb23849e3e83b",
+  "deployment": "Existing AWS release checkout fast-forward; persistent env/storage and installed extensions retained",
+  "runtime_application_code_changed": false,
+  "service_restart_required": false,
+  "host_rebooted": false,
+  "services": {
+    "g7-product-fpm": "active",
+    "g7-product-web": "active",
+    "g7-product-queue": "active",
+    "g7-product-scheduler.timer": "active",
+    "g7-product-backup.timer": "active",
+    "mariadb": "active"
+  },
+  "backup_service_result": "success",
+  "scheduler_result": "success",
+  "public_home_http": 200,
+  "internal_health_http": 200,
+  "existing_private_lead_id": 2,
+  "existing_private_lead_preserved": true,
+  "synthetic_private_lead_id": 5,
+  "synthetic_idempotency_repeated_without_additional_row": true,
+  "public_contact_success_claimed": false,
+  "other_products": {
+    "AI_GCS": "health ok",
+    "MOBILE_STOCK": "health ok; DB connected; public web 200"
+  },
+  "completion": "Schema/runtime verification completed; full business journey restoration blocked by absent source content and public HTTPS/privacy prerequisites",
+  "isolated_databases_cleaned": true
+}

@@ -30,7 +30,7 @@ mysql -h 127.0.0.1 -u DB_USER -p -e \
 
 예상 테이블 수는 `111`이다. `CREATE DATABASE` 권한이 없다면 관리자가 빈 DB를 먼저 준비하고 그 이름으로 import한다. SQL에는 `CREATE DATABASE`, `USE`, `DROP TABLE`, 데이터 삽입문이 없으며 대상 DB는 명령줄에서 지정한다.
 
-**기존 AWS 운영 DB에 그대로 실행하지 않는다.** 이 파일은 차이만 적용하는 마이그레이션이 아니므로 기존 테이블과 충돌한다. `--force`로 오류를 무시하지 않는다. [AWS 배포 기록](../aws/README.md)의 운영 DB는 이미 설치된 상태이며 MariaDB를 사용한다. 이 스냅샷의 실제 import 검증은 로컬 MySQL 8.0.46에서 수행했고, AWS MariaDB에서의 import는 검증하지 않았다.
+**기존 AWS 운영 DB에 그대로 실행하지 않는다.** 이 파일은 차이만 적용하는 마이그레이션이 아니므로 기존 테이블과 충돌한다. `--force`로 오류를 무시하지 않는다. [AWS 배포 기록](../aws/README.md)의 운영 DB는 이미 설치된 상태이며 MariaDB를 사용한다. 원본 import는 로컬 MySQL 8.0.46에서 성공했다. AWS MariaDB 10.11.14에서는 별도 reference DB의 원본 import가 ngram 오류로 중단되는 것을 확인했고, 명시적 별도 변환본으로만 111개 구조를 검증했다([정합성 기록](mariadb-reconciliation.md)).
 
 스냅샷을 전수 스캔한 결과 FULLTEXT 인덱스 14개 (게시글·게시판·신고 로그·이커머스·Page)는 MySQL `WITH PARSER ngram`을 사용한다. 대상 DB에서 해당 파서를 지원하는지 확인해야 하며, MariaDB 호환 SQL로 간주하지 않는다. 원본 검색 구조를 보존하기 위해 이 정의를 임의로 제거하지 않았다.
 
