@@ -124,6 +124,8 @@ id_rsa
 id_ed25519
 .htpasswd
 *.sql
+# 데이터 없는 검토용 DB 구조 스냅샷만 추적한다.
+!/deploy/database/g7-schema.sql
 *.sqlite
 *.db
 

@@ -1,5 +1,7 @@
 # AWS G7 운영 배포
 
+로컬 원본 DB의 데이터 없는 테이블 구조와 빈 검토용 DB import 방법은 [DB 구조 스냅샷](../database/README.md)을 참고한다. 기존 AWS 운영 DB에 덮어쓰는 용도로 사용하지 않는다.
+
 2026-10-03 요청의 AWS 전용 배포 설정이다. 런타임은 `/srv/g7/current`, 영속 파일은 `/var/lib/g7/storage`에 둔다. G7 코어와 제품 모듈을 바꾸지 않는다.
 
 - 실제 URL: `http://g7.3.34.73.254.sslip.io/` (`/g7/`는 이 주소로 이동).
