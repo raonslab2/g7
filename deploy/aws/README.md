@@ -39,3 +39,13 @@ php /srv/g7/current/deploy/aws/create-boot-verification-lead.php
 ```
 
 부팅 ID에 따른 멱등키를 사용하므로 같은 부팅에서 재실행해도 새 행을 늘리지 않는다. 기존 lead 2는 그대로 유지한다. 공식 FormRequest 입력 규칙과 ConsultationService를 재사용하며 합성 동의 버전은 CLI 메모리에만 적용한다. 공개 HTTP 접수 게이트와 운영 개인정보 설정은 바꾸지 않는다. 공개 Contact E2E 성공으로 해석하지 않는다.
+
+## MariaDB 구조 재검증 (2026-10-04)
+
+[정합성 runbook](../database/mariadb-reconciliation.md)과 [증거](../../docs/evidence/aws-schema-20261004/summary.json)를 참고한다. 109개 운영 테이블은 설치 범위에 맞으며 원본 111개 구조의 추가 2개는 미설치 확장 소유다. ngram은 실제 14개이며 native MariaDB 기본 파서 경로를 이미 사용한다. 운영 DDL 변경 없이 백업의 격리 복원·관리자 API·공식 Service 상담 closed loop를 확인했다. 원본 business Page 부재와 HTTP 공개 Contact 제한은 남아 있다.
+
+```bash
+php /srv/g7/current/deploy/aws/verify-runtime.php /srv/g7/current
+```
+
+공개 Page별 API status가 포함되므로 exit 0만으로 콘텐츠 복원을 판단하지 않는다. exit 0은 DB/관리자 필수 검증의 통과만 의미한다. 이 요청의 반영 범위는 검증 도구와 문서로, 기존 release checkout을 fast-forward하고 영속 `.env`/storage 및 활성 확장/서비스 설정을 보존한다. 애플리케이션 코드/설정 변경이 없으므로 서비스 재시작이나 호스트 재부팅은 필요하지 않다.

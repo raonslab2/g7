@@ -32,7 +32,7 @@ mysql -h 127.0.0.1 -u DB_USER -p -e \
 
 **기존 AWS 운영 DB에 그대로 실행하지 않는다.** 이 파일은 차이만 적용하는 마이그레이션이 아니므로 기존 테이블과 충돌한다. `--force`로 오류를 무시하지 않는다. [AWS 배포 기록](../aws/README.md)의 운영 DB는 이미 설치된 상태이며 MariaDB를 사용한다. 이 스냅샷의 실제 import 검증은 로컬 MySQL 8.0.46에서 수행했고, AWS MariaDB에서의 import는 검증하지 않았다.
 
-특히 게시글과 상품 공통정보의 FULLTEXT 인덱스 2개는 MySQL `WITH PARSER ngram`을 사용한다. 대상 DB에서 해당 파서를 지원하는지 확인해야 하며, MariaDB 호환 SQL로 간주하지 않는다. 원본 검색 구조를 보존하기 위해 이 정의를 임의로 제거하지 않았다.
+스냅샷을 전수 스캔한 결과 FULLTEXT 인덱스 14개 (게시글·게시판·신고 로그·이커머스·Page)는 MySQL `WITH PARSER ngram`을 사용한다. 대상 DB에서 해당 파서를 지원하는지 확인해야 하며, MariaDB 호환 SQL로 간주하지 않는다. 원본 검색 구조를 보존하기 위해 이 정의를 임의로 제거하지 않았다.
 
 구조만 불러온 DB는 G7 설치·복원이 완료된 DB가 아니다. `g7_migrations`도 빈 테이블이므로 그 상태에서 `php artisan migrate`를 실행하면 기존 테이블 생성과 충돌할 수 있다. 새 운영 설치는 프로젝트의 기본 설치·시더·확장 설치 절차를 사용하고, 기존 사이트 복원은 별도의 승인된 데이터 및 영속 파일 이관으로 진행한다.
 
@@ -58,3 +58,5 @@ sudo mysqldump --no-data --skip-add-drop-table --skip-lock-tables \
 ```
 
 갱신 시 추출일·원본 소스 커밋·테이블 수를 이 문서에 반영한다. 뷰·프로시저·함수·트리거·이벤트가 추가되었다면 별도 검토하여 누락과 `DEFINER`·환경별 참조 여부를 확인한다. 커밋 전 데이터 삽입문과 비밀값이 없는지 확인하고, 새 임시 DB에 import하여 테이블 정의와 빈 데이터 상태를 검증한다.
+
+AWS MariaDB 10.11에서 수행한 별도 reference import·운영 schema 비교·복원 검증은 [MariaDB 정합성 runbook](mariadb-reconciliation.md)을 참고한다.
