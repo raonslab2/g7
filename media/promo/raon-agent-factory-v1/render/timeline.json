@@ -1,0 +1,39 @@
+{
+  "title": "RAON Agent Factory 홍보영상 V1",
+  "fps": 30,
+  "duration": 88.0,
+  "scenes": [
+    { "id": "S1", "name": "문제 제시", "start": 0.0, "end": 7.0, "source": "motion", "note": "추상 모션 그래픽(코드 렌더). 실제 제품 화면 아님." },
+    { "id": "S2", "name": "RAON Agent Factory 소개", "start": 7.0, "end": 16.0, "source": "motion", "note": "추상 모션 그래픽 + 워드마크 타이포그래피." },
+    { "id": "S3a", "name": "AI_GCS 내 작업", "start": 16.0, "end": 22.0, "source": "ui", "assets": ["ui/01-work-list-1440x900.webp"] },
+    { "id": "S3b", "name": "한 문장 작업 지시", "start": 21.5, "end": 28.0, "source": "ui", "assets": ["ui/02-composer-390x844.webp"] },
+    { "id": "S3c", "name": "내 작업 · 지시함 · 프로젝트", "start": 27.5, "end": 33.0, "source": "ui", "assets": ["ui/01-work-list-390x844.webp", "ui/03-work-orders-390x844.webp", "ui/08-project-hub-390x844.webp"] },
+    { "id": "S4a", "name": "실행 구조", "start": 33.0, "end": 40.5, "source": "diagram", "note": "현재 canonical 구조(AI_GCS V2 → AgentOpt V2 → Provider → 관측 증거 → Git)를 그대로 도식화." },
+    { "id": "S4b", "name": "CODEX · CLAUDE 분업과 교차 검토", "start": 40.0, "end": 51.0, "source": "ui", "assets": ["ui/04-parent-waiting-390x844.webp", "ui/05-parent-collab-done-390x844.webp"] },
+    { "id": "S5a", "name": "결과물 · Git · 운영 반영", "start": 51.0, "end": 58.5, "source": "ui", "assets": ["ui/06-parent-result-390x844.webp"] },
+    { "id": "S5b", "name": "서버가 관측한 증거", "start": 58.0, "end": 67.0, "source": "ui", "assets": ["ui/07-observations-1440x900.webp"] },
+    { "id": "S6a", "name": "G7 · RAON Hub", "start": 67.0, "end": 74.0, "source": "web", "assets": ["web/g7-home-full-1440.webp", "web/g7-home-top-390.webp"] },
+    { "id": "S6b", "name": "MOBILE_STOCK", "start": 73.5, "end": 80.0, "source": "product", "assets": ["mobile-stock/case-01-new-paper-account.webp", "mobile-stock/case-03-first-buy-review.webp", "mobile-stock/case-04-first-buy-receipt.webp"] },
+    { "id": "S7", "name": "엔딩", "start": 80.0, "end": 88.0, "source": "motion" }
+  ],
+  "cues": [
+    { "start": 0.6, "end": 3.3, "text": "AI는 이제 빠르게 답합니다." },
+    { "start": 3.5, "end": 6.8, "text": "하지만 그 일이 정말 끝났는지는\n누가 확인할까요?" },
+    { "start": 7.6, "end": 11.3, "text": "RAON Agent Factory는\nAI Agent를 만드는 공장이자," },
+    { "start": 11.5, "end": 15.5, "text": "실제로 일하게 만드는\n운영 플랫폼입니다." },
+    { "start": 16.4, "end": 20.4, "text": "AI_GCS에서는 대화하듯,\n한 문장으로 일을 맡깁니다." },
+    { "start": 20.8, "end": 25.6, "text": "프로젝트와 Provider를 고르면,\n요청은 그 즉시 접수되어 기록됩니다." },
+    { "start": 26.0, "end": 32.4, "text": "내 작업과 지시함, 프로젝트에서\n진행 상황을 한곳에서 봅니다." },
+    { "start": 33.4, "end": 38.8, "text": "AgentOpt는 접수된 요청을\n실제 Provider 실행으로 옮깁니다." },
+    { "start": 39.2, "end": 44.8, "text": "총괄이 역할을 나누면, CODEX와 CLAUDE가\n각자의 작업공간에서 동시에 일합니다." },
+    { "start": 45.2, "end": 50.6, "text": "결과는 같은 대화로 돌아오고,\n서로의 작업을 교차 검토합니다." },
+    { "start": 51.4, "end": 54.8, "text": "완료는 끝이 아닙니다." },
+    { "start": 55.0, "end": 60.8, "text": "서버가 직접 관측한 변경 파일과 테스트,\n커밋을 증거로 남기고," },
+    { "start": 61.0, "end": 66.6, "text": "Git 원격 반영과 운영 반영까지\n따로 확인합니다." },
+    { "start": 67.6, "end": 72.8, "text": "RAON Hub 사이트도\n이 흐름으로 만들고 검증했습니다." },
+    { "start": 73.4, "end": 79.4, "text": "모의투자 앱 MOBILE_STOCK도\n같은 방식으로 개발하고 있습니다." },
+    { "start": 80.6, "end": 82.4, "text": "대화는 단순하게." },
+    { "start": 82.6, "end": 84.4, "text": "실행은 강력하게." },
+    { "start": 84.6, "end": 87.4, "text": "증거는 명확하게." }
+  ]
+}
