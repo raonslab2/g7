@@ -13,22 +13,22 @@
 
 ## 복호화 키
 
-공개 Git 저장소에는 OpenPGP AES256/MDC로 암호화한 파일만 올렸다. 비밀번호·세션·설정 비밀값도 백업 안에 있으므로 **복호화 키는 공개 저장소에 넣지 않는다.** 키는 1PC에 별도 보관했다(디렉터리 `0700`, 파일 `0600`).
+사용자의 명시적 후속 요청에 따라 [복호화 키](backup-passphrase.txt)도 같은 공개 Git 저장소에 추가했다. 저장소를 읽을 수 있는 누구나 비밀번호·세션·설정 비밀값을 포함한 전체 백업을 복호화할 수 있다. 키 파일을 나중에 삭제해도 과거 Git 이력에는 남는다. 1PC 원본 키도 유지한다(디렉터리 `0700`, 파일 `0600`).
 
 ```text
 /home/mrdev/.g7/backups/git-20261004T040706Z/backup-passphrase.txt
 ```
 
-원본 archive는 `/var/backups/g7-product/g7-product-20261004T040706Z.tar.gz`에 있다. 다른 서버에서 복원할 때는 키를 별도의 비공개 경로로 전달해야 한다.
+원본 archive는 `/var/backups/g7-product/g7-product-20261004T040706Z.tar.gz`에 있다. 다른 서버에서도 함께 제공된 키 파일로 백업을 열 수 있다.
 
 ## 백업 열기
 
-저장소 루트에서 실행한다. `backup_key_file`은 실제 전달받은 키 파일 경로로 바꾼다. 아래 명령은 운영 경로에 덮어쓰지 않고 새 임시 디렉터리에 백업을 연다.
+저장소 루트에서 실행한다. 함께 제공된 복호화 키 경로를 사용한다. 아래 명령은 운영 경로에 덮어쓰지 않고 새 임시 디렉터리에 백업을 연다.
 
 ```bash
 set -euo pipefail
 umask 077
-backup_key_file=/secure/path/backup-passphrase.txt
+backup_key_file=deploy/database/full-backup-20261004/backup-passphrase.txt
 restore_dir="$(mktemp -d)"
 
 (cd deploy/database/full-backup-20261004 && sha256sum -c SHA256SUMS)

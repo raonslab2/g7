@@ -129,7 +129,7 @@
   "artifact_sha256": "558139cc8ed3013e9243d89838e9aa1e4d9518e8321592e05e0ef3583ff40028",
   "plaintext_archive_bytes": 3974267,
   "plaintext_archive_sha256": "39976e041cb31ec76a7031caea9a49d797e1d1a778b3ed51f7507b509ea29a8c",
-  "encryption": "OpenPGP AES256 with MDC; recovery passphrase stored outside Git",
+  "encryption": "OpenPGP AES256 with MDC; recovery key included in this public repository at explicit operator request",
   "verification": {
     "inner_checksums": "PASS",
     "gzip_and_tar_read": "PASS",
@@ -138,5 +138,6 @@
     "decrypt_archive_byte_equality": "PASS",
     "temporary_restore_database_removed": true
   },
-  "aws_database_modified": false
+  "aws_database_modified": false,
+  "recovery_key_file": "backup-passphrase.txt"
 }
