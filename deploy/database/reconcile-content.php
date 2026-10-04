@@ -135,6 +135,14 @@ final class ContentReconcile
             if (!$sourceVersions || !in_array($raw['current_version'], array_column($sourceVersions, 'version'))) {
                 throw new RuntimeException('Source page current version is missing');
             }
+            $current = array_values(array_filter($sourceVersions, fn($v) => $v['version'] == $raw['current_version']))[0];
+            foreach (['title', 'content'] as $field) {
+                // MySQL source rows and snapshots use different Unicode escaping.
+                if (json_decode($raw[$field] ?? 'null', true, 512, JSON_THROW_ON_ERROR)
+                    !== json_decode($current[$field] ?? 'null', true, 512, JSON_THROW_ON_ERROR)) {
+                    throw new RuntimeException('Source current snapshot differs from page');
+                }
+            }
             $offset = 0;
             if ($old) {
                 $q = $this->db->prepare("SELECT COALESCE(MAX(version),0) FROM `{$this->target}`.g7_page_versions WHERE page_id=?");

@@ -1,0 +1,20 @@
+name: verified-backup-content-reconciliation
+scope: deployment-only
+axes:
+  database_identity: [separate_reference_and_target, same_database_rejected]
+  board_id_collision: [source_community_1_target_private_1]
+  page_slug: [existing_aws_page, new_source_page]
+  version_history: [preserve_aws_and_append_source, exact_current_snapshot]
+  rerun: [first_restore, duplicate_rejected]
+  filesystem_boundary: [env_not_copied, traversal_rejected, symlink_rejected]
+validation:
+  phpunit: tests/Unit/Deployment/ContentReconcileTest.php
+  python: tests/Unit/Deployment/test_restore_referenced_files.py
+  runtime_api: deploy/aws/verify-restored-content.php
+  browser: deploy/aws/verify-content-browser.cjs
+effects:
+  - original source Page body/title/publication restored with explicit version mapping
+  - existing AWS private posts and auth rows unchanged
+  - board/post/parent/comment/attachment relationships remapped without deletion
+  - source credentials and environment excluded
+  - final operational API and interactive navigation smoke passes

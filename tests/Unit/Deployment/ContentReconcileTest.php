@@ -41,6 +41,16 @@ final class ContentReconcileTest extends TestCase
                 $q->execute([$slug]); self::assertSame(1, (int)$q->fetchColumn(), $slug);
             }
             self::assertSame(0, (int)$db->query("SELECT COUNT(*) FROM `$target`.g7_page_versions v LEFT JOIN `$target`.g7_pages p ON p.id=v.page_id WHERE p.id IS NULL")->fetchColumn());
+            foreach ($db->query("SELECT p.title,p.content,v.title AS vt,v.content AS vc FROM `$target`.g7_pages p JOIN `$target`.g7_page_versions v ON v.page_id=p.id AND v.version=p.current_version") as $row) {
+                self::assertSame(json_decode($row['title'], true), json_decode($row['vt'], true));
+                self::assertSame(json_decode($row['content'], true), json_decode($row['vc'], true));
+            }
+            try {
+                $tool->run();
+                self::fail('Repeated restore must be rejected');
+            } catch (\RuntimeException $error) {
+                self::assertStringContainsString('already present', $error->getMessage());
+            }
         } finally { $db->rollBack(); }
         self::assertSame($before, $tool->inventory($target));
     }
