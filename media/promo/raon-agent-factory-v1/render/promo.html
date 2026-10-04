@@ -1,0 +1,422 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>RAON Agent Factory Promo V1 — compositor</title>
+<!--
+  결정적(deterministic) 영상 합성기. window.__render(t) 가 시각 t(초)의 한 프레임을 그린다.
+  ?o=h (1920x1080, 기본) | ?o=v (1080x1920). 렌더는 render.mjs 가 프레임 단위로 캡처한다.
+  실제 제품 화면은 assets/ 의 캡처 이미지를 그대로 쓰며, 위에 강조 박스·라벨만 겹친다.
+-->
+<style>
+@font-face { font-family: "Pretendard"; font-weight: 100 900; src: url("/templates/_bundled/sirsoft-basic/dist/vendor/pretendard/1.3.9/woff2/PretendardVariable.woff2") format("woff2"); }
+:root {
+  --bg: #0a0e13; --graphite: #131a22; --navy: #0f1b2d; --slate: #c9d2dd; --muted: #8a97a8; --dim: #5d6876;
+  --blue: #7fa6d6; --green: #74c19e; --line: rgba(160, 180, 205, 0.16);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { background: #000; overflow: hidden; }
+body { font-family: "Pretendard", "Noto Sans CJK KR", sans-serif; color: var(--slate); -webkit-font-smoothing: antialiased; }
+#stage { position: relative; overflow: hidden; background: radial-gradient(120% 90% at 70% 10%, #13213a 0%, #0c131d 45%, #080b10 100%); }
+.layer { position: absolute; inset: 0; opacity: 0; will-change: opacity, transform; }
+.abs { position: absolute; }
+.kicker { font-size: 20px; letter-spacing: 0.22em; font-weight: 600; color: var(--blue); text-transform: uppercase; }
+.kicker::before { content: ""; display: inline-block; width: 36px; height: 1px; background: var(--blue); vertical-align: middle; margin-right: 14px; opacity: .7; }
+.headline { font-weight: 700; color: #eef2f7; letter-spacing: -0.02em; line-height: 1.18; }
+.body { color: var(--muted); line-height: 1.55; }
+.tag { position: absolute; font-size: 15px; font-weight: 600; color: #aeb9c6; background: rgba(15, 22, 32, .78); border: 1px solid var(--line); border-radius: 999px; padding: 7px 14px; letter-spacing: .01em; white-space: nowrap; }
+.tag b { color: var(--green); font-weight: 700; margin-right: 6px; }
+.phone { position: absolute; border-radius: 44px; background: #0d1218; border: 2px solid #2a3442; box-shadow: 0 40px 90px rgba(0,0,0,.55), inset 0 0 0 7px #05080c; padding: 9px; }
+.phone .vp { position: relative; width: 100%; height: 100%; overflow: hidden; border-radius: 34px; background: #0b1220; }
+.phone .vp img, .browser .vp img { position: absolute; left: 0; top: 0; width: 100%; display: block; }
+.browser { position: absolute; border-radius: 14px; background: #0e141c; border: 1px solid #263140; box-shadow: 0 40px 100px rgba(0,0,0,.55); overflow: hidden; }
+.browser .bar { height: 34px; display: flex; align-items: center; gap: 8px; padding: 0 14px; background: #121a24; border-bottom: 1px solid #1f2935; }
+.browser .bar i { width: 11px; height: 11px; border-radius: 50%; background: #2c3746; display: block; }
+.browser .bar span { margin-left: 14px; font-size: 13px; color: #6f7c8c; background: #0b1118; border-radius: 6px; padding: 4px 14px; min-width: 240px; }
+.browser .vp { position: relative; overflow: hidden; }
+.hl { position: absolute; border: 2px solid rgba(116, 193, 158, .95); border-radius: 12px; background: rgba(116, 193, 158, .08); box-shadow: 0 0 0 6px rgba(116, 193, 158, .10); opacity: 0; }
+.hl.blue { border-color: rgba(127, 166, 214, .95); background: rgba(127, 166, 214, .08); box-shadow: 0 0 0 6px rgba(127, 166, 214, .10); }
+.callout { position: absolute; font-size: 21px; font-weight: 700; color: #e9eef5; background: rgba(13, 20, 30, .92); border: 1px solid rgba(116,193,158,.55); border-radius: 10px; padding: 9px 14px; white-space: nowrap; opacity: 0; }
+.callout small { display: block; font-size: 15px; font-weight: 500; color: var(--muted); margin-top: 2px; }
+.callout.blue { border-color: rgba(127,166,214,.6); }
+.node { position: absolute; border-radius: 16px; background: rgba(17, 25, 37, .92); border: 1px solid #2a3647; padding: 18px 22px; text-align: left; }
+.node h4 { font-size: 28px; color: #eef2f7; font-weight: 700; letter-spacing: -0.01em; }
+.node p { font-size: 17px; color: var(--muted); margin-top: 6px; line-height: 1.4; }
+.node.accent { border-color: rgba(127,166,214,.6); }
+.node.green { border-color: rgba(116,193,158,.6); }
+.step { display: flex; align-items: center; gap: 16px; font-size: 26px; font-weight: 700; color: #4f5b69; margin: 18px 0; }
+.step i { width: 14px; height: 14px; border-radius: 50%; border: 2px solid currentColor; display: block; flex: none; }
+.step span small { display: block; font-size: 17px; font-weight: 500; color: inherit; opacity: .85; margin-top: 3px; }
+.frag { position: absolute; border-radius: 10px; background: rgba(22, 31, 44, .85); border: 1px solid #253042; padding: 10px 12px; font-size: 15px; color: #7f8b99; font-family: ui-monospace, "Noto Sans Mono CJK KR", monospace; white-space: nowrap; }
+.frag .bar { height: 7px; border-radius: 4px; background: #253144; margin-top: 7px; }
+.wordmark { text-align: center; }
+.wordmark .r { font-size: 132px; font-weight: 800; letter-spacing: 0.04em; color: #f1f4f8; line-height: 1; }
+.wordmark .f { font-size: 26px; font-weight: 600; letter-spacing: 0.62em; color: var(--blue); margin-top: 18px; padding-left: .62em; }
+.lane { position: absolute; height: 1px; background: linear-gradient(90deg, transparent, rgba(127,166,214,.22), transparent); }
+.dot { position: absolute; width: 10px; height: 10px; border-radius: 50%; background: var(--green); box-shadow: 0 0 12px rgba(116,193,158,.35); }
+.dot.b { background: var(--blue); box-shadow: 0 0 12px rgba(127,166,214,.35); }
+.cap { position: absolute; font-size: 22px; font-weight: 600; color: var(--slate); text-align: center; }
+.endline { font-size: 64px; font-weight: 700; color: #eef2f7; letter-spacing: -0.02em; margin: 10px 0; opacity: 0; }
+.endline em { font-style: normal; color: var(--green); }
+#vignette { position: absolute; inset: 0; pointer-events: none; background: radial-gradient(130% 100% at 50% 50%, transparent 60%, rgba(0,0,0,.45) 100%); }
+#fade { position: absolute; inset: 0; background: #000; opacity: 0; pointer-events: none; }
+</style>
+</head>
+<body>
+<div id="stage"></div>
+<script>
+const Q = new URLSearchParams(location.search);
+const V = Q.get("o") === "v";
+const W = V ? 1080 : 1920, H = V ? 1920 : 1080;
+const stage = document.getElementById("stage");
+stage.style.width = W + "px"; stage.style.height = H + "px";
+const A = (p) => "../assets/" + p;
+// 캡처 시 기록한 실제 DOM 좌표(css px). 강조 박스는 이 값만 사용한다.
+const MAN = (() => { const x = new XMLHttpRequest(); x.open("GET", "../capture/ai-gcs-capture-manifest.json", false); x.send(); return JSON.parse(x.responseText); })();
+const RC = (file, sel, i = 0) => { const r = MAN.find((m) => m.file === file)?.rects_css_px?.[sel]?.[i]; if (!r) throw new Error(`rect missing ${file} ${sel} ${i}`); return r; };
+
+// ── helpers ──
+const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
+const ease = (x) => { x = clamp(x); return x < .5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2; };
+const eout = (x) => 1 - Math.pow(1 - clamp(x), 3);
+const lerp = (a, b, x) => a + (b - a) * x;
+const ramp = (t, a, b) => clamp((t - a) / (b - a));
+const win = (t, a, b, f = .5) => Math.min(eout(ramp(t, a, a + f)), 1 - ease(ramp(t, b - f, b)));
+const L = (h, v) => (V ? v : h);
+function el(tag, cls, parent, html) { const e = document.createElement(tag); if (cls) e.className = cls; if (html !== undefined) e.innerHTML = html; (parent || stage).append(e); return e; }
+function put(e, x, y, w, h) { e.style.left = x + "px"; e.style.top = y + "px"; if (w !== undefined) e.style.width = w + "px"; if (h !== undefined) e.style.height = h + "px"; return e; }
+function layer() { return el("div", "layer"); }
+function rnd(seed) { return () => { seed |= 0; seed = seed + 0x6D2B79F5 | 0; let t = Math.imul(seed ^ seed >>> 15, 1 | seed); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+function text(parent, cls, html, x, y, w, size) { const e = el("div", "abs " + cls, parent, html); put(e, x, y, w); if (size) e.style.fontSize = size + "px"; return e; }
+function tag(parent, html, x, y) { if (V) { x = 80; y = 84; } const e = el("div", "tag", parent, html); put(e, x, y); return e; }
+
+/** 실제 모바일 캡처를 휴대폰 프레임에. cssW=390 기준 좌표계. */
+function phone(parent, src, x, y, w, cssH = 844) {
+  const h = w * cssH / 390 + 18;
+  const p = put(el("div", "phone", parent), x, y, w + 18, h);
+  const vp = el("div", "vp", p);
+  const img = el("img", "", vp); img.src = src;
+  const s = w / 390;
+  return { root: p, img, vp, s, scroll(px) { img.style.transform = `translateY(${-px * s}px)`; this.sy = px; }, sy: 0 };
+}
+/** 실제 데스크톱 캡처를 브라우저 프레임에. cssW=1440 기준 좌표계. */
+function browser(parent, src, x, y, w, label, cssH = 900, cx = 0, cw = 1440) {
+  const vh = w * cssH / cw;
+  const b = put(el("div", "browser", parent), x, y, w, vh + 34);
+  const bar = el("div", "bar", b, "<i></i><i></i><i></i><span>" + label + "</span>");
+  const vp = put(el("div", "vp", b), 0, 0, w, vh); vp.style.position = "relative";
+  const img = el("img", "", vp); img.src = src;
+  const s = w / cw;
+  img.style.width = 1440 * s + "px"; img.style.left = -cx * s + "px";
+  return { root: b, img, vp, s, cx, scroll(px) { img.style.transform = `translateY(${-px * s}px)`; this.sy = px; }, sy: 0 };
+}
+/** 캡처 시 기록한 실제 DOM 좌표(css px)에 강조 박스. */
+function hl(dev, rect, cls = "", pad = 4) {
+  const e = el("div", "hl " + cls, dev.vp);
+  const [x0, y, w, h] = rect; const x = x0 - (dev.cx || 0);
+  put(e, x * dev.s - pad, y * dev.s - pad, w * dev.s + pad * 2, h * dev.s + pad * 2);
+  return e;
+}
+
+const scenes = [];
+function scene(a, b, build, draw, fade = .6) { const root = layer(); const ctx = build(root); scenes.push({ a, b, root, ctx, draw, fade }); }
+
+// ───────────────── S1 문제 제시 (0–7) · 추상 모션 ─────────────────
+scene(0, 7.2, (root) => {
+  const r = rnd(7), frags = [];
+  const labels = ["답변 완료", "patch.diff", "다시 시도할까요?", "TODO: 확인 필요", "✓ done?", "어디에 반영됐지?", "로그 확인 중…", "브랜치가 뭐였지?", "테스트는?", "배포됐나요?", "답변 완료", "copy & paste", "결과 요약", "누가 검토했나요?"];
+  for (let i = 0; i < 26; i++) {
+    const f = el("div", "frag", root, labels[i % labels.length] + '<div class="bar" style="width:' + (60 + r() * 120) + 'px"></div>');
+    frags.push({ e: f, x: r() * W * 1.05 - 40, y: r() * H * .9, vx: (r() - .5) * 26, vy: (r() - .5) * 18, d: r() * 1.4, z: .55 + r() * .7 });
+  }
+  const h1 = text(root, "headline", "AI는 빠르게 답합니다.", L(160, 80), L(430, 760), L(1600, 920), L(84, 72));
+  const h2 = text(root, "headline", "그 일이, 정말<br>끝났을까요?", L(160, 80), L(380, 700), L(1600, 920), L(96, 84));
+  return { frags, h1, h2 };
+}, (t, c) => {
+  for (const f of c.frags) {
+    const o = win(t, .2 + f.d, 6.7, .8) * .55 * f.z * (1 - .55 * ramp(t, 3.2, 4.2));
+    f.e.style.opacity = o;
+    f.e.style.transform = `translate(${f.x + f.vx * t}px, ${f.y + f.vy * t}px) scale(${f.z})`;
+    f.e.style.filter = `blur(${(1.3 - f.z) * 3 + ramp(t, 3.4, 4.4) * 2}px)`;
+  }
+  c.h1.style.opacity = win(t, .5, 3.6, .6); c.h1.style.transform = `translateY(${(1 - eout(ramp(t, .5, 1.3))) * 30}px)`;
+  c.h2.style.opacity = win(t, 3.7, 7.0, .6); c.h2.style.transform = `translateY(${(1 - eout(ramp(t, 3.7, 4.5))) * 30}px)`;
+});
+
+// ───────────────── S2 RAON Agent Factory 소개 (7–16) · 추상 모션 ─────────────────
+scene(7, 16.3, (root) => {
+  const lanes = [], dots = [];
+  const r = rnd(11);
+  const n = V ? 14 : 9;
+  for (let i = 0; i < n; i++) {
+    const y = (i + .5) * H / n;
+    lanes.push(put(el("div", "lane", root), 0, y, W));
+    for (let k = 0; k < 3; k++) dots.push({ e: put(el("div", "dot" + (r() > .5 ? " b" : ""), root), 0, y - 5), sp: 90 + r() * 140, off: r() * W, dir: i % 2 ? -1 : 1 });
+  }
+  const wm = el("div", "abs wordmark", root, '<div class="r">RAON</div><div class="f">AGENT FACTORY</div>');
+  put(wm, 0, L(250, 560), W);
+  const l1 = text(root, "headline", "AI Agent를 만드는 공장.", 0, L(640, 1000), W, L(64, 62));
+  const l2 = text(root, "headline", "실제로 일하게 만드는 <span style='color:var(--green)'>운영 플랫폼.</span>", 0, L(730, 1100), W, L(64, 58));
+  const en = text(root, "body", "Builds AI agents — and puts them to work.", 0, L(830, 1210), W, 24);
+  for (const e of [l1, l2, en]) e.style.textAlign = "center";
+  return { lanes, dots, wm, l1, l2, en };
+}, (t, c) => {
+  const lt = t - 7;
+  c.lanes.forEach((l, i) => { l.style.opacity = .9 * eout(ramp(lt, i * .06, i * .06 + 1)); });
+  for (const d of c.dots) { let x = (d.off + d.dir * d.sp * lt) % (W + 40); if (x < 0) x += W + 40; d.e.style.transform = `translateX(${x - 20}px)`; d.e.style.opacity = .85 * eout(ramp(lt, .6, 1.6)) * (1 - .55 * ramp(lt, 2.2, 3.2)); }
+  c.wm.style.opacity = eout(ramp(lt, 1.2, 2.4)); c.wm.style.transform = `scale(${lerp(1.04, 1, eout(ramp(lt, 1.2, 3)))})`;
+  c.l1.style.opacity = eout(ramp(lt, 3.6, 4.4)); c.l1.style.transform = `translateY(${(1 - eout(ramp(lt, 3.6, 4.4))) * 24}px)`;
+  c.l2.style.opacity = eout(ramp(lt, 5.0, 5.8)); c.l2.style.transform = `translateY(${(1 - eout(ramp(lt, 5.0, 5.8))) * 24}px)`;
+  c.en.style.opacity = .8 * eout(ramp(lt, 6.0, 6.8));
+});
+
+// ───────────────── S3a AI_GCS 내 작업 (16–22) · 실제 UI ─────────────────
+scene(16, 22, (root) => {
+  const k = text(root, "kicker", "01 · 대화로 지시", L(1290, 80), L(330, 150));
+  const h = text(root, "headline", L("대화하듯,<br>한 문장으로.", "대화하듯, 한 문장으로."), L(1290, 80), L(380, 200), L(560, 920), L(66, 64));
+  const b = text(root, "body", "AI_GCS V2 — 모바일 우선 작업 지시 Web.<br>내 작업 · 지시함 · 프로젝트 · 운영 통계", L(1290, 80), L(560, 300), L(560, 920), L(24, 28));
+  const dev = V ? phone(root, A("ui/01-work-list-390x844.webp"), 240, 520, 600) : browser(root, A("ui/01-work-list-1440x900.webp"), 110, 200, 1110, "AI_GCS V2");
+  const tg = tag(root, "<b>실제 화면</b>AI_GCS V2 · 데모 데이터", L(110, 60), L(150, 500));
+  // 상단 내비 탭(내 작업 · 지시함 · 프로젝트 · 운영 통계). 이 한 곳만 화면 실측(2160px 캡처 → css) 근사값.
+  const nav = V ? hl(dev, RC("01-work-list-390x844.png", "button.primary, .submit-request"), "blue") : hl(dev, [490, 11, 450, 44], "blue", 2);
+  return { k, h, b, dev, tg, nav };
+}, (t, c) => {
+  const lt = t - 16;
+  c.dev.root.style.transform = `translateY(${(1 - eout(ramp(lt, 0, 1))) * 40}px) scale(${lerp(1, 1.03, ramp(lt, 0, 6))})`;
+  c.dev.root.style.transformOrigin = "30% 30%";
+  c.k.style.opacity = eout(ramp(lt, .3, 1)); c.h.style.opacity = eout(ramp(lt, .5, 1.3)); c.b.style.opacity = eout(ramp(lt, 1.0, 1.8));
+  c.tg.style.opacity = eout(ramp(lt, .6, 1.2));
+  c.nav.style.opacity = win(lt, 2.4, 5.6, .4);
+});
+
+// ───────────────── S3b 한 문장 작업 지시 (21.5–28) · 실제 UI ─────────────────
+scene(21.5, 28, (root) => {
+  const pw = L(420, 600);
+  const dev = phone(root, A("ui/02-composer-390x844.webp"), L(1200, 230), L(70, 520), pw);
+  const k = text(root, "kicker", "AI_GCS · 새 요청", L(170, 80), L(300, 150));
+  const h = text(root, "headline", "무엇을 맡길까요?", L(170, 80), L(350, 200), L(900, 920), L(70, 66));
+  const b = text(root, "body", "프로젝트와 Provider를 고르고 원문 그대로 보냅니다.<br>의미를 분류하거나 다시 쓰지 않습니다.", L(170, 80), L(470, 300), L(900, 920), L(28, 28));
+  const tg = tag(root, "<b>실제 화면</b>AI_GCS V2 · 모바일 390px · 데모 데이터", L(170, 80), L(250, 440));
+  const hp = hl(dev, RC("02-composer-390x844.png", "#project-id"), "blue"), hv = hl(dev, RC("02-composer-390x844.png", "#provider-profile"), "blue"), hr = hl(dev, RC("02-composer-390x844.png", "#request-prompt"));
+  const c1 = el("div", "callout blue", root, "프로젝트"), c2 = el("div", "callout blue", root, "Provider · CODEX / CLAUDE"), c3 = el("div", "callout", root, "한 문장 지시<small>원문 그대로 Provider에 전달</small>");
+  const px = L(1200, 230) + 9, py = L(70, 520) + 9, s = dev.s;
+  if (V) for (const c of [c1, c2, c3]) c.style.display = "none";
+  else { for (const [c, y] of [[c1, 245], [c2, 350], [c3, 520]]) { put(c, px - 36, py + y * s); c.style.transform = "translateX(-100%)"; } }
+  return { dev, k, h, b, tg, hp, hv, hr, c1, c2, c3 };
+}, (t, c) => {
+  const lt = t - 21.5;
+  c.dev.root.style.transform = `translateY(${(1 - eout(ramp(lt, 0, 1))) * 60}px)`;
+  c.k.style.opacity = eout(ramp(lt, .2, .9)); c.h.style.opacity = eout(ramp(lt, .4, 1.2)); c.b.style.opacity = eout(ramp(lt, .9, 1.7)); c.tg.style.opacity = eout(ramp(lt, .5, 1.1));
+  c.hp.style.opacity = c.c1.style.opacity = win(lt, 1.4, 6.5, .4);
+  c.hv.style.opacity = c.c2.style.opacity = win(lt, 2.2, 6.5, .4);
+  c.hr.style.opacity = c.c3.style.opacity = win(lt, 3.2, 6.5, .4);
+});
+
+// ───────────────── S3c 내 작업 · 지시함 · 프로젝트 (27.5–33) · 실제 UI ─────────────────
+scene(27.5, 33.2, (root) => {
+  const items = [["ui/01-work-list-390x844.webp", "내 작업", "상태별 진행 · 실행 중 카드"], ["ui/03-work-orders-390x844.webp", "지시함", "Git 작업지시서 수집 · 작업등록"], ["ui/08-project-hub-390x844.webp", "프로젝트", "프로젝트별 진행 · 최근 활동"]];
+  const pw = L(350, 300), gap = L(110, 40), x0 = (W - (pw * 3 + gap * 2 + 54)) / 2, y0 = L(150, 640);
+  const devs = items.map(([src, name, sub], i) => {
+    const d = phone(root, A(src), x0 + i * (pw + 18 + gap), y0, pw);
+    const cap = text(root, "cap", name + "<br><span style='font-size:17px;color:var(--muted);font-weight:500'>" + sub + "</span>", x0 + i * (pw + 18 + gap), y0 + pw * 844 / 390 + L(34, 40), pw + 18);
+    if (!V) cap.style.display = "none";
+    return { d, cap };
+  });
+  const tg = tag(root, "<b>실제 화면</b>AI_GCS V2 · 데모 데이터", L(x0, 60), L(90, 520));
+  const h = text(root, "headline", "진행 상황은 한곳에서.", 80, 200, 920, 64); if (!V) h.style.display = "none";
+  const caps = items.map(([, name], i) => { const e = el("div", "callout blue", root, name); put(e, x0 + i * (pw + 18 + gap) + 24, y0 + 24); return e; });
+  if (V) caps.forEach((e) => (e.style.display = "none"));
+  return { devs, tg, h, caps };
+}, (t, c) => {
+  const lt = t - 27.5;
+  c.devs.forEach(({ d, cap }, i) => { const p = eout(ramp(lt, .1 + i * .25, .9 + i * .25)); d.root.style.opacity = p; d.root.style.transform = `translateY(${(1 - p) * 70}px)`; cap.style.opacity = p; });
+  c.caps.forEach((e, i) => (e.style.opacity = eout(ramp(lt, .9 + i * .25, 1.5 + i * .25))));
+  c.tg.style.opacity = eout(ramp(lt, .6, 1.2)); c.h.style.opacity = eout(ramp(lt, .3, 1.1));
+});
+
+// ───────────────── S4a 실행 구조 (33–40.5) · 구조 도식 ─────────────────
+scene(33, 40.6, (root) => {
+  const N = (x, y, w, h4, p, cls = "") => { const e = el("div", "node " + cls, root, `<h4>${h4}</h4><p>${p}</p>`); put(e, x, y, w); return e; };
+  const k = text(root, "kicker", "02 · 실행 구조", L(140, 80), L(140, 150));
+  const h = text(root, "headline", "접수에서 Git까지, 한 경로로.", L(140, 80), L(190, 200), L(1600, 920), L(60, 60));
+  let nodes, wires = [];
+  const wire = (x1, y1, x2, y2) => { const e = el("div", "abs", root); const len = Math.hypot(x2 - x1, y2 - y1); e.style.cssText += `left:${x1}px;top:${y1}px;width:${len}px;height:2px;background:linear-gradient(90deg,rgba(127,166,214,.25),rgba(116,193,158,.6));transform-origin:0 50%;transform:rotate(${Math.atan2(y2 - y1, x2 - x1)}rad)`; const p = el("div", "dot", root); wires.push({ e, p, x1, y1, x2, y2 }); return e; };
+  if (!V) {
+    const y = 470;
+    nodes = [N(110, y, 300, "AI_GCS", "대화형 지시 · 접수 · 결과 확인", "accent"), N(500, y, 320, "AgentOpt", "Provider 실행 · 이벤트 기록 · 서버 관측"),
+      N(910, y - 120, 260, "CODEX", "역할별 위임 · 격리된 작업공간"), N(910, y + 120, 260, "CLAUDE", "역할별 위임 · 격리된 작업공간"),
+      N(1260, y, 250, "Evidence", "변경 파일 · 테스트 · 커밋", "green"), N(1590, y, 230, "Git", "원격 ref · main 확인", "green")];
+    wire(410, y + 60, 500, y + 60); wire(820, y + 60, 910, y - 60); wire(820, y + 60, 910, y + 180); wire(1170, y - 60, 1260, y + 60); wire(1170, y + 180, 1260, y + 60); wire(1510, y + 60, 1590, y + 60);
+  } else {
+    const x = 140, w = 800;
+    nodes = [N(x, 400, w, "AI_GCS", "대화형 지시 · 접수 · 결과 확인", "accent"), N(x, 620, w, "AgentOpt", "Provider 실행 · 이벤트 기록 · 서버 관측"),
+      N(x, 860, 380, "CODEX", "역할별 위임<br>격리된 작업공간"), N(x + 420, 860, 380, "CLAUDE", "역할별 위임<br>격리된 작업공간"),
+      N(x, 1110, w, "Evidence", "변경 파일 · 테스트 · 커밋", "green"), N(x, 1320, w, "Git", "원격 ref · main 확인", "green")];
+    wire(540, 520, 540, 620); wire(540, 740, 330, 860); wire(540, 740, 750, 860); wire(330, 1010, 540, 1110); wire(750, 1010, 540, 1110); wire(540, 1230, 540, 1320);
+  }
+  const note = text(root, "body", "현재 운영 구조 그대로 · AI_GCS V2 → AgentOpt V2 → Provider → 관측 증거 → Git", L(140, 80), L(800, 1500), L(1640, 920), L(22, 24));
+  return { k, h, nodes, wires, note };
+}, (t, c) => {
+  const lt = t - 33;
+  c.k.style.opacity = eout(ramp(lt, .1, .7)); c.h.style.opacity = eout(ramp(lt, .3, 1.1));
+  const order = [0, 1, 2, 3, 4, 5], at = [0.6, 1.4, 2.3, 2.5, 3.6, 4.4];
+  order.forEach((i) => { const p = eout(ramp(lt, at[i], at[i] + .6)); c.nodes[i].style.opacity = p; c.nodes[i].style.transform = `translateY(${(1 - p) * 20}px)`; });
+  const wa = [1.1, 2.0, 2.0, 3.2, 3.2, 4.1];
+  c.wires.forEach((w, i) => {
+    w.e.style.opacity = eout(ramp(lt, wa[i], wa[i] + .4));
+    const ph = ((lt - wa[i]) * .55) % 1; const on = lt > wa[i] + .3 ? 1 : 0;
+    w.p.style.opacity = on * .9; w.p.style.left = lerp(w.x1, w.x2, ph) - 5 + "px"; w.p.style.top = lerp(w.y1, w.y2, ph) - 4 + "px";
+  });
+  c.note.style.opacity = .9 * eout(ramp(lt, 5, 5.8));
+});
+
+// ───────────────── S4b CODEX · CLAUDE 분업 · 교차 검토 (40–51) · 실제 UI ─────────────────
+scene(40, 51, (root) => {
+  const pw = L(440, 600), px = L(1220, 240), py = L(60, 470);
+  const F4 = "04-parent-waiting-390x844.png", F5 = "05-parent-collab-done-390x844.png";
+  const d1 = phone(root, A("ui/04-parent-waiting-390x844.webp"), px, py, pw);
+  const d2 = phone(root, A("ui/05-parent-collab-done-390x844.webp"), px, py, pw);
+  const k = text(root, "kicker", "03 · 멀티 Provider", L(150, 80), L(250, 150));
+  const h = text(root, "headline", L("역할을 나누고,<br>서로 검토합니다.", "역할을 나누고, 서로 검토합니다."), L(150, 80), L(300, 200), L(900, 920), L(68, 58));
+  const steps = el("div", "abs", root); put(steps, L(150, 80), L(520, 300), L(900, 940));
+  steps.innerHTML = ['<span>총괄 CODEX가 4개 작업으로 위임<small>API 계약 · 모바일 UX · 교차 검토 2건</small></span>', '<span>CODEX와 CLAUDE가 동시에 실행<small>요청별 격리된 작업공간</small></span>', '<span>결과는 같은 총괄 대화로 복귀<small>Provider 문장은 검증으로 간주하지 않음</small></span>'].map((s) => `<div class="step"><i></i>${s}</div>`).join("");
+  if (V) steps.style.display = "none";
+  const tg = tag(root, "<b>실제 화면</b>AI_GCS V2 · 협업 진행 · 데모 데이터", L(150, 80), L(190, 410));
+  const w1 = hl(d1, RC(F4, ".collaboration-child", 0), "blue"), w2 = hl(d1, RC(F4, ".collaboration-child", 1));
+  const x1 = hl(d2, RC(F5, ".collaboration-child", 2), "blue"), x2 = hl(d2, ((r) => [r[0], r[1], r[2], Math.min(r[3], 840 - r[1])])(RC(F5, ".collaboration-child", 3)));
+  const s = d1.s, ox = px + 9, oy = py + 9;
+  const mk = (html, cls, x, y) => put(el("div", "callout " + cls, root, html), x, y);
+  const cA = V ? mk("CODEX · 실행 중<small>API 계약 검토</small>", "blue", ox + 330 * s - 300, oy + RC(F4, ".collaboration-child", 0)[1] * s - 80) : mk("CODEX · 실행 중<small>API 계약 검토</small>", "blue", ox - 36, oy + 170 * s);
+  const cB = V ? mk("CLAUDE · 실행 중<small>모바일 UX 검토 · 구현</small>", "", ox + 330 * s - 330, oy + (RC(F4, ".collaboration-child", 1)[1] + RC(F4, ".collaboration-child", 1)[3]) * s + 12) : mk("CLAUDE · 실행 중<small>모바일 UX 검토 · 구현</small>", "", ox - 36, oy + 350 * s);
+  const cC = V ? mk("교차 검토 · 완료<small>CODEX ↔ CLAUDE 4/4 종료</small>", "", ox + 20, oy + RC(F5, ".collaboration-child", 2)[1] * s - 84) : mk("교차 검토 · 완료<small>CODEX ↔ CLAUDE · 4/4 종료</small>", "", ox - 36, oy + 560 * s);
+  if (!V) for (const c of [cA, cB, cC]) c.style.transform = "translateX(-100%)"; else for (const c of [cA, cB, cC]) c.style.display = "none";
+  const st = steps.querySelectorAll(".step");
+  return { d1, d2, k, h, st, tg, w1, w2, x1, x2, cA, cB, cC };
+}, (t, c) => {
+  const lt = t - 40;
+  c.d1.root.style.transform = c.d2.root.style.transform = `translateY(${(1 - eout(ramp(lt, 0, 1))) * 60}px)`;
+  const sw = ease(ramp(lt, 5.4, 6.2));
+  c.d1.root.style.opacity = 1; c.d2.root.style.opacity = sw;
+  c.k.style.opacity = eout(ramp(lt, .2, .9)); c.h.style.opacity = eout(ramp(lt, .4, 1.2)); c.tg.style.opacity = eout(ramp(lt, .5, 1.1));
+  const sAt = [1.0, 2.2, 5.6];
+  c.st.forEach((e, i) => { const on = ramp(lt, sAt[i], sAt[i] + .5); e.style.color = on > 0 ? `rgb(${lerp(79, 222, on)},${lerp(91, 230, on)},${lerp(105, 238, on)})` : "#4f5b69"; e.querySelector("i").style.background = on >= 1 ? (i === 2 ? "var(--green)" : "var(--blue)") : "transparent"; });
+  c.w1.style.opacity = c.cA.style.opacity = win(lt, 1.6, 5.6, .4);
+  c.w2.style.opacity = c.cB.style.opacity = win(lt, 2.4, 5.6, .4);
+  c.x1.style.opacity = c.x2.style.opacity = c.cC.style.opacity = win(lt, 6.6, 11, .4);
+});
+
+// ───────────────── S5a 결과물 · Git · 운영 반영 (51–58.5) · 실제 UI ─────────────────
+scene(51, 58.5, (root) => {
+  const pw = L(440, 560), px = L(1220, 260), py = L(60, 640);
+  const d = phone(root, A("ui/06-parent-result-390x844.webp"), px, py, pw);
+  const k = text(root, "kicker", "04 · 증거", L(150, 80), L(250, 150));
+  const h = text(root, "headline", "완료는<br>끝이 아닙니다.", L(150, 80), L(300, 200), L(900, 920), L(76, 64));
+  const steps = el("div", "abs", root); put(steps, L(150, 80), L(520, 400), L(900, 940));
+  steps.innerHTML = ['<span>Provider 완료<small>커밋 1 · 파일 3 · 명령·테스트 3건 관측</small></span>', '<span>Git 통합<small>main 원격 ref 확인</small></span>', '<span>운영 반영<small>서비스 반영 확인 · 배포 receipt 기준</small></span>'].map((s) => `<div class="step"><i></i>${s}</div>`).join("");
+  if (V) { h.innerHTML = "완료는 끝이 아닙니다."; steps.style.top = "300px"; steps.querySelectorAll(".step").forEach((e) => { e.style.margin = "6px 0"; e.style.fontSize = "24px"; }); }
+  const tg = tag(root, "<b>실제 화면</b>AI_GCS V2 · 결과물 · 데모 데이터", L(150, 80), L(190, 500));
+  const F6 = "06-parent-result-390x844.png";
+  const hs = [hl(d, RC(F6, ".result-summary"), "blue"), hl(d, RC(F6, ".result-truth li", 0)), hl(d, RC(F6, ".result-truth li", 1))];
+  return { d, k, h, steps: steps.querySelectorAll(".step"), tg, hs };
+}, (t, c) => {
+  const lt = t - 51;
+  c.d.root.style.transform = `translateY(${(1 - eout(ramp(lt, 0, 1))) * 60}px)`;
+  c.k.style.opacity = eout(ramp(lt, .2, .9)); c.h.style.opacity = eout(ramp(lt, .4, 1.2)); c.tg.style.opacity = eout(ramp(lt, .5, 1.1));
+  const at = [1.6, 3.2, 4.8];
+  c.steps.forEach((e, i) => { const on = ramp(lt, at[i], at[i] + .5); e.style.color = `rgb(${lerp(79, 222, on)},${lerp(91, 230, on)},${lerp(105, 238, on)})`; e.querySelector("i").style.background = on >= 1 ? "var(--green)" : "transparent"; c.hs[i].style.opacity = win(lt, at[i], 7.5, .4); });
+}, .5);
+
+// ───────────────── S5b 서버가 관측한 증거 (58–67) · 실제 UI ─────────────────
+scene(58, 67, (root) => {
+  // 데스크톱 캡처에서 상세 패널(css x 445–1415, y 0–700)만 확대해 보여준다.
+  const bw = L(1240, 1500), bx = L(620, -40), by = L(90, 640);
+  const d = browser(root, A("ui/07-observations-1440x900.webp"), bx, by, bw, "AI_GCS V2 · 작업 상세", 700, 445, 970);
+  const k = text(root, "kicker", "서버 관측 결과", L(110, 80), L(300, 150));
+  const h = text(root, "headline", L("Provider의 말이<br>아니라,<br>관측된 값으로.", "Provider의 말이 아니라,<br>관측된 값으로."), L(110, 80), L(350, 200), L(500, 920), L(56, 58));
+  const tg = tag(root, "<b>실제 화면</b>AI_GCS V2 · 1440px · 데모 데이터", L(110, 80), L(250, 470));
+  const F7 = "07-observations-1440x900.png";
+  const R = [RC(F7, ".observation-item", 2), RC(F7, ".observation-item", 3), RC(F7, ".observation-item", 4)];
+  const hs = [hl(d, R[0]), hl(d, R[1], "blue"), hl(d, R[2])];
+  const lab = ["명령 · 테스트 PASS", "commit SHA", "원격 ref · main 확인"].map((t, i) => { const e = el("div", "callout " + (i === 1 ? "blue" : ""), d.vp, t); const r = R[i]; put(e, (r[0] - 445) * d.s + 10, (r[1] + r[3]) * d.s + 12); e.style.fontSize = "20px"; return e; });
+  return { d, k, h, tg, hs, lab };
+}, (t, c) => {
+  const lt = t - 58;
+  const pan = V ? lerp(0, -460, ease(ramp(lt, 1.2, 7.6))) : 0;
+  c.d.root.style.transform = `translate(${pan}px, ${(1 - eout(ramp(lt, 0, 1))) * 50}px)`;
+  c.k.style.opacity = eout(ramp(lt, .2, .9)); c.h.style.opacity = eout(ramp(lt, .4, 1.2)); c.tg.style.opacity = eout(ramp(lt, .5, 1.1));
+  const at = V ? [1.2, 3.6, 5.6] : [1.4, 3.4, 5.4];
+  c.hs.forEach((e, i) => { e.style.opacity = c.lab[i].style.opacity = win(lt, at[i], 9, .4); });
+});
+
+// ───────────────── S6a G7 · RAON Hub (67–74) · 실제 공개 사이트 ─────────────────
+scene(67, 74, (root) => {
+  const bw = L(1240, 980), bx = L(110, 50), by = L(170, 500);
+  const d = browser(root, A("web/g7-home-full-1440.webp"), bx, by, bw, "RAON Hub");
+  const p = phone(root, A("web/g7-home-top-390.webp"), L(1460, 640), L(330, 1080), L(320, 360));
+  const k = text(root, "kicker", "05 · 실제 프로젝트", L(110, 80), L(70, 150));
+  const h = text(root, "headline", "G7 · RAON Hub", L(110, 80), L(105, 200), L(1200, 920), L(56, 64));
+  const tg = tag(root, "<b>실제 공개 사이트</b>2026-10-04 캡처 · 자체 구축", L(1160, 80), L(96, 300));
+  if (V) put(h, 80, 200);
+  return { d, p, k, h, tg };
+}, (t, c) => {
+  const lt = t - 67;
+  c.d.root.style.transform = `translateY(${(1 - eout(ramp(lt, 0, 1))) * 50}px)`;
+  c.d.scroll(lerp(0, 780, ease(ramp(lt, 1.6, 6.4))));
+  c.p.root.style.opacity = eout(ramp(lt, .9, 1.6)); c.p.root.style.transform = `translateY(${(1 - eout(ramp(lt, .9, 1.8))) * 60}px)`;
+  c.p.scroll(lerp(0, 380, ease(ramp(lt, 2.2, 6.6))));
+  c.k.style.opacity = eout(ramp(lt, .2, .9)); c.h.style.opacity = eout(ramp(lt, .4, 1.2)); c.tg.style.opacity = eout(ramp(lt, .5, 1.1));
+});
+
+// ───────────────── S6b MOBILE_STOCK (73.5–80) · 실제 제품 공개 사례 ─────────────────
+scene(73.5, 80.2, (root) => {
+  const items = ["mobile-stock/case-01-new-paper-account.webp", "mobile-stock/case-03-first-buy-review.webp", "mobile-stock/case-04-first-buy-receipt.webp"];
+  const pw = L(330, 310), gap = L(90, 24), x0 = (W - (pw * 3 + gap * 2 + 54)) / 2, y0 = L(185, 640);
+  const devs = items.map((src, i) => phone(root, A(src), x0 + i * (pw + 18 + gap), y0, pw, 880));
+  const k = text(root, "kicker", "05 · 실제 프로젝트", L(x0, 80), L(70, 150));
+  const h = text(root, "headline", "MOBILE_STOCK · 모의투자 앱", L(x0, 80), L(105, 200), L(1400, 920), L(56, 56));
+  const tg = tag(root, "<b>공개 사례 화면</b>모의투자 · 실거래 미지원 · 예시 데이터", L(1110, 80), L(96, 300));
+  if (V) { h.innerHTML = "MOBILE_STOCK<br>모의투자 앱"; put(tg, 80, 420); }
+  return { devs, k, h, tg };
+}, (t, c) => {
+  const lt = t - 73.5;
+  c.devs.forEach((d, i) => { const p = eout(ramp(lt, .2 + i * .3, 1.0 + i * .3)); d.root.style.opacity = p; d.root.style.transform = `translateY(${(1 - p) * 70 + Math.sin((lt + i) * .7) * 4}px)`; });
+  c.k.style.opacity = eout(ramp(lt, .2, .9)); c.h.style.opacity = eout(ramp(lt, .4, 1.2)); c.tg.style.opacity = eout(ramp(lt, .5, 1.1));
+});
+
+// ───────────────── S7 엔딩 (80–88) ─────────────────
+scene(80, 88, (root) => {
+  const wm = el("div", "abs wordmark", root, '<div class="r">RAON</div><div class="f">AGENT FACTORY</div>');
+  put(wm, 0, L(140, 420), W); wm.style.transform = "scale(.72)";
+  const box = el("div", "abs", root); put(box, 0, L(470, 860), W); box.style.textAlign = "center";
+  box.innerHTML = '<div class="endline">대화는 <em>단순하게.</em></div><div class="endline">실행은 <em>강력하게.</em></div><div class="endline">증거는 <em>명확하게.</em></div>';
+  const foot = text(root, "body", "AI_GCS V2 · AgentOpt V2 · CODEX · CLAUDE", 0, L(820, 1340), W, 22); foot.style.textAlign = "center";
+  return { wm, lines: box.querySelectorAll(".endline"), foot };
+}, (t, c) => {
+  const lt = t - 80;
+  c.wm.style.opacity = eout(ramp(lt, .1, 1));
+  c.lines.forEach((e, i) => { const p = eout(ramp(lt, .6 + i * 2, 1.3 + i * 2)); e.style.opacity = p; e.style.transform = `translateY(${(1 - p) * 20}px)`; });
+  c.foot.style.opacity = .75 * eout(ramp(lt, 5.4, 6.2));
+});
+
+el("div", "", stage).id = "vignette";
+const fade = el("div", "", stage); fade.id = "fade";
+
+window.__render = (t) => {
+  for (const s of scenes) {
+    const o = Math.min(eout(ramp(t, s.a, s.a + s.fade)), 1 - ease(ramp(t, s.b - s.fade, s.b)));
+    const on = t >= s.a - .001 && t <= s.b + .001;
+    s.root.style.opacity = on ? (s.a === 0 ? Math.min(1, 1 - ease(ramp(t, s.b - s.fade, s.b))) : o) : 0;
+    s.root.style.display = on ? "block" : "none";
+    if (on) s.draw(t, s.ctx);
+  }
+  fade.style.opacity = Math.max(1 - ramp(t, 0, .5), ramp(t, 87.3, 88));
+};
+window.__ready = (async () => {
+  await document.fonts.load('700 40px "Pretendard"');
+  await Promise.all([...document.images].map((i) => i.decode().catch(() => { throw new Error("image failed: " + i.src); })));
+  window.__render(0);
+  return true;
+})();
+</script>
+</body>
+</html>
