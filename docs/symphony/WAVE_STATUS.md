@@ -264,3 +264,20 @@ Lead final working-source integration checks: SQLite152/2469PASS118.622s; full t
 Lead actually restarted the request-owned preview and observed four travel-table digests identical, new PID andHTTP200. Then stopped preview, removed only the two marked ignored environment files via the reviewed recovery harness, regenerated scoped account/synthetic admin credentials, retained all user IDs/four travel-table digests and validated Laravel smoke. Transient service disappeared on stop, so sameunit/User=ubuntu/workdir/loopback18871/workers4 was recreated; HTTP200 recovered. This is bounded lead recovery evidence, not independent whole-database or product PASS. Nested subprocess log interleaving invalidated UTF8; raw private log excluded, successmarker/exit0/separate digest comparison recorded. New canonical reviewers receive fresh postrotation access. No production/Spring changes.
 
 Next: publish this meaningful reviewed batch once in PR2; preserve original security/fresh commits as reachable provenance without replacing the repaired tree. New fixedSHA browser samekey attempt2 (priorINTERRUPTED), NEW fresh-install task and ready independent privacy/rate/relogin checks use existing provider admission. Full native install/HTML/restore, own-policy admin390/1440 journey, privateedit, >12 pagination and source binding remain required. Hosted CI/canonical Validation receipt NOT_RUN, no waiver or main/prod merge. Deadline still October11 14:59UTC; more than48h remain.
+
+
+## Fixed source and canonical review handoff — October9
+
+Published product/review target **598a89fff702d51c1405f1a5952d95ab1d2651f4**, tree **9e00273bdf18d6a713343755aac54f44a9b032b4**; repaired sourcecommit54fba013 and provenance-only ours merge retain original dd43331a/cdd2def9 reachable without altering the repaired tree. origin taskbranch verifiedsame598a89ff, PR2OPEN/draft. Exacthead hostedActions0runs/statuschecks empty = NOT_RUN, canonicalValidationreceipt unavailable; no waiver/main/prodmerge. A later docs-only handoff head does not change the fixed tested source.
+
+Canonical single boundedstatus observed three RUNNING ready independentRequests, not just logical roles:
+
+| Task | Attempt / provider | Request | Scope |
+|---|---|---|---|
+| w03-browser-recheck | 2 CODEX | req_7e41235d7eeb44a0b4efe254bc678748 | Actual390/1440 nativecustomer/adminUI, interruptedattempt recovery |
+| w04-repaired-native-install | 1 CLAUDE | req_337b3638df9b4b958b0627e0b262a54a | ActualnativeemptyTEST/offlineHTML/fullsnapshotrestore; newkey |
+| w04-support-session-recheck | 1 CODEX | req_1c49be4c4f164489b069557bb1db4d06 | NativeHTTPthrottle/privateaudit/auth/securityregression |
+
+Browser and support have distinct freshsynthetic3roleaccess/fixtures issued afteractualenvrecovery, samefixedSHA/four-hour expiry; secrets onlyignored0700/0600 files. Freshinstaller exclusivelyownsTEST, two otherverifiers ownseparateAPPfixtures. Parent source/lifecycle frozen, previewunitactiveMainPID3837443. No accountrotation/restarts duringtheirtests. Allprivatehandoffpaths preserved in officialtaskprompts/nativehistory, notcredentialvalues.
+
+Sourcecheckpoint was published first because officialreviewers require a remote fixedSHA; this batched docs-only handoff is published once after allocation to preserve actualRequest IDs and resume state in disposableworktrees. Onresume fetchsamebranch/PR, compare childcommits/findings/sourcebindings, do notregenerate completedkeys, preserve negative/interrupted attempts, fixnewdefects and issue scopednewattempts. Browseroriginalpartialartefacts remainreadonly; canonicalresultsUNTRUSTED, no selfauthorreleasePASS. Recheck finalintegration and produce FINAL_REPORT onlywithactualstatuses/package/screens. Spring andproductionunchanged. Lead invokes officialwait and ends native turn onyielding, no shell/statuspollloop.
