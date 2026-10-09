@@ -1,0 +1,14 @@
+{
+    "command": [
+        "php",
+        "vendor/bin/phpunit",
+        "-c",
+        "docs/symphony/w03-support/evidence/support-fixed.xml",
+        "--filter",
+        "restricted_grants_without_owner_metadata|native_board_role_scope|all_sixteen",
+        "--do-not-cache-result",
+        "--log-junit",
+        "docs/symphony/w03-support/evidence/scope-green/junit.xml"
+    ],
+    "exit": 0
+}

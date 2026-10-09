@@ -249,12 +249,31 @@ class TravelSupportService
     {
         foreach ($this->foreignAccessPermissions($board, $write) as $permission) {
             if (! $viewer->hasPermission($permission, PermissionType::Admin)
-                || ! PermissionHelper::checkScopeAccess($post, $permission, $viewer)) {
+                || ! PermissionHelper::checkScopeAccess($post, $permission, $viewer)
+                || ! $this->questionOwnerIsInScope($viewer, $post, $permission)) {
                 return false;
             }
         }
 
         return true;
+    }
+
+    /** Apply the question owner contract even to grants without native owner metadata. */
+    private function questionOwnerIsInScope(User $viewer, Post $post, string $permission): bool
+    {
+        $scope = $viewer->getEffectiveScopeForPermission($permission);
+        if ($scope === null) {
+            return true;
+        }
+        if ($post->user_id === null) {
+            return false;
+        }
+
+        return match ($scope) {
+            'self' => (int) $post->user_id === (int) $viewer->id,
+            'role' => $this->supportPosts->ownerSharesRole((int) $post->user_id, (int) $viewer->id),
+            default => false,
+        };
     }
 
     /**

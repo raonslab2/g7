@@ -1,0 +1,23 @@
+W03: native bundled source origin verified; TEST-only env restored before Laravel bootstrap.
+PHPUnit 11.5.56 by Sebastian Bergmann and contributors.
+
+Runtime:       PHP 8.3.6
+Configuration: /home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/docs/symphony/w03-support/evidence/native.xml
+
+F                                                                   1 / 1 (100%)
+
+Time: 00:28.995, Memory: 70.50 MB
+
+There was 1 failure:
+
+1) Modules\Raonslab\TravelLab\Tests\Feature\W03SupportHardeningTest::restricted_grants_without_owner_metadata_cannot_bypass_foreign_scope
+Expected response status code [404] but received 200.
+Failed asserting that 200 is identical to 404.
+
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Testing/TestResponseAssert.php:45
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Testing/TestResponse.php:175
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Testing/Concerns/AssertsStatusCodes.php:151
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/modules/_bundled/raonslab-travel_lab/tests/Feature/W03SupportHardeningTest.php:330
+
+FAILURES!
+Tests: 1, Assertions: 2, Failures: 1.

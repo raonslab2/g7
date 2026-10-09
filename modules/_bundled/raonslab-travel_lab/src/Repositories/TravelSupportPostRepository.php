@@ -6,6 +6,7 @@ use App\Models\Permission;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\DB;
 use Modules\Raonslab\TravelLab\Repositories\Contracts\TravelSupportPostRepositoryInterface;
 use Modules\Sirsoft\Board\Enums\PostStatus;
 use Modules\Sirsoft\Board\Models\Comment;
@@ -104,6 +105,14 @@ class TravelSupportPostRepository implements TravelSupportPostRepositoryInterfac
             ->orderBy('id')
             ->limit($limit)
             ->get(['id', 'post_id', 'user_id', 'content', 'created_at']);
+    }
+
+    public function ownerSharesRole(int $ownerId, int $viewerId): bool
+    {
+        return DB::table('user_roles')
+            ->where('user_id', $ownerId)
+            ->whereIn('role_id', fn ($query) => $query->select('role_id')->from('user_roles')->where('user_id', $viewerId))
+            ->exists();
     }
 
     /**

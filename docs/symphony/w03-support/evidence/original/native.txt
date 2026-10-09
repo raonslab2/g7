@@ -1,0 +1,589 @@
+W03: native bundled source origin verified; TEST-only env restored before Laravel bootstrap.
+PHPUnit 11.5.56 by Sebastian Bergmann and contributors.
+
+Runtime:       PHP 8.3.6
+Configuration: /home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/docs/symphony/w03-support/evidence/native.xml
+
+...............................................................  63 / 104 ( 60%)
+................EEEEEEEEEEEEEE...........                       104 / 104 (100%)
+
+Time: 01:30.430, Memory: 105.00 MB
+
+There were 14 errors:
+
+1) Tests\Feature\Auth\GatePermissionTest::test_admin_user_passes_assigned_permissions
+Illuminate\Database\UniqueConstraintViolationException: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'admin' for key 'g7_roles_identifier_unique' (Connection: mysql, Host: 127.0.0.1, Port: 3306, Database: req81_travel_lab_test, SQL: insert into `g7_roles` (`identifier`, `name`, `description`, `updated_at`, `created_at`) values (admin, {"ko":"\uad00\ub9ac\uc790","en":"Administrator"}, {"ko":"\uc2dc\uc2a4\ud15c \uad00\ub9ac\uc790","en":"System Administrator"}, 2026-10-09 11:40:13, 2026-10-09 11:40:13))
+
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Connection.php:838
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Connection.php:794
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/MySqlConnection.php:42
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Query/Processors/MySqlProcessor.php:35
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Query/Builder.php:4170
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Builder.php:2237
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:1436
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:1401
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:1240
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Builder.php:1219
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Support/helpers.php:393
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Builder.php:1218
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Support/Traits/ForwardsCalls.php:23
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:2544
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:2560
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/tests/Feature/Auth/GatePermissionTest.php:49
+
+Caused by
+PDOException: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'admin' for key 'g7_roles_identifier_unique'
+
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/MySqlConnection.php:53
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Connection.php:827
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Connection.php:794
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/MySqlConnection.php:42
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Query/Processors/MySqlProcessor.php:35
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Query/Builder.php:4170
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Builder.php:2237
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:1436
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:1401
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:1240
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Builder.php:1219
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Support/helpers.php:393
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Builder.php:1218
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Support/Traits/ForwardsCalls.php:23
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:2544
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:2560
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/tests/Feature/Auth/GatePermissionTest.php:49
+
+2) Tests\Feature\Auth\GatePermissionTest::test_regular_user_with_permission_passes_gate_check
+Illuminate\Database\UniqueConstraintViolationException: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'admin' for key 'g7_roles_identifier_unique' (Connection: mysql, Host: 127.0.0.1, Port: 3306, Database: req81_travel_lab_test, SQL: insert into `g7_roles` (`identifier`, `name`, `description`, `updated_at`, `created_at`) values (admin, {"ko":"\uad00\ub9ac\uc790","en":"Administrator"}, {"ko":"\uc2dc\uc2a4\ud15c \uad00\ub9ac\uc790","en":"System Administrator"}, 2026-10-09 11:40:13, 2026-10-09 11:40:13))
+
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Connection.php:838
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Connection.php:794
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/MySqlConnection.php:42
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Query/Processors/MySqlProcessor.php:35
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Query/Builder.php:4170
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Builder.php:2237
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:1436
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:1401
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:1240
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Builder.php:1219
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Support/helpers.php:393
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Builder.php:1218
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Support/Traits/ForwardsCalls.php:23
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:2544
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:2560
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/tests/Feature/Auth/GatePermissionTest.php:49
+
+Caused by
+PDOException: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'admin' for key 'g7_roles_identifier_unique'
+
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/MySqlConnection.php:53
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Connection.php:827
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Connection.php:794
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/MySqlConnection.php:42
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Query/Processors/MySqlProcessor.php:35
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Query/Builder.php:4170
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Builder.php:2237
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:1436
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:1401
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:1240
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Builder.php:1219
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Support/helpers.php:393
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Builder.php:1218
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Support/Traits/ForwardsCalls.php:23
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:2544
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:2560
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/tests/Feature/Auth/GatePermissionTest.php:49
+
+3) Tests\Feature\Auth\GatePermissionTest::test_regular_user_without_permission_fails_gate_check
+Illuminate\Database\UniqueConstraintViolationException: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'admin' for key 'g7_roles_identifier_unique' (Connection: mysql, Host: 127.0.0.1, Port: 3306, Database: req81_travel_lab_test, SQL: insert into `g7_roles` (`identifier`, `name`, `description`, `updated_at`, `created_at`) values (admin, {"ko":"\uad00\ub9ac\uc790","en":"Administrator"}, {"ko":"\uc2dc\uc2a4\ud15c \uad00\ub9ac\uc790","en":"System Administrator"}, 2026-10-09 11:40:14, 2026-10-09 11:40:14))
+
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Connection.php:838
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Connection.php:794
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/MySqlConnection.php:42
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Query/Processors/MySqlProcessor.php:35
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Query/Builder.php:4170
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Builder.php:2237
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:1436
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:1401
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:1240
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Builder.php:1219
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Support/helpers.php:393
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Builder.php:1218
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Support/Traits/ForwardsCalls.php:23
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:2544
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:2560
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/tests/Feature/Auth/GatePermissionTest.php:49
+
+Caused by
+PDOException: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'admin' for key 'g7_roles_identifier_unique'
+
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/MySqlConnection.php:53
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Connection.php:827
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Connection.php:794
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/MySqlConnection.php:42
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Query/Processors/MySqlProcessor.php:35
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Query/Builder.php:4170
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Builder.php:2237
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:1436
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:1401
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:1240
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Builder.php:1219
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Support/helpers.php:393
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Builder.php:1218
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Support/Traits/ForwardsCalls.php:23
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:2544
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:2560
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/tests/Feature/Auth/GatePermissionTest.php:49
+
+4) Tests\Feature\Auth\GatePermissionTest::test_guest_with_permission_passes_check_permission
+Illuminate\Database\UniqueConstraintViolationException: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'admin' for key 'g7_roles_identifier_unique' (Connection: mysql, Host: 127.0.0.1, Port: 3306, Database: req81_travel_lab_test, SQL: insert into `g7_roles` (`identifier`, `name`, `description`, `updated_at`, `created_at`) values (admin, {"ko":"\uad00\ub9ac\uc790","en":"Administrator"}, {"ko":"\uc2dc\uc2a4\ud15c \uad00\ub9ac\uc790","en":"System Administrator"}, 2026-10-09 11:40:14, 2026-10-09 11:40:14))
+
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Connection.php:838
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Connection.php:794
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/MySqlConnection.php:42
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Query/Processors/MySqlProcessor.php:35
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Query/Builder.php:4170
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Builder.php:2237
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:1436
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:1401
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:1240
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Builder.php:1219
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Support/helpers.php:393
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Builder.php:1218
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Support/Traits/ForwardsCalls.php:23
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:2544
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:2560
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/tests/Feature/Auth/GatePermissionTest.php:49
+
+Caused by
+PDOException: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'admin' for key 'g7_roles_identifier_unique'
+
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/MySqlConnection.php:53
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Connection.php:827
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Connection.php:794
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/MySqlConnection.php:42
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Query/Processors/MySqlProcessor.php:35
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Query/Builder.php:4170
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Builder.php:2237
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:1436
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:1401
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:1240
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Builder.php:1219
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Support/helpers.php:393
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Builder.php:1218
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Support/Traits/ForwardsCalls.php:23
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:2544
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:2560
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/tests/Feature/Auth/GatePermissionTest.php:49
+
+5) Tests\Feature\Auth\GatePermissionTest::test_guest_without_permission_fails_check_permission
+Illuminate\Database\UniqueConstraintViolationException: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'admin' for key 'g7_roles_identifier_unique' (Connection: mysql, Host: 127.0.0.1, Port: 3306, Database: req81_travel_lab_test, SQL: insert into `g7_roles` (`identifier`, `name`, `description`, `updated_at`, `created_at`) values (admin, {"ko":"\uad00\ub9ac\uc790","en":"Administrator"}, {"ko":"\uc2dc\uc2a4\ud15c \uad00\ub9ac\uc790","en":"System Administrator"}, 2026-10-09 11:40:15, 2026-10-09 11:40:15))
+
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Connection.php:838
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Connection.php:794
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/MySqlConnection.php:42
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Query/Processors/MySqlProcessor.php:35
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Query/Builder.php:4170
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Builder.php:2237
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:1436
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:1401
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:1240
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Builder.php:1219
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Support/helpers.php:393
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Builder.php:1218
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Support/Traits/ForwardsCalls.php:23
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:2544
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:2560
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/tests/Feature/Auth/GatePermissionTest.php:49
+
+Caused by
+PDOException: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'admin' for key 'g7_roles_identifier_unique'
+
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/MySqlConnection.php:53
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Connection.php:827
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Connection.php:794
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/MySqlConnection.php:42
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Query/Processors/MySqlProcessor.php:35
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Query/Builder.php:4170
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Builder.php:2237
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:1436
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:1401
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:1240
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Builder.php:1219
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Support/helpers.php:393
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Builder.php:1218
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Support/Traits/ForwardsCalls.php:23
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:2544
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:2560
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/tests/Feature/Auth/GatePermissionTest.php:49
+
+6) Tests\Feature\Auth\GatePermissionTest::test_guest_fails_all_permissions_when_guest_role_does_not_exist
+Illuminate\Database\UniqueConstraintViolationException: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'admin' for key 'g7_roles_identifier_unique' (Connection: mysql, Host: 127.0.0.1, Port: 3306, Database: req81_travel_lab_test, SQL: insert into `g7_roles` (`identifier`, `name`, `description`, `updated_at`, `created_at`) values (admin, {"ko":"\uad00\ub9ac\uc790","en":"Administrator"}, {"ko":"\uc2dc\uc2a4\ud15c \uad00\ub9ac\uc790","en":"System Administrator"}, 2026-10-09 11:40:15, 2026-10-09 11:40:15))
+
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Connection.php:838
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Connection.php:794
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/MySqlConnection.php:42
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Query/Processors/MySqlProcessor.php:35
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Query/Builder.php:4170
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Builder.php:2237
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:1436
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:1401
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:1240
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Builder.php:1219
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Support/helpers.php:393
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Builder.php:1218
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Support/Traits/ForwardsCalls.php:23
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:2544
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:2560
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/tests/Feature/Auth/GatePermissionTest.php:49
+
+Caused by
+PDOException: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'admin' for key 'g7_roles_identifier_unique'
+
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/MySqlConnection.php:53
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Connection.php:827
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Connection.php:794
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/MySqlConnection.php:42
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Query/Processors/MySqlProcessor.php:35
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Query/Builder.php:4170
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Builder.php:2237
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:1436
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:1401
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:1240
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Builder.php:1219
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Support/helpers.php:393
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Builder.php:1218
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Support/Traits/ForwardsCalls.php:23
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:2544
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:2560
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/tests/Feature/Auth/GatePermissionTest.php:49
+
+7) Tests\Feature\Auth\GatePermissionTest::test_gate_check_works_same_as_allows_for_authenticated_users
+Illuminate\Database\UniqueConstraintViolationException: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'admin' for key 'g7_roles_identifier_unique' (Connection: mysql, Host: 127.0.0.1, Port: 3306, Database: req81_travel_lab_test, SQL: insert into `g7_roles` (`identifier`, `name`, `description`, `updated_at`, `created_at`) values (admin, {"ko":"\uad00\ub9ac\uc790","en":"Administrator"}, {"ko":"\uc2dc\uc2a4\ud15c \uad00\ub9ac\uc790","en":"System Administrator"}, 2026-10-09 11:40:15, 2026-10-09 11:40:15))
+
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Connection.php:838
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Connection.php:794
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/MySqlConnection.php:42
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Query/Processors/MySqlProcessor.php:35
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Query/Builder.php:4170
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Builder.php:2237
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:1436
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:1401
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:1240
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Builder.php:1219
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Support/helpers.php:393
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Builder.php:1218
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Support/Traits/ForwardsCalls.php:23
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:2544
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:2560
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/tests/Feature/Auth/GatePermissionTest.php:49
+
+Caused by
+PDOException: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'admin' for key 'g7_roles_identifier_unique'
+
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/MySqlConnection.php:53
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Connection.php:827
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Connection.php:794
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/MySqlConnection.php:42
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Query/Processors/MySqlProcessor.php:35
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Query/Builder.php:4170
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Builder.php:2237
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:1436
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:1401
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:1240
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Builder.php:1219
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Support/helpers.php:393
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Builder.php:1218
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Support/Traits/ForwardsCalls.php:23
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:2544
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:2560
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/tests/Feature/Auth/GatePermissionTest.php:49
+
+8) Tests\Feature\Auth\GatePermissionTest::test_user_can_method_uses_gate
+Illuminate\Database\UniqueConstraintViolationException: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'admin' for key 'g7_roles_identifier_unique' (Connection: mysql, Host: 127.0.0.1, Port: 3306, Database: req81_travel_lab_test, SQL: insert into `g7_roles` (`identifier`, `name`, `description`, `updated_at`, `created_at`) values (admin, {"ko":"\uad00\ub9ac\uc790","en":"Administrator"}, {"ko":"\uc2dc\uc2a4\ud15c \uad00\ub9ac\uc790","en":"System Administrator"}, 2026-10-09 11:40:15, 2026-10-09 11:40:15))
+
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Connection.php:838
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Connection.php:794
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/MySqlConnection.php:42
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Query/Processors/MySqlProcessor.php:35
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Query/Builder.php:4170
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Builder.php:2237
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:1436
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:1401
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:1240
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Builder.php:1219
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Support/helpers.php:393
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Builder.php:1218
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Support/Traits/ForwardsCalls.php:23
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:2544
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:2560
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/tests/Feature/Auth/GatePermissionTest.php:49
+
+Caused by
+PDOException: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'admin' for key 'g7_roles_identifier_unique'
+
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/MySqlConnection.php:53
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Connection.php:827
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Connection.php:794
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/MySqlConnection.php:42
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Query/Processors/MySqlProcessor.php:35
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Query/Builder.php:4170
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Builder.php:2237
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:1436
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:1401
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:1240
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Builder.php:1219
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Support/helpers.php:393
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Builder.php:1218
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Support/Traits/ForwardsCalls.php:23
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:2544
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:2560
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/tests/Feature/Auth/GatePermissionTest.php:49
+
+9) Tests\Feature\Auth\GatePermissionTest::test_gate_for_user_checks_specific_user_permission
+Illuminate\Database\UniqueConstraintViolationException: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'admin' for key 'g7_roles_identifier_unique' (Connection: mysql, Host: 127.0.0.1, Port: 3306, Database: req81_travel_lab_test, SQL: insert into `g7_roles` (`identifier`, `name`, `description`, `updated_at`, `created_at`) values (admin, {"ko":"\uad00\ub9ac\uc790","en":"Administrator"}, {"ko":"\uc2dc\uc2a4\ud15c \uad00\ub9ac\uc790","en":"System Administrator"}, 2026-10-09 11:40:16, 2026-10-09 11:40:16))
+
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Connection.php:838
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Connection.php:794
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/MySqlConnection.php:42
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Query/Processors/MySqlProcessor.php:35
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Query/Builder.php:4170
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Builder.php:2237
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:1436
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:1401
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:1240
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Builder.php:1219
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Support/helpers.php:393
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Builder.php:1218
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Support/Traits/ForwardsCalls.php:23
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:2544
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:2560
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/tests/Feature/Auth/GatePermissionTest.php:49
+
+Caused by
+PDOException: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'admin' for key 'g7_roles_identifier_unique'
+
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/MySqlConnection.php:53
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Connection.php:827
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Connection.php:794
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/MySqlConnection.php:42
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Query/Processors/MySqlProcessor.php:35
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Query/Builder.php:4170
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Builder.php:2237
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:1436
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:1401
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:1240
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Builder.php:1219
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Support/helpers.php:393
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Builder.php:1218
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Support/Traits/ForwardsCalls.php:23
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:2544
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:2560
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/tests/Feature/Auth/GatePermissionTest.php:49
+
+10) Tests\Feature\Auth\GatePermissionTest::test_newly_added_permission_is_reflected_immediately
+Illuminate\Database\UniqueConstraintViolationException: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'admin' for key 'g7_roles_identifier_unique' (Connection: mysql, Host: 127.0.0.1, Port: 3306, Database: req81_travel_lab_test, SQL: insert into `g7_roles` (`identifier`, `name`, `description`, `updated_at`, `created_at`) values (admin, {"ko":"\uad00\ub9ac\uc790","en":"Administrator"}, {"ko":"\uc2dc\uc2a4\ud15c \uad00\ub9ac\uc790","en":"System Administrator"}, 2026-10-09 11:40:17, 2026-10-09 11:40:17))
+
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Connection.php:838
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Connection.php:794
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/MySqlConnection.php:42
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Query/Processors/MySqlProcessor.php:35
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Query/Builder.php:4170
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Builder.php:2237
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:1436
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:1401
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:1240
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Builder.php:1219
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Support/helpers.php:393
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Builder.php:1218
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Support/Traits/ForwardsCalls.php:23
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:2544
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:2560
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/tests/Feature/Auth/GatePermissionTest.php:49
+
+Caused by
+PDOException: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'admin' for key 'g7_roles_identifier_unique'
+
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/MySqlConnection.php:53
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Connection.php:827
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Connection.php:794
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/MySqlConnection.php:42
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Query/Processors/MySqlProcessor.php:35
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Query/Builder.php:4170
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Builder.php:2237
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:1436
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:1401
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:1240
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Builder.php:1219
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Support/helpers.php:393
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Builder.php:1218
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Support/Traits/ForwardsCalls.php:23
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:2544
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:2560
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/tests/Feature/Auth/GatePermissionTest.php:49
+
+11) Tests\Feature\Auth\GatePermissionTest::test_guest_permission_is_reflected_after_cache_clear
+Illuminate\Database\UniqueConstraintViolationException: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'admin' for key 'g7_roles_identifier_unique' (Connection: mysql, Host: 127.0.0.1, Port: 3306, Database: req81_travel_lab_test, SQL: insert into `g7_roles` (`identifier`, `name`, `description`, `updated_at`, `created_at`) values (admin, {"ko":"\uad00\ub9ac\uc790","en":"Administrator"}, {"ko":"\uc2dc\uc2a4\ud15c \uad00\ub9ac\uc790","en":"System Administrator"}, 2026-10-09 11:40:17, 2026-10-09 11:40:17))
+
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Connection.php:838
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Connection.php:794
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/MySqlConnection.php:42
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Query/Processors/MySqlProcessor.php:35
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Query/Builder.php:4170
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Builder.php:2237
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:1436
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:1401
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:1240
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Builder.php:1219
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Support/helpers.php:393
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Builder.php:1218
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Support/Traits/ForwardsCalls.php:23
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:2544
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:2560
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/tests/Feature/Auth/GatePermissionTest.php:49
+
+Caused by
+PDOException: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'admin' for key 'g7_roles_identifier_unique'
+
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/MySqlConnection.php:53
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Connection.php:827
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Connection.php:794
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/MySqlConnection.php:42
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Query/Processors/MySqlProcessor.php:35
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Query/Builder.php:4170
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Builder.php:2237
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:1436
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:1401
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:1240
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Builder.php:1219
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Support/helpers.php:393
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Builder.php:1218
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Support/Traits/ForwardsCalls.php:23
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:2544
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:2560
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/tests/Feature/Auth/GatePermissionTest.php:49
+
+12) Tests\Feature\Auth\GatePermissionTest::test_check_permissions_requires_all_permissions
+Illuminate\Database\UniqueConstraintViolationException: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'admin' for key 'g7_roles_identifier_unique' (Connection: mysql, Host: 127.0.0.1, Port: 3306, Database: req81_travel_lab_test, SQL: insert into `g7_roles` (`identifier`, `name`, `description`, `updated_at`, `created_at`) values (admin, {"ko":"\uad00\ub9ac\uc790","en":"Administrator"}, {"ko":"\uc2dc\uc2a4\ud15c \uad00\ub9ac\uc790","en":"System Administrator"}, 2026-10-09 11:40:17, 2026-10-09 11:40:17))
+
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Connection.php:838
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Connection.php:794
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/MySqlConnection.php:42
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Query/Processors/MySqlProcessor.php:35
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Query/Builder.php:4170
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Builder.php:2237
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:1436
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:1401
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:1240
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Builder.php:1219
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Support/helpers.php:393
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Builder.php:1218
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Support/Traits/ForwardsCalls.php:23
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:2544
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:2560
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/tests/Feature/Auth/GatePermissionTest.php:49
+
+Caused by
+PDOException: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'admin' for key 'g7_roles_identifier_unique'
+
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/MySqlConnection.php:53
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Connection.php:827
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Connection.php:794
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/MySqlConnection.php:42
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Query/Processors/MySqlProcessor.php:35
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Query/Builder.php:4170
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Builder.php:2237
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:1436
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:1401
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:1240
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Builder.php:1219
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Support/helpers.php:393
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Builder.php:1218
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Support/Traits/ForwardsCalls.php:23
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:2544
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:2560
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/tests/Feature/Auth/GatePermissionTest.php:49
+
+13) Tests\Feature\Auth\GatePermissionTest::test_admin_passes_check_permissions
+Illuminate\Database\UniqueConstraintViolationException: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'admin' for key 'g7_roles_identifier_unique' (Connection: mysql, Host: 127.0.0.1, Port: 3306, Database: req81_travel_lab_test, SQL: insert into `g7_roles` (`identifier`, `name`, `description`, `updated_at`, `created_at`) values (admin, {"ko":"\uad00\ub9ac\uc790","en":"Administrator"}, {"ko":"\uc2dc\uc2a4\ud15c \uad00\ub9ac\uc790","en":"System Administrator"}, 2026-10-09 11:40:17, 2026-10-09 11:40:17))
+
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Connection.php:838
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Connection.php:794
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/MySqlConnection.php:42
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Query/Processors/MySqlProcessor.php:35
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Query/Builder.php:4170
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Builder.php:2237
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:1436
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:1401
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:1240
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Builder.php:1219
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Support/helpers.php:393
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Builder.php:1218
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Support/Traits/ForwardsCalls.php:23
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:2544
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:2560
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/tests/Feature/Auth/GatePermissionTest.php:49
+
+Caused by
+PDOException: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'admin' for key 'g7_roles_identifier_unique'
+
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/MySqlConnection.php:53
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Connection.php:827
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Connection.php:794
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/MySqlConnection.php:42
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Query/Processors/MySqlProcessor.php:35
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Query/Builder.php:4170
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Builder.php:2237
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:1436
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:1401
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:1240
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Builder.php:1219
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Support/helpers.php:393
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Builder.php:1218
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Support/Traits/ForwardsCalls.php:23
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:2544
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:2560
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/tests/Feature/Auth/GatePermissionTest.php:49
+
+14) Tests\Feature\Auth\GatePermissionTest::test_guest_check_permissions
+Illuminate\Database\UniqueConstraintViolationException: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'admin' for key 'g7_roles_identifier_unique' (Connection: mysql, Host: 127.0.0.1, Port: 3306, Database: req81_travel_lab_test, SQL: insert into `g7_roles` (`identifier`, `name`, `description`, `updated_at`, `created_at`) values (admin, {"ko":"\uad00\ub9ac\uc790","en":"Administrator"}, {"ko":"\uc2dc\uc2a4\ud15c \uad00\ub9ac\uc790","en":"System Administrator"}, 2026-10-09 11:40:18, 2026-10-09 11:40:18))
+
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Connection.php:838
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Connection.php:794
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/MySqlConnection.php:42
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Query/Processors/MySqlProcessor.php:35
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Query/Builder.php:4170
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Builder.php:2237
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:1436
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:1401
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:1240
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Builder.php:1219
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Support/helpers.php:393
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Builder.php:1218
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Support/Traits/ForwardsCalls.php:23
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:2544
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:2560
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/tests/Feature/Auth/GatePermissionTest.php:49
+
+Caused by
+PDOException: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'admin' for key 'g7_roles_identifier_unique'
+
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/MySqlConnection.php:53
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Connection.php:827
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Connection.php:794
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/MySqlConnection.php:42
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Query/Processors/MySqlProcessor.php:35
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Query/Builder.php:4170
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Builder.php:2237
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:1436
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:1401
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:1240
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Builder.php:1219
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Support/helpers.php:393
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Builder.php:1218
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Support/Traits/ForwardsCalls.php:23
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:2544
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:2560
+/home/ubuntu/.agentopt-v2/workspaces/req_360fde09455c407f9fa817a3c3767351/tests/Feature/Auth/GatePermissionTest.php:49
+
+ERRORS!
+Tests: 104, Assertions: 328, Errors: 14.
