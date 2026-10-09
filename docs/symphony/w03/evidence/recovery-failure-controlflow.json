@@ -1,0 +1,16 @@
+{
+  "request_id": "req_b3b4d5373a384cfd8e0b7b8f55fb011f",
+  "source_sha": "28ada286c1c34606741bcfe4f9d12e06ac50af30",
+  "source_tree": "a821bd89f6cf8bdf8cad3b8b35d8758ce8446d9c",
+  "started_utc": "2026-10-09T10:29:28.841434+00:00",
+  "duration_seconds": 0.059,
+  "command": [
+    "php",
+    "docs/symphony/w03/recovery-failure-probe.php"
+  ],
+  "environment_scope": "Pinned catch/finally defect reproduced with successful importer stub; no native DB failure",
+  "exit_code": 0,
+  "execution_provenance": "W03 nonauthor independent execution; harness labels are not formal Validation",
+  "output": "RECOVERED: testing schema restored from its private local dump after a failed check.\nFAIL: Restored synthetic testing records differ from the pre-rollback digest.\n{\n    \"status\": \"REPRODUCED_W03_P2_UNVERIFIED_FALLBACK_SNAPSHOT_DELETION\",\n    \"scope\": \"Exact source catch\\/finally only, successful importer stub; no DB\\/env\\/CLI\",\n    \"failed_check\": \"pre-rollback digest mismatch\",\n    \"fallback_imports\": 1,\n    \"snapshot_retained\": false,\n    \"fallback_digest_checked\": false,\n    \"native_restore_failure_reproduction\": \"NOT_RUN\"\n}\n",
+  "result_status": "FAIL"
+}

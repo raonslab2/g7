@@ -1,0 +1,16 @@
+{
+  "request_id": "req_b3b4d5373a384cfd8e0b7b8f55fb011f",
+  "source_sha": "28ada286c1c34606741bcfe4f9d12e06ac50af30",
+  "source_tree": "a821bd89f6cf8bdf8cad3b8b35d8758ce8446d9c",
+  "started_utc": "2026-10-09T10:24:49.735778+00:00",
+  "duration_seconds": 14.773,
+  "command": [
+    "php",
+    "scripts/travel-lab/live-recovery.php"
+  ],
+  "environment_scope": "guarded TEST req81_travel_lab_test; no APP access",
+  "exit_code": 0,
+  "execution_provenance": "W03 nonauthor independent execution; harness labels are not formal Validation",
+  "output": "{\n    \"status\": \"PASS_IMPLEMENTER_MYSQL_ROLLBACK_RESTORE\",\n    \"source_sha\": \"28ada286c1c34606741bcfe4f9d12e06ac50af30\",\n    \"db\": \"req81_travel_lab_test\",\n    \"private_dump_sha256\": \"56f5c4ea018d2ea96afebe6517f3188d3f51ea4e745ddc9a9bf9087b728f57da\",\n    \"restored_digests\": {\n        \"users\": {\n            \"count\": 3,\n            \"sha256\": \"1a65f91a236378594983a90642b797b406832e987c19ce73851209241b8eebec\"\n        },\n        \"ecommerce_products\": {\n            \"count\": 9,\n            \"sha256\": \"437218ebfff78dafc5d9ea99a1a9a9f949613f528e3c5a29d67e83e4ce115921\"\n        },\n        \"ecommerce_product_options\": {\n            \"count\": 25,\n            \"sha256\": \"de7ccfc8a9cf42a16b0136315af9241d7ff18684d9dcdf79a52e7df82d675b73\"\n        },\n        \"travel_lab_products\": {\n            \"count\": 9,\n            \"sha256\": \"b3db990b2a801e3ea4bfe4669fb995a07b701b0f010222d986de2c2e2eef4d69\"\n        },\n        \"travel_lab_departures\": {\n            \"count\": 25,\n            \"sha256\": \"65cd63ae92e8398c567eba2bee015d59f003f863461f1495604dff26aeb05b49\"\n        },\n        \"travel_lab_inquiries\": {\n            \"count\": 1,\n            \"sha256\": \"ff1a974bb1151c3c260f48782190a4b57f22019494576461d9a3b38f3f222132\"\n        },\n        \"travel_lab_inquiry_items\": {\n            \"count\": 1,\n            \"sha256\": \"0c25f173b87aa556ac5696d8c800e198b78389c9f72eb61813b43d5fb5443e8d\"\n        },\n        \"travel_lab_inquiry_events\": {\n            \"count\": 2,\n            \"sha256\": \"fff3fdea27f5493f4899a46f3d80a556590f41d2a97eda4c408dc684428f0c21\"\n        }\n    }\n}\n",
+  "result_status": "PASS"
+}

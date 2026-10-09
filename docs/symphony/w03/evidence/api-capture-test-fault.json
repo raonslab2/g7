@@ -1,0 +1,16 @@
+{
+  "request_id": "req_b3b4d5373a384cfd8e0b7b8f55fb011f",
+  "source_sha": "28ada286c1c34606741bcfe4f9d12e06ac50af30",
+  "source_tree": "a821bd89f6cf8bdf8cad3b8b35d8758ce8446d9c",
+  "started_utc": "2026-10-09T10:27:26.281722+00:00",
+  "duration_seconds": 2.738,
+  "command": [
+    "php",
+    "docs/symphony/w03/capture-test.php"
+  ],
+  "environment_scope": "TEST-only adapted original cleanup; expected injected exit1; separate fresh-process persistence proof",
+  "exit_code": 1,
+  "execution_provenance": "W03 nonauthor independent execution; harness labels are not formal Validation",
+  "output": "W03: native bundled source origin verified; TEST-only env restored before Laravel bootstrap.\nFAIL: Injected post-inquiry failure.\nCLEANUP: {\"failure_injected\":true,\"inquiry_id\":3,\"inquiry_status\":\"CANCELLED\",\"departure_id\":27,\"reserved\":0,\"product_id\":11,\"published\":false}\n",
+  "result_status": "PASS"
+}

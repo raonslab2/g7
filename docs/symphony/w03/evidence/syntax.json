@@ -1,0 +1,27 @@
+{
+  "request_id": "req_b3b4d5373a384cfd8e0b7b8f55fb011f",
+  "source_sha": "28ada286c1c34606741bcfe4f9d12e06ac50af30",
+  "source_tree": "a821bd89f6cf8bdf8cad3b8b35d8758ce8446d9c",
+  "started_utc": "2026-10-09T10:40:12.669046+00:00",
+  "duration_seconds": 2.379,
+  "command": [
+    "bash",
+    "-c",
+    "count=0; for path in scripts/travel-lab/*.php docs/symphony/w03/*.php; do php -l \"$path\" || exit 1; count=$((count+1)); done; echo \"PASS: PHP syntax files=$count\""
+  ],
+  "environment_scope": "No DB/bootstrap: source scripts20 and own PHP helpers7 syntax only",
+  "exit_code": 0,
+  "execution_provenance": "W03 nonauthor independent execution; harness labels are not formal Validation",
+  "review_helpers_sha256_at_start": {
+    "helper-env-restoration.php": "2260ceb1180942de6dd4db4723ab93d2903368b460a1b269001d2f678c3a5bf9",
+    "recovery-failure-probe.php": "7d986ad6ccdeac437e205470e1114aacc40094e8854ee7e6ebaae364ddad2c52",
+    "test-bootstrap.php": "016f9df1e625867af81515531c107e725316a102611c909207803069ef5dbc4c",
+    "record.py": "4bfb24509359cf9af5b140e37b834318b10e20eb34ac71b91db8ab00c9ae304b",
+    "capture-test.php": "34d804cc6c0f4865d4531e4c477a4e098ed000b09a196605d97e119011aca52e",
+    "verify-capture.php": "65dae202ab746f6449b5ddfa89a76eea056af1ffa951b816ebbddf8c55c45699",
+    "native-seed-probe.php": "18c45f12a34d898145658a5bbf476fdf1a1cfb63491fc9772b8f1344240b167e",
+    "schema-snapshot.php": "010f920ac19f182d0c06e54e02ebbe67fb8991cbd9dcee9003ef86ce5c455644"
+  },
+  "output": "No syntax errors detected in scripts/travel-lab/LiveMysqlTest.php\nNo syntax errors detected in scripts/travel-lab/clear-cache.php\nNo syntax errors detected in scripts/travel-lab/environment.php\nNo syntax errors detected in scripts/travel-lab/extensions.php\nNo syntax errors detected in scripts/travel-lab/guard-test.php\nNo syntax errors detected in scripts/travel-lab/live-admin.php\nNo syntax errors detected in scripts/travel-lab/live-api-responses.php\nNo syntax errors detected in scripts/travel-lab/live-bootstrap.php\nNo syntax errors detected in scripts/travel-lab/live-concurrency.php\nNo syntax errors detected in scripts/travel-lab/live-env-recovery.php\nNo syntax errors detected in scripts/travel-lab/live-fixtures.php\nNo syntax errors detected in scripts/travel-lab/live-persistence.php\nNo syntax errors detected in scripts/travel-lab/live-recovery.php\nNo syntax errors detected in scripts/travel-lab/live-review-access.php\nNo syntax errors detected in scripts/travel-lab/live-seed-rerun.php\nNo syntax errors detected in scripts/travel-lab/live-worker.php\nNo syntax errors detected in scripts/travel-lab/recover-partial.php\nNo syntax errors detected in scripts/travel-lab/run.php\nNo syntax errors detected in scripts/travel-lab/setup.php\nNo syntax errors detected in scripts/travel-lab/smoke.php\nNo syntax errors detected in docs/symphony/w03/capture-test.php\nNo syntax errors detected in docs/symphony/w03/helper-env-restoration.php\nNo syntax errors detected in docs/symphony/w03/native-seed-probe.php\nNo syntax errors detected in docs/symphony/w03/recovery-failure-probe.php\nNo syntax errors detected in docs/symphony/w03/schema-snapshot.php\nNo syntax errors detected in docs/symphony/w03/test-bootstrap.php\nNo syntax errors detected in docs/symphony/w03/verify-capture.php\nPASS: PHP syntax files=27\n",
+  "result_status": "PASS"
+}

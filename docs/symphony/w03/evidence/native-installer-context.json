@@ -1,0 +1,29 @@
+{
+  "request_id": "req_b3b4d5373a384cfd8e0b7b8f55fb011f",
+  "source_sha": "28ada286c1c34606741bcfe4f9d12e06ac50af30",
+  "source_tree": "a821bd89f6cf8bdf8cad3b8b35d8758ce8446d9c",
+  "started_utc": "2026-10-09T10:33:02.555065+00:00",
+  "duration_seconds": 4.99,
+  "command": [
+    "php",
+    "scripts/travel-lab/run.php",
+    "test",
+    "--bootstrap",
+    "docs/symphony/w03/test-bootstrap.php",
+    "tests/Unit/Support/InstallerContextTest.php"
+  ],
+  "environment_scope": "guarded TEST req81_travel_lab_test; no APP access",
+  "exit_code": 0,
+  "execution_provenance": "W03 nonauthor independent execution; harness labels are not formal Validation",
+  "review_helpers_sha256_at_start": {
+    "helper-env-restoration.php": "2260ceb1180942de6dd4db4723ab93d2903368b460a1b269001d2f678c3a5bf9",
+    "recovery-failure-probe.php": "7d986ad6ccdeac437e205470e1114aacc40094e8854ee7e6ebaae364ddad2c52",
+    "test-bootstrap.php": "016f9df1e625867af81515531c107e725316a102611c909207803069ef5dbc4c",
+    "record.py": "4bfb24509359cf9af5b140e37b834318b10e20eb34ac71b91db8ab00c9ae304b",
+    "capture-test.php": "34d804cc6c0f4865d4531e4c477a4e098ed000b09a196605d97e119011aca52e",
+    "verify-capture.php": "65dae202ab746f6449b5ddfa89a76eea056af1ffa951b816ebbddf8c55c45699",
+    "schema-snapshot.php": "010f920ac19f182d0c06e54e02ebbe67fb8991cbd9dcee9003ef86ce5c455644"
+  },
+  "output": "W03: native bundled source origin verified; TEST-only env restored before Laravel bootstrap.\nPHPUnit 11.5.56 by Sebastian Bergmann and contributors.\n\nRuntime:       PHP 8.3.6\nConfiguration: /home/ubuntu/.agentopt-v2/workspaces/req_b3b4d5373a384cfd8e0b7b8f55fb011f/phpunit.xml\n\n........                                                            8 / 8 (100%)\n\nTime: 00:03.605, Memory: 52.50 MB\n\nOK (8 tests, 8 assertions)\n",
+  "result_status": "PASS"
+}

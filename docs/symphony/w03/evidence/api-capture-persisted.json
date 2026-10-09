@@ -1,0 +1,16 @@
+{
+  "request_id": "req_b3b4d5373a384cfd8e0b7b8f55fb011f",
+  "source_sha": "28ada286c1c34606741bcfe4f9d12e06ac50af30",
+  "source_tree": "a821bd89f6cf8bdf8cad3b8b35d8758ce8446d9c",
+  "started_utc": "2026-10-09T10:27:59.349005+00:00",
+  "duration_seconds": 3.53,
+  "command": [
+    "php",
+    "docs/symphony/w03/verify-capture.php"
+  ],
+  "environment_scope": "guarded TEST req81_travel_lab_test; no APP access",
+  "exit_code": 0,
+  "execution_provenance": "W03 nonauthor independent execution; harness labels are not formal Validation",
+  "output": "W03: native bundled source origin verified; TEST-only env restored before Laravel bootstrap.\n{\n    \"status\": \"PASS_W03_TEST_ADAPTED_CAPTURE_CLEANUP\",\n    \"db\": \"req81_travel_lab_test\",\n    \"fresh_process_verified\": true,\n    \"inquiry_id\": 3,\n    \"inquiry_status\": \"CANCELLED\",\n    \"departure_id\": 27,\n    \"reserved\": 0,\n    \"product_id\": 11,\n    \"published\": false,\n    \"created_token_count\": 0,\n    \"limitation\": \"TEST adaptation with manually mounted bundled routes; APP installed discovery and product browser boundaries NOT_RUN\"\n}\n",
+  "result_status": "PASS"
+}
