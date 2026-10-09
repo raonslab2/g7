@@ -1,0 +1,99 @@
+{
+    "label": "mysql-smoke-fixed",
+    "child_exit": 0,
+    "wipe_exit": 0,
+    "empty_tables_after_wipe": 0,
+    "import_exit": 0,
+    "import_seconds": 1.608,
+    "import_pid": 480293,
+    "import_process_gone": true,
+    "import_handles": {
+        "utc": "2026-10-09T18:41:33.480230+00:00",
+        "count": 0,
+        "handles": [],
+        "unreadable_pids": [],
+        "lock_holders": [],
+        "excluded_ancestor_pids": [
+            460013,
+            479700,
+            480314,
+            480315,
+            3650359
+        ],
+        "method": "proc-only bounded cwd/argv/FD; known TEST owners and own nonancestor native processes"
+    },
+    "exact_tables_rows_ddl": true,
+    "restored_digest": "ded72a53ad82a159b88e50a6560625488bb569a55f5f5ffa109cd45ae52d056e",
+    "expected_digest": "ded72a53ad82a159b88e50a6560625488bb569a55f5f5ffa109cd45ae52d056e",
+    "equals_original_baseline": true,
+    "table_count": 55,
+    "row_count": 104,
+    "exclusive_pre_import": {
+        "pid": 479700,
+        "cwd": "/home/ubuntu/.agentopt-v2/workspaces/req_bed1c2288b1946de95782fe1a4acff75",
+        "argv": [
+            "docs/symphony/w04-recipe-final/snapshot.php",
+            "mysql-smoke-fixed",
+            "run",
+            "/usr/bin/php8.3",
+            "vendor/bin/phpunit",
+            "--bootstrap",
+            "docs/symphony/w04-recipe-final/test-bootstrap.php",
+            "scripts/travel-lab/LiveMysqlTest.php"
+        ],
+        "own_connection_id": 117605,
+        "other_test_connections": 0,
+        "own_server_processes": 0,
+        "prior_request_handles": {
+            "utc": "2026-10-09T18:41:31.870432+00:00",
+            "count": 0,
+            "handles": [],
+            "unreadable_pids": [],
+            "lock_holders": [],
+            "excluded_ancestor_pids": [
+                460013,
+                479700,
+                480290,
+                480291,
+                3650359
+            ],
+            "method": "proc-only bounded cwd/argv/FD; known TEST owners and own nonancestor native processes"
+        },
+        "utc": "2026-10-09T18:41:31+00:00"
+    },
+    "exclusive_post": {
+        "pid": 479700,
+        "cwd": "/home/ubuntu/.agentopt-v2/workspaces/req_bed1c2288b1946de95782fe1a4acff75",
+        "argv": [
+            "docs/symphony/w04-recipe-final/snapshot.php",
+            "mysql-smoke-fixed",
+            "run",
+            "/usr/bin/php8.3",
+            "vendor/bin/phpunit",
+            "--bootstrap",
+            "docs/symphony/w04-recipe-final/test-bootstrap.php",
+            "scripts/travel-lab/LiveMysqlTest.php"
+        ],
+        "own_connection_id": 117607,
+        "other_test_connections": 0,
+        "own_server_processes": 0,
+        "prior_request_handles": {
+            "utc": "2026-10-09T18:41:33.592266+00:00",
+            "count": 0,
+            "handles": [],
+            "unreadable_pids": [],
+            "lock_holders": [],
+            "excluded_ancestor_pids": [
+                460013,
+                479700,
+                480316,
+                480317,
+                3650359
+            ],
+            "method": "proc-only bounded cwd/argv/FD; known TEST owners and own nonancestor native processes"
+        },
+        "utc": "2026-10-09T18:41:33+00:00"
+    },
+    "backup_retained": true,
+    "utc": "2026-10-09T18:41:33+00:00"
+}

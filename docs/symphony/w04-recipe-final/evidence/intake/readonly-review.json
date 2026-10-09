@@ -1,0 +1,19 @@
+{
+  "reviewer": "/root/readonly_review",
+  "kind": "native readonly source/helper review; no SQL/runtime authorship",
+  "product_target": "992f9a65ac3f8957e5ec618f21072dc499053810",
+  "product_tree": "db85f35c5f42165802ec7ba6b02bc8a147a12c39",
+  "source_decision": "PASS",
+  "issues_resolved": [
+    "own env split local/database and testing/array",
+    "actual published migration helper invocation",
+    "scoped TEST PDO metadata, proc-only competing FD scan, immediate BLOCK",
+    "strict byte/mode restoration and native root guards retained",
+    "snapshot dump/import proc_close PID-gone/FD ordering",
+    "include-scope variable collision fixed, trial1 retained"
+  ],
+  "runtime_by_reviewer": "NOT_RUN",
+  "formal_validation": "NOT_RUN",
+  "final_test_bootstrap_sha256": "7eb2817860ae62ef8ee929ec87e5e89ba5edea3f102de641d596e2169c3a4fcf",
+  "original_snapshot_pid_recording": "original dump predates explicit dump PID field; later dumps/imports record it"
+}

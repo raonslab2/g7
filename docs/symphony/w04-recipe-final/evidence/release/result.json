@@ -1,0 +1,94 @@
+{
+    "status": "PASS",
+    "lease": "TEST RELEASE",
+    "request": "req_bed1c2288b1946de95782fe1a4acff75",
+    "release_utc": "2026-10-09T18:42:38+00:00",
+    "pid": 481710,
+    "cwd": "/home/ubuntu/.agentopt-v2/workspaces/req_bed1c2288b1946de95782fe1a4acff75",
+    "argv": [
+        "docs/symphony/w04-recipe-final/release.php"
+    ],
+    "tested_product_sha": "992f9a65ac3f8957e5ec618f21072dc499053810",
+    "tested_product_tree": "db85f35c5f42165802ec7ba6b02bc8a147a12c39",
+    "tables": 55,
+    "rows": 104,
+    "full_digest": "ded72a53ad82a159b88e50a6560625488bb569a55f5f5ffa109cd45ae52d056e",
+    "row_inventory_sha256": "f491092e081db3bd9e999cc81a1eb0c25c1362f002a7cd7ad30ebd8c3b78fa5b",
+    "ddl_inventory_sha256": "23f247d9ee8d400287155a15eb23d9eb0b0ece53d77600b098ad5d0bacf33534",
+    "object_inventory_sha256": "4fd7145664b849158a8cd0da85d622d78e0fdfb9651624b8a5a7713f643b7653",
+    "other_schema_objects": 0,
+    "exact_original_inventory": true,
+    "test_connections_after_pdo_close": 0,
+    "own_native_processes_excluding_observer": {
+        "native_processes": [],
+        "count": 0,
+        "unreadable_pids": [],
+        "excluded_observer_pid": 481710,
+        "method": "exact or descendant own cwd/path-valued argv/FD plus PHP/mysql executable"
+    },
+    "own_http_processes": 0,
+    "own_http_port_closed": true,
+    "exclusive": {
+        "pid": 481710,
+        "cwd": "/home/ubuntu/.agentopt-v2/workspaces/req_bed1c2288b1946de95782fe1a4acff75",
+        "argv": [
+            "docs/symphony/w04-recipe-final/release.php"
+        ],
+        "own_connection_id": 117617,
+        "other_test_connections": 0,
+        "own_server_processes": 0,
+        "prior_request_handles": {
+            "utc": "2026-10-09T18:42:38.257253+00:00",
+            "count": 0,
+            "handles": [],
+            "unreadable_pids": [],
+            "lock_holders": [],
+            "excluded_ancestor_pids": [
+                460013,
+                481710,
+                481718,
+                481719,
+                3650359
+            ],
+            "method": "proc-only bounded cwd/argv/FD; known TEST owners and own nonancestor native processes"
+        },
+        "utc": "2026-10-09T18:42:38+00:00"
+    },
+    "quiesce": {
+        "quiet": true,
+        "waited_seconds": 0
+    },
+    "retained_backups": [
+        {
+            "label": "mysql-smoke-fixed",
+            "original_sha256": "4a5f97688ed5e0a7577419fcb0b19c4266fefee557a290a78d809f75067836a2",
+            "original_retained": true
+        },
+        {
+            "label": "w04q-mysql-smoke-fixed/safety-7afc76f9.sql",
+            "safety_sha256": "50b5ac87d355292771ea43e38b1199ba2d79401abb1bfc7e3a37ae351d6d3bba",
+            "safety_retained": true
+        },
+        {
+            "label": "mysql-smoke",
+            "original_sha256": "2e3b9fdad35e6741efc93f59e251ba80fb2ed9cd13919da786a1619c2fe00baf",
+            "original_retained": true
+        },
+        {
+            "label": "w04q-mysql-smoke/safety-cff44fe4.sql",
+            "safety_sha256": "334041cb6dfaaf7f3e304a333f6080dbd41253ecbd4e4f8e637a52c4ea2bf2da",
+            "safety_retained": true
+        },
+        {
+            "label": "original",
+            "original_sha256": "51e3c86d2714cf2572e24e8df9a12e509c252609767b591241a5e90d94169aea",
+            "original_retained": true
+        },
+        {
+            "label": "w04q-original/safety-0477f9b5.sql",
+            "safety_sha256": "612bdf791e7b4eab28e0fb240915abe8ceeb795082b8654a33618247d6944000",
+            "safety_retained": true
+        }
+    ],
+    "original_128_639": "NOT_PROVEN"
+}

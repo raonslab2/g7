@@ -1,0 +1,38 @@
+{
+    "table_count": 112,
+    "row_count": 595,
+    "digest": "1f55ed1c1366beec4bc8e9a6a8e9cce503b5bea14f6bd26b6e44a04766e8cb68",
+    "exclusive": {
+        "pid": 479700,
+        "cwd": "/home/ubuntu/.agentopt-v2/workspaces/req_bed1c2288b1946de95782fe1a4acff75",
+        "argv": [
+            "docs/symphony/w04-recipe-final/snapshot.php",
+            "mysql-smoke-fixed",
+            "run",
+            "/usr/bin/php8.3",
+            "vendor/bin/phpunit",
+            "--bootstrap",
+            "docs/symphony/w04-recipe-final/test-bootstrap.php",
+            "scripts/travel-lab/LiveMysqlTest.php"
+        ],
+        "own_connection_id": 117593,
+        "other_test_connections": 0,
+        "own_server_processes": 0,
+        "prior_request_handles": {
+            "utc": "2026-10-09T18:41:29.882234+00:00",
+            "count": 0,
+            "handles": [],
+            "unreadable_pids": [],
+            "lock_holders": [],
+            "excluded_ancestor_pids": [
+                460013,
+                479700,
+                480207,
+                480208,
+                3650359
+            ],
+            "method": "proc-only bounded cwd/argv/FD; known TEST owners and own nonancestor native processes"
+        },
+        "utc": "2026-10-09T18:41:29+00:00"
+    }
+}

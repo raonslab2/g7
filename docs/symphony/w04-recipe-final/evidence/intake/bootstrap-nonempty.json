@@ -1,0 +1,72 @@
+{
+    "results": {
+        "wrong-schema": {
+            "status": "PASS",
+            "rejected": true,
+            "unchanged_environment": null
+        },
+        "wrong-account": {
+            "status": "PASS",
+            "rejected": true,
+            "unchanged_environment": null
+        },
+        "wrong-DB_URL": {
+            "status": "PASS",
+            "rejected": true,
+            "unchanged_environment": null
+        },
+        "wrong-CACHE_STORE": {
+            "status": "PASS",
+            "rejected": true,
+            "unchanged_environment": null
+        },
+        "wrong-G7_ENV_PRIORITY": {
+            "status": "PASS",
+            "rejected": true,
+            "unchanged_environment": null
+        },
+        "wrong-DB_CACHE_LOCK_CONNECTION": {
+            "status": "PASS",
+            "rejected": true,
+            "unchanged_environment": null
+        },
+        "nonempty": {
+            "status": "PASS",
+            "rejected": false,
+            "unchanged_environment": true
+        }
+    },
+    "count": 7,
+    "whole_inventory_unchanged": true,
+    "before_digest": "ded72a53ad82a159b88e50a6560625488bb569a55f5f5ffa109cd45ae52d056e",
+    "after_digest": "ded72a53ad82a159b88e50a6560625488bb569a55f5f5ffa109cd45ae52d056e",
+    "exclusive": {
+        "pid": 474704,
+        "cwd": "/home/ubuntu/.agentopt-v2/workspaces/req_bed1c2288b1946de95782fe1a4acff75",
+        "argv": [
+            "docs/symphony/w04-recipe-final/bootstrap-check.php",
+            "nonempty"
+        ],
+        "own_connection_id": 117171,
+        "other_test_connections": 0,
+        "own_server_processes": 0,
+        "prior_request_handles": {
+            "utc": "2026-10-09T18:38:17.541266+00:00",
+            "count": 0,
+            "handles": [],
+            "unreadable_pids": [],
+            "lock_holders": [],
+            "excluded_ancestor_pids": [
+                460013,
+                474700,
+                474704,
+                474705,
+                474706,
+                3650359
+            ],
+            "method": "proc-only bounded cwd/argv/FD; known TEST owners and own nonancestor native processes"
+        },
+        "utc": "2026-10-09T18:38:17+00:00"
+    },
+    "published_helper_sha256": "9b0ab095834ae01f8255b083e2070571600dae44cde52c082f099b6db85c160d"
+}
