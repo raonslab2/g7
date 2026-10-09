@@ -25,7 +25,7 @@ try {
     }
     // Recover older generated lab envs without replacing their local-only secrets.
     foreach (['.env', '.env.testing'] as $file) {
-        foreach (['G7_ENV_PRIORITY' => 'true', 'TRAVEL_LAB_SUPPORT_PROVISIONING' => '1'] as $key => $value) {
+        foreach (['G7_ENV_PRIORITY' => 'true', 'TRAVEL_LAB_SUPPORT_PROVISIONING' => '1', 'TRAVEL_LAB_CAMPAIGN_PROVISIONING' => '0'] as $key => $value) {
             if (is_file($root.'/'.$file) && ! preg_match('/^'.preg_quote($key, '/').'=/m', file_get_contents($root.'/'.$file))) {
                 file_put_contents($root.'/'.$file, file_get_contents($root.'/'.$file)."\n$key=$value\n");
             }

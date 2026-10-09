@@ -2,6 +2,8 @@
 
 namespace Modules\Raonslab\TravelLab\Tests\Feature;
 
+use App\Extension\HookListenerRegistrar;
+use App\Extension\HookManager;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Modules\Raonslab\TravelLab\Listeners\BlockTravelCommerceCheckout;
@@ -70,13 +72,39 @@ class TravelCheckoutGuardTest extends WorkflowTestCase
      */
     public function test_guard_uses_product_and_option_membership_and_preserves_ordinary_commerce(): void
     {
-        $canonicalModule = dirname(__DIR__, 2).'/module.php';
-        if (! class_exists(Module::class, false)) {
-            require_once $canonicalModule;
-        }
-        // Core explicitly includes installed module.php outside Composer. The
-        // native entry must match the canonical source before its metadata counts.
-        $this->assertSame(hash_file('sha256', $canonicalModule), hash_file('sha256', (new \ReflectionClass(Module::class))->getFileName()));
+        // Native core may already have loaded an older installed Module declaration.
+        // Inspect the current bundled entry in a clean process, without redefining or
+        // accepting the installed entry in this long-lived SQLite fixture application.
+        $canonicalModule = realpath(dirname(__DIR__, 2).'/module.php');
+        $canonicalListener = realpath(dirname(__DIR__, 2).'/src/Listeners/BlockTravelCommerceCheckout.php');
+        $parentModuleFile = class_exists(Module::class, false) ? (new \ReflectionClass(Module::class))->getFileName() : null;
+        $code = 'require '.var_export(base_path('vendor/autoload.php'), true).'; require '.var_export($canonicalModule, true).'; '
+            .'require '.var_export($canonicalListener, true).'; '
+            .'$module = new Modules\\Raonslab\\TravelLab\\Module; '
+            .'$source = (new ReflectionClass($module))->getFileName(); '
+            .'$listener = (new ReflectionClass(Modules\\Raonslab\\TravelLab\\Listeners\\BlockTravelCommerceCheckout::class))->getFileName(); '
+            .'echo json_encode(["source" => realpath($source), "sha256" => hash_file("sha256", $source), '
+            .'"listeners" => $module->getHookListeners(), "listener_source" => realpath($listener), '
+            .'"listener_sha256" => hash_file("sha256", $listener), '
+            .'"hooks" => Modules\\Raonslab\\TravelLab\\Listeners\\BlockTravelCommerceCheckout::getSubscribedHooks()], JSON_THROW_ON_ERROR);';
+        $process = proc_open([PHP_BINARY, '-r', $code], [0 => ['pipe', 'r'], 1 => ['pipe', 'w'], 2 => ['pipe', 'w']], $pipes, base_path());
+        $this->assertIsResource($process);
+        fclose($pipes[0]);
+        $output = stream_get_contents($pipes[1]);
+        $errors = stream_get_contents($pipes[2]);
+        fclose($pipes[1]);
+        fclose($pipes[2]);
+        $this->assertSame(0, proc_close($process), $errors);
+        $declaration = json_decode($output, true, 32, JSON_THROW_ON_ERROR);
+        $this->assertSame($canonicalModule, $declaration['source']);
+        $this->assertSame(hash_file('sha256', $canonicalModule), $declaration['sha256']);
+        $this->assertSame($canonicalListener, $declaration['listener_source']);
+        $this->assertSame(hash_file('sha256', $canonicalListener), $declaration['listener_sha256']);
+        $this->assertSame($parentModuleFile, class_exists(Module::class, false) ? (new \ReflectionClass(Module::class))->getFileName() : null);
+        $this->assertContains(BlockTravelCommerceCheckout::class, $declaration['listeners']);
+        $this->assertSame($canonicalListener, (new \ReflectionClass(BlockTravelCommerceCheckout::class))->getFileName());
+        $this->assertSame($declaration['hooks'], BlockTravelCommerceCheckout::getSubscribedHooks());
+        HookListenerRegistrar::register(BlockTravelCommerceCheckout::class, 'raonslab-travel_lab');
         $departure = $this->departure();
         $ordinary = $this->ordinaryOption();
         app(BlockTravelCommerceCheckout::class)->handle(collect([['product_id' => $ordinary->product_id, 'product_option_id' => $ordinary->id]]));
@@ -94,9 +122,16 @@ class TravelCheckoutGuardTest extends WorkflowTestCase
         } catch (CartUnavailableException $exception) {
             $this->assertTrue($exception->hasRestrictionIssue());
         }
-        $this->assertContains(BlockTravelCommerceCheckout::class, (new Module)->getHookListeners());
-        foreach (BlockTravelCommerceCheckout::getSubscribedHooks() as $hook) {
+        foreach ($declaration['hooks'] as $name => $hook) {
             $this->assertTrue($hook['sync']);
+            // Exercise native registrar callbacks, not just matching declarations.
+            HookManager::doAction($name, collect([['product_id' => $ordinary->product_id, 'product_option_id' => $ordinary->id]]));
+            try {
+                HookManager::doAction($name, collect([['product_id' => $ordinary->product_id, 'product_option_id' => $departure->product_option_id]]));
+                $this->fail('Declared native hook did not reject travel option membership: '.$name);
+            } catch (CartUnavailableException $exception) {
+                $this->assertTrue($exception->hasRestrictionIssue());
+            }
         }
     }
 }

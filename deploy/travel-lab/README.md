@@ -234,3 +234,35 @@ installer runtime/config cache are enforced before commands. No payment plugin
 is installed by this package. The implemented travel module must also reject
 real commerce checkout/order/payment entry; runtime isolation alone does not
 prove that application contract.
+
+
+## Page-backed campaigns (explicit opt-in)
+
+Travel0.1.3 consumes two fixed native sirsoft-page publication slots. Default
+installation, samples, extension updates and ordinary requests create zero Pages.
+After installing/updating the published0.1.3 module/template and board1.1.3,
+a permitted administrator may manage the fixed slots in the native Page editor
+through the travel admin adapter. Public home/list/detail show published Pages
+only, including for administrators; unknown/draft slots return404. Changing or
+deleting a fixed slug detaches the slot until it is explicitly restored/recreated.
+
+For an explicitly confirmed synthetic lab, set
+`TRAVEL_LAB_CAMPAIGN_PROVISIONING=1` in its private marked environment, select the
+existing native Page administrator ID, then run the guarded command below. Replace
+123 with that actual ID; no account is automatically chosen and no permissions
+are granted. The isolated marker, dedicated flag, --lab-confirm and native
+read/create permissions are all required. Do not run setup again to enable this
+feature or share environment credentials.
+
+```bash
+php scripts/travel-lab/run.php artisan raonslab-travel_lab:campaigns-provision --lab-confirm --actor=123
+```
+
+The command creates only missing autumn-escape/weekend-reset synthetic Pages
+through native PageService. Every existing Page, including a draft or operator
+edit, is skipped unchanged; rerunning is not a forced republish. Set the optional
+flag back to0 when explicit provisioning is finished. Editing, publishing and
+version restoration remain normal native Page admin operations, with native
+local activity/SEO/sitemap side effects. Actual campaign browser/role/draft/cache
+and postintegration regression are separate fixed-source gates; this procedure
+is not a claim those gates have already run.

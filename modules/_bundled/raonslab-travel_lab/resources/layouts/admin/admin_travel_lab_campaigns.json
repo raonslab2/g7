@@ -271,7 +271,8 @@
                                   "path": "/admin/pages/{{((campaign_pages?.data?.data ?? []).find(p => p.slug === 'travel-lab-campaign-autumn-escape') ?? null)?.id}}/edit"
                                 }
                               }
-                            ]
+                            ],
+                            "if": "{{((campaign_pages?.data?.data ?? []).find(p => p.slug === 'travel-lab-campaign-autumn-escape') ?? null)?.abilities?.can_update === true}}"
                           },
                           {
                             "type": "basic",
@@ -510,7 +511,8 @@
                               }
                             }
                           }
-                        ]
+                        ],
+                        "if": "{{campaign_pages?.data?.abilities?.can_create === true}}"
                       },
                       {
                         "type": "basic",
@@ -652,7 +654,8 @@
                                   "path": "/admin/pages/{{((campaign_pages?.data?.data ?? []).find(p => p.slug === 'travel-lab-campaign-weekend-reset') ?? null)?.id}}/edit"
                                 }
                               }
-                            ]
+                            ],
+                            "if": "{{((campaign_pages?.data?.data ?? []).find(p => p.slug === 'travel-lab-campaign-weekend-reset') ?? null)?.abilities?.can_update === true}}"
                           },
                           {
                             "type": "basic",
@@ -891,7 +894,8 @@
                               }
                             }
                           }
-                        ]
+                        ],
+                        "if": "{{campaign_pages?.data?.abilities?.can_create === true}}"
                       },
                       {
                         "type": "basic",

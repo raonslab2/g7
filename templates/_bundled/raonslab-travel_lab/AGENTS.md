@@ -5,7 +5,7 @@
 ## TL;DR (5초 요약)
 
 ```text
-1. 유형: 템플릿 (raonslab-travel_lab, type=user, v0.1.0) — 여행 고객 화면(탐색·출발일/인원·장바구니·상담 요청(테스트)·고객센터). 데이터는 별도 모듈 `raonslab-travel_lab` 의 API(/api/modules/raonslab-travel_lab)에서 온다
+1. 유형: 템플릿 (raonslab-travel_lab, type=user, v0.1.3) — 여행 고객 화면(탐색·출발일/인원·장바구니·상담 요청(테스트)·고객센터). 데이터는 별도 모듈 `raonslab-travel_lab` 의 API(/api/modules/raonslab-travel_lab)에서 온다
 2. 확장 방식: 훅 없음 — 확장점은 레이아웃의 data_sources 선언 · composite 4종(ScenicArt·PriceTag·StatusBadge·PageBody) · 전용 핸들러 3개(travelLab*)
 3. 건드리면 안 되는 것: 가격·금액을 요청 body 에 싣기, 오류 시 멱등 키 재생성, 통화 하드코딩, 레이아웃에 목업 응답, 외부 CDN·제3자 여행 사이트 자산
 4. 작업 위치: `templates/_bundled/raonslab-travel_lab` — 활성 디렉토리 직접 수정 금지
@@ -21,7 +21,7 @@ API 를 제공하고, 이 템플릿은 그 API 를 `data_sources` · `apiCall` �
 
 도메인 대응이 이 템플릿을 읽는 열쇠입니다. **여행 상품 = 이커머스 상품(product id)**,
 **출발편 = 이커머스 상품 옵션(ProductOption)**, **인원 = 장바구니 수량(Cart.quantity)** 입니다.
-그래서 manifest 가 여행 모듈과 함께 `sirsoft-ecommerce`(>=1.2.1) · `sirsoft-board`(>=1.1.2) ·
+그래서 manifest 가 여행 모듈과 함께 `sirsoft-ecommerce`(>=1.2.1) · `sirsoft-board`(>=1.1.3) ·
 `sirsoft-page`(>=1.1.2) 를 의존으로 선언합니다.
 
 화면은 홈(`/`·`/travel`) · 검색(`/travel/search`) · 상품 상세 · 기획전 목록/상세(`/travel/campaigns`,

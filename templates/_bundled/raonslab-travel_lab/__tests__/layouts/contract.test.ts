@@ -49,7 +49,7 @@ describe('매니페스트 · 버전', () => {
     expect(templateJson.dependencies.modules).toMatchObject({
       'raonslab-travel_lab': '>=0.1.3',
       'sirsoft-ecommerce': '>=1.2.1',
-      'sirsoft-board': '>=1.1.2',
+      'sirsoft-board': '>=1.1.3',
       'sirsoft-page': '>=1.1.2',
     });
   });

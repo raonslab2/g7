@@ -1,7 +1,7 @@
 # G7 Travel Lab delivery audit — IN_PROGRESS
 
 This is the accumulated delivery audit, not a completion declaration. Updated
-2026-10-09 19:20:08 UTC (October 10 KST). Deadline: October 11 23:59 KST /
+2026-10-09 19:40:25 UTC (October 10 KST). Deadline: October 11 23:59 KST /
 14:59 UTC; approximately 43 hours remain. Customer-approved design/database:
 NONE. The implementation is a RAON demonstration, not delivery of Lotte Tour's
 110 customer screens.
@@ -95,12 +95,11 @@ unique-test total. Full commands/environment/raw logs are in linked reports.
 
 ## Requests, integration and capacity
 
-Canonical observation during October9 continuation: **27 cumulative official attempts**,
-**21 COMPLETED / 4 FAILED / 1 INTERRUPTED / 1 RUNNING**, no queued child. This
-does not mean 27 simultaneous executions or 21 verified products. Current open
-Request: `w04-page-campaign-implementation` attempt 1,
-`req_7fe59f839ad748fcb2db4c8ad4b488b0`, CLAUDE. Do not duplicate it. The CODEX
-recipe and private-file CLAUDE reviews completed independently; TEST was released.
+Latest observed28 attempts:21COMPLETED/5FAILED/1INTERRUPTED/1RUNNING after Page
+child endedFAILED. These are Request states, not productPASS or simultaneous
+model streams. Current live verifier w04-common-binding-attachment-runtime-final
+attempt1 req_00485fdfe1eb455dbb11a6575fdd52d7 atfc54; Pagec85 source is recovered
+and separately reviewed/tested. No completed taskkey regenerated.
 
 The latest independent atomic Request
 `req_ea58da0bbb7043999b64641fcfc32490` / `w04-atomic-contention-final` attempt 1,
@@ -139,8 +138,9 @@ UNKNOWN; parent/child/native consumption is not double counted as account usage.
   Original PC pointer-menu failure is unreproduced by diagnostic; cause UNKNOWN.
   Official production core build passed; native11files546PASS and source review
   preserve initial failures, no new actual browserPASS claimed.
-- Page-backed two-slot campaign publication/list/detail/native-admin adapter is
-  being implemented, rather than treating installed Page/static banners as complete.
+- Page-backed two-slot campaign source is recovered from savedc85 (canonical child
+  FAILED/causeUNKNOWN) and reviewed/tested; actual install/browser gates pending.
+  See campaign backend/frontend/package/finalsource intakes and CAMPAIGN_EVIDENCE.
 - The atomic worker test failed once under load in the independent review,
   then passed four times. Original stderr was not retained there; its cause is
   UNKNOWN. A separate held-lock diagnostic reproduced missing translator/response
