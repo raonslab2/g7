@@ -4,6 +4,13 @@
 형식은 [Keep a Changelog](https://keepachangelog.com/ko/1.1.0/)를 따르며,
 [Semantic Versioning](https://semver.org/lang/ko/)을 준수합니다.
 
+## [7.0.12] - 2026-10-09
+
+### Fixed
+
+- bundled 의존성 모드를 지정한 새 모듈 설치에서도 기존 VendorResolver를 사용하도록 수정했습니다. 필수 의존성 설치에 실패하면 마이그레이션·모듈 DB 등록 전에 중단하며, HTML 상품 처리가 불가능한 설치본을 성공으로 기록하지 않습니다. 기존 installModule 시그니처·VendorMode 계약을 유지합니다.
+- 코어 설치 경로 수정의 실제 소비자는 외부 PHP 의존성이 있는 sirsoft-ecommerce와 그 설치 기능이 필요한 Travel Lab입니다. 이들의 코어 최소 요구 버전을 7.0.12로 맞췄습니다. 다른 번들 모듈은 PHP 외 외부 의존성이 없으며 플러그인·템플릿의 자체 설치 경로와 기존 RAON 사업사이트 공개 API는 변경하지 않았습니다. 전체 manifest·Composer require 검토를 수행했습니다.
+
 ## [7.0.11] - 2026-09-09
 
 ### Added

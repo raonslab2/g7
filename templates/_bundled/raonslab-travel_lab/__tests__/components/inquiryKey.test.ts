@@ -184,3 +184,16 @@ describe('persisted stale storage after write-only failures', () => {
     expect(prepareInquiryHandler(action)).toEqual(next);
   });
 });
+
+describe('native SDK identity is authoritative over data-source closure', () => {
+  it.each([undefined, 'owner-one'])('never restores old pending when closure owner=%s and live UUID changed', (staleOwner) => {
+    (window as any).G7Core.state.get = () => globalState;
+    globalState.currentUser = { uuid: 'owner-one' };
+    prepareInquiryHandler({handler:'travelLabPrepareInquiry',params:{cartIds:[5],quantities:[1],contact:{name:'Synthetic owner',phone:null},ownerId:'owner-one'}});
+    globalState.currentUser = { uuid: 'owner-two' };
+    expect(ensureInquiryKeyHandler({handler:'travelLabEnsureInquiryKey',params:{cartIds:[],ownerId:staleOwner}})).toBeNull();
+    expect(globalState.travelInquiryPending).toBeNull();
+    expect(globalState.travelInquiryContact).toBeNull();
+    expect(window.sessionStorage.getItem('raon_travel_inquiry_key')).toBeNull();
+  });
+});

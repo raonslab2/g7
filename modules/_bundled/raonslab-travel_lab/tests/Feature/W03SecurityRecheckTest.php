@@ -103,8 +103,29 @@ class W03SecurityRecheckTest extends WorkflowTestCase
     /** The actual module declaration, not a hand-registered closure, must wire every guard synchronously. */
     public function test_actual_module_declares_protect_listener_and_registrar_wires_sync_and_final_filter(): void
     {
-        require_once dirname(__DIR__, 2).'/module.php'; // the bundled module entry is not PSR-4 autoloaded
-        $this->assertContains(ProtectTravelCommerceCatalog::class, (new Module)->getHookListeners());
+        // Native boot may already have loaded the installed entry under this exact
+        // class name. Read the canonical bundled declaration in a clean process;
+        // never redefine the entry in this long-lived SQLite test application.
+        $canonical = realpath(dirname(__DIR__, 2).'/module.php');
+        $sourceHash = hash_file('sha256', $canonical);
+        $parentModuleFile = class_exists(Module::class, false) ? (new \ReflectionClass(Module::class))->getFileName() : null;
+        $code = 'require '.var_export(base_path('vendor/autoload.php'), true).'; require '.var_export($canonical, true).'; '
+            .'$module = new Modules\\Raonslab\\TravelLab\\Module; '
+            .'$source = (new ReflectionClass($module))->getFileName(); '
+            .'echo json_encode(["source" => realpath($source), "sha256" => hash_file("sha256", $source), "listeners" => $module->getHookListeners()], JSON_THROW_ON_ERROR);';
+        $process = proc_open([PHP_BINARY, '-r', $code], [0 => ['pipe', 'r'], 1 => ['pipe', 'w'], 2 => ['pipe', 'w']], $pipes, base_path());
+        $this->assertIsResource($process);
+        fclose($pipes[0]);
+        $output = stream_get_contents($pipes[1]);
+        $errors = stream_get_contents($pipes[2]);
+        fclose($pipes[1]);
+        fclose($pipes[2]);
+        $this->assertSame(0, proc_close($process), $errors);
+        $declaration = json_decode($output, true, 32, JSON_THROW_ON_ERROR);
+        $this->assertSame($canonical, $declaration['source']);
+        $this->assertSame($sourceHash, $declaration['sha256']);
+        $this->assertSame($parentModuleFile, class_exists(Module::class, false) ? (new \ReflectionClass(Module::class))->getFileName() : null);
+        $this->assertContains(ProtectTravelCommerceCatalog::class, $declaration['listeners']);
         $hooks = ProtectTravelCommerceCatalog::getSubscribedHooks();
         $this->assertTrue($hooks['sirsoft-ecommerce.product.before_delete']['sync']);
         $this->assertTrue($hooks['sirsoft-ecommerce.product.before_update']['sync']);

@@ -1,0 +1,575 @@
+{
+  "author": "native /root/w03_ui_repairs",
+  "kind": "implementer repair checks; not independent Validation",
+  "generated_at_utc": "2026-10-09T13:17:18+00:00",
+  "preview_source_baseline": "7de0c4441b68b1c012dbf4a75114200e322051c9",
+  "actual_git_head_at_before": "ae9d823c19a9c5aeeb869a6a6b1487ef17497a96",
+  "source_scope": "WORKINGTREE candidate; root owns lifecycle/version changes",
+  "before_browser": {
+    "390": {
+      "account_owner_isolation": "FAIL",
+      "admin_pointer": "FAIL",
+      "numeric_native_product_link_click": "FAIL",
+      "private_question_edit_control": "FAIL"
+    },
+    "1440": {
+      "account_owner_isolation": "FAIL",
+      "admin_pointer": "FAIL",
+      "numeric_native_product_link_click": "FAIL",
+      "private_question_edit_control": "FAIL"
+    },
+    "baseline_installed_ui_hashes_unchanged_between_two_runs": true,
+    "exact_owned_inquiry_cleanup": 2,
+    "exact_owned_question_cleanup": 2
+  },
+  "fail_first": {
+    "SDK_stale_identity_cases": {
+      "failures": 2,
+      "duration_seconds": 5.41
+    },
+    "catalog_unfetched_optional_blur_case": {
+      "failures": 1,
+      "same_run_as_SDK": true
+    },
+    "private_question_edit": {
+      "failures": 2,
+      "owner_visibility_negative_pass": 1,
+      "duration_seconds": 3.28
+    }
+  },
+  "focused_tests": [
+    {
+      "command": "npm run test:run -- __tests__/components/inquiryKey.test.ts __tests__/layouts/admin-api-contract.test.tsx __tests__/layouts/help-edit.test.tsx __tests__/layouts/contract.test.ts",
+      "status": "PASS",
+      "tests": 62,
+      "duration_seconds": 9.06
+    },
+    {
+      "command": "npm run test:run -- __tests__/layouts/cart.test.tsx",
+      "status": "PASS",
+      "tests": 13,
+      "duration_seconds": 8.23,
+      "limitation": "jsdom window.scrollTo not implemented warnings; no product browser-error claim"
+    }
+  ],
+  "total_focused_tests": 75,
+  "whole_suite": "NOT_RUN",
+  "type_check": {
+    "command": "npm run type-check",
+    "status": "PASS"
+  },
+  "build": {
+    "command": "G7_BUILD_SOURCEMAP=0 npm run build",
+    "status": "PASS",
+    "modules": 35,
+    "duration_seconds": 4.87,
+    "JS_kB": 38.22,
+    "CSS_kB": 47.65,
+    "sourceMappingURL": "absent"
+  },
+  "source_files": [
+    {
+      "path": "templates/_bundled/raonslab-travel_lab/src/handlers/inquiryKey.ts",
+      "sha256": "56da7f5628fb739913eccfbc3c9d1ffb8227602fe1ee20e2ac156c02cf193282"
+    },
+    {
+      "path": "templates/_bundled/raonslab-travel_lab/layouts/_user_base.json",
+      "sha256": "0aa7219abf51d716ffc8f08b5117d2eb472782ec6e3d4f645c31168a7afbe254"
+    },
+    {
+      "path": "templates/_bundled/raonslab-travel_lab/layouts/travel/help.json",
+      "sha256": "ac03e403769d46ba03135143796712aa8e316f2f0de7f175fc3f20c5337d1300"
+    },
+    {
+      "path": "templates/_bundled/raonslab-travel_lab/lang/ko.json",
+      "sha256": "bb2d948e8564c8fab26c507ae29ef9ef38c19fab68d5672ad0279cdc400659c0"
+    },
+    {
+      "path": "templates/_bundled/raonslab-travel_lab/lang/en.json",
+      "sha256": "1c2e2b201457ed7ae6ecac0a586931a3da295dd50a00e6ed9ce89ce24f615c55"
+    },
+    {
+      "path": "templates/_bundled/raonslab-travel_lab/__tests__/components/inquiryKey.test.ts",
+      "sha256": "64b33f591176186929f9c84d9ab54ab68107ae988949350ff45259f4b39c95a9"
+    },
+    {
+      "path": "templates/_bundled/raonslab-travel_lab/__tests__/layouts/admin-api-contract.test.tsx",
+      "sha256": "9c0b65bf2e8260b87f5ad01b4aac6c21a3566e972bbb5dd9520b409c22e7f9ff"
+    },
+    {
+      "path": "templates/_bundled/raonslab-travel_lab/__tests__/layouts/help-edit.test.tsx",
+      "sha256": "be8a59096660b3ff340dd0a51e87ead2b77f1900aeb1a6cbaa259027f0c6cd3a"
+    },
+    {
+      "path": "templates/_bundled/raonslab-travel_lab/__tests__/layouts/contract.test.ts",
+      "sha256": "93ecbdc92e70f03e256fc479b53c273bc423c8fe17704fef04965d66e4706d79"
+    },
+    {
+      "path": "templates/_bundled/raonslab-travel_lab/scripts/triage-ui-boundaries.mjs",
+      "sha256": "69b27cc96ed35479937b0eadb64135b9779715f5f82da215bb71aea7e0ca970b"
+    },
+    {
+      "path": "templates/_bundled/raonslab-travel_lab/dist/js/components.iife.js",
+      "sha256": "9cc99d8d8db0161cfc5f537531eb16f00d1a7ca272fd0b31824823185f46b390"
+    },
+    {
+      "path": "templates/_bundled/raonslab-travel_lab/dist/css/components.css",
+      "sha256": "2750062e8f93d635d9f126f6249852fe370725e3d7abd77d6c09cf58c6507529"
+    },
+    {
+      "path": "templates/_bundled/raonslab-travel_lab/dist/index.d.ts",
+      "sha256": "241e110368cd5c0726cb16be34582f82e86f02ea13c088f8e042bd5a9fed06fe"
+    },
+    {
+      "path": "modules/_bundled/raonslab-travel_lab/resources/layouts/admin/admin_travel_lab_catalog.json",
+      "sha256": "ea031efad85eb59b75abc9d16aa1aed3c7c33089b303567c99d09889b4c539fb"
+    }
+  ],
+  "after_browser": {
+    "status": "PASS with 2 bounded follow-up checks",
+    "unique_functional_cases": 8,
+    "widths": [
+      390,
+      1440
+    ],
+    "cases": [
+      "native logout/account UUID switch pending isolation after real upstream201 response loss",
+      "native admin Next pointer page2",
+      "numeric native product edit route navigation",
+      "owner private question UI create201/editPATCH200/reload persistence"
+    ],
+    "first_after_run": "6 PASS / 2 FAIL; network change and 429 preserved",
+    "bounded_follow_up": "1440 affected2 PASS after changing help fixture actor to other_member and fresh navigation",
+    "cleanup": "exact owned inquiries2 plus exact owned questions2; no broad deletion",
+    "scope": "implementer WORKINGTREE checks; not fixed SHA independent release PASS",
+    "screenshots": "NOT_CAPTURED"
+  },
+  "independent_official_attempt2": "NOT_RUN",
+  "canonical_validation": "NOT_CLAIMED",
+  "Git_delivery": "lead owned; native author did not stage/commit/push",
+  "shipping_reference_failure": "separate root isolated-package native ShippingTypeSeeder issue; author did not change commerce reference data",
+  "browser_phases": {
+    "before": {
+      "sourceSHA": "7de0c4441b68b1c012dbf4a75114200e322051c9",
+      "actualHead": "ae9d823c19a9c5aeeb869a6a6b1487ef17497a96",
+      "sourceScope": "WORKINGTREE; preview product UI still baseline7de",
+      "sourceMapping": [
+        {
+          "path": "dist/js/components.iife.js",
+          "bundled": "4488241bc757d3d3f60df16de7ea715bd75ad9e628e933dc92486173714f992a",
+          "installed": "4488241bc757d3d3f60df16de7ea715bd75ad9e628e933dc92486173714f992a"
+        },
+        {
+          "path": "layouts/_user_base.json",
+          "bundled": "6977ed3f9442c15ec37fc29a9bc39aa544a47617c960e8a28d5890486ffe9020",
+          "installed": "6977ed3f9442c15ec37fc29a9bc39aa544a47617c960e8a28d5890486ffe9020"
+        },
+        {
+          "path": "layouts/travel/cart.json",
+          "bundled": "f2cf69012e056fb875fbdbd4140d2e04274501559f3f446c0f6076250c8d1e95",
+          "installed": "f2cf69012e056fb875fbdbd4140d2e04274501559f3f446c0f6076250c8d1e95"
+        },
+        {
+          "path": "layouts/travel/help.json",
+          "bundled": "4235aebb69f20df40c462a9d6b9131ec1150f64a0979c5c0e6baf83b186812f4",
+          "installed": "4235aebb69f20df40c462a9d6b9131ec1150f64a0979c5c0e6baf83b186812f4"
+        },
+        {
+          "path": "resources/layouts/admin/admin_travel_lab_catalog.json",
+          "bundled": "c2b8ca989ae0c3dfbeb357e79d2199c246d20abc34c7c5259b6a197ae8ef7522",
+          "installed": "c2b8ca989ae0c3dfbeb357e79d2199c246d20abc34c7c5259b6a197ae8ef7522"
+        }
+      ],
+      "results": [
+        {
+          "width": 390,
+          "name": "account-isolation-observation",
+          "status": "OBSERVED",
+          "detail": {
+            "pending": true,
+            "empty": false,
+            "recovery": true
+          }
+        },
+        {
+          "width": 390,
+          "name": "native-logout-account-pending-isolation",
+          "status": "FAIL",
+          "error": "expect(received).toBe(expected) // Object.is equality\n\nExpected: false\nReceived: true"
+        },
+        {
+          "width": 390,
+          "name": "pointer-hit-test",
+          "status": "OBSERVED",
+          "detail": {
+            "buttonTarget": false,
+            "hitId": "admin_travel_lab_catalog_content",
+            "buttonRect": {
+              "x": 308,
+              "y": 862,
+              "width": 58,
+              "height": 38
+            },
+            "contentPosition": "static"
+          }
+        },
+        {
+          "width": 390,
+          "name": "native-admin-next-pointer",
+          "status": "FAIL",
+          "error": "locator.click: Timeout 5000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('#catalog_next')\u001b[22m\n\u001b[2m    - locator resolved to <button type=\"button\" id=\"catalog_next\" class=\"button btn btn-secondary btn-sm\">…</button>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <div class=\"admin-page-content\" id=\"admin_travel_lab_catalog_content\">…</div> intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <div class=\"admin-page-content\" id=\"admin_travel_lab_catalog_content\">…</div> intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m    9 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <div class=\"admin-page-content\" id=\"admin_travel_lab_catalog_content\">…</div> intercepts pointer events\u001b[22m\n\u001b[2m    - retrying clic"
+        },
+        {
+          "width": 390,
+          "name": "native-product-numeric-edit-route",
+          "status": "FAIL",
+          "error": "locator.click: Timeout 15000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('#open_product_admin_button').first()\u001b[22m\n\u001b[2m    - locator resolved to <button type=\"button\" id=\"open_product_admin_button\" class=\"button btn btn-secondary btn-sm\">…</button>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <div class=\"admin-page-content\" id=\"admin_travel_lab_catalog_content\">…</div> intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <div class=\"admin-page-content\" id=\"admin_travel_lab_catalog_content\">…</div> intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m    29 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m       - element is visible, enabled and stable\u001b[22m\n\u001b[2m       - scrolling into view if needed\u001b[22m\n\u001b[2m       - done scrolling\u001b[22m\n\u001b[2m       - <div class=\"admin-page-content\" id=\"admin_travel_lab_catalog_content\">…</div> intercepts poi"
+        },
+        {
+          "width": 1440,
+          "name": "account-isolation-observation",
+          "status": "OBSERVED",
+          "detail": {
+            "pending": true,
+            "empty": false,
+            "recovery": true
+          }
+        },
+        {
+          "width": 1440,
+          "name": "native-logout-account-pending-isolation",
+          "status": "FAIL",
+          "error": "expect(received).toBe(expected) // Object.is equality\n\nExpected: false\nReceived: true"
+        },
+        {
+          "width": 1440,
+          "name": "pointer-hit-test",
+          "status": "OBSERVED",
+          "detail": {
+            "buttonTarget": false,
+            "hitId": "admin_travel_lab_catalog_content",
+            "buttonRect": {
+              "x": 1358,
+              "y": 862,
+              "width": 58,
+              "height": 38
+            },
+            "contentPosition": "static"
+          }
+        },
+        {
+          "width": 1440,
+          "name": "native-admin-next-pointer",
+          "status": "FAIL",
+          "error": "locator.click: Timeout 5000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('#catalog_next')\u001b[22m\n\u001b[2m    - locator resolved to <button type=\"button\" id=\"catalog_next\" class=\"button btn btn-secondary btn-sm\">…</button>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <div class=\"admin-page-content\" id=\"admin_travel_lab_catalog_content\">…</div> intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <div class=\"admin-page-content\" id=\"admin_travel_lab_catalog_content\">…</div> intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m    9 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <div class=\"admin-page-content\" id=\"admin_travel_lab_catalog_content\">…</div> intercepts pointer events\u001b[22m\n\u001b[2m    - retrying clic"
+        },
+        {
+          "width": 1440,
+          "name": "native-product-numeric-edit-route",
+          "status": "FAIL",
+          "error": "locator.click: Timeout 15000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('#open_product_admin_button').first()\u001b[22m\n\u001b[2m    - locator resolved to <button type=\"button\" id=\"open_product_admin_button\" class=\"button btn btn-secondary btn-sm\">…</button>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <div class=\"admin-page-content\" id=\"admin_travel_lab_catalog_content\">…</div> intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <div class=\"admin-page-content\" id=\"admin_travel_lab_catalog_content\">…</div> intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m    29 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m       - element is visible, enabled and stable\u001b[22m\n\u001b[2m       - scrolling into view if needed\u001b[22m\n\u001b[2m       - done scrolling\u001b[22m\n\u001b[2m       - <div class=\"admin-page-content\" id=\"admin_travel_lab_catalog_content\">…</div> intercepts poi"
+        },
+        {
+          "name": "cleanup-exact-own-inquiry",
+          "id": 72,
+          "status": "PASS"
+        },
+        {
+          "name": "cleanup-exact-own-inquiry",
+          "id": 73,
+          "status": "PASS"
+        }
+      ]
+    },
+    "before-help": {
+      "sourceSHA": "7de0c4441b68b1c012dbf4a75114200e322051c9",
+      "actualHead": "ae9d823c19a9c5aeeb869a6a6b1487ef17497a96",
+      "sourceScope": "WORKINGTREE; preview product UI still baseline7de",
+      "sourceMapping": [
+        {
+          "path": "dist/js/components.iife.js",
+          "bundled": "9cc99d8d8db0161cfc5f537531eb16f00d1a7ca272fd0b31824823185f46b390",
+          "installed": "4488241bc757d3d3f60df16de7ea715bd75ad9e628e933dc92486173714f992a"
+        },
+        {
+          "path": "layouts/_user_base.json",
+          "bundled": "0aa7219abf51d716ffc8f08b5117d2eb472782ec6e3d4f645c31168a7afbe254",
+          "installed": "6977ed3f9442c15ec37fc29a9bc39aa544a47617c960e8a28d5890486ffe9020"
+        },
+        {
+          "path": "layouts/travel/cart.json",
+          "bundled": "f2cf69012e056fb875fbdbd4140d2e04274501559f3f446c0f6076250c8d1e95",
+          "installed": "f2cf69012e056fb875fbdbd4140d2e04274501559f3f446c0f6076250c8d1e95"
+        },
+        {
+          "path": "layouts/travel/help.json",
+          "bundled": "ac03e403769d46ba03135143796712aa8e316f2f0de7f175fc3f20c5337d1300",
+          "installed": "4235aebb69f20df40c462a9d6b9131ec1150f64a0979c5c0e6baf83b186812f4"
+        },
+        {
+          "path": "resources/layouts/admin/admin_travel_lab_catalog.json",
+          "bundled": "ea031efad85eb59b75abc9d16aa1aed3c7c33089b303567c99d09889b4c539fb",
+          "installed": "c2b8ca989ae0c3dfbeb357e79d2199c246d20abc34c7c5259b6a197ae8ef7522"
+        }
+      ],
+      "results": [
+        {
+          "width": 390,
+          "name": "private-question-edit",
+          "status": "FAIL",
+          "error": "expect(locator).toBeVisible() failed\n\nLocator: getByTestId('question-edit')\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n  - Expect \"to.be.visible\" with timeout 5000ms\n  - waiting for getByTestId('question-edit')\n"
+        },
+        {
+          "width": 1440,
+          "name": "private-question-edit",
+          "status": "FAIL",
+          "error": "expect(locator).toBeVisible() failed\n\nLocator: getByTestId('question-edit')\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n  - Expect \"to.be.visible\" with timeout 5000ms\n  - waiting for getByTestId('question-edit')\n"
+        },
+        {
+          "name": "cleanup-exact-own-question",
+          "id": 29,
+          "status": "PASS"
+        },
+        {
+          "name": "cleanup-exact-own-question",
+          "id": 30,
+          "status": "PASS"
+        }
+      ]
+    },
+    "after": {
+      "sourceSHA": "7de0c4441b68b1c012dbf4a75114200e322051c9",
+      "actualHead": "ae9d823c19a9c5aeeb869a6a6b1487ef17497a96",
+      "sourceScope": "WORKINGTREE; preview product UI still baseline7de",
+      "sourceMapping": [
+        {
+          "path": "dist/js/components.iife.js",
+          "bundled": "9cc99d8d8db0161cfc5f537531eb16f00d1a7ca272fd0b31824823185f46b390",
+          "installed": "9cc99d8d8db0161cfc5f537531eb16f00d1a7ca272fd0b31824823185f46b390"
+        },
+        {
+          "path": "layouts/_user_base.json",
+          "bundled": "0aa7219abf51d716ffc8f08b5117d2eb472782ec6e3d4f645c31168a7afbe254",
+          "installed": "0aa7219abf51d716ffc8f08b5117d2eb472782ec6e3d4f645c31168a7afbe254"
+        },
+        {
+          "path": "layouts/travel/cart.json",
+          "bundled": "f2cf69012e056fb875fbdbd4140d2e04274501559f3f446c0f6076250c8d1e95",
+          "installed": "f2cf69012e056fb875fbdbd4140d2e04274501559f3f446c0f6076250c8d1e95"
+        },
+        {
+          "path": "layouts/travel/help.json",
+          "bundled": "ac03e403769d46ba03135143796712aa8e316f2f0de7f175fc3f20c5337d1300",
+          "installed": "ac03e403769d46ba03135143796712aa8e316f2f0de7f175fc3f20c5337d1300"
+        },
+        {
+          "path": "resources/layouts/admin/admin_travel_lab_catalog.json",
+          "bundled": "ea031efad85eb59b75abc9d16aa1aed3c7c33089b303567c99d09889b4c539fb",
+          "installed": "ea031efad85eb59b75abc9d16aa1aed3c7c33089b303567c99d09889b4c539fb"
+        }
+      ],
+      "results": [
+        {
+          "width": 390,
+          "name": "account-isolation-observation",
+          "status": "OBSERVED",
+          "detail": {
+            "pending": false,
+            "empty": true,
+            "recovery": false
+          }
+        },
+        {
+          "width": 390,
+          "name": "native-logout-account-pending-isolation",
+          "status": "PASS",
+          "detail": {
+            "upstream": 201,
+            "inquiryId": 74
+          }
+        },
+        {
+          "width": 390,
+          "name": "pointer-hit-test",
+          "status": "OBSERVED",
+          "detail": {
+            "buttonTarget": true,
+            "hitId": "",
+            "buttonRect": {
+              "x": 308,
+              "y": 862,
+              "width": 58,
+              "height": 38
+            },
+            "contentPosition": "static"
+          }
+        },
+        {
+          "width": 390,
+          "name": "native-admin-next-pointer",
+          "status": "PASS",
+          "detail": {
+            "page": 2
+          }
+        },
+        {
+          "width": 390,
+          "name": "native-product-numeric-edit-route",
+          "status": "PASS",
+          "detail": {
+            "numericRoute": true
+          }
+        },
+        {
+          "width": 390,
+          "name": "private-question-edit",
+          "status": "PASS",
+          "detail": {
+            "id": 31,
+            "createHttp": 201,
+            "patchHttp": 200,
+            "reloadPersistence": true
+          }
+        },
+        {
+          "width": 1440,
+          "name": "account-isolation-observation",
+          "status": "OBSERVED",
+          "detail": {
+            "pending": false,
+            "empty": true,
+            "recovery": false
+          }
+        },
+        {
+          "width": 1440,
+          "name": "native-logout-account-pending-isolation",
+          "status": "PASS",
+          "detail": {
+            "upstream": 201,
+            "inquiryId": 75
+          }
+        },
+        {
+          "width": 1440,
+          "name": "pointer-hit-test",
+          "status": "OBSERVED",
+          "detail": {
+            "buttonTarget": true,
+            "hitId": "",
+            "buttonRect": {
+              "x": 1358,
+              "y": 862,
+              "width": 58,
+              "height": 38
+            },
+            "contentPosition": "static"
+          }
+        },
+        {
+          "width": 1440,
+          "name": "native-admin-next-pointer",
+          "status": "PASS",
+          "detail": {
+            "page": 2
+          }
+        },
+        {
+          "width": 1440,
+          "name": "native-product-numeric-edit-route",
+          "status": "FAIL",
+          "error": "page.goto: net::ERR_NETWORK_CHANGED at http://127.0.0.1:18871/admin/travel-lab\nCall log:\n\u001b[2m  - navigating to \"http://127.0.0.1:18871/admin/travel-lab\", waiting until \"load\"\u001b[22m\n"
+        },
+        {
+          "width": 1440,
+          "name": "private-question-edit",
+          "status": "FAIL",
+          "error": "expect(received).toBe(expected) // Object.is equality\n\nExpected: 201\nReceived: 429"
+        },
+        {
+          "name": "cleanup-exact-own-inquiry",
+          "id": 74,
+          "status": "PASS"
+        },
+        {
+          "name": "cleanup-exact-own-inquiry",
+          "id": 75,
+          "status": "PASS"
+        },
+        {
+          "name": "cleanup-exact-own-question",
+          "id": 31,
+          "status": "PASS"
+        }
+      ]
+    },
+    "after-retry": {
+      "sourceSHA": "7de0c4441b68b1c012dbf4a75114200e322051c9",
+      "actualHead": "ae9d823c19a9c5aeeb869a6a6b1487ef17497a96",
+      "sourceScope": "WORKINGTREE; preview product UI still baseline7de",
+      "sourceMapping": [
+        {
+          "path": "dist/js/components.iife.js",
+          "bundled": "9cc99d8d8db0161cfc5f537531eb16f00d1a7ca272fd0b31824823185f46b390",
+          "installed": "9cc99d8d8db0161cfc5f537531eb16f00d1a7ca272fd0b31824823185f46b390"
+        },
+        {
+          "path": "layouts/_user_base.json",
+          "bundled": "0aa7219abf51d716ffc8f08b5117d2eb472782ec6e3d4f645c31168a7afbe254",
+          "installed": "0aa7219abf51d716ffc8f08b5117d2eb472782ec6e3d4f645c31168a7afbe254"
+        },
+        {
+          "path": "layouts/travel/cart.json",
+          "bundled": "f2cf69012e056fb875fbdbd4140d2e04274501559f3f446c0f6076250c8d1e95",
+          "installed": "f2cf69012e056fb875fbdbd4140d2e04274501559f3f446c0f6076250c8d1e95"
+        },
+        {
+          "path": "layouts/travel/help.json",
+          "bundled": "ac03e403769d46ba03135143796712aa8e316f2f0de7f175fc3f20c5337d1300",
+          "installed": "ac03e403769d46ba03135143796712aa8e316f2f0de7f175fc3f20c5337d1300"
+        },
+        {
+          "path": "resources/layouts/admin/admin_travel_lab_catalog.json",
+          "bundled": "ea031efad85eb59b75abc9d16aa1aed3c7c33089b303567c99d09889b4c539fb",
+          "installed": "ea031efad85eb59b75abc9d16aa1aed3c7c33089b303567c99d09889b4c539fb"
+        }
+      ],
+      "results": [
+        {
+          "width": 1440,
+          "name": "native-product-numeric-edit-route",
+          "status": "PASS",
+          "detail": {
+            "numericRoute": true
+          }
+        },
+        {
+          "width": 1440,
+          "name": "private-question-edit",
+          "status": "PASS",
+          "detail": {
+            "id": 32,
+            "createHttp": 201,
+            "patchHttp": 200,
+            "reloadPersistence": true
+          }
+        },
+        {
+          "name": "cleanup-exact-own-question",
+          "id": 32,
+          "status": "PASS"
+        }
+      ]
+    }
+  },
+  "open_backend_observation": {
+    "code": "SUPPORT_THROTTLE_SHARED_KEY",
+    "source": "src/routes/support.php uses unprefixed 600,1 / 120,1 / 10,1",
+    "framework": "ThrottleRequests.handle key=prefix+resolveRequestSignature; same-user default prefix shares reads/writes counter",
+    "observation": "1440 first POST support/questions returned429 in initial after run; fresh other-member helper POST201 succeeded",
+    "owner": "root backend",
+    "status": "REPORTED, not changed by UI author"
+  },
+  "source_set_digest_definition": "SHA256(json.dumps(source_files,sort_keys=True).encode())",
+  "source_set_sha256": "04bcf33558199245bd158893c31ff8c125282fd27df8fd142f4de221a792c12a"
+}

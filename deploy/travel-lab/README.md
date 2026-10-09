@@ -86,7 +86,40 @@ database/checkout for another team's tests rather than sharing this test DB.
 
 `extensions.php` checks all module/template artifacts before mutation. It
 installs and activates board/page/ecommerce/travel plus the native G7 admin
-template and Travel Lab user template using official Artisan commands. It then
+template and Travel Lab user template using official Artisan commands. Module
+installation explicitly uses `--vendor-mode=bundled`; the checked-out native
+installer must honor that mode and fail on mandatory dependency failure before
+publishing the installation. The original W04 candidate did not satisfy this
+gate; its negative review remains historical evidence.
+
+Before any extension lifecycle, the package checks the native ecommerce bundle's
+manifest/ZIP/composer integrity. After native ecommerce installation and before
+activation or sample/support provisioning, it checks the **installed** vendor
+autoload, HTMLPurifier/Config file origins, the exact locked version and real HTML
+sanitization. This dependency-only check never boots Laravel, reads an environment
+file or connects to a DB. An already-active but incomplete installation also
+fails; the package does not silently update it or copy library files to make the
+old fresh-install result pass. Repair the native lifecycle at the reviewed source
+and execute a separately recorded fresh installation. `run.php preview` repeats
+the installed dependency gate before starting a server.
+
+Read-only dependency checks and private disposable filesystem/native-vendor tests:
+
+```bash
+php scripts/travel-lab/vendor-check.php --bundled
+php scripts/travel-lab/vendor-check.php
+php scripts/travel-lab/vendor-check-test.php
+```
+
+The fixture test actually uses the native `VendorResolver` and
+`VendorBundleInstaller`, the fixed ecommerce archive and real HTMLPurifier. It
+uses no Composer/network, Laravel application, DB or installed-module mutation.
+It proves dependency behavior in a filesystem fixture, not the complete native
+fresh-install/product transaction. The independent fixed-SHA empty-TEST install,
+native HTML product create/update and whole-schema restoration remain separate
+release gates.
+
+After the installed dependency gate, the package
 runs the declared travel sample seed with `module:seed --sample`, then the explicit
 `raonslab-travel_lab:support-provision --lab-confirm` command. Both provisioning
 markers are required. Already installed/active extensions
@@ -108,7 +141,9 @@ the default GitHub-first update discovery path. Template update has no vendor-mo
 flag; module update does.
 
 Root dependencies are installed by Composer; extension Composer dependencies
-are handled by the official module installer. Build frontend assets through the
+are installed from verified native bundles by the official module installer in
+this package. No manual vendor copy or forced post-install update substitutes for
+successful fresh installation. Build frontend assets through the
 repository's official core/module/template build commands for the final change
 and commit production build output according to G7's guides.
 

@@ -12,7 +12,13 @@
         "questionTitle": "",
         "questionContent": "",
         "questionSubmitting": false,
-        "questionErrors": null
+        "questionErrors": null,
+        "questionEditing": false,
+        "questionEditTitle": "",
+        "questionEditContent": "",
+        "questionEditSaving": false,
+        "questionEditErrors": null,
+        "questionEditError": ""
     },
     "data_sources": [
         {
@@ -1338,6 +1344,213 @@
                                                     "className": "rounded-xl bg-slate-50 p-4 text-sm text-ink-500"
                                                 },
                                                 "text": "$t:travel.help.waiting_answer"
+                                            },
+                                            {
+                                                "type": "basic",
+                                                "name": "Button",
+                                                "props": {
+                                                    "type": "button",
+                                                    "className": "rounded-xl border border-slate-300 px-4 py-2 text-sm font-semibold text-ink-700",
+                                                    "data-testid": "question-edit"
+                                                },
+                                                "text": "$t:travel.help.edit",
+                                                "if": "{{question_detail?.data?.is_mine === true && _local.questionEditing !== true}}",
+                                                "actions": [
+                                                    {
+                                                        "type": "click",
+                                                        "handler": "setState",
+                                                        "params": {
+                                                            "target": "local",
+                                                            "questionEditing": true,
+                                                            "questionEditSaving": false,
+                                                            "questionEditErrors": null,
+                                                            "questionEditError": "",
+                                                            "questionEditTitle": "{{question_detail.data.title ?? ''}}",
+                                                            "questionEditContent": "{{question_detail.data.content ?? ''}}"
+                                                        }
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "type": "basic",
+                                                "name": "Div",
+                                                "props": {
+                                                    "className": "space-y-3 rounded-xl border border-slate-200 p-4",
+                                                    "data-testid": "question-edit-form"
+                                                },
+                                                "children": [
+                                                    {
+                                                        "type": "basic",
+                                                        "name": "Input",
+                                                        "props": {
+                                                            "name": "questionEditTitle",
+                                                            "value": "{{_local.questionEditTitle ?? ''}}",
+                                                            "className": "w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm text-ink-900",
+                                                            "maxLength": 200,
+                                                            "aria-label": "$t:travel.help.ask_title_placeholder",
+                                                            "data-testid": "question-edit-title"
+                                                        },
+                                                        "actions": [
+                                                            {
+                                                                "type": "change",
+                                                                "handler": "setState",
+                                                                "params": {
+                                                                    "target": "local",
+                                                                    "questionEditTitle": "{{$event.target.value}}"
+                                                                }
+                                                            }
+                                                        ]
+                                                    },
+                                                    {
+                                                        "type": "basic",
+                                                        "name": "Textarea",
+                                                        "props": {
+                                                            "name": "questionEditContent",
+                                                            "value": "{{_local.questionEditContent ?? ''}}",
+                                                            "className": "w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm text-ink-900",
+                                                            "maxLength": 5000,
+                                                            "aria-label": "$t:travel.help.ask_content_label",
+                                                            "data-testid": "question-edit-content",
+                                                            "rows": 5
+                                                        },
+                                                        "actions": [
+                                                            {
+                                                                "type": "change",
+                                                                "handler": "setState",
+                                                                "params": {
+                                                                    "target": "local",
+                                                                    "questionEditContent": "{{$event.target.value}}"
+                                                                }
+                                                            }
+                                                        ]
+                                                    },
+                                                    {
+                                                        "type": "basic",
+                                                        "name": "P",
+                                                        "props": {
+                                                            "className": "text-sm text-red-700",
+                                                            "role": "alert",
+                                                            "data-testid": "question-edit-error"
+                                                        },
+                                                        "text": "{{_local.questionEditErrors?.title?.[0] ?? _local.questionEditErrors?.content?.[0] ?? _local.questionEditError ?? ''}}",
+                                                        "if": "{{!!_local.questionEditErrors || !!_local.questionEditError}}"
+                                                    },
+                                                    {
+                                                        "type": "basic",
+                                                        "name": "Div",
+                                                        "props": {
+                                                            "className": "flex flex-wrap gap-2"
+                                                        },
+                                                        "children": [
+                                                            {
+                                                                "type": "basic",
+                                                                "name": "Button",
+                                                                "props": {
+                                                                    "type": "button",
+                                                                    "className": "rounded-xl bg-raon-600 px-5 py-3 text-sm font-semibold text-white disabled:opacity-50",
+                                                                    "data-testid": "question-edit-save",
+                                                                    "disabled": "{{_local.questionEditSaving === true || String(_local.questionEditTitle ?? '').trim().length < 2 || String(_local.questionEditContent ?? '').trim().length < 2}}"
+                                                                },
+                                                                "text": "$t:travel.help.edit_save",
+                                                                "actions": [
+                                                                    {
+                                                                        "type": "click",
+                                                                        "handler": "sequence",
+                                                                        "actions": [
+                                                                            {
+                                                                                "handler": "setState",
+                                                                                "params": {
+                                                                                    "target": "local",
+                                                                                    "questionEditSaving": true,
+                                                                                    "questionEditErrors": null,
+                                                                                    "questionEditError": ""
+                                                                                }
+                                                                            },
+                                                                            {
+                                                                                "handler": "apiCall",
+                                                                                "auth_mode": "required",
+                                                                                "target": "/api/modules/raonslab-travel_lab/support/questions/{{question_detail.data.id}}",
+                                                                                "params": {
+                                                                                    "method": "PATCH",
+                                                                                    "body": {
+                                                                                        "title": "{{String(_local.questionEditTitle ?? '').trim()}}",
+                                                                                        "content": "{{String(_local.questionEditContent ?? '').trim()}}"
+                                                                                    }
+                                                                                },
+                                                                                "onSuccess": [
+                                                                                    {
+                                                                                        "handler": "setState",
+                                                                                        "params": {
+                                                                                            "target": "local",
+                                                                                            "questionEditing": false,
+                                                                                            "questionEditSaving": false,
+                                                                                            "questionEditErrors": null,
+                                                                                            "questionEditError": ""
+                                                                                        }
+                                                                                    },
+                                                                                    {
+                                                                                        "handler": "refetchDataSource",
+                                                                                        "params": {
+                                                                                            "dataSourceId": "question_detail"
+                                                                                        }
+                                                                                    },
+                                                                                    {
+                                                                                        "handler": "refetchDataSource",
+                                                                                        "params": {
+                                                                                            "dataSourceId": "questions"
+                                                                                        }
+                                                                                    },
+                                                                                    {
+                                                                                        "handler": "toast",
+                                                                                        "params": {
+                                                                                            "type": "success",
+                                                                                            "message": "$t:travel.help.edit_done"
+                                                                                        }
+                                                                                    }
+                                                                                ],
+                                                                                "onError": [
+                                                                                    {
+                                                                                        "handler": "setState",
+                                                                                        "params": {
+                                                                                            "target": "local",
+                                                                                            "questionEditSaving": false,
+                                                                                            "questionEditErrors": "{{error.errors ?? null}}",
+                                                                                            "questionEditError": "{{error.message ?? \"\"}}"
+                                                                                        }
+                                                                                    }
+                                                                                ]
+                                                                            }
+                                                                        ]
+                                                                    }
+                                                                ]
+                                                            },
+                                                            {
+                                                                "type": "basic",
+                                                                "name": "Button",
+                                                                "props": {
+                                                                    "type": "button",
+                                                                    "className": "rounded-xl border border-slate-300 px-5 py-3 text-sm",
+                                                                    "data-testid": "question-edit-cancel",
+                                                                    "disabled": "{{_local.questionEditSaving === true}}"
+                                                                },
+                                                                "text": "$t:travel.help.edit_cancel",
+                                                                "actions": [
+                                                                    {
+                                                                        "type": "click",
+                                                                        "handler": "setState",
+                                                                        "params": {
+                                                                            "target": "local",
+                                                                            "questionEditing": false,
+                                                                            "questionEditErrors": null,
+                                                                            "questionEditError": ""
+                                                                        }
+                                                                    }
+                                                                ]
+                                                            }
+                                                        ]
+                                                    }
+                                                ],
+                                                "if": "{{_local.questionEditing === true && question_detail?.data?.is_mine === true}}"
                                             }
                                         ]
                                     },

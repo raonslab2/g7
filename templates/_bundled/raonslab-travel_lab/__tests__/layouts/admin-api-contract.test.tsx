@@ -15,6 +15,13 @@ beforeAll(() => { registry = registerTemplateComponents(); });
 afterEach(() => { test?.cleanup(); test = undefined; });
 
 describe('native travel admin catalog', () => {
+  it('catalog interactions do not wait for the optional unfetched candidate selector', () => {
+    const layout=loadAdmin('admin_travel_lab_catalog');
+    expect(layout.data_sources.find((d:any)=>d.id==='travel_candidates').auto_fetch).toBe(false);
+    const blur=findAll(layout,(n:any)=>!!n.blur_until_loaded).map((n:any)=>n.blur_until_loaded);
+    expect(blur).toEqual([{enabled:true,data_sources:['catalog']}]);
+  });
+
   it('candidate fetch page size satisfies the actual backend FormRequest boundary', () => {
     const candidateSource=loadAdmin('admin_travel_lab_catalog').data_sources.find((d:any)=>d.id==='travel_candidates');
     const backendRequest=fs.readFileSync(path.join(moduleRoot,'src/Http/Requests/CatalogCandidatesRequest.php'),'utf8');

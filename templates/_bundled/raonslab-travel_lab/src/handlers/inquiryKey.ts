@@ -121,7 +121,10 @@ function setGlobalKey(key: string | null, contact?: StoredKey['contact']): void 
 export function ensureInquiryKeyHandler(action: HandlerAction): string | null {
   // An acknowledged native cart edit is a new intent, not an uncertain intake retry.
   if (action.params?.cartChanged === true) writeStored(null);
-  const ownerId = String(action.params?.ownerId ?? "").trim() || undefined;
+  // Data-source callbacks can retain a prior render's _global.currentUser.
+  // The native SDK returns current global contents, so live identity wins.
+  const liveUser = (window as any).G7Core?.state?.get?.()?.currentUser;
+  const ownerId = String(liveUser?.uuid ?? liveUser?.id ?? action.params?.ownerId ?? "").trim() || undefined;
   const prior = readStored();
   if (ownerId && prior && ownerId !== prior.ownerId) writeStored(null);
   const cartFingerprint = fingerprintCartIds(action?.params?.cartIds, action?.params?.quantities);

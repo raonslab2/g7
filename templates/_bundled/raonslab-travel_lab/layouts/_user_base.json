@@ -342,6 +342,9 @@
                                                             "handler": "logout",
                                                             "onSuccess": [
                                                                 {
+                                                                    "handler": "travelLabClearInquiryKey"
+                                                                },
+                                                                {
                                                                     "handler": "setState",
                                                                     "params": {
                                                                         "target": "global",
@@ -554,6 +557,9 @@
                                                     "type": "click",
                                                     "handler": "logout",
                                                     "onSuccess": [
+                                                        {
+                                                            "handler": "travelLabClearInquiryKey"
+                                                        },
                                                         {
                                                             "handler": "setState",
                                                             "params": {

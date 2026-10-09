@@ -162,3 +162,10 @@ actual/independent gates are recorded in [W03_RECOVERY_REPAIR.md](W03_RECOVERY_R
 
 
 W03 support recovery measured TEST55tables104rows and restored exact initial digest at5e3c04bc; earlier128tables639rows preservation is UNKNOWN following terminalFAILED support hardening. APP and own preview were untouched by that child. Final fresh install is still NOT_RUN and must use an exclusive TEST snapshot with actual starting table set. Preview now has four fork workers plus main accepting process; no measured overlapping contention PASS yet.
+
+
+## W04 lead runtime/recovery delta
+
+See evidence/W04_REPAIR/preview-restart.json and env-loss-recovery.json: actual request-owned restart preserved four travel-table digests; actual marked env-loss regeneration preserved userIDs/travelrecords and new local credentials worked. Only synthetic lab administrator password/scopedSQLaccount/APP_KEY rotated. Core seed skipped existing users; setup guards reject foreign grants. Testschema data was not intentionally changed; historical128/639 preservation remains NOT_PROVEN. New reviewaccess is issued after fixedcheckpoint using current ignoredenv, never old passwords.
+
+Transient req81-travel-lab-preview.service disappears after a fullstop; recreation uses the same assigned workdir/User=ubuntu/loopback18871/4PHPworkers. HTTP200 verified after recreation; no productionunit restarted. Source198 selected installed module/template runtimefiles match; coreinstaller/manifest gates bind separately. Alllead evidence is bounded, not independent finalValidation. EmptyTEST installation/real product HTML/completebaseline restore must rerun after repaired fixedSHA.

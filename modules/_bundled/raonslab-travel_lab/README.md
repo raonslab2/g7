@@ -6,7 +6,7 @@
 <p align="center">
   <img src="https://img.shields.io/badge/version-0.1.1-0066FF?style=flat-square" alt="version 0.1.1">
   <img src="https://img.shields.io/badge/type-%EB%AA%A8%EB%93%88-555555?style=flat-square" alt="type 모듈">
-  <img src="https://img.shields.io/badge/%EA%B7%B8%EB%88%84%EB%B3%B4%EB%93%9C7-%3E%3D7.0.11-1F883D?style=flat-square" alt="그누보드7 &gt;=7.0.11">
+  <img src="https://img.shields.io/badge/%EA%B7%B8%EB%88%84%EB%B3%B4%EB%93%9C7-%3E%3D7.0.12-1F883D?style=flat-square" alt="그누보드7 &gt;=7.0.12">
   <img src="https://img.shields.io/badge/license-MIT-8250DF?style=flat-square" alt="license MIT">
   <img src="https://img.shields.io/badge/requires-sirsoft--board-BF8700?style=flat-square" alt="requires sirsoft-board">
   <img src="https://img.shields.io/badge/requires-sirsoft--ecommerce-BF8700?style=flat-square" alt="requires sirsoft-ecommerce">
@@ -35,7 +35,7 @@ RAON 자체 여행 상품 실증을 위한 G7 모듈입니다. 합성 상품을 
 <!-- @generated:requirements START — ext:docgen 이 갱신. 이 블록 안은 직접 수정하지 않는다 -->
 | 항목 | 값 |
 |---|---|
-| 그누보드7 코어 | `>=7.0.11` |
+| 그누보드7 코어 | `>=7.0.12` |
 | PHP | `^8.2` |
 | 의존 모듈 | `sirsoft-board` `>=1.1.2` |
 | 의존 모듈 | `sirsoft-ecommerce` `>=1.2.1` |

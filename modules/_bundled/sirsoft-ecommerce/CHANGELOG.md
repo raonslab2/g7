@@ -4,6 +4,12 @@
 형식은 [Keep a Changelog](https://keepachangelog.com/ko/1.1.0/)를 따르며,
 [Semantic Versioning](https://semver.org/lang/ko/)을 준수합니다.
 
+## [Unreleased]
+
+### Changed
+
+- bundled 의존성의 정상 신규 설치와 실패 중단을 보장하는 코어 최소 요구 버전을 7.0.12로 상향했습니다. 기존 모듈 Service·Route·가격 계약은 바뀌지 않아 확장 간 최소 API 버전은 유지합니다.
+
 ## [1.2.1] - 2026-09-06
 
 ### Fixed

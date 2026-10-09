@@ -844,7 +844,12 @@
                 "if": "{{(catalog?.data?.pagination?.last_page ?? 1) > 1}}"
               }
             ],
-            "blur_until_loaded": true
+            "blur_until_loaded": {
+              "enabled": true,
+              "data_sources": [
+                "catalog"
+              ]
+            }
           }
         ]
       }

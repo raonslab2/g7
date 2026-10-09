@@ -113,3 +113,17 @@ Original W03 negative reports remain failure evidence. New fixed-source review a
 
 
 Contractv3 repair evidence update: actual native edit route is numeric `/admin/ecommerce/products/{id}/edit`; the earlier v2 product_code link statement was superseded. Candidate page bound48 matches CatalogCandidatesRequest max48. Optional itinerary defaults[]; all prices/options retain native identity. Nonauthor catalogue review25/366 and UI handler/diff review passed after fail-first fixes, bounded working-tree only. Inquiry recovery now treats in-memory state (including cleared tombstone) as authoritative after storage write/removal failure; latest live browser8scenarios/10cleanup checks passed on working tree, not independent fixed SHA. Support scope requires owner membership for every required native and travel grant, with exact native audit/write paths and mysql-fulltext-only privacy contract. New editor-spec covers4actual data_sources with6groups/24synthetic editor variants; nativecollector/type/resolver checks declared PASS, actual admineditorUI remains independent NOT_RUN. Customer-approved design/DB remainsNONE.
+
+
+## W04 repair contract v4 — October9 13:40UTC
+
+Input independent target7de0c444/tree3c285467; security dd43331a and fresh install cdd2def9 original commits compared and locally cherry-picked as f6eb5176/ae9d823c. Original negative decisions remain unchanged; browser attempt1 INTERRUPTED with no accepted Git result. The next target must include reviewed fixes, not reuse the original failed product SHA.
+
+| Work/screen | Owner paths / resulting contract | Acceptance / next independent target |
+|---|---|---|
+| TR-HELP create/edit | Lead `src/routes/support.php`: distinct public600, questions120 and create10 prefixes; native UI owner-only PATCH with native service authorization/audit | Read requests cannot consume create budget; 11th creation returns429; foreign owner returns404; editor error retains input |
+| TR-CART uncertain retry/account switch | UI `inquiryKey.ts`, `_user_base.json`: live native SDK UUID wins over stale render context, successful desktop/mobile logout clears pending intent | Same-owner committed-response loss retains key; another account sees no old request/contact |
+| TR-ADMIN catalog pagination | UI admin catalog blur explicitly depends only on fetched catalog | Actual pointer clicks on Next and numeric product edit work at390/1440 |
+| PKG-INSTALL | Native core ModuleManager owner; package scripts owner; lead version/manifests | Existing native resolver honors bundled mode before module entry/DDL, actual dependency autoload required; missing/corrupt bundle aborts; no forced-update/copy fresh-PASS |
+
+Core candidate7.0.12 is recorded in config/app.php, .env.example and rootCHANGELOG. Scan24 bundled manifests: affected ecommerce/travel module/travel template require>=7.0.12. The ecommerce external-dependency install is the affected path; other modules have no external Composer packages. Ecommerce Service/Model/Route signatures and native vendor composer.json/lock/archive are unchanged, so seven ecommerce consumers (travel module/template, four payment plugins, sirsoft-basic) do not need a new ecommerce dependency version. PluginManager install path is unchanged. New Travel APIs remain unreleased0.1.1 with explicit changelog entries. No RAON business module or production DB changes.

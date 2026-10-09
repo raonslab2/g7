@@ -45,7 +45,7 @@ describe('매니페스트 · 버전', () => {
     expect(templateJson.identifier).toBe('raonslab-travel_lab');
     expect(templateJson.version).toBe('0.1.1');
     expect(pkg.version).toBe(templateJson.version);
-    expect(templateJson.g7_version).toBe('>=7.0.11');
+    expect(templateJson.g7_version).toBe('>=7.0.12');
     expect(templateJson.dependencies.modules).toMatchObject({
       'raonslab-travel_lab': '>=0.1.1',
       'sirsoft-ecommerce': '>=1.2.1',
@@ -305,6 +305,7 @@ describe('핸들러·바인딩 금지 패턴', () => {
     const base = layouts.find((l) => l.file === '_user_base.json')!.json;
     expect(base.components[0]).toMatchObject({ name: 'Toast', props: { toasts: '{{_global.toasts}}' } });
     expect(findAll(base, (n) => n.handler === 'logout').length).toBeGreaterThan(0);
+    findAll(base,(n)=>n.handler==='logout').forEach((action)=>expect(action.onSuccess?.[0]).toEqual({handler:'travelLabClearInquiryKey'}));
     expect(findAll(base, (n) => n.handler === 'navigate' && n.params?.path === '/login').length).toBeGreaterThan(0);
     expect(findAll(base, (n) => n.slot === 'content').length).toBe(1);
     expect(findAll(base, (n) => n.props?.['data-testid'] === 'test-notice-bar').length).toBe(1);

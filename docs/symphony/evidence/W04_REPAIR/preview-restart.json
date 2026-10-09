@@ -1,0 +1,51 @@
+{
+  "kind": "lead bounded actual restart, not independent Validation",
+  "unit": "req81-travel-lab-preview.service",
+  "before_main_pid": 3338735,
+  "after_main_pid": 3813653,
+  "after_http_status": 200,
+  "digests_equal": true,
+  "before": {
+    "db": "req81_travel_lab",
+    "digests": {
+      "travel_lab_inquiries": {
+        "count": 75,
+        "sha256": "1bd296ec9ce7d2255c43e83c36fc6b6dd2effa685e3c3632d71136a9ab3cfb9d"
+      },
+      "travel_lab_inquiry_items": {
+        "count": 75,
+        "sha256": "3ff84bbbd996c1c53a14bf6770cbddb0fc71039c4dd19522ec9556ca03223c9e"
+      },
+      "travel_lab_departures": {
+        "count": 61,
+        "sha256": "c273bcc37715348996d317aa780ad4caeb825685d4f6c680eed9f9f81a309d58"
+      },
+      "travel_lab_inquiry_events": {
+        "count": 161,
+        "sha256": "759aef7ed181ce48e93dfd7d4c5e28cac0f61a6997bb356b74d0da23632843fb"
+      }
+    }
+  },
+  "after": {
+    "db": "req81_travel_lab",
+    "digests": {
+      "travel_lab_inquiries": {
+        "count": 75,
+        "sha256": "1bd296ec9ce7d2255c43e83c36fc6b6dd2effa685e3c3632d71136a9ab3cfb9d"
+      },
+      "travel_lab_inquiry_items": {
+        "count": 75,
+        "sha256": "3ff84bbbd996c1c53a14bf6770cbddb0fc71039c4dd19522ec9556ca03223c9e"
+      },
+      "travel_lab_departures": {
+        "count": 61,
+        "sha256": "c273bcc37715348996d317aa780ad4caeb825685d4f6c680eed9f9f81a309d58"
+      },
+      "travel_lab_inquiry_events": {
+        "count": 161,
+        "sha256": "759aef7ed181ce48e93dfd7d4c5e28cac0f61a6997bb356b74d0da23632843fb"
+      }
+    }
+  },
+  "limitations": "Four travel tables only. Broad support/account durability and independent postintegration gates remain separate."
+}

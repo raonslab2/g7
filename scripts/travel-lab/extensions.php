@@ -6,6 +6,9 @@ require __DIR__.'/environment.php';
 try {
     $environment = travelLabEnvironment();
     $root = dirname(__DIR__, 2);
+    if (travelLabProcess([PHP_BINARY, __DIR__.'/vendor-check.php', '--bundled'], $environment) !== 0) {
+        throw new RuntimeException('Bundled ecommerce dependencies failed preflight; no extension lifecycle started.');
+    }
     $pdo = new PDO('mysql:host=127.0.0.1;port=3306;dbname=req81_travel_lab', 'req81_travel', $environment['DB_WRITE_PASSWORD'], [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
     $commands = [];
     foreach (['sirsoft-board', 'sirsoft-page', 'sirsoft-ecommerce', 'raonslab-travel_lab'] as $module) {
@@ -23,7 +26,11 @@ try {
         $statement->execute([$module]);
         $status = $statement->fetchColumn();
         if ($status === false) {
-            $commands[] = ['module:install', $module, '--no-interaction'];
+            $commands[] = ['module:install', $module, '--vendor-mode=bundled', '--no-interaction'];
+        }
+        if ($module === 'sirsoft-ecommerce') {
+            // Verify a real installed library even when an earlier installation returned success.
+            $commands[] = ['@ecommerce-vendor-check'];
         }
         if ($status !== 'active') {
             $commands[] = ['module:activate', $module, '--no-interaction'];
@@ -44,6 +51,13 @@ try {
         }
     }
     foreach ($commands as $command) {
+        if ($command === ['@ecommerce-vendor-check']) {
+            if (travelLabProcess([PHP_BINARY, __DIR__.'/vendor-check.php'], $environment) !== 0) {
+                throw new RuntimeException('Installed ecommerce dependency check failed; activation/sample/support provisioning refused.');
+            }
+
+            continue;
+        }
         if (travelLabLifecycleProcess([PHP_BINARY, 'artisan', ...$command], $environment) !== 0) {
             throw new RuntimeException('Extension command failed: '.implode(' ', $command));
         }

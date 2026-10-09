@@ -26,7 +26,11 @@ try {
         exit(travelLabProcess([PHP_BINARY, 'vendor/bin/phpunit', ...$arguments], travelLabEnvironment(true)));
     }
     if ($mode === 'preview') {
-        exit(travelLabProcess([PHP_BINARY, 'artisan', 'serve', '--host=127.0.0.1', '--port=18871', '--no-reload'], travelLabEnvironment()));
+        $environment = travelLabEnvironment();
+        if (travelLabProcess([PHP_BINARY, __DIR__.'/vendor-check.php'], $environment) !== 0) {
+            throw new RuntimeException('Preview refused: installed ecommerce dependency preflight failed.');
+        }
+        exit(travelLabProcess([PHP_BINARY, 'artisan', 'serve', '--host=127.0.0.1', '--port=18871', '--no-reload'], $environment));
     }
     throw new RuntimeException('Usage: run.php artisan <command> | test <focused arguments> | preview');
 } catch (Throwable $error) {
