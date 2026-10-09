@@ -561,11 +561,50 @@
                                                 "actions": [
                                                     {
                                                         "type": "click",
-                                                        "handler": "setState",
-                                                        "params": {
-                                                            "target": "local",
-                                                            "openNoticeId": "{{String(_local.openNoticeId ?? '') === String(notice.id) ? null : notice.id}}"
-                                                        }
+                                                        "handler": "sequence",
+                                                        "actions": [
+                                                            {
+                                                                "handler": "setState",
+                                                                "params": {
+                                                                    "target": "local",
+                                                                    "openNoticeId": "{{notice.id}}",
+                                                                    "noticeDetailContent": "$t:travel.common.loading"
+                                                                }
+                                                            },
+                                                            {
+                                                                "handler": "apiCall",
+                                                                "target": "/api/modules/raonslab-travel_lab/support/notices/{{notice.id}}",
+                                                                "params": {
+                                                                    "method": "GET"
+                                                                },
+                                                                "onSuccess": [
+                                                                    {
+                                                                        "handler": "setState",
+                                                                        "params": {
+                                                                            "target": "local",
+                                                                            "noticeDetailContent": "{{String(_local.openNoticeId ?? '') === String(response.data?.id ?? '') ? (response.data?.content ?? '') : (_local.noticeDetailContent ?? '')}}"
+                                                                        }
+                                                                    }
+                                                                ],
+                                                                "onError": [
+                                                                    {
+                                                                        "handler": "setState",
+                                                                        "params": {
+                                                                            "target": "local",
+                                                                            "noticeDetailContent": "$t:travel.common.error_hint"
+                                                                        }
+                                                                    },
+                                                                    {
+                                                                        "handler": "toast",
+                                                                        "params": {
+                                                                            "type": "error",
+                                                                            "message": "{{error.message ?? ''}}"
+                                                                        }
+                                                                    }
+                                                                ],
+                                                                "auth_mode": "optional"
+                                                            }
+                                                        ]
                                                     }
                                                 ]
                                             },
@@ -583,7 +622,7 @@
                                                         "props": {
                                                             "className": "whitespace-pre-line"
                                                         },
-                                                        "text": "{{notice.content_plain ?? notice.content_text ?? notice.excerpt ?? notice.content ?? ''}}"
+                                                        "text": "{{_local.noticeDetailContent ?? ''}}"
                                                     }
                                                 ]
                                             }
@@ -594,11 +633,11 @@
                             {
                                 "type": "composite",
                                 "name": "Pagination",
-                                "if": "{{(notices?.data?.pagination?.last_page ?? 0) > 1 || notices?.data?.pagination?.has_more_pages === true || Number(query.page ?? 1) > 1}}",
+                                "if": "{{(notices?.data?.meta?.last_page ?? 0) > 1 || notices?.data?.meta?.has_more_pages === true || Number(query.page ?? 1) > 1}}",
                                 "props": {
-                                    "currentPage": "{{Number(query.page ?? notices?.data?.pagination?.current_page ?? 1)}}",
-                                    "totalPages": "{{notices?.data?.pagination?.last_page ?? null}}",
-                                    "hasMorePages": "{{notices?.data?.pagination?.has_more_pages ?? false}}",
+                                    "currentPage": "{{Number(query.page ?? notices?.data?.meta?.current_page ?? 1)}}",
+                                    "totalPages": "{{notices?.data?.meta?.last_page ?? null}}",
+                                    "hasMorePages": "{{notices?.data?.meta?.has_more_pages ?? false}}",
                                     "className": "mt-6 flex justify-center"
                                 },
                                 "actions": [
@@ -966,11 +1005,50 @@
                                                 "actions": [
                                                     {
                                                         "type": "click",
-                                                        "handler": "setState",
-                                                        "params": {
-                                                            "target": "local",
-                                                            "openFaqId": "{{String(_local.openFaqId ?? '') === String(faq.id) ? null : faq.id}}"
-                                                        }
+                                                        "handler": "sequence",
+                                                        "actions": [
+                                                            {
+                                                                "handler": "setState",
+                                                                "params": {
+                                                                    "target": "local",
+                                                                    "openFaqId": "{{faq.id}}",
+                                                                    "faqDetailContent": "$t:travel.common.loading"
+                                                                }
+                                                            },
+                                                            {
+                                                                "handler": "apiCall",
+                                                                "target": "/api/modules/raonslab-travel_lab/support/faqs/{{faq.id}}",
+                                                                "params": {
+                                                                    "method": "GET"
+                                                                },
+                                                                "onSuccess": [
+                                                                    {
+                                                                        "handler": "setState",
+                                                                        "params": {
+                                                                            "target": "local",
+                                                                            "faqDetailContent": "{{String(_local.openFaqId ?? '') === String(response.data?.id ?? '') ? (response.data?.content ?? '') : (_local.faqDetailContent ?? '')}}"
+                                                                        }
+                                                                    }
+                                                                ],
+                                                                "onError": [
+                                                                    {
+                                                                        "handler": "setState",
+                                                                        "params": {
+                                                                            "target": "local",
+                                                                            "faqDetailContent": "$t:travel.common.error_hint"
+                                                                        }
+                                                                    },
+                                                                    {
+                                                                        "handler": "toast",
+                                                                        "params": {
+                                                                            "type": "error",
+                                                                            "message": "{{error.message ?? ''}}"
+                                                                        }
+                                                                    }
+                                                                ],
+                                                                "auth_mode": "optional"
+                                                            }
+                                                        ]
                                                     }
                                                 ]
                                             },
@@ -988,7 +1066,7 @@
                                                         "props": {
                                                             "className": "whitespace-pre-line"
                                                         },
-                                                        "text": "{{faq.answer ?? (faq.content_plain ?? faq.content_text ?? faq.excerpt ?? faq.content ?? '')}}"
+                                                        "text": "{{_local.faqDetailContent ?? ''}}"
                                                     }
                                                 ]
                                             }
@@ -1229,7 +1307,7 @@
                                             {
                                                 "type": "basic",
                                                 "name": "Div",
-                                                "if": "{{!!(question_detail?.data?.answer?.content ?? question_detail?.data?.answer_content ?? question_detail?.data?.replies?.[0]?.content ?? question_detail?.data?.comments?.[0]?.content)}}",
+                                                "if": "{{!!((question_detail?.data?.answers ?? []).map(a => a.content).join('\\n\\n'))}}",
                                                 "props": {
                                                     "className": "rounded-xl bg-raon-50 p-4"
                                                 },
@@ -1248,14 +1326,14 @@
                                                         "props": {
                                                             "className": "whitespace-pre-line text-sm leading-relaxed text-ink-900"
                                                         },
-                                                        "text": "{{question_detail?.data?.answer?.content ?? question_detail?.data?.answer_content ?? question_detail?.data?.replies?.[0]?.content ?? question_detail?.data?.comments?.[0]?.content ?? ''}}"
+                                                        "text": "{{(question_detail?.data?.answers ?? []).map(a => a.content).join('\\n\\n') ?? ''}}"
                                                     }
                                                 ]
                                             },
                                             {
                                                 "type": "basic",
                                                 "name": "P",
-                                                "if": "{{!(question_detail?.data?.answer?.content ?? question_detail?.data?.answer_content ?? question_detail?.data?.replies?.[0]?.content ?? question_detail?.data?.comments?.[0]?.content)}}",
+                                                "if": "{{!((question_detail?.data?.answers ?? []).map(a => a.content).join('\\n\\n'))}}",
                                                 "props": {
                                                     "className": "rounded-xl bg-slate-50 p-4 text-sm text-ink-500"
                                                 },
@@ -1648,7 +1726,7 @@
                                                             {
                                                                 "type": "basic",
                                                                 "name": "Span",
-                                                                "if": "{{!!(question.is_answered ?? question.answered ?? question.answer ?? (question.replies_count ?? question.comments_count ?? 0) > 0)}}",
+                                                                "if": "{{!!(Number(question.answers_count ?? 0) > 0)}}",
                                                                 "props": {
                                                                     "className": "shrink-0 rounded-full bg-emerald-50 px-2.5 py-1 text-xs font-semibold text-emerald-700"
                                                                 },
@@ -1657,7 +1735,7 @@
                                                             {
                                                                 "type": "basic",
                                                                 "name": "Span",
-                                                                "if": "{{!(question.is_answered ?? question.answered ?? question.answer ?? (question.replies_count ?? question.comments_count ?? 0) > 0)}}",
+                                                                "if": "{{!(Number(question.answers_count ?? 0) > 0)}}",
                                                                 "props": {
                                                                     "className": "shrink-0 rounded-full bg-slate-100 px-2.5 py-1 text-xs font-semibold text-ink-500"
                                                                 },
@@ -1686,11 +1764,11 @@
                                     {
                                         "type": "composite",
                                         "name": "Pagination",
-                                        "if": "{{(questions?.data?.pagination?.last_page ?? 0) > 1 || questions?.data?.pagination?.has_more_pages === true || Number(query.page ?? 1) > 1}}",
+                                        "if": "{{(questions?.data?.meta?.last_page ?? 0) > 1 || questions?.data?.meta?.has_more_pages === true || Number(query.page ?? 1) > 1}}",
                                         "props": {
-                                            "currentPage": "{{Number(query.page ?? questions?.data?.pagination?.current_page ?? 1)}}",
-                                            "totalPages": "{{questions?.data?.pagination?.last_page ?? null}}",
-                                            "hasMorePages": "{{questions?.data?.pagination?.has_more_pages ?? false}}",
+                                            "currentPage": "{{Number(query.page ?? questions?.data?.meta?.current_page ?? 1)}}",
+                                            "totalPages": "{{questions?.data?.meta?.last_page ?? null}}",
+                                            "hasMorePages": "{{questions?.data?.meta?.has_more_pages ?? false}}",
                                             "className": "mt-6 flex justify-center"
                                         },
                                         "actions": [

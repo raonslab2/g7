@@ -4,7 +4,7 @@
  *
  * @vitest-environment jsdom
  */
-import { describe, it, expect, beforeEach } from 'vitest';
+import { describe, it, expect, beforeEach, vi } from 'vitest';
 import {
   ensureInquiryKeyHandler,
   clearInquiryKeyHandler,
@@ -19,6 +19,7 @@ beforeEach(() => {
   window.sessionStorage.clear();
   globalState = {};
   (window as any).G7Core = { state: { set: (u: Record<string, any>) => Object.assign(globalState, u) } };
+  clearInquiryKeyHandler();
 });
 
 const ensure = (cartIds: unknown, quantities?: unknown) =>
@@ -68,9 +69,29 @@ describe('ensure / clear', () => {
     expect(after).not.toBe(before);
   });
 
+  it('연락처를 포함한 네트워크 재시도와 새로고침은 동일 키·본문을 복원한다', () => {
+    const action = { handler: 'travelLabEnsureInquiryKey', params: { cartIds: [5], quantities: [2], contact: { name: ' 라온 ', phone: '01000000000' } } };
+    const submitted = ensureInquiryKeyHandler(action);
+    expect(ensure([5], [2])).toBe(submitted);
+    expect(globalState.travelInquiryContact).toEqual({ name: '라온', phone: '01000000000' });
+    expect(ensureInquiryKeyHandler(action)).toBe(submitted);
+    const edited = ensureInquiryKeyHandler({ ...action, params: { ...action.params, contact: { name: '라온', phone: '01011111111' } } });
+    expect(edited).not.toBe(submitted);
+  });
+
   it('빈 장바구니는 키를 만들지 않는다 (요청 버튼 비활성)', () => {
     expect(ensure([], [])).toBeNull();
     expect(globalState.travelInquiryKey).toBeNull();
+  });
+
+  it('저장소 쓰기만 차단되어도 현재 탭의 네트워크 재시도는 같은 키다', () => {
+    const write = vi.spyOn(Storage.prototype, 'setItem').mockImplementation(() => { throw new DOMException('quota', 'QuotaExceededError'); });
+    try {
+      const first = ensure([5], [2]);
+      expect(ensure([5], [2])).toBe(first);
+    } finally {
+      write.mockRestore();
+    }
   });
 
   it('생성 키는 충분히 길고 서로 다르다', () => {

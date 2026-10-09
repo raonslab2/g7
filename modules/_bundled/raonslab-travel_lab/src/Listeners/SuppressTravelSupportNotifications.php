@@ -6,6 +6,7 @@ use App\Contracts\Extension\HookListenerInterface;
 use Modules\Raonslab\TravelLab\Enums\TravelSupportChannel;
 use Modules\Sirsoft\Board\Models\Comment;
 use Modules\Sirsoft\Board\Models\Post;
+use Modules\Sirsoft\Board\Models\Report;
 
 /**
  * 여행 고객지원 게시판(travel-lab-*)에서 발생하는 게시판 알림만 발송 중단합니다.
@@ -76,7 +77,7 @@ class SuppressTravelSupportNotifications implements HookListenerInterface
         }
 
         $target = $args[0] ?? null;
-        if ($target instanceof Post || $target instanceof Comment) {
+        if ($target instanceof Post || $target instanceof Comment || $target instanceof Report) {
             $board = $target->relationLoaded('board') ? $target->board : $target->board()->first(['id', 'slug']);
 
             return $board !== null && in_array($board->slug, $slugs, true);

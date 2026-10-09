@@ -32,7 +32,7 @@
 
 데이터는 별도 모듈 **RAON 트래블랩 모듈(`raonslab-travel_lab`)** 이 제공합니다. 이 템플릿은
 화면만 담당하므로, 여행 모듈과 이커머스·게시판·페이지 모듈이 함께 설치되어 있어야 합니다.
-여행 상품은 이커머스 상품, 출발일은 상품 옵션, 인원은 장바구니 수량으로 관리됩니다.
+여행 상품은 이커머스 상품, 출발일은 별도 여행 Departure가 해당 상품 옵션을 참조하며, 인원은 여행 장바구니 수량으로 관리됩니다.
 
 **상담 요청은 테스트 기능입니다.** 요청 상태(테스트 접수 · 검토 중 · 테스트 수락 · 거절 · 취소)는
 모두 시뮬레이션이며 실제 예약·결제·환불은 일어나지 않습니다. 고객은 요청 전에 이 사실을 확인하는
@@ -213,8 +213,8 @@ php artisan template:activate raonslab-travel_lab
 | 증상 | 원인 | 조치 |
 |---|---|---|
 | 홈·검색·상세가 오류 없이 비어 있음 | 여행 모듈이 없거나 비활성, 또는 모듈 API 응답 형태가 템플릿이 기대하는 v1 계약과 다름 | 모듈 활성 여부 확인 → `/api/modules/raonslab-travel_lab/catalog` 응답이 `data.data` + `data.pagination` 형태인지 확인. 다르면 해당 레이아웃 바인딩을 맞춘다 |
-| 장바구니 항목 제목·출발편이 빈칸 | 응답 필드 이름이 바인딩 대체 경로(`item.title`/`item.product.title`, 출발편 `data` 배열/`data.data`) 어느 쪽과도 맞지 않음 | 모듈 응답을 확인하고 `layouts/travel/cart.json` · `product.json` 바인딩을 조정 |
-| 고객센터 공지·FAQ·1:1 문의 본문이나 답변이 안 나옴 | 고객센터 API 를 게시판 글 응답 형태(`title` · `content`(`content_plain` 우선) · `created_at`, 답변은 `answer.content` · `replies[0].content` · `comments[0].content`, 답변 여부는 `is_answered` · `answered` · `replies_count`)로 가정했는데 최종 모듈이 다름 | `layouts/travel/help.json` 바인딩을 모듈 응답에 맞춰 고친다 |
+| 장바구니 항목 제목·출발편이 빈칸 | 서버 응답의 `item.product_name` 번역 객체 또는 출발일 필드가 누락됨 | 모듈 응답을 확인하고 `layouts/travel/cart.json` · `product.json` 바인딩을 조정 |
+| 고객센터 공지·FAQ·1:1 문의 본문이나 답변이 안 나옴 | 목록은 본문이 없는 Resource이며 공개 상세 GET 또는 개인문의 `answers[]` 로딩이 실패함 | `layouts/travel/help.json` 바인딩을 모듈 응답에 맞춰 고친다 |
 | 「상담 요청」 버튼이 눌리지 않음 | 테스트 고지 미확인 · 이름 미입력 · 장바구니 비어 있음 · 중복 방지 키 미확보 중 하나 | 체크박스와 이름을 확인. 계속되면 장바구니 응답(`GET /cart`)이 실패하지 않았는지 확인 — 키는 그 응답을 받은 뒤 만들어진다 |
 | 네트워크 오류 후 다시 보냈는데 요청이 하나만 생김 | 정상 동작 — 재시도는 같은 중복 방지 키를 보낸다 | 조치 불필요 |
 | 금액에 통화 기호가 없이 숫자만 나옴 | 서버 응답에 `currency_code` 가 없거나 잘못된 코드 | 이커머스 통화 설정과 모듈 응답의 `currency_code` 확인 |
@@ -230,3 +230,7 @@ php artisan template:activate raonslab-travel_lab
 ## 라이선스
 
 MIT
+
+## 로컬 개발 검증
+
+템플릿 디렉터리에서 `npm ci --legacy-peer-deps --ignore-scripts --no-audit --no-fund --cache /tmp/g7-travel-template-npm-cache` 를 사용합니다. 제공 lockfile과 동일 peer 설치 규칙을 적용하며 캐시는 Git에 넣지 않습니다. `npm run test:run`, `npm run type-check`, `G7_BUILD_SOURCEMAP=0 npm run build` 후 배포용 `dist/` 를 소스와 함께 lead가 체크포인트로 발행합니다. 레이아웃 fixture 테스트는 실제 API/DB 브라우저 독립 검증과 별도입니다.

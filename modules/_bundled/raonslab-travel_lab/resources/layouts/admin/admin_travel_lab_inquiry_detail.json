@@ -52,7 +52,9 @@
       },
       "fallback": {
         "data": null
-      }
+      },
+      "auth_mode": "required",
+      "params": {}
     }
   ],
   "slots": {
@@ -324,7 +326,7 @@
                         "props": {
                           "className": "text-sm text-gray-900 dark:text-white text-right"
                         },
-                        "text": "{{inquiry?.data?.product_name ?? ''}}"
+                        "text": "{{inquiry?.data?.first_product_name ?? ''}}"
                       }
                     ]
                   },
@@ -376,7 +378,7 @@
                         "props": {
                           "className": "text-sm text-gray-900 dark:text-white text-right"
                         },
-                        "text": "{{inquiry?.data?.party_size ?? 0}}"
+                        "text": "{{inquiry?.data?.total_quantity ?? 0}}"
                       }
                     ]
                   },
@@ -402,7 +404,7 @@
                         "props": {
                           "className": "text-sm text-gray-900 dark:text-white text-right"
                         },
-                        "text": "{{inquiry?.data?.requester_name ?? ''}}"
+                        "text": "{{inquiry?.data?.contact?.name ?? ''}}"
                       }
                     ]
                   },
@@ -454,7 +456,7 @@
                         "props": {
                           "className": "mt-1 text-sm text-gray-900 dark:text-white whitespace-pre-line break-words"
                         },
-                        "text": "{{inquiry?.data?.message ?? ''}}"
+                        "text": "{{inquiry?.data?.contact?.phone ?? ''}}"
                       }
                     ]
                   },
@@ -527,7 +529,38 @@
                         "props": {
                           "className": "inline-flex items-center px-2 py-0.5 rounded text-xs font-medium {{inquiry?.data?.status === 'TEST_ACCEPTED' ? 'bg-green-100 text-green-800 dark:bg-green-800 dark:text-green-100' : inquiry?.data?.status === 'UNDER_REVIEW' ? 'bg-blue-100 text-blue-800 dark:bg-blue-800 dark:text-blue-100' : inquiry?.data?.status === 'DECLINED' || inquiry?.data?.status === 'CANCELLED' ? 'bg-gray-200 text-gray-800 dark:bg-gray-600 dark:text-gray-100' : 'bg-amber-100 text-amber-800 dark:bg-amber-800 dark:text-amber-100'}}"
                         },
-                        "text": "{{inquiry?.data?.status === 'TEST_INQUIRY' ? '$t:raonslab-travel_lab.admin.inquiries.status.TEST_INQUIRY' : inquiry?.data?.status === 'UNDER_REVIEW' ? '$t:raonslab-travel_lab.admin.inquiries.status.UNDER_REVIEW' : inquiry?.data?.status === 'TEST_ACCEPTED' ? '$t:raonslab-travel_lab.admin.inquiries.status.TEST_ACCEPTED' : inquiry?.data?.status === 'DECLINED' ? '$t:raonslab-travel_lab.admin.inquiries.status.DECLINED' : inquiry?.data?.status === 'CANCELLED' ? '$t:raonslab-travel_lab.admin.inquiries.status.CANCELLED' : (inquiry?.data?.status ?? '')}}"
+                        "children": [
+                          {
+                            "type": "basic",
+                            "name": "Span",
+                            "if": "{{inquiry?.data?.status === 'TEST_INQUIRY'}}",
+                            "text": "$t:raonslab-travel_lab.admin.inquiries.status.TEST_INQUIRY"
+                          },
+                          {
+                            "type": "basic",
+                            "name": "Span",
+                            "if": "{{inquiry?.data?.status === 'UNDER_REVIEW'}}",
+                            "text": "$t:raonslab-travel_lab.admin.inquiries.status.UNDER_REVIEW"
+                          },
+                          {
+                            "type": "basic",
+                            "name": "Span",
+                            "if": "{{inquiry?.data?.status === 'TEST_ACCEPTED'}}",
+                            "text": "$t:raonslab-travel_lab.admin.inquiries.status.TEST_ACCEPTED"
+                          },
+                          {
+                            "type": "basic",
+                            "name": "Span",
+                            "if": "{{inquiry?.data?.status === 'DECLINED'}}",
+                            "text": "$t:raonslab-travel_lab.admin.inquiries.status.DECLINED"
+                          },
+                          {
+                            "type": "basic",
+                            "name": "Span",
+                            "if": "{{inquiry?.data?.status === 'CANCELLED'}}",
+                            "text": "$t:raonslab-travel_lab.admin.inquiries.status.CANCELLED"
+                          }
+                        ]
                       }
                     ]
                   },
@@ -559,7 +592,38 @@
                           {
                             "type": "basic",
                             "name": "Span",
-                            "text": "{{nextStatus === 'TEST_INQUIRY' ? '$t:raonslab-travel_lab.admin.inquiries.status.TEST_INQUIRY' : nextStatus === 'UNDER_REVIEW' ? '$t:raonslab-travel_lab.admin.inquiries.status.UNDER_REVIEW' : nextStatus === 'TEST_ACCEPTED' ? '$t:raonslab-travel_lab.admin.inquiries.status.TEST_ACCEPTED' : nextStatus === 'DECLINED' ? '$t:raonslab-travel_lab.admin.inquiries.status.DECLINED' : nextStatus === 'CANCELLED' ? '$t:raonslab-travel_lab.admin.inquiries.status.CANCELLED' : nextStatus}}"
+                            "children": [
+                              {
+                                "type": "basic",
+                                "name": "Span",
+                                "if": "{{nextStatus === 'TEST_INQUIRY'}}",
+                                "text": "$t:raonslab-travel_lab.admin.inquiries.status.TEST_INQUIRY"
+                              },
+                              {
+                                "type": "basic",
+                                "name": "Span",
+                                "if": "{{nextStatus === 'UNDER_REVIEW'}}",
+                                "text": "$t:raonslab-travel_lab.admin.inquiries.status.UNDER_REVIEW"
+                              },
+                              {
+                                "type": "basic",
+                                "name": "Span",
+                                "if": "{{nextStatus === 'TEST_ACCEPTED'}}",
+                                "text": "$t:raonslab-travel_lab.admin.inquiries.status.TEST_ACCEPTED"
+                              },
+                              {
+                                "type": "basic",
+                                "name": "Span",
+                                "if": "{{nextStatus === 'DECLINED'}}",
+                                "text": "$t:raonslab-travel_lab.admin.inquiries.status.DECLINED"
+                              },
+                              {
+                                "type": "basic",
+                                "name": "Span",
+                                "if": "{{nextStatus === 'CANCELLED'}}",
+                                "text": "$t:raonslab-travel_lab.admin.inquiries.status.CANCELLED"
+                              }
+                            ]
                           }
                         ],
                         "iteration": {
@@ -627,7 +691,7 @@
                     "props": {
                       "type": "button",
                       "className": "btn btn-primary w-full mt-3",
-                      "disabled": "{{_global.travelInquirySaving === true || inquiry?.data?.abilities?.can_update !== true}}"
+                      "disabled": "{{_global.travelInquirySaving === true || inquiry?.data?.abilities?.can_update !== true || !(inquiry?.data?.allowed_transitions ?? []).includes(_global.travelInquiryNextStatus)}}"
                     },
                     "children": [
                       {
@@ -656,7 +720,7 @@
                               "method": "PATCH",
                               "body": {
                                 "status": "{{_global.travelInquiryNextStatus ?? inquiry?.data?.status}}",
-                                "admin_note": "{{_global.travelInquiryNote ?? ''}}"
+                                "admin_note": "{{_global.travelInquiryNote ?? inquiry?.data?.admin_note ?? ''}}"
                               }
                             },
                             "onSuccess": [
@@ -697,7 +761,8 @@
                                   "message": "{{error.message}}"
                                 }
                               }
-                            ]
+                            ],
+                            "auth_mode": "required"
                           }
                         ]
                       }

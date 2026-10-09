@@ -12,6 +12,12 @@ the initial execution used PHP 8.3.6 and MariaDB 10.11.14.
 ```bash
 composer install --no-interaction --prefer-dist
 npm ci
+cd templates/_bundled/raonslab-travel_lab
+npm ci --legacy-peer-deps
+npm run build
+npm run type-check
+npm run test:run
+cd ../../..
 php scripts/travel-lab/setup.php
 php scripts/travel-lab/smoke.php
 php scripts/travel-lab/smoke.php --testing
@@ -31,11 +37,22 @@ The databases are `req81_travel_lab` and `req81_travel_lab_test`. User
 
 ```bash
 php scripts/travel-lab/run.php test tests/Unit/Support/InstallerContextTest.php
-php scripts/travel-lab/run.php test modules/_bundled/raonslab-travel_lab/tests
+php vendor/bin/phpunit -c modules/_bundled/raonslab-travel_lab/tests/phpunit.xml
+php scripts/travel-lab/run.php test scripts/travel-lab/LiveMysqlTest.php
+php scripts/travel-lab/run.php test modules/_bundled/raonslab-travel_lab/tests/Feature/TravelSupportApiTest.php
+php scripts/travel-lab/run.php test modules/_bundled/raonslab-travel_lab/tests/Feature/TravelSupportNotificationTest.php
+php scripts/travel-lab/run.php test modules/_bundled/raonslab-travel_lab/tests/Feature/TravelSupportProvisionerTest.php
 php scripts/travel-lab/run.php test --testsuite=Installation
 ```
 
-The travel command requires the final module's tests. The explicitly scoped
+The canonical `-c` domain suite uses its own in-memory SQLite bootstrap; it is
+distinct from native board/support tests and `LiveMysqlTest`, which use the root
+G7 test context and the guarded MySQL testing schema. Do not run the whole module
+directory through root PHPUnit: its domain tests require the canonical bootstrap.
+`LiveMysqlTest` installs native reference data without ecommerce sample orders;
+it mounts the actual bundled routes for the test context. Runtime route discovery
+is checked separately by `live-api-responses.php` against installed module metadata.
+The explicitly scoped
 Installation suite is permitted for the mandatory installation smoke gate;
 the runner rejects an unscoped full suite. Run broad gates sequentially on this
 DB. Use a separate request-local
@@ -44,22 +61,73 @@ database/checkout for another team's tests rather than sharing this test DB.
 `extensions.php` checks all module/template artifacts before mutation. It
 installs and activates board/page/ecommerce/travel plus the native G7 admin
 template and Travel Lab user template using official Artisan commands. It then
-runs the travel module's declared seeder. Already installed/active extensions
+runs the declared travel sample seed with `module:seed --sample`, then the explicit
+`raonslab-travel_lab:support-provision --lab-confirm` command. Both provisioning
+markers are required. Already installed/active extensions
 are preserved on rerun. To apply new bundled code to an existing lab, explicitly
-run the official `module:update` / `template:update` command through `run.php`.
+run the official commands through `run.php`, after final source/assets are ready:
+
+```bash
+php scripts/travel-lab/run.php artisan module:update raonslab-travel_lab --force --source=bundled --vendor-mode=bundled --no-interaction
+php scripts/travel-lab/run.php artisan template:update raonslab-travel_lab --force --source=bundled --no-interaction
+```
+
+Native lifecycle commands generate a configuration cache. The harness removes
+only this marked checkout's regular `bootstrap/cache/config.php` after each
+command, including failures. For a interrupted older lifecycle command, use
+`php scripts/travel-lab/clear-cache.php`; all DB/egress checks still apply and
+symlinked cache/installer runtime overrides are refused.
+The explicit bundled source uses the checked-out reviewed code rather than
+the default GitHub-first update discovery path. Template update has no vendor-mode
+flag; module update does.
 
 Root dependencies are installed by Composer; extension Composer dependencies
 are handled by the official module installer. Build frontend assets through the
 repository's official core/module/template build commands for the final change
 and commit production build output according to G7's guides.
 
+Implementation checks, run sequentially while no other tests/reviewer mutate
+these two schemas:
+
+```bash
+php scripts/travel-lab/live-api-responses.php
+php scripts/travel-lab/live-concurrency.php
+php scripts/travel-lab/live-seed-rerun.php
+php scripts/travel-lab/live-recovery.php
+php scripts/travel-lab/live-env-recovery.php
+php scripts/travel-lab/live-persistence.php
+```
+
+The concurrency check uses two separate PHP processes/MySQL connections calling
+actual domain services: last seat, identical idempotency key, cancel/decline,
+and locked commerce-stock edit. It is service concurrency evidence; independent
+fixed-SHA validation must additionally exercise the HTTP/browser boundaries.
+The recovery check snapshots only the testing schema privately, rolls back and
+replays travel migrations, restores the snapshot, and compares record digests.
+It changes the testing schema; never overlap another suite. The env-loss check
+privately moves generated env files, regenerates scoped authentication, preserves
+user IDs/travel records, and leaves new local credentials. A new APP_KEY invalidates
+old sessions; no preservation of unrelated encrypted customer data is claimed.
+
+`recover-partial.php` is only for a failed initial travel migration. It refuses
+applied migrations or any populated travel table, then removes empty travel tables
+in reverse FK order without disabling foreign keys. Retry the native
+`module:install raonslab-travel_lab --force` afterward. It is never a general reset.
+
 Recovery: stop only this foreground preview with Ctrl-C, correct the isolated
 checkout, rerun `setup.php`, and rerun the relevant extension update and seed.
-Core migration is incremental. The setup skips core `DatabaseSeeder` when any
-user exists because `AdminUserSeeder` deletes all users. This package supplies
-no automatic DB deletion, environment overwrite, or production restart command.
-Migration rollback/reseed and application restart verification must be recorded
-against the final implementation; initial core bootstrap is not that evidence.
+Core migration is incremental. Setup skips core `DatabaseSeeder` when any user
+exists because `AdminUserSeeder` deletes all users. It safely rotates only the
+dedicated localhost DB account after checking it has no privileges outside the
+two schemas, and recovers only the exact synthetic administrator via native
+UserService. No existing user is deleted. It refuses unmarked environments.
+
+For same-node reviewers, `php scripts/travel-lab/live-review-access.php` creates
+unique synthetic member/other-member/admin accounts through native UserService
+and role ceiling checks. Credentials and four-hour native Sanctum tokens go only
+to an ignored mode-0600 JSON file within a mode-0700 request-local directory.
+Share the path, never its contents in prompts/logs/Git. A separate node should
+reproduce its own marked lab from the fixed SHA and generate its own credentials.
 
 Array mail, sync queue, local storage, environment-priority locking, and absent
 installer runtime/config cache are enforced before commands. No payment plugin

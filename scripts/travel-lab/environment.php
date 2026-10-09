@@ -7,7 +7,7 @@ declare(strict_types=1);
  *
  * @return array<string, string>
  */
-function travelLabEnvironment(bool $testing = false): array
+function travelLabEnvironment(bool $testing = false, bool $allowGeneratedConfigForCleanup = false): array
 {
     $root = dirname(__DIR__, 2);
     require_once $root.'/vendor/autoload.php';
@@ -59,7 +59,7 @@ function travelLabEnvironment(bool $testing = false): array
     if (($values['G7_ENV_PRIORITY'] ?? null) !== 'true') {
         throw new RuntimeException('Lab environment must own mail/queue/storage configuration.');
     }
-    if (is_file($root.'/storage/installer/runtime.php') || is_file($root.'/bootstrap/cache/config.php')) {
+    if (is_file($root.'/storage/installer/runtime.php') || (! $allowGeneratedConfigForCleanup && is_file($root.'/bootstrap/cache/config.php'))) {
         throw new RuntimeException('Installer runtime/config cache must be absent in this isolated checkout.');
     }
     $environment = getenv();
@@ -70,6 +70,29 @@ function travelLabEnvironment(bool $testing = false): array
     }
 
     return array_merge($environment, $values, ['APP_ENV' => $testing ? 'testing' : 'local']);
+}
+
+/** Remove only this marked checkout's generated config after native lifecycle work. */
+function travelLabClearGeneratedConfig(): void
+{
+    travelLabEnvironment(false, true); // All DB/egress checks still apply; installer override remains forbidden.
+    $path = dirname(__DIR__, 2).'/bootstrap/cache/config.php';
+    if (is_link($path)) {
+        throw new RuntimeException('Refusing a symlinked configuration cache.');
+    }
+    if (is_file($path) && ! unlink($path)) {
+        throw new RuntimeException('Could not clear this checkout generated configuration cache.');
+    }
+}
+
+/** Native G7 lifecycle commands optimize config; a lab must not retain that snapshot. */
+function travelLabLifecycleProcess(array $command, array $environment): int
+{
+    try {
+        return travelLabProcess($command, $environment);
+    } finally {
+        travelLabClearGeneratedConfig();
+    }
 }
 
 /**
@@ -84,4 +107,46 @@ function travelLabProcess(array $command, array $environment): int
     }
 
     return proc_close($process);
+}
+
+/** Apply the already-validated environment to a process that bootstraps Laravel. */
+function travelLabApplyEnvironment(array $environment): void
+{
+    $keys = array_unique(array_merge(array_keys(getenv()), array_keys($_ENV), array_keys($_SERVER)));
+    foreach ($keys as $key) {
+        if (! array_key_exists($key, $environment) && (
+            str_starts_with($key, 'DB_') || $key === 'MYSQL_ATTR_SSL_CA'
+            || str_starts_with($key, 'INSTALLER_ADMIN_')
+            || (str_starts_with($key, 'APP_') && str_ends_with($key, '_CACHE'))
+        )) {
+            putenv($key);
+            unset($_ENV[$key], $_SERVER[$key]);
+        }
+    }
+    foreach ($environment as $key => $value) {
+        putenv($key.'='.$value);
+        $_ENV[$key] = $value;
+        $_SERVER[$key] = $value;
+    }
+}
+
+/** Local administrative SQL; never logs statements, output or credential material. */
+function travelLabAdminSql(string $sql): string
+{
+    $process = proc_open(['sudo', '-n', 'mysql', '--protocol=socket', '-uroot', '--batch', '--skip-column-names'],
+        [0 => ['pipe', 'r'], 1 => ['pipe', 'w'], 2 => ['pipe', 'w']], $pipes);
+    if (! is_resource($process)) {
+        throw new RuntimeException('Local administrative socket unavailable.');
+    }
+    fwrite($pipes[0], $sql);
+    fclose($pipes[0]);
+    $output = stream_get_contents($pipes[1]);
+    stream_get_contents($pipes[2]);
+    fclose($pipes[1]);
+    fclose($pipes[2]);
+    if (proc_close($process) !== 0) {
+        throw new RuntimeException('Local scoped database operation failed; no external fallback is permitted.');
+    }
+
+    return $output;
 }

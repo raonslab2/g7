@@ -30,3 +30,24 @@ Host load rose during parallel local/canonical work; memory remains available. D
 ## Update requirements
 
 At meaningful WAVE checkpoints record actual child state and attempts, execution origin, observed native activity, load/memory, build/test duration/failures, queue/verification delay, fixed SHA/PR. Capacity configuration is not an operational load-test PASS. Use official wait once work is durably saved; after yielding end the native turn to release parent capacity, without shell sleeps/status polling.
+
+## W01 returned results and repair concurrency
+
+Canonical observation 2026-10-09 09:15:39 UTC: five official children COMPLETED (CODEX2, CLAUDE3), including independent preflight, cumulative5 attempts; no new official implementation Requests. Reported child-native counts: domain2, workflow2, preflight1; UI/support UNKNOWN. Counts are reported usage, not proof those five internal agents were concurrent or separate PCs. All source results remain untrusted pending lead verification, and the canonical Git-evidence blocker is preserved.
+
+At 09:26 UTC all three parent native followups active concurrently with lead: workflow repair, UI/admin integration, runtime/live environment. Parent native tools cap4 including lead, fully used for ready disjoint work. Host load1/5/15=6.70/8.96/7.90; memory available10Gi of15Gi, swapused4.2Gi/8Gi. PHP focused batch45 tests24.16s had1 stale shipping-policy assertion; assertion updated to demand explicitKR/FREE/no-extra-fee. SQLite is not a MySQL concurrency benchmark. Local build/test jobs are sequenced only on readiness/DB collision; official independent verification will use the next fixed integrated commit. Spring remains registered; its live usage is UNKNOWN and not double-counted.
+
+Catalog refreshed09:28UTC: same configuredCODEX8/CLAUDE3, max-active10/max-total50/depth1; off-host G7 nodes still OFFLINE/BLOCKED. Tool execution_source workspace head214b remains the server snapshot, whereas actual local Git includes scoped cherry-picks2114; lead uses git rev-parse and fixed new checkpoint as review truth. No capacity/settings/account increase.
+
+
+At10:04-10:08UTC parent native followups again used all4slots including lead for
+ready disjoint work: UI guest-browser check, nonauthor runtime delta review,
+API-capture cleanup repair, lead native commerce regression/installation/publication.
+Official children remain5 completed; no additional implementation Request was created.
+The two next independent Request roles wait only for a verified fixed source checkpoint,
+not as admission-slot placeholders. Native20guards and21lint passed; author guestbrowser
+scope completed, runtime repair completed, delta review still active at this observation.
+Host10:07UTC load6.98/6.51/6.88, memoryavailable10Gi/15Gi, swap4.4Gi/8Gi; no quota or
+load/admission failure observed. Test DB mutations are sequenced to avoid suite collisions;
+read-only guest browser and source review run concurrently. Actual configuredcatalog at
+10:04 unchanged; PC2/PC3 unavailable, central-node-only, no separate PC count inferred.

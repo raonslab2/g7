@@ -69,29 +69,21 @@ php artisan raonslab-travel_lab:support-provision --lab-confirm
 
 | 경로 | 레이아웃 | 권한 | 데이터 |
 | --- | --- | --- | --- |
-| `/admin/travel-lab`, `/admin/travel-lab/catalog` | `admin_travel_lab_catalog` | `raonslab-travel_lab.catalog.read` | `GET /admin/catalog`, `PATCH /admin/departures/{id}` |
+| `/admin/travel-lab`, `/admin/travel-lab/catalog` | `admin_travel_lab_catalog` | `raonslab-travel_lab.catalog.read` | `GET /admin/catalog`, `PUT /admin/catalog/{product}/departures/{departure}` |
 | `/admin/travel-lab/inquiries` | `admin_travel_lab_inquiry_list` | `raonslab-travel_lab.inquiries.read` | `GET /admin/inquiries?status=&page=` |
 | `/admin/travel-lab/inquiries/:id` | `admin_travel_lab_inquiry_detail` | `raonslab-travel_lab.inquiries.read` | `GET/PATCH /admin/inquiries/{id}` |
 | `/admin/travel-lab/support` | `admin_travel_lab_support` | `raonslab-travel_lab.support.read` | 게시판 관리자 화면 링크만 |
 
-- 가격·옵션은 이커머스가 소유한다. 카탈로그 화면은 가격을 표시·수정하지 않고 「이커머스 상품 관리 열기」(`/admin/ecommerce/products/{product_code}/edit`)로 연결한다. 출발일 PATCH 본문은 `{status, capacity}` 뿐이다.
+- 가격·옵션은 이커머스가 소유한다. 카탈로그 화면은 가격을 표시·수정하지 않고 「이커머스 상품 관리 열기」(`/admin/ecommerce/products/{product_code}/edit`)로 연결한다. 출발일 PUT 본문은 `{product_option_id, departure_date, return_date, capacity, is_active}`이다. departure는 여행 출발 ID이며 옵션 ID와 다르다.
 - 문의 상태 전환 버튼은 서버가 상세 응답에 주는 `allowed_transitions` 만 반복한다. 화면에는 전이표가 없다 (서버가 SSoT).
 - 저장 성공/실패는 공통 `toast`, 목록↔상세 이동은 `mergeQuery: true` 로 목록 상태를 보존한다. 섹션 이동·외부 화면 이동만 `audit:allow` 사유와 함께 비병합이다.
 - 번역: `resources/lang/partial/{ko,en}/admin.json` (`$t:raonslab-travel_lab.admin.*`).
 
-### 6.1 도메인 API 가정 (도메인 담당이 구현)
+### 6.1 통합 후 실제 관리자 계약
 
-카탈로그·문의 관리자 API 는 이 작업 범위 밖이다. 레이아웃은 아래 계약을 가정한다. 이름이 달라지면 레이아웃의 바인딩 경로만 바꾸면 된다.
+도메인/워크플로 Resources와 동일 버전의 바인딩을 사용한다. 카탈로그는 `data.data`와 `data.pagination`, `data.abilities.can_update`를 반환하며 각 상품 `id`는 커머스 상품 ID이고 `product_code`는 커머스 편집 링크에 사용한다. 출발에는 `id`, `product_option_id`, `departure_date`, `return_date`, `capacity`, `reserved`, `is_active`, `available`이 있다. 상품 메타는 `PATCH /admin/catalog/{product}`, 출발은 `PUT /admin/catalog/{product}/departures/{departure}`에 저장한다.
 
-| 엔드포인트 | 라우트명(가정) | 권한(가정) | 응답 `data` |
-| --- | --- | --- | --- |
-| `GET /api/modules/raonslab-travel_lab/admin/catalog` | `api.modules.raonslab-travel_lab.admin.catalog.index` | `permission:admin,raonslab-travel_lab.catalog.read` | `{data: [{product_id, product_code, name, departures: [{id, label, departure_date, status: OPEN\|CLOSED\|HIDDEN, capacity, reserved_count}]}], meta: {current_page,last_page,per_page,total}, abilities: {can_update}}` |
-| `PATCH /api/modules/raonslab-travel_lab/admin/departures/{id}` | `api.modules.raonslab-travel_lab.admin.departures.update` | `permission:admin,raonslab-travel_lab.catalog.update` | body `{status, capacity}` — `{id}` 는 이커머스 `ProductOption` id |
-| `GET /api/modules/raonslab-travel_lab/admin/inquiries` | `api.modules.raonslab-travel_lab.admin.inquiries.index` | `permission:admin,raonslab-travel_lab.inquiries.read` | `{data: [{id, reference, product_name, departure_label, party_size, status, created_at}], meta}` |
-| `GET /api/modules/raonslab-travel_lab/admin/inquiries/{id}` | `api.modules.raonslab-travel_lab.admin.inquiries.show` | `permission:admin,raonslab-travel_lab.inquiries.read` | `{id, reference, status, allowed_transitions[], admin_note, product_code, product_name, departure_label, party_size, requester_name, message, created_at, abilities: {can_update}}` |
-| `PATCH /api/modules/raonslab-travel_lab/admin/inquiries/{id}` | `api.modules.raonslab-travel_lab.admin.inquiries.update` | `permission:admin,raonslab-travel_lab.inquiries.update` | body `{status, admin_note}` — status ∈ `TEST_INQUIRY, UNDER_REVIEW, TEST_ACCEPTED, DECLINED, CANCELLED` |
-
-권장 전이(서버가 `allowed_transitions` 로 내려 줌): `TEST_INQUIRY → UNDER_REVIEW | DECLINED | CANCELLED`, `UNDER_REVIEW → TEST_ACCEPTED | DECLINED | CANCELLED`, 나머지는 종결. 모두 테스트 상태이며 결제·예약·환불을 만들지 않는다.
+시험 문의 목록·상세는 대문자 enum 상태와 서버 `allowed_transitions`, 권한 `abilities`, `data.pagination`을 사용한다. 상태 PATCH는 `status,admin_note`를 보낸다. 같은 상태에서 메모만 변경하면 저장과 처리자 이력이 남고 완전히 동일한 재요청만 no-op다. 기존 child 가정 필드나 옵션 ID를 출발 ID로 사용하는 계약은 폐기되었다. 자세한 전체 필드는 `docs/api/workflow.md`, `docs/domain-api.md`를 따른다.
 
 ## 7. 등록 통합 (리드 소유 파일에 반영할 것)
 

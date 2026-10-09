@@ -23,7 +23,8 @@ class InquiryController extends AdminBaseController
     public function index(ListInquiriesRequest $request): JsonResponse
     {
         return ResponseHelper::successWithResource(resource: new AdminInquiryCollection($this->service->listAdmin(
-            (int) $request->user()->id, (int) $request->validated('per_page', 20), (int) $request->validated('page', 1)
+            (int) $request->user()->id, (int) $request->validated('per_page', 20), (int) $request->validated('page', 1),
+            $request->validated('status') === null ? null : InquiryStatus::from($request->validated('status'))
         )));
     }
 
@@ -35,7 +36,7 @@ class InquiryController extends AdminBaseController
     public function update(UpdateInquiryRequest $request, int $inquiry): JsonResponse
     {
         return ResponseHelper::successWithResource(resource: new AdminInquiryResource($this->service->transition(
-            (int) $request->user()->id, $inquiry, InquiryStatus::from($request->validated('status')), $request->validated('admin_note')
+            (int) $request->user()->id, $inquiry, InquiryStatus::from($request->validated('status')), $request->validated('admin_note'), $request->exists('admin_note')
         )));
     }
 }

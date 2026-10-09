@@ -382,7 +382,7 @@
                                                 "props": {
                                                     "className": "rounded-full bg-raon-50 px-3 py-1 text-xs font-bold text-raon-700"
                                                 },
-                                                "text": "{{product?.data?.region_label ?? product?.data?.region ?? ''}}"
+                                                "text": "{{product?.data?.region_label ?? $t('travel.facets.region.' + (product?.data?.region ?? ''))}}"
                                             },
                                             {
                                                 "type": "basic",
@@ -391,7 +391,7 @@
                                                 "props": {
                                                     "className": "rounded-full bg-dusk-50 px-3 py-1 text-xs font-bold text-dusk-600"
                                                 },
-                                                "text": "{{product?.data?.theme_label ?? product?.data?.theme ?? ''}}"
+                                                "text": "{{product?.data?.theme_label ?? $t('travel.facets.theme.' + (product?.data?.theme ?? ''))}}"
                                             },
                                             {
                                                 "type": "basic",
@@ -543,7 +543,7 @@
                                                         "props": {
                                                             "className": "text-base font-bold text-ink-900"
                                                         },
-                                                        "text": "{{day.title ?? (typeof day === 'string' ? day : '')}}"
+                                                        "text": "{{day.title?.[_global.locale ?? 'ko'] ?? day.title?.ko ?? day.title?.en ?? (typeof day.title === 'string' ? day.title : '')}}"
                                                     },
                                                     {
                                                         "type": "basic",
@@ -552,7 +552,7 @@
                                                         "props": {
                                                             "className": "mt-1 whitespace-pre-line text-sm leading-relaxed text-ink-500"
                                                         },
-                                                        "text": "{{day.description ?? day.summary ?? ''}}"
+                                                        "text": "{{day.description?.[_global.locale ?? 'ko'] ?? day.description?.ko ?? day.description?.en ?? (typeof day.description === 'string' ? day.description : '')}}"
                                                     }
                                                 ]
                                             }

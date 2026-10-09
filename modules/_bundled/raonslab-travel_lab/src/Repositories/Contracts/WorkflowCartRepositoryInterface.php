@@ -20,6 +20,10 @@ interface WorkflowCartRepositoryInterface
 
     public function publishedProductIds(array $productIds, bool $lock = false): array;
 
+    public function containsTravelCommerceItems(array $productIds, array $optionIds): bool;
+
+    public function orderCommerceItems(int $orderId): array;
+
     public function reserve(Departure $departure, int $quantity): bool;
 
     public function release(Departure $departure, int $quantity): bool;

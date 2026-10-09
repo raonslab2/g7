@@ -8,8 +8,11 @@ use Modules\Raonslab\TravelLab\Models\Departure;
 use Modules\Raonslab\TravelLab\Models\TravelProduct;
 use Modules\Raonslab\TravelLab\Repositories\Contracts\WorkflowCartRepositoryInterface;
 use Modules\Sirsoft\Ecommerce\Models\Cart;
+use Modules\Sirsoft\Ecommerce\Models\OrderOption;
 use Modules\Sirsoft\Ecommerce\Models\Product;
 use Modules\Sirsoft\Ecommerce\Models\ProductOption;
+use Modules\Sirsoft\Ecommerce\Models\ShippingPolicy;
+use Modules\Sirsoft\Ecommerce\Models\ShippingPolicyCountrySetting;
 
 /** 여행 워크플로의 읽기·잠금과 모의 정원 변경을 소유한다. 커머스 쓰기는 하지 않는다. */
 class WorkflowCartRepository implements WorkflowCartRepositoryInterface
@@ -55,13 +58,33 @@ class WorkflowCartRepository implements WorkflowCartRepositoryInterface
 
     private function loadCommerce(Collection $departures, bool $lock): Collection
     {
-        // 가격·활성 상태도 같은 트랜잭션 안에서 고정한다. 모든 잠금은 ID 오름차순이다.
-        if ($lock) {
-            Product::query()->whereIn('id', $departures->pluck('product_id'))->orderBy('id')->lockForUpdate()->get();
-            ProductOption::query()->whereIn('id', $departures->pluck('product_option_id'))->orderBy('id')->lockForUpdate()->get();
+        // 잠금으로 읽은 모델 자체를 사용한다. REPEATABLE READ의 오래된 일반 SELECT로
+        // 다시 load하면 대기 뒤 최신 재고·가격 대신 이전 snapshot을 읽을 수 있다.
+        $productQuery = Product::query()->whereIn('id', $departures->pluck('product_id'))->orderBy('id');
+        $products = ($lock ? $productQuery->lockForUpdate() : $productQuery)->get()->keyBy('id');
+        $optionQuery = ProductOption::query()->whereIn('id', $departures->pluck('product_option_id'))->orderBy('id');
+        $options = ($lock ? $optionQuery->lockForUpdate() : $optionQuery)->get()->keyBy('id');
+        $policyQuery = ShippingPolicy::query()->whereIn('id', $products->pluck('shipping_policy_id')->filter())->orderBy('id');
+        $policies = ($lock ? $policyQuery->lockForUpdate() : $policyQuery)->get()->keyBy('id');
+        $countryQuery = ShippingPolicyCountrySetting::query()->whereIn('shipping_policy_id', $policies->keys())->orderBy('id');
+        $countries = ($lock ? $countryQuery->lockForUpdate() : $countryQuery)->get()->groupBy('shipping_policy_id');
+        foreach ($policies as $policy) {
+            $policy->setRelation('countrySettings', $countries->get($policy->id, new Collection));
+        }
+        foreach ($products as $product) {
+            $product->setRelation('shippingPolicy', $policies->get($product->shipping_policy_id));
+        }
+        foreach ($departures as $departure) {
+            $product = $products->get($departure->product_id);
+            $option = $options->get($departure->product_option_id);
+            if ($option !== null) {
+                $option->setRelation('product', $product);
+            }
+            $departure->setRelation('product', $product);
+            $departure->setRelation('option', $option);
         }
 
-        return $departures->load(['product', 'option']);
+        return $departures;
     }
 
     public function publishedProductIds(array $productIds, bool $lock = false): array
@@ -74,9 +97,14 @@ class WorkflowCartRepository implements WorkflowCartRepositoryInterface
 
     public function reserve(Departure $departure, int $quantity): bool
     {
-        // 행 잠금과 조건부 UPDATE를 함께 사용하여 정원 상한을 DB에서도 보장한다.
+        // option은 departure와 함께 잠긴 현재 행이다. 같은 ceiling을 조건부 UPDATE에도 적용한다.
+        $ceiling = min((int) $departure->capacity, (int) $departure->option?->stock_quantity);
+        if ($quantity < 1) {
+            return false;
+        }
         $changed = Departure::query()->whereKey($departure->id)
-            ->whereRaw('reserved + ? <= capacity', [$quantity])->increment('reserved', $quantity);
+            ->whereRaw('reserved + ? <= capacity', [$quantity])
+            ->whereRaw('reserved + ? <= ?', [$quantity, $ceiling])->increment('reserved', $quantity);
         if ($changed === 1) {
             $departure->reserved += $quantity;
         }
@@ -93,5 +121,16 @@ class WorkflowCartRepository implements WorkflowCartRepositoryInterface
         }
 
         return $changed === 1;
+    }
+
+    public function containsTravelCommerceItems(array $productIds, array $optionIds): bool
+    {
+        return TravelProduct::query()->whereIn('product_id', $productIds)->exists()
+            || Departure::query()->whereIn('product_option_id', $optionIds)->exists();
+    }
+
+    public function orderCommerceItems(int $orderId): array
+    {
+        return OrderOption::query()->where('order_id', $orderId)->get(['product_id', 'product_option_id'])->all();
     }
 }

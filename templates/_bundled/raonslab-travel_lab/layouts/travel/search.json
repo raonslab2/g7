@@ -297,7 +297,7 @@
                                                 "name": "Select",
                                                 "props": {
                                                     "value": "{{_local.draft?.region ?? ''}}",
-                                                    "options": "{{(facets?.data?.regions ?? []).map(r => (typeof r === 'object' ? r : { value: r, label: r })).map(r => ({ value: String(r.value ?? ''), label: String(r.label ?? r.value ?? '') }))}}",
+                                                    "options": "{{(facets?.data?.region ?? []).map(r => (typeof r === 'object' ? r : { value: r, label: $t('travel.facets.region.' + r) })).map(r => ({ value: String(r.value ?? ''), label: String(r.label ?? r.value ?? '') }))}}",
                                                     "emptyOptionLabel": "$t:travel.search.all_regions",
                                                     "className": "w-full",
                                                     "data-testid": "filter-region"
@@ -332,7 +332,7 @@
                                                 "name": "Select",
                                                 "props": {
                                                     "value": "{{_local.draft?.theme ?? ''}}",
-                                                    "options": "{{(facets?.data?.themes ?? []).map(t => (typeof t === 'object' ? t : { value: t, label: t })).map(t => ({ value: String(t.value ?? ''), label: String(t.label ?? t.value ?? '') }))}}",
+                                                    "options": "{{(facets?.data?.theme ?? []).map(t => (typeof t === 'object' ? t : { value: t, label: $t('travel.facets.theme.' + t) })).map(t => ({ value: String(t.value ?? ''), label: String(t.label ?? t.value ?? '') }))}}",
                                                     "emptyOptionLabel": "$t:travel.search.all_themes",
                                                     "className": "w-full",
                                                     "data-testid": "filter-theme"
@@ -1308,7 +1308,7 @@
                                                                         "props": {
                                                                             "className": "rounded-full bg-white/90 px-2.5 py-1 text-xs font-semibold text-raon-700 shadow-sm"
                                                                         },
-                                                                        "text": "{{trip.region_label ?? trip.region ?? ''}}"
+                                                                        "text": "{{trip.region_label ?? $t('travel.facets.region.' + (trip.region ?? ''))}}"
                                                                     },
                                                                     {
                                                                         "type": "basic",
@@ -1317,7 +1317,7 @@
                                                                         "props": {
                                                                             "className": "rounded-full bg-dusk-50/95 px-2.5 py-1 text-xs font-semibold text-dusk-600 shadow-sm"
                                                                         },
-                                                                        "text": "{{trip.theme_label ?? trip.theme ?? ''}}"
+                                                                        "text": "{{trip.theme_label ?? $t('travel.facets.theme.' + (trip.theme ?? ''))}}"
                                                                     }
                                                                 ]
                                                             }

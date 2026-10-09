@@ -25,8 +25,13 @@ class SyntheticCatalogHelper
             $policy = $this->catalog->findSampleShippingPolicy() ?? $this->shippingPolicies->create([
                 'name' => ['ko' => '트래블 랩 배송 없는 테스트', 'en' => 'Travel Lab synthetic nonshipping'],
                 'is_default' => false, 'is_active' => true, 'sort_order' => 9999,
-                // 국가 설정 없는 명시 정책: 기본 배송정책으로 폴백하지 않고 배송비 0.
-                'country_settings' => [],
+                // 배송비·외부 계산 API 없는 명시 무료 정책입니다.
+                'country_settings' => [[
+                    'country_code' => 'KR', 'currency_code' => 'KRW',
+                    'shipping_method' => 'pickup', 'charge_policy' => 'free',
+                    'base_fee' => 0, 'extra_fee_enabled' => false,
+                    'extra_fee_multiply' => false, 'is_active' => true,
+                ]],
             ]);
             foreach ($rows as $row) {
                 $product = $this->catalog->findSampleProduct($row['sku']);

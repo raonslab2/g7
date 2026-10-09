@@ -30,7 +30,7 @@ return new class extends Migration
             $table->unsignedInteger('reserved')->default(0)->comment('테스트 문의로 확보한 인원 (실제 예약 아님)');
             $table->boolean('is_active')->default(true)->comment('활성 여부 (1: 활성, 0: 비활성)');
             $table->timestamps();
-            $table->index(['product_id', 'is_active', 'departure_date']);
+            $table->index(['product_id', 'is_active', 'departure_date'], 'tl_departures_product_active_date');
         });
         Schema::create('travel_lab_inquiries', function (Blueprint $table) {
             $table->id()->comment('테스트 문의 ID');

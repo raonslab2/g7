@@ -64,6 +64,8 @@ export function initTemplate(): void {
   const maxRetries = 50;
 
   const registerHandlers = () => {
+    // A delayed attempt must stop once the rendering environment is disposed.
+    if (typeof window === 'undefined') return;
     const actionDispatcher = (window as any).G7Core?.getActionDispatcher?.();
     if (actionDispatcher) {
       Object.entries(handlerMap).forEach(([name, handler]) => {

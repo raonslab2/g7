@@ -4,7 +4,9 @@
  *
  * @vitest-environment jsdom
  */
-import { describe, it, expect, afterEach, beforeAll, vi } from 'vitest';
+import { describe, it, expect, afterEach, beforeAll, beforeEach, vi } from 'vitest';
+import { ActionDispatcher } from '@core/template-engine/ActionDispatcher';
+import { handlerMap } from '../../src/handlers';
 import { createLayoutTest, screen, waitFor } from '@core/template-engine/__tests__/utils/layoutTestUtils';
 import { registerTemplateComponents, loadLayout, flatten, translations, API_BASE } from '../helpers/travelTestKit';
 
@@ -12,10 +14,10 @@ const cartResponse = {
   success: true,
   data: {
     items: [
-      { id: 11, departure_id: 71, product_id: 7, title: '제주 오름 산책 3일', departure_date: '2026-11-02', return_date: '2026-11-04', quantity: 2, unit_price: 420000, line_total: 840000, currency_code: 'KRW', remaining: 2 },
-      { id: 12, departure_id: 81, product_id: 8, title: '부산 바다 미식 2일', departure_date: '2026-11-20', return_date: '2026-11-21', quantity: 1, unit_price: 310000, currency_code: 'KRW' },
+      { id: 11, departure_id: 71, product_id: 7, product_name: { ko: '제주 오름 산책 3일', en: 'Jeju Walk' }, departure_date: '2026-11-02', return_date: '2026-11-04', quantity: 2, unit_price: 420000, line_total: 840000, currency_code: 'KRW', available: true, remaining_capacity: 2 },
+      { id: 12, departure_id: 81, product_id: 8, product_name: { ko: '부산 바다 미식 2일', en: 'Busan Coast' }, departure_date: '2026-11-20', return_date: '2026-11-21', quantity: 1, available: true, remaining_capacity: 8, unit_price: 310000, currency_code: 'KRW' },
     ],
-    totals: { quantity: 3, amount: 1150000 },
+    totals: { final_amount: 1150000 },
     currency_code: 'KRW',
   },
 };
@@ -25,6 +27,17 @@ beforeAll(() => {
   registry = registerTemplateComponents();
 });
 let t: ReturnType<typeof createLayoutTest> | undefined;
+beforeEach(() => {
+  window.sessionStorage.clear();
+  const register = ActionDispatcher.prototype.registerHandler;
+  vi.spyOn(ActionDispatcher.prototype, 'registerHandler').mockImplementation(function (name, handler, options) {
+    register.call(this, name, handler, options);
+    if (name === 'toast') Object.entries(handlerMap).forEach(([key, value]) => register.call(this, key, value));
+  });
+  (window as any).G7Core = { ...(window as any).G7Core, state: { set: (updates: Record<string, any>) => {
+    Object.entries(updates).forEach(([key, value]) => t?.setState(key, value, 'global'));
+  } } };
+});
 afterEach(() => {
   t?.cleanup();
   t = undefined;
@@ -60,10 +73,45 @@ describe('travel/cart', () => {
 
   it('빈 장바구니는 둘러보기 안내', async () => {
     t = createLayoutTest(layout, { componentRegistry: registry, translations, locale: 'ko', initialState: member() });
-    t.mockApi('cart', { response: { success: true, data: { items: [], totals: { quantity: 0, amount: 0 } } } });
+    t.mockApi('cart', { response: { success: true, data: { items: [], totals: { final_amount: 0 } } } });
     await t.render();
     expect(screen.getByTestId('cart-empty')).toBeInTheDocument();
     expect(screen.queryByTestId('inquiry-form')).toBeNull();
+  });
+
+  it('비활성 출발편은 인원 증가와 접수를 차단하고 안내한다', async () => {
+    t = createLayoutTest(layout, { componentRegistry: registry, translations, locale: 'ko', initialState: member() });
+    t.mockApi('cart', { response: { ...cartResponse, data: { ...cartResponse.data,
+      items: [{ ...cartResponse.data.items[0], available: false, remaining_capacity: 0, unavailable_reason: 'departure_unavailable' }],
+    } } });
+    await t.render();
+    await t.user.click(screen.getByTestId('ack-test'));
+    expect(screen.getByTestId('cart-qty-increase')).toBeDisabled();
+    expect(screen.getByTestId('submit-inquiry')).toBeDisabled();
+    expect(screen.getByText(translations.travel.cart.unavailable)).toBeInTheDocument();
+  });
+
+  it('새로고침에서 보존한 연락처를 다시 보내고 연락처 변경 시 새 키를 쓴다', async () => {
+    await renderCart(member({ travelInquiryContact: { name: '시험 사용자', phone: '010-0000-0000' } }));
+    const original = globalThis.fetch;
+    globalThis.fetch = vi.fn(async (url: any, init: any) => {
+      if (String(url).endsWith(`${API_BASE}/inquiries`) && init?.method === 'POST') throw new TypeError('Failed to fetch');
+      return original(url, init);
+    }) as any;
+    expect(screen.getByTestId('contact-phone')).toHaveValue('010-0000-0000');
+    await t!.user.click(screen.getByTestId('ack-test'));
+    await t!.user.click(screen.getByTestId('submit-inquiry'));
+    await waitFor(() => expect(inquiryCalls()).toHaveLength(1));
+    const first = JSON.parse(String(inquiryCalls()[0][1]!.body));
+    expect(first.contact).toEqual({ name: '시험 사용자', phone: '010-0000-0000' });
+    await waitFor(() => expect(screen.getByTestId('submit-inquiry')).not.toBeDisabled());
+    await t!.user.clear(screen.getByTestId('contact-phone'));
+    await t!.user.type(screen.getByTestId('contact-phone'), '010-0000-0001');
+    await t!.user.click(screen.getByTestId('submit-inquiry'));
+    await waitFor(() => expect(inquiryCalls()).toHaveLength(2));
+    const second = JSON.parse(String(inquiryCalls()[1][1]!.body));
+    expect(second.contact.phone).toBe('010-0000-0001');
+    expect(second.idempotency_key).not.toBe(first.idempotency_key);
   });
 
   it('불러오기 실패 시 다시 시도', async () => {
@@ -103,7 +151,7 @@ describe('travel/cart', () => {
     expect(JSON.parse(String((inquiryCalls()[0][1] as any).body))).toEqual({
       cart_ids: [11, 12],
       contact: { name: '라온', phone: null },
-      idempotency_key: 'raon-key-1',
+      idempotency_key: expect.stringMatching(/^raon-/),
     });
   });
 
@@ -124,13 +172,14 @@ describe('travel/cart', () => {
       await t!.user.click(screen.getByTestId('submit-inquiry'));
       await waitFor(() => expect(attempt).toBe(1));
       await waitFor(() => expect(screen.getByTestId('submit-inquiry')).not.toBeDisabled());
-      expect(t!.getState()._global.travelInquiryKey).toBe('raon-key-1');
+      const submittedKey = t!.getState()._global.travelInquiryKey;
+      expect(submittedKey).toMatch(/^raon-/);
       await t!.user.click(screen.getByTestId('submit-inquiry'));
       await waitFor(() => expect(attempt).toBe(2));
       const keys = vi.mocked(globalThis.fetch).mock.calls
         .filter(([url, init]) => String(url).endsWith(`${API_BASE}/inquiries`) && (init as any)?.method === 'POST')
         .map(([, init]) => JSON.parse(String((init as any).body)).idempotency_key);
-      expect(keys).toEqual(['raon-key-1', 'raon-key-1']);
+      expect(keys).toEqual([submittedKey, submittedKey]);
     } finally {
       globalThis.fetch = original;
     }

@@ -23,14 +23,32 @@ foreach ([
 }
 
 $loader = require $projectRoot.'/vendor/autoload.php';
+$canonicalNamespaces = [];
 foreach (['sirsoft-ecommerce', 'raonslab-travel_lab'] as $identifier) {
     $path = $projectRoot.'/modules/_bundled/'.$identifier;
     $composer = json_decode(file_get_contents($path.'/composer.json'), true, flags: JSON_THROW_ON_ERROR);
     foreach ($composer['autoload']['psr-4'] ?? [] as $namespace => $relative) {
         $loader->addPsr4($namespace, $path.'/'.$relative, true);
+        $canonicalNamespaces[$namespace] = $path.'/'.$relative;
     }
     foreach ($composer['autoload']['files'] ?? [] as $relative) {
         require_once $path.'/'.$relative;
     }
 }
 $loader->addPsr4('Modules\\Raonslab\\TravelLab\\Tests\\', __DIR__, true);
+// Core bootstrap may register an installed extension src_classmap, which takes
+// priority over Composer PSR-4. A test-only loader pins the source under review
+// even when the isolated preview has an older installed extension copy.
+spl_autoload_register(static function (string $class) use ($canonicalNamespaces): void {
+    foreach ($canonicalNamespaces as $namespace => $directory) {
+        if (! str_starts_with($class, $namespace)) {
+            continue;
+        }
+        $file = $directory.'/'.str_replace('\\', '/', substr($class, strlen($namespace))).'.php';
+        if (is_file($file)) {
+            require_once $file;
+
+            return;
+        }
+    }
+}, true, true);

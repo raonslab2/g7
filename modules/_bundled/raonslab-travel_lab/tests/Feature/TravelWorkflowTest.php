@@ -141,7 +141,7 @@ class TravelWorkflowTest extends WorkflowTestCase
         $first = $this->departure(capacity: 5);
         $second = $this->departure(capacity: 5);
         $ids = [$this->cart($user, $first, 2), $this->cart($user, $second, 2)];
-        $second->update(['reserved' => 4]);
+        $second->forceFill(['reserved' => 4])->save();
         $this->assertRejected(fn () => app(InquiryService::class)->submit($user->id, array_reverse($ids), ['name' => '테스터'], 'rollback'), 409);
         $this->assertSame(0, $first->fresh()->reserved);
         $this->assertSame(4, $second->fresh()->reserved);
@@ -261,7 +261,7 @@ class TravelWorkflowTest extends WorkflowTestCase
         $inquiry->update(['status' => $from]);
         $releasedBefore = in_array($fromName, ['DECLINED', 'CANCELLED'], true);
         if ($releasedBefore) {
-            $departure->refresh()->update(['reserved' => 0]);
+            $departure->refresh()->forceFill(['reserved' => 0])->save();
         }
         $allowed = [
             'TEST_INQUIRY' => ['UNDER_REVIEW', 'DECLINED', 'CANCELLED'],
@@ -276,7 +276,7 @@ class TravelWorkflowTest extends WorkflowTestCase
             $this->assertSame($expectedReserve, $departure->fresh()->reserved);
             app(InquiryService::class)->transition($admin->id, $inquiry->id, $to, '두 번째 메모');
             $this->assertSame($expectedReserve, $departure->fresh()->reserved);
-            $this->assertSame($fromName === $toName ? null : '관리자 검토', $inquiry->fresh()->admin_note);
+            $this->assertSame('두 번째 메모', $inquiry->fresh()->admin_note);
         } else {
             $this->assertRejected(fn () => app(InquiryService::class)->transition($admin->id, $inquiry->id, $to, '허용되지 않음'), 409);
             $this->assertSame($from, $inquiry->fresh()->status);
@@ -332,7 +332,7 @@ class TravelWorkflowTest extends WorkflowTestCase
         $this->postJson(self::API.'/inquiries', ['cart_ids' => [$cartId, $cartId], 'contact' => ['name' => '테스터'], 'idempotency_key' => 'duplicate-key'], $headers)->assertUnprocessable();
         $this->postJson(self::API.'/inquiries', $payload + ['idempotency_key' => 'body-stable-key'], $headers + ['Idempotency-Key' => 'header-stable-key'])->assertUnprocessable();
         $created = $this->postJson(self::API.'/inquiries', $payload, $headers + ['Idempotency-Key' => 'header-key']);
-        $this->assertContains($created->status(), [200, 201]);
+        $created->assertCreated();
         $this->assertDatabaseHas('travel_lab_inquiries', ['user_id' => $user->id, 'idempotency_key' => 'header-key', 'total_amount' => 12000]);
         $this->assertSame(1, $departure->fresh()->reserved);
     }
@@ -383,7 +383,7 @@ class TravelWorkflowTest extends WorkflowTestCase
         $ids = [$this->cart($user, $first, 2), $this->cart($user, $second, 3)];
         $inquiry = app(InquiryService::class)->submit($user->id, $ids, ['name' => '테스터'], 'release-rollback');
         $inquiry->update(['admin_note' => '기존 메모']);
-        $second->update(['reserved' => 1]);
+        $second->forceFill(['reserved' => 1])->save();
         $this->assertRejected(fn () => app(InquiryService::class)->transition($admin->id, $inquiry->id, InquiryStatus::CANCELLED, '변경 메모'), 409);
         $this->assertSame(2, $first->fresh()->reserved);
         $this->assertSame(1, $second->fresh()->reserved);

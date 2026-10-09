@@ -28,6 +28,6 @@ class Departure extends Model
 
     public function getAvailableAttribute(): int
     {
-        return max(0, $this->capacity - $this->reserved);
+        return max(0, min($this->capacity, (int) ($this->option?->stock_quantity ?? 0)) - $this->reserved);
     }
 }

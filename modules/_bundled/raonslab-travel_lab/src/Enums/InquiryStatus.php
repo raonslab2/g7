@@ -11,6 +11,22 @@ enum InquiryStatus: string
     case DECLINED = 'DECLINED';
     case CANCELLED = 'CANCELLED';
 
+    /** 허용된 테스트 상태 전이의 단일 정의입니다. */
+    public function allowedNext(): array
+    {
+        return match ($this) {
+            self::TEST_INQUIRY => [self::UNDER_REVIEW, self::DECLINED, self::CANCELLED],
+            self::UNDER_REVIEW => [self::TEST_ACCEPTED, self::DECLINED, self::CANCELLED],
+            self::TEST_ACCEPTED => [self::CANCELLED],
+            self::DECLINED, self::CANCELLED => [],
+        };
+    }
+
+    public function canCancel(): bool
+    {
+        return in_array(self::CANCELLED, $this->allowedNext(), true);
+    }
+
     public function label(): string
     {
         return __('raonslab-travel_lab::enums.inquiry_status.'.$this->value);

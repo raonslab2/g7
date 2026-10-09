@@ -3,7 +3,13 @@
          xsi:noNamespaceSchemaLocation="../../../../vendor/phpunit/phpunit/phpunit.xsd"
          bootstrap="bootstrap.php" colors="true" cacheResult="false">
     <testsuites>
-        <testsuite name="TravelLabDomain"><directory>Feature</directory></testsuite>
+        <testsuite name="TravelLabDomain">
+            <directory>Feature</directory>
+            <!-- Native board migrations require MySQL; run these via root guarded test runner. -->
+            <exclude>Feature/TravelSupportApiTest.php</exclude>
+            <exclude>Feature/TravelSupportNotificationTest.php</exclude>
+            <exclude>Feature/TravelSupportProvisionerTest.php</exclude>
+        </testsuite>
     </testsuites>
     <php><ini name="memory_limit" value="512M"/></php>
 </phpunit>

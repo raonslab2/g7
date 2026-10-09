@@ -19,7 +19,7 @@ class CatalogDomainTest extends ModuleTestCase
             'departure-past' => [[], [], ['departure_date' => '2026-10-08', 'return_date' => '2026-10-10'], []],
             'departure-full' => [[], [], ['reserved' => 20], []],
             'option-inactive' => [[], [], [], ['is_active' => false]],
-            'option-understock' => [[], [], [], ['stock_quantity' => 19]],
+            'option-understock' => [[], [], [], ['stock_quantity' => 0]],
         ];
     }
 
@@ -131,7 +131,7 @@ class CatalogDomainTest extends ModuleTestCase
     public function test_departure_list_excludes_full_past_inactive_and_understock_rows(): void
     {
         [$travel, $valid] = $this->createTravel();
-        foreach ([['reserved' => 20], ['departure_date' => '2026-10-08'], ['is_active' => false], ['stock_quantity' => 19]] as $index => $attributes) {
+        foreach ([['reserved' => 20], ['departure_date' => '2026-10-08'], ['is_active' => false], ['stock_quantity' => 0]] as $index => $attributes) {
             $option = $valid->option->replicate();
             $option->option_code = 'EXCLUDED-'.$index;
             if (isset($attributes['stock_quantity'])) {
@@ -145,6 +145,18 @@ class CatalogDomainTest extends ModuleTestCase
         }
         $result = $this->app->make(CatalogService::class)->departures($travel->product_id);
         $this->assertSame([$valid->id], $result->pluck('id')->all());
+    }
+
+    /** @effects effective_stock_capacity, same_day_unavailable */
+    public function test_reduced_stock_limits_available_seats_without_hiding_remaining_seats(): void
+    {
+        [$travel] = $this->createTravel([], [], ['capacity' => 10, 'reserved' => 3], ['stock_quantity' => 5]);
+        $departure = $this->app->make(CatalogService::class)->find($travel->product_id)->departures->first();
+        $this->assertSame(2, $departure->available);
+        $departure->option->update(['stock_quantity' => 3]);
+        $this->assertSame(0, $this->app->make(CatalogService::class)->index([])->total());
+        $this->createTravel([], [], ['departure_date' => '2026-10-09', 'return_date' => '2026-10-10']);
+        $this->assertSame(0, $this->app->make(CatalogService::class)->index([])->total());
     }
 
     /** @effects visible_facets_only */

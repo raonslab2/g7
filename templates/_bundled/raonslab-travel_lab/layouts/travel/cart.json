@@ -8,8 +8,7 @@
     "initLocal": {
         "busyId": null,
         "submitting": false,
-        "ackTest": false,
-        "contactPhone": ""
+        "ackTest": false
     },
     "data_sources": [
         {
@@ -367,7 +366,7 @@
                                                         "props": {
                                                             "type": "button",
                                                             "className": "h-24 w-24 shrink-0 overflow-hidden rounded-xl bg-raon-50 md:h-28 md:w-36",
-                                                            "aria-label": "{{item.title ?? item.product?.title ?? ''}}"
+                                                            "aria-label": "{{item.product_name?.[_global.locale ?? 'ko'] ?? item.product_name?.ko ?? item.product_name?.en ?? ''}}"
                                                         },
                                                         "children": [
                                                             {
@@ -376,7 +375,7 @@
                                                                 "if": "{{!!item.image_url}}",
                                                                 "props": {
                                                                     "src": "{{item.image_url}}",
-                                                                    "alt": "{{item.title ?? item.product?.title ?? ''}}",
+                                                                    "alt": "{{item.product_name?.[_global.locale ?? 'ko'] ?? item.product_name?.ko ?? item.product_name?.en ?? ''}}",
                                                                     "className": "h-full w-full object-cover"
                                                                 }
                                                             },
@@ -413,7 +412,7 @@
                                                                 "props": {
                                                                     "className": "line-clamp-2 text-base font-bold text-ink-900"
                                                                 },
-                                                                "text": "{{item.title ?? item.product?.title ?? ''}}"
+                                                                "text": "{{item.product_name?.[_global.locale ?? 'ko'] ?? item.product_name?.ko ?? item.product_name?.en ?? ''}}"
                                                             },
                                                             {
                                                                 "type": "basic",
@@ -452,9 +451,11 @@
                                                             {
                                                                 "type": "basic",
                                                                 "name": "P",
-                                                                "if": "{{item.available === false || item.is_available === false}}",
+                                                                "if": "{{item.available !== true}}",
                                                                 "props": {
-                                                                    "className": "rounded-lg bg-amber-50 px-2 py-1 text-xs font-medium text-amber-700"
+                                                                    "className": "rounded-lg bg-amber-50 px-2 py-1 text-xs font-medium text-amber-700",
+                                                                    "data-testid": "cart-unavailable",
+                                                                    "role": "alert"
                                                                 },
                                                                 "text": "$t:travel.cart.unavailable"
                                                             },
@@ -478,7 +479,7 @@
                                                                                 "props": {
                                                                                     "type": "button",
                                                                                     "className": "inline-flex h-8 w-8 items-center justify-center rounded-lg bg-slate-100 text-ink-700 hover:bg-slate-200 disabled:opacity-40",
-                                                                                    "disabled": "{{!!_local.busyId || Number(item.quantity ?? 1) <= 1}}",
+                                                                                    "disabled": "{{!!_local.busyId || item.available !== true || Number(item.quantity ?? 1) <= 1}}",
                                                                                     "aria-label": "$t:travel.product.people_decrease",
                                                                                     "data-testid": "cart-qty-decrease"
                                                                                 },
@@ -571,7 +572,7 @@
                                                                                 "props": {
                                                                                     "type": "button",
                                                                                     "className": "inline-flex h-8 w-8 items-center justify-center rounded-lg bg-slate-100 text-ink-700 hover:bg-slate-200 disabled:opacity-40",
-                                                                                    "disabled": "{{!!_local.busyId || (item.remaining ?? item.available_seats ?? null) !== null && Number(item.quantity ?? 1) >= Number(item.remaining ?? item.available_seats)}}",
+                                                                                    "disabled": "{{!!_local.busyId || item.available !== true || Number(item.quantity ?? 1) >= Number(item.remaining_capacity ?? 0)}}",
                                                                                     "aria-label": "$t:travel.product.people_increase",
                                                                                     "data-testid": "cart-qty-increase"
                                                                                 },
@@ -702,7 +703,7 @@
                                                                                                     "target": "global",
                                                                                                     "travelCartRemoveTarget": {
                                                                                                         "id": "{{item.id}}",
-                                                                                                        "title": "{{item.title ?? item.product?.title ?? ''}}"
+                                                                                                        "title": "{{item.product_name?.[_global.locale ?? 'ko'] ?? item.product_name?.ko ?? item.product_name?.en ?? ''}}"
                                                                                                     }
                                                                                                 }
                                                                                             },
@@ -869,7 +870,7 @@
                                                         "type": "composite",
                                                         "name": "PriceTag",
                                                         "props": {
-                                                            "amount": "{{cart?.data?.totals?.amount ?? cart?.data?.totals?.total ?? cart?.data?.totals?.subtotal ?? (cart?.data?.items ?? []).reduce((sum, i) => sum + (Number(i.line_total ?? (Number(i.unit_price ?? 0) * Number(i.quantity ?? 0))) || 0), 0)}}",
+                                                            "amount": "{{cart?.data?.totals?.final_amount ?? 0}}",
                                                             "currency": "{{cart?.data?.currency_code ?? cart?.data?.totals?.currency_code ?? cart?.data?.items?.[0]?.currency_code}}",
                                                             "amountClassName": "text-xl font-black text-raon-700",
                                                             "data-testid": "cart-total"
@@ -906,7 +907,7 @@
                                                 "props": {
                                                     "id": "travel-contact-name",
                                                     "name": "contactName",
-                                                    "value": "{{_local.contactName ?? _global.currentUser?.name ?? ''}}",
+                                                    "value": "{{_local.contactName ?? _global.travelInquiryContact?.name ?? _global.currentUser?.name ?? ''}}",
                                                     "className": "w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm text-ink-900 placeholder:text-slate-400 focus:border-raon-500 focus:outline-none focus:ring-2 focus:ring-raon-100",
                                                     "maxLength": 50,
                                                     "required": true,
@@ -946,7 +947,7 @@
                                                     "id": "travel-contact-phone",
                                                     "type": "tel",
                                                     "name": "contactPhone",
-                                                    "value": "{{_local.contactPhone ?? ''}}",
+                                                    "value": "{{_local.contactPhone ?? _global.travelInquiryContact?.phone ?? ''}}",
                                                     "className": "w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm text-ink-900 placeholder:text-slate-400 focus:border-raon-500 focus:outline-none focus:ring-2 focus:ring-raon-100",
                                                     "maxLength": 30,
                                                     "autoComplete": "tel",
@@ -1007,7 +1008,7 @@
                                         "props": {
                                             "type": "button",
                                             "className": "inline-flex items-center justify-center gap-2 rounded-xl bg-raon-600 px-5 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-raon-700 disabled:cursor-not-allowed disabled:opacity-50 w-full py-3.5 text-base",
-                                            "disabled": "{{!!_local.submitting || !!_local.busyId || (cart?.data?.items ?? []).length === 0 || _local.ackTest !== true || String(_local.contactName ?? _global.currentUser?.name ?? '').trim() === '' || !_global.travelInquiryKey}}",
+                                            "disabled": "{{!!_local.submitting || !!_local.busyId || (cart?.data?.items ?? []).length === 0 || _local.ackTest !== true || String(_local.contactName ?? _global.travelInquiryContact?.name ?? _global.currentUser?.name ?? '').trim() === '' || !_global.travelInquiryKey || (cart?.data?.items ?? []).some(i => i.available !== true)}}",
                                             "data-testid": "submit-inquiry"
                                         },
                                         "children": [
@@ -1038,6 +1039,17 @@
                                                 "handler": "sequence",
                                                 "actions": [
                                                     {
+                                                        "handler": "travelLabEnsureInquiryKey",
+                                                        "params": {
+                                                            "cartIds": "{{(cart?.data?.items ?? []).map(i => i.id)}}",
+                                                            "quantities": "{{(cart?.data?.items ?? []).map(i => i.quantity)}}",
+                                                            "contact": {
+                                                                "name": "{{String(_local.contactName ?? _global.travelInquiryContact?.name ?? _global.currentUser?.name ?? '').trim()}}",
+                                                                "phone": "{{(_local.contactPhone ?? _global.travelInquiryContact?.phone ?? '').trim() || null}}"
+                                                            }
+                                                        }
+                                                    },
+                                                    {
                                                         "handler": "setState",
                                                         "params": {
                                                             "target": "local",
@@ -1054,8 +1066,8 @@
                                                             "body": {
                                                                 "cart_ids": "{{(cart?.data?.items ?? []).map(i => i.id)}}",
                                                                 "contact": {
-                                                                    "name": "{{String(_local.contactName ?? _global.currentUser?.name ?? '').trim()}}",
-                                                                    "phone": "{{(_local.contactPhone ?? '').trim() || null}}"
+                                                                    "name": "{{String(_local.contactName ?? _global.travelInquiryContact?.name ?? _global.currentUser?.name ?? '').trim()}}",
+                                                                    "phone": "{{(_local.contactPhone ?? _global.travelInquiryContact?.phone ?? '').trim() || null}}"
                                                                 },
                                                                 "idempotency_key": "{{_global.travelInquiryKey}}"
                                                             }
@@ -1116,7 +1128,7 @@
                                     {
                                         "type": "basic",
                                         "name": "P",
-                                        "if": "{{(cart?.data?.items ?? []).length === 0 || _local.ackTest !== true || String(_local.contactName ?? _global.currentUser?.name ?? '').trim() === ''}}",
+                                        "if": "{{(cart?.data?.items ?? []).length === 0 || _local.ackTest !== true || String(_local.contactName ?? _global.travelInquiryContact?.name ?? _global.currentUser?.name ?? '').trim() === ''}}",
                                         "props": {
                                             "className": "text-center text-xs text-ink-500"
                                         },

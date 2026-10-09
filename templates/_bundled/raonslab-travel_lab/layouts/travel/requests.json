@@ -440,7 +440,7 @@
                                                 "props": {
                                                     "className": "mt-2 line-clamp-1 text-base font-semibold text-ink-900"
                                                 },
-                                                "text": "{{inq.items?.[0]?.title ?? inq.items?.[0]?.product?.title ?? inq.title ?? ''}}"
+                                                "text": "{{inq.first_product_name ?? inq.items?.[0]?.product_name?.ko ?? inq.items?.[0]?.product_name?.en ?? ''}}"
                                             },
                                             {
                                                 "type": "basic",

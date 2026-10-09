@@ -28,6 +28,7 @@ class InquiryService
         // 재시도에서 삭제된 카트를 다시 읽지 않는다. 선택 순서와 연락처 키 순서는 의미가 없다.
         $cartIds = array_map('intval', $cartIds);
         sort($cartIds, SORT_NUMERIC);
+        $contact = array_filter(array_map(static fn ($value) => is_string($value) ? trim($value) : $value, $contact), static fn ($value) => $value !== null && $value !== '');
         ksort($contact);
         $payloadHash = hash('sha256', json_encode(['cart_ids' => $cartIds, 'contact' => $contact], JSON_THROW_ON_ERROR));
 
@@ -66,18 +67,20 @@ class InquiryService
                 'total_amount' => $snapshot['totals']['final_amount'],
                 'currency_code' => $snapshot['currency_code'],
                 'contact' => $contact,
+                'calculation_snapshot' => $snapshot['calculation_snapshot'],
             ], $items);
+            $this->inquiries->appendEvent($inquiry, $userId, null, InquiryStatus::TEST_INQUIRY);
             $this->travelCart->removeSelected($userId, $cartIds);
 
             return $inquiry;
         }, 3);
     }
 
-    public function listOwn(int $userId, int $perPage = 20, int $page = 1): LengthAwarePaginator
+    public function listOwn(int $userId, int $perPage = 20, int $page = 1, ?InquiryStatus $status = null): LengthAwarePaginator
     {
         $this->requireUser($userId);
 
-        return $this->inquiries->paginate($userId, $perPage, $page);
+        return $this->inquiries->paginate($userId, $perPage, $page, status: $status);
     }
 
     public function findOwn(int $userId, int $inquiryId): Inquiry
@@ -100,15 +103,15 @@ class InquiryService
                 $this->fail('not_found', 404);
             }
 
-            return $this->applyTransition($inquiry, InquiryStatus::CANCELLED);
+            return $this->applyTransition($inquiry, InquiryStatus::CANCELLED, $userId);
         }, 3);
     }
 
-    public function listAdmin(int $actorId, int $perPage = 20, int $page = 1): LengthAwarePaginator
+    public function listAdmin(int $actorId, int $perPage = 20, int $page = 1, ?InquiryStatus $status = null): LengthAwarePaginator
     {
         $actor = $this->requireAdmin($actorId, 'read');
 
-        return $this->inquiries->paginate(null, $perPage, $page, $actor);
+        return $this->inquiries->paginate(null, $perPage, $page, $actor, $status);
     }
 
     public function findAdmin(int $actorId, int $inquiryId): Inquiry
@@ -123,9 +126,12 @@ class InquiryService
         return $inquiry;
     }
 
-    public function transition(int $actorId, int $inquiryId, InquiryStatus $status, ?string $adminNote = null): Inquiry
+    public function transition(int $actorId, int $inquiryId, InquiryStatus $status, ?string $adminNote = null, bool $noteProvided = false): Inquiry
     {
-        return DB::transaction(function () use ($actorId, $inquiryId, $status, $adminNote) {
+        $noteProvided = $noteProvided || $adminNote !== null;
+        $adminNote = $adminNote === null ? null : trim($adminNote);
+
+        return DB::transaction(function () use ($actorId, $inquiryId, $status, $adminNote, $noteProvided) {
             $actor = $this->requireAdmin($actorId, 'update');
             $inquiry = $this->inquiries->find($inquiryId, lock: true);
             if (! $inquiry) {
@@ -133,25 +139,23 @@ class InquiryService
             }
             $this->checkAdminScope($actor, $inquiry, 'update');
 
-            return $this->applyTransition($inquiry, $status, $adminNote);
+            return $this->applyTransition($inquiry, $status, $actorId, $adminNote, $noteProvided);
         }, 3);
     }
 
-    private function applyTransition(Inquiry $inquiry, InquiryStatus $next, ?string $adminNote = null): Inquiry
+    private function applyTransition(Inquiry $inquiry, InquiryStatus $next, int $actorId, ?string $adminNote = null, bool $noteProvided = false): Inquiry
     {
         $current = $inquiry->status instanceof InquiryStatus ? $inquiry->status : InquiryStatus::from($inquiry->status);
         if ($current === $next) {
-            // 재전송은 정원·스냅샷·관리자 메모를 다시 변경하지 않는다.
+            // 같은 상태의 메모 저장은 감사하지만 동일 메모의 재전송은 쓰지 않는다.
+            if ($noteProvided && $inquiry->admin_note !== $adminNote) {
+                $inquiry = $this->inquiries->update($inquiry, ['admin_note' => $adminNote]);
+                $this->inquiries->appendEvent($inquiry, $actorId, $current, $next, $adminNote);
+            }
+
             return $inquiry;
         }
-        $allowed = match ($current) {
-            InquiryStatus::TEST_INQUIRY => [InquiryStatus::UNDER_REVIEW, InquiryStatus::DECLINED, InquiryStatus::CANCELLED],
-            InquiryStatus::UNDER_REVIEW => [InquiryStatus::TEST_ACCEPTED, InquiryStatus::DECLINED, InquiryStatus::CANCELLED],
-            // 수락도 실 예약이 아니다. 테스트 수락 이후에는 취소만 가능하다.
-            InquiryStatus::TEST_ACCEPTED => [InquiryStatus::CANCELLED],
-            InquiryStatus::DECLINED, InquiryStatus::CANCELLED => [],
-        };
-        if (! in_array($next, $allowed, true)) {
+        if (! in_array($next, $current->allowedNext(), true)) {
             $this->fail('invalid_transition');
         }
         if (in_array($next, [InquiryStatus::DECLINED, InquiryStatus::CANCELLED], true)) {
@@ -167,11 +171,13 @@ class InquiryService
             }
         }
         $attributes = ['status' => $next];
-        if ($adminNote !== null) {
+        if ($noteProvided) {
             $attributes['admin_note'] = $adminNote;
         }
+        $inquiry = $this->inquiries->update($inquiry, $attributes);
+        $this->inquiries->appendEvent($inquiry, $actorId, $current, $next, $noteProvided ? $adminNote : null);
 
-        return $this->inquiries->update($inquiry, $attributes);
+        return $inquiry;
     }
 
     private function requireUser(int $userId, bool $lock = false): User

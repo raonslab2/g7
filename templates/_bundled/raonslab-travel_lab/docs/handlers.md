@@ -19,7 +19,7 @@
 
 | 핸들러 | 부르는 곳 | 하는 일 |
 |---|---|---|
-| `travelLabEnsureInquiryKey` | `travel/cart` 의 `cart` 데이터소스 `onSuccess` (`params.cartIds` · `params.quantities`) | 장바구니 id:인원 묶음의 순서 무관 지문을 만들어, 세션 저장소 `raon_travel_inquiry_key` 의 지문과 같으면 기존 키 재사용, 다르면 새 키 생성·저장. 결과를 `_global.travelInquiryKey` 에 둔다. 빈 장바구니면 키를 `null` 로 |
+| `travelLabEnsureInquiryKey` | `travel/cart` 의 `cart` 데이터소스 `onSuccess` 및 제출 직전 (`params.cartIds` · `params.quantities` · 제출 시 `params.contact`) | 장바구니 id:인원 묶음의 순서 무관 지문(제출 시 정규화한 연락처 포함)을 만들어, 세션 저장소 `raon_travel_inquiry_key` 의 지문과 같으면 기존 키 재사용, 다르면 새 키 생성·저장. 결과를 `_global.travelInquiryKey` 에 둔다. 빈 장바구니면 키를 `null` 로 |
 | `travelLabClearInquiryKey` | `POST /inquiries` 의 `onSuccess` 에서만 | 저장소와 `_global.travelInquiryKey` 를 비운다 — 다음 요청은 새 키 |
 
 **왜 레이아웃 표현식이 아니라 핸들러인가**: 키를 새로고침 뒤에도 유지해야 하기 때문입니다.
@@ -27,7 +27,7 @@
 같은 키를 실어야 서버가 중복을 막을 수 있습니다. 그래서 **`onError` 에서는 어떤 핸들러도
 부르지 않습니다** — 오류 시 키를 새로 만드는 순간 같은 요청이 두 번 접수될 수 있습니다.
 
-인원을 바꾸면 서버가 받는 요청 내용이 달라지므로 지문이 바뀌어 새 키가 됩니다. 요청 버튼은
+인원 또는 연락처를 바꾸면 서버가 받는 요청 내용이 달라지므로 지문이 바뀌어 새 키가 됩니다. 새로고침의 cart 응답은 기존 연락처와 키를 복원합니다. 저장소 접근이 차단되면 메모리에서 재사용하며 새로고침 영속성은 보장하지 못합니다. 요청 버튼은
 `_global.travelInquiryKey` 가 확보되기 전에는 비활성입니다.
 
 동작은 `__tests__/components/inquiryKey.test.ts`(재시도 시 같은 키 · 새로고침 후 같은 키 ·

@@ -21,7 +21,7 @@ class SubmitInquiryRequest extends WorkflowRequest
             'contact' => ['required', 'array:name,phone'],
             'contact.name' => ['required', 'string', 'max:100'],
             'contact.phone' => ['sometimes', 'nullable', 'string', 'max:40'],
-            'idempotency_key' => ['required', 'string', 'min:8', 'max:128', 'regex:/^[A-Za-z0-9][A-Za-z0-9._:\-]*$/D'],
+            'idempotency_key' => ['required', 'string', 'min:8', 'max:100', 'regex:/^[A-Za-z0-9][A-Za-z0-9._:\-]*$/D'],
         ];
     }
 

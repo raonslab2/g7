@@ -10,7 +10,7 @@ try {
         if ($arguments === []) {
             throw new RuntimeException('Supply an Artisan command.');
         }
-        exit(travelLabProcess([PHP_BINARY, 'artisan', ...$arguments], travelLabEnvironment()));
+        exit(travelLabLifecycleProcess([PHP_BINARY, 'artisan', ...$arguments], travelLabEnvironment()));
     }
     if ($mode === 'test') {
         $installationSuite = in_array('--testsuite=Installation', $arguments, true);

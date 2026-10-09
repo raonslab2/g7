@@ -26,8 +26,8 @@
       "cache": false,
       "refetchOnMount": true,
       "params": {
-        "page": "{{query.page}}",
-        "per_page": "{{query.per_page}}"
+        "page": "{{query.page ?? 1}}",
+        "per_page": "{{query.per_page ?? 20}}"
       },
       "errorHandling": {
         "401": {
@@ -60,7 +60,8 @@
           },
           "abilities": {}
         }
-      }
+      },
+      "auth_mode": "required"
     }
   ],
   "slots": {
@@ -287,7 +288,7 @@
                             "props": {
                               "className": "card-title"
                             },
-                            "text": "{{trip.name ?? ''}}"
+                            "text": "{{trip.title ?? ''}}"
                           },
                           {
                             "type": "basic",
@@ -347,6 +348,61 @@
                     ]
                   },
                   {
+                    "id": "trip_publication_toggle",
+                    "type": "basic",
+                    "name": "Button",
+                    "props": {
+                      "type": "button",
+                      "className": "btn btn-secondary btn-sm my-2",
+                      "disabled": "{{catalog?.data?.abilities?.can_update !== true}}"
+                    },
+                    "actions": [
+                      {
+                        "type": "click",
+                        "handler": "apiCall",
+                        "auth_mode": "required",
+                        "target": "/api/modules/raonslab-travel_lab/admin/catalog/{{trip.id}}",
+                        "params": {
+                          "method": "PATCH",
+                          "body": {
+                            "published": "{{!trip.published}}"
+                          }
+                        },
+                        "onSuccess": [
+                          {
+                            "handler": "refetchDataSource",
+                            "params": {
+                              "dataSourceId": "catalog"
+                            }
+                          }
+                        ],
+                        "onError": [
+                          {
+                            "handler": "toast",
+                            "params": {
+                              "type": "error",
+                              "message": "{{error.message ?? ''}}"
+                            }
+                          }
+                        ]
+                      }
+                    ],
+                    "children": [
+                      {
+                        "type": "basic",
+                        "name": "Span",
+                        "if": "{{trip.published}}",
+                        "text": "$t:raonslab-travel_lab.admin.catalog.unpublish"
+                      },
+                      {
+                        "type": "basic",
+                        "name": "Span",
+                        "if": "{{!trip.published}}",
+                        "text": "$t:raonslab-travel_lab.admin.catalog.publish"
+                      }
+                    ]
+                  },
+                  {
                     "type": "basic",
                     "name": "P",
                     "props": {
@@ -383,7 +439,7 @@
                             "props": {
                               "className": "text-xs text-gray-500 dark:text-gray-400"
                             },
-                            "text": "$t:raonslab-travel_lab.admin.catalog.capacity_line|capacity={{departure.capacity ?? '-'}}|reserved={{departure.reserved_count ?? 0}}"
+                            "text": "$t:raonslab-travel_lab.admin.catalog.capacity_line|capacity={{departure.capacity ?? '-'}}|reserved={{departure.reserved ?? 0}}"
                           }
                         ]
                       },
@@ -400,7 +456,20 @@
                             "props": {
                               "className": "inline-flex items-center px-2 py-0.5 rounded text-xs font-medium {{departure.status === 'OPEN' ? 'bg-green-100 text-green-800 dark:bg-green-800 dark:text-green-100' : departure.status === 'CLOSED' ? 'bg-gray-200 text-gray-800 dark:bg-gray-600 dark:text-gray-100' : 'bg-amber-100 text-amber-800 dark:bg-amber-800 dark:text-amber-100'}}"
                             },
-                            "text": "{{departure.status === 'OPEN' ? '$t:raonslab-travel_lab.admin.catalog.status.OPEN' : departure.status === 'CLOSED' ? '$t:raonslab-travel_lab.admin.catalog.status.CLOSED' : departure.status === 'HIDDEN' ? '$t:raonslab-travel_lab.admin.catalog.status.HIDDEN' : (departure.status ?? '')}}"
+                            "children": [
+                              {
+                                "type": "basic",
+                                "name": "Span",
+                                "if": "{{departure.is_active}}",
+                                "text": "$t:raonslab-travel_lab.admin.catalog.status.ACTIVE"
+                              },
+                              {
+                                "type": "basic",
+                                "name": "Span",
+                                "if": "{{!departure.is_active}}",
+                                "text": "$t:raonslab-travel_lab.admin.catalog.status.INACTIVE"
+                              }
+                            ]
                           },
                           {
                             "id": "edit_departure_button",
@@ -437,9 +506,13 @@
                                       "target": "global",
                                       "travelDepartureEdit": {
                                         "id": "{{departure.id}}",
-                                        "label": "{{departure.label ?? departure.departure_date ?? ''}}",
-                                        "status": "{{departure.status ?? 'OPEN'}}",
-                                        "capacity": "{{departure.capacity ?? 0}}"
+                                        "product_id": "{{trip.id}}",
+                                        "product_option_id": "{{departure.product_option_id}}",
+                                        "departure_date": "{{departure.departure_date}}",
+                                        "return_date": "{{departure.return_date}}",
+                                        "capacity": "{{departure.capacity}}",
+                                        "reserved": "{{departure.reserved}}",
+                                        "is_active": "{{departure.is_active}}"
                                       },
                                       "travelDepartureSaving": false
                                     }
@@ -470,6 +543,46 @@
                     },
                     "text": "$t:raonslab-travel_lab.admin.catalog.no_departures",
                     "if": "{{(trip.departures ?? []).length === 0}}"
+                  },
+                  {
+                    "id": "new_departure_button",
+                    "type": "basic",
+                    "name": "Button",
+                    "props": {
+                      "type": "button",
+                      "className": "btn btn-secondary btn-sm mt-2",
+                      "disabled": "{{catalog?.data?.abilities?.can_update !== true}}"
+                    },
+                    "text": "$t:raonslab-travel_lab.admin.catalog.new_departure",
+                    "actions": [
+                      {
+                        "type": "click",
+                        "handler": "sequence",
+                        "actions": [
+                          {
+                            "handler": "setState",
+                            "params": {
+                              "target": "global",
+                              "travelDepartureEdit": {
+                                "id": null,
+                                "product_id": "{{trip.id}}",
+                                "product_option_id": null,
+                                "departure_date": "",
+                                "return_date": "",
+                                "capacity": 1,
+                                "reserved": 0,
+                                "is_active": true
+                              },
+                              "travelDepartureSaving": false
+                            }
+                          },
+                          {
+                            "handler": "openModal",
+                            "target": "travel_departure_modal"
+                          }
+                        ]
+                      }
+                    ]
                   }
                 ],
                 "iteration": {
@@ -502,7 +615,7 @@
                     "props": {
                       "className": "text-sm text-gray-600 dark:text-gray-300"
                     },
-                    "text": "$t:raonslab-travel_lab.admin.common.page_summary|current={{catalog?.data?.meta?.current_page ?? 1}}|last={{catalog?.data?.meta?.last_page ?? 1}}|total={{catalog?.data?.meta?.total ?? 0}}"
+                    "text": "$t:raonslab-travel_lab.admin.common.page_summary|current={{catalog?.data?.pagination?.current_page ?? 1}}|last={{catalog?.data?.pagination?.last_page ?? 1}}|total={{catalog?.data?.pagination?.total ?? 0}}"
                   },
                   {
                     "type": "basic",
@@ -518,7 +631,7 @@
                         "props": {
                           "type": "button",
                           "className": "btn btn-secondary btn-sm",
-                          "disabled": "{{(catalog?.data?.meta?.current_page ?? 1) <= 1}}"
+                          "disabled": "{{(catalog?.data?.pagination?.current_page ?? 1) <= 1}}"
                         },
                         "children": [
                           {
@@ -535,7 +648,7 @@
                               "path": "/admin/travel-lab",
                               "mergeQuery": true,
                               "query": {
-                                "page": "{{(catalog?.data?.meta?.current_page ?? 1) - 1}}"
+                                "page": "{{(catalog?.data?.pagination?.current_page ?? 1) - 1}}"
                               }
                             }
                           }
@@ -548,7 +661,7 @@
                         "props": {
                           "type": "button",
                           "className": "btn btn-secondary btn-sm",
-                          "disabled": "{{(catalog?.data?.meta?.current_page ?? 1) >= (catalog?.data?.meta?.last_page ?? 1)}}"
+                          "disabled": "{{(catalog?.data?.pagination?.current_page ?? 1) >= (catalog?.data?.pagination?.last_page ?? 1)}}"
                         },
                         "children": [
                           {
@@ -565,7 +678,7 @@
                               "path": "/admin/travel-lab",
                               "mergeQuery": true,
                               "query": {
-                                "page": "{{(catalog?.data?.meta?.current_page ?? 1) + 1}}"
+                                "page": "{{(catalog?.data?.pagination?.current_page ?? 1) + 1}}"
                               }
                             }
                           }
@@ -574,7 +687,7 @@
                     ]
                   }
                 ],
-                "if": "{{(catalog?.data?.meta?.last_page ?? 1) > 1}}"
+                "if": "{{(catalog?.data?.pagination?.last_page ?? 1) > 1}}"
               }
             ],
             "blur_until_loaded": true
@@ -611,6 +724,132 @@
             },
             {
               "type": "basic",
+              "name": "Div",
+              "props": {
+                "className": "flex flex-col gap-2"
+              },
+              "children": [
+                {
+                  "type": "basic",
+                  "name": "Label",
+                  "props": {
+                    "htmlFor": "departure_product_option_id_input",
+                    "className": "text-sm font-medium"
+                  },
+                  "text": "$t:raonslab-travel_lab.admin.catalog.modal.product_option_id"
+                },
+                {
+                  "id": "departure_product_option_id_input",
+                  "type": "basic",
+                  "name": "Input",
+                  "props": {
+                    "type": "number",
+                    "className": "w-full border rounded-lg p-2",
+                    "min": 1,
+                    "disabled": "{{!!_global.travelDepartureEdit?.id}}",
+                    "value": "{{_global.travelDepartureEdit?.product_option_id ?? ''}}",
+                    "data-testid": "departure_product_option_id_input",
+                    "id": "departure_product_option_id_input"
+                  },
+                  "actions": [
+                    {
+                      "type": "change",
+                      "handler": "setState",
+                      "params": {
+                        "target": "global",
+                        "travelDepartureEdit.product_option_id": "{{Number($event.target.value)}}"
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "basic",
+              "name": "Div",
+              "props": {
+                "className": "flex flex-col gap-2"
+              },
+              "children": [
+                {
+                  "type": "basic",
+                  "name": "Label",
+                  "props": {
+                    "htmlFor": "departure_departure_date_input",
+                    "className": "text-sm font-medium"
+                  },
+                  "text": "$t:raonslab-travel_lab.admin.catalog.modal.departure_date"
+                },
+                {
+                  "id": "departure_departure_date_input",
+                  "type": "basic",
+                  "name": "Input",
+                  "props": {
+                    "type": "date",
+                    "className": "w-full border rounded-lg p-2",
+                    "min": null,
+                    "disabled": false,
+                    "value": "{{_global.travelDepartureEdit?.departure_date ?? ''}}",
+                    "data-testid": "departure_departure_date_input",
+                    "id": "departure_departure_date_input"
+                  },
+                  "actions": [
+                    {
+                      "type": "change",
+                      "handler": "setState",
+                      "params": {
+                        "target": "global",
+                        "travelDepartureEdit.departure_date": "{{$event.target.value}}"
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "basic",
+              "name": "Div",
+              "props": {
+                "className": "flex flex-col gap-2"
+              },
+              "children": [
+                {
+                  "type": "basic",
+                  "name": "Label",
+                  "props": {
+                    "htmlFor": "departure_return_date_input",
+                    "className": "text-sm font-medium"
+                  },
+                  "text": "$t:raonslab-travel_lab.admin.catalog.modal.return_date"
+                },
+                {
+                  "id": "departure_return_date_input",
+                  "type": "basic",
+                  "name": "Input",
+                  "props": {
+                    "type": "date",
+                    "className": "w-full border rounded-lg p-2",
+                    "min": null,
+                    "disabled": false,
+                    "value": "{{_global.travelDepartureEdit?.return_date ?? ''}}",
+                    "data-testid": "departure_return_date_input",
+                    "id": "departure_return_date_input"
+                  },
+                  "actions": [
+                    {
+                      "type": "change",
+                      "handler": "setState",
+                      "params": {
+                        "target": "global",
+                        "travelDepartureEdit.return_date": "{{$event.target.value}}"
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "basic",
               "name": "Label",
               "props": {
                 "className": "text-sm font-medium text-gray-700 dark:text-gray-300"
@@ -622,21 +861,18 @@
               "name": "Select",
               "id": "departure_status_select",
               "props": {
-                "value": "{{_global.travelDepartureEdit?.status ?? 'OPEN'}}",
+                "value": "{{_global.travelDepartureEdit?.is_active ? '1' : '0'}}",
                 "options": [
                   {
-                    "value": "OPEN",
-                    "label": "$t:raonslab-travel_lab.admin.catalog.status.OPEN"
+                    "value": "1",
+                    "label": "$t:raonslab-travel_lab.admin.catalog.status.ACTIVE"
                   },
                   {
-                    "value": "CLOSED",
-                    "label": "$t:raonslab-travel_lab.admin.catalog.status.CLOSED"
-                  },
-                  {
-                    "value": "HIDDEN",
-                    "label": "$t:raonslab-travel_lab.admin.catalog.status.HIDDEN"
+                    "value": "0",
+                    "label": "$t:raonslab-travel_lab.admin.catalog.status.INACTIVE"
                   }
-                ]
+                ],
+                "data-testid": "departure_status_select"
               },
               "actions": [
                 {
@@ -644,7 +880,7 @@
                   "handler": "setState",
                   "params": {
                     "target": "global",
-                    "travelDepartureEdit.status": "{{$event.target.value}}"
+                    "travelDepartureEdit.is_active": "{{$event.target.value === '1'}}"
                   }
                 }
               ]
@@ -663,10 +899,11 @@
               "name": "Input",
               "props": {
                 "type": "number",
-                "min": 0,
-                "max": 999,
+                "min": "{{Math.max(1, _global.travelDepartureEdit?.reserved ?? 0)}}",
+                "max": 100000,
                 "className": "w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white",
-                "value": "{{_global.travelDepartureEdit?.capacity ?? 0}}"
+                "value": "{{_global.travelDepartureEdit?.capacity ?? 0}}",
+                "data-testid": "departure_capacity_input"
               },
               "actions": [
                 {
@@ -700,7 +937,8 @@
                   "name": "Button",
                   "props": {
                     "type": "button",
-                    "className": "btn btn-secondary"
+                    "className": "btn btn-secondary",
+                    "data-testid": "departure_cancel"
                   },
                   "children": [
                     {
@@ -723,7 +961,8 @@
                   "props": {
                     "type": "button",
                     "className": "btn btn-primary",
-                    "disabled": "{{_global.travelDepartureSaving === true}}"
+                    "disabled": "{{_global.travelDepartureSaving === true || !_global.travelDepartureEdit?.product_option_id || !_global.travelDepartureEdit?.departure_date || !_global.travelDepartureEdit?.return_date}}",
+                    "data-testid": "departure_save"
                   },
                   "children": [
                     {
@@ -746,13 +985,16 @@
                         },
                         {
                           "handler": "apiCall",
-                          "auth_required": true,
-                          "target": "/api/modules/raonslab-travel_lab/admin/departures/{{_global.travelDepartureEdit?.id}}",
+                          "auth_mode": "required",
+                          "target": "/api/modules/raonslab-travel_lab/admin/catalog/{{_global.travelDepartureEdit?.product_id}}/departures{{_global.travelDepartureEdit?.id ? \"/\" + _global.travelDepartureEdit.id : \"\"}}",
                           "params": {
-                            "method": "PATCH",
+                            "method": "{{_global.travelDepartureEdit?.id ? 'PUT' : 'POST'}}",
                             "body": {
-                              "status": "{{_global.travelDepartureEdit?.status}}",
-                              "capacity": "{{_global.travelDepartureEdit?.capacity}}"
+                              "product_option_id": "{{_global.travelDepartureEdit?.product_option_id}}",
+                              "departure_date": "{{_global.travelDepartureEdit?.departure_date}}",
+                              "return_date": "{{_global.travelDepartureEdit?.return_date}}",
+                              "capacity": "{{_global.travelDepartureEdit?.capacity}}",
+                              "is_active": "{{_global.travelDepartureEdit?.is_active}}"
                             }
                           },
                           "onSuccess": [
@@ -765,13 +1007,6 @@
                             },
                             {
                               "handler": "closeModal"
-                            },
-                            {
-                              "handler": "toast",
-                              "params": {
-                                "type": "success",
-                                "message": "$t:raonslab-travel_lab.admin.catalog.modal.saved"
-                              }
                             },
                             {
                               "handler": "refetchDataSource",
@@ -792,7 +1027,7 @@
                               "handler": "toast",
                               "params": {
                                 "type": "error",
-                                "message": "{{error.message}}"
+                                "message": "{{error.message ?? ''}}"
                               }
                             }
                           ]

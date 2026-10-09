@@ -1,7 +1,8 @@
 # Travel Lab runtime evidence
 
 Request: `req_81ac33cac94046b9a2249cd14c0d00ba`.
-Owner: lead-owned native `commerce_contract` support role; official child worktrees
+Initial bootstrap owner: lead-owned native `commerce_contract`; subsequent live
+runtime harness owner: native `inheritance_capacity`. Official child worktrees
 are not modified. Input research SHA: `6853f40d58acbf53a2f29cbb9dd422cc439047a9`.
 
 ## Scope and installation
@@ -75,3 +76,60 @@ dev/test smoke with unusable local DB_URL injections PASS; Pint PASS. The curren
 G7 effective database smoke already passed the DB_URL injection before this
 cleanup, so no foreign-DB connection is claimed. See W00_RUNTIME_REVIEW.md for
 independent revision-bound results, not universal isolation or product PASS.
+
+## W01 actual installation and implementation checks, 2026-10-09
+
+These are implementation self-checks after the four official child results were
+integrated into the parent checkout. They are **not independent Validation**.
+Recorded HEAD is `2114703d208f260c5a63515b3a4c899afff1d46b` plus uncommitted
+integrated/runtime edits; the results must not be attributed to HEAD alone or
+treated as a fixed final release. Root owns subsequent fixed-SHA publication,
+independent security/browser checks and final integration regression.
+
+| Command/check | Result | Bounded actual evidence |
+|---|---|---|
+| `setup.php` with existing lab | PASS | Existing users preserved; scoped authentication; core migration/settings incremental |
+| `extensions.php` initial installation | FAIL, recovered | MySQL1059 exposed an overlong departure index, then native permission registration exposed missing description; lead fixed bundled schema/manifest |
+| `recover-partial.php` | PASS | Before any travel migration record existed, exactly2 empty travel tables removed reverse-FK order; no FK guard disabled; applied/populated recovery is refused |
+| Native forced travel install + `extensions.php` | PASS | Board/Page/ecommerce/travel active, admin/travel templates installed;10 travel permissions/3 menus; explicit `--sample` plus gated support provisioning |
+| Native generated config-cache boundary | PASS | Native lifecycle created a cache; ordinary smoke refused it; lab-only cleanup now runs in lifecycle `finally`, validates DB/egress markers and refuses symlink/installer override |
+| `guard-test.php` | PASS |20 cases, including generated-cache cleanup and unmarked/foreign-DB/symlink preservation; fixture only, no DB calls |
+| Dev/test `smoke.php` after install/recovery | PASS | Real named schema and array-mail/sync/local-storage configuration; inherited connection sanitizer retained |
+| `run.php test scripts/travel-lab/LiveMysqlTest.php` | PASS |1 test/30 assertions,1.480s; root G7 TestCase + real MySQL + actual HTTP routes/native commerce/services/Sanctum; server price24000, tamper422, duplicate replay, owner403/404, cancel/replay no double release, zero orders/payments |
+| `live-api-responses.php` | PASS |11 actual **installed root HTTP kernel** replies: catalog/detail/departures/cart/inquiry/user+admin detail/notices/FAQ/private question list/cancel; no route-manual mount for this runtime check |
+| `live-concurrency.php` | PASS |2 PHP processes and2 distinct MySQL connections per scenario, direct actual service calls; last-seat200/409, same-key200/200 single allocation, cancel/decline200/409 release once, stock-edit200/waiting-submit409 |
+| `live-seed-rerun.php` | PASS | Repeat explicit sample/provision leaves exact existing users/products/options/travel/boards/posts row counts and SHA256 digests unchanged |
+| `live-recovery.php` | PASS | Testing schema only: private dump,2 travel migrations rollback/forward, restore; exact8 selected-table digests preserved including inquiry/items/events; private SQL/options deleted |
+| `live-env-recovery.php` | PASS | Real ignored env loss reproduced against retained dedicated MySQL account; fresh local DB/admin credentials recovered; existing4 user IDs and travel record digests preserved; APP_KEY/session replacement explicit |
+| `live-review-access.php` | PASS | Unique synthetic member/other-member/admin via native UserService/role-ceiling checks; four-hour Sanctum tokens and random passwords only in ignored0600 file within0700 directory |
+| Bundled-only final module/template resync | PASS | Official `--force --source=bundled`; module also `--vendor-mode=bundled`; GitHub-first source discovery bypassed with supported flag |
+| Preview restart persistence | PASS | Own app preview stopped/restarted; exact3 inquiries/3 items/27 departures/5 events digests unchanged; fresh `/up`200; DB server was not restarted |
+| Preview HTTP + reviewer roles | PASS | Loopback `/up`, `/`, actual catalog all200; unique native reviewer admin inquiry list200/member cart200; these are HTTP smoke checks, not visual E2E |
+| Browser / HTTP concurrency / fixed-SHA final regression | NOT_RUN here | Lead/official independent reviewers own those gates; direct service concurrency remains distinct from HTTP/browser concurrency |
+
+The test harness seeds native ecommerce **installation** reference data (including
+sequences), not ecommerce sample orders. Its first attempt failed because migration
+alone does not initialize native sequences; adding the declared non-sample native
+seeder resolved that test-environment omission. Module domain tests retain their
+canonical SQLite `-c` bootstrap; native board/support tests use the guarded root
+MySQL test context. These are separate suites, not interchangeable PASS labels.
+
+Raw logs remain ignored in `storage/logs/travel-live-*.log`. Safe API payloads are
+initially in ignored `storage/framework/testing/travel-live-api-responses.json`;
+they contain synthetic response bodies only, no authorization headers, passwords
+or tokens. The lead can publish those bounded payloads as product evidence after
+review. Private review-access JSON must never be copied into evidence/Git.
+
+Portable sanitized evidence is now in
+[`deploy/travel-lab/evidence/runtime-self-checks.json`](../../deploy/travel-lab/evidence/runtime-self-checks.json)
+and [`actual-api-responses.json`](../../deploy/travel-lab/evidence/actual-api-responses.json).
+It includes runtime source SHA256s, working-tree status, distinct connection IDs
+and before/after record digests. Latest bundled-resynced service-race replay also
+PASSed all four scenarios. Historical results are not silently rebound to a
+future integration SHA. Private SQL dumps, envs and reviewer secrets are excluded.
+
+Only `req81_travel_lab_test` is rolled back/restored. The app DB retains synthetic
+test history; race fixture products are unpublished afterward. A populated/applied
+travel installation is never reset by the partial-install helper. Generated env
+recovery has no customer-encryption/session continuity claim: it is a synthetic
+lab recovery procedure before preview/reviewer credentials are issued.

@@ -11,9 +11,14 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
+use Modules\Raonslab\TravelLab\Enums\CatalogSort;
+use Modules\Raonslab\TravelLab\Enums\InquiryStatus;
 use Modules\Raonslab\TravelLab\Models\Departure;
 use Modules\Raonslab\TravelLab\Models\TravelProduct;
 use Modules\Raonslab\TravelLab\Providers\TravelLabServiceProvider;
+use Modules\Raonslab\TravelLab\Repositories\CatalogRepository;
+use Modules\Raonslab\TravelLab\Services\InquiryService;
+use Modules\Raonslab\TravelLab\Services\TravelCartService;
 use Modules\Sirsoft\Ecommerce\Models\Product;
 use Modules\Sirsoft\Ecommerce\Models\ProductOption;
 use Modules\Sirsoft\Ecommerce\Providers\EcommerceServiceProvider;
@@ -44,6 +49,18 @@ abstract class ModuleTestCase extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
+        $canonicalSource = realpath(dirname(__DIR__).'/src');
+        foreach ([
+            CatalogRepository::class,
+            TravelCartService::class,
+            InquiryService::class,
+            Departure::class,
+            InquiryStatus::class,
+            CatalogSort::class,
+            TravelLabServiceProvider::class,
+        ] as $class) {
+            $this->assertStringStartsWith($canonicalSource.'/', (new \ReflectionClass($class))->getFileName());
+        }
         $this->assertSame('sqlite', DB::connection()->getDriverName());
         $this->assertSame(':memory:', DB::connection()->getDatabaseName());
         Storage::fake('settings');

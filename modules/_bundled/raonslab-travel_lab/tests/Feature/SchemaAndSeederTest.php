@@ -24,7 +24,7 @@ class SchemaAndSeederTest extends ModuleTestCase
     /** @effects schema_up_and_down, foreign_keys_registered */
     public function test_travel_migration_is_reversible_and_has_native_foreign_keys(): void
     {
-        $tables = ['travel_lab_products', 'travel_lab_departures', 'travel_lab_inquiries', 'travel_lab_inquiry_items'];
+        $tables = ['travel_lab_products', 'travel_lab_departures', 'travel_lab_inquiries', 'travel_lab_inquiry_items', 'travel_lab_inquiry_events'];
         foreach ($tables as $table) {
             $this->assertTrue(Schema::hasTable($table));
             $this->assertNotEmpty(Schema::getForeignKeys($table));
@@ -133,7 +133,12 @@ class SchemaAndSeederTest extends ModuleTestCase
             $this->assertTrue($row->product->has_options);
             $this->assertNotNull($row->product->shipping_policy_id);
             $this->assertFalse($row->product->shippingPolicy->is_default);
-            $this->assertSame(0, $row->product->shippingPolicy->countrySettings()->count());
+            $this->assertSame(1, $row->product->shippingPolicy->countrySettings()->count());
+            $country = $row->product->shippingPolicy->countrySettings()->first();
+            $this->assertSame('KR', $country->country_code);
+            $this->assertSame('free', $country->charge_policy->value);
+            $this->assertEquals(0, $country->base_fee);
+            $this->assertFalse($country->extra_fee_enabled);
         }
         foreach (['ecommerce_orders', 'ecommerce_order_payments', 'travel_lab_inquiries'] as $table) {
             $this->assertSame(0, DB::table($table)->count());

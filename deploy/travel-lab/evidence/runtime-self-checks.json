@@ -1,0 +1,291 @@
+{
+  "service_concurrency": {
+    "source_sha": "2114703d208f260c5a63515b3a4c899afff1d46b",
+    "source_state": "WORKING_TREE_IMPLEMENTER_CHECK",
+    "db": "req81_travel_lab",
+    "run": "0a545721a3bd",
+    "checks": {
+      "last_seat": [
+        {
+          "status": 200,
+          "inquiry_id": 4,
+          "inquiry_status": "TEST_INQUIRY",
+          "connection_id": 48026,
+          "started": 1791539541.014445,
+          "finished": 1791539541.20326
+        },
+        {
+          "status": 409,
+          "connection_id": 48027,
+          "started": 1791539541.027937,
+          "finished": 1791539541.277029,
+          "rejected": true
+        }
+      ],
+      "same_key": [
+        {
+          "status": 200,
+          "inquiry_id": 5,
+          "inquiry_status": "TEST_INQUIRY",
+          "connection_id": 48030,
+          "started": 1791539542.457467,
+          "finished": 1791539542.650547
+        },
+        {
+          "status": 200,
+          "inquiry_id": 5,
+          "inquiry_status": "TEST_INQUIRY",
+          "connection_id": 48031,
+          "started": 1791539542.459965,
+          "finished": 1791539542.60614
+        }
+      ],
+      "cancel_decline": [
+        {
+          "status": 200,
+          "inquiry_id": 5,
+          "inquiry_status": "CANCELLED",
+          "connection_id": 48034,
+          "started": 1791539543.996484,
+          "finished": 1791539544.135453
+        },
+        {
+          "status": 409,
+          "connection_id": 48035,
+          "started": 1791539543.989045,
+          "finished": 1791539544.201111,
+          "rejected": true
+        }
+      ],
+      "stock_edit": [
+        {
+          "status": 200,
+          "stock": 0,
+          "connection_id": 48039,
+          "started": 1791539545.537243,
+          "finished": 1791539546.107606
+        },
+        {
+          "status": 409,
+          "connection_id": 48038,
+          "started": 1791539545.684117,
+          "finished": 1791539546.010498,
+          "rejected": true
+        }
+      ]
+    },
+    "status": "PASS_IMPLEMENTER_MYSQL_CONCURRENCY"
+  },
+  "seed_rerun": {
+    "status": "PASS_IMPLEMENTER_SEED_RERUN",
+    "db": "req81_travel_lab",
+    "source_sha": "2114703d208f260c5a63515b3a4c899afff1d46b",
+    "preserved_digests": {
+      "users": {
+        "count": 4,
+        "sha256": "213e67c40252c7298f6ff654d8f3c27bec261900c09cacf6326be672c0569f10"
+      },
+      "ecommerce_products": {
+        "count": 11,
+        "sha256": "f0c2079f03f5cd2a146967e23c4a04c32fe14ed9b44b83931b71e09039d2efdf"
+      },
+      "ecommerce_product_options": {
+        "count": 27,
+        "sha256": "4fb9eb1b9c26ede82e70d06e770f8470af45dd6cd0edea9c4025429a4ffab68f"
+      },
+      "travel_lab_products": {
+        "count": 11,
+        "sha256": "073789a8bcb082af6b9815f38d0e6471cc8a29d47c527376ff603abc06498545"
+      },
+      "travel_lab_departures": {
+        "count": 27,
+        "sha256": "de83bd3679c672dfd90662d613e40f7b3fafd26691b7616d7ebbd7e2e836db8a"
+      },
+      "travel_lab_inquiries": {
+        "count": 3,
+        "sha256": "652a274ef200fc34381280d2b16fd2cb215bcb3205fae6315369baa65f76384c"
+      },
+      "travel_lab_inquiry_items": {
+        "count": 3,
+        "sha256": "2b1a5e1238e925aad7cc8b7b1925e2302cd6bac6fdb7a1a5dde2f18069d3fcba"
+      },
+      "boards": {
+        "count": 3,
+        "sha256": "d3e457000f035fc5a11b2d54e175f45427d665b244e1272c4c75d283ef02328b"
+      },
+      "board_posts": {
+        "count": 7,
+        "sha256": "6dd7db2274d370a63b05a23da445bb4b451c03e34b6a25f76140433f3be92db9"
+      }
+    },
+    "source_state": "WORKING_TREE_IMPLEMENTER_CHECK"
+  },
+  "test_rollback_restore": {
+    "status": "PASS_IMPLEMENTER_MYSQL_ROLLBACK_RESTORE",
+    "source_sha": "2114703d208f260c5a63515b3a4c899afff1d46b",
+    "db": "req81_travel_lab_test",
+    "private_dump_sha256": "fa035747cdf19e833a73b2caff96f3332058b18a0a39c9fa020ee4c884524261",
+    "restored_digests": {
+      "users": {
+        "count": 3,
+        "sha256": "dd3620f149a6fd16447d3cded117cab34259c87f0dce4abf089a73d0f91c40f9"
+      },
+      "ecommerce_products": {
+        "count": 9,
+        "sha256": "a6e967f1148cb680df03f2b74e86cffeb234053d085aca0e4db99144ff07ae37"
+      },
+      "ecommerce_product_options": {
+        "count": 25,
+        "sha256": "f8f1d3d1a2274ed5fe18dc7d44aad5bcc24c786d5f1265077b991cf39b621e1f"
+      },
+      "travel_lab_products": {
+        "count": 9,
+        "sha256": "84951ba36ec891fa752b8c6400f69239e536e2e6c2ed04df40f6f1220db28854"
+      },
+      "travel_lab_departures": {
+        "count": 25,
+        "sha256": "190dc1323c2c097dca54c31b34c458581e923473a49838b15333ccd7d8bfa613"
+      },
+      "travel_lab_inquiries": {
+        "count": 1,
+        "sha256": "b85431144643e6bc1dac33b1daf36ac1d0651719f81f44a450ad72324bb6569f"
+      },
+      "travel_lab_inquiry_items": {
+        "count": 1,
+        "sha256": "40f851bcc5069f5ca02fb600b925e000fe23050ea08a91ebb2abb52528edef6e"
+      },
+      "travel_lab_inquiry_events": {
+        "count": 2,
+        "sha256": "dd69d6fc9e8dbda48527bbf6d0c2ca55039732bafca32c17bca15ad5ca4468cf"
+      }
+    },
+    "source_state": "WORKING_TREE_IMPLEMENTER_CHECK"
+  },
+  "preview_restart": {
+    "status": "PASS_IMPLEMENTER_PREVIEW_RESTART_PERSISTENCE",
+    "scope": "own application preview only; MySQL server was not restarted",
+    "before": {
+      "db": "req81_travel_lab",
+      "digests": {
+        "travel_lab_inquiries": {
+          "count": 3,
+          "sha256": "652a274ef200fc34381280d2b16fd2cb215bcb3205fae6315369baa65f76384c"
+        },
+        "travel_lab_inquiry_items": {
+          "count": 3,
+          "sha256": "2b1a5e1238e925aad7cc8b7b1925e2302cd6bac6fdb7a1a5dde2f18069d3fcba"
+        },
+        "travel_lab_departures": {
+          "count": 27,
+          "sha256": "de83bd3679c672dfd90662d613e40f7b3fafd26691b7616d7ebbd7e2e836db8a"
+        },
+        "travel_lab_inquiry_events": {
+          "count": 5,
+          "sha256": "cc855202032ce54fe823efb232693ec2f7c58ece7be2e252ef276a4c9ebf0797"
+        }
+      }
+    },
+    "after": {
+      "db": "req81_travel_lab",
+      "digests": {
+        "travel_lab_inquiries": {
+          "count": 3,
+          "sha256": "652a274ef200fc34381280d2b16fd2cb215bcb3205fae6315369baa65f76384c"
+        },
+        "travel_lab_inquiry_items": {
+          "count": 3,
+          "sha256": "2b1a5e1238e925aad7cc8b7b1925e2302cd6bac6fdb7a1a5dde2f18069d3fcba"
+        },
+        "travel_lab_departures": {
+          "count": 27,
+          "sha256": "de83bd3679c672dfd90662d613e40f7b3fafd26691b7616d7ebbd7e2e836db8a"
+        },
+        "travel_lab_inquiry_events": {
+          "count": 5,
+          "sha256": "cc855202032ce54fe823efb232693ec2f7c58ece7be2e252ef276a4c9ebf0797"
+        }
+      }
+    },
+    "http_health": 200
+  },
+  "source_head": "2114703d208f260c5a63515b3a4c899afff1d46b",
+  "source_state": "WORKING_TREE_IMPLEMENTER_CHECK_NOT_FIXED_SHA_VALIDATION",
+  "runtime_source_sha256": {
+    "scripts/travel-lab/LiveMysqlTest.php": "a54651fb89aa2391f3cea77d8f149893b234f480f0bc274c1863075519b91ea7",
+    "scripts/travel-lab/clear-cache.php": "a3414e098ce3aefe692920b4d707d296f836496dafbe0c03d0926272445d6b1d",
+    "scripts/travel-lab/environment.php": "8819e89a2abd936ba8fc7344dfc2fa424c2558ffb2bb6586849cf65d2662c11c",
+    "scripts/travel-lab/extensions.php": "42d71f333e3b1c10cba27b3a86321081a8c356c58fe72e4059ecf6101ba8efdd",
+    "scripts/travel-lab/guard-test.php": "801698a24ca0f7601ddf297b00614f3c9e57b76dd229add5fd75078ec8326a95",
+    "scripts/travel-lab/live-admin.php": "e0deb2b716b193fe8593eac22101dae2b0d5f3f59434893e626266ef15eea697",
+    "scripts/travel-lab/live-api-responses.php": "af463ceaf5fb2616efeee4cba4134126bd4aafd4ec699fae7bbd993f89eb2597",
+    "scripts/travel-lab/live-bootstrap.php": "67a2b04129c0bdfad9e87c7a12efbab363ce267e11cc913e8b5820c93f5cbbc6",
+    "scripts/travel-lab/live-concurrency.php": "e9f602ed0de8f908c367866f1fde1b0855a2311e86e4e3147f2d8dc174ac4e1b",
+    "scripts/travel-lab/live-env-recovery.php": "b02c261de42ceb96949d32d0bb4c74ac57ebc97566ba8453dc2ff5ad6ab20210",
+    "scripts/travel-lab/live-fixtures.php": "b35b38d3e93cad2611b2d8b0939a50eb4f1c28cc9e5b5e94227bb7f5b714fffe",
+    "scripts/travel-lab/live-persistence.php": "00b8893d05f4b9cdb732dbb5dc4a86f1236bdb6e5dfbaed9e3578de0926060db",
+    "scripts/travel-lab/live-recovery.php": "24cb60481c6d5814eb19aa48a6f60202f25a1e531f0f5a76b9ee27bc8c93793d",
+    "scripts/travel-lab/live-review-access.php": "c3f649f0b4de277db01a3dd27c122af7cab34823dc27f7ef665f449116aa3429",
+    "scripts/travel-lab/live-seed-rerun.php": "6f980b907bb77e328ada842199790ad7b84704146d80013a4961e408bc9d06aa",
+    "scripts/travel-lab/live-worker.php": "b6e7c8ef8cea4b5f3dd8929b220d585b5495ac9d2bfaf37d1f53c2a1d57a3bd5",
+    "scripts/travel-lab/recover-partial.php": "ad31667bbf2eff773f3a77f581e17faa7644a478a234246bcd3df6f04d2ff861",
+    "scripts/travel-lab/run.php": "2e4559f2662112124b6f6d982ac0c90b074874c73704e80ae2bc3109bb7257c7",
+    "scripts/travel-lab/setup.php": "67e2966335c4cc8c896bed22baaf33bedcf60712ef2a1e26e9debb3be4e9a3e2",
+    "scripts/travel-lab/smoke.php": "645476e8ad52e9367d2a6767d14e12eb913e9c50c0ef3d35e868fb7c82235711"
+  },
+  "native_mysql_http_test": {
+    "status": "PASS_IMPLEMENTER",
+    "tests": 1,
+    "assertions": 30,
+    "elapsed_seconds": 1.48,
+    "root_http_kernel": true,
+    "manual_route_mount_in_test_context": true
+  },
+  "guard_cases": 20,
+  "env_loss_recovery": {
+    "status": "PASS_IMPLEMENTER",
+    "user_ids_preserved": 4,
+    "travel_record_digests_preserved": true,
+    "scoped_credentials_regenerated": true,
+    "old_sessions_invalidated": true
+  },
+  "runtime_review_repairs": {
+    "source_state": "WORKING_TREE_IMPLEMENTER_CHECK",
+    "observed_utc": "2026-10-09T10:08:00Z",
+    "source_sha256": {
+      "scripts/travel-lab/live-api-responses.php": "808b987e43608cef99c5e8f68832a7528cb9e272c07ca9cefa59a946ba9c1124",
+      "scripts/travel-lab/LiveMysqlTest.php": "a2d9c3c75e7652082d336bec56f6c6c786fc821c08fba47d5b60518e49aca05b"
+    },
+    "failed_api_capture": {
+      "command": "php scripts/travel-lab/live-api-responses.php --fail-after-inquiry",
+      "exit": 1,
+      "expected_failure": true,
+      "inquiry_id": 8,
+      "status": "CANCELLED",
+      "departure_id": 31,
+      "reserved": 0,
+      "product_id": 15,
+      "published": false,
+      "fresh_process_rechecked": true
+    },
+    "normal_api_capture": {
+      "command": "php scripts/travel-lab/live-api-responses.php",
+      "exit": 0,
+      "responses": 11,
+      "inquiry_id": 9,
+      "status": "CANCELLED",
+      "departure_id": 32,
+      "reserved": 0,
+      "product_id": 16,
+      "published": false
+    },
+    "direct_phpunit_sanitization": {
+      "command": "DB_URL=mysql://invalid:invalid@127.0.0.1:1/forbidden DB_SOCKET=/tmp/forbidden.sock php vendor/bin/phpunit scripts/travel-lab/LiveMysqlTest.php",
+      "result": "PASS",
+      "tests": 1,
+      "assertions": 31,
+      "seconds": 5.748,
+      "scope": "Unusable loopback overrides removed before native root bootstrap; isolated MySQL test DB only"
+    },
+    "boundary": "Author verification, independent delta source review separate; no canonical Validation receipt."
+  }
+}

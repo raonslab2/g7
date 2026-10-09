@@ -578,7 +578,7 @@
                                                                         "props": {
                                                                             "className": "line-clamp-1 text-sm font-bold text-ink-900"
                                                                         },
-                                                                        "text": "{{line.title ?? line.product?.title ?? ''}}"
+                                                                        "text": "{{line.product_name?.[_global.locale ?? 'ko'] ?? line.product_name?.ko ?? line.product_name?.en ?? ''}}"
                                                                     },
                                                                     {
                                                                         "type": "basic",
@@ -803,7 +803,7 @@
                                     {
                                         "type": "basic",
                                         "name": "Button",
-                                        "if": "{{(inquiry?.data?.can_cancel ?? ['TEST_INQUIRY', 'UNDER_REVIEW'].includes(inquiry?.data?.status))}}",
+                                        "if": "{{inquiry?.data?.can_cancel === true}}",
                                         "props": {
                                             "type": "button",
                                             "className": "inline-flex w-full items-center justify-center gap-2 rounded-xl border border-rose-200 bg-white px-5 py-3 text-sm font-semibold text-rose-600 hover:bg-rose-50",

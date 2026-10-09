@@ -17,8 +17,8 @@ const product = {
   duration_days: 3,
   summary: '천천히 걷는 오름 여행',
   itinerary: [
-    { day: 1, title: '도착 · 해안 산책', description: '공항 도착 후 해안길 산책' },
-    { day: 2, title: '오름 트레킹' },
+    { day: 1, title: { ko: '도착 · 해안 산책', en: 'Arrival' }, description: { ko: '공항 도착 후 해안길 산책', en: 'Coastal walk' } },
+    { day: 2, title: { ko: '오름 트레킹', en: 'Trekking' } },
   ],
   from_price: 420000,
   currency_code: 'KRW',

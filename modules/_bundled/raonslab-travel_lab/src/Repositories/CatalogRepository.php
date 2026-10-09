@@ -24,24 +24,29 @@ use Modules\Sirsoft\Ecommerce\Models\ShippingPolicy;
 class CatalogRepository implements CatalogRepositoryInterface
 {
     /** 이커머스 getSellingPrice()와 같은 현재 가격 식이며 여행 가격을 저장하지 않습니다. */
-    private const OPTION_PRICE_SQL = 'ecommerce_products.selling_price + ecommerce_product_options.price_adjustment';
+    private function optionPriceSql(): string
+    {
+        $grammar = DB::connection()->getQueryGrammar();
+
+        return $grammar->wrap('ecommerce_products.selling_price').' + '.$grammar->wrap('ecommerce_product_options.price_adjustment');
+    }
 
     private function eligibleDepartures(Builder $query, array $filters = []): void
     {
         $query->where('travel_lab_departures.is_active', true)
-            ->where('departure_date', '>=', now()->toDateString())
+            ->where('departure_date', '>', now()->toDateString())
             ->whereColumn('capacity', '>', 'reserved')
             ->whereHas('option', function (Builder $option) use ($filters) {
                 $option->where('ecommerce_product_options.is_active', true)
                     ->whereColumn('ecommerce_product_options.product_id', 'travel_lab_departures.product_id')
-                    ->whereColumn('ecommerce_product_options.stock_quantity', '>=', 'travel_lab_departures.capacity');
+                    ->whereColumn('ecommerce_product_options.stock_quantity', '>', 'travel_lab_departures.reserved');
                 if (isset($filters['min_price']) || isset($filters['max_price'])) {
                     $option->join('ecommerce_products', 'ecommerce_products.id', '=', 'ecommerce_product_options.product_id');
                     if (isset($filters['min_price'])) {
-                        $option->whereRaw(self::OPTION_PRICE_SQL.' >= ?', [$filters['min_price']]);
+                        $option->whereRaw($this->optionPriceSql().' >= ?', [$filters['min_price']]);
                     }
                     if (isset($filters['max_price'])) {
-                        $option->whereRaw(self::OPTION_PRICE_SQL.' <= ?', [$filters['max_price']]);
+                        $option->whereRaw($this->optionPriceSql().' <= ?', [$filters['max_price']]);
                     }
                 }
             });
@@ -94,7 +99,7 @@ class CatalogRepository implements CatalogRepositoryInterface
             } else {
                 $departure->join('ecommerce_product_options', 'ecommerce_product_options.id', '=', 'travel_lab_departures.product_option_id')
                     ->join('ecommerce_products', 'ecommerce_products.id', '=', 'travel_lab_departures.product_id')
-                    ->selectRaw('MIN('.self::OPTION_PRICE_SQL.')');
+                    ->selectRaw('MIN('.$this->optionPriceSql().')');
             }
             $query->addSelect(['travel_lab_products.*', 'catalog_sort_value' => $departure])
                 ->orderBy('catalog_sort_value', $sort === CatalogSort::PRICE_DESC ? 'desc' : 'asc');
@@ -136,9 +141,11 @@ class CatalogRepository implements CatalogRepositoryInterface
     public function saveDeparture(int $productId, array $data, ?int $departureId = null): Departure
     {
         return DB::transaction(function () use ($productId, $data, $departureId) {
-            TravelProduct::query()->where('product_id', $productId)->lockForUpdate()->firstOrFail();
+            // 문의 경로와 같은 순서: 출발 -> 상품 -> 옵션 -> 여행 메타.
             $departure = $departureId === null ? new Departure : Departure::query()->where('product_id', $productId)->lockForUpdate()->findOrFail($departureId);
+            Product::query()->whereKey($productId)->lockForUpdate()->firstOrFail();
             $option = ProductOption::query()->where('product_id', $productId)->lockForUpdate()->findOrFail($data['product_option_id']);
+            TravelProduct::query()->where('product_id', $productId)->lockForUpdate()->firstOrFail();
             if ($option->stock_quantity < $data['capacity'] || $data['capacity'] < ($departure->reserved ?? 0)) {
                 throw new CatalogConflictException('messages.capacity_conflict');
             }
@@ -156,7 +163,7 @@ class CatalogRepository implements CatalogRepositoryInterface
             $departure->save();
 
             return $departure->refresh()->load('option.product');
-        });
+        }, 3);
     }
 
     public function updateMetadata(int $productId, array $data): TravelProduct

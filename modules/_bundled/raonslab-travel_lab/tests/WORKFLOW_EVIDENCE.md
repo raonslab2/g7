@@ -1,69 +1,104 @@
-# 여행 워크플로 테스트 근거
+# Workflow integration verification
 
-기준 소스: `6853f40d58acbf53a2f29cbb9dd422cc439047a9`. 이 문서는 이 Request 안에서 실행한 개발 테스트의 결과다. 독립 Validation 또는 MySQL 병렬 잠금 검증을 의미하지 않는다.
+The W01 independent review at workflow `6aaf80af` found B1 stock-ceiling,
+B2 shipping-policy and B3 native-checkout blockers. That revision's 48-test PASS
+used test-only domain classes and is historical evidence only. It does not
+certify the integrated domain. The current rework removes DomainContract.php
+and its fallback schema/enum and uses canonical Travel Lab ModuleTestCase,
+actual shared models, enum, provider, migrations and real ecommerce services.
 
-## 실행 결과
+Commands:
 
-```bash
-php vendor/bin/phpunit modules/_bundled/raonslab-travel_lab/tests/Feature/TravelWorkflowTest.php
-# OK (48 tests, 373 assertions)
-# Time: 01:19.331, Memory: 82.50 MB
-
-vendor/bin/pint modules/_bundled/raonslab-travel_lab/tests --test
-# passed
+```sh
+php vendor/bin/phpunit -c modules/_bundled/raonslab-travel_lab/tests/phpunit.xml --filter=TravelWorkflowTest
+php vendor/bin/phpunit -c modules/_bundled/raonslab-travel_lab/tests/phpunit.xml --filter='TravelWorkflowRegressionTest|TravelCheckoutGuardTest'
 ```
 
-현재 테스트 총 48개 실행 케이스를 마지막 전체 실행으로 검증했다. 시나리오 매니페스트의 17개 flow 및 52개 effect와 테스트 메서드의 마커를 대조하여 누락이 없음을 확인했다.
+Initial integrated rework run: original **48 tests / 373 assertions PASS**,
+18.107 seconds, PHP 8.3.6 / PHPUnit 11.5.56 / SQLite memory.
+Initial added regression run before the final audit-rollback case:
+**18 tests / 125 assertions PASS**, 14.139 seconds.
+Combined actual-domain developer check including the audit-rollback case:
+**67 tests / 509 assertions PASS**, 62.714 seconds, 157 MB. Final broader rework
+result is recorded by the integrating lead against the published SHA; these
+developer checks are not official independent Validation.
+After formatting and tightening new-request HTTP201 and independent product/
+option membership assertions, the two affected tests passed again (30 assertions,
+1.080 and 1.121 seconds). Scoped `vendor/bin/pint --test` passed for the owned PHP
+files. The extra membership assertion increases the combined assertion count by
+one; no unchanged broad suite was repeated solely for that reporting count.
 
-검증한 주요 결과: 실제 이커머스 담기·수량 변경·선택 삭제 및 현재 가격 계산, 일반 상품 제외, Bearer 토큰 인증, 소유권과 관리자 권한/본인 스코프, 같은 키 재전송/변경 충돌, 정원 경계, 상태 25개 조합, 정원 반환의 재전송 안전성, 스냅샷 쓰기 실패 후 전체 롤백 및 동일 키 재시도, 두 번째 정원 반환 실패 후 첫 반환/상태/메모 롤백, 불가 항목 정리, 비지원 추가옵션 및 중복 옵션 거절, 금액/수량 주입·중복 ID·헤더/본문 키 충돌 거절, 불변 스냅샷 리소스 직렬화.
+Regression cases cover the original capacity10/stock5/reserved3/quantity4
+oversell, both ceilings at boundaries, stock falling below reservations, stock
+changed after cart add, paid default with no explicit travel FREE policy,
+country header/context behavior, nonzero shipping calculation rejection,
+full snapshot and actor event persistence, normalized contact retries/HTTP200,
+same-state note writes/retry/explicit-null clearing, uppercase status query and
+resource/state contract, owner cancellation after test acceptance, audit-write
+rollback and safe retry, native cart and direct-item checkout rejection before
+trade writes, native order guard and ordinary-commerce membership preservation.
 
-## 격리와 한계
+Actual-domain fixture reconciliation exposed two prior fixture assumptions:
+`Departure.reserved` is not mass assignable, so tests now explicitly force their
+synthetic preexisting reservations; native option_values is nonnullable, so
+ordinary-product setup supplies its required value. No production model was
+changed to satisfy tests.
 
-- `WorkflowTestCase`는 앱 bootstrap 이전부터 DB 연결을 SQLite `:memory:`로 고정한다. 실제 운영 DB에 접속하지 않는다. settings 디스크는 기존 Commerce ModuleTestCase가 격리하며, 환경 변수와 테스트 autoloader는 teardown에서 복원한다.
-- Commerce `CartService`, 계산기, repositories, Sanctum 인증은 실제 구현을 사용한다. Commerce 가격·카트 기능의 mock은 없다.
-- 아직 이 Request에 도메인 담당자의 소스가 없으므로 **테스트 전용 모델 4개 및 enum 1개**와 계약 테이블 4개를 사용했다. 실제 도메인 클래스·마이그레이션이 합쳐지면 bootstrap은 해당 실제 구현을 우선 사용한다. 이 fixture는 운영 provider/autoload에 등록하지 않는다. 합본 이후 실제 도메인으로 재검증해야 한다.
-- MySQL의 테이블별 인덱스 이름을 SQLite의 전역 이름으로 변환하는 테스트 전용 grammar를 사용한다. 여행 문의와 무관한 구매적립 generated-column의 MySQL 전용 마이그레이션 1개는 제외하며 다른 실제 코어·커머스 마이그레이션을 실행한다.
-- SQLite는 `SELECT FOR UPDATE`를 제공하지 않는다. 테스트는 원자성·순차 정원 경계·멱등성과 상태 전이를 검증한다. 동시 중복 키 및 실제 MySQL 잠금 경합 검증은 **NOT_RUN**이며 별도의 합본 검증이 필요하다.
-- 실제 주문·결제 생성이 없음을 확인했고 외부 결제, 이메일/SMS 또는 공급자 연동을 실행하지 않았다.
+SQLite has no SELECT FOR UPDATE row locking. Real MySQL concurrent last-seat,
+same-key, cancel/decline and stock-edit contention remain a separate required
+gate. Native board tests run separately against the marked isolated MySQL test
+DB; no board SQLite compatibility hacks are introduced. Domain migrations all
+run unchanged. Tests send no external email/SMS/provider calls and create no real
+travel order or payment. The scenario source is `scenarios/workflow.yaml`.
 
-## 내부 검토와 전달 대상
 
-소스를 구현하지 않은 네이티브 서브에이전트가 고정된 staged source diff를 검토했다. 최종 검토 대상 SHA256 (`git diff --cached -- modules/_bundled/raonslab-travel_lab/src`): `6a5481bb299948aad24a73750861e740bb157a2270890359c662f6b9f212fc04`. 최종 차단 사항 없음. 오래된 카트 정리, 쓰기 이후 롤백, 관리자 소유자 스코프의 초기 발견 사항을 수정·테스트했다. 이는 내부 검토이며 공식 독립 Validation이 아니다.
+## Same-day correction and authoritative source pin
 
-실제로 생성한 네이티브 서브에이전트는 2개다(커머스 계약 조사·내부 검토 1개, 테스트 구현·실행 1개). 리드를 포함한 최대 동시 활성 에이전트는 3개였다. 공식 자식 Request는 생성하지 않았다.
+P2 SHARED-02 is corrected in workflow eligibility: departure_date must be
+strictly after today, matching public catalog. Two new actual HTTP regression
+cases first **FAIL** (known-ID cart add returned201; stale cart remained available),
+then **PASS 2tests/21assertions, 1.478s** after fixing eligibility and source loading.
+Same-day stale submit rejects409 without cart, capacity, inquiry or audit loss.
 
-리드가 최종 전체 테스트를 직접 재실행한 결과: `OK (48 tests, 373 assertions)`, `Time: 01:20.522, Memory: 82.50 MB`. src와 tests 대상 Pint `--test` PASS, 17개 flow/52개 effect 마커 대조 PASS, staged diff whitespace 검사 PASS.
+When the installed isolated preview was present, native bootstrap's installed
+extension src_classmap overrode Composer's canonical bundled PSR-4 paths. The
+initial bundled-only fix still failed because the service loaded from installed
+source. The test launcher now prepends a resolver for real bundled travel/ecommerce
+src classes; no fake repositories or runtime copies are changed.
+ModuleTestCase asserts seven canonical source origins on every case. The initial
+whole-suite attempt after that pin reached47cases then failed with duplicate
+Module declaration. Root Module autoload mapping/preload attempts also failed:
+native CoreServiceProvider unconditionally requires installed classmap entry files,
+bypassing Composer. The final harness retains that native Module declaration and
+asserts its file SHA256 equals canonical module.php before counting metadata
+checks; this works both with and without an installed preview. It pins src class
+origins while explicitly detecting stale root metadata instead of hiding it.
+A new whole-suite result follows this correction; previous results are preserved
+as earlier bounded runs, not fabricated current-head PASS.
 
-아래는 이 스코프의 정확한 변경 경로다. 모두 신규 파일이며 기준 소스의 다른 경로는 변경하지 않았다.
 
-```text
-modules/_bundled/raonslab-travel_lab/docs/api/workflow.md
-modules/_bundled/raonslab-travel_lab/src/Http/Controllers/Admin/InquiryController.php
-modules/_bundled/raonslab-travel_lab/src/Http/Controllers/Api/CartController.php
-modules/_bundled/raonslab-travel_lab/src/Http/Controllers/Api/InquiryController.php
-modules/_bundled/raonslab-travel_lab/src/Http/Requests/Workflow/AddTravelCartRequest.php
-modules/_bundled/raonslab-travel_lab/src/Http/Requests/Workflow/ListInquiriesRequest.php
-modules/_bundled/raonslab-travel_lab/src/Http/Requests/Workflow/SubmitInquiryRequest.php
-modules/_bundled/raonslab-travel_lab/src/Http/Requests/Workflow/UpdateInquiryRequest.php
-modules/_bundled/raonslab-travel_lab/src/Http/Requests/Workflow/UpdateTravelCartRequest.php
-modules/_bundled/raonslab-travel_lab/src/Http/Requests/Workflow/WorkflowRequest.php
-modules/_bundled/raonslab-travel_lab/src/Http/Resources/AdminInquiryCollection.php
-modules/_bundled/raonslab-travel_lab/src/Http/Resources/AdminInquiryResource.php
-modules/_bundled/raonslab-travel_lab/src/Http/Resources/InquiryCollection.php
-modules/_bundled/raonslab-travel_lab/src/Http/Resources/InquiryItemResource.php
-modules/_bundled/raonslab-travel_lab/src/Http/Resources/InquiryResource.php
-modules/_bundled/raonslab-travel_lab/src/Http/Resources/TravelCartResource.php
-modules/_bundled/raonslab-travel_lab/src/Repositories/Contracts/WorkflowCartRepositoryInterface.php
-modules/_bundled/raonslab-travel_lab/src/Repositories/Contracts/WorkflowInquiryRepositoryInterface.php
-modules/_bundled/raonslab-travel_lab/src/Repositories/WorkflowCartRepository.php
-modules/_bundled/raonslab-travel_lab/src/Repositories/WorkflowInquiryRepository.php
-modules/_bundled/raonslab-travel_lab/src/Services/InquiryService.php
-modules/_bundled/raonslab-travel_lab/src/Services/TravelCartService.php
-modules/_bundled/raonslab-travel_lab/src/routes/workflow.php
-modules/_bundled/raonslab-travel_lab/tests/Feature/TravelWorkflowTest.php
-modules/_bundled/raonslab-travel_lab/tests/Fixtures/DomainContract.php
-modules/_bundled/raonslab-travel_lab/tests/Fixtures/WorkflowSqliteGrammar.php
-modules/_bundled/raonslab-travel_lab/tests/WORKFLOW_EVIDENCE.md
-modules/_bundled/raonslab-travel_lab/tests/WorkflowTestCase.php
-modules/_bundled/raonslab-travel_lab/tests/scenarios/workflow.yaml
-```
+Final canonical travel SQLite run after the class-resolution fixes:
+`php vendor/bin/phpunit -c modules/_bundled/raonslab-travel_lab/tests/phpunit.xml`
+**PASS 118tests/1895assertions, 67.933s, 229MB**, PHP8.3.6/PHPUnit11.5.56.
+This includes 69 workflow/checkout cases (previous67 plus two same-day cases),
+domain/API/schema tests and static support layout checks. Assertion growth
+includes seven source-origin checks per ModuleTestCase case; it is not reported
+as that many new business scenarios. Native MySQL board tests remain excluded.
+Final affected5tests/78assertions PASS5.940s and scoped Pint PASS.
+
+Same-day/harness source digest: `0c1c488491a0aa5783fd734eccce87911891d8f9961d03fb505108842edf6258`. Formula: SHA256 of the ordered lines
+`path + space + file_sha256 + newline` below; evidence file excluded to avoid
+self-reference. Git fixed revision and official independent Validation are owned
+by the lead. This developer run does not approve the reviewer's implementation.
+
+| Source path | SHA256 |
+|---|---|
+| `modules/_bundled/raonslab-travel_lab/src/Services/TravelCartService.php` | `5c326179dbfa17e2c482853f203ea53ed70015e25fe9b501d460247e5ecbdb8f` |
+| `modules/_bundled/raonslab-travel_lab/tests/bootstrap.php` | `dd821e1397bbd1244516c73fc705e3510b9c3a8dedeb598cbeeee68480f57da2` |
+| `modules/_bundled/raonslab-travel_lab/tests/ModuleTestCase.php` | `3ad3c1ce5e11ac52e53734d0397862688c2312081b57589b784fe4fa048a1f58` |
+| `modules/_bundled/raonslab-travel_lab/tests/WorkflowTestCase.php` | `2212ae45632eba276b17785841930bd10852b3be8072d370d52de5215ecd0d89` |
+| `modules/_bundled/raonslab-travel_lab/tests/Feature/TravelWorkflowRegressionTest.php` | `2ba745b1f725aedb42c25d17b935c4a60200da14e56bd76ed117716b535d859d` |
+| `modules/_bundled/raonslab-travel_lab/tests/Feature/TravelCheckoutGuardTest.php` | `b36e75d6405c4cafe319f318f4fb64505abe750e0e7fbcfe0f789a6f1c7c201f` |
+| `modules/_bundled/raonslab-travel_lab/tests/scenarios/workflow.yaml` | `92cba695e89167c4ac174281501c800ba8993aa27e1b1b9d16d6a12f75e8aa5b` |
+| `modules/_bundled/raonslab-travel_lab/tests/README.md` | `d3955735494cbbc59fc6795d286ff82c2fd844d2ff0cde0ac04c30bbeaa00248` |
+| `modules/_bundled/raonslab-travel_lab/docs/api/workflow.md` | `c68ae6e4bd0cb710e7f66960aa107e6123e0b2c51454b8143e3bca8d9a042e64` |

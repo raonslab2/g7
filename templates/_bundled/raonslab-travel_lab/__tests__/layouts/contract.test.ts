@@ -167,7 +167,8 @@ describe('데이터 소스 · API', () => {
     dataSources
       .filter((ds) => authEndpoints.some((re) => re.test(ds.endpoint)))
       .forEach((ds) => expect(ds.auth_mode, `${ds.file}:${ds.id}`).toBe('required'));
-    apiCalls.forEach((a) => expect(a.auth_mode).toBe('required'));
+    apiCalls.filter(a => authEndpoints.some(re => re.test(a.target))).forEach((a) => expect(a.auth_mode).toBe('required'));
+    apiCalls.filter(a => /\/support\/(notices|faqs)\//.test(a.target)).forEach(a => expect(a.auth_mode).toBe('optional'));
   });
 
   it('신뢰할 수 없는 가격을 서버로 보내지 않는다', () => {

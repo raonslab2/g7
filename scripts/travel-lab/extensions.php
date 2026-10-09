@@ -44,14 +44,17 @@ try {
         }
     }
     foreach ($commands as $command) {
-        if (travelLabProcess([PHP_BINARY, 'artisan', ...$command], $environment) !== 0) {
+        if (travelLabLifecycleProcess([PHP_BINARY, 'artisan', ...$command], $environment) !== 0) {
             throw new RuntimeException('Extension command failed: '.implode(' ', $command));
         }
     }
-    if (travelLabProcess([PHP_BINARY, 'artisan', 'module:seed', 'raonslab-travel_lab', '--no-interaction'], $environment) !== 0) {
+    if (travelLabLifecycleProcess([PHP_BINARY, 'artisan', 'module:seed', 'raonslab-travel_lab', '--sample', '--no-interaction'], $environment) !== 0) {
         throw new RuntimeException('Travel module seed failed.');
     }
-    echo 'PASS: extensions installed/activated and travel seed executed.'.PHP_EOL;
+    if (travelLabLifecycleProcess([PHP_BINARY, 'artisan', 'raonslab-travel_lab:support-provision', '--lab-confirm', '--no-interaction'], $environment) !== 0) {
+        throw new RuntimeException('Explicit lab support provisioning failed.');
+    }
+    echo 'PASS: extensions installed/activated, explicit sample seed and lab support provisioning executed.'.PHP_EOL;
 } catch (Throwable $error) {
     fwrite(STDERR, 'BLOCKED: '.$error->getMessage().PHP_EOL);
     exit(1);

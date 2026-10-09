@@ -46,7 +46,7 @@ describe('travel/home', () => {
 
   it('추천·출발 임박 여행 카드와 지역·테마를 API 응답으로 그린다', async () => {
     t = createLayoutTest(layout, { componentRegistry: registry, translations, locale: 'ko' });
-    t.mockApi('facets', { response: { success: true, data: { regions: [{ value: 'jeju', label: '제주', count: 4 }, 'busan'], themes: [{ value: 'nature', label: '자연' }] } } });
+    t.mockApi('facets', { response: { success: true, data: { region: [{ value: 'jeju', label: '제주', count: 4 }, { value: 'busan', label: '부산' }], theme: [{ value: 'nature', label: '자연' }] } } });
     t.mockApi('featured_trips', { response: page([trip(1), trip(2)]) });
     t.mockApi('departing_trips', { response: page([trip(3)]) });
     await t.render();
@@ -56,13 +56,13 @@ describe('travel/home', () => {
     expect(screen.getByText('여행 1')).toBeInTheDocument();
     expect(screen.getAllByText('₩450,000').length).toBeGreaterThan(0);
     expect(screen.getAllByText('제주').length).toBeGreaterThan(0);
-    expect(screen.getByText('busan')).toBeInTheDocument();
+    expect(screen.getByText('부산')).toBeInTheDocument();
     expect(screen.getAllByTestId('theme-card')).toHaveLength(1);
   });
 
   it('여행 목록이 비면 빈 상태 안내', async () => {
     t = createLayoutTest(layout, { componentRegistry: registry, translations, locale: 'ko' });
-    t.mockApi('facets', { response: { success: true, data: { regions: [], themes: [] } } });
+    t.mockApi('facets', { response: { success: true, data: { region: [], theme: [] } } });
     t.mockApi('featured_trips', { response: page([]) });
     t.mockApi('departing_trips', { response: page([]) });
     await t.render();
@@ -71,7 +71,7 @@ describe('travel/home', () => {
 
   it('응답 전에는 로딩 스켈레톤', async () => {
     t = createLayoutTest(layout, { componentRegistry: registry, translations, locale: 'ko', initialData: { featured_trips: undefined } });
-    t.mockApi('facets', { response: { success: true, data: { regions: [], themes: [] } } });
+    t.mockApi('facets', { response: { success: true, data: { region: [], theme: [] } } });
     t.mockApi('departing_trips', { response: page([]) });
     t.mockApi('featured_trips', { response: undefined });
     await t.render();
@@ -80,7 +80,7 @@ describe('travel/home', () => {
 
   it('카드를 누르면 상세로 이동한다', async () => {
     t = createLayoutTest(layout, { componentRegistry: registry, translations, locale: 'ko' });
-    t.mockApi('facets', { response: { success: true, data: { regions: [], themes: [] } } });
+    t.mockApi('facets', { response: { success: true, data: { region: [], theme: [] } } });
     t.mockApi('featured_trips', { response: page([trip(7)]) });
     t.mockApi('departing_trips', { response: page([]) });
     await t.render();
@@ -94,7 +94,7 @@ describe('travel/search', () => {
 
   it('조건 결과·건수·적용 조건 수를 그린다', async () => {
     t = createLayoutTest(layout, { componentRegistry: registry, translations, locale: 'ko', queryParams: { region: 'jeju', sort: 'price_asc' } });
-    t.mockApi('facets', { response: { success: true, data: { regions: [{ value: 'jeju', label: '제주' }], themes: [] } } });
+    t.mockApi('facets', { response: { success: true, data: { region: [{ value: 'jeju', label: '제주' }], theme: [] } } });
     t.mockApi('catalog', { response: page([trip(1), trip(2)], { total: 2 }) });
     await t.render();
     expect(screen.getAllByTestId('trip-card')).toHaveLength(2);
@@ -105,7 +105,7 @@ describe('travel/search', () => {
 
   it('결과가 없으면 초기화 버튼이 있는 빈 상태', async () => {
     t = createLayoutTest(layout, { componentRegistry: registry, translations, locale: 'ko', queryParams: { q: '없는여행' } });
-    t.mockApi('facets', { response: { success: true, data: { regions: [], themes: [] } } });
+    t.mockApi('facets', { response: { success: true, data: { region: [], theme: [] } } });
     t.mockApi('catalog', { response: page([]) });
     await t.render();
     expect(screen.getByTestId('catalog-empty')).toBeInTheDocument();
@@ -114,7 +114,7 @@ describe('travel/search', () => {
 
   it('여러 페이지면 페이지 이동을 노출한다 (총 건수 상한으로 last_page=null 이어도)', async () => {
     t = createLayoutTest(layout, { componentRegistry: registry, translations, locale: 'ko', queryParams: {} });
-    t.mockApi('facets', { response: { success: true, data: { regions: [], themes: [] } } });
+    t.mockApi('facets', { response: { success: true, data: { region: [], theme: [] } } });
     t.mockApi('catalog', { response: page([trip(1)], { last_page: null, total: null, has_more_pages: true }) });
     await t.render();
     expect(document.querySelector('nav[aria-label], [aria-label="common.pagination"], [aria-label="페이지 이동"]')).not.toBeNull();

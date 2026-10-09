@@ -14,7 +14,7 @@
 | POST /admin/catalog/{product}/departures | admin.catalog.departures.store | catalog.update, 기존 이커머스 옵션에 출발 생성 |
 | PUT /admin/catalog/{product}/departures/{departure} | admin.catalog.departures.update | catalog.update, 기존 출발 수정 |
 
-권한 접두사는 `raonslab-travel_lab.`입니다. catalog/inquiry/support 각각 read/update를 등록합니다. product 경로값은 반드시 이커머스 상품 ID이며 travel_lab_products.id가 아닙니다. departure 경로값은 travel_lab_departures.id입니다.
+권한 접두사는 `raonslab-travel_lab.`입니다. catalog/inquiries/support 각각 read/update를 등록합니다. product 경로값은 반드시 이커머스 상품 ID이며 travel_lab_products.id가 아닙니다. departure 경로값은 travel_lab_departures.id입니다.
 
 목록 쿼리:
 

@@ -78,7 +78,7 @@ API 를 제공하고, 이 템플릿은 그 API 를 `data_sources` · `apiCall` �
 - `travel/search`: `GET /catalog` 에 URL 쿼리(`q` · `region` · `theme` · `date_from` · `date_to` ·
   `min_price` · `max_price` · `sort` · `page` · `per_page`)를 그대로 하달 → `data.data` +
   `data.pagination`. 필터·정렬·페이지 이동은 `navigate` + `mergeQuery: true` 로 URL 을 바꿉니다.
-  `facets` 의 regions/themes 는 객체(`{value,label,count?}`)와 문자열 둘 다 받습니다.
+  `facets` 의 실제 공개 응답은 `data.region` / `data.theme` (단수형) enum 문자열 배열입니다. 홈·검색 진입과 카드·상세 enum 표시는 템플릿 `travel.facets.{region|theme}.{code}` 언어키로 번역합니다. plural 필드를 가정하지 않습니다.
 - `travel/product`: `GET /catalog/{id}` + `GET /catalog/{id}/departures`. 출발편과 인원을 고르고
   `POST /cart` 에 `{departure_id, quantity}` 만 보냅니다 — 금액은 보내지 않습니다.
 

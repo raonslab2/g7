@@ -2,7 +2,7 @@
  * 상담 요청(테스트) 멱등 키 핸들러
  *
  * 같은 요청을 다시 보내는 경우(네트워크 오류 후 재시도·새로고침)에는 **같은 키**를 쓰고,
- * 요청이 성공했거나 담은 출발편 묶음이 바뀌면 **새 키**를 쓴다. 키는 세션 저장소에
+ * 요청이 성공했거나 담은 출발편 묶음·인원·연락처가 바뀌면 **새 키**를 쓴다. 키는 세션 저장소에
  * 출발편 묶음 지문과 함께 보관해 새로고침 뒤에도 재시도가 같은 키를 싣는다.
  *
  * 네트워크 오류 시에는 이 모듈의 어떤 핸들러도 부르지 않는다 — 키를 새로 만들지 않는 것이
@@ -17,7 +17,10 @@ const STATE_KEY = 'travelInquiryKey';
 interface StoredKey {
   key: string;
   fingerprint: string;
+  contact?: { name: string; phone: string | null };
 }
+
+let memoryStored: StoredKey | null = null;
 
 interface HandlerAction {
   handler: string;
@@ -66,18 +69,20 @@ export function generateInquiryKey(): string {
 function readStored(): StoredKey | null {
   try {
     const raw = window.sessionStorage.getItem(STORAGE_KEY);
-    if (!raw) return null;
+    if (!raw) return memoryStored;
     const parsed = JSON.parse(raw);
     if (typeof parsed?.key === 'string' && typeof parsed?.fingerprint === 'string') {
       return parsed as StoredKey;
     }
   } catch {
     // 손상·차단된 저장소 — 메모리 상태만으로 동작한다
+    return memoryStored;
   }
   return null;
 }
 
 function writeStored(value: StoredKey | null): void {
+  memoryStored = value;
   try {
     if (value) {
       window.sessionStorage.setItem(STORAGE_KEY, JSON.stringify(value));
@@ -89,32 +94,44 @@ function writeStored(value: StoredKey | null): void {
   }
 }
 
-function setGlobalKey(key: string | null): void {
-  (window as any).G7Core?.state?.set?.({ [STATE_KEY]: key });
+function setGlobalKey(key: string | null, contact?: StoredKey['contact']): void {
+  (window as any).G7Core?.state?.set?.({ [STATE_KEY]: key, ...(contact ? { travelInquiryContact: contact } : {}) });
 }
 
 /**
  * 출발편 묶음(cartIds)에 대응하는 키를 확보한다. 같은 묶음이면 기존 키를 재사용한다.
  *
- * params.cartIds: number[], params.quantities?: number[] (cartIds 와 같은 순서)
+ * params.cartIds: number[], params.quantities?: number[] (cartIds 와 같은 순서), params.contact?: {name,phone}
  */
 export function ensureInquiryKeyHandler(action: HandlerAction): string | null {
-  const fingerprint = fingerprintCartIds(action?.params?.cartIds, action?.params?.quantities);
-  if (!fingerprint) {
+  const cartFingerprint = fingerprintCartIds(action?.params?.cartIds, action?.params?.quantities);
+  if (!cartFingerprint) {
     setGlobalKey(null);
     return null;
   }
 
   const stored = readStored();
+  const inputContact = action?.params?.contact;
+  const contact = inputContact ? {
+    name: String(inputContact.name ?? '').trim(),
+    phone: String(inputContact.phone ?? '').trim() || null,
+  } : undefined;
+  // A cart refresh must preserve the submitted payload/key, including contact.
+  // An explicitly edited contact forms a new request; unchanged retries reuse it.
+  if (!contact && stored && (stored.fingerprint === cartFingerprint || stored.fingerprint.startsWith(`${cartFingerprint}|`))) {
+    setGlobalKey(stored.key, stored.contact);
+    return stored.key;
+  }
+  const fingerprint = contact ? `${cartFingerprint}|${JSON.stringify(contact)}` : cartFingerprint;
   if (stored && stored.fingerprint === fingerprint) {
-    setGlobalKey(stored.key);
+    setGlobalKey(stored.key, stored.contact);
     return stored.key;
   }
 
   const key = generateInquiryKey();
-  writeStored({ key, fingerprint });
-  setGlobalKey(key);
-  logger.log('New inquiry key prepared for cart set', fingerprint);
+  writeStored({ key, fingerprint, contact });
+  setGlobalKey(key, contact);
+  logger.log('New inquiry key prepared');
   return key;
 }
 

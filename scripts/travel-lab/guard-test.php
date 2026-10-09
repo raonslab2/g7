@@ -16,6 +16,7 @@ $probe = <<<'PHP'
 <?php
 require __DIR__.'/environment.php';
 try {
+    if (($argv[1] ?? '') === 'clear') { travelLabClearGeneratedConfig(); exit(0); }
     $env = travelLabEnvironment();
     if (isset($env['DB_URL'])) { exit(2); }
     exit(0);
@@ -62,7 +63,30 @@ try {
         unlink($fixture.'/'.$override);
         echo 'PASS: '.$override.' refusal'.PHP_EOL;
     }
-    echo 'PASS: 16 isolation checks; no live environment mutation or database access.'.PHP_EOL;
+    foreach (['marked generated cache removal' => [$valid, 0],
+        'unmarked cache preserved' => [str_replace('TRAVEL_LAB_ISOLATED=1', 'TRAVEL_LAB_ISOLATED=0', $valid), 1],
+        'foreign DB cache preserved' => [str_replace('DB_WRITE_DATABASE=req81_travel_lab', 'DB_WRITE_DATABASE=unrelated', $valid), 1]] as $label => [$contents, $expected]) {
+        file_put_contents($fixture.'/.env', $contents);
+        file_put_contents($fixture.'/bootstrap/cache/config.php', '<?php return [];');
+        $process = proc_open([PHP_BINARY, $fixture.'/scripts/travel-lab/probe.php', 'clear'], [0 => STDIN, 1 => STDOUT, 2 => STDERR], $pipes, $fixture);
+        if (proc_close($process) !== $expected || is_file($fixture.'/bootstrap/cache/config.php') !== ($expected !== 0)) {
+            throw new RuntimeException('Cache recovery guard failed: '.$label);
+        }
+        if (is_file($fixture.'/bootstrap/cache/config.php')) {
+            unlink($fixture.'/bootstrap/cache/config.php');
+        }
+        echo 'PASS: '.$label.PHP_EOL;
+    }
+    file_put_contents($fixture.'/.env', $valid);
+    file_put_contents($fixture.'/cache-target.php', '<?php return [];');
+    symlink($fixture.'/cache-target.php', $fixture.'/bootstrap/cache/config.php');
+    $process = proc_open([PHP_BINARY, $fixture.'/scripts/travel-lab/probe.php', 'clear'], [0 => STDIN, 1 => STDOUT, 2 => STDERR], $pipes, $fixture);
+    if (proc_close($process) !== 1 || ! is_link($fixture.'/bootstrap/cache/config.php') || ! is_file($fixture.'/cache-target.php')) {
+        throw new RuntimeException('Cache recovery guard failed: symlink preserved');
+    }
+    unlink($fixture.'/bootstrap/cache/config.php');
+    echo 'PASS: symlink cache preserved'.PHP_EOL;
+    echo 'PASS: 20 isolation checks; no live environment mutation or database access.'.PHP_EOL;
 } finally {
     unlink($fixture.'/vendor');
     $iterator = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($fixture, FilesystemIterator::SKIP_DOTS), RecursiveIteratorIterator::CHILD_FIRST);

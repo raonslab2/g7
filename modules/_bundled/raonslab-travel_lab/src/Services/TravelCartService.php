@@ -6,12 +6,15 @@ use App\Helpers\ResponseHelper;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\DB;
 use Modules\Raonslab\TravelLab\Models\Departure;
 use Modules\Raonslab\TravelLab\Repositories\Contracts\WorkflowCartRepositoryInterface;
+use Modules\Sirsoft\Ecommerce\Enums\ChargePolicyEnum;
 use Modules\Sirsoft\Ecommerce\Exceptions\CartOperationException;
 use Modules\Sirsoft\Ecommerce\Exceptions\CartQuantityLimitException;
 use Modules\Sirsoft\Ecommerce\Exceptions\CartUnavailableException;
+use Modules\Sirsoft\Ecommerce\Http\Middleware\ResolveShippingCountry;
 use Modules\Sirsoft\Ecommerce\Services\CartService;
 use Modules\Sirsoft\Ecommerce\Services\CurrencyConversionService;
 
@@ -109,11 +112,28 @@ class TravelCartService
             $reasons[$cart->id] = $reason;
         }
         $eligible = $carts->filter(fn ($cart) => $reasons[$cart->id] === null);
-        $result = $this->commerceOperation(fn () => $this->commerce->getCartWithCalculation(
-            $userId, null, [], 0, $eligible->modelKeys()
-        ));
+        // 시험 문의는 배송국가/쿠폰/포인트를 소비하지 않는다. 실제 커머스 계산기를 쓰되
+        // 국가 입력을 서버가 고정하고 원래 요청 컨텍스트는 반드시 복구한다.
+        $countryKey = ResolveShippingCountry::SHIPPING_COUNTRY_KEY;
+        $countryWasBound = App::bound($countryKey);
+        $previousCountry = $countryWasBound ? App::make($countryKey) : null;
+        App::instance($countryKey, 'KR');
+        try {
+            $result = $this->commerceOperation(fn () => $this->commerce->getCartWithCalculation(
+                $userId, null, [], 0, $eligible->modelKeys()
+            ));
+        } finally {
+            if ($countryWasBound) {
+                App::instance($countryKey, $previousCountry);
+            } else {
+                App::forgetInstance($countryKey);
+            }
+        }
         $calculated = collect($result->calculation->items);
-        if ($calculated->count() !== $eligible->count()) {
+        $summary = $result->calculation->summary;
+        if ($calculated->count() !== $eligible->count() || $result->calculation->hasValidationErrors()
+            || $summary->totalShipping !== 0 || $summary->totalDiscount !== 0
+            || $summary->shippingDiscount !== 0 || $summary->pointsUsed !== 0) {
             $this->fail('calculation_changed');
         }
         $items = [];
@@ -135,6 +155,7 @@ class TravelCartService
                 'product_id' => (int) $cart->product_id,
                 'product_option_id' => (int) $cart->product_option_id,
                 'quantity' => (int) $cart->quantity,
+                'remaining_capacity' => $departure ? max(0, min((int) $departure->capacity, (int) $departure->option?->stock_quantity) - (int) $departure->reserved) : 0,
                 'product_name' => $departure?->product?->name,
                 'departure_date' => $departure ? Carbon::parse($departure->departure_date)->toDateString() : null,
                 'return_date' => $departure ? Carbon::parse($departure->return_date)->toDateString() : null,
@@ -149,6 +170,11 @@ class TravelCartService
             'items' => $items,
             'totals' => $result->calculation->summary->toArray(),
             'currency_code' => $this->currency->getDefaultCurrency(),
+            'calculation_snapshot' => [
+                ...$result->calculation->toArray(),
+                'currency_code' => $this->currency->getDefaultCurrency(),
+                'shipping_country' => 'KR',
+            ],
         ];
     }
 
@@ -182,13 +208,20 @@ class TravelCartService
             || ! $departure->is_active || ! $departure->product?->isPurchasable()
             || ! $departure->option?->is_active
             || (int) $departure->option->product_id !== (int) $departure->product_id
-            || ! Carbon::parse($departure->departure_date)->startOfDay()->gt(now()->startOfDay())
+            || Carbon::parse($departure->departure_date)->startOfDay()->lte(now()->startOfDay())
             || Carbon::parse($departure->return_date)->startOfDay()->lt(Carbon::parse($departure->departure_date)->startOfDay())) {
             return 'departure_unavailable';
         }
+        $policy = $departure->product->shippingPolicy;
+        if ($policy === null || ! $policy->is_active || $policy->is_default
+            || $policy->countrySettings->isEmpty()
+            || ! $policy->countrySettings->contains(fn ($country) => $country->country_code === 'KR' && $country->is_active)
+            || $policy->countrySettings->contains(fn ($country) => $country->charge_policy !== ChargePolicyEnum::FREE
+                || $country->extra_fee_enabled || (float) $country->base_fee !== 0.0 || ! empty($country->api_endpoint))) {
+            return 'shipping_policy_unavailable';
+        }
         if ($quantity < 1 || $quantity > (int) config('sirsoft-ecommerce.cart.max_quantity', 99)
-            || $quantity > (int) $departure->option->stock_quantity
-            || $quantity > (int) $departure->capacity - (int) $departure->reserved) {
+            || $quantity > max(0, min((int) $departure->capacity, (int) $departure->option->stock_quantity) - (int) $departure->reserved)) {
             return 'capacity_unavailable';
         }
 

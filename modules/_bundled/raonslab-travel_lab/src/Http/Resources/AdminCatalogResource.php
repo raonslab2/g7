@@ -10,6 +10,7 @@ class AdminCatalogResource extends CatalogResource
     {
         return [
             ...parent::toArray($request),
+            'product_code' => $this->product->product_code,
             'published' => $this->published,
             'summary_translations' => $this->summary,
             'title_translations' => $this->product->name,

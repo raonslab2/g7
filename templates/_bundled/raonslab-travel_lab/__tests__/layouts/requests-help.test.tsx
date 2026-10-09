@@ -22,9 +22,10 @@ const member = { _global: { currentUser: { id: 1, uuid: 'u-1', name: '라온' } 
 const inquiry = (id: number, status: string) => ({
   id,
   status,
+  can_cancel: ['TEST_INQUIRY', 'UNDER_REVIEW', 'TEST_ACCEPTED'].includes(status),
   created_at: '2026-10-09T10:00:00+09:00',
   contact: { name: '라온', phone: null },
-  items: [{ id: 1, product_id: 7, title: '제주 오름 산책 3일', departure_date: '2026-11-02', return_date: '2026-11-04', quantity: 2, unit_price: 420000, currency_code: 'KRW' }],
+  items: [{ id: 1, product_id: 7, product_name: { ko: '제주 오름 산책 3일', en: 'Jeju Walk' }, departure_date: '2026-11-02', return_date: '2026-11-04', quantity: 2, unit_price: 420000, currency_code: 'KRW' }],
   total_amount: 840000,
   currency_code: 'KRW',
 });
@@ -56,7 +57,7 @@ describe('travel/request_detail', () => {
   it.each([
     ['TEST_INQUIRY', true],
     ['UNDER_REVIEW', true],
-    ['TEST_ACCEPTED', false],
+    ['TEST_ACCEPTED', true],
     ['DECLINED', false],
     ['CANCELLED', false],
   ])('%s 상태 — 취소 버튼 노출=%s', async (status, cancellable) => {
@@ -99,17 +100,19 @@ describe('travel/help', () => {
 
   it('공지 탭(기본) — 항목을 펼친다', async () => {
     t = createLayoutTest(layout, { componentRegistry: registry, translations, locale: 'ko' });
-    t.mockApi('notices', { response: { success: true, data: { data: [{ id: 1, title: '가을 시즌 안내', content: '가을 일정이 열렸어요', created_at: '2026-10-01' }], pagination: { current_page: 1, last_page: 1 } } } });
+    t.mockApi('notices', { response: { success: true, data: { data: [{ id: 1, title: '가을 시즌 안내', created_at: '2026-10-01' }], meta: { current_page: 1, last_page: 1 } } } });
     await t.render();
     expect(screen.getByTestId('help-panel-notices')).toBeInTheDocument();
     expect(screen.queryByTestId('help-panel-faq')).toBeNull();
+    const originalFetch = globalThis.fetch;
+    globalThis.fetch = vi.fn(async (url: any, init: any) => String(url).endsWith('/support/notices/1') ? new Response(JSON.stringify({success:true,data:{id:1,title:'가을 시즌 안내',content:'가을 일정이 열렸어요'}}),{status:200,headers:{'Content-Type':'application/json'}}) : (originalFetch as any)(url,init));
     await t.user.click(screen.getByTestId('notice-item'));
     await waitFor(() => expect(screen.getByText('가을 일정이 열렸어요')).toBeInTheDocument());
   });
 
   it('FAQ 탭 — 검색어로 거른다', async () => {
     t = createLayoutTest(layout, { componentRegistry: registry, translations, locale: 'ko', queryParams: { tab: 'faq' } });
-    t.mockApi('faqs', { response: { success: true, data: { data: [{ id: 1, title: '인원 변경은 어떻게 하나요?', content: '장바구니에서 바꿀 수 있어요' }, { id: 2, title: '결제는 언제 하나요?', content: '테스트 서비스라 결제가 없어요' }] } } });
+    t.mockApi('faqs', { response: { success: true, data: { data: [{ id: 1, title: '인원 변경은 어떻게 하나요?' }, { id: 2, title: '결제는 언제 하나요?' }] } } });
     await t.render();
     expect(screen.getAllByTestId('faq-item')).toHaveLength(2);
     await t.user.type(screen.getByTestId('faq-search'), '결제');
@@ -125,7 +128,7 @@ describe('travel/help', () => {
 
   it('1:1 문의 탭 — 회원은 문의를 보내고 내역·답변 상태를 본다', async () => {
     t = createLayoutTest(layout, { componentRegistry: registry, translations, locale: 'ko', queryParams: { tab: 'questions' }, initialState: member });
-    t.mockApi('questions', { response: { success: true, data: { data: [{ id: 5, title: '단체 여행 문의', created_at: '2026-10-08', is_answered: true }, { id: 6, title: '아이 동반', created_at: '2026-10-09', is_answered: false }], pagination: { current_page: 1, last_page: 1 } } } });
+    t.mockApi('questions', { response: { success: true, data: { data: [{ id: 5, title: '단체 여행 문의', created_at: '2026-10-08', answers_count: 1 }, { id: 6, title: '아이 동반', created_at: '2026-10-09', answers_count: 0 }], meta: { current_page: 1, last_page: 1 } } } });
     await t.render();
     expect(screen.getAllByTestId('question-item')).toHaveLength(2);
     expect(screen.getByText('답변 완료')).toBeInTheDocument();
@@ -148,6 +151,18 @@ describe('travel/help', () => {
     await t.render();
     await t.user.click(screen.getByTestId('help-tab-faq'));
     expect(t.getNavigationHistory().some((p) => p.startsWith('/travel/help') && p.includes('tab=faq'))).toBe(true);
+  });
+
+  it('비공개 문의 상세는 실제 answers 배열의 답변 본문을 그린다', async () => {
+    t = createLayoutTest(layout, { componentRegistry: registry, translations, locale: 'ko', queryParams: { tab: 'questions', question: '5' }, initialState: member });
+    t.mockApi('questions', { response: { success: true, data: { data: [], meta: { current_page: 1, last_page: 1 } } } });
+    t.mockApi('question_detail', { response: { success: true, data: {
+      id: 5, title: '합성 비공개 문의', content: '출발 일정 확인 요청', answers_count: 1,
+      answers: [{ id: 10, is_author: false, content: '시험 일정은 관리자 화면에서 확인했습니다.', created_at: '2026-10-09' }],
+    } } });
+    await t.render();
+    expect(screen.getByText('출발 일정 확인 요청')).toBeInTheDocument();
+    expect(screen.getByText('시험 일정은 관리자 화면에서 확인했습니다.')).toBeInTheDocument();
   });
 });
 

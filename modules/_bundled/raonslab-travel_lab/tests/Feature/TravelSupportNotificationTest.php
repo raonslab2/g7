@@ -11,6 +11,7 @@ use Modules\Raonslab\TravelLab\Tests\SupportTestCase;
 use Modules\Sirsoft\Board\Models\Board;
 use Modules\Sirsoft\Board\Models\Comment;
 use Modules\Sirsoft\Board\Models\Post;
+use Modules\Sirsoft\Board\Models\Report;
 use PHPUnit\Framework\Attributes\Test;
 
 /**
@@ -86,6 +87,10 @@ class TravelSupportNotificationTest extends SupportTestCase
             'status' => 'published', 'ip_address' => '0.0.0.0', 'depth' => 0,
         ]);
         $result = HookManager::applyFilters('sirsoft-board.notification.extract_data', $default, 'new_comment', [$comment]);
+        $this->assertTrue($result['context']['skip'] ?? false);
+
+        $report = new Report(['board_id' => $post->board_id]);
+        $result = HookManager::applyFilters('sirsoft-board.notification.extract_data', $default, 'report_received_admin', [$report]);
         $this->assertTrue($result['context']['skip'] ?? false);
 
         // 다른 게시판 알림은 그대로 둔다 (게시판 기본 추출 결과 유지 여부만 확인)

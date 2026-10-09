@@ -5,6 +5,7 @@ namespace Modules\Raonslab\TravelLab\Http\Controllers\Api;
 use App\Helpers\ResponseHelper;
 use App\Http\Controllers\Api\Base\AuthBaseController;
 use Illuminate\Http\JsonResponse;
+use Modules\Raonslab\TravelLab\Enums\InquiryStatus;
 use Modules\Raonslab\TravelLab\Http\Requests\Workflow\ListInquiriesRequest;
 use Modules\Raonslab\TravelLab\Http\Requests\Workflow\SubmitInquiryRequest;
 use Modules\Raonslab\TravelLab\Http\Requests\Workflow\WorkflowRequest;
@@ -22,15 +23,18 @@ class InquiryController extends AuthBaseController
     public function index(ListInquiriesRequest $request): JsonResponse
     {
         return ResponseHelper::successWithResource(resource: new InquiryCollection($this->service->listOwn(
-            (int) $request->user()->id, (int) $request->validated('per_page', 20), (int) $request->validated('page', 1)
+            (int) $request->user()->id, (int) $request->validated('per_page', 20), (int) $request->validated('page', 1),
+            $request->validated('status') === null ? null : InquiryStatus::from($request->validated('status'))
         )));
     }
 
     public function store(SubmitInquiryRequest $request): JsonResponse
     {
-        return ResponseHelper::successWithResource(resource: new InquiryResource($this->service->submit(
+        $inquiry = $this->service->submit(
             (int) $request->user()->id, $request->validated('cart_ids'), $request->validated('contact'), $request->validated('idempotency_key')
-        )), statusCode: 201);
+        );
+
+        return ResponseHelper::successWithResource(resource: new InquiryResource($inquiry), statusCode: $inquiry->wasRecentlyCreated ? 201 : 200);
     }
 
     public function show(WorkflowRequest $request, int $inquiry): JsonResponse
