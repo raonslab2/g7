@@ -1,0 +1,29 @@
+{
+  "command": [
+    "node",
+    "tests/W04_NATIVE_ADMIN/sort-varied.mjs"
+  ],
+  "started": "2026-10-09T18:23:50.618745+00:00",
+  "files": [
+    {
+      "path": "tests/W04_NATIVE_ADMIN/sort-varied.mjs",
+      "sha256": "530990401fddc23e22116566ff57caf5082e32f3094fb40963ab6c36f154ad5d"
+    },
+    {
+      "path": "tests/W04_NATIVE_ADMIN/common.mjs",
+      "sha256": "6dd3942cbee8c1dd92fcf93aeeb521b9c0cc997095e5280dee38157908bd2d6e"
+    },
+    {
+      "path": "tests/W04_NATIVE_ADMIN/render-tools.mjs",
+      "sha256": "1fcf062fc3caa6ef24b99bda64694b51b1fa8b9558ff554be9643d1b58081445"
+    },
+    {
+      "path": "tests/W04_NATIVE_ADMIN/audit-api.mjs",
+      "sha256": "0db4ea9ef78251ecb47bad6d0b9a0b8a277bb09719bef6d15e3433336d2824d0"
+    }
+  ],
+  "execution_id": "sort-varied-20261009T182350619095",
+  "exit_code": 1,
+  "finished": "2026-10-09T18:23:52.740004+00:00",
+  "sanitized_output": "0 same13 API-only own fixture heterogeneous price/date preparation FAIL expect(received).toBe(expected) // Object.is equality\n0 exact auxiliary cleanup after heterogeneous nativeUI 72 FAIL expect(received).toBe(expected) // Object.is equality\nnode:internal/modules/run_main:123\n    triggerUncaughtException(\n    ^\n\nExpectError: expect(received).toHaveLength(expected)\n\nExpected length: 13\nReceived length: 0\nReceived array:  []\n    at captureRawStack (/home/ubuntu/.agentopt-v2/workspaces/req_c2e43e4188284ec78b8702e7e3e0d45a/tests/W04_NATIVE_ADMIN/node_modules/playwright-core/lib/coreBundle.js:9282:17)\n    at callMatcherAsStep (/home/ubuntu/.agentopt-v2/workspaces/req_c2e43e4188284ec78b8702e7e3e0d45a/tests/W04_NATIVE_ADMIN/node_modules/playwright/lib/matchers/expect.js:13316:57)\n    at Object.toHaveLength (/home/ubuntu/.agentopt-v2/workspaces/req_c2e43e4188284ec78b8702e7e3e0d45a/tests/W04_NATIVE_ADMIN/node_modules/playwright/lib/matchers/expect.js:13308:23)\n    at /home/ubuntu/.agentopt-v2/workspaces/req_c2e43e4188284ec78b8702e7e3e0d45a/tests/W04_NATIVE_ADMIN/sort-varied.mjs:8:190 {\n  matcherResult: {\n    message: 'expect(received).toHaveLength(expected)\\n' +\n      '\\n' +\n      'Expected length: 13\\n' +\n      'Received length: 0\\n' +\n      'Received array:  []',\n    pass: false,\n    name: 'toHaveLength'\n  }\n}\n\nNode.js v22.23.3\n"
+}

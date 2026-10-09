@@ -1,0 +1,210 @@
+{
+  "reviewed_commit": "d1e85b719f17cf40acbecd7f11b03e3432a4556b",
+  "reviewed_tree": "adc076f73e671b76df10f91ead7fb4fa5420e1e4",
+  "base_source_sha": "fa5523175ac494cfbd13bbf89bf06b3ec91835a6",
+  "base_source_tree": "fa685339b030ee4efe46b63dc8d98c0e2f7d4f0c",
+  "observed_utc": "2026-10-09T18:21:09.095993+00:00",
+  "reviewer": "existing source_binding native helper; unique native helper count1",
+  "review_type": "Independent fixed-local-commit packaging review for nonauthored browser scripts/report/artifacts. Helper-authored source/assets portions are explicitly contributor self-check, not independent review.",
+  "author_boundary": {
+    "independent_portion": "Browser harness, native journey reports/screenshots, matrix/count/token/cleanup evidence and final prose authored by lead; reviewer did not implement these or product code",
+    "contributor_self_check_files": [
+      "tests/W04_NATIVE_ADMIN/source-binding.py",
+      "docs/symphony/evidence/W04_NATIVE_ADMIN/source-binding.json",
+      "docs/symphony/evidence/W04_NATIVE_ADMIN/executed-assets-review.json"
+    ],
+    "product_implementation": "No product implementation performed by reviewer or changed by this package"
+  },
+  "overall_status": "FAIL",
+  "reason": "One factual prose correction required: earlier public-issuance coverage count37 is conflated with aggregate-only count8. Binding/privacy/structure checks otherwise PASS; known UI timing/menu findings remain honestly documented.",
+  "official_validation": "NOT_RUN; native internal review is not canonical Validation",
+  "runtime_reexecution_by_reviewer": "NOT_RUN; this final review reads fixed artifacts/scripts and does not repeat the lead browser/runtime journeys",
+  "blocking_findings": [
+    {
+      "id": "PKG-TOKEN-PROVENANCE-001",
+      "status": "FAIL",
+      "severity": "documentation factual correction",
+      "path": "docs/symphony/W04_NATIVE_ADMIN_BROWSER_FINAL.md",
+      "line": 43,
+      "observed": "Report states initial37 aggregate-only. Fixed provenance records83 aggregate entries,75 per-token files,46 later public issuance rows,8 aggregate-only. Earlier37 lack public issuance rows;29 of these do have per-token files.",
+      "required_correction": "Distinguish earlier37 public-issuance-absent from8 aggregate-only;75 per-token files and83 distinct final-audited tokens remain valid.",
+      "evidence": "docs/symphony/evidence/W04_NATIVE_ADMIN/token-ledger-provenance.json",
+      "runtime_impact": "No source/runtime/test rerun required for this count prose correction"
+    }
+  ],
+  "checks": [
+    {
+      "name": "Publication boundary and fixed source scope",
+      "status": "PASS",
+      "files_changed": 266,
+      "outside_allowed_paths": 0,
+      "product_files_changed": 0,
+      "private_ledger_or_env_files_in_commit": 0,
+      "allowed": [
+        "tests/W04_NATIVE_ADMIN/**",
+        "docs/symphony/evidence/W04_NATIVE_ADMIN/**",
+        "docs/symphony/W04_NATIVE_ADMIN_BROWSER_FINAL.md"
+      ]
+    },
+    {
+      "name": "Safe text private-pattern scan of every committed non-PNG artifact",
+      "status": "PASS",
+      "raw_sanctum_tokens": 0,
+      "email_uuid_bearer_contact_pattern_hits": 0,
+      "known_private_values_independent_scan": "NOT_RUN; no credentials read by helper. Guarded lead exact-known-value scan evidence reviewed separately."
+    },
+    {
+      "name": "PNG privacy row/hash binding",
+      "status": "PASS",
+      "png_files": 98,
+      "matching_privacy_rows": 98,
+      "known_private_hits_in_record": 0,
+      "private_pattern_hits_in_record": 0,
+      "source": "docs/symphony/evidence/W04_NATIVE_ADMIN/privacy-final.json",
+      "privacy_report_self_hash": "Not recursively included in its own hash list; fixed privacy report text independently scanned clean"
+    },
+    {
+      "name": "Representative screenshots after privacy checks",
+      "status": "PASS",
+      "files": [
+        "ordinary-inquiry-390.png",
+        "mobile-final-list-390.png",
+        "mobile-final-list-1440.png"
+      ],
+      "independent_generic_ocr": "PASS before any view; no raw OCR saved",
+      "representative_visual": "Contact fields masked in390 inquiry; native multiitem list full titles/date/status/amount/IDs visibly fit390 and1440 screenshots",
+      "limits": "Screenshot review is artifact inspection, not another browser execution or exhaustive visual-state review"
+    },
+    {
+      "name": "Harness syntax and durable execution-script binding",
+      "status": "PASS",
+      "syntax_files_checked": 91,
+      "archived_command_file_hash_rows_checked": 59,
+      "archive_mismatches": 0,
+      "final_safe_manifest_files": 33,
+      "final_manifest_mismatches": 0,
+      "checks": "Python AST parse and node --check only; no import/runtime credential access"
+    },
+    {
+      "name": "Native numeric token audit counts",
+      "status": "PASS",
+      "issued_distinct": 83,
+      "unique_hashes": 83,
+      "audited": 83,
+      "final_native_logout_401": 83,
+      "native_auth_requery_401": 83,
+      "provided_handoff_retained_auth_200": 3,
+      "later_public_issuance_rows": 46,
+      "earlier_public_issuance_absent": 37,
+      "per_token_files_recorded": 75,
+      "aggregate_only_recorded": 8,
+      "independent_token_table_inventory": "NOT_RUN; prior six historical unrecorded tokens not claimed cleaned"
+    },
+    {
+      "name": "Own fixture cleanup evidence",
+      "status": "PASS",
+      "counts": {
+        "inquiries": 28,
+        "carts": 43,
+        "products": 15,
+        "posts": 6,
+        "policies": 2,
+        "categories": 2
+      },
+      "closed_inquiries_native_200": 28,
+      "terminal_states": "CANCELLED or legitimate DECLINED; no forced state override",
+      "products": "Own15 hidden/unpublished; native linked delete409 remains expected; departures inactive/reserved0 recorded",
+      "policies_categories": "Own2 each inactive, policies nondefault; no broad/default/old-fixture cleanup",
+      "independent_SQL_cleanup_audit": "NOT_RUN"
+    },
+    {
+      "name": "14-scenario original requirements retained",
+      "status": "PASS",
+      "scenario_count": 14,
+      "axis_count": 9,
+      "cross_product_policy_count": 5,
+      "pinned_contract_sha256": "f87c0f98c1ea3f241f40d876d5814061ba8ce85b48c33b5a02bd95a6d973bb47",
+      "original_contract_exact": true,
+      "scenario_action_and_effect_keys_exact": true,
+      "all_matrix_cartesian_execution": "NOT_RUN",
+      "canonicalValidation": "NOT_RUN",
+      "notrun_scopes": "SQL barriers/races, restart/envloss, migrations/full native CI, attachments/editor preview, persisted past/invalid date intake and external-dispatch DB negative assertions explicitly retained"
+    },
+    {
+      "name": "Response-loss source-backed effects labeling",
+      "status": "PASS",
+      "recorded": "UPSTREAM committed201 precedes abort; immediate/reload/sessionStorage retries same body/key/ID with amount/items/events/allocation API snapshot equality",
+      "independent_SQL_effect_measurement": "NOT_RUN; report does not relabel native API snapshots as SQL"
+    },
+    {
+      "name": "Known failures preserved and bounded success distinguished",
+      "status": "PASS",
+      "retained": [
+        "inactive-row-selection-harness.json",
+        "inactive-exact-date-failed.json",
+        "inactive-ui-toggle-witness.json",
+        "journey-1440-menu-harness.json",
+        "recovery.json bootstrap errors"
+      ],
+      "remaining_UI_limitations": [
+        "Rapid native select then Save submitted staleis_active:true at both widths; settled1s false/GETfalse/cart409/UI intake409 restoration201 succeeds",
+        "Initial1440 pointer RowActionMenu unstable; Enter-open plus native detail click succeeds"
+      ],
+      "scope": "No source/copy fix made to force testpass; no claim rapid-save/pointer issue resolved"
+    }
+  ],
+  "contributor_self_checks": [
+    {
+      "name": "Stored source-binding consistency",
+      "status": "PASS",
+      "initial_before_active_source_files": 4354,
+      "after_same_original_scope": 4354,
+      "during_supplement_entrypoints": 2,
+      "during_supplement_root_lang_files": 90,
+      "distinct_measured_active_source_paths": 4446,
+      "initial_timing_honest": true,
+      "stored_hash_equality_failures": 0,
+      "runtime_extras": 0,
+      "before_after_identical": true,
+      "during_after_supplements_identical": true,
+      "required_runtime_binding_before_after": true,
+      "broad_source_all_equal": false,
+      "optional_basic_absent_paths": 463,
+      "exclusions": "Docs/tests/tooling/config/env/storage/DB/vendor-autoload/unallowed caches and optional packages are explicit; not all executed dependencies audited"
+    },
+    {
+      "name": "Executed-asset source binding consistency",
+      "status": "PASS",
+      "unique_paths": 12,
+      "bound_paths": 12,
+      "unbound_paths": 0,
+      "literal_fixed_git_paths": 8,
+      "native_CSS_rewrite_paths": 4,
+      "recorded_asset_rows": 498,
+      "recorded_metric_entries": 79,
+      "instrumented_entries": 57,
+      "metric_report_files": 32,
+      "all_input_file_hashes_fixed_target_match": true,
+      "unique_HTTP_request_count": "NOT_MEASURED",
+      "unique_context_count": "NOT_MEASURED",
+      "rows_unit": "Deduplicated path/hash rows per context; report copies overlap; not request count",
+      "module_bundle": "One ecommerce globalpriority100 segment: JS153543 bytes no sourceMap; legitimate empty CSS0 bytes, exact pinned concatenation rule",
+      "untraced_earlier_support_assets": "NOT_RUN"
+    }
+  ],
+  "nonblocking_coverage_limits": [
+    {
+      "id": "PKG-SORT-COVERAGE-001",
+      "status": "NOT_RUN",
+      "description": "Heterogeneous-price/date ordering discrimination:13 pagination fixtures all12000 and2026-12-25. Four selectors/URL query persistence and equal-value monotonic checks executed; these fixtures cannot distinguish price ascending versus descending or heterogeneous departure ordering. Bounded UI sorting observations do not prove comparator behavior on mixed values."
+    }
+  ],
+  "commands_used": [
+    "git diff --name-only/stat fa5523175ac494cfbd13bbf89bf06b3ec91835a6 d1e85b719f17cf40acbecd7f11b03e3432a4556b",
+    "git show d1e85b719f17cf40acbecd7f11b03e3432a4556b:<allowlisted file>",
+    "node --check --input-type=module with fixed script bytes; Python ast.parse with fixed script bytes",
+    "Tesseract stdin stdout for3 representative fixedPNG; pattern counts only retained",
+    "Fixed Git JSON/hash comparisons; no application boot, DB/env/private ledger reads or runtime mutations"
+  ],
+  "publication": "Reviewer performed no commit/push/merge/deploy; lead owns correction and final checkpoint."
+}
