@@ -279,3 +279,31 @@ explicitselection/exclusions in W04_CAMPAIGN_ACTIVATION. CompiledJS8941442d
 diffonly embeddedBoarddependencyfloor1.1.2→1.1.3; coreb8cf/Boardd368 unchanged.
 Native readonlyreview11assetpairs/source-map0, no duplicatedtests. Independent
 newPage390/1440fixedruntime and TESTnativegates pending; no wholeproductPASS.
+
+
+## Fixed final campaign gates dispatched — 2026-10-09 19:54:10 UTC
+
+Published activation/evidence checkpoint31a18318f91dde34a9c75eaaac65ae1d434b7bc3,
+treec0984e682a77153753edcde318a6d44b6973b1c0, existingdraftPR2. Originale902 is
+remotely reachable through ancestry-preserving merge; no childcanonicalstate
+rewritten. Actions/checkruns0/0 atthisexacthead, hostedCI NOT_RUN/Validationnone.
+
+Canonical boundedstatus:30cumulative attempts=22COMPLETED5FAILED1INTERRUPTED
+2RUNNING. Both actual CENTRALverified1PC CODEX Requestsrunning: req812d
+w04-campaign-native-install-final attempt1 targetd059/tree6dc (exclusiveTEST),
+reqfc51 w04-campaign-browser-final attempt1 target31a/treec098 (APP18871 only).
+The difference in productruntimeartifacts is only compiled Boardminimum1.1.2→
+1.1.3, independentproductionreview verified; source/API/DB/UIfeature filesunchanged.
+Two running now reflects ready independentTEST/browser scopes, not an account/
+provider/twoLane limit. HistoricalmultipleCODEX/CLAUDE/nativeconcurrency retained;
+no duplicate work to fillslots. Nativeparent0active, available4incllead; nooffhost
+PC or guaranteedaccountquota claims. Parentreleases viaofficialwait/resume.
+
+New browser receives ownsyntheticprivate0600handoff expires22:30UTC. Permitted
+only nativeAPPAPI/UI, ownfixturecleanup and originalPage7/8 propertyrestoration;
+noTEST/env/service/cache/source/foreignrows modifications. No inactivecacheflush/
+rebuild while it runs. TESTchild gets minimumTESTenv/wholefreshbaselinebackup/
+exactrowDDLrestore, noAPP/privatehandoff access. Separate actors/resources and
+originalfailures/sourcepins remain distinct. No main/production/business/Spring
+changes; approximately43h5m todeadlineOct11 14:59UTC. Next: comparefinishedfixed
+results, repaironlyreporteddefects, rerunaffectedgates andmeaningfulfinalGitpack.

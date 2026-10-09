@@ -1,7 +1,7 @@
 # G7 Travel Lab delivery audit — IN_PROGRESS
 
 This is the accumulated delivery audit, not a completion declaration. Updated
-2026-10-09 19:49:08 UTC (October 10 KST). Deadline: October 11 23:59 KST /
+2026-10-09 19:54:10 UTC (October 10 KST). Deadline: October 11 23:59 KST /
 14:59 UTC; approximately 43 hours remain. Customer-approved design/database:
 NONE. The implementation is a RAON demonstration, not delivery of Lotte Tour's
 110 customer screens.
@@ -27,7 +27,7 @@ NONE. The implementation is a RAON demonstration, not delivery of Lotte Tour's
   binding fixes plus browser/file/recipe evidence are published atfc54, original
   review commits1d2a4/abf354/0e634 remotely reachable. Official core production
   build and board1.1.3 update completed; independent actual replay completed with bounded PASS atfc54; no campaign PASS inference.
-  Campaign source checkpoint d059d735/tree6dc9381b is published; native production asset8941442d and activation/intake checkpoint follow. Independent new campaign gates remain pending.
+  Campaign source d059d735/tree6dc9381b and activation/intake checkpoint31a18318/treec0984e68 are published. Native production asset8941442d is installed. New campaign TEST and browser gates are RUNNING, not PASS.
 - Main `6853f40d58acbf53a2f29cbb9dd422cc439047a9` was not merged or deployed.
   External automatic deployment behavior remains UNKNOWN. No production service
   restart or business-site DB modification is authorized by this result.
@@ -182,7 +182,7 @@ original failures and the signed-preview/soft-delete native contracts.
 1. CODEXreq812d independently installs fixedd059 in exclusive TEST, exercises
    Page/provisioning/permissions and affected native regression, then exactly
    restores its newly measured whole schema and releases processes.
-2. New fixed-source browser review must exercise390/1440 native Page editor,
+2. CODEXreqfc51 at31a independently exercises390/1440 native Page editor,
    publication/draft/version restore and customer campaign→catalog→cart→request
    with final installed source/assets; preserve preexisting synthetic Pages.
 3. Integrate those original evidence commits, run relevant final regression and
@@ -220,3 +220,31 @@ explicitselection/exclusions in W04_CAMPAIGN_ACTIVATION. CompiledJS8941442d
 diffonly embeddedBoarddependencyfloor1.1.2→1.1.3; coreb8cf/Boardd368 unchanged.
 Native readonlyreview11assetpairs/source-map0, no duplicatedtests. Independent
 newPage390/1440fixedruntime and TESTnativegates pending; no wholeproductPASS.
+
+
+## Fixed final campaign gates dispatched — 2026-10-09 19:54:10 UTC
+
+Published activation/evidence checkpoint31a18318f91dde34a9c75eaaac65ae1d434b7bc3,
+treec0984e682a77153753edcde318a6d44b6973b1c0, existingdraftPR2. Originale902 is
+remotely reachable through ancestry-preserving merge; no childcanonicalstate
+rewritten. Actions/checkruns0/0 atthisexacthead, hostedCI NOT_RUN/Validationnone.
+
+Canonical boundedstatus:30cumulative attempts=22COMPLETED5FAILED1INTERRUPTED
+2RUNNING. Both actual CENTRALverified1PC CODEX Requestsrunning: req812d
+w04-campaign-native-install-final attempt1 targetd059/tree6dc (exclusiveTEST),
+reqfc51 w04-campaign-browser-final attempt1 target31a/treec098 (APP18871 only).
+The difference in productruntimeartifacts is only compiled Boardminimum1.1.2→
+1.1.3, independentproductionreview verified; source/API/DB/UIfeature filesunchanged.
+Two running now reflects ready independentTEST/browser scopes, not an account/
+provider/twoLane limit. HistoricalmultipleCODEX/CLAUDE/nativeconcurrency retained;
+no duplicate work to fillslots. Nativeparent0active, available4incllead; nooffhost
+PC or guaranteedaccountquota claims. Parentreleases viaofficialwait/resume.
+
+New browser receives ownsyntheticprivate0600handoff expires22:30UTC. Permitted
+only nativeAPPAPI/UI, ownfixturecleanup and originalPage7/8 propertyrestoration;
+noTEST/env/service/cache/source/foreignrows modifications. No inactivecacheflush/
+rebuild while it runs. TESTchild gets minimumTESTenv/wholefreshbaselinebackup/
+exactrowDDLrestore, noAPP/privatehandoff access. Separate actors/resources and
+originalfailures/sourcepins remain distinct. No main/production/business/Spring
+changes; approximately43h5m todeadlineOct11 14:59UTC. Next: comparefinishedfixed
+results, repaironlyreporteddefects, rerunaffectedgates andmeaningfulfinalGitpack.
