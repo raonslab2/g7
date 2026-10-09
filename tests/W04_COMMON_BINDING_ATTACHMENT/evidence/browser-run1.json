@@ -1,0 +1,764 @@
+{
+  "review_sha": "fc54b6ae091cd6cef2d0fabc48d2ec4fe4fdba8c",
+  "handoff_source_sha": "fa5523175ac494cfbd13bbf89bf06b3ec91835a6",
+  "phase": "run1",
+  "started": "2026-10-09T19:21:32.259Z",
+  "assets": [
+    {
+      "path": "/build/core/template-engine.min.js",
+      "expected": "b8cf27fab58e108b1509c379a5f4d0860a21a90bc591bb34b48a94d6e56cb76d",
+      "observed": "b8cf27fab58e108b1509c379a5f4d0860a21a90bc591bb34b48a94d6e56cb76d",
+      "http": 200,
+      "match": true
+    },
+    {
+      "path": "/api/templates/assets/sirsoft-admin_basic/js/components.iife.js",
+      "expected": "d25eb47e1308a83a456b17fe86953fec8fefc46a38769c0c225be72b0028e6c9",
+      "observed": "d25eb47e1308a83a456b17fe86953fec8fefc46a38769c0c225be72b0028e6c9",
+      "http": 200,
+      "match": true
+    }
+  ],
+  "cases": [
+    {
+      "width": 1440,
+      "name": "rapid-true-to-false",
+      "selected": {
+        "at": 2411.899999976158,
+        "nativeGlobalActive": false,
+        "renderedStatusLabel": "접수 가능"
+      },
+      "saveFirstEvent": {
+        "t": 2499.899999976158,
+        "type": "pointerdown",
+        "trusted": true,
+        "testId": "departure_save",
+        "role": "dialog",
+        "state": {
+          "is_active": false,
+          "capacity": 4,
+          "departure_date": "2026-12-29",
+          "return_date": "2026-12-30",
+          "product_option_id": 175
+        },
+        "renderedStatusLabel": "접수 가능"
+      },
+      "saveEventTypes": [
+        "pointerdown",
+        "mousedown",
+        "mouseup",
+        "click"
+      ],
+      "allSaveEventsTrusted": true,
+      "staleRenderAtSave": true,
+      "method": "PUT",
+      "http": 200,
+      "request": {
+        "product_option_id": 175,
+        "departure_date": "2026-12-29",
+        "return_date": "2026-12-30",
+        "capacity": 4,
+        "is_active": false
+      },
+      "returned": {
+        "is_active": false,
+        "capacity": 4,
+        "departure_date": "2026-12-29",
+        "return_date": "2026-12-30",
+        "product_option_id": 175
+      },
+      "readback": {
+        "is_active": false,
+        "capacity": 4,
+        "departure_date": "2026-12-29",
+        "return_date": "2026-12-30",
+        "product_option_id": 175,
+        "reserved": 0
+      },
+      "pass": true
+    },
+    {
+      "width": 1440,
+      "name": "rapid-false-to-true",
+      "selected": {
+        "at": 2348.5,
+        "nativeGlobalActive": true,
+        "renderedStatusLabel": "접수 중지"
+      },
+      "saveFirstEvent": {
+        "t": 2430.899999976158,
+        "type": "pointerdown",
+        "trusted": true,
+        "testId": "departure_save",
+        "role": "dialog",
+        "state": {
+          "is_active": true,
+          "capacity": 4,
+          "departure_date": "2026-12-29",
+          "return_date": "2026-12-30",
+          "product_option_id": 175
+        },
+        "renderedStatusLabel": "접수 중지"
+      },
+      "saveEventTypes": [
+        "pointerdown",
+        "mousedown",
+        "mouseup",
+        "click"
+      ],
+      "allSaveEventsTrusted": true,
+      "staleRenderAtSave": true,
+      "method": "PUT",
+      "http": 200,
+      "request": {
+        "product_option_id": 175,
+        "departure_date": "2026-12-29",
+        "return_date": "2026-12-30",
+        "capacity": 4,
+        "is_active": true
+      },
+      "returned": {
+        "is_active": true,
+        "capacity": 4,
+        "departure_date": "2026-12-29",
+        "return_date": "2026-12-30",
+        "product_option_id": 175
+      },
+      "readback": {
+        "is_active": true,
+        "capacity": 4,
+        "departure_date": "2026-12-29",
+        "return_date": "2026-12-30",
+        "product_option_id": 175,
+        "reserved": 0
+      },
+      "pass": true
+    },
+    {
+      "width": 1440,
+      "name": "rapid-true-to-false-repeat",
+      "selected": {
+        "at": 2184.5,
+        "nativeGlobalActive": false,
+        "renderedStatusLabel": "접수 가능"
+      },
+      "saveFirstEvent": {
+        "t": 2251.5999999046326,
+        "type": "pointerdown",
+        "trusted": true,
+        "testId": "departure_save",
+        "role": "dialog",
+        "state": {
+          "is_active": false,
+          "capacity": 4,
+          "departure_date": "2026-12-29",
+          "return_date": "2026-12-30",
+          "product_option_id": 175
+        },
+        "renderedStatusLabel": "접수 가능"
+      },
+      "saveEventTypes": [
+        "pointerdown",
+        "mousedown",
+        "mouseup",
+        "click"
+      ],
+      "allSaveEventsTrusted": true,
+      "staleRenderAtSave": true,
+      "method": "PUT",
+      "http": 200,
+      "request": {
+        "product_option_id": 175,
+        "departure_date": "2026-12-29",
+        "return_date": "2026-12-30",
+        "capacity": 4,
+        "is_active": false
+      },
+      "returned": {
+        "is_active": false,
+        "capacity": 4,
+        "departure_date": "2026-12-29",
+        "return_date": "2026-12-30",
+        "product_option_id": 175
+      },
+      "readback": {
+        "is_active": false,
+        "capacity": 4,
+        "departure_date": "2026-12-29",
+        "return_date": "2026-12-30",
+        "product_option_id": 175,
+        "reserved": 0
+      },
+      "pass": true
+    },
+    {
+      "width": 1440,
+      "name": "validation-return-before-departure",
+      "method": "PUT",
+      "http": 422,
+      "request": {
+        "product_option_id": 175,
+        "departure_date": "2026-12-29",
+        "return_date": "2026-12-20",
+        "capacity": 4,
+        "is_active": true
+      },
+      "readback": {
+        "is_active": true,
+        "capacity": 4,
+        "departure_date": "2026-12-29",
+        "return_date": "2026-12-30",
+        "product_option_id": 175,
+        "reserved": 0
+      },
+      "errorFields": null,
+      "pass": true
+    },
+    {
+      "width": 1440,
+      "name": "validation-capacity-zero",
+      "method": "PUT",
+      "http": 422,
+      "request": {
+        "product_option_id": 175,
+        "departure_date": "2026-12-29",
+        "return_date": "2026-12-30",
+        "capacity": 0,
+        "is_active": true
+      },
+      "readback": {
+        "is_active": true,
+        "capacity": 4,
+        "departure_date": "2026-12-29",
+        "return_date": "2026-12-30",
+        "product_option_id": 175,
+        "reserved": 0
+      },
+      "pass": true
+    },
+    {
+      "width": 390,
+      "name": "rapid-true-to-false",
+      "selected": {
+        "at": 2501.5,
+        "nativeGlobalActive": false,
+        "renderedStatusLabel": "접수 가능"
+      },
+      "saveFirstEvent": {
+        "t": 2580,
+        "type": "pointerdown",
+        "trusted": true,
+        "testId": "departure_save",
+        "role": "dialog",
+        "state": {
+          "is_active": false,
+          "capacity": 4,
+          "departure_date": "2026-12-29",
+          "return_date": "2026-12-30",
+          "product_option_id": 175
+        },
+        "renderedStatusLabel": "접수 가능"
+      },
+      "saveEventTypes": [
+        "pointerdown",
+        "touchstart",
+        "mousedown",
+        "mouseup",
+        "click"
+      ],
+      "allSaveEventsTrusted": true,
+      "staleRenderAtSave": true,
+      "method": "PUT",
+      "http": 200,
+      "request": {
+        "product_option_id": 175,
+        "departure_date": "2026-12-29",
+        "return_date": "2026-12-30",
+        "capacity": 4,
+        "is_active": false
+      },
+      "returned": {
+        "is_active": false,
+        "capacity": 4,
+        "departure_date": "2026-12-29",
+        "return_date": "2026-12-30",
+        "product_option_id": 175
+      },
+      "readback": {
+        "is_active": false,
+        "capacity": 4,
+        "departure_date": "2026-12-29",
+        "return_date": "2026-12-30",
+        "product_option_id": 175,
+        "reserved": 0
+      },
+      "pass": true
+    },
+    {
+      "width": 390,
+      "name": "rapid-false-to-true",
+      "selected": {
+        "at": 2653.399999976158,
+        "nativeGlobalActive": true,
+        "renderedStatusLabel": "접수 중지"
+      },
+      "saveFirstEvent": {
+        "t": 2763.8000000715256,
+        "type": "pointerdown",
+        "trusted": true,
+        "testId": "departure_save",
+        "role": "dialog",
+        "state": {
+          "is_active": true,
+          "capacity": 4,
+          "departure_date": "2026-12-29",
+          "return_date": "2026-12-30",
+          "product_option_id": 175
+        },
+        "renderedStatusLabel": "접수 중지"
+      },
+      "saveEventTypes": [
+        "pointerdown",
+        "touchstart",
+        "mousedown",
+        "mouseup",
+        "click"
+      ],
+      "allSaveEventsTrusted": true,
+      "staleRenderAtSave": true,
+      "method": "PUT",
+      "http": 200,
+      "request": {
+        "product_option_id": 175,
+        "departure_date": "2026-12-29",
+        "return_date": "2026-12-30",
+        "capacity": 4,
+        "is_active": true
+      },
+      "returned": {
+        "is_active": true,
+        "capacity": 4,
+        "departure_date": "2026-12-29",
+        "return_date": "2026-12-30",
+        "product_option_id": 175
+      },
+      "readback": {
+        "is_active": true,
+        "capacity": 4,
+        "departure_date": "2026-12-29",
+        "return_date": "2026-12-30",
+        "product_option_id": 175,
+        "reserved": 0
+      },
+      "pass": true
+    },
+    {
+      "width": 390,
+      "name": "rapid-true-to-false-repeat",
+      "selected": {
+        "at": 2294.100000023842,
+        "nativeGlobalActive": false,
+        "renderedStatusLabel": "접수 가능"
+      },
+      "saveFirstEvent": {
+        "t": 2386.9000000953674,
+        "type": "pointerdown",
+        "trusted": true,
+        "testId": "departure_save",
+        "role": "dialog",
+        "state": {
+          "is_active": false,
+          "capacity": 4,
+          "departure_date": "2026-12-29",
+          "return_date": "2026-12-30",
+          "product_option_id": 175
+        },
+        "renderedStatusLabel": "접수 가능"
+      },
+      "saveEventTypes": [
+        "pointerdown",
+        "touchstart",
+        "mousedown",
+        "mouseup",
+        "click"
+      ],
+      "allSaveEventsTrusted": true,
+      "staleRenderAtSave": true,
+      "method": "PUT",
+      "http": 200,
+      "request": {
+        "product_option_id": 175,
+        "departure_date": "2026-12-29",
+        "return_date": "2026-12-30",
+        "capacity": 4,
+        "is_active": false
+      },
+      "returned": {
+        "is_active": false,
+        "capacity": 4,
+        "departure_date": "2026-12-29",
+        "return_date": "2026-12-30",
+        "product_option_id": 175
+      },
+      "readback": {
+        "is_active": false,
+        "capacity": 4,
+        "departure_date": "2026-12-29",
+        "return_date": "2026-12-30",
+        "product_option_id": 175,
+        "reserved": 0
+      },
+      "pass": true
+    },
+    {
+      "width": 390,
+      "name": "validation-return-before-departure",
+      "method": "PUT",
+      "http": 422,
+      "request": {
+        "product_option_id": 175,
+        "departure_date": "2026-12-29",
+        "return_date": "2026-12-20",
+        "capacity": 4,
+        "is_active": true
+      },
+      "readback": {
+        "is_active": true,
+        "capacity": 4,
+        "departure_date": "2026-12-29",
+        "return_date": "2026-12-30",
+        "product_option_id": 175,
+        "reserved": 0
+      },
+      "errorFields": null,
+      "pass": true
+    },
+    {
+      "width": 390,
+      "name": "validation-capacity-zero",
+      "method": "PUT",
+      "http": 422,
+      "request": {
+        "product_option_id": 175,
+        "departure_date": "2026-12-29",
+        "return_date": "2026-12-30",
+        "capacity": 0,
+        "is_active": true
+      },
+      "readback": {
+        "is_active": true,
+        "capacity": 4,
+        "departure_date": "2026-12-29",
+        "return_date": "2026-12-30",
+        "product_option_id": 175,
+        "reserved": 0
+      },
+      "pass": true
+    }
+  ],
+  "menu": [
+    {
+      "width": 1440,
+      "label": "own-latest",
+      "inquiryId": 174,
+      "pageNumber": 1,
+      "mode": "locator-pointer",
+      "trigger": {
+        "x": 1359.0625,
+        "y": 391,
+        "width": 32,
+        "height": 24
+      },
+      "menuImmediately": 1,
+      "detail": true
+    },
+    {
+      "width": 1440,
+      "label": "own-latest",
+      "inquiryId": 174,
+      "pageNumber": 1,
+      "mode": "coordinate-pointer",
+      "trigger": {
+        "x": 1359.0625,
+        "y": 391,
+        "width": 32,
+        "height": 24
+      },
+      "menuImmediately": 1,
+      "detail": true
+    },
+    {
+      "width": 1440,
+      "label": "own-latest",
+      "inquiryId": 174,
+      "pageNumber": 1,
+      "mode": "keyboard",
+      "trigger": {
+        "x": 1359.0625,
+        "y": 391,
+        "width": 32,
+        "height": 24
+      },
+      "menuImmediately": 1,
+      "detail": false,
+      "error": "expect(page).toHaveURL(expected) failed"
+    },
+    {
+      "width": 390,
+      "label": "own-latest",
+      "inquiryId": 174,
+      "pageNumber": 1,
+      "mode": "tap",
+      "detail": false,
+      "error": "expect(locator).toBeVisible() failed"
+    },
+    {
+      "width": 390,
+      "label": "own-latest",
+      "inquiryId": 174,
+      "pageNumber": 1,
+      "mode": "keyboard",
+      "detail": false,
+      "error": "expect(locator).toBeVisible() failed"
+    },
+    {
+      "width": 1440,
+      "label": "original-report-150",
+      "inquiryId": 150,
+      "pageNumber": 2,
+      "mode": "locator-pointer",
+      "trigger": {
+        "x": 1358.84375,
+        "y": 619,
+        "width": 32,
+        "height": 24
+      },
+      "menuImmediately": 1,
+      "detail": true
+    },
+    {
+      "width": 1440,
+      "label": "original-report-150",
+      "inquiryId": 150,
+      "pageNumber": 2,
+      "mode": "coordinate-pointer",
+      "trigger": {
+        "x": 1358.84375,
+        "y": 619,
+        "width": 32,
+        "height": 24
+      },
+      "menuImmediately": 1,
+      "detail": true
+    },
+    {
+      "width": 1440,
+      "label": "original-report-150",
+      "inquiryId": 150,
+      "pageNumber": 2,
+      "mode": "keyboard",
+      "trigger": {
+        "x": 1358.84375,
+        "y": 619,
+        "width": 32,
+        "height": 24
+      },
+      "menuImmediately": 1,
+      "detail": false,
+      "error": "expect(page).toHaveURL(expected) failed"
+    },
+    {
+      "width": 390,
+      "label": "original-report-150",
+      "inquiryId": 150,
+      "pageNumber": 2,
+      "mode": "tap",
+      "detail": false,
+      "error": "expect(locator).toBeVisible() failed"
+    },
+    {
+      "width": 390,
+      "label": "original-report-150",
+      "inquiryId": 150,
+      "pageNumber": 2,
+      "mode": "keyboard",
+      "detail": false,
+      "error": "expect(locator).toBeVisible() failed"
+    }
+  ],
+  "smoke": [
+    {
+      "check": "member-ui-page",
+      "route": "/travel",
+      "http": 200,
+      "renderedTextLength": 1589,
+      "onLogin": false
+    },
+    {
+      "check": "member-ui-page",
+      "route": "/travel/cart",
+      "http": 200,
+      "renderedTextLength": 371,
+      "onLogin": false
+    },
+    {
+      "check": "member-ui-page",
+      "route": "/travel/requests",
+      "http": 200,
+      "renderedTextLength": 1593,
+      "onLogin": false
+    },
+    {
+      "check": "api",
+      "label": "member-cart",
+      "http": 200,
+      "shape": {
+        "itemCount": 0
+      }
+    },
+    {
+      "check": "api",
+      "label": "guest-cart",
+      "http": 401,
+      "shape": null
+    },
+    {
+      "check": "api",
+      "label": "member-admin-catalog",
+      "http": 403,
+      "shape": null
+    },
+    {
+      "check": "api",
+      "label": "member-auth-user",
+      "http": 200,
+      "shape": null
+    },
+    {
+      "check": "member-ui-pageerrors",
+      "count": 0,
+      "sample": []
+    }
+  ],
+  "validation": [],
+  "ownership": [
+    {
+      "actor": "member",
+      "method": "PUT",
+      "http": 403
+    },
+    {
+      "actor": "other_member",
+      "method": "PUT",
+      "http": 403
+    },
+    {
+      "actor": "guest",
+      "method": "PUT",
+      "http": 401
+    },
+    {
+      "readbackAfterForeignAttempts": {
+        "is_active": false,
+        "capacity": 4
+      }
+    }
+  ],
+  "tokens": [
+    {
+      "hash": "be8ac4888ed5e696d7a01bcc145e108a75f36f97593c4cc4694fb2da52d1bac7",
+      "logout": 200,
+      "authAfter": 401
+    },
+    {
+      "hash": "d8c7897651d2fc8ddbf8f685b9bf247b3b42288c3b215225d21d188e75d3f26f",
+      "logout": 200,
+      "authAfter": 401
+    },
+    {
+      "hash": "5b3d09ee897efd634c9387146fe9bf4efc71dba6f9f2b26603a00b5f85f41e5b",
+      "logout": 200,
+      "authAfter": 401
+    },
+    {
+      "hash": "5dcacb3dbf107df649242ab50dff095bd88637beb5fa9fa8ee080bb2008133d1",
+      "logout": 200,
+      "authAfter": 401
+    },
+    {
+      "hash": "cd18338547696f1eea15b8dcb0c1130173cf3d7ee14bbb529caca762a9bf479b",
+      "logout": 200,
+      "authAfter": 401
+    },
+    {
+      "hash": "d1cac12828e5fa6e8f404d2ccfb01ae1d9d89ecf1d70213003e64949f98bf73e",
+      "logout": 200,
+      "authAfter": 401
+    },
+    {
+      "hash": "0f791c251f23562cba563a7d439de3d4f815342d392e2d48b0d377eb43bb9216",
+      "logout": 200,
+      "authAfter": 401
+    },
+    {
+      "supplied": "member",
+      "authUserHttp": 200
+    },
+    {
+      "supplied": "other_member",
+      "authUserHttp": 200
+    },
+    {
+      "supplied": "admin",
+      "authUserHttp": 200
+    }
+  ],
+  "fixture": {
+    "productId": 87,
+    "marker": "W04CB1791573692971",
+    "scope": "ONE newly owned hidden synthetic product with 2 options; API preparation only (not UI CREATE); category26/policy6 referenced read-only",
+    "optionIds": [
+      175,
+      176
+    ],
+    "departureId": 141
+  },
+  "cleanup": [
+    {
+      "departureInactiveHttp": 200,
+      "allOwnDeparturesInactiveReserved0": true,
+      "departures": 1
+    },
+    {
+      "productId": 87,
+      "unpublishedHttp": 200,
+      "publishedRead": false,
+      "hiddenHttp": 200,
+      "hiddenRead": true,
+      "retainedSynthetic": true
+    }
+  ],
+  "harness_errors": [
+    {
+      "width": 1440,
+      "name": "rapid-number-date-option-status",
+      "error": "locator.click: Timeout 30000ms exceeded.\nCall log:\n  - waiting for getByTestId('departure_product_option_select')\n"
+    },
+    {
+      "width": 390,
+      "name": "rapid-number-date-option-status",
+      "error": "locator.tap: Timeout 30000ms exceeded.\nCall log:\n  - waiting for getByTestId('departure_product_option_select')\n"
+    }
+  ],
+  "chromium": "156.0.8078.4",
+  "screenshots": [
+    "departure-modal-1440-run1.png",
+    "departure-modal-390-run1.png"
+  ],
+  "menuTargets": {
+    "ownListHttp": 200,
+    "ownCount": 20,
+    "inquiry150OwnerReadHttp": 200
+  },
+  "finished": "2026-10-09T19:24:53.647Z"
+}
