@@ -1,0 +1,95 @@
+{
+  "nav": {
+    "catalog": "여행 카탈로그",
+    "inquiries": "여행 문의",
+    "support": "고객지원"
+  },
+  "common": {
+    "lab_banner": "LAB 테스트 환경입니다. 실제 결제·예약·환불·메일·문자는 발생하지 않습니다.",
+    "refresh": "새로고침",
+    "save": "저장",
+    "cancel": "취소",
+    "prev": "이전",
+    "next": "다음",
+    "page_summary": "{{current}} / {{last}} 페이지 · 전체 {{total}}건"
+  },
+  "catalog": {
+    "title": "여행 카탈로그",
+    "description": "이커머스 상품을 여행 상품으로, 상품 옵션을 출발일로 관리합니다.",
+    "product_code": "상품 코드 {{code}}",
+    "open_product_admin": "이커머스 상품 관리 열기",
+    "price_source_note": "가격과 옵션 원본은 이커머스 상품 관리에서만 수정합니다. 이 화면은 출발일 운영 상태와 정원만 다룹니다.",
+    "capacity_line": "정원 {{capacity}} · 문의 인원 {{reserved}}",
+    "edit_departure": "출발일 설정",
+    "no_departures": "등록된 출발일(상품 옵션)이 없습니다.",
+    "empty": "여행 상품이 없습니다.",
+    "status": {
+      "OPEN": "접수 중",
+      "CLOSED": "마감",
+      "HIDDEN": "숨김"
+    },
+    "modal": {
+      "title": "출발일 운영 설정",
+      "status": "운영 상태",
+      "capacity": "정원(명)",
+      "price_note": "금액은 여기서 바꾸지 않습니다. 이커머스 상품 옵션에서 관리하세요.",
+      "saved": "출발일 설정을 저장했습니다."
+    }
+  },
+  "inquiries": {
+    "title": "여행 문의",
+    "description": "LAB 테스트 문의를 확인하고 허용된 상태로만 전환합니다.",
+    "filter_all": "전체",
+    "empty": "문의가 없습니다.",
+    "columns": {
+      "reference": "접수 번호",
+      "trip": "여행 상품",
+      "departure": "출발일",
+      "party_size": "인원",
+      "status": "상태",
+      "created_at": "접수 일시"
+    },
+    "actions": {
+      "view": "상세 보기"
+    },
+    "status": {
+      "TEST_INQUIRY": "테스트 접수",
+      "UNDER_REVIEW": "검토 중",
+      "TEST_ACCEPTED": "테스트 수락",
+      "DECLINED": "거절",
+      "CANCELLED": "취소"
+    }
+  },
+  "inquiry_detail": {
+    "title": "여행 문의 상세",
+    "description": "모든 상태는 테스트용이며 실제 예약이 성립하지 않습니다.",
+    "back": "목록",
+    "summary": "문의 내용",
+    "requester": "문의자",
+    "message": "요청 메시지",
+    "status_title": "상태 처리",
+    "transition_hint": "서버가 허용한 다음 상태만 선택할 수 있습니다.",
+    "terminal": "더 이상 전환할 수 있는 상태가 없습니다.",
+    "admin_note": "관리자 메모",
+    "admin_note_placeholder": "내부 처리 메모 (문의자에게 발송되지 않습니다)",
+    "saved": "문의 상태를 저장했습니다."
+  },
+  "support": {
+    "title": "고객지원",
+    "description": "공지사항·FAQ·1:1 문의는 그누보드7 게시판으로 운영합니다.",
+    "open_board_admin": "게시판 관리 열기",
+    "notices": {
+      "title": "공지사항",
+      "description": "방문자에게 공개되는 여행 연구소 공지입니다."
+    },
+    "faqs": {
+      "title": "자주 묻는 질문",
+      "description": "방문자에게 공개되는 FAQ 입니다."
+    },
+    "questions": {
+      "title": "1:1 문의",
+      "description": "작성자와 관리자만 볼 수 있는 비밀 문의입니다. 답변은 댓글로 등록합니다."
+    },
+    "provision_hint": "게시판이 없으면 LAB 환경에서 raonslab-travel_lab:support-provision --lab-confirm 으로 준비합니다."
+  }
+}

@@ -1,0 +1,398 @@
+{
+  "version": "1.0.0",
+  "layout_name": "admin_travel_lab_support",
+  "permissions": [
+    "raonslab-travel_lab.support.read"
+  ],
+  "extends": "_admin_base",
+  "meta": {
+    "title": "$t:raonslab-travel_lab.admin.support.title",
+    "description": "$t:raonslab-travel_lab.admin.support.description"
+  },
+  "data_sources": [],
+  "slots": {
+    "content": [
+      {
+        "id": "admin_travel_lab_support_content",
+        "type": "basic",
+        "name": "Div",
+        "props": {
+          "className": "admin-page-content"
+        },
+        "children": [
+          {
+            "id": "page_header",
+            "type": "basic",
+            "name": "Div",
+            "props": {
+              "className": "flex-start justify-between gap-4 mb-4"
+            },
+            "children": [
+              {
+                "id": "page_header_left",
+                "type": "basic",
+                "name": "Div",
+                "children": [
+                  {
+                    "type": "basic",
+                    "name": "H1",
+                    "props": {
+                      "className": "page-title mb-1"
+                    },
+                    "text": "$t:raonslab-travel_lab.admin.support.title"
+                  },
+                  {
+                    "type": "basic",
+                    "name": "P",
+                    "props": {
+                      "className": "text-secondary text-sm"
+                    },
+                    "text": "$t:raonslab-travel_lab.admin.support.description"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "travel_section_nav",
+            "type": "basic",
+            "name": "Div",
+            "props": {
+              "className": "flex flex-wrap gap-2 mb-6"
+            },
+            "children": [
+              {
+                "id": "travel_nav_catalog",
+                "type": "basic",
+                "name": "Button",
+                "props": {
+                  "type": "button",
+                  "className": "px-3 py-1.5 text-sm rounded-lg text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700"
+                },
+                "children": [
+                  {
+                    "type": "basic",
+                    "name": "Span",
+                    "text": "$t:raonslab-travel_lab.admin.nav.catalog"
+                  }
+                ],
+                "actions": [
+                  {
+                    "type": "click",
+                    "handler": "navigate",
+                    "comment": "audit:allow layout-list-context-navigate-merge-query 여행 연구소 관리 섹션 간 이동 — 목록 정체성이 달라 승계하지 않는다",
+                    "params": {
+                      "path": "/admin/travel-lab",
+                      "mergeQuery": false,
+                      "query": {}
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "travel_nav_inquiries",
+                "type": "basic",
+                "name": "Button",
+                "props": {
+                  "type": "button",
+                  "className": "px-3 py-1.5 text-sm rounded-lg text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700"
+                },
+                "children": [
+                  {
+                    "type": "basic",
+                    "name": "Span",
+                    "text": "$t:raonslab-travel_lab.admin.nav.inquiries"
+                  }
+                ],
+                "actions": [
+                  {
+                    "type": "click",
+                    "handler": "navigate",
+                    "comment": "audit:allow layout-list-context-navigate-merge-query 여행 연구소 관리 섹션 간 이동 — 목록 정체성이 달라 승계하지 않는다",
+                    "params": {
+                      "path": "/admin/travel-lab/inquiries",
+                      "mergeQuery": false,
+                      "query": {}
+                    }
+                  }
+                ]
+              },
+              {
+                "id": "travel_nav_support",
+                "type": "basic",
+                "name": "Button",
+                "props": {
+                  "type": "button",
+                  "className": "px-3 py-1.5 text-sm rounded-lg bg-gray-900 text-white dark:bg-white dark:text-gray-900"
+                },
+                "children": [
+                  {
+                    "type": "basic",
+                    "name": "Span",
+                    "text": "$t:raonslab-travel_lab.admin.nav.support"
+                  }
+                ],
+                "actions": [
+                  {
+                    "type": "click",
+                    "handler": "navigate",
+                    "comment": "audit:allow layout-list-context-navigate-merge-query 여행 연구소 관리 섹션 간 이동 — 목록 정체성이 달라 승계하지 않는다",
+                    "params": {
+                      "path": "/admin/travel-lab/support",
+                      "mergeQuery": false,
+                      "query": {}
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "lab_banner",
+            "type": "basic",
+            "name": "Div",
+            "props": {
+              "className": "mb-4 px-4 py-3 rounded-lg bg-amber-50 text-amber-800 dark:bg-amber-900 dark:text-amber-100 text-sm"
+            },
+            "children": [
+              {
+                "type": "basic",
+                "name": "Span",
+                "text": "$t:raonslab-travel_lab.admin.common.lab_banner"
+              }
+            ]
+          },
+          {
+            "id": "support_cards",
+            "type": "basic",
+            "name": "Div",
+            "props": {
+              "className": "grid grid-cols-1 md:grid-cols-3 gap-4"
+            },
+            "children": [
+              {
+                "id": "support_notices_card",
+                "type": "basic",
+                "name": "Div",
+                "props": {
+                  "className": "admin-card flex flex-col gap-2"
+                },
+                "children": [
+                  {
+                    "type": "basic",
+                    "name": "H2",
+                    "props": {
+                      "className": "card-title"
+                    },
+                    "text": "$t:raonslab-travel_lab.admin.support.notices.title"
+                  },
+                  {
+                    "type": "basic",
+                    "name": "P",
+                    "props": {
+                      "className": "text-sm text-gray-600 dark:text-gray-300"
+                    },
+                    "text": "$t:raonslab-travel_lab.admin.support.notices.description"
+                  },
+                  {
+                    "type": "basic",
+                    "name": "Span",
+                    "props": {
+                      "className": "font-mono text-xs text-gray-500 dark:text-gray-400"
+                    },
+                    "text": "travel-lab-notices"
+                  },
+                  {
+                    "id": "open_notices_board",
+                    "type": "basic",
+                    "name": "Button",
+                    "props": {
+                      "type": "button",
+                      "className": "btn btn-secondary btn-sm self-start"
+                    },
+                    "children": [
+                      {
+                        "type": "basic",
+                        "name": "Icon",
+                        "props": {
+                          "name": "external-link-alt",
+                          "className": "text-sm"
+                        }
+                      },
+                      {
+                        "type": "basic",
+                        "name": "Span",
+                        "text": "$t:raonslab-travel_lab.admin.support.open_board_admin"
+                      }
+                    ],
+                    "actions": [
+                      {
+                        "type": "click",
+                        "handler": "navigate",
+                        "comment": "audit:allow layout-list-context-navigate-merge-query 그누보드7 게시판 관리자 화면으로 이동 — 다른 목록 클러스터",
+                        "params": {
+                          "path": "/admin/board/travel-lab-notices",
+                          "mergeQuery": false,
+                          "query": {}
+                        }
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "id": "support_faqs_card",
+                "type": "basic",
+                "name": "Div",
+                "props": {
+                  "className": "admin-card flex flex-col gap-2"
+                },
+                "children": [
+                  {
+                    "type": "basic",
+                    "name": "H2",
+                    "props": {
+                      "className": "card-title"
+                    },
+                    "text": "$t:raonslab-travel_lab.admin.support.faqs.title"
+                  },
+                  {
+                    "type": "basic",
+                    "name": "P",
+                    "props": {
+                      "className": "text-sm text-gray-600 dark:text-gray-300"
+                    },
+                    "text": "$t:raonslab-travel_lab.admin.support.faqs.description"
+                  },
+                  {
+                    "type": "basic",
+                    "name": "Span",
+                    "props": {
+                      "className": "font-mono text-xs text-gray-500 dark:text-gray-400"
+                    },
+                    "text": "travel-lab-faqs"
+                  },
+                  {
+                    "id": "open_faqs_board",
+                    "type": "basic",
+                    "name": "Button",
+                    "props": {
+                      "type": "button",
+                      "className": "btn btn-secondary btn-sm self-start"
+                    },
+                    "children": [
+                      {
+                        "type": "basic",
+                        "name": "Icon",
+                        "props": {
+                          "name": "external-link-alt",
+                          "className": "text-sm"
+                        }
+                      },
+                      {
+                        "type": "basic",
+                        "name": "Span",
+                        "text": "$t:raonslab-travel_lab.admin.support.open_board_admin"
+                      }
+                    ],
+                    "actions": [
+                      {
+                        "type": "click",
+                        "handler": "navigate",
+                        "comment": "audit:allow layout-list-context-navigate-merge-query 그누보드7 게시판 관리자 화면으로 이동 — 다른 목록 클러스터",
+                        "params": {
+                          "path": "/admin/board/travel-lab-faqs",
+                          "mergeQuery": false,
+                          "query": {}
+                        }
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "id": "support_questions_card",
+                "type": "basic",
+                "name": "Div",
+                "props": {
+                  "className": "admin-card flex flex-col gap-2"
+                },
+                "children": [
+                  {
+                    "type": "basic",
+                    "name": "H2",
+                    "props": {
+                      "className": "card-title"
+                    },
+                    "text": "$t:raonslab-travel_lab.admin.support.questions.title"
+                  },
+                  {
+                    "type": "basic",
+                    "name": "P",
+                    "props": {
+                      "className": "text-sm text-gray-600 dark:text-gray-300"
+                    },
+                    "text": "$t:raonslab-travel_lab.admin.support.questions.description"
+                  },
+                  {
+                    "type": "basic",
+                    "name": "Span",
+                    "props": {
+                      "className": "font-mono text-xs text-gray-500 dark:text-gray-400"
+                    },
+                    "text": "travel-lab-questions"
+                  },
+                  {
+                    "id": "open_questions_board",
+                    "type": "basic",
+                    "name": "Button",
+                    "props": {
+                      "type": "button",
+                      "className": "btn btn-secondary btn-sm self-start"
+                    },
+                    "children": [
+                      {
+                        "type": "basic",
+                        "name": "Icon",
+                        "props": {
+                          "name": "external-link-alt",
+                          "className": "text-sm"
+                        }
+                      },
+                      {
+                        "type": "basic",
+                        "name": "Span",
+                        "text": "$t:raonslab-travel_lab.admin.support.open_board_admin"
+                      }
+                    ],
+                    "actions": [
+                      {
+                        "type": "click",
+                        "handler": "navigate",
+                        "comment": "audit:allow layout-list-context-navigate-merge-query 그누보드7 게시판 관리자 화면으로 이동 — 다른 목록 클러스터",
+                        "params": {
+                          "path": "/admin/board/travel-lab-questions",
+                          "mergeQuery": false,
+                          "query": {}
+                        }
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "support_provision_hint",
+            "type": "basic",
+            "name": "P",
+            "props": {
+              "className": "mt-4 text-xs text-gray-500 dark:text-gray-400"
+            },
+            "text": "$t:raonslab-travel_lab.admin.support.provision_hint"
+          }
+        ]
+      }
+    ]
+  }
+}
