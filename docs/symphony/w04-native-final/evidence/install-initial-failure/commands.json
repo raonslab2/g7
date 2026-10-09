@@ -1,0 +1,31 @@
+{
+    "commands": [
+        {
+            "step": "01-db-wipe",
+            "args": [
+                "db:wipe",
+                "--database=mysql",
+                "--drop-views",
+                "--force",
+                "--no-interaction"
+            ],
+            "quiesce_wait": 0.056,
+            "exit": 0,
+            "seconds": 2.485,
+            "pid": 240143
+        },
+        {
+            "step": "02-migrate",
+            "args": [
+                "migrate",
+                "--database=mysql",
+                "--force",
+                "--no-interaction"
+            ],
+            "quiesce_wait": 0.072,
+            "exit": 1,
+            "seconds": 0.376,
+            "pid": 240319
+        }
+    ]
+}

@@ -1,0 +1,42 @@
+{
+    "vendor-bundle": {
+        "command": [
+            "/usr/bin/php8.3",
+            "scripts/travel-lab/vendor-check.php",
+            "--bundled"
+        ],
+        "pid": 231519,
+        "exit": 0,
+        "process_gone": true,
+        "seconds": 1.171,
+        "utc": "2026-10-09T17:15:40+00:00",
+        "output_sha256": "9ff77d690c6b9987381ce133c2f0eb72930b8cbfa57e27a9eafff14c71d868c8",
+        "safe_summary": "{\"status\":\"PASS dependency-only check\",\"bundle_sha256\":\"713f98578a866fada6782d11f8c80ff13037f1faf0edaaa55f004ddc4e80d1b9\",\"package_count\":1}"
+    },
+    "guard": {
+        "command": [
+            "/usr/bin/php8.3",
+            "scripts/travel-lab/guard-test.php"
+        ],
+        "pid": 231543,
+        "exit": 0,
+        "process_gone": true,
+        "seconds": 35.085,
+        "utc": "2026-10-09T17:16:15+00:00",
+        "output_sha256": "55e49a2efc970206d93100e48c646815b1e10527fea8bb44542d859c19fb536f",
+        "safe_summary": "PASS: surviving TEST cache isolated to array\nPASS: 27 isolation checks; no live environment mutation or database access."
+    },
+    "recovery-flow": {
+        "command": [
+            "/usr/bin/php8.3",
+            "scripts/travel-lab/recovery-failure-test.php"
+        ],
+        "pid": 233289,
+        "exit": 0,
+        "process_gone": true,
+        "seconds": 0.311,
+        "utc": "2026-10-09T17:16:15+00:00",
+        "output_sha256": "af1513c5c2d69ff7aac89deaadbe300ce62a7297077f3a007ae43e52ff8bdd9e",
+        "safe_summary": "{\n    \"status\": \"PASS_CONTROL_FLOW_ONLY\",\n    \"source_sha256\": \"9e65fd5f1440fc827aef3eb4c4e2fa2dc51608d15d9d7b34d0258fae493fe62e\",\n    \"cases\": [\n        {\n            \"scenario\": \"verified\",\n            \"status\": \"PASS\",\n            \"imports\": 1,\n            \"purges\": 1,\n            \"digest_checks\": 1,\n            \"private_snapshot_retained\": false\n        },\n        {\n            \"scenario\": \"mismatch\",\n            \"status\": \"PASS\",\n            \"imports\": 1,\n            \"purges\": 1,\n            \"digest_checks\": 1,\n            \"private_snapshot_retained\": true\n        },\n        {\n            \"scenario\": \"import_failure\",\n            \"status\": \"PASS\",\n            \"imports\": 1,\n            \"purges\": 0,\n            \"digest_checks\": 0,\n            \"private_snapshot_retained\": true\n        },\n        {\n            \"scenario\": \"digest_exception\",\n            \"status\": \"PASS\",\n            \"imports\": 1,\n            \"purges\": 1,\n            \"digest_checks\": 1,\n            \"private_snapshot_retained\": true\n        }\n    ],\n    \"actual_mysql_restore\": \"NOT_RUN\"\n}"
+    }
+}

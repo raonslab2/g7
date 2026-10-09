@@ -1,0 +1,41 @@
+{
+    "fixture": "corrupt",
+    "native_command": [
+        "module:install",
+        "sirsoft-ecommerce",
+        "--vendor-mode=bundled",
+        "--no-interaction"
+    ],
+    "native_exit": 1,
+    "failed_closed": true,
+    "schema_rows_ddl_unchanged": true,
+    "full_inventory_comparison": {
+        "before_digest": "b7cd4d37ce13e410f92ad8f3d4efa232463e184f057e24a6be83dea7e9f92ca8",
+        "after_digest": "b7cd4d37ce13e410f92ad8f3d4efa232463e184f057e24a6be83dea7e9f92ca8",
+        "exact_all_tables": true,
+        "table_set_equal": true,
+        "ddl_equal": true,
+        "ddl_changed_tables": [],
+        "changed_tables": [],
+        "all_nonallowed_tables_equal": true,
+        "allowed_tables": [
+            "g7_cache"
+        ]
+    },
+    "noncache_rows_ddl_unchanged": true,
+    "table_count": 58,
+    "row_count": 463,
+    "module_registration_row": false,
+    "active_directory_absent": true,
+    "pending_directory_absent": true,
+    "safe_output_markers": {
+        "vendor-bundle.zip \ud30c\uc77c\uc744 \ucc3e\uc744 \uc218 \uc5c6\uc2b5\ub2c8\ub2e4": false,
+        "\ubb34\uacb0\uc131 \uac80\uc99d\uc5d0 \uc2e4\ud328\ud588\uc2b5\ub2c8\ub2e4": true,
+        ":expected": true,
+        ":actual": true
+    },
+    "output_sha256": "5fb092466cb52f04156356b0b82f7af584f2d66ee7273894d53cabddc79869dc",
+    "source_restored_sha256": "713f98578a866fada6782d11f8c80ff13037f1faf0edaaa55f004ddc4e80d1b9",
+    "source_restored_exact": true,
+    "bundled_source_git_clean": true
+}

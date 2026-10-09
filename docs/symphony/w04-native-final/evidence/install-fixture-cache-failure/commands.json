@@ -1,0 +1,92 @@
+{
+    "commands": [
+        {
+            "step": "01-db-wipe",
+            "args": [
+                "db:wipe",
+                "--database=mysql",
+                "--drop-views",
+                "--force",
+                "--no-interaction"
+            ],
+            "quiesce_wait": 0.101,
+            "exit": 0,
+            "seconds": 3.327,
+            "pid": 246250
+        },
+        {
+            "step": "02-settings-install",
+            "args": [
+                "settings:install",
+                "--no-interaction"
+            ],
+            "quiesce_wait": 0.065,
+            "exit": 0,
+            "seconds": 6.741,
+            "pid": 247170
+        },
+        {
+            "step": "03-db-seed",
+            "args": [
+                "db:seed",
+                "--class=DatabaseSeeder",
+                "--force",
+                "--no-interaction"
+            ],
+            "quiesce_wait": 0.309,
+            "exit": 0,
+            "seconds": 7.048,
+            "pid": 247381
+        },
+        {
+            "step": "04-module-install-sirsoft-board",
+            "args": [
+                "module:install",
+                "sirsoft-board",
+                "--vendor-mode=bundled",
+                "--no-interaction"
+            ],
+            "quiesce_wait": 0.068,
+            "exit": 0,
+            "seconds": 11.069,
+            "pid": 247726
+        },
+        {
+            "step": "05-module-activate-sirsoft-board",
+            "args": [
+                "module:activate",
+                "sirsoft-board",
+                "--no-interaction"
+            ],
+            "quiesce_wait": 0.048,
+            "exit": 0,
+            "seconds": 3.83,
+            "pid": 248133
+        },
+        {
+            "step": "06-module-install-sirsoft-page",
+            "args": [
+                "module:install",
+                "sirsoft-page",
+                "--vendor-mode=bundled",
+                "--no-interaction"
+            ],
+            "quiesce_wait": 0.05,
+            "exit": 0,
+            "seconds": 7.176,
+            "pid": 248353
+        },
+        {
+            "step": "07-module-activate-sirsoft-page",
+            "args": [
+                "module:activate",
+                "sirsoft-page",
+                "--no-interaction"
+            ],
+            "quiesce_wait": 0.05,
+            "exit": 0,
+            "seconds": 4.363,
+            "pid": 249097
+        }
+    ]
+}
