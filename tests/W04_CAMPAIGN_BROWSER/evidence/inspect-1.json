@@ -1,0 +1,1421 @@
+{
+  "phase": "inspect-1",
+  "tested_sha": "31a18318f91dde34a9c75eaaac65ae1d434b7bc3",
+  "tree": "c0984e682a77153753edcde318a6d44b6973b1c0",
+  "actual_head": "31a18318f91dde34a9c75eaaac65ae1d434b7bc3",
+  "started": "2026-10-09T19:56:13.107Z",
+  "checks": [
+    {
+      "name": "private native baseline",
+      "id": 7,
+      "status": "PASS",
+      "slug": "travel-lab-campaign-autumn-escape",
+      "version": 1,
+      "mode": "text",
+      "published": true,
+      "abilities": {
+        "can_create": true,
+        "can_update": true,
+        "can_delete": true
+      }
+    },
+    {
+      "name": "private native baseline",
+      "id": 8,
+      "status": "PASS",
+      "slug": "travel-lab-campaign-weekend-reset",
+      "version": 1,
+      "mode": "text",
+      "published": true,
+      "abilities": {
+        "can_create": true,
+        "can_update": true,
+        "can_delete": true
+      }
+    },
+    {
+      "name": "masked screenshot adapter-initial",
+      "width": 390,
+      "status": "PASS",
+      "known_private_ocr_hits": 0,
+      "path": "tests/W04_CAMPAIGN_BROWSER/evidence/adapter-initial-390.png",
+      "sha256": "d5a51127a3b8fc982d20c7d4211b371d3943130b809f1341375ceec79f96e0bb",
+      "geometry": {
+        "viewport": 390,
+        "document": 390
+      }
+    },
+    {
+      "width": 390,
+      "name": "actual native adapter inspect",
+      "status": "PASS",
+      "data": {
+        "buttons": [
+          {
+            "testid": "campaign-slot-autumn-escape",
+            "text": "가을 숲 기획전 (자연 테마)주소(slug)travel-lab-campaign-autumn-escape발행됨가을, 숲으로 떠나는 느린 여행현재 버전 1페이지 편집상세·버전·복원발행 중지"
+          },
+          {
+            "testid": "campaign-slot-slug",
+            "text": "travel-lab-campaign-autumn-escape"
+          },
+          {
+            "testid": "campaign-slot-status",
+            "text": "발행됨"
+          },
+          {
+            "testid": "campaign-slot-page",
+            "text": "가을, 숲으로 떠나는 느린 여행현재 버전 1페이지 편집상세·버전·복원발행 중지"
+          },
+          {
+            "testid": "campaign-slot-title",
+            "text": "가을, 숲으로 떠나는 느린 여행"
+          },
+          {
+            "testid": "campaign-slot-version",
+            "text": "현재 버전 1"
+          },
+          {
+            "testid": "campaign-slot-edit",
+            "text": "페이지 편집",
+            "disabled": false
+          },
+          {
+            "testid": "campaign-slot-detail",
+            "text": "상세·버전·복원",
+            "disabled": false
+          },
+          {
+            "testid": "campaign-slot-unpublish",
+            "text": "발행 중지",
+            "disabled": false
+          },
+          {
+            "testid": "campaign-slot-weekend-reset",
+            "text": "주말 리셋 기획전 (웰니스 테마)주소(slug)travel-lab-campaign-weekend-reset발행됨주말 리셋, 쉼이 있는 짧은 여행현재 버전 1페이지 편집상세·버전·복원발행 중지"
+          },
+          {
+            "testid": "campaign-slot-slug",
+            "text": "travel-lab-campaign-weekend-reset"
+          },
+          {
+            "testid": "campaign-slot-status",
+            "text": "발행됨"
+          },
+          {
+            "testid": "campaign-slot-page",
+            "text": "주말 리셋, 쉼이 있는 짧은 여행현재 버전 1페이지 편집상세·버전·복원발행 중지"
+          },
+          {
+            "testid": "campaign-slot-title",
+            "text": "주말 리셋, 쉼이 있는 짧은 여행"
+          },
+          {
+            "testid": "campaign-slot-version",
+            "text": "현재 버전 1"
+          },
+          {
+            "testid": "campaign-slot-edit",
+            "text": "페이지 편집",
+            "disabled": false
+          },
+          {
+            "testid": "campaign-slot-detail",
+            "text": "상세·버전·복원",
+            "disabled": false
+          },
+          {
+            "testid": "campaign-slot-unpublish",
+            "text": "발행 중지",
+            "disabled": false
+          }
+        ],
+        "title": [
+          "여행 기획전"
+        ]
+      }
+    },
+    {
+      "width": 390,
+      "name": "native Page content editor inspect",
+      "status": "PASS",
+      "data": {
+        "controls": [
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "name": null,
+            "type": null,
+            "placeholder": null,
+            "text": "통화KRW",
+            "checked": null
+          },
+          {
+            "tag": "BUTTON",
+            "id": "admin_drawer_language_toggle",
+            "name": null,
+            "type": "button",
+            "placeholder": null,
+            "text": "언어한국어",
+            "checked": null
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "name": null,
+            "type": "button",
+            "placeholder": null,
+            "text": "한국어",
+            "checked": null
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "name": null,
+            "type": "button",
+            "placeholder": null,
+            "text": "English",
+            "checked": null
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "name": null,
+            "type": null,
+            "placeholder": null,
+            "text": "통화KRW",
+            "checked": null
+          },
+          {
+            "tag": "BUTTON",
+            "id": "menu_toggle_btn",
+            "name": null,
+            "type": "button",
+            "placeholder": null,
+            "text": "",
+            "checked": null
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "name": null,
+            "type": null,
+            "placeholder": null,
+            "text": "",
+            "checked": null
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "name": null,
+            "type": null,
+            "placeholder": null,
+            "text": "ko",
+            "checked": null
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "name": null,
+            "type": null,
+            "placeholder": null,
+            "text": "통화KRW",
+            "checked": null
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "name": null,
+            "type": null,
+            "placeholder": null,
+            "text": "",
+            "checked": null
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "name": null,
+            "type": null,
+            "placeholder": null,
+            "text": "",
+            "checked": null
+          },
+          {
+            "tag": "BUTTON",
+            "id": "mobile_menu_toggle",
+            "name": null,
+            "type": null,
+            "placeholder": null,
+            "text": "☰",
+            "checked": null
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "name": null,
+            "type": null,
+            "placeholder": null,
+            "text": "",
+            "checked": null
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "name": null,
+            "type": null,
+            "placeholder": null,
+            "text": "",
+            "checked": null
+          },
+          {
+            "tag": "INPUT",
+            "id": "slug_input",
+            "name": null,
+            "type": "text",
+            "placeholder": "url-slug",
+            "text": null,
+            "checked": null
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "name": null,
+            "type": "button",
+            "placeholder": null,
+            "text": "미발행",
+            "checked": null
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "name": null,
+            "type": "button",
+            "placeholder": null,
+            "text": "한국어*",
+            "checked": null
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "name": null,
+            "type": "button",
+            "placeholder": null,
+            "text": "English",
+            "checked": null
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "name": null,
+            "type": "button",
+            "placeholder": null,
+            "text": "",
+            "checked": null
+          },
+          {
+            "tag": "INPUT",
+            "id": "",
+            "name": "title[ko]",
+            "type": "text",
+            "placeholder": "페이지 제목을 입력하세요 (한국어)",
+            "text": null,
+            "checked": null
+          },
+          {
+            "tag": "INPUT",
+            "id": "",
+            "name": "title[en]",
+            "type": "text",
+            "placeholder": "페이지 제목을 입력하세요 (English)",
+            "text": null,
+            "checked": null
+          },
+          {
+            "tag": "INPUT",
+            "id": "",
+            "name": null,
+            "type": "file",
+            "placeholder": null,
+            "text": null,
+            "checked": null
+          },
+          {
+            "tag": "INPUT",
+            "id": "",
+            "name": null,
+            "type": "text",
+            "placeholder": "검색 엔진에 표시될 제목",
+            "text": null,
+            "checked": null
+          },
+          {
+            "tag": "TEXTAREA",
+            "id": "",
+            "name": null,
+            "type": null,
+            "placeholder": "검색 엔진에 표시될 설명",
+            "text": null,
+            "checked": null
+          },
+          {
+            "tag": "INPUT",
+            "id": "",
+            "name": null,
+            "type": "text",
+            "placeholder": "쉼표로 구분하여 입력",
+            "text": null,
+            "checked": null
+          },
+          {
+            "tag": "BUTTON",
+            "id": "footer_cancel_button",
+            "name": null,
+            "type": "button",
+            "placeholder": null,
+            "text": "취소",
+            "checked": null
+          }
+        ],
+        "frames": [
+          "/admin/pages/7/edit"
+        ]
+      }
+    },
+    {
+      "name": "masked screenshot adapter-initial",
+      "width": 1440,
+      "status": "PASS",
+      "known_private_ocr_hits": 0,
+      "path": "tests/W04_CAMPAIGN_BROWSER/evidence/adapter-initial-1440.png",
+      "sha256": "12fc27c121e7361e5a0f8c8382bf350d3faae244a76d59f14e9fcd00dd028365",
+      "geometry": {
+        "viewport": 1440,
+        "document": 1440
+      }
+    },
+    {
+      "width": 1440,
+      "name": "actual native adapter inspect",
+      "status": "PASS",
+      "data": {
+        "buttons": [
+          {
+            "testid": "campaign-slot-autumn-escape",
+            "text": "가을 숲 기획전 (자연 테마)주소(slug)travel-lab-campaign-autumn-escape발행됨가을, 숲으로 떠나는 느린 여행현재 버전 1페이지 편집상세·버전·복원발행 중지"
+          },
+          {
+            "testid": "campaign-slot-slug",
+            "text": "travel-lab-campaign-autumn-escape"
+          },
+          {
+            "testid": "campaign-slot-status",
+            "text": "발행됨"
+          },
+          {
+            "testid": "campaign-slot-page",
+            "text": "가을, 숲으로 떠나는 느린 여행현재 버전 1페이지 편집상세·버전·복원발행 중지"
+          },
+          {
+            "testid": "campaign-slot-title",
+            "text": "가을, 숲으로 떠나는 느린 여행"
+          },
+          {
+            "testid": "campaign-slot-version",
+            "text": "현재 버전 1"
+          },
+          {
+            "testid": "campaign-slot-edit",
+            "text": "페이지 편집",
+            "disabled": false
+          },
+          {
+            "testid": "campaign-slot-detail",
+            "text": "상세·버전·복원",
+            "disabled": false
+          },
+          {
+            "testid": "campaign-slot-unpublish",
+            "text": "발행 중지",
+            "disabled": false
+          },
+          {
+            "testid": "campaign-slot-weekend-reset",
+            "text": "주말 리셋 기획전 (웰니스 테마)주소(slug)travel-lab-campaign-weekend-reset발행됨주말 리셋, 쉼이 있는 짧은 여행현재 버전 1페이지 편집상세·버전·복원발행 중지"
+          },
+          {
+            "testid": "campaign-slot-slug",
+            "text": "travel-lab-campaign-weekend-reset"
+          },
+          {
+            "testid": "campaign-slot-status",
+            "text": "발행됨"
+          },
+          {
+            "testid": "campaign-slot-page",
+            "text": "주말 리셋, 쉼이 있는 짧은 여행현재 버전 1페이지 편집상세·버전·복원발행 중지"
+          },
+          {
+            "testid": "campaign-slot-title",
+            "text": "주말 리셋, 쉼이 있는 짧은 여행"
+          },
+          {
+            "testid": "campaign-slot-version",
+            "text": "현재 버전 1"
+          },
+          {
+            "testid": "campaign-slot-edit",
+            "text": "페이지 편집",
+            "disabled": false
+          },
+          {
+            "testid": "campaign-slot-detail",
+            "text": "상세·버전·복원",
+            "disabled": false
+          },
+          {
+            "testid": "campaign-slot-unpublish",
+            "text": "발행 중지",
+            "disabled": false
+          }
+        ],
+        "title": [
+          "여행 기획전"
+        ]
+      }
+    },
+    {
+      "width": 1440,
+      "name": "native Page content editor inspect",
+      "status": "PASS",
+      "data": {
+        "controls": [
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "name": null,
+            "type": null,
+            "placeholder": null,
+            "text": "KRW",
+            "checked": null
+          },
+          {
+            "tag": "BUTTON",
+            "id": "menu_toggle_btn",
+            "name": null,
+            "type": "button",
+            "placeholder": null,
+            "text": "",
+            "checked": null
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "name": null,
+            "type": null,
+            "placeholder": null,
+            "text": "",
+            "checked": null
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "name": null,
+            "type": null,
+            "placeholder": null,
+            "text": "ko",
+            "checked": null
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "name": null,
+            "type": null,
+            "placeholder": null,
+            "text": "KRW",
+            "checked": null
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "name": null,
+            "type": null,
+            "placeholder": null,
+            "text": "",
+            "checked": null
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "name": null,
+            "type": null,
+            "placeholder": null,
+            "text": "",
+            "checked": null
+          },
+          {
+            "tag": "BUTTON",
+            "id": "mobile_menu_toggle",
+            "name": null,
+            "type": null,
+            "placeholder": null,
+            "text": "☰",
+            "checked": null
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "name": null,
+            "type": null,
+            "placeholder": null,
+            "text": "",
+            "checked": null
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "name": null,
+            "type": null,
+            "placeholder": null,
+            "text": "",
+            "checked": null
+          },
+          {
+            "tag": "INPUT",
+            "id": "slug_input",
+            "name": null,
+            "type": "text",
+            "placeholder": "url-slug",
+            "text": null,
+            "checked": null
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "name": null,
+            "type": "button",
+            "placeholder": null,
+            "text": "미발행",
+            "checked": null
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "name": null,
+            "type": "button",
+            "placeholder": null,
+            "text": "한국어*",
+            "checked": null
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "name": null,
+            "type": "button",
+            "placeholder": null,
+            "text": "English",
+            "checked": null
+          },
+          {
+            "tag": "BUTTON",
+            "id": "",
+            "name": null,
+            "type": "button",
+            "placeholder": null,
+            "text": "",
+            "checked": null
+          },
+          {
+            "tag": "INPUT",
+            "id": "",
+            "name": "title[ko]",
+            "type": "text",
+            "placeholder": "페이지 제목을 입력하세요 (한국어)",
+            "text": null,
+            "checked": null
+          },
+          {
+            "tag": "INPUT",
+            "id": "",
+            "name": "title[en]",
+            "type": "text",
+            "placeholder": "페이지 제목을 입력하세요 (English)",
+            "text": null,
+            "checked": null
+          },
+          {
+            "tag": "INPUT",
+            "id": "",
+            "name": null,
+            "type": "file",
+            "placeholder": null,
+            "text": null,
+            "checked": null
+          },
+          {
+            "tag": "INPUT",
+            "id": "",
+            "name": null,
+            "type": "text",
+            "placeholder": "검색 엔진에 표시될 제목",
+            "text": null,
+            "checked": null
+          },
+          {
+            "tag": "TEXTAREA",
+            "id": "",
+            "name": null,
+            "type": null,
+            "placeholder": "검색 엔진에 표시될 설명",
+            "text": null,
+            "checked": null
+          },
+          {
+            "tag": "INPUT",
+            "id": "",
+            "name": null,
+            "type": "text",
+            "placeholder": "쉼표로 구분하여 입력",
+            "text": null,
+            "checked": null
+          },
+          {
+            "tag": "BUTTON",
+            "id": "footer_cancel_button",
+            "name": null,
+            "type": "button",
+            "placeholder": null,
+            "text": "취소",
+            "checked": null
+          }
+        ],
+        "frames": [
+          "/admin/pages/7/edit"
+        ]
+      }
+    }
+  ],
+  "metrics": [
+    {
+      "width": 390,
+      "role": "admin",
+      "pageerrors": [],
+      "external_attempts": [],
+      "external_connections": [],
+      "http": [
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/js/components.iife.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/css/components.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/vendor/font-awesome/6.4.0/css/all.inlined.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/ko.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/components.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/routes.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/en.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/config.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/layouts/raonslab-travel_lab/auth/login.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/auth/login",
+          "method": "POST",
+          "status": 200
+        },
+        {
+          "path": "/api/layouts/raonslab-travel_lab/travel/home.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/vendor/flag-icons/7.2.3/css/flag-icons.min.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/vendor/font-awesome/6.4.0/css/all.inlined.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/css/components.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/vendor/pretendard/1.3.9/pretendard-variable.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/js/components.iife.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/sirsoft-admin_basic/config.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/sirsoft-admin_basic/lang/ko.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/sirsoft-admin_basic/components.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/sirsoft-admin_basic/lang/en.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/auth/user",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/sirsoft-admin_basic/routes.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/layouts/sirsoft-admin_basic/raonslab-travel_lab.admin_travel_lab_campaigns.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/menus/active",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/auth/user",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/notifications/unread-count",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/notifications",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/modules/installed",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/plugins/installed",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/sirsoft-page/admin/pages",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/vendor/pretendard/1.3.9/woff2/PretendardVariable.woff2",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/vendor/pretendard/1.3.9/pretendard-variable.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/vendor/font-awesome/6.4.0/css/all.inlined.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/vendor/flag-icons/7.2.3/css/flag-icons.min.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/css/components.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/js/components.iife.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/sirsoft-admin_basic/config.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/sirsoft-admin_basic/lang/en.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/sirsoft-admin_basic/lang/ko.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/sirsoft-admin_basic/components.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/sirsoft-admin_basic/routes.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/auth/user",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/layouts/sirsoft-admin_basic/sirsoft-page.admin_page_form.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/notifications",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/auth/user",
+          "method": "GET",
+          "status": 200
+        }
+      ],
+      "assets": [
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/js/components.iife.js",
+          "sha256": "8941442d1a921c2f366063359e39f79ed3a719bce77a174b6c0aa5657b691d63",
+          "status": 200,
+          "bytes": 68911
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/css/components.css",
+          "sha256": "8b372bcc681e6b78fbac301ddb274e75703f3e50a9e76d0472243c23c571d207",
+          "status": 200,
+          "bytes": 51039
+        },
+        {
+          "path": "/build/core/template-engine.min.js",
+          "sha256": "b8cf27fab58e108b1509c379a5f4d0860a21a90bc591bb34b48a94d6e56cb76d",
+          "status": 200,
+          "bytes": 819049
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/vendor/font-awesome/6.4.0/css/all.inlined.css",
+          "sha256": "6af1cb388a71cc87fe960b65c2bb06039ab37dd39630f6710f812483725b1455",
+          "status": 200,
+          "bytes": 480419
+        },
+        {
+          "path": "/api/modules/bundle.css",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "status": 200,
+          "bytes": 0
+        },
+        {
+          "path": "/api/modules/bundle.js",
+          "sha256": "a69dc60260eef16feb33b5433426d974164fcc5a9b15d3577a710a9212b9f2ce",
+          "status": 200,
+          "bytes": 153543
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/vendor/flag-icons/7.2.3/css/flag-icons.min.css",
+          "sha256": "1651282d9aca6c0326887221612d34edf1937adeff9eb50f8c227b5de96aab87",
+          "status": 200,
+          "bytes": 70024
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/vendor/font-awesome/6.4.0/css/all.inlined.css",
+          "sha256": "940d2ea3cc2846779b56ea7ea3d8cee525122bda45aa146da5b4d87cb6c97f66",
+          "status": 200,
+          "bytes": 480419
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/css/components.css",
+          "sha256": "3aafccf49bb7fc4521c2bb95ab2dcb550fc04b89848618aca6232fecfe10692c",
+          "status": 200,
+          "bytes": 592888
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/vendor/pretendard/1.3.9/pretendard-variable.css",
+          "sha256": "3e2a4f37d9c3adc931babd0587e4af5949880b76e6a880f955a55653687a351d",
+          "status": 200,
+          "bytes": 558
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/js/components.iife.js",
+          "sha256": "d25eb47e1308a83a456b17fe86953fec8fefc46a38769c0c225be72b0028e6c9",
+          "status": 200,
+          "bytes": 728609
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/vendor/pretendard/1.3.9/woff2/PretendardVariable.woff2",
+          "sha256": "9599f12fd42fc0bce1cd50b47a0c022e108d7aa64dd0d1bb0ed44f3282d900b4",
+          "status": 200,
+          "bytes": 2057688
+        }
+      ],
+      "geometry": [
+        {
+          "name": "adapter-initial",
+          "viewport": 390,
+          "document": 390
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "role": "admin",
+      "pageerrors": [],
+      "external_attempts": [],
+      "external_connections": [],
+      "http": [
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/vendor/font-awesome/6.4.0/css/all.inlined.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/css/components.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/js/components.iife.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/en.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/components.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/ko.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/routes.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/config.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/layouts/raonslab-travel_lab/auth/login.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/auth/login",
+          "method": "POST",
+          "status": 200
+        },
+        {
+          "path": "/api/layouts/raonslab-travel_lab/travel/home.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/vendor/font-awesome/6.4.0/css/all.inlined.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/css/components.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/vendor/pretendard/1.3.9/pretendard-variable.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/js/components.iife.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/vendor/flag-icons/7.2.3/css/flag-icons.min.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/sirsoft-admin_basic/config.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/sirsoft-admin_basic/lang/ko.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/sirsoft-admin_basic/lang/en.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/sirsoft-admin_basic/components.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/sirsoft-admin_basic/routes.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/auth/user",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/layouts/sirsoft-admin_basic/raonslab-travel_lab.admin_travel_lab_campaigns.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/auth/user",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/menus/active",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/notifications",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/modules/installed",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/plugins/installed",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/sirsoft-page/admin/pages",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/notifications/unread-count",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/vendor/pretendard/1.3.9/woff2/PretendardVariable.woff2",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/vendor/pretendard/1.3.9/pretendard-variable.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/vendor/flag-icons/7.2.3/css/flag-icons.min.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/css/components.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/vendor/font-awesome/6.4.0/css/all.inlined.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/js/components.iife.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/sirsoft-admin_basic/routes.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/sirsoft-admin_basic/lang/en.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/sirsoft-admin_basic/lang/ko.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/sirsoft-admin_basic/components.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/sirsoft-admin_basic/config.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/auth/user",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/layouts/sirsoft-admin_basic/sirsoft-page.admin_page_form.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/plugins/installed",
+          "method": "GET",
+          "status": 200
+        }
+      ],
+      "assets": [
+        {
+          "path": "/build/core/template-engine.min.js",
+          "sha256": "b8cf27fab58e108b1509c379a5f4d0860a21a90bc591bb34b48a94d6e56cb76d",
+          "status": 200,
+          "bytes": 819049
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/vendor/font-awesome/6.4.0/css/all.inlined.css",
+          "sha256": "6af1cb388a71cc87fe960b65c2bb06039ab37dd39630f6710f812483725b1455",
+          "status": 200,
+          "bytes": 480419
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/css/components.css",
+          "sha256": "8b372bcc681e6b78fbac301ddb274e75703f3e50a9e76d0472243c23c571d207",
+          "status": 200,
+          "bytes": 51039
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/js/components.iife.js",
+          "sha256": "8941442d1a921c2f366063359e39f79ed3a719bce77a174b6c0aa5657b691d63",
+          "status": 200,
+          "bytes": 68911
+        },
+        {
+          "path": "/api/modules/bundle.css",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "status": 200,
+          "bytes": 0
+        },
+        {
+          "path": "/api/modules/bundle.js",
+          "sha256": "a69dc60260eef16feb33b5433426d974164fcc5a9b15d3577a710a9212b9f2ce",
+          "status": 200,
+          "bytes": 153543
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/vendor/font-awesome/6.4.0/css/all.inlined.css",
+          "sha256": "940d2ea3cc2846779b56ea7ea3d8cee525122bda45aa146da5b4d87cb6c97f66",
+          "status": 200,
+          "bytes": 480419
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/css/components.css",
+          "sha256": "3aafccf49bb7fc4521c2bb95ab2dcb550fc04b89848618aca6232fecfe10692c",
+          "status": 200,
+          "bytes": 592888
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/vendor/pretendard/1.3.9/pretendard-variable.css",
+          "sha256": "3e2a4f37d9c3adc931babd0587e4af5949880b76e6a880f955a55653687a351d",
+          "status": 200,
+          "bytes": 558
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/js/components.iife.js",
+          "sha256": "d25eb47e1308a83a456b17fe86953fec8fefc46a38769c0c225be72b0028e6c9",
+          "status": 200,
+          "bytes": 728609
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/vendor/flag-icons/7.2.3/css/flag-icons.min.css",
+          "sha256": "1651282d9aca6c0326887221612d34edf1937adeff9eb50f8c227b5de96aab87",
+          "status": 200,
+          "bytes": 70024
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/vendor/pretendard/1.3.9/woff2/PretendardVariable.woff2",
+          "sha256": "9599f12fd42fc0bce1cd50b47a0c022e108d7aa64dd0d1bb0ed44f3282d900b4",
+          "status": 200,
+          "bytes": 2057688
+        }
+      ],
+      "geometry": [
+        {
+          "name": "adapter-initial",
+          "viewport": 1440,
+          "document": 1440
+        }
+      ]
+    }
+  ],
+  "cleanup": [
+    {
+      "type": "exact-own-token",
+      "hash": "3b553b1780372fdb17013292a6d8caa9b6465c351c21c14ba4a81c90133e578b",
+      "logout": 200,
+      "requery": 401,
+      "status": "PASS"
+    },
+    {
+      "type": "exact-own-token",
+      "hash": "8969b1786e6f6a4d3f49a0d0d2318e7a5cc58c986198515209d7a90ccc137d20",
+      "logout": 200,
+      "requery": 401,
+      "status": "PASS"
+    },
+    {
+      "type": "supplied-handoff-preserved",
+      "role": "admin",
+      "status": "PASS",
+      "http": 200
+    },
+    {
+      "type": "supplied-handoff-preserved",
+      "role": "member",
+      "status": "PASS",
+      "http": 200
+    },
+    {
+      "type": "supplied-handoff-preserved",
+      "role": "other_member",
+      "status": "PASS",
+      "http": 200
+    }
+  ],
+  "chromium": "156.0.8078.4",
+  "elapsed_seconds": 24.1,
+  "finished": "2026-10-09T19:56:37.207Z"
+}

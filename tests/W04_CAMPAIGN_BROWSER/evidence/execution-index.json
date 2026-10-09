@@ -1,0 +1,358 @@
+{
+  "tested_sha": "31a18318f91dde34a9c75eaaac65ae1d434b7bc3",
+  "tested_tree": "c0984e682a77153753edcde318a6d44b6973b1c0",
+  "generated_utc": "2026-10-09T20:33:23.658914+00:00",
+  "actual_browser": "Chromium156.0.8078.4, Playwright1.60, 390x1000 touch and1440x1000 pointer",
+  "phases": [
+    {
+      "phase": "adapter-retry-1",
+      "artifact": "tests/W04_CAMPAIGN_BROWSER/evidence/adapter-retry-1.json",
+      "command": "node tests/W04_CAMPAIGN_BROWSER/adapter-retry-repro.mjs adapter-retry-1",
+      "started": "2026-10-09T20:16:36.530Z",
+      "finished": "2026-10-09T20:17:56.682Z",
+      "elapsed_seconds": 80.152,
+      "raw_check_status_counts": {
+        "FAIL": 4
+      },
+      "pageerrors": 0,
+      "external_connections": 0,
+      "blocked_external_attempts": 0,
+      "browser_contexts": 6
+    },
+    {
+      "phase": "adapter-retry-2",
+      "artifact": "tests/W04_CAMPAIGN_BROWSER/evidence/adapter-retry-2.json",
+      "command": "node tests/W04_CAMPAIGN_BROWSER/adapter-retry-repro.mjs adapter-retry-2",
+      "started": "2026-10-09T20:18:42.084Z",
+      "finished": "2026-10-09T20:19:16.598Z",
+      "elapsed_seconds": 34.514,
+      "raw_check_status_counts": {
+        "PASS": 6,
+        "FAIL": 2
+      },
+      "pageerrors": 0,
+      "external_connections": 0,
+      "blocked_external_attempts": 0,
+      "browser_contexts": 6
+    },
+    {
+      "phase": "bounded-followup-1",
+      "artifact": "tests/W04_CAMPAIGN_BROWSER/evidence/bounded-followup-1.json",
+      "command": "node tests/W04_CAMPAIGN_BROWSER/bounded-followup.mjs bounded-followup-1",
+      "started": "2026-10-09T20:32:03.996Z",
+      "finished": "2026-10-09T20:32:38.595Z",
+      "elapsed_seconds": 34.599,
+      "raw_check_status_counts": {
+        "PASS": 4
+      },
+      "pageerrors": 0,
+      "external_connections": 0,
+      "blocked_external_attempts": 0,
+      "browser_contexts": 3
+    },
+    {
+      "phase": "campaign-1",
+      "artifact": "tests/W04_CAMPAIGN_BROWSER/evidence/campaign-1.json",
+      "command": "node tests/W04_CAMPAIGN_BROWSER/campaign.mjs campaign-1",
+      "started": "2026-10-09T19:58:35.318Z",
+      "finished": "2026-10-09T20:00:48.573Z",
+      "elapsed_seconds": 133.255,
+      "raw_check_status_counts": {
+        "FAIL": 10,
+        "PASS": 14
+      },
+      "pageerrors": 0,
+      "external_connections": 0,
+      "blocked_external_attempts": 11,
+      "browser_contexts": 4
+    },
+    {
+      "phase": "campaign-3",
+      "artifact": "tests/W04_CAMPAIGN_BROWSER/evidence/campaign-3.json",
+      "command": "node tests/W04_CAMPAIGN_BROWSER/campaign.mjs campaign-3",
+      "started": "2026-10-09T20:01:11.363Z",
+      "finished": "2026-10-09T20:03:35.734Z",
+      "elapsed_seconds": 144.371,
+      "raw_check_status_counts": {
+        "PASS": 26,
+        "OBSERVED": 2,
+        "FAIL": 4
+      },
+      "pageerrors": 0,
+      "external_connections": 0,
+      "blocked_external_attempts": 17,
+      "browser_contexts": 4
+    },
+    {
+      "phase": "campaign-4",
+      "artifact": "tests/W04_CAMPAIGN_BROWSER/evidence/campaign-4.json",
+      "command": "node tests/W04_CAMPAIGN_BROWSER/campaign.mjs campaign-4",
+      "started": "2026-10-09T20:04:00.580Z",
+      "finished": null,
+      "elapsed_seconds": 57.934,
+      "raw_check_status_counts": {
+        "PASS": 13,
+        "OBSERVED": 1,
+        "FAIL": 2
+      },
+      "pageerrors": 0,
+      "external_connections": 0,
+      "blocked_external_attempts": 13,
+      "browser_contexts": 2
+    },
+    {
+      "phase": "campaign-5",
+      "artifact": "tests/W04_CAMPAIGN_BROWSER/evidence/campaign-5.json",
+      "command": "node tests/W04_CAMPAIGN_BROWSER/campaign.mjs campaign-5",
+      "started": "2026-10-09T20:05:29.406Z",
+      "finished": "2026-10-09T20:08:03.247Z",
+      "elapsed_seconds": 153.841,
+      "raw_check_status_counts": {
+        "PASS": 34,
+        "OBSERVED": 2
+      },
+      "pageerrors": 0,
+      "external_connections": 0,
+      "blocked_external_attempts": 20,
+      "browser_contexts": 4
+    },
+    {
+      "phase": "campaign-6",
+      "artifact": "tests/W04_CAMPAIGN_BROWSER/evidence/campaign-6.json",
+      "command": "node tests/W04_CAMPAIGN_BROWSER/campaign.mjs campaign-6",
+      "started": "2026-10-09T20:22:56.707Z",
+      "finished": "2026-10-09T20:26:22.897Z",
+      "elapsed_seconds": 206.19,
+      "raw_check_status_counts": {
+        "PASS": 34,
+        "OBSERVED": 2
+      },
+      "pageerrors": 0,
+      "external_connections": 0,
+      "blocked_external_attempts": 20,
+      "browser_contexts": 4
+    },
+    {
+      "phase": "inspect-1",
+      "artifact": "tests/W04_CAMPAIGN_BROWSER/evidence/inspect-1.json",
+      "command": "node tests/W04_CAMPAIGN_BROWSER/inspect.mjs inspect-1",
+      "started": "2026-10-09T19:56:13.107Z",
+      "finished": "2026-10-09T19:56:37.207Z",
+      "elapsed_seconds": 24.1,
+      "raw_check_status_counts": {
+        "PASS": 8
+      },
+      "pageerrors": 0,
+      "external_connections": 0,
+      "blocked_external_attempts": 0,
+      "browser_contexts": 2
+    },
+    {
+      "phase": "inspect-2",
+      "artifact": "tests/W04_CAMPAIGN_BROWSER/evidence/inspect-2.json",
+      "command": "node tests/W04_CAMPAIGN_BROWSER/inspect.mjs inspect-2",
+      "started": "2026-10-09T19:56:46.416Z",
+      "finished": "2026-10-09T19:57:08.191Z",
+      "elapsed_seconds": 21.775,
+      "raw_check_status_counts": {
+        "PASS": 4,
+        "FAIL": 2
+      },
+      "pageerrors": 0,
+      "external_connections": 0,
+      "blocked_external_attempts": 0,
+      "browser_contexts": 2
+    },
+    {
+      "phase": "inspect",
+      "artifact": "tests/W04_CAMPAIGN_BROWSER/evidence/inspect.json",
+      "command": "W04_PHASE=final-audit-1 node tests/W04_CAMPAIGN_BROWSER/final-audit.mjs",
+      "started": "2026-10-09T20:29:23.656Z",
+      "finished": "2026-10-09T20:30:03.421Z",
+      "elapsed_seconds": 39.765,
+      "raw_check_status_counts": {
+        "PASS": 38,
+        "NOT_RUN": 1
+      },
+      "pageerrors": 0,
+      "external_connections": 0,
+      "blocked_external_attempts": 0,
+      "browser_contexts": 2
+    },
+    {
+      "phase": "menu-repro-1",
+      "artifact": "tests/W04_CAMPAIGN_BROWSER/evidence/menu-repro-1.json",
+      "command": "node tests/W04_CAMPAIGN_BROWSER/menu-repro.mjs menu-repro-1",
+      "started": "2026-10-09T20:26:24.020Z",
+      "finished": "2026-10-09T20:26:57.442Z",
+      "elapsed_seconds": 33.422,
+      "raw_check_status_counts": {
+        "PASS": 5,
+        "FAIL": 1
+      },
+      "pageerrors": 0,
+      "external_connections": 0,
+      "blocked_external_attempts": 0,
+      "browser_contexts": 3
+    },
+    {
+      "phase": "public-states-1",
+      "artifact": "tests/W04_CAMPAIGN_BROWSER/evidence/public-states-1.json",
+      "command": "node tests/W04_CAMPAIGN_BROWSER/public-states.mjs public-states-1",
+      "started": "2026-10-09T20:12:48.628Z",
+      "finished": "2026-10-09T20:15:48.890Z",
+      "elapsed_seconds": 180.262,
+      "raw_check_status_counts": {
+        "PASS": 42,
+        "FAIL": 4,
+        "BLOCKED": 1
+      },
+      "pageerrors": 0,
+      "external_connections": 0,
+      "blocked_external_attempts": 0,
+      "browser_contexts": 6
+    },
+    {
+      "phase": "support-1",
+      "artifact": "tests/W04_CAMPAIGN_BROWSER/evidence/support-1.json",
+      "command": "node tests/W04_CAMPAIGN_BROWSER/support.mjs support-1",
+      "started": "2026-10-09T20:21:28.729Z",
+      "finished": "2026-10-09T20:22:45.552Z",
+      "elapsed_seconds": 76.823,
+      "raw_check_status_counts": {
+        "PASS": 16
+      },
+      "pageerrors": 0,
+      "external_connections": 0,
+      "blocked_external_attempts": 0,
+      "browser_contexts": 4
+    },
+    {
+      "phase": "transaction-1",
+      "artifact": "tests/W04_CAMPAIGN_BROWSER/evidence/transaction-1.json",
+      "command": "node tests/W04_CAMPAIGN_BROWSER/transaction.mjs transaction-1",
+      "started": "2026-10-09T20:08:22.635Z",
+      "finished": "2026-10-09T20:09:07.487Z",
+      "elapsed_seconds": 44.852,
+      "raw_check_status_counts": {
+        "PASS": 4,
+        "FAIL": 6
+      },
+      "pageerrors": 0,
+      "external_connections": 0,
+      "blocked_external_attempts": 0,
+      "browser_contexts": 4
+    },
+    {
+      "phase": "transaction-2",
+      "artifact": "tests/W04_CAMPAIGN_BROWSER/evidence/transaction-2.json",
+      "command": "node tests/W04_CAMPAIGN_BROWSER/transaction.mjs transaction-2",
+      "started": "2026-10-09T20:10:27.673Z",
+      "finished": "2026-10-09T20:12:29.659Z",
+      "elapsed_seconds": 121.986,
+      "raw_check_status_counts": {
+        "PASS": 20,
+        "TEST_INQUIRY": 2,
+        "FAIL": 2
+      },
+      "pageerrors": 0,
+      "external_connections": 0,
+      "blocked_external_attempts": 0,
+      "browser_contexts": 4
+    },
+    {
+      "phase": "transaction-3",
+      "artifact": "tests/W04_CAMPAIGN_BROWSER/evidence/transaction-3.json",
+      "command": "node tests/W04_CAMPAIGN_BROWSER/transaction.mjs transaction-3 1440",
+      "started": "2026-10-09T20:19:33.721Z",
+      "finished": "2026-10-09T20:20:43.528Z",
+      "elapsed_seconds": 69.807,
+      "raw_check_status_counts": {
+        "PASS": 12,
+        "FAIL": 1
+      },
+      "pageerrors": 0,
+      "external_connections": 0,
+      "blocked_external_attempts": 0,
+      "browser_contexts": 2
+    },
+    {
+      "phase": "transaction-diagnostic",
+      "artifact": "tests/W04_CAMPAIGN_BROWSER/evidence/transaction-diagnostic.json",
+      "command": "node tests/W04_CAMPAIGN_BROWSER/diagnose-transaction.mjs transaction-diagnostic",
+      "started": "2026-10-09T20:09:44.179Z",
+      "finished": "2026-10-09T20:09:46.591Z",
+      "elapsed_seconds": 2.412,
+      "raw_check_status_counts": {
+        "PASS": 2
+      },
+      "pageerrors": 0,
+      "external_connections": 0,
+      "blocked_external_attempts": 0,
+      "browser_contexts": 0,
+      "prior_derived_command": "node tests/W04_CAMPAIGN_BROWSER/transaction.mjs transaction-diagnostic",
+      "metadata_correction": "Read-only diagnostic script mapping; raw result untouched."
+    }
+  ],
+  "metrics": {
+    "contexts": 62,
+    "pageerrors": 0,
+    "external_http_connections": 0,
+    "blocked_external_attempts": 81,
+    "own_unique_tokens": 47,
+    "own_tokens_all_final401": true,
+    "supplied_tokens_preserved": 3
+  },
+  "label_corrections": [
+    "inspect.json is actual final-audit.mjs: W04_PHASE env was unused; argv phase default was inspect. No output overwritten.",
+    "transaction-2 two successful inquiry checks have raw status TEST_INQUIRY because early step helper treated business status as gate status. Successful assertions/native201 are retained, interpreted as bounded PASS only; no raw rewrite.",
+    "campaign-2 syntax failure created no browser phase; see campaign-2-syntax.json.",
+    "common-campaign5-reconstructed.mjs is retrospective reconstruction, not an execution-time saved file. Other archived scripts are copied executed variants; current common plus named snapshots records later changes.",
+    "source-binding after exit1 is retained. Missing inherited during_verification keys explain false summary fields; binding-audit compares actual before/after supplements. Optional basic absent463 disclosed."
+  ],
+  "commands_extra": [
+    {
+      "command": "git fetch origin feat/g7-travel-lab-c7ae42d1",
+      "exit": 0
+    },
+    {
+      "command": "git checkout --detach 31a18318f91dde34a9c75eaaac65ae1d434b7bc3",
+      "exit": 0
+    },
+    {
+      "command": "npm ci",
+      "exit": 0,
+      "scope": "own worktree harness dependencies; no parent build",
+      "prior_derived_command": "npm ci --ignore-scripts",
+      "provenance": "Dependency setup completion retained in conversation summary; original optional flags not recoverable from persisted artifacts. Not an audited exact shell transcript."
+    },
+    {
+      "command": "python3 tests/W04_CAMPAIGN_BROWSER/source-binding.py before",
+      "exit": 0
+    },
+    {
+      "command": "python3 tests/W04_CAMPAIGN_BROWSER/source-binding.py after",
+      "exit": 1
+    },
+    {
+      "command": "python3 tests/W04_CAMPAIGN_BROWSER/binding-audit.py",
+      "exit": 0
+    },
+    {
+      "command": "python3 tests/W04_CAMPAIGN_BROWSER/closing-binding.py",
+      "exit": 0
+    },
+    {
+      "command": "node tests/W04_CAMPAIGN_BROWSER/contact-sheet.mjs",
+      "exit": 0,
+      "scope": "Private contact-sheet review aid only, no lab requests/product PASS"
+    }
+  ],
+  "sql": "NOT_RUN forbidden",
+  "test_schema": "NOT_RUN offlimits",
+  "ci_runs": 0,
+  "canonical_validation": "NOT_RUN absent",
+  "product_changes": 0,
+  "official_children": 0,
+  "command_provenance": "Phase commands are reconstructed/replay commands from executed script snapshots and recorded phase/viewport selection, not a PTY audit log. Final-audit unused-env command recorded explicitly; preliminary dependency flags unrecovered."
+}

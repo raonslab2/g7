@@ -1,0 +1,75 @@
+{
+  "utc": "2026-10-09T20:31:36.446413+00:00",
+  "tested_sha": "31a18318f91dde34a9c75eaaac65ae1d434b7bc3",
+  "tree": "c0984e682a77153753edcde318a6d44b6973b1c0",
+  "versions": [
+    {
+      "source": "modules/_bundled/raonslab-travel_lab/module.json",
+      "installed_version": "0.1.3",
+      "expected_version": "0.1.3",
+      "bytes_equal": true,
+      "sha256": "4cdd3b1baf6c8794bc029327c686249157a2f7182ef47723d463869f2f85c866"
+    },
+    {
+      "source": "templates/_bundled/raonslab-travel_lab/template.json",
+      "installed_version": "0.1.3",
+      "expected_version": "0.1.3",
+      "bytes_equal": true,
+      "sha256": "28268a1d971ddfc3080a059955bc21d101e0eca7bb750004ecbd89bdadac4991"
+    },
+    {
+      "source": "modules/_bundled/sirsoft-board/module.json",
+      "installed_version": "1.1.3",
+      "expected_version": "1.1.3",
+      "bytes_equal": true,
+      "sha256": "e4892f7943fc59f158550db3918dcd0ae26ced38e6175f20ea173a1f243b9ea4"
+    }
+  ],
+  "supplemental_before_after": {
+    "supplemental_core_entrypoints": {
+      "files_equal": true,
+      "before_count": 2,
+      "after_count": 2,
+      "both_all_equal": true
+    },
+    "supplemental_core_languages": {
+      "files_equal": true,
+      "before_count": 90,
+      "after_count": 90,
+      "both_all_equal": true
+    }
+  },
+  "module_bundles": [
+    {
+      "path": "/api/modules/bundle.js",
+      "http": 200,
+      "served_sha256": "a69dc60260eef16feb33b5433426d974164fcc5a9b15d3577a710a9212b9f2ce",
+      "fixed_source_sha256": "a69dc60260eef16feb33b5433426d974164fcc5a9b15d3577a710a9212b9f2ce",
+      "bytes": 153543,
+      "exact_equal": true,
+      "method": "Only ecommerce declares global module assets in the four active module manifests; one segment needs no concat separator/source-map rewrite."
+    },
+    {
+      "path": "/api/modules/bundle.css",
+      "http": 200,
+      "served_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "fixed_source_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "exact_equal": true,
+      "method": "Only ecommerce declares global module assets in the four active module manifests; one segment needs no concat separator/source-map rewrite."
+    }
+  ],
+  "collector_exit": 1,
+  "collector_exit_diagnosis": "Inherited after summary compares missing during_verification_* keys against after files. Both supplemental sets actually exist in before and after and match. Raw false fields/exit retained. Optional sirsoft-basic463 absent is separate and does not cause required active byte mismatches.",
+  "active_selected_count": 4386,
+  "supplement_count": 92,
+  "optional_absent_count": 463,
+  "before_after_identical": true,
+  "required_active_binding": {
+    "before": true,
+    "after": true
+  },
+  "public_shell_assets_equal": true,
+  "collector_scope_correction": "Extension config source included by runtime_path; legacy scope text saying config directories excluded is inaccurate. Root config is excluded. Supplemental entrypoint/lang sets were collected in both actual snapshots despite inherited timing label. No unseen during-verification snapshot claimed.",
+  "status": "PASS"
+}
