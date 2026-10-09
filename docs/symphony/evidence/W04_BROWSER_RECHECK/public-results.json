@@ -1,0 +1,1065 @@
+{
+  "target": "598a89fff702d51c1405f1a5952d95ab1d2651f4",
+  "actualHead": "598a89fff702d51c1405f1a5952d95ab1d2651f4",
+  "tree": "9e00273bdf18d6a713343755aac54f44a9b032b4",
+  "base": "http://127.0.0.1:18871",
+  "started": "2026-10-09T13:53:59.352Z",
+  "browser": "Chromium",
+  "authentication": "guest",
+  "mutations": 0,
+  "scenarios": [
+    {
+      "width": 390,
+      "name": "home-real-facets-ko-layout",
+      "status": "PASS",
+      "detail": {
+        "regions": [
+          "부산",
+          "강원",
+          "제주",
+          "서울"
+        ],
+        "themes": [
+          "도시",
+          "문화",
+          "자연",
+          "쉼·힐링"
+        ]
+      }
+    },
+    {
+      "width": 390,
+      "name": "category-click-real-results",
+      "status": "PASS",
+      "detail": {
+        "count": 2
+      }
+    },
+    {
+      "width": 390,
+      "name": "theme-click-real-results",
+      "status": "PASS",
+      "detail": {
+        "count": 2
+      }
+    },
+    {
+      "width": 390,
+      "name": "hero-search-real-results",
+      "status": "PASS",
+      "detail": {
+        "count": 2
+      },
+      "initialHarnessStatus": "FAIL",
+      "initialHarnessReason": "Uncorrelated waitForResponse caught home featured catalog while search UI correctly rendered2 제주 results"
+    },
+    {
+      "width": 390,
+      "name": "combined-region-theme-date-price-filter",
+      "status": "PASS",
+      "detail": {
+        "query": "?region=jeju&theme=nature&date_from=2026-11-01&date_to=2026-11-08&min_price=180000&max_price=210000",
+        "count": 1
+      }
+    },
+    {
+      "width": 390,
+      "name": "filter-reset",
+      "status": "PASS",
+      "detail": {
+        "count": 8
+      }
+    },
+    {
+      "width": 390,
+      "name": "sort-price_asc",
+      "status": "PASS",
+      "detail": {
+        "order": [
+          8,
+          7,
+          3,
+          5,
+          1,
+          6,
+          4,
+          2
+        ]
+      }
+    },
+    {
+      "width": 390,
+      "name": "sort-price_desc",
+      "status": "PASS",
+      "detail": {
+        "order": [
+          2,
+          4,
+          6,
+          1,
+          5,
+          3,
+          7,
+          8
+        ]
+      }
+    },
+    {
+      "width": 390,
+      "name": "sort-departure_asc",
+      "status": "PASS",
+      "detail": {
+        "order": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ]
+      }
+    },
+    {
+      "width": 390,
+      "name": "sort-recommended",
+      "status": "PASS",
+      "detail": {
+        "order": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ]
+      }
+    },
+    {
+      "width": 390,
+      "name": "pagination",
+      "status": "PASS",
+      "detail": {
+        "fixtureRole": "Native admin API created OWN synthetic pagination support only; not adminUIcreate verification",
+        "firstIds": [
+          41,
+          42,
+          43,
+          44,
+          45,
+          46,
+          47,
+          48,
+          49,
+          50,
+          51,
+          52
+        ],
+        "secondIds": [
+          53
+        ],
+        "total": 13,
+        "pointer": "touch tap",
+        "reloadPage2": true
+      },
+      "initialStatus": "NOT_RUN",
+      "initialReason": "Only 8 public products; UI fixes per_page at12, so no second-page control. No seed edits or API-only pagination PASS.",
+      "followupReason": "Lead created scoped native fixtures; no product or fixture mutation by public verifier"
+    },
+    {
+      "width": 390,
+      "name": "detail-itinerary-departure-people-estimate",
+      "status": "PASS",
+      "detail": {
+        "path": "/travel/products/1",
+        "departures": [
+          "2026-11-012026-11-03 도착₩189,00024석 남음",
+          "2026-11-082026-11-10 도착₩209,00024석 남음",
+          "2026-11-152026-11-17 도착₩229,00024석 남음"
+        ]
+      }
+    },
+    {
+      "width": 390,
+      "name": "soldout-disabled",
+      "status": "PASS",
+      "detail": {
+        "observed": [
+          {
+            "product": 39,
+            "fromPrice": 13000,
+            "soldoutUnitPrices": [
+              9000
+            ],
+            "soldoutDisabled": true,
+            "activeAvailability": [
+              4
+            ],
+            "noCartMutation": true
+          },
+          {
+            "product": 40,
+            "fromPrice": 13000,
+            "soldoutUnitPrices": [
+              9000
+            ],
+            "soldoutDisabled": true,
+            "activeAvailability": [
+              4
+            ],
+            "noCartMutation": true
+          }
+        ]
+      },
+      "initialStatus": "NOT_RUN",
+      "initialReason": "No public sold-out departure found; cannot alter authored fixtures. Read-only catalog observation is not sold-out UI PASS.",
+      "followupReason": "Lead created scoped native fixtures; no product or fixture mutation by public verifier"
+    },
+    {
+      "width": 390,
+      "name": "empty-and-reset-action",
+      "status": "PASS"
+    },
+    {
+      "width": 390,
+      "name": "product-not-found-real-404",
+      "status": "PASS"
+    },
+    {
+      "width": 390,
+      "name": "fault-injection-loading-error-retry-real-success",
+      "status": "PASS",
+      "detail": {
+        "faultInjection": "aborted GET catalog after holding response for visible loading; retry then actual HTTP200",
+        "blockedRequests": 1,
+        "recoveredCount": 8
+      }
+    },
+    {
+      "width": 390,
+      "name": "native-navigation-mobile-drawer",
+      "status": "PASS"
+    },
+    {
+      "width": 1440,
+      "name": "home-real-facets-ko-layout",
+      "status": "PASS",
+      "detail": {
+        "regions": [
+          "부산",
+          "강원",
+          "제주",
+          "서울"
+        ],
+        "themes": [
+          "도시",
+          "문화",
+          "자연",
+          "쉼·힐링"
+        ]
+      }
+    },
+    {
+      "width": 1440,
+      "name": "category-click-real-results",
+      "status": "PASS",
+      "detail": {
+        "count": 2
+      }
+    },
+    {
+      "width": 1440,
+      "name": "theme-click-real-results",
+      "status": "PASS",
+      "detail": {
+        "count": 2
+      }
+    },
+    {
+      "width": 1440,
+      "name": "hero-search-real-results",
+      "status": "PASS",
+      "detail": {
+        "count": 2
+      },
+      "initialHarnessStatus": "PASS",
+      "initialHarnessReason": "Initial PASS retained; rerun used stricter query correlation."
+    },
+    {
+      "width": 1440,
+      "name": "combined-region-theme-date-price-filter",
+      "status": "PASS",
+      "detail": {
+        "query": "?region=jeju&theme=nature&date_from=2026-11-01&date_to=2026-11-08&min_price=180000&max_price=210000",
+        "count": 1
+      }
+    },
+    {
+      "width": 1440,
+      "name": "filter-reset",
+      "status": "PASS",
+      "detail": {
+        "count": 8
+      }
+    },
+    {
+      "width": 1440,
+      "name": "sort-price_asc",
+      "status": "PASS",
+      "detail": {
+        "order": [
+          8,
+          7,
+          3,
+          5,
+          1,
+          6,
+          4,
+          2
+        ]
+      }
+    },
+    {
+      "width": 1440,
+      "name": "sort-price_desc",
+      "status": "PASS",
+      "detail": {
+        "order": [
+          2,
+          4,
+          6,
+          1,
+          5,
+          3,
+          7,
+          8
+        ]
+      }
+    },
+    {
+      "width": 1440,
+      "name": "sort-departure_asc",
+      "status": "PASS",
+      "detail": {
+        "order": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ]
+      }
+    },
+    {
+      "width": 1440,
+      "name": "sort-recommended",
+      "status": "PASS",
+      "detail": {
+        "order": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ]
+      }
+    },
+    {
+      "width": 1440,
+      "name": "pagination",
+      "status": "PASS",
+      "detail": {
+        "fixtureRole": "Native admin API created OWN synthetic pagination support only; not adminUIcreate verification",
+        "firstIds": [
+          41,
+          42,
+          43,
+          44,
+          45,
+          46,
+          47,
+          48,
+          49,
+          50,
+          51,
+          52
+        ],
+        "secondIds": [
+          53
+        ],
+        "total": 13,
+        "pointer": "mouse click",
+        "reloadPage2": true
+      },
+      "initialStatus": "NOT_RUN",
+      "initialReason": "Only 8 public products; UI fixes per_page at12, so no second-page control. No seed edits or API-only pagination PASS.",
+      "followupReason": "Lead created scoped native fixtures; no product or fixture mutation by public verifier"
+    },
+    {
+      "width": 1440,
+      "name": "detail-itinerary-departure-people-estimate",
+      "status": "PASS",
+      "detail": {
+        "path": "/travel/products/1",
+        "departures": [
+          "2026-11-012026-11-03 도착₩189,00024석 남음",
+          "2026-11-082026-11-10 도착₩209,00024석 남음",
+          "2026-11-152026-11-17 도착₩229,00024석 남음"
+        ]
+      }
+    },
+    {
+      "width": 1440,
+      "name": "soldout-disabled",
+      "status": "PASS",
+      "detail": {
+        "observed": [
+          {
+            "product": 39,
+            "fromPrice": 13000,
+            "soldoutUnitPrices": [
+              9000
+            ],
+            "soldoutDisabled": true,
+            "activeAvailability": [
+              2
+            ],
+            "noCartMutation": true
+          },
+          {
+            "product": 40,
+            "fromPrice": 13000,
+            "soldoutUnitPrices": [
+              9000
+            ],
+            "soldoutDisabled": true,
+            "activeAvailability": [
+              4
+            ],
+            "noCartMutation": true
+          }
+        ]
+      },
+      "initialStatus": "NOT_RUN",
+      "initialReason": "No public sold-out departure found; cannot alter authored fixtures. Read-only catalog observation is not sold-out UI PASS.",
+      "followupReason": "Lead created scoped native fixtures; no product or fixture mutation by public verifier"
+    },
+    {
+      "width": 1440,
+      "name": "empty-and-reset-action",
+      "status": "PASS"
+    },
+    {
+      "width": 1440,
+      "name": "product-not-found-real-404",
+      "status": "PASS"
+    },
+    {
+      "width": 1440,
+      "name": "fault-injection-loading-error-retry-real-success",
+      "status": "PASS",
+      "detail": {
+        "faultInjection": "aborted GET catalog after holding response for visible loading; retry then actual HTTP200",
+        "blockedRequests": 1,
+        "recoveredCount": 8
+      }
+    },
+    {
+      "width": 1440,
+      "name": "native-navigation-mobile-drawer",
+      "status": "PASS"
+    }
+  ],
+  "viewports": [
+    {
+      "width": 390,
+      "pageErrors": [],
+      "consoleErrors": [
+        "Failed to load resource: the server responded with a status of 404 (Not Found)",
+        "Failed to load resource: the server responded with a status of 404 (Not Found)",
+        "Failed to load resource: net::ERR_FAILED"
+      ],
+      "consoleWarnings": [],
+      "failedRequests": [
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog",
+          "error": "net::ERR_FAILED"
+        }
+      ],
+      "httpErrors": [
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog/999999999/departures",
+          "status": 404
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog/999999999",
+          "status": 404
+        }
+      ],
+      "overflows": [
+        {
+          "name": "home",
+          "viewport": 390,
+          "document": 390,
+          "body": 390
+        },
+        {
+          "name": "category",
+          "viewport": 390,
+          "document": 390,
+          "body": 390
+        },
+        {
+          "name": "filters",
+          "viewport": 390,
+          "document": 390,
+          "body": 390
+        },
+        {
+          "name": "sort",
+          "viewport": 390,
+          "document": 390,
+          "body": 390
+        },
+        {
+          "name": "sort",
+          "viewport": 390,
+          "document": 390,
+          "body": 390
+        },
+        {
+          "name": "sort",
+          "viewport": 390,
+          "document": 390,
+          "body": 390
+        },
+        {
+          "name": "sort",
+          "viewport": 390,
+          "document": 390,
+          "body": 390
+        },
+        {
+          "name": "detail",
+          "viewport": 390,
+          "document": 390,
+          "body": 390
+        },
+        {
+          "name": "empty-reset",
+          "viewport": 390,
+          "document": 390,
+          "body": 390
+        },
+        {
+          "name": "not-found",
+          "viewport": 390,
+          "document": 390,
+          "body": 390
+        },
+        {
+          "name": "retry-recovered",
+          "viewport": 390,
+          "document": 390,
+          "body": 390
+        },
+        {
+          "name": "navigation",
+          "viewport": 390,
+          "document": 390,
+          "body": 390
+        }
+      ],
+      "consoleErrorCount": 3,
+      "pageErrorCount": 0,
+      "assets": [
+        {
+          "path": "/build/core/template-engine.min.js",
+          "status": 200,
+          "sha256": "be2d01f3be637afd127f9c62c2fed35cc3de2cabd5da14a7734635ae1798a414",
+          "bytes": 819067
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/css/components.css",
+          "status": 200,
+          "sha256": "2750062e8f93d635d9f126f6249852fe370725e3d7abd77d6c09cf58c6507529",
+          "bytes": 47653
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/js/components.iife.js",
+          "status": 200,
+          "sha256": "9cc99d8d8db0161cfc5f537531eb16f00d1a7ca272fd0b31824823185f46b390",
+          "bytes": 38218
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/vendor/font-awesome/6.4.0/css/all.inlined.css",
+          "status": 200,
+          "sha256": "ef54af5cfb27524385f24b7c9447f0cd62b009dff57ba52bc84c6d440974201a",
+          "bytes": 480419
+        },
+        {
+          "path": "/api/modules/bundle.css",
+          "status": 200,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0
+        },
+        {
+          "path": "/api/modules/bundle.js",
+          "status": 200,
+          "sha256": "a69dc60260eef16feb33b5433426d974164fcc5a9b15d3577a710a9212b9f2ce",
+          "bytes": 153543
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "pageErrors": [],
+      "consoleErrors": [
+        "Failed to load resource: the server responded with a status of 404 (Not Found)",
+        "Failed to load resource: the server responded with a status of 404 (Not Found)",
+        "Failed to load resource: net::ERR_FAILED"
+      ],
+      "consoleWarnings": [],
+      "failedRequests": [
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog",
+          "error": "net::ERR_FAILED"
+        }
+      ],
+      "httpErrors": [
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog/999999999",
+          "status": 404
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog/999999999/departures",
+          "status": 404
+        }
+      ],
+      "overflows": [
+        {
+          "name": "home",
+          "viewport": 1440,
+          "document": 1440,
+          "body": 1440
+        },
+        {
+          "name": "category",
+          "viewport": 1440,
+          "document": 1440,
+          "body": 1440
+        },
+        {
+          "name": "filters",
+          "viewport": 1440,
+          "document": 1440,
+          "body": 1440
+        },
+        {
+          "name": "sort",
+          "viewport": 1440,
+          "document": 1440,
+          "body": 1440
+        },
+        {
+          "name": "sort",
+          "viewport": 1440,
+          "document": 1440,
+          "body": 1440
+        },
+        {
+          "name": "sort",
+          "viewport": 1440,
+          "document": 1440,
+          "body": 1440
+        },
+        {
+          "name": "sort",
+          "viewport": 1440,
+          "document": 1440,
+          "body": 1440
+        },
+        {
+          "name": "detail",
+          "viewport": 1440,
+          "document": 1440,
+          "body": 1440
+        },
+        {
+          "name": "empty-reset",
+          "viewport": 1440,
+          "document": 1440,
+          "body": 1440
+        },
+        {
+          "name": "not-found",
+          "viewport": 1440,
+          "document": 1440,
+          "body": 1440
+        },
+        {
+          "name": "retry-recovered",
+          "viewport": 1440,
+          "document": 1440,
+          "body": 1440
+        },
+        {
+          "name": "navigation",
+          "viewport": 1440,
+          "document": 1440,
+          "body": 1440
+        }
+      ],
+      "consoleErrorCount": 3,
+      "pageErrorCount": 0,
+      "assets": [
+        {
+          "path": "/build/core/template-engine.min.js",
+          "status": 200,
+          "sha256": "be2d01f3be637afd127f9c62c2fed35cc3de2cabd5da14a7734635ae1798a414",
+          "bytes": 819067
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/vendor/font-awesome/6.4.0/css/all.inlined.css",
+          "status": 200,
+          "sha256": "ef54af5cfb27524385f24b7c9447f0cd62b009dff57ba52bc84c6d440974201a",
+          "bytes": 480419
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/css/components.css",
+          "status": 200,
+          "sha256": "2750062e8f93d635d9f126f6249852fe370725e3d7abd77d6c09cf58c6507529",
+          "bytes": 47653
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/js/components.iife.js",
+          "status": 200,
+          "sha256": "9cc99d8d8db0161cfc5f537531eb16f00d1a7ca272fd0b31824823185f46b390",
+          "bytes": 38218
+        },
+        {
+          "path": "/api/modules/bundle.css",
+          "status": 200,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0
+        },
+        {
+          "path": "/api/modules/bundle.js",
+          "status": 200,
+          "sha256": "a69dc60260eef16feb33b5433426d974164fcc5a9b15d3577a710a9212b9f2ce",
+          "bytes": 153543
+        }
+      ]
+    }
+  ],
+  "limitations": [
+    "Guest UI evidence only; actual admin/auth/cart/interruption flows are owned by lead.",
+    "Fullpage capture records sticky header/nav at scroll position; not a viewport-only visual.",
+    "Hosted CI and canonical Validation unavailable; no officialPASS.",
+    "Pagination fixture provisioning is native adminAPI only and proves no adminUI creation. Admin-owned customer fixtures39/40 tested read-only. Cleanup owned by lead."
+  ],
+  "finished": "2026-10-09T13:55:19.034Z",
+  "durationSeconds": 79.682,
+  "reuse": {
+    "source": "attempt1 public-recheck.mjs read-only source reuse; no historical PNG copied",
+    "priorOriginalMarkers": {
+      "pagination390": "NOT_RUN",
+      "pagination1440": "NOT_RUN"
+    }
+  },
+  "counts": {
+    "PASS": 34,
+    "FAIL": 0,
+    "NOT_RUN": 0,
+    "BLOCKED": 0
+  },
+  "commands": [
+    "node tests/W04_RECHECK/public-recheck.mjs (initial exit1;79.682s)",
+    "W04_ONLY=hero-search-real-results node tests/W04_RECHECK/public-recheck.mjs (targeted exit0;4.613s)",
+    "W04_ONLY=pagination W04_RUN_LABEL=public-pagination-followup W04_PAGINATION_Q=W04PAGE1791554431128 W04_PAGINATION_IDS=41,42,43,44,45,46,47,48,49,50,51,52,53 node tests/W04_RECHECK/public-recheck.mjs (exit0;17.496s)",
+    "W04_ONLY=soldout-disabled W04_RUN_LABEL=public-soldout-followup W04_DETAIL_IDS=39,40 node tests/W04_RECHECK/public-recheck.mjs (exit0;8.577s)"
+  ],
+  "evidenceAggregation": "Unique scenario results with targeted followup replacement; initial execution retained separately. No false repeat-count addition.",
+  "allExecutionSeconds": 110.368,
+  "privacyReview": "25 newly captured guest PNGs individually visually inspected. Every public JSON manually reviewed and UUID scan clear. No login/token/contact/UUID or historical screenshot reuse.",
+  "scriptSha256": "434f4c47eaae0bd9dd0732c0bc64e582e8a32d9539c931f939b413d3e7dc0b53",
+  "scriptScope": "Guest base and targeted hero/pagination/soldout followups executed; unique scenarios aggregate without double counting",
+  "environment": {
+    "node": "v22.23.3",
+    "browser": "Playwright bundled Chromium headless",
+    "viewport390": {
+      "width": 390,
+      "height": 844,
+      "hasTouch": true,
+      "isMobile": true,
+      "interaction": "tap"
+    },
+    "viewport1440": {
+      "width": 1440,
+      "height": 1000,
+      "interaction": "mouse click"
+    },
+    "appOwner": "parent isolatedAPP req81_travel_lab",
+    "appWorkers": 4,
+    "noCredentialsRead": true,
+    "ownNativeSubagents": 0
+  },
+  "followupViewports": [
+    {
+      "run": "pagination",
+      "viewports": [
+        {
+          "width": 390,
+          "pageErrors": [],
+          "consoleErrors": [],
+          "consoleWarnings": [],
+          "failedRequests": [],
+          "httpErrors": [],
+          "overflows": [
+            {
+              "name": "pagination",
+              "viewport": 390,
+              "document": 390,
+              "body": 390
+            }
+          ],
+          "consoleErrorCount": 0,
+          "pageErrorCount": 0,
+          "assets": [
+            {
+              "path": "/api/templates/assets/raonslab-travel_lab/css/components.css",
+              "status": 200,
+              "sha256": "2750062e8f93d635d9f126f6249852fe370725e3d7abd77d6c09cf58c6507529",
+              "bytes": 47653
+            },
+            {
+              "path": "/api/templates/assets/raonslab-travel_lab/vendor/font-awesome/6.4.0/css/all.inlined.css",
+              "status": 200,
+              "sha256": "ef54af5cfb27524385f24b7c9447f0cd62b009dff57ba52bc84c6d440974201a",
+              "bytes": 480419
+            },
+            {
+              "path": "/api/templates/assets/raonslab-travel_lab/js/components.iife.js",
+              "status": 200,
+              "sha256": "9cc99d8d8db0161cfc5f537531eb16f00d1a7ca272fd0b31824823185f46b390",
+              "bytes": 38218
+            },
+            {
+              "path": "/build/core/template-engine.min.js",
+              "status": 200,
+              "sha256": "be2d01f3be637afd127f9c62c2fed35cc3de2cabd5da14a7734635ae1798a414",
+              "bytes": 819067
+            },
+            {
+              "path": "/api/modules/bundle.css",
+              "status": 200,
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "bytes": 0
+            },
+            {
+              "path": "/api/modules/bundle.js",
+              "status": 200,
+              "sha256": "a69dc60260eef16feb33b5433426d974164fcc5a9b15d3577a710a9212b9f2ce",
+              "bytes": 153543
+            }
+          ]
+        },
+        {
+          "width": 1440,
+          "pageErrors": [],
+          "consoleErrors": [],
+          "consoleWarnings": [],
+          "failedRequests": [],
+          "httpErrors": [],
+          "overflows": [
+            {
+              "name": "pagination",
+              "viewport": 1440,
+              "document": 1440,
+              "body": 1440
+            }
+          ],
+          "consoleErrorCount": 0,
+          "pageErrorCount": 0,
+          "assets": [
+            {
+              "path": "/api/templates/assets/raonslab-travel_lab/css/components.css",
+              "status": 200,
+              "sha256": "2750062e8f93d635d9f126f6249852fe370725e3d7abd77d6c09cf58c6507529",
+              "bytes": 47653
+            },
+            {
+              "path": "/api/templates/assets/raonslab-travel_lab/vendor/font-awesome/6.4.0/css/all.inlined.css",
+              "status": 200,
+              "sha256": "ef54af5cfb27524385f24b7c9447f0cd62b009dff57ba52bc84c6d440974201a",
+              "bytes": 480419
+            },
+            {
+              "path": "/api/templates/assets/raonslab-travel_lab/js/components.iife.js",
+              "status": 200,
+              "sha256": "9cc99d8d8db0161cfc5f537531eb16f00d1a7ca272fd0b31824823185f46b390",
+              "bytes": 38218
+            },
+            {
+              "path": "/build/core/template-engine.min.js",
+              "status": 200,
+              "sha256": "be2d01f3be637afd127f9c62c2fed35cc3de2cabd5da14a7734635ae1798a414",
+              "bytes": 819067
+            },
+            {
+              "path": "/api/modules/bundle.css",
+              "status": 200,
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "bytes": 0
+            },
+            {
+              "path": "/api/modules/bundle.js",
+              "status": 200,
+              "sha256": "a69dc60260eef16feb33b5433426d974164fcc5a9b15d3577a710a9212b9f2ce",
+              "bytes": 153543
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "run": "soldout",
+      "viewports": [
+        {
+          "width": 390,
+          "pageErrors": [],
+          "consoleErrors": [],
+          "consoleWarnings": [],
+          "failedRequests": [],
+          "httpErrors": [],
+          "overflows": [
+            {
+              "name": "soldout-detail",
+              "viewport": 390,
+              "document": 390,
+              "body": 390
+            },
+            {
+              "name": "soldout-detail",
+              "viewport": 390,
+              "document": 390,
+              "body": 390
+            }
+          ],
+          "consoleErrorCount": 0,
+          "pageErrorCount": 0,
+          "assets": [
+            {
+              "path": "/api/templates/assets/raonslab-travel_lab/js/components.iife.js",
+              "status": 200,
+              "sha256": "9cc99d8d8db0161cfc5f537531eb16f00d1a7ca272fd0b31824823185f46b390",
+              "bytes": 38218
+            },
+            {
+              "path": "/api/templates/assets/raonslab-travel_lab/css/components.css",
+              "status": 200,
+              "sha256": "2750062e8f93d635d9f126f6249852fe370725e3d7abd77d6c09cf58c6507529",
+              "bytes": 47653
+            },
+            {
+              "path": "/api/templates/assets/raonslab-travel_lab/vendor/font-awesome/6.4.0/css/all.inlined.css",
+              "status": 200,
+              "sha256": "ef54af5cfb27524385f24b7c9447f0cd62b009dff57ba52bc84c6d440974201a",
+              "bytes": 480419
+            },
+            {
+              "path": "/build/core/template-engine.min.js",
+              "status": 200,
+              "sha256": "be2d01f3be637afd127f9c62c2fed35cc3de2cabd5da14a7734635ae1798a414",
+              "bytes": 819067
+            },
+            {
+              "path": "/api/modules/bundle.css",
+              "status": 200,
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "bytes": 0
+            },
+            {
+              "path": "/api/modules/bundle.js",
+              "status": 200,
+              "sha256": "a69dc60260eef16feb33b5433426d974164fcc5a9b15d3577a710a9212b9f2ce",
+              "bytes": 153543
+            }
+          ]
+        },
+        {
+          "width": 1440,
+          "pageErrors": [],
+          "consoleErrors": [],
+          "consoleWarnings": [],
+          "failedRequests": [],
+          "httpErrors": [],
+          "overflows": [
+            {
+              "name": "soldout-detail",
+              "viewport": 1440,
+              "document": 1440,
+              "body": 1440
+            },
+            {
+              "name": "soldout-detail",
+              "viewport": 1440,
+              "document": 1440,
+              "body": 1440
+            }
+          ],
+          "consoleErrorCount": 0,
+          "pageErrorCount": 0,
+          "assets": [
+            {
+              "path": "/api/templates/assets/raonslab-travel_lab/vendor/font-awesome/6.4.0/css/all.inlined.css",
+              "status": 200,
+              "sha256": "ef54af5cfb27524385f24b7c9447f0cd62b009dff57ba52bc84c6d440974201a",
+              "bytes": 480419
+            },
+            {
+              "path": "/api/templates/assets/raonslab-travel_lab/css/components.css",
+              "status": 200,
+              "sha256": "2750062e8f93d635d9f126f6249852fe370725e3d7abd77d6c09cf58c6507529",
+              "bytes": 47653
+            },
+            {
+              "path": "/api/templates/assets/raonslab-travel_lab/js/components.iife.js",
+              "status": 200,
+              "sha256": "9cc99d8d8db0161cfc5f537531eb16f00d1a7ca272fd0b31824823185f46b390",
+              "bytes": 38218
+            },
+            {
+              "path": "/build/core/template-engine.min.js",
+              "status": 200,
+              "sha256": "be2d01f3be637afd127f9c62c2fed35cc3de2cabd5da14a7734635ae1798a414",
+              "bytes": 819067
+            },
+            {
+              "path": "/api/modules/bundle.css",
+              "status": 200,
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "bytes": 0
+            },
+            {
+              "path": "/api/modules/bundle.js",
+              "status": 200,
+              "sha256": "a69dc60260eef16feb33b5433426d974164fcc5a9b15d3577a710a9212b9f2ce",
+              "bytes": 153543
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "leadReviewCorrection": "Read-only native public review found ambiguous1440 initial reason; corrected wording only; initial raw execution remains unchanged."
+}

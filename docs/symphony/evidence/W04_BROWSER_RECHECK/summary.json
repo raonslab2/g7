@@ -1,0 +1,67 @@
+{
+  "sourceSHA": "598a89fff702d51c1405f1a5952d95ab1d2651f4",
+  "tree": "9e00273bdf18d6a713343755aac54f44a9b032b4",
+  "tested_actual_HEAD": "598a89fff702d51c1405f1a5952d95ab1d2651f4",
+  "request": "req_7e41235d7eeb44a0b4efe254bc678748",
+  "overall": "FAIL",
+  "critical_native_journeys": {
+    "390": "PASS with requests overflowFAIL",
+    "1440": "PASS"
+  },
+  "product_findings": [
+    {
+      "width": 390,
+      "route": "/travel/requests",
+      "viewport": 390,
+      "initialScrollWidth": 412,
+      "finalScrollWidth": 424,
+      "status": "FAIL",
+      "evidence": [
+        "journey.json",
+        "my-requests-390.png",
+        "overflow-reproducer.json",
+        "final-requests-overflow-390.png"
+      ]
+    }
+  ],
+  "blocked": [
+    "six unretained initial native-login tokens deletion unproven",
+    "prior actors25carts/tokens inaccessible to fresh actors",
+    "canonical Validation unavailable"
+  ],
+  "not_run": [
+    "four individually selected native editor datasource previews",
+    "optional localStorage quota fallback: actual quotaHits0",
+    "private attachment access: no owned attachment",
+    "independent SQL last-seat concurrency and transactional stock/order/payment/dispatch table assertions",
+    "preview restart/migrations/full product regression",
+    "prior10category final state requery",
+    "hostedCI0runs"
+  ],
+  "cleanup": {
+    "counts": {
+      "inquiries": 24,
+      "carts": 34,
+      "products": 15,
+      "posts": 18,
+      "policies": 4,
+      "categories": 4
+    },
+    "CANCELLED": 22,
+    "DECLINED": 2,
+    "products_hidden_unpublished": 15,
+    "departures_inactive_reserved0": 17,
+    "native_posts_softdeleted": 18,
+    "policies_inactive": 4,
+    "categories_inactive": 4,
+    "member_cart_items": 0,
+    "other_member_cart_items": 0,
+    "recorded_tokens_verified_revoked": 87,
+    "unretained_tokens_unproven": 6,
+    "all_requests_CANCELLED": false
+  },
+  "screenshots": 121,
+  "officialPASS": false,
+  "push_merge_deploy": false,
+  "implementation_changed": false
+}

@@ -1,0 +1,833 @@
+{
+  "tested_sha": "598a89fff702d51c1405f1a5952d95ab1d2651f4",
+  "actual_head": "598a89fff702d51c1405f1a5952d95ab1d2651f4",
+  "run": "W04R1791557602811",
+  "elapsed_seconds": 10.991,
+  "results": [
+    {
+      "width": 390,
+      "name": "actual durable inquiry snapshot and actor event statuses after UI cleanup",
+      "status": "PASS",
+      "detail": {
+        "id": 91,
+        "state": "CANCELLED",
+        "snapshotPresent": true,
+        "snapshotKeys": [
+          "items",
+          "summary",
+          "promotions",
+          "validation_errors",
+          "currency_code",
+          "shipping_country"
+        ],
+        "unitPrice": 13000,
+        "quantity": 2,
+        "total": 26000,
+        "eventStates": [
+          "TEST_INQUIRY",
+          "UNDER_REVIEW",
+          "TEST_ACCEPTED",
+          "CANCELLED"
+        ],
+        "repeatCancel": 200,
+        "eventCountAfterRepeat": 4
+      }
+    },
+    {
+      "width": 1440,
+      "name": "actual durable inquiry snapshot and actor event statuses after UI cleanup",
+      "status": "PASS",
+      "detail": {
+        "id": 92,
+        "state": "CANCELLED",
+        "snapshotPresent": true,
+        "snapshotKeys": [
+          "items",
+          "summary",
+          "promotions",
+          "validation_errors",
+          "currency_code",
+          "shipping_country"
+        ],
+        "unitPrice": 13000,
+        "quantity": 2,
+        "total": 26000,
+        "eventStates": [
+          "TEST_INQUIRY",
+          "UNDER_REVIEW",
+          "TEST_ACCEPTED",
+          "CANCELLED"
+        ],
+        "repeatCancel": 200,
+        "eventCountAfterRepeat": 4
+      }
+    },
+    {
+      "width": 0,
+      "name": "response loss retries emitted no duplicate inquiry audit events",
+      "status": "PASS",
+      "detail": {
+        "count": 12,
+        "rows": [
+          {
+            "id": 79,
+            "eventStates": [
+              "TEST_INQUIRY",
+              "CANCELLED"
+            ],
+            "total": 13000,
+            "snapshotPresent": true
+          },
+          {
+            "id": 80,
+            "eventStates": [
+              "TEST_INQUIRY",
+              "CANCELLED"
+            ],
+            "total": 13000,
+            "snapshotPresent": true
+          },
+          {
+            "id": 81,
+            "eventStates": [
+              "TEST_INQUIRY",
+              "CANCELLED"
+            ],
+            "total": 13000,
+            "snapshotPresent": true
+          },
+          {
+            "id": 82,
+            "eventStates": [
+              "TEST_INQUIRY",
+              "CANCELLED"
+            ],
+            "total": 13000,
+            "snapshotPresent": true
+          },
+          {
+            "id": 83,
+            "eventStates": [
+              "TEST_INQUIRY",
+              "CANCELLED"
+            ],
+            "total": 13000,
+            "snapshotPresent": true
+          },
+          {
+            "id": 84,
+            "eventStates": [
+              "TEST_INQUIRY",
+              "CANCELLED"
+            ],
+            "total": 13000,
+            "snapshotPresent": true
+          },
+          {
+            "id": 85,
+            "eventStates": [
+              "TEST_INQUIRY",
+              "CANCELLED"
+            ],
+            "total": 13000,
+            "snapshotPresent": true
+          },
+          {
+            "id": 86,
+            "eventStates": [
+              "TEST_INQUIRY",
+              "CANCELLED"
+            ],
+            "total": 13000,
+            "snapshotPresent": true
+          },
+          {
+            "id": 87,
+            "eventStates": [
+              "TEST_INQUIRY",
+              "CANCELLED"
+            ],
+            "total": 13000,
+            "snapshotPresent": true
+          },
+          {
+            "id": 88,
+            "eventStates": [
+              "TEST_INQUIRY",
+              "CANCELLED"
+            ],
+            "total": 13000,
+            "snapshotPresent": true
+          },
+          {
+            "id": 89,
+            "eventStates": [
+              "TEST_INQUIRY",
+              "CANCELLED"
+            ],
+            "total": 13000,
+            "snapshotPresent": true
+          },
+          {
+            "id": 90,
+            "eventStates": [
+              "TEST_INQUIRY",
+              "CANCELLED"
+            ],
+            "total": 13000,
+            "snapshotPresent": true
+          }
+        ]
+      }
+    },
+    {
+      "width": 390,
+      "name": "actual native guest protected-page login redirect",
+      "status": "PASS",
+      "detail": {
+        "cartAndRequestsLoginRedirect": true,
+        "guestAdmin": 401
+      }
+    },
+    {
+      "width": 1440,
+      "name": "actual native guest protected-page login redirect",
+      "status": "PASS",
+      "detail": {
+        "cartAndRequestsLoginRedirect": true,
+        "guestAdmin": 401
+      }
+    },
+    {
+      "width": 0,
+      "name": "actual all own departure reservations still zero after repeated cancel",
+      "status": "PASS",
+      "detail": {
+        "rows": [
+          {
+            "productId": 39,
+            "departures": [
+              {
+                "id": 64,
+                "reserved": 0,
+                "active": false
+              },
+              {
+                "id": 62,
+                "reserved": 0,
+                "active": false
+              }
+            ]
+          },
+          {
+            "productId": 40,
+            "departures": [
+              {
+                "id": 63,
+                "reserved": 0,
+                "active": false
+              },
+              {
+                "id": 78,
+                "reserved": 0,
+                "active": false
+              }
+            ]
+          },
+          {
+            "productId": 41,
+            "departures": [
+              {
+                "id": 65,
+                "reserved": 0,
+                "active": false
+              }
+            ]
+          },
+          {
+            "productId": 42,
+            "departures": [
+              {
+                "id": 66,
+                "reserved": 0,
+                "active": false
+              }
+            ]
+          },
+          {
+            "productId": 43,
+            "departures": [
+              {
+                "id": 67,
+                "reserved": 0,
+                "active": false
+              }
+            ]
+          },
+          {
+            "productId": 44,
+            "departures": [
+              {
+                "id": 68,
+                "reserved": 0,
+                "active": false
+              }
+            ]
+          },
+          {
+            "productId": 45,
+            "departures": [
+              {
+                "id": 69,
+                "reserved": 0,
+                "active": false
+              }
+            ]
+          },
+          {
+            "productId": 46,
+            "departures": [
+              {
+                "id": 70,
+                "reserved": 0,
+                "active": false
+              }
+            ]
+          },
+          {
+            "productId": 47,
+            "departures": [
+              {
+                "id": 71,
+                "reserved": 0,
+                "active": false
+              }
+            ]
+          },
+          {
+            "productId": 48,
+            "departures": [
+              {
+                "id": 72,
+                "reserved": 0,
+                "active": false
+              }
+            ]
+          },
+          {
+            "productId": 49,
+            "departures": [
+              {
+                "id": 73,
+                "reserved": 0,
+                "active": false
+              }
+            ]
+          },
+          {
+            "productId": 50,
+            "departures": [
+              {
+                "id": 74,
+                "reserved": 0,
+                "active": false
+              }
+            ]
+          },
+          {
+            "productId": 51,
+            "departures": [
+              {
+                "id": 75,
+                "reserved": 0,
+                "active": false
+              }
+            ]
+          },
+          {
+            "productId": 52,
+            "departures": [
+              {
+                "id": 76,
+                "reserved": 0,
+                "active": false
+              }
+            ]
+          },
+          {
+            "productId": 53,
+            "departures": [
+              {
+                "id": 77,
+                "reserved": 0,
+                "active": false
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "metrics": [
+    {
+      "width": 390,
+      "role": "guest",
+      "pageErrors": [],
+      "consoleErrors": [],
+      "requests": [
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/vendor/font-awesome/6.4.0/css/all.inlined.css",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/css/components.css",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/js/components.iife.js",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/ko.json",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/en.json",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/components.json",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/routes.json",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/config.json",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/modules/bundle.css",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/modules/bundle.js",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/vendor/font-awesome/6.4.0/css/all.inlined.css",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/css/components.css",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/js/components.iife.js",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/ko.json",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/en.json",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/components.json",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/routes.json",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/config.json",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/modules/bundle.css",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/modules/bundle.js",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/layouts/raonslab-travel_lab/auth/login.json",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/vendor/font-awesome/6.4.0/css/all.inlined.css",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/css/components.css",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/js/components.iife.js",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/ko.json",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/en.json",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/components.json",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/routes.json",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/config.json",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/modules/bundle.css",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/modules/bundle.js",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/vendor/font-awesome/6.4.0/css/all.inlined.css",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/css/components.css",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/js/components.iife.js",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/ko.json",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/en.json",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/components.json",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/routes.json",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/config.json",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/modules/bundle.css",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/modules/bundle.js",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/layouts/raonslab-travel_lab/auth/login.json",
+          "method": "GET",
+          "nativeBearer": false
+        }
+      ],
+      "httpErrors": [],
+      "overflow": [
+        {
+          "name": "guest-auth-redirect",
+          "viewport": 390,
+          "document": 390
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "role": "guest",
+      "pageErrors": [],
+      "consoleErrors": [],
+      "requests": [
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/vendor/font-awesome/6.4.0/css/all.inlined.css",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/css/components.css",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/js/components.iife.js",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/ko.json",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/en.json",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/components.json",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/routes.json",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/config.json",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/modules/bundle.css",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/modules/bundle.js",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/vendor/font-awesome/6.4.0/css/all.inlined.css",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/css/components.css",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/js/components.iife.js",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/ko.json",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/en.json",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/components.json",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/routes.json",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/config.json",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/modules/bundle.css",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/modules/bundle.js",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/layouts/raonslab-travel_lab/auth/login.json",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/vendor/font-awesome/6.4.0/css/all.inlined.css",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/css/components.css",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/js/components.iife.js",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/ko.json",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/en.json",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/components.json",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/routes.json",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/config.json",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/modules/bundle.css",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/modules/bundle.js",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/vendor/font-awesome/6.4.0/css/all.inlined.css",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/css/components.css",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/js/components.iife.js",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/ko.json",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/en.json",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/components.json",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/routes.json",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/config.json",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/modules/bundle.css",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/modules/bundle.js",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/layouts/raonslab-travel_lab/auth/login.json",
+          "method": "GET",
+          "nativeBearer": false
+        }
+      ],
+      "httpErrors": [],
+      "overflow": [
+        {
+          "name": "guest-auth-redirect",
+          "viewport": 1440,
+          "document": 1440
+        }
+      ]
+    }
+  ],
+  "owned": {
+    "inquiries": [],
+    "carts": [],
+    "products": [],
+    "posts": [],
+    "policies": [],
+    "categories": []
+  }
+}
