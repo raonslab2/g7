@@ -5,7 +5,7 @@ prior=json.loads((root/'docs/symphony/evidence/W04_FINAL_BROWSER/required-matrix
 # PASS는 이 Request가 수행한 bounded native API/browser 관찰에만 적용한다.
 def effect(status,note,evidence):return {'status':status,'scope':note,'evidence':evidence}
 passed={
-'TR-CATALOG-001':['public.json','catalogue.json','journey-initial-harness.json','journey-1440.json'],
+'TR-CATALOG-001':['sort-varied.json','public.json','catalogue.json','journey-initial-harness.json','journey-1440.json'],
 'TR-CART-001':['journey-initial-harness.json','journey-1440.json','access-decline.json'],
 'TR-INQUIRY-001':['journey-initial-harness.json','journey-1440.json','recovery.json','actor-effects.json'],
 'TR-IDEMPOTENCY-001':['recovery.json'],

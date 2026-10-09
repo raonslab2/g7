@@ -1,5 +1,5 @@
 {
-  "observedAt": "2026-10-09T18:15:31.860783+00:00",
+  "observedAt": "2026-10-09T18:29:52.278945+00:00",
   "reports": [
     {
       "report": "admin.json",
@@ -8996,6 +8996,1202 @@
       ],
       "counts": {
         "PASS": 4,
+        "FAIL": 0,
+        "NOT_RUN": 0,
+        "BLOCKED": 0
+      }
+    },
+    {
+      "report": "sort-varied.json",
+      "unit": "named bounded check; not unique HTTP request or fixture count",
+      "checks": [
+        {
+          "width": 390,
+          "name": "heterogeneous nativeUI sort complete13 price_asc",
+          "status": "PASS",
+          "detail": {
+            "sort": "price_asc",
+            "actual": [
+              {
+                "id": 73,
+                "price": 11000,
+                "date": "2026-12-25"
+              },
+              {
+                "id": 79,
+                "price": 11100,
+                "date": "2026-12-21"
+              },
+              {
+                "id": 77,
+                "price": 11200,
+                "date": "2026-12-26"
+              },
+              {
+                "id": 81,
+                "price": 11300,
+                "date": "2026-12-24"
+              },
+              {
+                "id": 75,
+                "price": 11400,
+                "date": "2026-12-23"
+              },
+              {
+                "id": 83,
+                "price": 11500,
+                "date": "2026-12-22"
+              },
+              {
+                "id": 78,
+                "price": 11600,
+                "date": "2026-12-18"
+              },
+              {
+                "id": 84,
+                "price": 11700,
+                "date": "2026-12-20"
+              },
+              {
+                "id": 74,
+                "price": 11800,
+                "date": "2026-12-16"
+              },
+              {
+                "id": 82,
+                "price": 11900,
+                "date": "2026-12-17"
+              },
+              {
+                "id": 76,
+                "price": 12000,
+                "date": "2026-12-14"
+              },
+              {
+                "id": 80,
+                "price": 12100,
+                "date": "2026-12-15"
+              },
+              {
+                "id": 72,
+                "price": 12200,
+                "date": "2026-12-19"
+              }
+            ],
+            "expected": [
+              {
+                "id": 73,
+                "price": 11000,
+                "date": "2026-12-25"
+              },
+              {
+                "id": 79,
+                "price": 11100,
+                "date": "2026-12-21"
+              },
+              {
+                "id": 77,
+                "price": 11200,
+                "date": "2026-12-26"
+              },
+              {
+                "id": 81,
+                "price": 11300,
+                "date": "2026-12-24"
+              },
+              {
+                "id": 75,
+                "price": 11400,
+                "date": "2026-12-23"
+              },
+              {
+                "id": 83,
+                "price": 11500,
+                "date": "2026-12-22"
+              },
+              {
+                "id": 78,
+                "price": 11600,
+                "date": "2026-12-18"
+              },
+              {
+                "id": 84,
+                "price": 11700,
+                "date": "2026-12-20"
+              },
+              {
+                "id": 74,
+                "price": 11800,
+                "date": "2026-12-16"
+              },
+              {
+                "id": 82,
+                "price": 11900,
+                "date": "2026-12-17"
+              },
+              {
+                "id": 76,
+                "price": 12000,
+                "date": "2026-12-14"
+              },
+              {
+                "id": 80,
+                "price": 12100,
+                "date": "2026-12-15"
+              },
+              {
+                "id": 72,
+                "price": 12200,
+                "date": "2026-12-19"
+              }
+            ],
+            "cardinalities": [
+              12,
+              1
+            ],
+            "units": "13 distinct real server prices and13 departure dates",
+            "queryPreserved": true
+          }
+        },
+        {
+          "width": 390,
+          "name": "heterogeneous nativeUI sort complete13 price_desc",
+          "status": "PASS",
+          "detail": {
+            "sort": "price_desc",
+            "actual": [
+              {
+                "id": 72,
+                "price": 12200,
+                "date": "2026-12-19"
+              },
+              {
+                "id": 80,
+                "price": 12100,
+                "date": "2026-12-15"
+              },
+              {
+                "id": 76,
+                "price": 12000,
+                "date": "2026-12-14"
+              },
+              {
+                "id": 82,
+                "price": 11900,
+                "date": "2026-12-17"
+              },
+              {
+                "id": 74,
+                "price": 11800,
+                "date": "2026-12-16"
+              },
+              {
+                "id": 84,
+                "price": 11700,
+                "date": "2026-12-20"
+              },
+              {
+                "id": 78,
+                "price": 11600,
+                "date": "2026-12-18"
+              },
+              {
+                "id": 83,
+                "price": 11500,
+                "date": "2026-12-22"
+              },
+              {
+                "id": 75,
+                "price": 11400,
+                "date": "2026-12-23"
+              },
+              {
+                "id": 81,
+                "price": 11300,
+                "date": "2026-12-24"
+              },
+              {
+                "id": 77,
+                "price": 11200,
+                "date": "2026-12-26"
+              },
+              {
+                "id": 79,
+                "price": 11100,
+                "date": "2026-12-21"
+              },
+              {
+                "id": 73,
+                "price": 11000,
+                "date": "2026-12-25"
+              }
+            ],
+            "expected": [
+              {
+                "id": 72,
+                "price": 12200,
+                "date": "2026-12-19"
+              },
+              {
+                "id": 80,
+                "price": 12100,
+                "date": "2026-12-15"
+              },
+              {
+                "id": 76,
+                "price": 12000,
+                "date": "2026-12-14"
+              },
+              {
+                "id": 82,
+                "price": 11900,
+                "date": "2026-12-17"
+              },
+              {
+                "id": 74,
+                "price": 11800,
+                "date": "2026-12-16"
+              },
+              {
+                "id": 84,
+                "price": 11700,
+                "date": "2026-12-20"
+              },
+              {
+                "id": 78,
+                "price": 11600,
+                "date": "2026-12-18"
+              },
+              {
+                "id": 83,
+                "price": 11500,
+                "date": "2026-12-22"
+              },
+              {
+                "id": 75,
+                "price": 11400,
+                "date": "2026-12-23"
+              },
+              {
+                "id": 81,
+                "price": 11300,
+                "date": "2026-12-24"
+              },
+              {
+                "id": 77,
+                "price": 11200,
+                "date": "2026-12-26"
+              },
+              {
+                "id": 79,
+                "price": 11100,
+                "date": "2026-12-21"
+              },
+              {
+                "id": 73,
+                "price": 11000,
+                "date": "2026-12-25"
+              }
+            ],
+            "cardinalities": [
+              12,
+              1
+            ],
+            "units": "13 distinct real server prices and13 departure dates",
+            "queryPreserved": true
+          }
+        },
+        {
+          "width": 390,
+          "name": "heterogeneous nativeUI sort complete13 departure_asc",
+          "status": "PASS",
+          "detail": {
+            "sort": "departure_asc",
+            "actual": [
+              {
+                "id": 76,
+                "price": 12000,
+                "date": "2026-12-14"
+              },
+              {
+                "id": 80,
+                "price": 12100,
+                "date": "2026-12-15"
+              },
+              {
+                "id": 74,
+                "price": 11800,
+                "date": "2026-12-16"
+              },
+              {
+                "id": 82,
+                "price": 11900,
+                "date": "2026-12-17"
+              },
+              {
+                "id": 78,
+                "price": 11600,
+                "date": "2026-12-18"
+              },
+              {
+                "id": 72,
+                "price": 12200,
+                "date": "2026-12-19"
+              },
+              {
+                "id": 84,
+                "price": 11700,
+                "date": "2026-12-20"
+              },
+              {
+                "id": 79,
+                "price": 11100,
+                "date": "2026-12-21"
+              },
+              {
+                "id": 83,
+                "price": 11500,
+                "date": "2026-12-22"
+              },
+              {
+                "id": 75,
+                "price": 11400,
+                "date": "2026-12-23"
+              },
+              {
+                "id": 81,
+                "price": 11300,
+                "date": "2026-12-24"
+              },
+              {
+                "id": 73,
+                "price": 11000,
+                "date": "2026-12-25"
+              },
+              {
+                "id": 77,
+                "price": 11200,
+                "date": "2026-12-26"
+              }
+            ],
+            "expected": [
+              {
+                "id": 76,
+                "price": 12000,
+                "date": "2026-12-14"
+              },
+              {
+                "id": 80,
+                "price": 12100,
+                "date": "2026-12-15"
+              },
+              {
+                "id": 74,
+                "price": 11800,
+                "date": "2026-12-16"
+              },
+              {
+                "id": 82,
+                "price": 11900,
+                "date": "2026-12-17"
+              },
+              {
+                "id": 78,
+                "price": 11600,
+                "date": "2026-12-18"
+              },
+              {
+                "id": 72,
+                "price": 12200,
+                "date": "2026-12-19"
+              },
+              {
+                "id": 84,
+                "price": 11700,
+                "date": "2026-12-20"
+              },
+              {
+                "id": 79,
+                "price": 11100,
+                "date": "2026-12-21"
+              },
+              {
+                "id": 83,
+                "price": 11500,
+                "date": "2026-12-22"
+              },
+              {
+                "id": 75,
+                "price": 11400,
+                "date": "2026-12-23"
+              },
+              {
+                "id": 81,
+                "price": 11300,
+                "date": "2026-12-24"
+              },
+              {
+                "id": 73,
+                "price": 11000,
+                "date": "2026-12-25"
+              },
+              {
+                "id": 77,
+                "price": 11200,
+                "date": "2026-12-26"
+              }
+            ],
+            "cardinalities": [
+              12,
+              1
+            ],
+            "units": "13 distinct real server prices and13 departure dates",
+            "queryPreserved": true
+          }
+        },
+        {
+          "width": 390,
+          "name": "heterogeneous nativeUI sort complete13 recommended",
+          "status": "PASS",
+          "detail": {
+            "sort": "recommended",
+            "actual": [
+              {
+                "id": 72,
+                "price": 12200,
+                "date": "2026-12-19"
+              },
+              {
+                "id": 73,
+                "price": 11000,
+                "date": "2026-12-25"
+              },
+              {
+                "id": 74,
+                "price": 11800,
+                "date": "2026-12-16"
+              },
+              {
+                "id": 75,
+                "price": 11400,
+                "date": "2026-12-23"
+              },
+              {
+                "id": 76,
+                "price": 12000,
+                "date": "2026-12-14"
+              },
+              {
+                "id": 77,
+                "price": 11200,
+                "date": "2026-12-26"
+              },
+              {
+                "id": 78,
+                "price": 11600,
+                "date": "2026-12-18"
+              },
+              {
+                "id": 79,
+                "price": 11100,
+                "date": "2026-12-21"
+              },
+              {
+                "id": 80,
+                "price": 12100,
+                "date": "2026-12-15"
+              },
+              {
+                "id": 81,
+                "price": 11300,
+                "date": "2026-12-24"
+              },
+              {
+                "id": 82,
+                "price": 11900,
+                "date": "2026-12-17"
+              },
+              {
+                "id": 83,
+                "price": 11500,
+                "date": "2026-12-22"
+              },
+              {
+                "id": 84,
+                "price": 11700,
+                "date": "2026-12-20"
+              }
+            ],
+            "expected": [
+              {
+                "id": 72,
+                "price": 12200,
+                "date": "2026-12-19"
+              },
+              {
+                "id": 73,
+                "price": 11000,
+                "date": "2026-12-25"
+              },
+              {
+                "id": 74,
+                "price": 11800,
+                "date": "2026-12-16"
+              },
+              {
+                "id": 75,
+                "price": 11400,
+                "date": "2026-12-23"
+              },
+              {
+                "id": 76,
+                "price": 12000,
+                "date": "2026-12-14"
+              },
+              {
+                "id": 77,
+                "price": 11200,
+                "date": "2026-12-26"
+              },
+              {
+                "id": 78,
+                "price": 11600,
+                "date": "2026-12-18"
+              },
+              {
+                "id": 79,
+                "price": 11100,
+                "date": "2026-12-21"
+              },
+              {
+                "id": 80,
+                "price": 12100,
+                "date": "2026-12-15"
+              },
+              {
+                "id": 81,
+                "price": 11300,
+                "date": "2026-12-24"
+              },
+              {
+                "id": 82,
+                "price": 11900,
+                "date": "2026-12-17"
+              },
+              {
+                "id": 83,
+                "price": 11500,
+                "date": "2026-12-22"
+              },
+              {
+                "id": 84,
+                "price": 11700,
+                "date": "2026-12-20"
+              }
+            ],
+            "cardinalities": [
+              12,
+              1
+            ],
+            "units": "13 distinct real server prices and13 departure dates",
+            "queryPreserved": true
+          }
+        },
+        {
+          "width": 1440,
+          "name": "heterogeneous nativeUI sort complete13 price_asc",
+          "status": "PASS",
+          "detail": {
+            "sort": "price_asc",
+            "actual": [
+              {
+                "id": 73,
+                "price": 11000,
+                "date": "2026-12-25"
+              },
+              {
+                "id": 79,
+                "price": 11100,
+                "date": "2026-12-21"
+              },
+              {
+                "id": 77,
+                "price": 11200,
+                "date": "2026-12-26"
+              },
+              {
+                "id": 81,
+                "price": 11300,
+                "date": "2026-12-24"
+              },
+              {
+                "id": 75,
+                "price": 11400,
+                "date": "2026-12-23"
+              },
+              {
+                "id": 83,
+                "price": 11500,
+                "date": "2026-12-22"
+              },
+              {
+                "id": 78,
+                "price": 11600,
+                "date": "2026-12-18"
+              },
+              {
+                "id": 84,
+                "price": 11700,
+                "date": "2026-12-20"
+              },
+              {
+                "id": 74,
+                "price": 11800,
+                "date": "2026-12-16"
+              },
+              {
+                "id": 82,
+                "price": 11900,
+                "date": "2026-12-17"
+              },
+              {
+                "id": 76,
+                "price": 12000,
+                "date": "2026-12-14"
+              },
+              {
+                "id": 80,
+                "price": 12100,
+                "date": "2026-12-15"
+              },
+              {
+                "id": 72,
+                "price": 12200,
+                "date": "2026-12-19"
+              }
+            ],
+            "expected": [
+              {
+                "id": 73,
+                "price": 11000,
+                "date": "2026-12-25"
+              },
+              {
+                "id": 79,
+                "price": 11100,
+                "date": "2026-12-21"
+              },
+              {
+                "id": 77,
+                "price": 11200,
+                "date": "2026-12-26"
+              },
+              {
+                "id": 81,
+                "price": 11300,
+                "date": "2026-12-24"
+              },
+              {
+                "id": 75,
+                "price": 11400,
+                "date": "2026-12-23"
+              },
+              {
+                "id": 83,
+                "price": 11500,
+                "date": "2026-12-22"
+              },
+              {
+                "id": 78,
+                "price": 11600,
+                "date": "2026-12-18"
+              },
+              {
+                "id": 84,
+                "price": 11700,
+                "date": "2026-12-20"
+              },
+              {
+                "id": 74,
+                "price": 11800,
+                "date": "2026-12-16"
+              },
+              {
+                "id": 82,
+                "price": 11900,
+                "date": "2026-12-17"
+              },
+              {
+                "id": 76,
+                "price": 12000,
+                "date": "2026-12-14"
+              },
+              {
+                "id": 80,
+                "price": 12100,
+                "date": "2026-12-15"
+              },
+              {
+                "id": 72,
+                "price": 12200,
+                "date": "2026-12-19"
+              }
+            ],
+            "cardinalities": [
+              12,
+              1
+            ],
+            "units": "13 distinct real server prices and13 departure dates",
+            "queryPreserved": true
+          }
+        },
+        {
+          "width": 1440,
+          "name": "heterogeneous nativeUI sort complete13 price_desc",
+          "status": "PASS",
+          "detail": {
+            "sort": "price_desc",
+            "actual": [
+              {
+                "id": 72,
+                "price": 12200,
+                "date": "2026-12-19"
+              },
+              {
+                "id": 80,
+                "price": 12100,
+                "date": "2026-12-15"
+              },
+              {
+                "id": 76,
+                "price": 12000,
+                "date": "2026-12-14"
+              },
+              {
+                "id": 82,
+                "price": 11900,
+                "date": "2026-12-17"
+              },
+              {
+                "id": 74,
+                "price": 11800,
+                "date": "2026-12-16"
+              },
+              {
+                "id": 84,
+                "price": 11700,
+                "date": "2026-12-20"
+              },
+              {
+                "id": 78,
+                "price": 11600,
+                "date": "2026-12-18"
+              },
+              {
+                "id": 83,
+                "price": 11500,
+                "date": "2026-12-22"
+              },
+              {
+                "id": 75,
+                "price": 11400,
+                "date": "2026-12-23"
+              },
+              {
+                "id": 81,
+                "price": 11300,
+                "date": "2026-12-24"
+              },
+              {
+                "id": 77,
+                "price": 11200,
+                "date": "2026-12-26"
+              },
+              {
+                "id": 79,
+                "price": 11100,
+                "date": "2026-12-21"
+              },
+              {
+                "id": 73,
+                "price": 11000,
+                "date": "2026-12-25"
+              }
+            ],
+            "expected": [
+              {
+                "id": 72,
+                "price": 12200,
+                "date": "2026-12-19"
+              },
+              {
+                "id": 80,
+                "price": 12100,
+                "date": "2026-12-15"
+              },
+              {
+                "id": 76,
+                "price": 12000,
+                "date": "2026-12-14"
+              },
+              {
+                "id": 82,
+                "price": 11900,
+                "date": "2026-12-17"
+              },
+              {
+                "id": 74,
+                "price": 11800,
+                "date": "2026-12-16"
+              },
+              {
+                "id": 84,
+                "price": 11700,
+                "date": "2026-12-20"
+              },
+              {
+                "id": 78,
+                "price": 11600,
+                "date": "2026-12-18"
+              },
+              {
+                "id": 83,
+                "price": 11500,
+                "date": "2026-12-22"
+              },
+              {
+                "id": 75,
+                "price": 11400,
+                "date": "2026-12-23"
+              },
+              {
+                "id": 81,
+                "price": 11300,
+                "date": "2026-12-24"
+              },
+              {
+                "id": 77,
+                "price": 11200,
+                "date": "2026-12-26"
+              },
+              {
+                "id": 79,
+                "price": 11100,
+                "date": "2026-12-21"
+              },
+              {
+                "id": 73,
+                "price": 11000,
+                "date": "2026-12-25"
+              }
+            ],
+            "cardinalities": [
+              12,
+              1
+            ],
+            "units": "13 distinct real server prices and13 departure dates",
+            "queryPreserved": true
+          }
+        },
+        {
+          "width": 1440,
+          "name": "heterogeneous nativeUI sort complete13 departure_asc",
+          "status": "PASS",
+          "detail": {
+            "sort": "departure_asc",
+            "actual": [
+              {
+                "id": 76,
+                "price": 12000,
+                "date": "2026-12-14"
+              },
+              {
+                "id": 80,
+                "price": 12100,
+                "date": "2026-12-15"
+              },
+              {
+                "id": 74,
+                "price": 11800,
+                "date": "2026-12-16"
+              },
+              {
+                "id": 82,
+                "price": 11900,
+                "date": "2026-12-17"
+              },
+              {
+                "id": 78,
+                "price": 11600,
+                "date": "2026-12-18"
+              },
+              {
+                "id": 72,
+                "price": 12200,
+                "date": "2026-12-19"
+              },
+              {
+                "id": 84,
+                "price": 11700,
+                "date": "2026-12-20"
+              },
+              {
+                "id": 79,
+                "price": 11100,
+                "date": "2026-12-21"
+              },
+              {
+                "id": 83,
+                "price": 11500,
+                "date": "2026-12-22"
+              },
+              {
+                "id": 75,
+                "price": 11400,
+                "date": "2026-12-23"
+              },
+              {
+                "id": 81,
+                "price": 11300,
+                "date": "2026-12-24"
+              },
+              {
+                "id": 73,
+                "price": 11000,
+                "date": "2026-12-25"
+              },
+              {
+                "id": 77,
+                "price": 11200,
+                "date": "2026-12-26"
+              }
+            ],
+            "expected": [
+              {
+                "id": 76,
+                "price": 12000,
+                "date": "2026-12-14"
+              },
+              {
+                "id": 80,
+                "price": 12100,
+                "date": "2026-12-15"
+              },
+              {
+                "id": 74,
+                "price": 11800,
+                "date": "2026-12-16"
+              },
+              {
+                "id": 82,
+                "price": 11900,
+                "date": "2026-12-17"
+              },
+              {
+                "id": 78,
+                "price": 11600,
+                "date": "2026-12-18"
+              },
+              {
+                "id": 72,
+                "price": 12200,
+                "date": "2026-12-19"
+              },
+              {
+                "id": 84,
+                "price": 11700,
+                "date": "2026-12-20"
+              },
+              {
+                "id": 79,
+                "price": 11100,
+                "date": "2026-12-21"
+              },
+              {
+                "id": 83,
+                "price": 11500,
+                "date": "2026-12-22"
+              },
+              {
+                "id": 75,
+                "price": 11400,
+                "date": "2026-12-23"
+              },
+              {
+                "id": 81,
+                "price": 11300,
+                "date": "2026-12-24"
+              },
+              {
+                "id": 73,
+                "price": 11000,
+                "date": "2026-12-25"
+              },
+              {
+                "id": 77,
+                "price": 11200,
+                "date": "2026-12-26"
+              }
+            ],
+            "cardinalities": [
+              12,
+              1
+            ],
+            "units": "13 distinct real server prices and13 departure dates",
+            "queryPreserved": true
+          }
+        },
+        {
+          "width": 1440,
+          "name": "heterogeneous nativeUI sort complete13 recommended",
+          "status": "PASS",
+          "detail": {
+            "sort": "recommended",
+            "actual": [
+              {
+                "id": 72,
+                "price": 12200,
+                "date": "2026-12-19"
+              },
+              {
+                "id": 73,
+                "price": 11000,
+                "date": "2026-12-25"
+              },
+              {
+                "id": 74,
+                "price": 11800,
+                "date": "2026-12-16"
+              },
+              {
+                "id": 75,
+                "price": 11400,
+                "date": "2026-12-23"
+              },
+              {
+                "id": 76,
+                "price": 12000,
+                "date": "2026-12-14"
+              },
+              {
+                "id": 77,
+                "price": 11200,
+                "date": "2026-12-26"
+              },
+              {
+                "id": 78,
+                "price": 11600,
+                "date": "2026-12-18"
+              },
+              {
+                "id": 79,
+                "price": 11100,
+                "date": "2026-12-21"
+              },
+              {
+                "id": 80,
+                "price": 12100,
+                "date": "2026-12-15"
+              },
+              {
+                "id": 81,
+                "price": 11300,
+                "date": "2026-12-24"
+              },
+              {
+                "id": 82,
+                "price": 11900,
+                "date": "2026-12-17"
+              },
+              {
+                "id": 83,
+                "price": 11500,
+                "date": "2026-12-22"
+              },
+              {
+                "id": 84,
+                "price": 11700,
+                "date": "2026-12-20"
+              }
+            ],
+            "expected": [
+              {
+                "id": 72,
+                "price": 12200,
+                "date": "2026-12-19"
+              },
+              {
+                "id": 73,
+                "price": 11000,
+                "date": "2026-12-25"
+              },
+              {
+                "id": 74,
+                "price": 11800,
+                "date": "2026-12-16"
+              },
+              {
+                "id": 75,
+                "price": 11400,
+                "date": "2026-12-23"
+              },
+              {
+                "id": 76,
+                "price": 12000,
+                "date": "2026-12-14"
+              },
+              {
+                "id": 77,
+                "price": 11200,
+                "date": "2026-12-26"
+              },
+              {
+                "id": 78,
+                "price": 11600,
+                "date": "2026-12-18"
+              },
+              {
+                "id": 79,
+                "price": 11100,
+                "date": "2026-12-21"
+              },
+              {
+                "id": 80,
+                "price": 12100,
+                "date": "2026-12-15"
+              },
+              {
+                "id": 81,
+                "price": 11300,
+                "date": "2026-12-24"
+              },
+              {
+                "id": 82,
+                "price": 11900,
+                "date": "2026-12-17"
+              },
+              {
+                "id": 83,
+                "price": 11500,
+                "date": "2026-12-22"
+              },
+              {
+                "id": 84,
+                "price": 11700,
+                "date": "2026-12-20"
+              }
+            ],
+            "cardinalities": [
+              12,
+              1
+            ],
+            "units": "13 distinct real server prices and13 departure dates",
+            "queryPreserved": true
+          }
+        }
+      ],
+      "counts": {
+        "PASS": 8,
         "FAIL": 0,
         "NOT_RUN": 0,
         "BLOCKED": 0

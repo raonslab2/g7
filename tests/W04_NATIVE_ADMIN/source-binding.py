@@ -1,6 +1,7 @@
 """Read-only fixed-source binding; output only paths, digests and HTTP status.
 
-Run once before browser work and once after cleanup. No application boot, credentials,
+Run before browser work, after cleanup, and after a separately authorized sort extension.
+Each named phase is append-only; the original after snapshot is preserved. No application boot, credentials,
 environment/config caches or database access. The parent tree is never written.
 """
 import argparse
@@ -294,13 +295,16 @@ def required_equal(snapshot):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("phase", choices=("before", "after"))
+    parser.add_argument("phase", choices=("before", "after", "after_sort_extension"))
     args = parser.parse_args()
-    result = collect()
     out = json.loads(DEST.read_text()) if DEST.exists() else {}
-    assert args.phase not in out, "Do not overwrite an existing phase or rerun unchanged head."
-    if args.phase == "after":
+    assert args.phase not in out, "Do not overwrite an existing phase."
+    if args.phase in ("after", "after_sort_extension"):
         assert "before" in out
+    if args.phase == "after_sort_extension":
+        assert "after" in out, "Preserve the original after measurement before the sort extension."
+    original_after_digest = digest(json.dumps(out["after"], sort_keys=True, separators=(",", ":")).encode()) if args.phase == "after_sort_extension" else None
+    result = collect()
     out.update(source_sha=SHA, source_tree=TREE, official_validation="NOT_RUN", hosted_ci="NOT_RUN",
                scope="Pinned Git runtime paths: core app/routes/resources/bootstrap/app.php, "
                      "travel/ecommerce/board/page modules, travel/admin/basic templates and public/build. "
@@ -311,8 +315,26 @@ if __name__ == "__main__":
         out["before_after_identical"] = stable(out["before"]) == stable(result)
         out["during_after_entrypoints_identical"] = out.get("during_verification_entrypoints", {}).get("files") == result["supplemental_core_entrypoints"]["files"]
         out["during_after_languages_identical"] = out.get("during_verification_languages", {}).get("files") == result["supplemental_core_languages"]["files"]
+    if args.phase == "after_sort_extension":
+        out["before_after_sort_extension_identical"] = stable(out["before"]) == stable(result)
+        out["during_after_sort_extension_entrypoints_identical"] = out.get("during_verification_entrypoints", {}).get("files") == result["supplemental_core_entrypoints"]["files"]
+        out["during_after_sort_extension_languages_identical"] = out.get("during_verification_languages", {}).get("files") == result["supplemental_core_languages"]["files"]
+        out["closing_runtime_binding"] = {
+            "phase": args.phase,
+            "required_source_equal": required_equal(result),
+            "direct_served_assets_equal": result["served_all_equal"],
+            "public_shell_assets_equal": result["public_shell_asset_binding"]["all_equal"],
+            "initial_before_scope_identical": out["before_after_sort_extension_identical"],
+            "during_entrypoints_identical": out["during_after_sort_extension_entrypoints_identical"],
+            "during_root_languages_identical": out["during_after_sort_extension_languages_identical"],
+            "original_after_serialized_sha256": original_after_digest,
+            "original_after_preserved": original_after_digest == digest(json.dumps(out["after"], sort_keys=True, separators=(",", ":")).encode()),
+        }
+        out["closing_runtime_binding"]["all_equal"] = all(
+            value for key, value in out["closing_runtime_binding"].items()
+            if key not in {"phase", "original_after_serialized_sha256"})
     out["required_runtime_binding"] = {phase: required_equal(out[phase])
-                                       for phase in ("before", "after") if phase in out}
+                                       for phase in ("before", "after", "after_sort_extension") if phase in out}
     optional = result["summary"].get("templates/sirsoft-basic", {})
     out["default_basic_template_note"] = (
         f"sirsoft-basic optional inventory: {optional.get('count', 0)} pinned paths. "
@@ -335,7 +357,10 @@ if __name__ == "__main__":
                       "supplemental_entrypoint_count": result["supplemental_core_entrypoints"]["count"],
                       "supplemental_root_lang_count": result["supplemental_core_languages"]["count"],
                       "during_after_entrypoints_identical": out.get("during_after_entrypoints_identical", "NOT_RUN"),
-                      "during_after_languages_identical": out.get("during_after_languages_identical", "NOT_RUN")}))
+                      "during_after_languages_identical": out.get("during_after_languages_identical", "NOT_RUN"),
+                      "closing_runtime_binding": out.get("closing_runtime_binding", "NOT_RUN")}))
+    if args.phase == "after_sort_extension":
+        raise SystemExit(0 if out["closing_runtime_binding"]["all_equal"] else 1)
     raise SystemExit(0 if required_equal(result) and result["served_all_equal"]
                      and result["public_shell_asset_binding"]["all_equal"]
                      and result["supplemental_core_entrypoints"]["all_equal"]

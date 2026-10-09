@@ -1,0 +1,3301 @@
+{
+  "tested_sha": "fa5523175ac494cfbd13bbf89bf06b3ec91835a6",
+  "actual_head": "d1e85b719f17cf40acbecd7f11b03e3432a4556b",
+  "browserVersion": "156.0.8078.4",
+  "run": "W04N1791570320093",
+  "elapsed_seconds": 42.708,
+  "results": [
+    {
+      "width": 0,
+      "name": "same13 API-only own fixture heterogeneous price/date preparation",
+      "status": "PASS",
+      "detail": {
+        "ids": [
+          72,
+          73,
+          74,
+          75,
+          76,
+          77,
+          78,
+          79,
+          80,
+          81,
+          82,
+          83,
+          84
+        ],
+        "unit": "NativeAPI preparation on existing own13; no category/policy/default/cart/inquiry mutation, no newfixtures"
+      }
+    },
+    {
+      "width": 390,
+      "name": "heterogeneous nativeUI sort complete13 price_asc",
+      "status": "PASS",
+      "detail": {
+        "sort": "price_asc",
+        "actual": [
+          {
+            "id": 73,
+            "price": 11000,
+            "date": "2026-12-25"
+          },
+          {
+            "id": 79,
+            "price": 11100,
+            "date": "2026-12-21"
+          },
+          {
+            "id": 77,
+            "price": 11200,
+            "date": "2026-12-26"
+          },
+          {
+            "id": 81,
+            "price": 11300,
+            "date": "2026-12-24"
+          },
+          {
+            "id": 75,
+            "price": 11400,
+            "date": "2026-12-23"
+          },
+          {
+            "id": 83,
+            "price": 11500,
+            "date": "2026-12-22"
+          },
+          {
+            "id": 78,
+            "price": 11600,
+            "date": "2026-12-18"
+          },
+          {
+            "id": 84,
+            "price": 11700,
+            "date": "2026-12-20"
+          },
+          {
+            "id": 74,
+            "price": 11800,
+            "date": "2026-12-16"
+          },
+          {
+            "id": 82,
+            "price": 11900,
+            "date": "2026-12-17"
+          },
+          {
+            "id": 76,
+            "price": 12000,
+            "date": "2026-12-14"
+          },
+          {
+            "id": 80,
+            "price": 12100,
+            "date": "2026-12-15"
+          },
+          {
+            "id": 72,
+            "price": 12200,
+            "date": "2026-12-19"
+          }
+        ],
+        "expected": [
+          {
+            "id": 73,
+            "price": 11000,
+            "date": "2026-12-25"
+          },
+          {
+            "id": 79,
+            "price": 11100,
+            "date": "2026-12-21"
+          },
+          {
+            "id": 77,
+            "price": 11200,
+            "date": "2026-12-26"
+          },
+          {
+            "id": 81,
+            "price": 11300,
+            "date": "2026-12-24"
+          },
+          {
+            "id": 75,
+            "price": 11400,
+            "date": "2026-12-23"
+          },
+          {
+            "id": 83,
+            "price": 11500,
+            "date": "2026-12-22"
+          },
+          {
+            "id": 78,
+            "price": 11600,
+            "date": "2026-12-18"
+          },
+          {
+            "id": 84,
+            "price": 11700,
+            "date": "2026-12-20"
+          },
+          {
+            "id": 74,
+            "price": 11800,
+            "date": "2026-12-16"
+          },
+          {
+            "id": 82,
+            "price": 11900,
+            "date": "2026-12-17"
+          },
+          {
+            "id": 76,
+            "price": 12000,
+            "date": "2026-12-14"
+          },
+          {
+            "id": 80,
+            "price": 12100,
+            "date": "2026-12-15"
+          },
+          {
+            "id": 72,
+            "price": 12200,
+            "date": "2026-12-19"
+          }
+        ],
+        "cardinalities": [
+          12,
+          1
+        ],
+        "units": "13 distinct real server prices and13 departure dates",
+        "queryPreserved": true
+      }
+    },
+    {
+      "width": 390,
+      "name": "privacy OCR heterogeneous-price-desc",
+      "status": "PASS",
+      "knownValueHits": 0,
+      "tokenPatternHits": 0
+    },
+    {
+      "width": 390,
+      "name": "heterogeneous nativeUI sort complete13 price_desc",
+      "status": "PASS",
+      "detail": {
+        "sort": "price_desc",
+        "actual": [
+          {
+            "id": 72,
+            "price": 12200,
+            "date": "2026-12-19"
+          },
+          {
+            "id": 80,
+            "price": 12100,
+            "date": "2026-12-15"
+          },
+          {
+            "id": 76,
+            "price": 12000,
+            "date": "2026-12-14"
+          },
+          {
+            "id": 82,
+            "price": 11900,
+            "date": "2026-12-17"
+          },
+          {
+            "id": 74,
+            "price": 11800,
+            "date": "2026-12-16"
+          },
+          {
+            "id": 84,
+            "price": 11700,
+            "date": "2026-12-20"
+          },
+          {
+            "id": 78,
+            "price": 11600,
+            "date": "2026-12-18"
+          },
+          {
+            "id": 83,
+            "price": 11500,
+            "date": "2026-12-22"
+          },
+          {
+            "id": 75,
+            "price": 11400,
+            "date": "2026-12-23"
+          },
+          {
+            "id": 81,
+            "price": 11300,
+            "date": "2026-12-24"
+          },
+          {
+            "id": 77,
+            "price": 11200,
+            "date": "2026-12-26"
+          },
+          {
+            "id": 79,
+            "price": 11100,
+            "date": "2026-12-21"
+          },
+          {
+            "id": 73,
+            "price": 11000,
+            "date": "2026-12-25"
+          }
+        ],
+        "expected": [
+          {
+            "id": 72,
+            "price": 12200,
+            "date": "2026-12-19"
+          },
+          {
+            "id": 80,
+            "price": 12100,
+            "date": "2026-12-15"
+          },
+          {
+            "id": 76,
+            "price": 12000,
+            "date": "2026-12-14"
+          },
+          {
+            "id": 82,
+            "price": 11900,
+            "date": "2026-12-17"
+          },
+          {
+            "id": 74,
+            "price": 11800,
+            "date": "2026-12-16"
+          },
+          {
+            "id": 84,
+            "price": 11700,
+            "date": "2026-12-20"
+          },
+          {
+            "id": 78,
+            "price": 11600,
+            "date": "2026-12-18"
+          },
+          {
+            "id": 83,
+            "price": 11500,
+            "date": "2026-12-22"
+          },
+          {
+            "id": 75,
+            "price": 11400,
+            "date": "2026-12-23"
+          },
+          {
+            "id": 81,
+            "price": 11300,
+            "date": "2026-12-24"
+          },
+          {
+            "id": 77,
+            "price": 11200,
+            "date": "2026-12-26"
+          },
+          {
+            "id": 79,
+            "price": 11100,
+            "date": "2026-12-21"
+          },
+          {
+            "id": 73,
+            "price": 11000,
+            "date": "2026-12-25"
+          }
+        ],
+        "cardinalities": [
+          12,
+          1
+        ],
+        "units": "13 distinct real server prices and13 departure dates",
+        "queryPreserved": true
+      }
+    },
+    {
+      "width": 390,
+      "name": "heterogeneous nativeUI sort complete13 departure_asc",
+      "status": "PASS",
+      "detail": {
+        "sort": "departure_asc",
+        "actual": [
+          {
+            "id": 76,
+            "price": 12000,
+            "date": "2026-12-14"
+          },
+          {
+            "id": 80,
+            "price": 12100,
+            "date": "2026-12-15"
+          },
+          {
+            "id": 74,
+            "price": 11800,
+            "date": "2026-12-16"
+          },
+          {
+            "id": 82,
+            "price": 11900,
+            "date": "2026-12-17"
+          },
+          {
+            "id": 78,
+            "price": 11600,
+            "date": "2026-12-18"
+          },
+          {
+            "id": 72,
+            "price": 12200,
+            "date": "2026-12-19"
+          },
+          {
+            "id": 84,
+            "price": 11700,
+            "date": "2026-12-20"
+          },
+          {
+            "id": 79,
+            "price": 11100,
+            "date": "2026-12-21"
+          },
+          {
+            "id": 83,
+            "price": 11500,
+            "date": "2026-12-22"
+          },
+          {
+            "id": 75,
+            "price": 11400,
+            "date": "2026-12-23"
+          },
+          {
+            "id": 81,
+            "price": 11300,
+            "date": "2026-12-24"
+          },
+          {
+            "id": 73,
+            "price": 11000,
+            "date": "2026-12-25"
+          },
+          {
+            "id": 77,
+            "price": 11200,
+            "date": "2026-12-26"
+          }
+        ],
+        "expected": [
+          {
+            "id": 76,
+            "price": 12000,
+            "date": "2026-12-14"
+          },
+          {
+            "id": 80,
+            "price": 12100,
+            "date": "2026-12-15"
+          },
+          {
+            "id": 74,
+            "price": 11800,
+            "date": "2026-12-16"
+          },
+          {
+            "id": 82,
+            "price": 11900,
+            "date": "2026-12-17"
+          },
+          {
+            "id": 78,
+            "price": 11600,
+            "date": "2026-12-18"
+          },
+          {
+            "id": 72,
+            "price": 12200,
+            "date": "2026-12-19"
+          },
+          {
+            "id": 84,
+            "price": 11700,
+            "date": "2026-12-20"
+          },
+          {
+            "id": 79,
+            "price": 11100,
+            "date": "2026-12-21"
+          },
+          {
+            "id": 83,
+            "price": 11500,
+            "date": "2026-12-22"
+          },
+          {
+            "id": 75,
+            "price": 11400,
+            "date": "2026-12-23"
+          },
+          {
+            "id": 81,
+            "price": 11300,
+            "date": "2026-12-24"
+          },
+          {
+            "id": 73,
+            "price": 11000,
+            "date": "2026-12-25"
+          },
+          {
+            "id": 77,
+            "price": 11200,
+            "date": "2026-12-26"
+          }
+        ],
+        "cardinalities": [
+          12,
+          1
+        ],
+        "units": "13 distinct real server prices and13 departure dates",
+        "queryPreserved": true
+      }
+    },
+    {
+      "width": 390,
+      "name": "heterogeneous nativeUI sort complete13 recommended",
+      "status": "PASS",
+      "detail": {
+        "sort": "recommended",
+        "actual": [
+          {
+            "id": 72,
+            "price": 12200,
+            "date": "2026-12-19"
+          },
+          {
+            "id": 73,
+            "price": 11000,
+            "date": "2026-12-25"
+          },
+          {
+            "id": 74,
+            "price": 11800,
+            "date": "2026-12-16"
+          },
+          {
+            "id": 75,
+            "price": 11400,
+            "date": "2026-12-23"
+          },
+          {
+            "id": 76,
+            "price": 12000,
+            "date": "2026-12-14"
+          },
+          {
+            "id": 77,
+            "price": 11200,
+            "date": "2026-12-26"
+          },
+          {
+            "id": 78,
+            "price": 11600,
+            "date": "2026-12-18"
+          },
+          {
+            "id": 79,
+            "price": 11100,
+            "date": "2026-12-21"
+          },
+          {
+            "id": 80,
+            "price": 12100,
+            "date": "2026-12-15"
+          },
+          {
+            "id": 81,
+            "price": 11300,
+            "date": "2026-12-24"
+          },
+          {
+            "id": 82,
+            "price": 11900,
+            "date": "2026-12-17"
+          },
+          {
+            "id": 83,
+            "price": 11500,
+            "date": "2026-12-22"
+          },
+          {
+            "id": 84,
+            "price": 11700,
+            "date": "2026-12-20"
+          }
+        ],
+        "expected": [
+          {
+            "id": 72,
+            "price": 12200,
+            "date": "2026-12-19"
+          },
+          {
+            "id": 73,
+            "price": 11000,
+            "date": "2026-12-25"
+          },
+          {
+            "id": 74,
+            "price": 11800,
+            "date": "2026-12-16"
+          },
+          {
+            "id": 75,
+            "price": 11400,
+            "date": "2026-12-23"
+          },
+          {
+            "id": 76,
+            "price": 12000,
+            "date": "2026-12-14"
+          },
+          {
+            "id": 77,
+            "price": 11200,
+            "date": "2026-12-26"
+          },
+          {
+            "id": 78,
+            "price": 11600,
+            "date": "2026-12-18"
+          },
+          {
+            "id": 79,
+            "price": 11100,
+            "date": "2026-12-21"
+          },
+          {
+            "id": 80,
+            "price": 12100,
+            "date": "2026-12-15"
+          },
+          {
+            "id": 81,
+            "price": 11300,
+            "date": "2026-12-24"
+          },
+          {
+            "id": 82,
+            "price": 11900,
+            "date": "2026-12-17"
+          },
+          {
+            "id": 83,
+            "price": 11500,
+            "date": "2026-12-22"
+          },
+          {
+            "id": 84,
+            "price": 11700,
+            "date": "2026-12-20"
+          }
+        ],
+        "cardinalities": [
+          12,
+          1
+        ],
+        "units": "13 distinct real server prices and13 departure dates",
+        "queryPreserved": true
+      }
+    },
+    {
+      "width": 1440,
+      "name": "heterogeneous nativeUI sort complete13 price_asc",
+      "status": "PASS",
+      "detail": {
+        "sort": "price_asc",
+        "actual": [
+          {
+            "id": 73,
+            "price": 11000,
+            "date": "2026-12-25"
+          },
+          {
+            "id": 79,
+            "price": 11100,
+            "date": "2026-12-21"
+          },
+          {
+            "id": 77,
+            "price": 11200,
+            "date": "2026-12-26"
+          },
+          {
+            "id": 81,
+            "price": 11300,
+            "date": "2026-12-24"
+          },
+          {
+            "id": 75,
+            "price": 11400,
+            "date": "2026-12-23"
+          },
+          {
+            "id": 83,
+            "price": 11500,
+            "date": "2026-12-22"
+          },
+          {
+            "id": 78,
+            "price": 11600,
+            "date": "2026-12-18"
+          },
+          {
+            "id": 84,
+            "price": 11700,
+            "date": "2026-12-20"
+          },
+          {
+            "id": 74,
+            "price": 11800,
+            "date": "2026-12-16"
+          },
+          {
+            "id": 82,
+            "price": 11900,
+            "date": "2026-12-17"
+          },
+          {
+            "id": 76,
+            "price": 12000,
+            "date": "2026-12-14"
+          },
+          {
+            "id": 80,
+            "price": 12100,
+            "date": "2026-12-15"
+          },
+          {
+            "id": 72,
+            "price": 12200,
+            "date": "2026-12-19"
+          }
+        ],
+        "expected": [
+          {
+            "id": 73,
+            "price": 11000,
+            "date": "2026-12-25"
+          },
+          {
+            "id": 79,
+            "price": 11100,
+            "date": "2026-12-21"
+          },
+          {
+            "id": 77,
+            "price": 11200,
+            "date": "2026-12-26"
+          },
+          {
+            "id": 81,
+            "price": 11300,
+            "date": "2026-12-24"
+          },
+          {
+            "id": 75,
+            "price": 11400,
+            "date": "2026-12-23"
+          },
+          {
+            "id": 83,
+            "price": 11500,
+            "date": "2026-12-22"
+          },
+          {
+            "id": 78,
+            "price": 11600,
+            "date": "2026-12-18"
+          },
+          {
+            "id": 84,
+            "price": 11700,
+            "date": "2026-12-20"
+          },
+          {
+            "id": 74,
+            "price": 11800,
+            "date": "2026-12-16"
+          },
+          {
+            "id": 82,
+            "price": 11900,
+            "date": "2026-12-17"
+          },
+          {
+            "id": 76,
+            "price": 12000,
+            "date": "2026-12-14"
+          },
+          {
+            "id": 80,
+            "price": 12100,
+            "date": "2026-12-15"
+          },
+          {
+            "id": 72,
+            "price": 12200,
+            "date": "2026-12-19"
+          }
+        ],
+        "cardinalities": [
+          12,
+          1
+        ],
+        "units": "13 distinct real server prices and13 departure dates",
+        "queryPreserved": true
+      }
+    },
+    {
+      "width": 1440,
+      "name": "privacy OCR heterogeneous-price-desc",
+      "status": "PASS",
+      "knownValueHits": 0,
+      "tokenPatternHits": 0
+    },
+    {
+      "width": 1440,
+      "name": "heterogeneous nativeUI sort complete13 price_desc",
+      "status": "PASS",
+      "detail": {
+        "sort": "price_desc",
+        "actual": [
+          {
+            "id": 72,
+            "price": 12200,
+            "date": "2026-12-19"
+          },
+          {
+            "id": 80,
+            "price": 12100,
+            "date": "2026-12-15"
+          },
+          {
+            "id": 76,
+            "price": 12000,
+            "date": "2026-12-14"
+          },
+          {
+            "id": 82,
+            "price": 11900,
+            "date": "2026-12-17"
+          },
+          {
+            "id": 74,
+            "price": 11800,
+            "date": "2026-12-16"
+          },
+          {
+            "id": 84,
+            "price": 11700,
+            "date": "2026-12-20"
+          },
+          {
+            "id": 78,
+            "price": 11600,
+            "date": "2026-12-18"
+          },
+          {
+            "id": 83,
+            "price": 11500,
+            "date": "2026-12-22"
+          },
+          {
+            "id": 75,
+            "price": 11400,
+            "date": "2026-12-23"
+          },
+          {
+            "id": 81,
+            "price": 11300,
+            "date": "2026-12-24"
+          },
+          {
+            "id": 77,
+            "price": 11200,
+            "date": "2026-12-26"
+          },
+          {
+            "id": 79,
+            "price": 11100,
+            "date": "2026-12-21"
+          },
+          {
+            "id": 73,
+            "price": 11000,
+            "date": "2026-12-25"
+          }
+        ],
+        "expected": [
+          {
+            "id": 72,
+            "price": 12200,
+            "date": "2026-12-19"
+          },
+          {
+            "id": 80,
+            "price": 12100,
+            "date": "2026-12-15"
+          },
+          {
+            "id": 76,
+            "price": 12000,
+            "date": "2026-12-14"
+          },
+          {
+            "id": 82,
+            "price": 11900,
+            "date": "2026-12-17"
+          },
+          {
+            "id": 74,
+            "price": 11800,
+            "date": "2026-12-16"
+          },
+          {
+            "id": 84,
+            "price": 11700,
+            "date": "2026-12-20"
+          },
+          {
+            "id": 78,
+            "price": 11600,
+            "date": "2026-12-18"
+          },
+          {
+            "id": 83,
+            "price": 11500,
+            "date": "2026-12-22"
+          },
+          {
+            "id": 75,
+            "price": 11400,
+            "date": "2026-12-23"
+          },
+          {
+            "id": 81,
+            "price": 11300,
+            "date": "2026-12-24"
+          },
+          {
+            "id": 77,
+            "price": 11200,
+            "date": "2026-12-26"
+          },
+          {
+            "id": 79,
+            "price": 11100,
+            "date": "2026-12-21"
+          },
+          {
+            "id": 73,
+            "price": 11000,
+            "date": "2026-12-25"
+          }
+        ],
+        "cardinalities": [
+          12,
+          1
+        ],
+        "units": "13 distinct real server prices and13 departure dates",
+        "queryPreserved": true
+      }
+    },
+    {
+      "width": 1440,
+      "name": "heterogeneous nativeUI sort complete13 departure_asc",
+      "status": "PASS",
+      "detail": {
+        "sort": "departure_asc",
+        "actual": [
+          {
+            "id": 76,
+            "price": 12000,
+            "date": "2026-12-14"
+          },
+          {
+            "id": 80,
+            "price": 12100,
+            "date": "2026-12-15"
+          },
+          {
+            "id": 74,
+            "price": 11800,
+            "date": "2026-12-16"
+          },
+          {
+            "id": 82,
+            "price": 11900,
+            "date": "2026-12-17"
+          },
+          {
+            "id": 78,
+            "price": 11600,
+            "date": "2026-12-18"
+          },
+          {
+            "id": 72,
+            "price": 12200,
+            "date": "2026-12-19"
+          },
+          {
+            "id": 84,
+            "price": 11700,
+            "date": "2026-12-20"
+          },
+          {
+            "id": 79,
+            "price": 11100,
+            "date": "2026-12-21"
+          },
+          {
+            "id": 83,
+            "price": 11500,
+            "date": "2026-12-22"
+          },
+          {
+            "id": 75,
+            "price": 11400,
+            "date": "2026-12-23"
+          },
+          {
+            "id": 81,
+            "price": 11300,
+            "date": "2026-12-24"
+          },
+          {
+            "id": 73,
+            "price": 11000,
+            "date": "2026-12-25"
+          },
+          {
+            "id": 77,
+            "price": 11200,
+            "date": "2026-12-26"
+          }
+        ],
+        "expected": [
+          {
+            "id": 76,
+            "price": 12000,
+            "date": "2026-12-14"
+          },
+          {
+            "id": 80,
+            "price": 12100,
+            "date": "2026-12-15"
+          },
+          {
+            "id": 74,
+            "price": 11800,
+            "date": "2026-12-16"
+          },
+          {
+            "id": 82,
+            "price": 11900,
+            "date": "2026-12-17"
+          },
+          {
+            "id": 78,
+            "price": 11600,
+            "date": "2026-12-18"
+          },
+          {
+            "id": 72,
+            "price": 12200,
+            "date": "2026-12-19"
+          },
+          {
+            "id": 84,
+            "price": 11700,
+            "date": "2026-12-20"
+          },
+          {
+            "id": 79,
+            "price": 11100,
+            "date": "2026-12-21"
+          },
+          {
+            "id": 83,
+            "price": 11500,
+            "date": "2026-12-22"
+          },
+          {
+            "id": 75,
+            "price": 11400,
+            "date": "2026-12-23"
+          },
+          {
+            "id": 81,
+            "price": 11300,
+            "date": "2026-12-24"
+          },
+          {
+            "id": 73,
+            "price": 11000,
+            "date": "2026-12-25"
+          },
+          {
+            "id": 77,
+            "price": 11200,
+            "date": "2026-12-26"
+          }
+        ],
+        "cardinalities": [
+          12,
+          1
+        ],
+        "units": "13 distinct real server prices and13 departure dates",
+        "queryPreserved": true
+      }
+    },
+    {
+      "width": 1440,
+      "name": "heterogeneous nativeUI sort complete13 recommended",
+      "status": "PASS",
+      "detail": {
+        "sort": "recommended",
+        "actual": [
+          {
+            "id": 72,
+            "price": 12200,
+            "date": "2026-12-19"
+          },
+          {
+            "id": 73,
+            "price": 11000,
+            "date": "2026-12-25"
+          },
+          {
+            "id": 74,
+            "price": 11800,
+            "date": "2026-12-16"
+          },
+          {
+            "id": 75,
+            "price": 11400,
+            "date": "2026-12-23"
+          },
+          {
+            "id": 76,
+            "price": 12000,
+            "date": "2026-12-14"
+          },
+          {
+            "id": 77,
+            "price": 11200,
+            "date": "2026-12-26"
+          },
+          {
+            "id": 78,
+            "price": 11600,
+            "date": "2026-12-18"
+          },
+          {
+            "id": 79,
+            "price": 11100,
+            "date": "2026-12-21"
+          },
+          {
+            "id": 80,
+            "price": 12100,
+            "date": "2026-12-15"
+          },
+          {
+            "id": 81,
+            "price": 11300,
+            "date": "2026-12-24"
+          },
+          {
+            "id": 82,
+            "price": 11900,
+            "date": "2026-12-17"
+          },
+          {
+            "id": 83,
+            "price": 11500,
+            "date": "2026-12-22"
+          },
+          {
+            "id": 84,
+            "price": 11700,
+            "date": "2026-12-20"
+          }
+        ],
+        "expected": [
+          {
+            "id": 72,
+            "price": 12200,
+            "date": "2026-12-19"
+          },
+          {
+            "id": 73,
+            "price": 11000,
+            "date": "2026-12-25"
+          },
+          {
+            "id": 74,
+            "price": 11800,
+            "date": "2026-12-16"
+          },
+          {
+            "id": 75,
+            "price": 11400,
+            "date": "2026-12-23"
+          },
+          {
+            "id": 76,
+            "price": 12000,
+            "date": "2026-12-14"
+          },
+          {
+            "id": 77,
+            "price": 11200,
+            "date": "2026-12-26"
+          },
+          {
+            "id": 78,
+            "price": 11600,
+            "date": "2026-12-18"
+          },
+          {
+            "id": 79,
+            "price": 11100,
+            "date": "2026-12-21"
+          },
+          {
+            "id": 80,
+            "price": 12100,
+            "date": "2026-12-15"
+          },
+          {
+            "id": 81,
+            "price": 11300,
+            "date": "2026-12-24"
+          },
+          {
+            "id": 82,
+            "price": 11900,
+            "date": "2026-12-17"
+          },
+          {
+            "id": 83,
+            "price": 11500,
+            "date": "2026-12-22"
+          },
+          {
+            "id": 84,
+            "price": 11700,
+            "date": "2026-12-20"
+          }
+        ],
+        "cardinalities": [
+          12,
+          1
+        ],
+        "units": "13 distinct real server prices and13 departure dates",
+        "queryPreserved": true
+      }
+    },
+    {
+      "width": 0,
+      "name": "exact auxiliary cleanup after heterogeneous nativeUI 72",
+      "status": "PASS",
+      "detail": {
+        "id": 72,
+        "public": 404,
+        "reserved": 0,
+        "published": false,
+        "display": "hidden",
+        "optionIdsPreserved": true
+      }
+    },
+    {
+      "width": 0,
+      "name": "exact auxiliary cleanup after heterogeneous nativeUI 73",
+      "status": "PASS",
+      "detail": {
+        "id": 73,
+        "public": 404,
+        "reserved": 0,
+        "published": false,
+        "display": "hidden",
+        "optionIdsPreserved": true
+      }
+    },
+    {
+      "width": 0,
+      "name": "exact auxiliary cleanup after heterogeneous nativeUI 74",
+      "status": "PASS",
+      "detail": {
+        "id": 74,
+        "public": 404,
+        "reserved": 0,
+        "published": false,
+        "display": "hidden",
+        "optionIdsPreserved": true
+      }
+    },
+    {
+      "width": 0,
+      "name": "exact auxiliary cleanup after heterogeneous nativeUI 75",
+      "status": "PASS",
+      "detail": {
+        "id": 75,
+        "public": 404,
+        "reserved": 0,
+        "published": false,
+        "display": "hidden",
+        "optionIdsPreserved": true
+      }
+    },
+    {
+      "width": 0,
+      "name": "exact auxiliary cleanup after heterogeneous nativeUI 76",
+      "status": "PASS",
+      "detail": {
+        "id": 76,
+        "public": 404,
+        "reserved": 0,
+        "published": false,
+        "display": "hidden",
+        "optionIdsPreserved": true
+      }
+    },
+    {
+      "width": 0,
+      "name": "exact auxiliary cleanup after heterogeneous nativeUI 77",
+      "status": "PASS",
+      "detail": {
+        "id": 77,
+        "public": 404,
+        "reserved": 0,
+        "published": false,
+        "display": "hidden",
+        "optionIdsPreserved": true
+      }
+    },
+    {
+      "width": 0,
+      "name": "exact auxiliary cleanup after heterogeneous nativeUI 78",
+      "status": "PASS",
+      "detail": {
+        "id": 78,
+        "public": 404,
+        "reserved": 0,
+        "published": false,
+        "display": "hidden",
+        "optionIdsPreserved": true
+      }
+    },
+    {
+      "width": 0,
+      "name": "exact auxiliary cleanup after heterogeneous nativeUI 79",
+      "status": "PASS",
+      "detail": {
+        "id": 79,
+        "public": 404,
+        "reserved": 0,
+        "published": false,
+        "display": "hidden",
+        "optionIdsPreserved": true
+      }
+    },
+    {
+      "width": 0,
+      "name": "exact auxiliary cleanup after heterogeneous nativeUI 80",
+      "status": "PASS",
+      "detail": {
+        "id": 80,
+        "public": 404,
+        "reserved": 0,
+        "published": false,
+        "display": "hidden",
+        "optionIdsPreserved": true
+      }
+    },
+    {
+      "width": 0,
+      "name": "exact auxiliary cleanup after heterogeneous nativeUI 81",
+      "status": "PASS",
+      "detail": {
+        "id": 81,
+        "public": 404,
+        "reserved": 0,
+        "published": false,
+        "display": "hidden",
+        "optionIdsPreserved": true
+      }
+    },
+    {
+      "width": 0,
+      "name": "exact auxiliary cleanup after heterogeneous nativeUI 82",
+      "status": "PASS",
+      "detail": {
+        "id": 82,
+        "public": 404,
+        "reserved": 0,
+        "published": false,
+        "display": "hidden",
+        "optionIdsPreserved": true
+      }
+    },
+    {
+      "width": 0,
+      "name": "exact auxiliary cleanup after heterogeneous nativeUI 83",
+      "status": "PASS",
+      "detail": {
+        "id": 83,
+        "public": 404,
+        "reserved": 0,
+        "published": false,
+        "display": "hidden",
+        "optionIdsPreserved": true
+      }
+    },
+    {
+      "width": 0,
+      "name": "exact auxiliary cleanup after heterogeneous nativeUI 84",
+      "status": "PASS",
+      "detail": {
+        "id": 84,
+        "public": 404,
+        "reserved": 0,
+        "published": false,
+        "display": "hidden",
+        "optionIdsPreserved": true
+      }
+    }
+  ],
+  "metrics": [
+    {
+      "width": 390,
+      "role": "guest",
+      "pageErrors": [],
+      "consoleErrors": [],
+      "requests": [
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/vendor/font-awesome/6.4.0/css/all.inlined.css",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/css/components.css",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/js/components.iife.js",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/ko.json",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/en.json",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/components.json",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/routes.json",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/config.json",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/modules/bundle.css",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/modules/bundle.js",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/layouts/raonslab-travel_lab/travel/search.json",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/facets",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/facets",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/facets",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/vendor/font-awesome/6.4.0/css/all.inlined.css",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/css/components.css",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/js/components.iife.js",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/ko.json",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/en.json",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/components.json",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/routes.json",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/config.json",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/modules/bundle.css",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/modules/bundle.js",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/layouts/raonslab-travel_lab/travel/search.json",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/facets",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/facets",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/facets",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/facets",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/vendor/font-awesome/6.4.0/css/all.inlined.css",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/css/components.css",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/js/components.iife.js",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/ko.json",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/en.json",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/components.json",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/routes.json",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/config.json",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/modules/bundle.css",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/modules/bundle.js",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/layouts/raonslab-travel_lab/travel/search.json",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/facets",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/facets",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/facets",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/facets",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/vendor/font-awesome/6.4.0/css/all.inlined.css",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/css/components.css",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/js/components.iife.js",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/ko.json",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/en.json",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/components.json",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/routes.json",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/config.json",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/modules/bundle.css",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/modules/bundle.js",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/layouts/raonslab-travel_lab/travel/search.json",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/facets",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/facets",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/facets",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/facets",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/vendor/font-awesome/6.4.0/css/all.inlined.css",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/css/components.css",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/js/components.iife.js",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/ko.json",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/en.json",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/components.json",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/routes.json",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/config.json",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/modules/bundle.css",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/modules/bundle.js",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/layouts/raonslab-travel_lab/travel/search.json",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/facets",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/facets",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog",
+          "method": "GET",
+          "nativeBearer": false
+        }
+      ],
+      "responses": [
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/vendor/font-awesome/6.4.0/css/all.inlined.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/css/components.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/js/components.iife.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/components.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/routes.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/config.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/ko.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/en.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/layouts/raonslab-travel_lab/travel/search.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/facets",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/facets",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/facets",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/css/components.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/vendor/font-awesome/6.4.0/css/all.inlined.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/js/components.iife.js",
+          "method": "GET",
+          "status": 304
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/en.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/components.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/routes.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/config.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/ko.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/layouts/raonslab-travel_lab/travel/search.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/facets",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/facets",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/facets",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/facets",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/vendor/font-awesome/6.4.0/css/all.inlined.css",
+          "method": "GET",
+          "status": 304
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/js/components.iife.js",
+          "method": "GET",
+          "status": 304
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/css/components.css",
+          "method": "GET",
+          "status": 304
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/components.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/en.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/ko.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/routes.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/config.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/layouts/raonslab-travel_lab/travel/search.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/facets",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/facets",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/facets",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/facets",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/css/components.css",
+          "method": "GET",
+          "status": 304
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/vendor/font-awesome/6.4.0/css/all.inlined.css",
+          "method": "GET",
+          "status": 304
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/js/components.iife.js",
+          "method": "GET",
+          "status": 304
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/components.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/routes.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/ko.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/en.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/config.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/layouts/raonslab-travel_lab/travel/search.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/facets",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/facets",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/facets",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/facets",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/vendor/font-awesome/6.4.0/css/all.inlined.css",
+          "method": "GET",
+          "status": 304
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/js/components.iife.js",
+          "method": "GET",
+          "status": 304
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/css/components.css",
+          "method": "GET",
+          "status": 304
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/config.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/routes.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/ko.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/components.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/en.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/layouts/raonslab-travel_lab/travel/search.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/facets",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/facets",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog",
+          "method": "GET",
+          "status": 200
+        }
+      ],
+      "httpErrors": [],
+      "overflow": [
+        {
+          "name": "heterogeneous-price-desc",
+          "viewport": 390,
+          "document": 390
+        }
+      ],
+      "assets": [
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/vendor/font-awesome/6.4.0/css/all.inlined.css",
+          "status": 200,
+          "sha256": "27fe189610ca6f0192845c2813ecb90349f67d3eb61cbbc21791f1d09fd7992e",
+          "bytes": 480419
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/css/components.css",
+          "status": 200,
+          "sha256": "e340b3bfcf22be2ef56f7d11a8f9bf2fc3563439f908628ab044931b463dce66",
+          "bytes": 47750
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/js/components.iife.js",
+          "status": 200,
+          "sha256": "9cc99d8d8db0161cfc5f537531eb16f00d1a7ca272fd0b31824823185f46b390",
+          "bytes": 38218
+        },
+        {
+          "path": "/build/core/template-engine.min.js",
+          "status": 200,
+          "sha256": "be2d01f3be637afd127f9c62c2fed35cc3de2cabd5da14a7734635ae1798a414",
+          "bytes": 819067
+        },
+        {
+          "path": "/api/modules/bundle.css",
+          "status": 200,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0
+        },
+        {
+          "path": "/api/modules/bundle.js",
+          "status": 200,
+          "sha256": "a69dc60260eef16feb33b5433426d974164fcc5a9b15d3577a710a9212b9f2ce",
+          "bytes": 153543
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "role": "guest",
+      "pageErrors": [],
+      "consoleErrors": [],
+      "requests": [
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/vendor/font-awesome/6.4.0/css/all.inlined.css",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/css/components.css",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/js/components.iife.js",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/ko.json",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/en.json",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/components.json",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/routes.json",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/config.json",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/modules/bundle.css",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/modules/bundle.js",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/layouts/raonslab-travel_lab/travel/search.json",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/facets",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/facets",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/facets",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/vendor/font-awesome/6.4.0/css/all.inlined.css",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/css/components.css",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/js/components.iife.js",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/ko.json",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/en.json",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/components.json",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/routes.json",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/config.json",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/modules/bundle.css",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/modules/bundle.js",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/layouts/raonslab-travel_lab/travel/search.json",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/facets",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/facets",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/facets",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/facets",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/vendor/font-awesome/6.4.0/css/all.inlined.css",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/css/components.css",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/js/components.iife.js",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/ko.json",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/en.json",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/components.json",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/routes.json",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/config.json",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/modules/bundle.css",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/modules/bundle.js",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/layouts/raonslab-travel_lab/travel/search.json",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/facets",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/facets",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/facets",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/facets",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/vendor/font-awesome/6.4.0/css/all.inlined.css",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/css/components.css",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/js/components.iife.js",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/ko.json",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/en.json",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/components.json",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/routes.json",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/config.json",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/modules/bundle.css",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/modules/bundle.js",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/layouts/raonslab-travel_lab/travel/search.json",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/facets",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/facets",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/facets",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/facets",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/vendor/font-awesome/6.4.0/css/all.inlined.css",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/css/components.css",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/js/components.iife.js",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/ko.json",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/en.json",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/components.json",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/routes.json",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/config.json",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/modules/bundle.css",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/modules/bundle.js",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/layouts/raonslab-travel_lab/travel/search.json",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/facets",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/facets",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog",
+          "method": "GET",
+          "nativeBearer": false
+        }
+      ],
+      "responses": [
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/css/components.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/vendor/font-awesome/6.4.0/css/all.inlined.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/js/components.iife.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/ko.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/en.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/routes.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/components.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/config.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/layouts/raonslab-travel_lab/travel/search.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/facets",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/facets",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/facets",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/css/components.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/vendor/font-awesome/6.4.0/css/all.inlined.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/js/components.iife.js",
+          "method": "GET",
+          "status": 304
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/ko.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/en.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/components.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/routes.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/config.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/layouts/raonslab-travel_lab/travel/search.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/facets",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/facets",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/facets",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/facets",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/js/components.iife.js",
+          "method": "GET",
+          "status": 304
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/vendor/font-awesome/6.4.0/css/all.inlined.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/css/components.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/en.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/ko.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/routes.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/components.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/config.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/layouts/raonslab-travel_lab/travel/search.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/facets",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/facets",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/facets",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/facets",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/js/components.iife.js",
+          "method": "GET",
+          "status": 304
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/css/components.css",
+          "method": "GET",
+          "status": 304
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/vendor/font-awesome/6.4.0/css/all.inlined.css",
+          "method": "GET",
+          "status": 304
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/ko.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/components.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/routes.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/en.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/config.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/layouts/raonslab-travel_lab/travel/search.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/facets",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/facets",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/facets",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/facets",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/css/components.css",
+          "method": "GET",
+          "status": 304
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/vendor/font-awesome/6.4.0/css/all.inlined.css",
+          "method": "GET",
+          "status": 304
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/js/components.iife.js",
+          "method": "GET",
+          "status": 304
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/en.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/components.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/routes.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/ko.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/config.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/layouts/raonslab-travel_lab/travel/search.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/facets",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/facets",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog",
+          "method": "GET",
+          "status": 200
+        }
+      ],
+      "httpErrors": [],
+      "overflow": [
+        {
+          "name": "heterogeneous-price-desc",
+          "viewport": 1440,
+          "document": 1440
+        }
+      ],
+      "assets": [
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/css/components.css",
+          "status": 200,
+          "sha256": "e340b3bfcf22be2ef56f7d11a8f9bf2fc3563439f908628ab044931b463dce66",
+          "bytes": 47750
+        },
+        {
+          "path": "/build/core/template-engine.min.js",
+          "status": 200,
+          "sha256": "be2d01f3be637afd127f9c62c2fed35cc3de2cabd5da14a7734635ae1798a414",
+          "bytes": 819067
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/vendor/font-awesome/6.4.0/css/all.inlined.css",
+          "status": 200,
+          "sha256": "27fe189610ca6f0192845c2813ecb90349f67d3eb61cbbc21791f1d09fd7992e",
+          "bytes": 480419
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/js/components.iife.js",
+          "status": 200,
+          "sha256": "9cc99d8d8db0161cfc5f537531eb16f00d1a7ca272fd0b31824823185f46b390",
+          "bytes": 38218
+        },
+        {
+          "path": "/api/modules/bundle.css",
+          "status": 200,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0
+        },
+        {
+          "path": "/api/modules/bundle.js",
+          "status": 200,
+          "sha256": "a69dc60260eef16feb33b5433426d974164fcc5a9b15d3577a710a9212b9f2ce",
+          "bytes": 153543
+        }
+      ]
+    }
+  ],
+  "owned": {
+    "inquiries": [],
+    "carts": [],
+    "products": [],
+    "posts": [],
+    "policies": [],
+    "categories": []
+  }
+}
