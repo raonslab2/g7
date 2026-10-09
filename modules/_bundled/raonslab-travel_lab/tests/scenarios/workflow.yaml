@@ -1,0 +1,70 @@
+feature: travel_lab_workflow
+description: 실제 커머스 장바구니·가격 계산과 모의 여행 문의의 원자성·소유권·상태 전이를 검증한다.
+test_files:
+  - modules/_bundled/raonslab-travel_lab/tests/Feature/TravelWorkflowTest.php
+axes:
+  flow: [cart_authority, price_change, idempotency, capacity_rollback, capacity_boundary, scope, eligibility, transition, http_auth, http_validation, write_rollback, release_rollback, admin_scope, resource, stale_cleanup, quantity_change, unsupported_cart]
+effects:
+  - commerce_cart_written
+  - quantity_updated
+  - authoritative_amounts_returned
+  - ordinary_cart_preserved
+  - current_price_snapshotted
+  - capacity_reserved
+  - selected_cart_removed
+  - immutable_snapshot
+  - replay_returns_original
+  - capacity_reserved_once
+  - changed_payload_conflict
+  - replay_after_cancel_safe
+  - insufficient_capacity_rejected
+  - all_reserves_rolled_back
+  - selected_carts_preserved
+  - exact_capacity_reserved
+  - second_user_rejected
+  - second_cart_preserved
+  - foreign_cart_rejected
+  - ordinary_cart_rejected
+  - foreign_inquiry_rejected
+  - own_list_scoped
+  - unavailable_departure_rejected
+  - unavailable_submit_rolled_back
+  - transition_matrix_enforced
+  - capacity_released_once
+  - invalid_transition_rolled_back
+  - admin_note_written
+  - unauthenticated_rejected
+  - bearer_authenticated
+  - admin_permission_enforced
+  - supplied_money_rejected
+  - invalid_quantity_rejected
+  - idempotency_header_supported
+  - supplied_payload_not_persisted
+  - inquiry_insert_failure_rolled_back
+  - first_release_rolled_back
+  - admin_note_unchanged
+  - admin_list_self_scoped
+  - admin_detail_scope_enforced
+  - admin_update_scope_enforced
+  - unloaded_resource_safe
+  - loaded_snapshot_serialized
+  - stale_rows_visible
+  - stale_amounts_excluded
+  - stale_rows_individually_removed
+  - valid_row_updated
+  - current_quantity_snapshotted
+  - capacity_matches_quantity
+  - unsupported_cart_rejected
+  - unsupported_cart_visible
+  - unsupported_amounts_excluded
+sub_flows:
+  - id: eligibility_matrix
+    description: 비공개 여행, 비활성 출발일/옵션, 과거 출발일, 잘못된 귀국일, 판매중지 상품, 옵션 상품 불일치 7개 실제 입력.
+    effects: [unavailable_departure_rejected, unavailable_submit_rolled_back]
+  - id: status_matrix
+    description: 상태 5개와 목표 상태 5개의 전 조합 25개를 허용 전이표와 대조한다.
+    effects: [transition_matrix_enforced, capacity_released_once, invalid_transition_rolled_back]
+limitations:
+  - SQLite는 SELECT FOR UPDATE를 지원하지 않는다. 이 스위트는 순차 경계·롤백·재시도를 검증하며 MySQL 병렬 락 검증 또는 독립 Validation PASS를 주장하지 않는다.
+  - 병렬 도메인 합본 전에는 tests/Fixtures/DomainContract.php와 계약 스키마를 사용한다. 실제 도메인 클래스·마이그레이션이 있으면 자동으로 실제 구현을 사용한다.
+  - SQLite 전용 index 이름 변환을 적용하며 여행 흐름과 무관한 MySQL 구매적립 generated-column 마이그레이션 1개를 제외한다.
