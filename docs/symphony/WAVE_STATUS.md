@@ -323,3 +323,20 @@ Lead final SQLite154/2539 PASS71.450s; author atomic/route21/2209 PASS separatel
 Next: reviewed meaningful checkpoint/PR2 fixedSHA; independent CODEX fresh attempt3 on exclusiveTEST, CLAUDE repaired same-gap/strict quota/matrix on ownAPP fixtures and CODEX actual native product/option CREATE+browser delta. Full restart/envloss/recovery/attachments/editor/noexternal index assertions remain individually bounded. HostedCI and canonicalValidation receipt NOT_RUN, not waived; no main/production/Spring changes. DeadlineOct11 23:59KST still~46h.
 
 Native admin preparation addendum: ownAPP shipping reference11/active pickup1 already present, active category0. Guarded seed SKIPPED/preserved (exit0 is not seed success). Package extensions.php adds native ShippingTypeSeeder only for empty reference tables; nonempty/custom rows are preserved. Independent source intake approves bounded helper; fresh empty branch and actual native new category/policy/product UI remain NOT_RUN.
+
+
+## Fixed 0.1.2 checkpoint and final-gate handoff — 2026-10-09 17:16 UTC
+
+Remote fixed source **fa5523175ac494cfbd13bbf89bf06b3ec91835a6**, tree **fa685339b030ee4efe46b63dc8d98c0e2f7d4f0c**. Repair004dc6dc plus intake5c7bf3b9 and ancestry-only ours merge preserve originald9701209/5ce63b5a/738c2fa4 as remote reachable ancestors without replacing repairedtree. All12 source/review pins matched and0.1.2 package versions synced. PR2 OPEN/DRAFT actualheadfa552; exacthead Actions0/check-runs0 = hostedCI NOT_RUN. CanonicalValidation receipt NOT_RUN, not waived; main/prod untouched.
+
+|Ready independent scope|Attempt/provider|Official Request|Bounded canonical state|
+|---|---|---|---|
+|w04-repaired-native-install|3 CODEX|req_caef46f3473043048b5b4bc2ec41eaea|RUNNING|
+|w04-atomic-contention-final|1 CLAUDE|req_ea58da0bbb7043999b64641fcfc32490|RUNNING|
+|w04-native-admin-create-final|1 CODEX|req_c2e43e4188284ec78b8702e7e3e0d45a|RUNNING|
+
+These are observed canonical states, not guaranteed concurrent model streams or productPASS. Fresh owns TEST55/104 exclusively with original/safety snapshots and per-suite restoration; security/browser own distinct synthetic3roleAPP fixtures. Parent code/runtime/cache/auth frozen: preview activePID185050, native database cache and onlyownloopback18871. Fresh tokens4h/privatehandoffs recorded in official prompts, minimumAPP PDO onlysecurity; no platformcredentials. Parent will not restart/rotate during reviews.
+
+Onresume compare source/cache/probes/commits, preserve negative old results and failedfresh attempts, review/publish trueevidence, fixactualnewfindings, recheck finalintegration and complete FINAL_REPORT/repropackage/screens. UI nativecategory/policy/product/options CREATE and retry amount/item comparisons explicitlyincluded; fresh true nativevendor/HTML/cache/restart/envloss/restore; security repaired samegap/strict concurrentquota/nativeprivateeffects. Completed keys neverregenerated. Originalmaskingnegative remainshistorical; prior late-emailPNG excluded106retainedframes.
+
+This docs-only handoff preserves newly created IDs and resume truth in disposableworktrees; it does not change the fixed product review target. Parent waits selected security result for an automatic continuation while otherready work continues, then ends native turn on yielding. No shell/status polling to occupy Provider slot. DeadlineOct11 23:59KST about45h43m, no Spring cancellation or shared operatingdata changes.
