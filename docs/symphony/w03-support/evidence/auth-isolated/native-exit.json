@@ -1,0 +1,12 @@
+{
+    "command": [
+        "php",
+        "vendor/bin/phpunit",
+        "-c",
+        "docs/symphony/w03-support/evidence/auth.xml",
+        "--do-not-cache-result",
+        "--log-junit",
+        "docs/symphony/w03-support/evidence/auth-isolated/junit.xml"
+    ],
+    "exit": 0
+}
