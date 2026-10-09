@@ -30,7 +30,7 @@ Desktop: central content width about 1200 px, concise primary navigation, two-co
 | Screen ID | Proposed route / surface | Required behavior and API dependency |
 | --- | --- | --- |
 | TR-HOME-001 | `/travel` | Original hero + region/date search, destination entries, campaign and recommended product cards; live catalog API. |
-| TR-LIST-001 | `/travel/products` | URL-preserved region/date/price/query filters, explicit sort, result count, reset, loading/empty/error/retry; live catalog API. |
+| TR-LIST-001 | `/travel/search` (lead-selected contract v1 route) | URL-preserved region/date/price/query filters, explicit sort, result count, reset, loading/empty/error/retry; live catalog API. Product details remain `/travel/products/:id`. |
 | TR-CATEGORY-001 | List route with region query | Same list contract reached from a destination entry; do not create a disconnected catalog. |
 | TR-CAMPAIGN-001 | List route with theme/campaign query | Authored campaign header and filtered catalog membership; explicit empty result. |
 | TR-DETAIL-001 | `/travel/products/:id` | Product summary, authored itinerary, available departures, party count and server-calculated selection quote; unavailable departure blocks cart action. |

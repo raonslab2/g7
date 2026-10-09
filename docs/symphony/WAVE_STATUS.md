@@ -12,6 +12,14 @@ Work `work-20261009-g7-symphony-max-child-c7ae42d1`; parent `req_81ac33cac94046b
 - New branch `feat/g7-travel-lab-c7ae42d1`; no existing travel branch or PR discovered. Remote checkpoint/PR pending canonical validation + meaningful implementation/evidence. No per-agent push.
 - Open limitations: account quota/global live count unavailable; old live coordinator unavailable; unmanaged main autodeploy unknown. All isolated design/implementation outcomes remain reviewable and not customer-approved.
 
+### W00 verification checkpoint
+
+- Canonical input-order validation at ai_gcs_v2 `10bc5eff5f777aa49760387778303063b0222129`: PASS, 89 documents, explicit new work ID present, no errors. An initial lazy-object read failure was recovered without source/validator changes; full receipt in WORK_ORDER_VALIDATION.md.
+- Runtime harness completed: isolated MariaDB schemas `req81_travel_lab` / `req81_travel_lab_test`, dedicated scoped account; core migrations/settings/synthetic admin initialized, setup rerun preserves users. Actual local/test DB and array-mail/sync-queue smoke PASS; InstallerContext 8 tests/8 assertions PASS; 15 negative isolation checks PASS; loopback /up HTTP200. Preview stopped after smoke. Secrets only in ignored 0600 environment files. This is runtime preflight, not Travel journey or independent product PASS.
+- Native W00 review at `6efbf0a57dfb75c0fcea6944407f136f5366e273`: CHANGES_REQUIRED, product NOT_RUN. Contract inventory/cancellation/list-route defects corrected in next checkpoint; full calculation snapshot/actor audit explicitly assigned to parent integration. Fixed-target source/canonical evidence now included; next revision requires re-review. REFERENCE's author did not approve their own file.
+- Child implementation files still pending. Runtime extension installer returns BLOCKED before mutations if any required travel manifest/class/composer/route/template is absent. Shared API entry point lint PASS, its scoped includes are pending.
+- Historical coordinator lookup remains UNKNOWN. One asynchronous request for prior Request ID/official handoff link has been issued; work proceeds as quarantined travel-only scoped output, no main/production integration and no duplicate-free assertion until bounded coordination is resolved.
+
 ## Required next actions
 
 1. Save this contract/evidence checkpoint; run canonical source-order validation and isolated runtime/bootstrap checks.
@@ -20,4 +28,4 @@ Work `work-20261009-g7-symphony-max-child-c7ae42d1`; parent `req_81ac33cac94046b
 4. Repair failures, rerun affected checks, complete core cart→test inquiry→admin→owner status journey first; then broaden authored help/campaign/screens.
 5. Preserve a Git-addressable reproducible package/preview and sanitised evidence; integrate under actual repo gates and retest. Report incomplete gates truthfully.
 
-Spring Request remains registered and independent; no state/source changes made to it. User action currently none for recoverable implementation. If canonical historical live coordination cannot be resolved and a conflicting implementation appears, stop only the conflicting scope and request the missing official handoff route once.
+Spring Request remains registered and independent; no state/source changes made to it. Recoverable implementation needs no approval. Previous Request ID/official handoff link has been requested once because the provided canonical historical lookup is bounded; preserve scoped output while awaiting it. If a conflicting implementation appears, stop only that conflicting scope and perform the permitted handoff.
