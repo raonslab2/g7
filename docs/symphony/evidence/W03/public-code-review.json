@@ -1,0 +1,55 @@
+{
+  "reviewTarget": "28ada286c1c34606741bcfe4f9d12e06ac50af30",
+  "reviewedHarness": "tests/W03/journey-review.mjs",
+  "harnessSha256": "af545d083b8206d83d537e90a71d8a87876c08a5712e8c8e2aeef43ffbc25c41",
+  "reviewedAt": "2026-10-09T10:31:45.722Z",
+  "implementationEdits": false,
+  "idempotencyDiagnosis": {
+    "priority": "P1",
+    "sources": [
+      "templates/_bundled/raonslab-travel_lab/layouts/travel/cart.json:1042",
+      "templates/_bundled/raonslab-travel_lab/src/handlers/inquiryKey.ts:129",
+      "resources/js/core/template-engine/ActionDispatcher.ts:7177",
+      "resources/js/core/template-engine/ActionDispatcher.ts:5626",
+      "resources/js/core/template-engine/G7CoreGlobals.ts:1730"
+    ],
+    "cause": "First contact submission changes cart-only keyK0 to contact-aware keyK1 via custom handler global write. Sequence retains captured context._global; evaluateExpression attempts state.get()._global although state.get() returns global contents directly. API body therefore sends priorK0; next rendered retry sendsK1. A lost upstream201 leaves committed inquiry underK0 and cart removed, so retry underK1 conflicts.",
+    "diagnostic": "Isolated source handler simulation using node--experimental-strip-types and mocked local state/storage only, no app/API/auth; preparedKeyChanged/latestGlobalUndefined/firstWireUsesInitialKey/retryWireUsesPreparedKey/wireKeysDiffer alltrue. Browser proof belongs to lead actual execution.",
+    "proposal": "Honor direct state.get() global contract in ActionDispatcher global refresh, or pass custom handler returned key through sequence $prev/resultTo local before apiCall. Freeze original submission cart IDs/contact/key across response loss and reload, and verify retry sameID/no duplicate/reservation."
+  },
+  "harnessFindings": [
+    {
+      "priority": "P1",
+      "finding": "Support route/answer scenario does not submit native admin answer or verify owner answer, despite PASS label."
+    },
+    {
+      "priority": "P1",
+      "finding": "Cleanup current inquiryId only leaves earlier lost-response upstream201 fixture allocated after normal submission overwrites inquiryId."
+    },
+    {
+      "priority": "P2",
+      "finding": "Native catalog scenario checks headings/modal; it does not verify native product/options/prices fields or save departure metadata."
+    },
+    {
+      "priority": "P2",
+      "finding": "Notice and FAQ clicks/screenshots lack detailHTTP200/content/loading-complete assertions."
+    },
+    {
+      "priority": "P2",
+      "finding": "Screenshots record overflow but do not assert overflowfalse."
+    },
+    {
+      "priority": "P2",
+      "finding": "Login URL!=/login lacks explicit actualnative login success/currentuser assertion."
+    },
+    {
+      "priority": "P3",
+      "finding": "Cart add detail returns status:r.status function instead of r.status(), so JSON omits it."
+    },
+    {
+      "priority": "P3",
+      "finding": "If all supplied role emails are considered private, screenshot mask should cover member/other_member/admin emails; current mask covers only adminemail."
+    }
+  ],
+  "secretHandling": "No credential file read during this code review. Harness keeps token headers in private process, scrubs console/error strings, masks inputs; no HAR/trace. Raw replay bodies use synthetic contact but should be kept scoped to ownfixture."
+}

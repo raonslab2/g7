@@ -1,0 +1,917 @@
+{
+  "tested_sha": "28ada286c1c34606741bcfe4f9d12e06ac50af30",
+  "run": "W03-P-1791542366735",
+  "fixture": {
+    "id": 18,
+    "product_code": "W03P1791542366735"
+  },
+  "results": [
+    {
+      "width": 0,
+      "name": "NEW own category fixture",
+      "status": "PASS",
+      "detail": {
+        "id": 4,
+        "http": 201
+      }
+    },
+    {
+      "width": 0,
+      "name": "NEW own commerce fixture via real native API",
+      "status": "PASS",
+      "detail": {
+        "status": 201,
+        "id": 18,
+        "product_code": "W03P1791542366735"
+      }
+    },
+    {
+      "width": 390,
+      "name": "native UI edit own product price/options and persist",
+      "status": "FAIL",
+      "error": "expect(locator).toHaveValue(expected) failed\n\nLocator:  locator('input[name=selling_price]').first()\nExpected: \"12890\"\nReceived: \"12000\"\nTimeout:  5000ms\n\nCall log:\n  - Expect \"to.have.value\" with timeout 5000ms\n  - waiting for locator('input[name=selling_price]').first()\n    2 × locator resolved to <input min=\"0\" step=\"100\" class=\"input\" type=\"number\" value=\"12000\" placeholder=\"0\" name=\"selling_price\"/>\n      - unexpected value \"12000\"\n"
+    },
+    {
+      "width": 390,
+      "name": "travel onboarding observed native API",
+      "status": "OBSERVED",
+      "detail": {
+        "status": 404,
+        "id": 18
+      }
+    },
+    {
+      "width": 390,
+      "name": "NEW product travel metadata onboarding availability",
+      "status": "FAIL",
+      "error": "expect(received).toBe(expected) // Object.is equality\n\nExpected: 200\nReceived: 404"
+    },
+    {
+      "width": 1440,
+      "name": "native UI edit own product price/options and persist",
+      "status": "FAIL",
+      "error": "expect(locator).toHaveValue(expected) failed\n\nLocator:  locator('input[name=selling_price]').first()\nExpected: \"13940\"\nReceived: \"12000\"\nTimeout:  5000ms\n\nCall log:\n  - Expect \"to.have.value\" with timeout 5000ms\n  - waiting for locator('input[name=selling_price]').first()\n    5 × locator resolved to <input min=\"0\" step=\"100\" class=\"input\" type=\"number\" value=\"12000\" placeholder=\"0\" name=\"selling_price\"/>\n      - unexpected value \"12000\"\n"
+    },
+    {
+      "width": 1440,
+      "name": "travel onboarding observed native API",
+      "status": "OBSERVED",
+      "detail": {
+        "status": 404,
+        "id": 18
+      }
+    },
+    {
+      "width": 1440,
+      "name": "NEW product travel metadata onboarding availability",
+      "status": "FAIL",
+      "error": "expect(received).toBe(expected) // Object.is equality\n\nExpected: 200\nReceived: 404"
+    },
+    {
+      "width": 0,
+      "name": "cleanup retain own hidden commerce fixture",
+      "status": "PASS",
+      "detail": {
+        "id": 18,
+        "http": 200
+      }
+    },
+    {
+      "width": 0,
+      "name": "cleanup own category inactive",
+      "status": "PASS",
+      "detail": {
+        "id": 4,
+        "http": 200
+      }
+    }
+  ],
+  "metrics": [
+    {
+      "width": 390,
+      "pageErrors": [],
+      "consoleErrors": [],
+      "requests": [
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/vendor/font-awesome/6.4.0/css/all.inlined.css",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/css/components.css",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/js/components.iife.js",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/ko.json",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/en.json",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/components.json",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/routes.json",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/config.json",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/modules/bundle.css",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/modules/bundle.js",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/layouts/raonslab-travel_lab/auth/login.json",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/auth/login",
+          "method": "POST",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/layouts/raonslab-travel_lab/travel/home.json",
+          "method": "GET",
+          "nativeBearer": true
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/facets",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/auth/user",
+          "method": "GET",
+          "nativeBearer": true
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/cart",
+          "method": "GET",
+          "nativeBearer": true
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/vendor/font-awesome/6.4.0/css/all.inlined.css",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/vendor/pretendard/1.3.9/pretendard-variable.css",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/vendor/flag-icons/7.2.3/css/flag-icons.min.css",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/css/components.css",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/js/components.iife.js",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/sirsoft-admin_basic/lang/ko.json",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/sirsoft-admin_basic/lang/en.json",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/sirsoft-admin_basic/components.json",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/sirsoft-admin_basic/routes.json",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/sirsoft-admin_basic/config.json",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/admin/auth/user",
+          "method": "GET",
+          "nativeBearer": true
+        },
+        {
+          "path": "/api/modules/bundle.css",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/modules/bundle.js",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/layouts/sirsoft-admin_basic/sirsoft-ecommerce.admin_ecommerce_product_form.json",
+          "method": "GET",
+          "nativeBearer": true
+        },
+        {
+          "path": "/api/modules/sirsoft-ecommerce/admin/products/W03P1791542366735",
+          "method": "GET",
+          "nativeBearer": true
+        },
+        {
+          "path": "/api/modules/sirsoft-ecommerce/admin/shipping-policies",
+          "method": "GET",
+          "nativeBearer": true
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/vendor/pretendard/1.3.9/woff2/PretendardVariable.woff2",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/admin/menus/active",
+          "method": "GET",
+          "nativeBearer": true
+        },
+        {
+          "path": "/api/admin/auth/user",
+          "method": "GET",
+          "nativeBearer": true
+        },
+        {
+          "path": "/api/admin/notifications",
+          "method": "GET",
+          "nativeBearer": true
+        },
+        {
+          "path": "/api/admin/notifications/unread-count",
+          "method": "GET",
+          "nativeBearer": true
+        },
+        {
+          "path": "/api/admin/modules/installed",
+          "method": "GET",
+          "nativeBearer": true
+        },
+        {
+          "path": "/api/admin/plugins/installed",
+          "method": "GET",
+          "nativeBearer": true
+        },
+        {
+          "path": "/api/modules/sirsoft-ecommerce/admin/categories/tree",
+          "method": "GET",
+          "nativeBearer": true
+        },
+        {
+          "path": "/api/modules/sirsoft-ecommerce/admin/brands",
+          "method": "GET",
+          "nativeBearer": true
+        },
+        {
+          "path": "/api/modules/sirsoft-ecommerce/admin/product-notice-templates",
+          "method": "GET",
+          "nativeBearer": true
+        },
+        {
+          "path": "/api/modules/sirsoft-ecommerce/admin/product-common-infos",
+          "method": "GET",
+          "nativeBearer": true
+        },
+        {
+          "path": "/api/modules/sirsoft-ecommerce/admin/product-labels",
+          "method": "GET",
+          "nativeBearer": true
+        },
+        {
+          "path": "/api/admin/roles/active",
+          "method": "GET",
+          "nativeBearer": true
+        },
+        {
+          "path": "/api/modules/sirsoft-ecommerce/admin/products/W03P1791542366735/logs",
+          "method": "GET",
+          "nativeBearer": true
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/vendor/flag-icons/7.2.3/flags/1x1/kr.svg",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/modules/sirsoft-ecommerce/admin/products/W03P1791542366735",
+          "method": "PUT",
+          "nativeBearer": true
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/vendor/font-awesome/6.4.0/css/all.inlined.css",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/vendor/pretendard/1.3.9/pretendard-variable.css",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/vendor/flag-icons/7.2.3/css/flag-icons.min.css",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/css/components.css",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/js/components.iife.js",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/sirsoft-admin_basic/lang/ko.json",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/sirsoft-admin_basic/lang/en.json",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/sirsoft-admin_basic/components.json",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/sirsoft-admin_basic/routes.json",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/sirsoft-admin_basic/config.json",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/admin/auth/user",
+          "method": "GET",
+          "nativeBearer": true
+        },
+        {
+          "path": "/api/modules/bundle.css",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/modules/bundle.js",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/layouts/sirsoft-admin_basic/sirsoft-ecommerce.admin_ecommerce_product_form.json",
+          "method": "GET",
+          "nativeBearer": true
+        },
+        {
+          "path": "/api/modules/sirsoft-ecommerce/admin/products/W03P1791542366735",
+          "method": "GET",
+          "nativeBearer": true
+        },
+        {
+          "path": "/api/modules/sirsoft-ecommerce/admin/shipping-policies",
+          "method": "GET",
+          "nativeBearer": true
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/vendor/pretendard/1.3.9/woff2/PretendardVariable.woff2",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/admin/menus/active",
+          "method": "GET",
+          "nativeBearer": true
+        },
+        {
+          "path": "/api/admin/auth/user",
+          "method": "GET",
+          "nativeBearer": true
+        },
+        {
+          "path": "/api/admin/notifications",
+          "method": "GET",
+          "nativeBearer": true
+        },
+        {
+          "path": "/api/admin/notifications/unread-count",
+          "method": "GET",
+          "nativeBearer": true
+        },
+        {
+          "path": "/api/admin/modules/installed",
+          "method": "GET",
+          "nativeBearer": true
+        },
+        {
+          "path": "/api/admin/plugins/installed",
+          "method": "GET",
+          "nativeBearer": true
+        },
+        {
+          "path": "/api/modules/sirsoft-ecommerce/admin/categories/tree",
+          "method": "GET",
+          "nativeBearer": true
+        },
+        {
+          "path": "/api/modules/sirsoft-ecommerce/admin/brands",
+          "method": "GET",
+          "nativeBearer": true
+        },
+        {
+          "path": "/api/modules/sirsoft-ecommerce/admin/product-notice-templates",
+          "method": "GET",
+          "nativeBearer": true
+        },
+        {
+          "path": "/api/modules/sirsoft-ecommerce/admin/product-common-infos",
+          "method": "GET",
+          "nativeBearer": true
+        },
+        {
+          "path": "/api/modules/sirsoft-ecommerce/admin/product-labels",
+          "method": "GET",
+          "nativeBearer": true
+        },
+        {
+          "path": "/api/admin/roles/active",
+          "method": "GET",
+          "nativeBearer": true
+        },
+        {
+          "path": "/api/modules/sirsoft-ecommerce/admin/products/W03P1791542366735/logs",
+          "method": "GET",
+          "nativeBearer": true
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/vendor/flag-icons/7.2.3/flags/1x1/kr.svg",
+          "method": "GET",
+          "nativeBearer": false
+        }
+      ],
+      "overflow": []
+    },
+    {
+      "width": 1440,
+      "pageErrors": [],
+      "consoleErrors": [],
+      "requests": [
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/vendor/font-awesome/6.4.0/css/all.inlined.css",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/css/components.css",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/js/components.iife.js",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/ko.json",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/en.json",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/components.json",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/routes.json",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/config.json",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/modules/bundle.css",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/modules/bundle.js",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/layouts/raonslab-travel_lab/auth/login.json",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/auth/login",
+          "method": "POST",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/layouts/raonslab-travel_lab/travel/home.json",
+          "method": "GET",
+          "nativeBearer": true
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/facets",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/auth/user",
+          "method": "GET",
+          "nativeBearer": true
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/cart",
+          "method": "GET",
+          "nativeBearer": true
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/vendor/font-awesome/6.4.0/css/all.inlined.css",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/vendor/pretendard/1.3.9/pretendard-variable.css",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/vendor/flag-icons/7.2.3/css/flag-icons.min.css",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/css/components.css",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/js/components.iife.js",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/sirsoft-admin_basic/lang/ko.json",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/sirsoft-admin_basic/lang/en.json",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/sirsoft-admin_basic/components.json",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/sirsoft-admin_basic/routes.json",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/sirsoft-admin_basic/config.json",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/admin/auth/user",
+          "method": "GET",
+          "nativeBearer": true
+        },
+        {
+          "path": "/api/modules/bundle.css",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/modules/bundle.js",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/layouts/sirsoft-admin_basic/sirsoft-ecommerce.admin_ecommerce_product_form.json",
+          "method": "GET",
+          "nativeBearer": true
+        },
+        {
+          "path": "/api/modules/sirsoft-ecommerce/admin/products/W03P1791542366735",
+          "method": "GET",
+          "nativeBearer": true
+        },
+        {
+          "path": "/api/modules/sirsoft-ecommerce/admin/shipping-policies",
+          "method": "GET",
+          "nativeBearer": true
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/vendor/pretendard/1.3.9/woff2/PretendardVariable.woff2",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/admin/menus/active",
+          "method": "GET",
+          "nativeBearer": true
+        },
+        {
+          "path": "/api/admin/auth/user",
+          "method": "GET",
+          "nativeBearer": true
+        },
+        {
+          "path": "/api/admin/notifications",
+          "method": "GET",
+          "nativeBearer": true
+        },
+        {
+          "path": "/api/admin/notifications/unread-count",
+          "method": "GET",
+          "nativeBearer": true
+        },
+        {
+          "path": "/api/admin/modules/installed",
+          "method": "GET",
+          "nativeBearer": true
+        },
+        {
+          "path": "/api/admin/plugins/installed",
+          "method": "GET",
+          "nativeBearer": true
+        },
+        {
+          "path": "/api/modules/sirsoft-ecommerce/admin/categories/tree",
+          "method": "GET",
+          "nativeBearer": true
+        },
+        {
+          "path": "/api/modules/sirsoft-ecommerce/admin/brands",
+          "method": "GET",
+          "nativeBearer": true
+        },
+        {
+          "path": "/api/modules/sirsoft-ecommerce/admin/product-notice-templates",
+          "method": "GET",
+          "nativeBearer": true
+        },
+        {
+          "path": "/api/modules/sirsoft-ecommerce/admin/product-common-infos",
+          "method": "GET",
+          "nativeBearer": true
+        },
+        {
+          "path": "/api/modules/sirsoft-ecommerce/admin/product-labels",
+          "method": "GET",
+          "nativeBearer": true
+        },
+        {
+          "path": "/api/admin/roles/active",
+          "method": "GET",
+          "nativeBearer": true
+        },
+        {
+          "path": "/api/modules/sirsoft-ecommerce/admin/products/W03P1791542366735/logs",
+          "method": "GET",
+          "nativeBearer": true
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/vendor/flag-icons/7.2.3/flags/1x1/kr.svg",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/modules/sirsoft-ecommerce/admin/products/W03P1791542366735",
+          "method": "PUT",
+          "nativeBearer": true
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/vendor/font-awesome/6.4.0/css/all.inlined.css",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/vendor/pretendard/1.3.9/pretendard-variable.css",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/vendor/flag-icons/7.2.3/css/flag-icons.min.css",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/css/components.css",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/js/components.iife.js",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/sirsoft-admin_basic/lang/ko.json",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/sirsoft-admin_basic/lang/en.json",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/sirsoft-admin_basic/components.json",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/sirsoft-admin_basic/routes.json",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/templates/sirsoft-admin_basic/config.json",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/admin/auth/user",
+          "method": "GET",
+          "nativeBearer": true
+        },
+        {
+          "path": "/api/modules/bundle.css",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/modules/bundle.js",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/layouts/sirsoft-admin_basic/sirsoft-ecommerce.admin_ecommerce_product_form.json",
+          "method": "GET",
+          "nativeBearer": true
+        },
+        {
+          "path": "/api/modules/sirsoft-ecommerce/admin/products/W03P1791542366735",
+          "method": "GET",
+          "nativeBearer": true
+        },
+        {
+          "path": "/api/modules/sirsoft-ecommerce/admin/shipping-policies",
+          "method": "GET",
+          "nativeBearer": true
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/vendor/pretendard/1.3.9/woff2/PretendardVariable.woff2",
+          "method": "GET",
+          "nativeBearer": false
+        },
+        {
+          "path": "/api/admin/menus/active",
+          "method": "GET",
+          "nativeBearer": true
+        },
+        {
+          "path": "/api/admin/auth/user",
+          "method": "GET",
+          "nativeBearer": true
+        },
+        {
+          "path": "/api/admin/notifications",
+          "method": "GET",
+          "nativeBearer": true
+        },
+        {
+          "path": "/api/admin/notifications/unread-count",
+          "method": "GET",
+          "nativeBearer": true
+        },
+        {
+          "path": "/api/admin/modules/installed",
+          "method": "GET",
+          "nativeBearer": true
+        },
+        {
+          "path": "/api/admin/plugins/installed",
+          "method": "GET",
+          "nativeBearer": true
+        },
+        {
+          "path": "/api/modules/sirsoft-ecommerce/admin/categories/tree",
+          "method": "GET",
+          "nativeBearer": true
+        },
+        {
+          "path": "/api/modules/sirsoft-ecommerce/admin/brands",
+          "method": "GET",
+          "nativeBearer": true
+        },
+        {
+          "path": "/api/modules/sirsoft-ecommerce/admin/product-notice-templates",
+          "method": "GET",
+          "nativeBearer": true
+        },
+        {
+          "path": "/api/modules/sirsoft-ecommerce/admin/product-common-infos",
+          "method": "GET",
+          "nativeBearer": true
+        },
+        {
+          "path": "/api/modules/sirsoft-ecommerce/admin/product-labels",
+          "method": "GET",
+          "nativeBearer": true
+        },
+        {
+          "path": "/api/admin/roles/active",
+          "method": "GET",
+          "nativeBearer": true
+        },
+        {
+          "path": "/api/modules/sirsoft-ecommerce/admin/products/W03P1791542366735/logs",
+          "method": "GET",
+          "nativeBearer": true
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/vendor/flag-icons/7.2.3/flags/1x1/kr.svg",
+          "method": "GET",
+          "nativeBearer": false
+        }
+      ],
+      "overflow": []
+    }
+  ]
+}

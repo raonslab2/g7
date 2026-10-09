@@ -1,0 +1,89 @@
+{
+  "tested_sha": "28ada286c1c34606741bcfe4f9d12e06ac50af30",
+  "results": [
+    {
+      "width": 390,
+      "name": "real logout/relogin persistence corrected locator",
+      "status": "PASS",
+      "detail": {
+        "inquiryId": 18,
+        "status": "CANCELLED",
+        "nativeLogin200": true,
+        "nativeLogout200": true
+      }
+    },
+    {
+      "width": 390,
+      "name": "own native saved price evidence",
+      "status": "OBSERVED",
+      "detail": {
+        "fixture": 18,
+        "before": "12000",
+        "entered": "13000",
+        "wirePrice": "13000",
+        "wireOptions": [
+          {
+            "id": 34,
+            "selling_price": 13000
+          }
+        ],
+        "status": 200,
+        "responsePrice": 13000,
+        "reloaded": "13000"
+      }
+    },
+    {
+      "width": 390,
+      "name": "own native commerce valid price save/reload diagnostic",
+      "status": "PASS"
+    },
+    {
+      "width": 1440,
+      "name": "real logout/relogin persistence corrected locator",
+      "status": "PASS",
+      "detail": {
+        "inquiryId": 20,
+        "status": "CANCELLED",
+        "nativeLogin200": true,
+        "nativeLogout200": true
+      }
+    },
+    {
+      "width": 1440,
+      "name": "own native saved price evidence",
+      "status": "OBSERVED",
+      "detail": {
+        "fixture": 18,
+        "before": "13000",
+        "entered": "14000",
+        "wirePrice": "14000",
+        "wireOptions": [
+          {
+            "id": 34,
+            "selling_price": 14000
+          }
+        ],
+        "status": 200,
+        "responsePrice": 14000,
+        "reloaded": "14000"
+      }
+    },
+    {
+      "width": 1440,
+      "name": "own native commerce valid price save/reload diagnostic",
+      "status": "PASS"
+    }
+  ],
+  "metrics": [
+    {
+      "width": 390,
+      "pageErrors": [],
+      "consoleErrors": []
+    },
+    {
+      "width": 1440,
+      "pageErrors": [],
+      "consoleErrors": []
+    }
+  ]
+}
