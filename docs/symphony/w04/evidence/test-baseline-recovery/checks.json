@@ -1,0 +1,40 @@
+{
+  "status": "PASS",
+  "utc": "2026-10-09T15:24:02.748134+00:00",
+  "syntax": [
+    {
+      "file": "docs/symphony/w04/recovery-common.php",
+      "sha256": "800d8b904a111da334a6d3d8bfa87c3fb08190052ded3f7616e9bc8a53e3b0d6",
+      "syntax": "PASS"
+    },
+    {
+      "file": "docs/symphony/w04/recovery-artisan.php",
+      "sha256": "427ff985d3fd73f4af1b6eaaea5f78a39885eaf772757016bc58e4f2254380ac",
+      "syntax": "PASS"
+    },
+    {
+      "file": "docs/symphony/w04/test-baseline-recovery.php",
+      "sha256": "939893de102f610ee0ad06c6a25f7523ebad9c05abee47cec3627e42b4ea0ade",
+      "syntax": "PASS"
+    },
+    {
+      "file": "docs/symphony/w04/recovery-dump-check.py",
+      "sha256": "f97039a6ff9f32a619b7d4e69620641f1249b35c1c909448f7af9952122e2006",
+      "syntax": "PASS"
+    },
+    {
+      "file": "docs/symphony/w04/recovery-guard-check.py",
+      "sha256": "308141dd33579ef4f99a0d8844b798e4f4244080f27538dd5e65601c46c2a779",
+      "syntax": "PASS"
+    }
+  ],
+  "sql_guard_cases": {
+    "status": "PASS",
+    "positive_cases": 2,
+    "rejection_cases": 6,
+    "database_access": false,
+    "seconds": 0.004
+  },
+  "review": "executor source review; independent helper review NOT_RUN",
+  "database_access": false
+}
