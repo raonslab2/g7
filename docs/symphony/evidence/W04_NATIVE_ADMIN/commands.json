@@ -583,6 +583,35 @@
     {
       "command": [
         "node",
+        "tests/W04_NATIVE_ADMIN/sort-final-audit.mjs"
+      ],
+      "started": "2026-10-09T18:33:42.941926+00:00",
+      "files": [
+        {
+          "path": "tests/W04_NATIVE_ADMIN/sort-final-audit.mjs",
+          "sha256": "a4de6dbb42aee5bf95ec185715e344cca0764441d433c92424d16c0f0cc85a91"
+        },
+        {
+          "path": "tests/W04_NATIVE_ADMIN/common.mjs",
+          "sha256": "6dd3942cbee8c1dd92fcf93aeeb521b9c0cc997095e5280dee38157908bd2d6e"
+        },
+        {
+          "path": "tests/W04_NATIVE_ADMIN/render-tools.mjs",
+          "sha256": "1fcf062fc3caa6ef24b99bda64694b51b1fa8b9558ff554be9643d1b58081445"
+        },
+        {
+          "path": "tests/W04_NATIVE_ADMIN/audit-api.mjs",
+          "sha256": "0db4ea9ef78251ecb47bad6d0b9a0b8a277bb09719bef6d15e3433336d2824d0"
+        }
+      ],
+      "execution_id": "sort-final-audit-20261009T183342942268",
+      "exit_code": 0,
+      "finished": "2026-10-09T18:33:46.331541+00:00",
+      "sanitized_output": "Exact own auxiliary final native restored-value queries 13\n"
+    },
+    {
+      "command": [
+        "node",
         "tests/W04_NATIVE_ADMIN/sort-varied.mjs"
       ],
       "started": "2026-10-09T18:23:50.618745+00:00",

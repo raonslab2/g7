@@ -1,0 +1,211 @@
+{
+  "reviewed_commit": "c3a61a26bb21b68dd6ee5eb3bcd4c5412ee6434f",
+  "reviewed_tree": "000bd37da57f97a685fd9a3931cee3db995cb636",
+  "base_source_sha": "fa5523175ac494cfbd13bbf89bf06b3ec91835a6",
+  "base_source_tree": "fa685339b030ee4efe46b63dc8d98c0e2f7d4f0c",
+  "previous_review_target": "d1e85b719f17cf40acbecd7f11b03e3432a4556b",
+  "previous_review_record": "docs/symphony/evidence/W04_NATIVE_ADMIN/independent-review-initial.json",
+  "observed_utc": "2026-10-09T18:34:24.392131+00:00",
+  "overall_status": "PASS",
+  "scope": "Narrow fixed-commit independent package review of token-provenance correction, heterogeneous sort follow-up, closing source/asset/privacy evidence. Restore commands/statuses are evidenced; exact restored-price/display/date value readback remains a named nonblocking evidence limit at this target.",
+  "reviewer": "Same supported source_binding helper; unique native helper count1",
+  "official_validation": "NOT_RUN; native internal review is not canonical Validation",
+  "runtime_reexecution_by_reviewer": "NOT_RUN; no product/runtime/DB/env/credential operations during fixed-target packaging review",
+  "author_boundary": {
+    "independent": "Lead-authored corrected report, sort browser harness and reports, cleanup/privacy/matrix evidence reviewed independently",
+    "contributor_self_check": [
+      "tests/W04_NATIVE_ADMIN/source-binding.py",
+      "docs/symphony/evidence/W04_NATIVE_ADMIN/source-binding.json",
+      "docs/symphony/evidence/W04_NATIVE_ADMIN/executed-assets-review.json"
+    ],
+    "previous_review_record": "Reviewer-authored initial finding preserved as review history, not relabeled independent source implementation validation",
+    "product_implementation": "No product source authored or edited by reviewer; product source unchanged"
+  },
+  "blocking_findings": [],
+  "resolved_findings": [
+    {
+      "id": "PKG-TOKEN-PROVENANCE-001",
+      "status": "PASS",
+      "resolution": "Corrected fixed prose distinguishes37 earlier tokens without public issuance lines,75 per-token files,8 aggregate-only tokens,46 later public issuance rows and83 distinct final-audited tokens. Initial FAIL remains in immutable prior-target review record."
+    },
+    {
+      "id": "PKG-SORT-COVERAGE-001",
+      "status": "PASS",
+      "resolution": "New native UI/API follow-up at390/1440 supplies13 distinct server prices and13 distinct departure dates and checks all13 returned rows across12+1 pagination for4 sorts. Initial uniform-value coverage limitation is not retroactively rewritten."
+    }
+  ],
+  "nonblocking_findings": [
+    {
+      "id": "PKG-SORT-RESTORE-READBACK-001",
+      "status": "NOT_RUN",
+      "scope": "Exact product/option selling_price12000, product display_statushidden and original departure/return dates after restore independently asserted from final native GET values",
+      "observed": "sort-varied change() restores12000/hidden through real native PUT200 and reGET verifies preserved option IDs; final native travel GET asserts departure inactive/reserved0, and public GET404. Final result labels publishedfalse/displayhidden but does not directly assert/expose all product price/display and restored date fields.",
+      "qualification": "Command success and closed public visibility are supported; exact restored-value native readback will be an additional read-only audit, not another UI CREATE or source change."
+    }
+  ],
+  "checks": [
+    {
+      "name": "Authorized diff boundaries",
+      "status": "PASS",
+      "base_to_target_changed_files": 283,
+      "initial_to_corrected_changed_files": 28,
+      "outside_allowed_paths": 0,
+      "product_changes": 0,
+      "private_ledger_or_env_files": 0,
+      "allowed": [
+        "tests/W04_NATIVE_ADMIN/**",
+        "docs/symphony/evidence/W04_NATIVE_ADMIN/**",
+        "docs/symphony/W04_NATIVE_ADMIN_BROWSER_FINAL.md"
+      ]
+    },
+    {
+      "name": "Corrected token prose and unchanged audit",
+      "status": "PASS",
+      "issued_distinct": 83,
+      "earlier_public_issuance_absent": 37,
+      "later_public_issuance_rows": 46,
+      "per_token_files": 75,
+      "aggregate_only": 8,
+      "initial_review_preserved": true,
+      "audit_content_unchanged": true,
+      "native_final_logout401_auth401": 83,
+      "provided_handoff_auth200_retained": 3,
+      "independent_token_table_audit": "NOT_RUN"
+    },
+    {
+      "name": "Heterogeneous native sort evidence",
+      "status": "PASS",
+      "browser_checks": 8,
+      "viewports": [
+        390,
+        1440
+      ],
+      "sorts": [
+        "price_asc",
+        "price_desc",
+        "departure_asc",
+        "recommended"
+      ],
+      "distinct_native_prices": 13,
+      "distinct_native_departure_dates": 13,
+      "per_check_complete_rows": 13,
+      "page_cardinalities": [
+        12,
+        1
+      ],
+      "native_response_order_recomputed_against_baseline": true,
+      "query_and_reload_assertions": true,
+      "rendered_card_count_assertions": true,
+      "limit": "Harness compares sorted native response rows and rendered card counts; it does not independently compare every card DOM field to each response row during this sort extension."
+    },
+    {
+      "name": "Native sort restoration command evidence",
+      "status": "PASS",
+      "exact_auxiliary_ids": [
+        72,
+        73,
+        74,
+        75,
+        76,
+        77,
+        78,
+        79,
+        80,
+        81,
+        82,
+        83,
+        84
+      ],
+      "restore_steps_pass": 13,
+      "public404": 13,
+      "inactive_reserved0_assertions": 13,
+      "option_ID_preservation": 13,
+      "new_fixtures_UI_creates_or_logins": 0,
+      "retained422_preparation_harness": true,
+      "exact_price_display_date_readback": "NOT_RUN at reviewed target; separately identified nonblocking evidence qualification"
+    },
+    {
+      "name": "Fixed product source versus artifact-head labels",
+      "status": "PASS",
+      "pinned_product_sha": "fa5523175ac494cfbd13bbf89bf06b3ec91835a6",
+      "sort_actual_head": "d1e85b719f17cf40acbecd7f11b03e3432a4556b",
+      "artifact_descendant_label_honest": true,
+      "new_266_plus_extension_files": "Own test/report/evidence only; no runtime product source modifications"
+    },
+    {
+      "name": "PNG privacy and changed text",
+      "status": "PASS",
+      "PNG_fixed_hashes_matching_privacy_rows": 100,
+      "known_private_hits_recorded": 0,
+      "generic_pattern_hits_recorded": 0,
+      "changed_nonPNG_private_pattern_hits": 0,
+      "independent_known_value_credential_scan": "NOT_RUN; helper reads no credentials. Guarded lead exact-known-value scan is reviewed as evidence."
+    },
+    {
+      "name": "Changed harness syntax",
+      "status": "PASS",
+      "Python_AST_or_node_check_files": 12,
+      "runtime_imports_executed": false
+    },
+    {
+      "name": "Original requirement matrix retained",
+      "status": "PASS",
+      "scenarios": 14,
+      "axes": 9,
+      "cross_product_policies": 5,
+      "original_contract_exact": true,
+      "source_contract_hash": "f87c0f98c1ea3f241f40d876d5814061ba8ce85b48c33b5a02bd95a6d973bb47",
+      "full_contract_result": "NOT_RUN",
+      "canonicalValidation": "NOT_RUN"
+    },
+    {
+      "name": "Known UI and prior harness findings retained",
+      "status": "PASS",
+      "rapid_save_stale_true": "Still explicitly unresolved at both widths;1s settled false path is separately bounded PASS",
+      "PC_pointer_RowActionMenu": "Still unresolved; keyboard Enter-open/native detail click path separately PASS",
+      "initial_review_status": "FAIL retained for d1e85 count wording finding",
+      "failed_sort_prepare": "Native422 missinglist_price attempt retained, never upgraded to success"
+    }
+  ],
+  "contributor_self_checks": [
+    {
+      "name": "Append-only closing source consistency",
+      "status": "PASS",
+      "phase": "after_sort_extension",
+      "initial_before4354_preserved": true,
+      "during_supplement2_entrypoints90_lang": 92,
+      "total_distinct_active_source_paths": 4446,
+      "required_closing_all_equal": true,
+      "original_after_equal_to_initial_commit": true,
+      "original_after_canonical_sha256": "0366bbc5e9709553b463b9a910e22abf4a0ff95e923008fd7cf049065f70eed7",
+      "during_closing_supplements_equal": true,
+      "optional_basic_missing": 463,
+      "broad_source_all_equal": false,
+      "sensitive_and_optional_exclusions": "Explicit; no broad dependency/runtime configuration PASS"
+    },
+    {
+      "name": "Refreshed executed-asset consistency",
+      "status": "PASS",
+      "recorded_rows": 510,
+      "rows_unit": "Deduplicated context-level path/hash observations; report copies overlap. Not unique HTTP requests or contexts.",
+      "initial_sample_rows": 102,
+      "pre_sort_sample_rows": 498,
+      "unique_paths": 12,
+      "bound_paths": 12,
+      "unbound": 0,
+      "literal_paths": 8,
+      "native_CSS_rewrite_paths": 4,
+      "all_input_hashes_match_fixed_target": true,
+      "closing_installed_source_bound": true,
+      "unique_HTTP_request_count": "NOT_MEASURED",
+      "unique_context_count": "NOT_MEASURED"
+    }
+  ],
+  "remaining_NOT_RUN": [
+    "Canonical Validation",
+    "Independent SQL/races/barriers, restart/envloss, migration/full native CI, attachment/editor preview and out-of-scope outage tests",
+    "Reviewer browser/runtime reexecution",
+    "Exact restored product/option prices/display/date fields at this target, pending bounded native read-only audit"
+  ],
+  "publication": "No reviewer commit/push/merge/deploy. Lead may append this review and privacy refresh without modifying the reviewed runtime/harness/report content; future restoration audit reviewed separately."
+}
