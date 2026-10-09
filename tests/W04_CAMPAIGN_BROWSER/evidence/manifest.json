@@ -1,14 +1,14 @@
 {
-  "generated_utc": "2026-10-09T20:39:36.155128+00:00",
+  "generated_utc": "2026-10-09T20:43:56.326794+00:00",
   "tested_source_sha": "31a18318f91dde34a9c75eaaac65ae1d434b7bc3",
   "tested_tree": "c0984e682a77153753edcde318a6d44b6973b1c0",
-  "evidence_base_head": "31a18318f91dde34a9c75eaaac65ae1d434b7bc3",
+  "evidence_base_head": "f235e7c313cbccc792eaaefb2a8c2188f376217c",
   "source_provenance": "Exact fixed Git, selected installed-source and served-byte bindings; actual native Chromium executions. Script/source/local checks are distinct from actual browser PASS.",
   "files": [
     {
       "path": "docs/symphony/W04_CAMPAIGN_BROWSER_FINAL.md",
-      "bytes": 16233,
-      "sha256": "41f1d5c0846608be2ef2a96f722b68fe8ef96b17edd80d88580a58959fc62516"
+      "bytes": 17064,
+      "sha256": "3f2a2f235e9122e5ccdb1cf703e579214bbd9e7dac53e3330ab4acd2ea6e2742"
     },
     {
       "path": "tests/W04_CAMPAIGN_BROWSER/adapter-retry-repro.mjs",
@@ -347,8 +347,8 @@
     },
     {
       "path": "tests/W04_CAMPAIGN_BROWSER/evidence/execution-index.json",
-      "bytes": 12824,
-      "sha256": "1521516fdc3e8a804a3a72e7959a741199ab31055d195d3fc97aee05003256a9"
+      "bytes": 16244,
+      "sha256": "a3742b56dfe7e51990985ab6e4d6cfb770cf4dadbe3e695ad7d95143dca8ea4b"
     },
     {
       "path": "tests/W04_CAMPAIGN_BROWSER/evidence/faqs-support-1-1440.png",
@@ -466,6 +466,11 @@
       "sha256": "abc22be87ecda0ea9e00314b8c9411f8cd26e58b3bf827d53d4e472fb75ed883"
     },
     {
+      "path": "tests/W04_CAMPAIGN_BROWSER/evidence/internal-review.json",
+      "bytes": 1967,
+      "sha256": "f16ef908aa6bcfe61e0a8ded573a56e33c4d84362d51c14dff6167770624de30"
+    },
+    {
       "path": "tests/W04_CAMPAIGN_BROWSER/evidence/list-error-public-states-1-1440.png",
       "bytes": 77274,
       "sha256": "ea42894bc811517d0a5617f02596cf80c94b378c69ccdedeb04ee7569ce33a7f"
@@ -557,8 +562,8 @@
     },
     {
       "path": "tests/W04_CAMPAIGN_BROWSER/evidence/privacy.json",
-      "bytes": 149602,
-      "sha256": "3ba99315bf4b7fbfdc54a8346a5f46c99f339b06df8953fede8ca02d1ae47b8e"
+      "bytes": 169629,
+      "sha256": "9cd3e1b7b89684337e061cd1de3de3b64c7c868620adeb380c8e2c3344b6d8fb"
     },
     {
       "path": "tests/W04_CAMPAIGN_BROWSER/evidence/public-states-1-executed.mjs",
@@ -699,6 +704,11 @@
       "path": "tests/W04_CAMPAIGN_BROWSER/evidence/restored-campaign-6-390.png",
       "bytes": 143212,
       "sha256": "f0d981fa4aa52573578dbac797343cd6584561f7ae9763e37bdd123cdb2032c1"
+    },
+    {
+      "path": "tests/W04_CAMPAIGN_BROWSER/evidence/safety-provenance.json",
+      "bytes": 1183,
+      "sha256": "bf2b35db9344ea23daef38974c76708eb607b7dd6009a8cf5aac3361ae73fa3a"
     },
     {
       "path": "tests/W04_CAMPAIGN_BROWSER/evidence/source-binding.json",
@@ -871,7 +881,7 @@
       "sha256": "cf492d48affd60e9b061b294a2d1e8a3fdbeb65eca15457a72fc1ab6c5d1cf8a"
     }
   ],
-  "file_count": 173,
+  "file_count": 175,
   "safe_png_count": 105,
   "exclusions": [
     "manifest.json and MANIFEST.sha256 self-reference",
@@ -885,7 +895,7 @@
   "ci_runs": 0,
   "canonical_validation": "NOT_RUN absent",
   "official_children": 0,
-  "internal_helpers": 0,
+  "internal_helpers": 1,
   "internal_helpers_planned": 1,
   "review_type": "Native same-Request nonauthor evidence review; not a Validation receipt"
 }

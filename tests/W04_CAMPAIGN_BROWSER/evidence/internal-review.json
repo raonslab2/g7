@@ -1,0 +1,46 @@
+{
+  "utc": "2026-10-09T20:43:14.404739+00:00",
+  "type": "Supported native internal nonauthor evidence review within this same Request",
+  "helper_task": "/root/evidence_review",
+  "review_target_commit": "f235e7c313cbccc792eaaefb2a8c2188f376217c",
+  "tested_product_sha": "31a18318f91dde34a9c75eaaac65ae1d434b7bc3",
+  "tested_product_tree": "c0984e682a77153753edcde318a6d44b6973b1c0",
+  "bounded_evidence_review": "PASS",
+  "product_gate": "FAIL",
+  "findings": [],
+  "checks": {
+    "manifest_digests": 173,
+    "manifest_mismatches": 0,
+    "selected_source_and_supplement_bytes_compared": 4478,
+    "source_mismatches": 0,
+    "product_diff_empty": true,
+    "contexts": 62,
+    "pageerrors": 0,
+    "observed_external_http_connections": 0,
+    "blocked_external_attempts": 81,
+    "own_token_unique_count": 47,
+    "own_tokens_final401": 47,
+    "supplied_tokens_preserved200": 3,
+    "safe_png_privacy_digests": 105,
+    "critical3901440_pngs_visually_reviewed": 14,
+    "original_page_versions": [
+      11,
+      9
+    ]
+  },
+  "informational": [
+    "Raw campaign check label save real purifier is misleading in isolation; raw unchanged probe/backend_htmlpurifier_changed false and report NOT_RUN/unproven explanation are authoritative. Retain raw label."
+  ],
+  "limits": [
+    "No browser/native API reruns",
+    "No parent/private/handoff/env/SQL/TEST accesses",
+    "Read-only fixed local evidence and Git source review",
+    "No official child, PC separation, Validation receipt or release PASS"
+  ],
+  "internal_helper_count": 1,
+  "observed_peak_agents_in_request": 2,
+  "resource_usage": "Model/token usage unavailable; no capacity/configuration changes",
+  "canonical_validation": "NOT_RUN absent",
+  "hosted_ci_runs": 0,
+  "lead_response": "No substantive finding to fix. Added explicit harness-phase/command provenance and wrapper-attribute wording, safety/read-only review metadata and regenerated manifest. Raw actual results/PNGs unchanged."
+}
