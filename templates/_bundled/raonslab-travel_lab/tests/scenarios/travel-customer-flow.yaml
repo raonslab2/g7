@@ -1,0 +1,77 @@
+feature: RAON Travel Lab 고객 여행 화면 (탐색 → 출발일·인원 → 여행 장바구니 → 상담 요청(테스트) → 진행 상태 · 고객센터)
+
+description: |
+  raonslab-travel_lab 사용자 템플릿이 같은 이름의 모듈 공개 API(/api/modules/raonslab-travel_lab)를
+  화면에 연결한다. 여행 식별자는 이커머스 상품 id, 출발편은 이커머스 ProductOption, 인원은 Cart.quantity.
+  상담 요청과 그 상태(TEST_INQUIRY → UNDER_REVIEW → TEST_ACCEPTED / DECLINED / CANCELLED)는 모두
+  거래 테스트(시뮬레이션)이며 실제 예약·결제·환불은 일어나지 않는다.
+
+  핵심 동작:
+    - 모든 흐름(홈·검색·상세·장바구니·요청 목록/상세·고객센터)이 로딩 / 빈 / 오류+다시 시도 상태를 가진다
+    - 검색 조건은 주소(query)가 단일 출처 — 정렬·페이지 이동은 조건을 승계, 초기화는 승계하지 않는다
+    - 장바구니 담기·인원 변경·요청 제출은 가격을 보내지 않는다 (서버가 출발편 기준으로 계산)
+    - 멱등 키: 장바구니 로드 시 (항목 id × 인원) 묶음 지문으로 확보, 네트워크 오류 재시도는 같은 키, 성공 시에만 폐기
+    - 장바구니·요청은 로그인 필요(Sanctum bearer, auth_mode=required) — 비회원은 상세에서 로그인 후 복귀
+    - 2단계 인증이 켜진 사이트의 로그인 200(two_factor_required) 응답을 인증번호 단계로 처리
+
+axes:
+  viewer: [guest, member]
+  viewport: [mobile_390, desktop_1440]
+  data_source_state: [loading, loaded_with_items, loaded_empty, error_retryable, not_found_404]
+  search_filters: [none, keyword, region, theme, date_range, price_range, combined]
+  sort: [recommended, price_asc, price_desc, departure_asc]
+  pagination_meta: [single_page, multi_page_exact_total, capped_total_last_page_null]
+  departure_state: [available, sold_out, none_scheduled]
+  people_change: [increase_within_seats, increase_at_limit_blocked, decrease_to_one_blocked]
+  inquiry_submit_outcome: [success, validation_422, conflict_409, network_error_then_retry]
+  inquiry_status: [TEST_INQUIRY, UNDER_REVIEW, TEST_ACCEPTED, DECLINED, CANCELLED]
+  help_tab: [notices, faq, questions]
+  login_response: [authenticated, two_factor_required]
+  locale: [ko, en]
+
+exclusions:
+  - { viewer: guest, inquiry_submit_outcome: success, reason: "장바구니·요청 라우트는 auth_required — 비회원은 도달 전 로그인으로 이동" }
+  - { viewer: guest, inquiry_status: TEST_INQUIRY, reason: "요청 상세는 auth_required" }
+  - { departure_state: none_scheduled, people_change: increase_within_seats, reason: "출발일 미선택 시 인원 조작은 상한 1" }
+
+effects:
+  - home_renders_featured_and_departing_rails_from_catalog_api
+  - home_region_and_theme_shortcuts_navigate_to_search_without_inheriting_state
+  - every_data_source_shows_skeleton_until_response
+  - every_data_source_error_shows_retry_calling_refetchDataSource
+  - empty_results_offer_reset_or_browse_action
+  - search_query_params_passed_verbatim_to_catalog_endpoint
+  - sort_change_keeps_filters_and_resets_page
+  - pagination_shows_prev_next_when_last_page_null_and_has_more_pages
+  - filter_reset_drops_all_query_state_with_audit_allow_comment
+  - product_departure_selection_updates_estimate_with_server_unit_price
+  - people_increase_blocked_at_available_seats
+  - sold_out_departure_not_selectable
+  - add_to_cart_posts_departure_id_and_quantity_only_no_price
+  - guest_add_to_cart_routes_to_login_with_redirect_back
+  - cart_quantity_patch_sends_quantity_only
+  - cart_remove_requires_confirmation_modal_then_delete
+  - inquiry_submit_disabled_until_key_ack_and_name
+  - inquiry_body_contains_only_cart_ids_contact_idempotency_key
+  - network_error_retry_reuses_same_idempotency_key
+  - successful_submit_clears_key_and_navigates_to_request_detail
+  - changed_cart_set_or_quantity_yields_new_key
+  - request_status_badge_and_timeline_reflect_simulated_status
+  - cancel_available_only_for_test_inquiry_and_under_review_or_server_can_cancel
+  - cancel_posts_to_cancel_endpoint_and_refetches_detail
+  - help_tabs_switch_by_query_tab_without_inheriting_page
+  - faq_client_side_keyword_filter
+  - private_questions_require_login_and_post_title_content_only
+  - login_two_factor_required_switches_to_code_step
+  - base_layout_keeps_toast_host_login_logout_and_test_notice
+  - currency_formatted_from_server_currency_code_not_hardcoded
+  - all_lang_keys_exist_in_ko_and_en
+
+test_files:
+  - templates/_bundled/raonslab-travel_lab/__tests__/layouts/contract.test.ts
+  - templates/_bundled/raonslab-travel_lab/__tests__/layouts/home-search.test.tsx
+  - templates/_bundled/raonslab-travel_lab/__tests__/layouts/product.test.tsx
+  - templates/_bundled/raonslab-travel_lab/__tests__/layouts/cart.test.tsx
+  - templates/_bundled/raonslab-travel_lab/__tests__/layouts/requests-help.test.tsx
+  - templates/_bundled/raonslab-travel_lab/__tests__/components/travelComponents.test.tsx
+  - templates/_bundled/raonslab-travel_lab/__tests__/components/inquiryKey.test.ts

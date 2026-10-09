@@ -1,0 +1,1279 @@
+{
+    "version": "1.0.0",
+    "layout_name": "_user_base",
+    "meta": {
+        "title": "$t:travel.meta.site_title",
+        "description": "$t:travel.meta.site_description",
+        "is_base": true
+    },
+    "data_sources": [
+        {
+            "id": "current_user",
+            "label_key": "$t:editor.data_source.current_user",
+            "type": "api",
+            "endpoint": "/api/auth/user",
+            "method": "GET",
+            "auto_fetch": true,
+            "auth_mode": "required",
+            "loading_strategy": "progressive",
+            "initGlobal": "currentUser",
+            "fallback": {
+                "data": null
+            },
+            "errorHandling": {
+                "401": {
+                    "comment": "비회원의 401 은 정상 — 레이아웃 오류로 전파하지 않는다",
+                    "handler": "suppress"
+                }
+            }
+        },
+        {
+            "id": "travel_cart_badge",
+            "label_key": "$t:editor.data_source.travel_cart_badge",
+            "type": "api",
+            "endpoint": "/api/modules/raonslab-travel_lab/cart",
+            "method": "GET",
+            "auto_fetch": true,
+            "auth_mode": "required",
+            "loading_strategy": "background",
+            "fallback": {
+                "data": {
+                    "items": []
+                }
+            },
+            "errorHandling": {
+                "401": {
+                    "handler": "suppress"
+                },
+                "default": {
+                    "comment": "배지는 보조 정보 — 실패해도 화면을 막지 않는다",
+                    "handler": "suppress"
+                }
+            }
+        }
+    ],
+    "components": [
+        {
+            "comment": "전역 토스트 호스트",
+            "id": "global_toast",
+            "type": "composite",
+            "name": "Toast",
+            "props": {
+                "toasts": "{{_global.toasts}}",
+                "position": "bottom-center",
+                "duration": 4000
+            }
+        },
+        {
+            "id": "user_layout_root",
+            "type": "basic",
+            "name": "Div",
+            "props": {
+                "className": "flex min-h-screen flex-col bg-sand-50 text-ink-900"
+            },
+            "children": [
+                {
+                    "comment": "거래 테스트 고지 띠",
+                    "type": "basic",
+                    "name": "Div",
+                    "props": {
+                        "className": "bg-ink-900 text-white",
+                        "role": "note",
+                        "data-testid": "test-notice-bar"
+                    },
+                    "children": [
+                        {
+                            "type": "basic",
+                            "name": "Div",
+                            "props": {
+                                "className": "mx-auto w-full max-w-6xl px-4 md:px-6 flex items-center justify-center gap-2 py-2 text-center text-xs"
+                            },
+                            "children": [
+                                {
+                                    "type": "basic",
+                                    "name": "Icon",
+                                    "props": {
+                                        "name": "info-circle",
+                                        "className": "text-xs text-dusk-200"
+                                    }
+                                },
+                                {
+                                    "type": "basic",
+                                    "name": "Span",
+                                    "text": "$t:travel.notice.bar"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "comment": "상단 헤더 — 브랜드 · 주요 메뉴 · 로그인/로그아웃",
+                    "type": "basic",
+                    "name": "Div",
+                    "props": {
+                        "className": "sticky top-0 z-40 border-b border-slate-200/80 bg-white/90 backdrop-blur"
+                    },
+                    "children": [
+                        {
+                            "type": "basic",
+                            "name": "Div",
+                            "props": {
+                                "className": "mx-auto w-full max-w-6xl px-4 md:px-6 flex h-16 items-center justify-between gap-4"
+                            },
+                            "children": [
+                                {
+                                    "type": "basic",
+                                    "name": "Button",
+                                    "props": {
+                                        "type": "button",
+                                        "className": "flex items-center gap-2.5",
+                                        "aria-label": "$t:travel.nav.brand_home",
+                                        "data-testid": "brand"
+                                    },
+                                    "children": [
+                                        {
+                                            "type": "basic",
+                                            "name": "Div",
+                                            "props": {
+                                                "className": "flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-raon-400 to-raon-700 text-white shadow-sm"
+                                            },
+                                            "children": [
+                                                {
+                                                    "type": "basic",
+                                                    "name": "Icon",
+                                                    "props": {
+                                                        "name": "paper-plane",
+                                                        "className": "text-sm"
+                                                    }
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "type": "basic",
+                                            "name": "Div",
+                                            "props": {
+                                                "className": "flex flex-col items-start leading-none"
+                                            },
+                                            "children": [
+                                                {
+                                                    "type": "basic",
+                                                    "name": "Span",
+                                                    "props": {
+                                                        "className": "text-base font-black tracking-wide text-ink-900"
+                                                    },
+                                                    "text": "RAON"
+                                                },
+                                                {
+                                                    "type": "basic",
+                                                    "name": "Span",
+                                                    "props": {
+                                                        "className": "text-[11px] font-semibold uppercase tracking-[0.2em] text-raon-600"
+                                                    },
+                                                    "text": "Travel Lab"
+                                                }
+                                            ]
+                                        }
+                                    ],
+                                    "actions": [
+                                        {
+                                            "type": "click",
+                                            "handler": "navigate",
+                                            "params": {
+                                                "path": "/travel"
+                                            }
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "basic",
+                                    "name": "Nav",
+                                    "props": {
+                                        "className": "hidden items-center gap-1 md:flex",
+                                        "aria-label": "$t:travel.nav.primary"
+                                    },
+                                    "children": [
+                                        {
+                                            "type": "basic",
+                                            "name": "Button",
+                                            "props": {
+                                                "type": "button",
+                                                "className": "inline-flex items-center rounded-lg px-3 py-2 text-sm font-semibold text-ink-700 transition hover:bg-raon-50 hover:text-raon-700",
+                                                "data-testid": "nav-search"
+                                            },
+                                            "children": [
+                                                {
+                                                    "type": "basic",
+                                                    "name": "Span",
+                                                    "text": "$t:travel.nav.search"
+                                                }
+                                            ],
+                                            "actions": [
+                                                {
+                                                    "type": "click",
+                                                    "handler": "navigate",
+                                                    "params": {
+                                                        "path": "/travel/search"
+                                                    }
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "type": "basic",
+                                            "name": "Button",
+                                            "props": {
+                                                "type": "button",
+                                                "className": "inline-flex items-center rounded-lg px-3 py-2 text-sm font-semibold text-ink-700 transition hover:bg-raon-50 hover:text-raon-700",
+                                                "data-testid": "nav-cart"
+                                            },
+                                            "children": [
+                                                {
+                                                    "type": "basic",
+                                                    "name": "Span",
+                                                    "text": "$t:travel.nav.cart"
+                                                },
+                                                {
+                                                    "type": "basic",
+                                                    "name": "Span",
+                                                    "if": "{{(travel_cart_badge?.data?.items ?? []).length > 0}}",
+                                                    "props": {
+                                                        "className": "ml-1 inline-flex h-5 min-w-5 items-center justify-center rounded-full bg-dusk-500 px-1.5 text-[11px] font-bold text-white",
+                                                        "data-testid": "cart-badge"
+                                                    },
+                                                    "text": "{{(travel_cart_badge?.data?.items ?? []).length}}"
+                                                }
+                                            ],
+                                            "actions": [
+                                                {
+                                                    "type": "click",
+                                                    "handler": "navigate",
+                                                    "params": {
+                                                        "path": "/travel/cart"
+                                                    }
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "type": "basic",
+                                            "name": "Button",
+                                            "props": {
+                                                "type": "button",
+                                                "className": "inline-flex items-center rounded-lg px-3 py-2 text-sm font-semibold text-ink-700 transition hover:bg-raon-50 hover:text-raon-700",
+                                                "data-testid": "nav-requests"
+                                            },
+                                            "children": [
+                                                {
+                                                    "type": "basic",
+                                                    "name": "Span",
+                                                    "text": "$t:travel.nav.requests"
+                                                }
+                                            ],
+                                            "actions": [
+                                                {
+                                                    "type": "click",
+                                                    "handler": "navigate",
+                                                    "params": {
+                                                        "path": "/travel/requests"
+                                                    }
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "type": "basic",
+                                            "name": "Button",
+                                            "props": {
+                                                "type": "button",
+                                                "className": "inline-flex items-center rounded-lg px-3 py-2 text-sm font-semibold text-ink-700 transition hover:bg-raon-50 hover:text-raon-700",
+                                                "data-testid": "nav-help"
+                                            },
+                                            "children": [
+                                                {
+                                                    "type": "basic",
+                                                    "name": "Span",
+                                                    "text": "$t:travel.nav.help"
+                                                }
+                                            ],
+                                            "actions": [
+                                                {
+                                                    "type": "click",
+                                                    "handler": "navigate",
+                                                    "params": {
+                                                        "path": "/travel/help"
+                                                    }
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "basic",
+                                    "name": "Div",
+                                    "props": {
+                                        "className": "flex items-center gap-2"
+                                    },
+                                    "children": [
+                                        {
+                                            "type": "basic",
+                                            "name": "Div",
+                                            "if": "{{!!(_global.currentUser?.uuid || _global.currentUser?.id)}}",
+                                            "props": {
+                                                "className": "hidden items-center gap-2 md:flex"
+                                            },
+                                            "children": [
+                                                {
+                                                    "type": "basic",
+                                                    "name": "Span",
+                                                    "props": {
+                                                        "className": "max-w-[10rem] truncate text-sm font-semibold text-ink-700"
+                                                    },
+                                                    "text": "$t:travel.auth.greeting|name={{_global.currentUser?.name ?? ''}}"
+                                                },
+                                                {
+                                                    "type": "basic",
+                                                    "name": "Button",
+                                                    "props": {
+                                                        "type": "button",
+                                                        "className": "inline-flex items-center justify-center gap-1.5 rounded-lg px-3 py-2 text-sm font-medium text-ink-700 transition hover:bg-raon-50 hover:text-raon-700",
+                                                        "data-testid": "header-logout"
+                                                    },
+                                                    "text": "$t:travel.auth.logout",
+                                                    "actions": [
+                                                        {
+                                                            "type": "click",
+                                                            "handler": "logout",
+                                                            "onSuccess": [
+                                                                {
+                                                                    "handler": "setState",
+                                                                    "params": {
+                                                                        "target": "global",
+                                                                        "travelMenuOpen": false
+                                                                    }
+                                                                },
+                                                                {
+                                                                    "handler": "navigate",
+                                                                    "params": {
+                                                                        "path": "/travel"
+                                                                    }
+                                                                }
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "type": "basic",
+                                            "name": "Div",
+                                            "props": {
+                                                "className": "hidden md:block"
+                                            },
+                                            "children": [
+                                                {
+                                                    "type": "basic",
+                                                    "name": "Button",
+                                                    "if": "{{!_global.currentUser?.uuid && !_global.currentUser?.id}}",
+                                                    "props": {
+                                                        "type": "button",
+                                                        "className": "inline-flex items-center gap-1.5 rounded-xl bg-raon-600 px-4 py-2 text-sm font-semibold text-white hover:bg-raon-700",
+                                                        "data-testid": "header-login"
+                                                    },
+                                                    "children": [
+                                                        {
+                                                            "type": "basic",
+                                                            "name": "Icon",
+                                                            "props": {
+                                                                "name": "user",
+                                                                "className": "text-sm"
+                                                            }
+                                                        },
+                                                        {
+                                                            "type": "basic",
+                                                            "name": "Span",
+                                                            "text": "$t:travel.auth.login"
+                                                        }
+                                                    ],
+                                                    "actions": [
+                                                        {
+                                                            "type": "click",
+                                                            "handler": "navigate",
+                                                            "params": {
+                                                                "path": "/login"
+                                                            }
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "type": "basic",
+                                            "name": "Button",
+                                            "props": {
+                                                "type": "button",
+                                                "className": "inline-flex h-10 w-10 items-center justify-center rounded-xl text-ink-700 hover:bg-raon-50 md:hidden",
+                                                "aria-label": "$t:travel.nav.open_menu",
+                                                "aria-expanded": "{{!!_global.travelMenuOpen}}",
+                                                "data-testid": "menu-toggle"
+                                            },
+                                            "children": [
+                                                {
+                                                    "type": "basic",
+                                                    "name": "Icon",
+                                                    "props": {
+                                                        "name": "bars",
+                                                        "className": "text-lg"
+                                                    }
+                                                }
+                                            ],
+                                            "actions": [
+                                                {
+                                                    "type": "click",
+                                                    "handler": "setState",
+                                                    "params": {
+                                                        "target": "global",
+                                                        "travelMenuOpen": "{{!_global.travelMenuOpen}}"
+                                                    }
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "comment": "모바일 메뉴 드로어",
+                    "type": "basic",
+                    "name": "Div",
+                    "if": "{{!!_global.travelMenuOpen}}",
+                    "props": {
+                        "className": "fixed inset-0 z-50 md:hidden",
+                        "data-testid": "mobile-drawer"
+                    },
+                    "children": [
+                        {
+                            "type": "basic",
+                            "name": "Div",
+                            "props": {
+                                "className": "absolute inset-0 bg-ink-900/40",
+                                "aria-hidden": "true"
+                            },
+                            "actions": [
+                                {
+                                    "type": "click",
+                                    "handler": "setState",
+                                    "params": {
+                                        "target": "global",
+                                        "travelMenuOpen": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "type": "basic",
+                            "name": "Div",
+                            "props": {
+                                "className": "absolute right-0 top-0 flex h-full w-80 max-w-[85%] flex-col gap-2 bg-white p-5 shadow-xl",
+                                "role": "dialog",
+                                "aria-modal": "true",
+                                "aria-label": "$t:travel.nav.menu"
+                            },
+                            "children": [
+                                {
+                                    "type": "basic",
+                                    "name": "Div",
+                                    "props": {
+                                        "className": "mb-2 flex items-center justify-between"
+                                    },
+                                    "children": [
+                                        {
+                                            "type": "basic",
+                                            "name": "Span",
+                                            "props": {
+                                                "className": "text-base font-black text-ink-900"
+                                            },
+                                            "text": "RAON Travel Lab"
+                                        },
+                                        {
+                                            "type": "basic",
+                                            "name": "Button",
+                                            "props": {
+                                                "type": "button",
+                                                "className": "inline-flex h-9 w-9 items-center justify-center rounded-lg hover:bg-slate-100",
+                                                "aria-label": "$t:travel.nav.close_menu"
+                                            },
+                                            "children": [
+                                                {
+                                                    "type": "basic",
+                                                    "name": "Icon",
+                                                    "props": {
+                                                        "name": "times",
+                                                        "className": "text-lg"
+                                                    }
+                                                }
+                                            ],
+                                            "actions": [
+                                                {
+                                                    "type": "click",
+                                                    "handler": "setState",
+                                                    "params": {
+                                                        "target": "global",
+                                                        "travelMenuOpen": false
+                                                    }
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "basic",
+                                    "name": "Div",
+                                    "props": {
+                                        "className": "rounded-2xl bg-raon-50 p-4"
+                                    },
+                                    "children": [
+                                        {
+                                            "type": "basic",
+                                            "name": "P",
+                                            "if": "{{!!(_global.currentUser?.uuid || _global.currentUser?.id)}}",
+                                            "props": {
+                                                "className": "text-sm font-semibold text-raon-800"
+                                            },
+                                            "text": "$t:travel.auth.greeting|name={{_global.currentUser?.name ?? ''}}"
+                                        },
+                                        {
+                                            "type": "basic",
+                                            "name": "Button",
+                                            "if": "{{!!(_global.currentUser?.uuid || _global.currentUser?.id)}}",
+                                            "props": {
+                                                "type": "button",
+                                                "className": "mt-2 text-sm font-medium text-raon-700 underline"
+                                            },
+                                            "text": "$t:travel.auth.logout",
+                                            "actions": [
+                                                {
+                                                    "type": "click",
+                                                    "handler": "logout",
+                                                    "onSuccess": [
+                                                        {
+                                                            "handler": "setState",
+                                                            "params": {
+                                                                "target": "global",
+                                                                "travelMenuOpen": false
+                                                            }
+                                                        },
+                                                        {
+                                                            "handler": "navigate",
+                                                            "params": {
+                                                                "path": "/travel"
+                                                            }
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "type": "basic",
+                                            "name": "P",
+                                            "if": "{{!_global.currentUser?.uuid && !_global.currentUser?.id}}",
+                                            "props": {
+                                                "className": "text-sm text-raon-800"
+                                            },
+                                            "text": "$t:travel.auth.guest_hint"
+                                        },
+                                        {
+                                            "type": "basic",
+                                            "name": "Button",
+                                            "if": "{{!_global.currentUser?.uuid && !_global.currentUser?.id}}",
+                                            "props": {
+                                                "type": "button",
+                                                "className": "mt-3 w-full rounded-xl bg-raon-600 px-4 py-2.5 text-sm font-semibold text-white hover:bg-raon-700"
+                                            },
+                                            "text": "$t:travel.auth.login",
+                                            "actions": [
+                                                {
+                                                    "type": "click",
+                                                    "handler": "sequence",
+                                                    "actions": [
+                                                        {
+                                                            "handler": "setState",
+                                                            "params": {
+                                                                "target": "global",
+                                                                "travelMenuOpen": false
+                                                            }
+                                                        },
+                                                        {
+                                                            "handler": "navigate",
+                                                            "params": {
+                                                                "path": "/login"
+                                                            }
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "basic",
+                                    "name": "Nav",
+                                    "props": {
+                                        "className": "flex flex-col gap-1",
+                                        "aria-label": "$t:travel.nav.primary"
+                                    },
+                                    "children": [
+                                        {
+                                            "type": "basic",
+                                            "name": "Button",
+                                            "props": {
+                                                "type": "button",
+                                                "className": "flex w-full items-center gap-3 rounded-xl px-4 py-3 text-base font-semibold text-ink-700 hover:bg-raon-50"
+                                            },
+                                            "children": [
+                                                {
+                                                    "type": "basic",
+                                                    "name": "Icon",
+                                                    "props": {
+                                                        "name": "home",
+                                                        "className": "w-5 text-center text-base text-raon-600"
+                                                    }
+                                                },
+                                                {
+                                                    "type": "basic",
+                                                    "name": "Span",
+                                                    "props": {
+                                                        "className": "flex-1 text-left"
+                                                    },
+                                                    "text": "$t:travel.nav.home"
+                                                }
+                                            ],
+                                            "actions": [
+                                                {
+                                                    "type": "click",
+                                                    "handler": "sequence",
+                                                    "actions": [
+                                                        {
+                                                            "handler": "setState",
+                                                            "params": {
+                                                                "target": "global",
+                                                                "travelMenuOpen": false
+                                                            }
+                                                        },
+                                                        {
+                                                            "handler": "navigate",
+                                                            "params": {
+                                                                "path": "/travel"
+                                                            }
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "type": "basic",
+                                            "name": "Button",
+                                            "props": {
+                                                "type": "button",
+                                                "className": "flex w-full items-center gap-3 rounded-xl px-4 py-3 text-base font-semibold text-ink-700 hover:bg-raon-50"
+                                            },
+                                            "children": [
+                                                {
+                                                    "type": "basic",
+                                                    "name": "Icon",
+                                                    "props": {
+                                                        "name": "search",
+                                                        "className": "w-5 text-center text-base text-raon-600"
+                                                    }
+                                                },
+                                                {
+                                                    "type": "basic",
+                                                    "name": "Span",
+                                                    "props": {
+                                                        "className": "flex-1 text-left"
+                                                    },
+                                                    "text": "$t:travel.nav.search"
+                                                }
+                                            ],
+                                            "actions": [
+                                                {
+                                                    "type": "click",
+                                                    "handler": "sequence",
+                                                    "actions": [
+                                                        {
+                                                            "handler": "setState",
+                                                            "params": {
+                                                                "target": "global",
+                                                                "travelMenuOpen": false
+                                                            }
+                                                        },
+                                                        {
+                                                            "handler": "navigate",
+                                                            "params": {
+                                                                "path": "/travel/search"
+                                                            }
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "type": "basic",
+                                            "name": "Button",
+                                            "props": {
+                                                "type": "button",
+                                                "className": "flex w-full items-center gap-3 rounded-xl px-4 py-3 text-base font-semibold text-ink-700 hover:bg-raon-50"
+                                            },
+                                            "children": [
+                                                {
+                                                    "type": "basic",
+                                                    "name": "Icon",
+                                                    "props": {
+                                                        "name": "shopping-cart",
+                                                        "className": "w-5 text-center text-base text-raon-600"
+                                                    }
+                                                },
+                                                {
+                                                    "type": "basic",
+                                                    "name": "Span",
+                                                    "props": {
+                                                        "className": "flex-1 text-left"
+                                                    },
+                                                    "text": "$t:travel.nav.cart"
+                                                },
+                                                {
+                                                    "type": "basic",
+                                                    "name": "Span",
+                                                    "if": "{{(travel_cart_badge?.data?.items ?? []).length > 0}}",
+                                                    "props": {
+                                                        "className": "rounded-full bg-dusk-500 px-2 py-0.5 text-xs font-bold text-white"
+                                                    },
+                                                    "text": "{{(travel_cart_badge?.data?.items ?? []).length}}"
+                                                }
+                                            ],
+                                            "actions": [
+                                                {
+                                                    "type": "click",
+                                                    "handler": "sequence",
+                                                    "actions": [
+                                                        {
+                                                            "handler": "setState",
+                                                            "params": {
+                                                                "target": "global",
+                                                                "travelMenuOpen": false
+                                                            }
+                                                        },
+                                                        {
+                                                            "handler": "navigate",
+                                                            "params": {
+                                                                "path": "/travel/cart"
+                                                            }
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "type": "basic",
+                                            "name": "Button",
+                                            "props": {
+                                                "type": "button",
+                                                "className": "flex w-full items-center gap-3 rounded-xl px-4 py-3 text-base font-semibold text-ink-700 hover:bg-raon-50"
+                                            },
+                                            "children": [
+                                                {
+                                                    "type": "basic",
+                                                    "name": "Icon",
+                                                    "props": {
+                                                        "name": "file-alt",
+                                                        "className": "w-5 text-center text-base text-raon-600"
+                                                    }
+                                                },
+                                                {
+                                                    "type": "basic",
+                                                    "name": "Span",
+                                                    "props": {
+                                                        "className": "flex-1 text-left"
+                                                    },
+                                                    "text": "$t:travel.nav.requests"
+                                                }
+                                            ],
+                                            "actions": [
+                                                {
+                                                    "type": "click",
+                                                    "handler": "sequence",
+                                                    "actions": [
+                                                        {
+                                                            "handler": "setState",
+                                                            "params": {
+                                                                "target": "global",
+                                                                "travelMenuOpen": false
+                                                            }
+                                                        },
+                                                        {
+                                                            "handler": "navigate",
+                                                            "params": {
+                                                                "path": "/travel/requests"
+                                                            }
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "type": "basic",
+                                            "name": "Button",
+                                            "props": {
+                                                "type": "button",
+                                                "className": "flex w-full items-center gap-3 rounded-xl px-4 py-3 text-base font-semibold text-ink-700 hover:bg-raon-50"
+                                            },
+                                            "children": [
+                                                {
+                                                    "type": "basic",
+                                                    "name": "Icon",
+                                                    "props": {
+                                                        "name": "question-circle",
+                                                        "className": "w-5 text-center text-base text-raon-600"
+                                                    }
+                                                },
+                                                {
+                                                    "type": "basic",
+                                                    "name": "Span",
+                                                    "props": {
+                                                        "className": "flex-1 text-left"
+                                                    },
+                                                    "text": "$t:travel.nav.help"
+                                                }
+                                            ],
+                                            "actions": [
+                                                {
+                                                    "type": "click",
+                                                    "handler": "sequence",
+                                                    "actions": [
+                                                        {
+                                                            "handler": "setState",
+                                                            "params": {
+                                                                "target": "global",
+                                                                "travelMenuOpen": false
+                                                            }
+                                                        },
+                                                        {
+                                                            "handler": "navigate",
+                                                            "params": {
+                                                                "path": "/travel/help"
+                                                            }
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": "main_content_area",
+                    "type": "basic",
+                    "name": "Div",
+                    "props": {
+                        "className": "flex-1 pb-24 md:pb-0"
+                    },
+                    "children": [
+                        {
+                            "id": "main_content",
+                            "type": "basic",
+                            "name": "Div",
+                            "children": [],
+                            "slot": "content"
+                        }
+                    ]
+                },
+                {
+                    "comment": "푸터",
+                    "type": "basic",
+                    "name": "Div",
+                    "props": {
+                        "className": "mt-16 border-t border-slate-200 bg-white"
+                    },
+                    "children": [
+                        {
+                            "type": "basic",
+                            "name": "Div",
+                            "props": {
+                                "className": "mx-auto w-full max-w-6xl px-4 md:px-6 grid gap-8 py-10 md:grid-cols-3"
+                            },
+                            "children": [
+                                {
+                                    "type": "basic",
+                                    "name": "Div",
+                                    "props": {
+                                        "className": "space-y-2"
+                                    },
+                                    "children": [
+                                        {
+                                            "type": "basic",
+                                            "name": "Span",
+                                            "props": {
+                                                "className": "text-base font-black text-ink-900"
+                                            },
+                                            "text": "RAON Travel Lab"
+                                        },
+                                        {
+                                            "type": "basic",
+                                            "name": "P",
+                                            "props": {
+                                                "className": "text-sm text-ink-500"
+                                            },
+                                            "text": "$t:travel.footer.tagline"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "basic",
+                                    "name": "Div",
+                                    "props": {
+                                        "className": "flex flex-col items-start gap-1 text-sm"
+                                    },
+                                    "children": [
+                                        {
+                                            "type": "basic",
+                                            "name": "Button",
+                                            "props": {
+                                                "type": "button",
+                                                "className": "text-ink-700 hover:text-raon-700"
+                                            },
+                                            "text": "$t:travel.nav.search",
+                                            "actions": [
+                                                {
+                                                    "type": "click",
+                                                    "handler": "navigate",
+                                                    "params": {
+                                                        "path": "/travel/search"
+                                                    }
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "type": "basic",
+                                            "name": "Button",
+                                            "props": {
+                                                "type": "button",
+                                                "className": "text-ink-700 hover:text-raon-700"
+                                            },
+                                            "text": "$t:travel.nav.requests",
+                                            "actions": [
+                                                {
+                                                    "type": "click",
+                                                    "handler": "navigate",
+                                                    "params": {
+                                                        "path": "/travel/requests"
+                                                    }
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "type": "basic",
+                                            "name": "Button",
+                                            "props": {
+                                                "type": "button",
+                                                "className": "text-ink-700 hover:text-raon-700"
+                                            },
+                                            "text": "$t:travel.nav.help",
+                                            "actions": [
+                                                {
+                                                    "type": "click",
+                                                    "handler": "navigate",
+                                                    "params": {
+                                                        "path": "/travel/help"
+                                                    }
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "basic",
+                                    "name": "Div",
+                                    "props": {
+                                        "className": "space-y-2 text-xs leading-relaxed text-ink-500"
+                                    },
+                                    "children": [
+                                        {
+                                            "type": "basic",
+                                            "name": "P",
+                                            "text": "$t:travel.footer.simulation"
+                                        },
+                                        {
+                                            "type": "basic",
+                                            "name": "P",
+                                            "text": "$t:travel.footer.art"
+                                        },
+                                        {
+                                            "type": "basic",
+                                            "name": "P",
+                                            "text": "$t:travel.footer.copyright|year=2026"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "comment": "모바일 하단 탭바",
+                    "type": "basic",
+                    "name": "Nav",
+                    "props": {
+                        "className": "fixed inset-x-0 bottom-0 z-40 border-t border-slate-200 bg-white/95 pb-[env(safe-area-inset-bottom)] backdrop-blur md:hidden",
+                        "aria-label": "$t:travel.nav.tabbar"
+                    },
+                    "children": [
+                        {
+                            "type": "basic",
+                            "name": "Div",
+                            "props": {
+                                "className": "grid grid-cols-5"
+                            },
+                            "children": [
+                                {
+                                    "type": "basic",
+                                    "name": "Button",
+                                    "props": {
+                                        "type": "button",
+                                        "className": "flex flex-col items-center gap-1 py-2.5 text-ink-500 hover:text-raon-700",
+                                        "data-testid": "tab-home"
+                                    },
+                                    "children": [
+                                        {
+                                            "type": "basic",
+                                            "name": "Div",
+                                            "props": {
+                                                "className": "relative"
+                                            },
+                                            "children": [
+                                                {
+                                                    "type": "basic",
+                                                    "name": "Icon",
+                                                    "props": {
+                                                        "name": "home",
+                                                        "className": "text-lg"
+                                                    }
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "type": "basic",
+                                            "name": "Span",
+                                            "props": {
+                                                "className": "text-[11px] font-medium"
+                                            },
+                                            "text": "$t:travel.nav.home"
+                                        }
+                                    ],
+                                    "actions": [
+                                        {
+                                            "type": "click",
+                                            "handler": "navigate",
+                                            "params": {
+                                                "path": "/travel"
+                                            }
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "basic",
+                                    "name": "Button",
+                                    "props": {
+                                        "type": "button",
+                                        "className": "flex flex-col items-center gap-1 py-2.5 text-ink-500 hover:text-raon-700",
+                                        "data-testid": "tab-search"
+                                    },
+                                    "children": [
+                                        {
+                                            "type": "basic",
+                                            "name": "Div",
+                                            "props": {
+                                                "className": "relative"
+                                            },
+                                            "children": [
+                                                {
+                                                    "type": "basic",
+                                                    "name": "Icon",
+                                                    "props": {
+                                                        "name": "search",
+                                                        "className": "text-lg"
+                                                    }
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "type": "basic",
+                                            "name": "Span",
+                                            "props": {
+                                                "className": "text-[11px] font-medium"
+                                            },
+                                            "text": "$t:travel.nav.search"
+                                        }
+                                    ],
+                                    "actions": [
+                                        {
+                                            "type": "click",
+                                            "handler": "navigate",
+                                            "params": {
+                                                "path": "/travel/search"
+                                            }
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "basic",
+                                    "name": "Button",
+                                    "props": {
+                                        "type": "button",
+                                        "className": "flex flex-col items-center gap-1 py-2.5 text-ink-500 hover:text-raon-700",
+                                        "data-testid": "tab-cart"
+                                    },
+                                    "children": [
+                                        {
+                                            "type": "basic",
+                                            "name": "Div",
+                                            "props": {
+                                                "className": "relative"
+                                            },
+                                            "children": [
+                                                {
+                                                    "type": "basic",
+                                                    "name": "Icon",
+                                                    "props": {
+                                                        "name": "shopping-cart",
+                                                        "className": "text-lg"
+                                                    }
+                                                },
+                                                {
+                                                    "type": "basic",
+                                                    "name": "Span",
+                                                    "if": "{{(travel_cart_badge?.data?.items ?? []).length > 0}}",
+                                                    "props": {
+                                                        "className": "absolute -right-2.5 -top-1.5 rounded-full bg-dusk-500 px-1.5 text-[10px] font-bold leading-4 text-white"
+                                                    },
+                                                    "text": "{{(travel_cart_badge?.data?.items ?? []).length}}"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "type": "basic",
+                                            "name": "Span",
+                                            "props": {
+                                                "className": "text-[11px] font-medium"
+                                            },
+                                            "text": "$t:travel.nav.cart"
+                                        }
+                                    ],
+                                    "actions": [
+                                        {
+                                            "type": "click",
+                                            "handler": "navigate",
+                                            "params": {
+                                                "path": "/travel/cart"
+                                            }
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "basic",
+                                    "name": "Button",
+                                    "props": {
+                                        "type": "button",
+                                        "className": "flex flex-col items-center gap-1 py-2.5 text-ink-500 hover:text-raon-700",
+                                        "data-testid": "tab-requests"
+                                    },
+                                    "children": [
+                                        {
+                                            "type": "basic",
+                                            "name": "Div",
+                                            "props": {
+                                                "className": "relative"
+                                            },
+                                            "children": [
+                                                {
+                                                    "type": "basic",
+                                                    "name": "Icon",
+                                                    "props": {
+                                                        "name": "file-alt",
+                                                        "className": "text-lg"
+                                                    }
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "type": "basic",
+                                            "name": "Span",
+                                            "props": {
+                                                "className": "text-[11px] font-medium"
+                                            },
+                                            "text": "$t:travel.nav.requests"
+                                        }
+                                    ],
+                                    "actions": [
+                                        {
+                                            "type": "click",
+                                            "handler": "navigate",
+                                            "params": {
+                                                "path": "/travel/requests"
+                                            }
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "basic",
+                                    "name": "Button",
+                                    "props": {
+                                        "type": "button",
+                                        "className": "flex flex-col items-center gap-1 py-2.5 text-ink-500 hover:text-raon-700",
+                                        "data-testid": "tab-help"
+                                    },
+                                    "children": [
+                                        {
+                                            "type": "basic",
+                                            "name": "Div",
+                                            "props": {
+                                                "className": "relative"
+                                            },
+                                            "children": [
+                                                {
+                                                    "type": "basic",
+                                                    "name": "Icon",
+                                                    "props": {
+                                                        "name": "question-circle",
+                                                        "className": "text-lg"
+                                                    }
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "type": "basic",
+                                            "name": "Span",
+                                            "props": {
+                                                "className": "text-[11px] font-medium"
+                                            },
+                                            "text": "$t:travel.nav.help"
+                                        }
+                                    ],
+                                    "actions": [
+                                        {
+                                            "type": "click",
+                                            "handler": "navigate",
+                                            "params": {
+                                                "path": "/travel/help"
+                                            }
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

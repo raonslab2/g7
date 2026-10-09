@@ -1,0 +1,85 @@
+/**
+ * RAON Travel Lab 템플릿 스타일시트 (Tailwind CSS v4)
+ *
+ * 밝은(LIGHT) 단일 테마. 외부 웹폰트를 쓰지 않고 시스템 글꼴 스택만 사용한다 —
+ * 구동 자산을 제3자 CDN 에 의존하지 않는다는 원칙을 지킨다.
+ */
+@import 'tailwindcss';
+
+/* 레이아웃 JSON 은 vite 모듈 그래프 밖이므로 직접 스캔 대상으로 선언한다 */
+@source "../../layouts";
+@source "../components";
+
+@theme {
+  --font-sans: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Segoe UI', Roboto, 'Noto Sans KR', 'Noto Sans', sans-serif;
+
+  /* RAON 시그니처 — 맑은 바다빛 청록 */
+  --color-raon-50: #ecfdfb;
+  --color-raon-100: #cff8f3;
+  --color-raon-200: #a2efe7;
+  --color-raon-300: #67dfd5;
+  --color-raon-400: #2fc5bd;
+  --color-raon-500: #14a9a3;
+  --color-raon-600: #0d8885;
+  --color-raon-700: #0f6c6b;
+  --color-raon-800: #115656;
+  --color-raon-900: #124848;
+
+  /* 노을빛 포인트 */
+  --color-dusk-50: #fff6ed;
+  --color-dusk-100: #ffead4;
+  --color-dusk-200: #ffd1a8;
+  --color-dusk-400: #ff9a52;
+  --color-dusk-500: #fb7a26;
+  --color-dusk-600: #e85f12;
+
+  /* 본문 잉크 */
+  --color-ink-500: #5b6474;
+  --color-ink-700: #2f3846;
+  --color-ink-900: #141b26;
+
+  /* 모래빛 배경 */
+  --color-sand-50: #fbfaf6;
+  --color-sand-100: #f4f1e8;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-sand-50 text-ink-900 antialiased;
+  }
+
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-raon-500;
+  }
+
+  button:not(:disabled),
+  [role='button']:not([aria-disabled='true']) {
+    cursor: pointer;
+  }
+}
+
+@layer utilities {
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+  }
+
+  .scrollbar-none {
+    scrollbar-width: none;
+  }
+
+  .scrollbar-none::-webkit-scrollbar {
+    display: none;
+  }
+}

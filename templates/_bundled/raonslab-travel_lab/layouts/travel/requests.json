@@ -1,0 +1,526 @@
+{
+    "version": "1.0.0",
+    "layout_name": "travel/requests",
+    "extends": "_user_base",
+    "meta": {
+        "title": "$t:travel.meta.requests_title"
+    },
+    "data_sources": [
+        {
+            "id": "inquiries",
+            "label_key": "$t:editor.data_source.inquiries",
+            "type": "api",
+            "endpoint": "/api/modules/raonslab-travel_lab/inquiries",
+            "method": "GET",
+            "auto_fetch": true,
+            "auth_mode": "required",
+            "loading_strategy": "progressive",
+            "params": {
+                "page": "{{query.page ?? 1}}",
+                "per_page": 10
+            }
+        }
+    ],
+    "slots": {
+        "content": [
+            {
+                "type": "basic",
+                "name": "Div",
+                "props": {
+                    "className": "border-b border-slate-200 bg-white"
+                },
+                "children": [
+                    {
+                        "type": "basic",
+                        "name": "Div",
+                        "props": {
+                            "className": "mx-auto w-full max-w-6xl px-4 md:px-6 py-6 md:py-8"
+                        },
+                        "children": [
+                            {
+                                "type": "basic",
+                                "name": "Div",
+                                "props": {
+                                    "className": "mb-2 flex flex-wrap items-center gap-1 text-xs text-ink-500"
+                                },
+                                "children": [
+                                    {
+                                        "type": "basic",
+                                        "name": "Button",
+                                        "props": {
+                                            "type": "button",
+                                            "className": "hover:text-raon-700 hover:underline"
+                                        },
+                                        "text": "$t:travel.nav.home",
+                                        "actions": [
+                                            {
+                                                "type": "click",
+                                                "handler": "navigate",
+                                                "params": {
+                                                    "path": "/travel"
+                                                }
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "type": "basic",
+                                        "name": "Icon",
+                                        "props": {
+                                            "name": "chevron-right",
+                                            "className": "text-[10px] text-slate-400"
+                                        }
+                                    },
+                                    {
+                                        "type": "basic",
+                                        "name": "Span",
+                                        "props": {
+                                            "className": "font-semibold text-ink-700"
+                                        },
+                                        "text": "$t:travel.requests.title"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "basic",
+                                "name": "H1",
+                                "props": {
+                                    "className": "text-2xl font-extrabold tracking-tight text-ink-900 md:text-3xl"
+                                },
+                                "text": "$t:travel.requests.title"
+                            },
+                            {
+                                "type": "basic",
+                                "name": "P",
+                                "props": {
+                                    "className": "mt-1 text-sm text-ink-500 md:text-base"
+                                },
+                                "text": "$t:travel.requests.subtitle"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "type": "basic",
+                "name": "Div",
+                "props": {
+                    "className": "mx-auto w-full max-w-6xl px-4 md:px-6 mt-6 space-y-4"
+                },
+                "children": [
+                    {
+                        "type": "basic",
+                        "name": "Div",
+                        "props": {
+                            "className": "flex items-start gap-3 rounded-2xl border border-dusk-200 bg-dusk-50 p-4 text-sm text-dusk-600",
+                            "role": "note",
+                            "data-testid": "simulation-notice"
+                        },
+                        "children": [
+                            {
+                                "type": "basic",
+                                "name": "Icon",
+                                "props": {
+                                    "name": "info-circle",
+                                    "className": "mt-0.5 text-base"
+                                }
+                            },
+                            {
+                                "type": "basic",
+                                "name": "Div",
+                                "props": {
+                                    "className": "space-y-1"
+                                },
+                                "children": [
+                                    {
+                                        "type": "basic",
+                                        "name": "P",
+                                        "props": {
+                                            "className": "font-semibold"
+                                        },
+                                        "text": "$t:travel.notice.simulation_title"
+                                    },
+                                    {
+                                        "type": "basic",
+                                        "name": "P",
+                                        "props": {
+                                            "className": "leading-relaxed"
+                                        },
+                                        "text": "$t:travel.notice.simulation_body"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "comment": "inquiries 로딩 스켈레톤",
+                        "type": "basic",
+                        "name": "Div",
+                        "if": "{{inquiries === undefined && !_dataSourceErrors?.inquiries}}",
+                        "props": {
+                            "className": "space-y-3",
+                            "aria-busy": "true",
+                            "aria-live": "polite",
+                            "data-testid": "inquiries-loading"
+                        },
+                        "children": [
+                            {
+                                "type": "basic",
+                                "name": "Div",
+                                "props": {
+                                    "className": "space-y-2 rounded-2xl border border-slate-200 bg-white p-5"
+                                },
+                                "children": [
+                                    {
+                                        "type": "basic",
+                                        "name": "Div",
+                                        "props": {
+                                            "className": "h-4 w-1/2 animate-pulse rounded bg-slate-100"
+                                        }
+                                    },
+                                    {
+                                        "type": "basic",
+                                        "name": "Div",
+                                        "props": {
+                                            "className": "h-3 w-5/6 animate-pulse rounded bg-slate-100"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "basic",
+                                "name": "Div",
+                                "props": {
+                                    "className": "space-y-2 rounded-2xl border border-slate-200 bg-white p-5"
+                                },
+                                "children": [
+                                    {
+                                        "type": "basic",
+                                        "name": "Div",
+                                        "props": {
+                                            "className": "h-4 w-1/2 animate-pulse rounded bg-slate-100"
+                                        }
+                                    },
+                                    {
+                                        "type": "basic",
+                                        "name": "Div",
+                                        "props": {
+                                            "className": "h-3 w-5/6 animate-pulse rounded bg-slate-100"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "basic",
+                                "name": "Div",
+                                "props": {
+                                    "className": "space-y-2 rounded-2xl border border-slate-200 bg-white p-5"
+                                },
+                                "children": [
+                                    {
+                                        "type": "basic",
+                                        "name": "Div",
+                                        "props": {
+                                            "className": "h-4 w-1/2 animate-pulse rounded bg-slate-100"
+                                        }
+                                    },
+                                    {
+                                        "type": "basic",
+                                        "name": "Div",
+                                        "props": {
+                                            "className": "h-3 w-5/6 animate-pulse rounded bg-slate-100"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "comment": "inquiries 오류 + 다시 시도",
+                        "type": "basic",
+                        "name": "Div",
+                        "if": "{{!inquiries && !!_dataSourceErrors?.inquiries}}",
+                        "props": {
+                            "className": "flex flex-col items-center gap-3 rounded-2xl border border-rose-200 bg-rose-50 px-6 py-10 text-center",
+                            "role": "alert",
+                            "data-testid": "inquiries-error"
+                        },
+                        "children": [
+                            {
+                                "type": "basic",
+                                "name": "Icon",
+                                "props": {
+                                    "name": "exclamation-triangle",
+                                    "className": "text-2xl text-rose-500"
+                                }
+                            },
+                            {
+                                "type": "basic",
+                                "name": "P",
+                                "props": {
+                                    "className": "text-sm font-semibold text-rose-700"
+                                },
+                                "text": "$t:travel.requests.error"
+                            },
+                            {
+                                "type": "basic",
+                                "name": "P",
+                                "props": {
+                                    "className": "text-xs text-rose-600"
+                                },
+                                "text": "$t:travel.common.error_hint"
+                            },
+                            {
+                                "type": "basic",
+                                "name": "Button",
+                                "props": {
+                                    "type": "button",
+                                    "className": "inline-flex items-center gap-2 rounded-xl bg-white px-4 py-2 text-sm font-semibold text-rose-700 ring-1 ring-rose-200 hover:bg-rose-100",
+                                    "data-testid": "inquiries-retry"
+                                },
+                                "children": [
+                                    {
+                                        "type": "basic",
+                                        "name": "Icon",
+                                        "props": {
+                                            "name": "rotate-left",
+                                            "className": "text-sm"
+                                        }
+                                    },
+                                    {
+                                        "type": "basic",
+                                        "name": "Span",
+                                        "text": "$t:travel.common.retry"
+                                    }
+                                ],
+                                "actions": [
+                                    {
+                                        "type": "click",
+                                        "handler": "refetchDataSource",
+                                        "params": {
+                                            "dataSourceId": "inquiries"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "basic",
+                        "name": "Div",
+                        "if": "{{!!inquiries && (inquiries?.data?.data ?? []).length === 0}}",
+                        "props": {
+                            "className": "flex flex-col items-center gap-3 rounded-2xl border border-dashed border-slate-300 bg-white px-6 py-12 text-center",
+                            "data-testid": "requests-empty"
+                        },
+                        "children": [
+                            {
+                                "type": "basic",
+                                "name": "Div",
+                                "props": {
+                                    "className": "flex h-14 w-14 items-center justify-center rounded-full bg-raon-50 text-raon-600"
+                                },
+                                "children": [
+                                    {
+                                        "type": "basic",
+                                        "name": "Icon",
+                                        "props": {
+                                            "name": "inbox",
+                                            "className": "text-2xl"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "basic",
+                                "name": "P",
+                                "props": {
+                                    "className": "text-base font-semibold text-ink-900"
+                                },
+                                "text": "$t:travel.requests.empty_title"
+                            },
+                            {
+                                "type": "basic",
+                                "name": "P",
+                                "props": {
+                                    "className": "max-w-md text-sm text-ink-500"
+                                },
+                                "text": "$t:travel.requests.empty_desc"
+                            },
+                            {
+                                "type": "basic",
+                                "name": "Button",
+                                "props": {
+                                    "type": "button",
+                                    "className": "inline-flex items-center justify-center gap-2 rounded-xl bg-raon-600 px-5 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-raon-700 disabled:cursor-not-allowed disabled:opacity-50"
+                                },
+                                "text": "$t:travel.requests.go_cart",
+                                "actions": [
+                                    {
+                                        "type": "click",
+                                        "handler": "navigate",
+                                        "params": {
+                                            "path": "/travel/cart"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "basic",
+                        "name": "Div",
+                        "if": "{{(inquiries?.data?.data ?? []).length > 0}}",
+                        "props": {
+                            "className": "grid gap-3 md:grid-cols-2",
+                            "data-testid": "requests-list"
+                        },
+                        "children": [
+                            {
+                                "type": "basic",
+                                "name": "Div",
+                                "iteration": {
+                                    "source": "{{inquiries?.data?.data ?? []}}",
+                                    "item_var": "inq"
+                                },
+                                "children": [
+                                    {
+                                        "type": "basic",
+                                        "name": "Button",
+                                        "props": {
+                                            "type": "button",
+                                            "className": "w-full text-left rounded-2xl border border-slate-200 bg-white shadow-sm p-4 transition hover:border-raon-300 hover:shadow-md md:p-5",
+                                            "data-testid": "request-card"
+                                        },
+                                        "children": [
+                                            {
+                                                "type": "basic",
+                                                "name": "Div",
+                                                "props": {
+                                                    "className": "flex flex-wrap items-center justify-between gap-2"
+                                                },
+                                                "children": [
+                                                    {
+                                                        "type": "basic",
+                                                        "name": "Div",
+                                                        "props": {
+                                                            "className": "flex items-center gap-2"
+                                                        },
+                                                        "children": [
+                                                            {
+                                                                "type": "basic",
+                                                                "name": "Span",
+                                                                "props": {
+                                                                    "className": "text-sm font-bold text-ink-900"
+                                                                },
+                                                                "text": "$t:travel.requests.number|id={{inq.id}}"
+                                                            },
+                                                            {
+                                                                "type": "composite",
+                                                                "name": "StatusBadge",
+                                                                "props": {
+                                                                    "status": "{{inq.status}}",
+                                                                    "data-testid": "request-status"
+                                                                }
+                                                            }
+                                                        ]
+                                                    },
+                                                    {
+                                                        "type": "basic",
+                                                        "name": "Span",
+                                                        "props": {
+                                                            "className": "text-xs text-ink-500"
+                                                        },
+                                                        "text": "{{inq.created_at | datetime}}"
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "type": "basic",
+                                                "name": "P",
+                                                "props": {
+                                                    "className": "mt-2 line-clamp-1 text-base font-semibold text-ink-900"
+                                                },
+                                                "text": "{{inq.items?.[0]?.title ?? inq.items?.[0]?.product?.title ?? inq.title ?? ''}}"
+                                            },
+                                            {
+                                                "type": "basic",
+                                                "name": "Span",
+                                                "if": "{{(inq.items?.length ?? 0) > 1}}",
+                                                "props": {
+                                                    "className": "text-xs text-ink-500"
+                                                },
+                                                "text": "$t:travel.requests.more_items|count={{(inq.items?.length ?? 1) - 1}}"
+                                            },
+                                            {
+                                                "type": "basic",
+                                                "name": "Div",
+                                                "props": {
+                                                    "className": "mt-3 flex items-center justify-between text-sm"
+                                                },
+                                                "children": [
+                                                    {
+                                                        "type": "basic",
+                                                        "name": "Span",
+                                                        "props": {
+                                                            "className": "text-ink-500"
+                                                        },
+                                                        "text": "$t:travel.product.people_value|count={{inq.total_quantity ?? (inq.items ?? []).reduce((s, x) => s + Number(x.quantity ?? 0), 0)}}"
+                                                    },
+                                                    {
+                                                        "type": "composite",
+                                                        "name": "PriceTag",
+                                                        "props": {
+                                                            "amount": "{{inq.total_amount ?? inq.totals?.amount}}",
+                                                            "currency": "{{inq.currency_code ?? inq.totals?.currency_code}}",
+                                                            "amountClassName": "font-bold text-raon-700"
+                                                        }
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "actions": [
+                                            {
+                                                "type": "click",
+                                                "handler": "navigate",
+                                                "params": {
+                                                    "path": "/travel/requests/{{inq.id}}",
+                                                    "mergeQuery": true,
+                                                    "query": {}
+                                                },
+                                                "comment": "상세로 이동 — 돌아올 때 보던 페이지 유지"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "composite",
+                        "name": "Pagination",
+                        "if": "{{(inquiries?.data?.pagination?.last_page ?? 0) > 1 || inquiries?.data?.pagination?.has_more_pages === true || Number(query.page ?? 1) > 1}}",
+                        "props": {
+                            "currentPage": "{{Number(query.page ?? inquiries?.data?.pagination?.current_page ?? 1)}}",
+                            "totalPages": "{{inquiries?.data?.pagination?.last_page ?? null}}",
+                            "hasMorePages": "{{inquiries?.data?.pagination?.has_more_pages ?? false}}",
+                            "className": "mt-6 flex justify-center"
+                        },
+                        "actions": [
+                            {
+                                "event": "onPageChange",
+                                "handler": "navigate",
+                                "params": {
+                                    "path": "/travel/requests",
+                                    "mergeQuery": true,
+                                    "query": {
+                                        "page": "{{$args[0]}}"
+                                    }
+                                }
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+}
