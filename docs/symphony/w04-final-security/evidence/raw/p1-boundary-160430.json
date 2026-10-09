@@ -1,0 +1,56 @@
+{
+ "phase": "p1-boundary-160430",
+ "review_sha": "1052e3fb4bc4cccabb51b8c538116c78655f345b",
+ "base_url": "http://127.0.0.1:18871",
+ "counts": {
+  "PASS": 1,
+  "FAIL": 0,
+  "OBSERVED": 0,
+  "BLOCKED": 0,
+  "NOT_RUN": 0
+ },
+ "results": [
+  {
+   "name": "member exact public boundary: 600 accepted then 601st 429 inside one 60s own window (1 lanes)",
+   "status": "PASS",
+   "detail": {
+    "role": "member",
+    "lanes": 1,
+    "first": {
+     "status": 200,
+     "remaining": "599",
+     "limit": "600"
+    },
+    "statuses_2_600": [
+     200
+    ],
+    "count_1_to_600": 600,
+    "min_remaining_2_600": 0,
+    "duplicate_remaining_values": 0,
+    "elapsed_first_to_600th_s": 40.811,
+    "latency_ms_p50_p95": [
+     60.0,
+     105.5
+    ],
+    "request_601": {
+     "status": 429,
+     "limit": "600",
+     "remaining": "0",
+     "retry_after": "19",
+     "ms": 52.3
+    },
+    "elapsed_first_to_601_complete_s": 40.864,
+    "post_601_until_429": [],
+    "file_counter_after": {
+     "key_kind": "travel-lab-support-public",
+     "present": true,
+     "expires_unix": 1791561930,
+     "value": 600,
+     "mtime_utc": "16:05:11"
+    },
+    "duplicate_note": "duplicate X-RateLimit-Remaining values alone can come from concurrent reads of one counter; lost increments are measured by accepted requests before the first 429"
+   },
+   "at": "16:05:11"
+  }
+ ]
+}

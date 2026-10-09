@@ -1,0 +1,150 @@
+{
+ "phase": "p3-fixtures-160738",
+ "review_sha": "1052e3fb4bc4cccabb51b8c538116c78655f345b",
+ "base_url": "http://127.0.0.1:18871",
+ "counts": {
+  "PASS": 1,
+  "FAIL": 0,
+  "OBSERVED": 0,
+  "BLOCKED": 0,
+  "NOT_RUN": 0
+ },
+ "results": [
+  {
+   "name": "own fixtures via native admin APIs: category, 8-option product, catalog registration, 8 unique departures",
+   "status": "PASS",
+   "detail": {
+    "policy_reused_read_only": 1,
+    "category": 25,
+    "product": 69,
+    "options": [
+     130,
+     131,
+     132,
+     133,
+     134,
+     135,
+     136,
+     137
+    ],
+    "departures": {
+     "price": 96,
+     "qty": 97,
+     "state": 98,
+     "last": 99,
+     "key": 100,
+     "cd": 101,
+     "low": 102,
+     "spare": 103
+    },
+    "sql_departures": {
+     "96": {
+      "id": 96,
+      "product_id": 69,
+      "product_option_id": 130,
+      "capacity": 3,
+      "reserved": 0,
+      "is_active": 1,
+      "departure_date": "2026-10-20",
+      "stock_quantity": 5,
+      "price_adjustment": "0.00",
+      "option_selling_price": "12000.00",
+      "product_selling_price": "12000.00"
+     },
+     "97": {
+      "id": 97,
+      "product_id": 69,
+      "product_option_id": 131,
+      "capacity": 4,
+      "reserved": 0,
+      "is_active": 1,
+      "departure_date": "2026-10-20",
+      "stock_quantity": 5,
+      "price_adjustment": "0.00",
+      "option_selling_price": "12000.00",
+      "product_selling_price": "12000.00"
+     },
+     "98": {
+      "id": 98,
+      "product_id": 69,
+      "product_option_id": 132,
+      "capacity": 3,
+      "reserved": 0,
+      "is_active": 1,
+      "departure_date": "2026-10-20",
+      "stock_quantity": 5,
+      "price_adjustment": "0.00",
+      "option_selling_price": "12000.00",
+      "product_selling_price": "12000.00"
+     },
+     "99": {
+      "id": 99,
+      "product_id": 69,
+      "product_option_id": 133,
+      "capacity": 1,
+      "reserved": 0,
+      "is_active": 1,
+      "departure_date": "2026-10-20",
+      "stock_quantity": 5,
+      "price_adjustment": "0.00",
+      "option_selling_price": "12000.00",
+      "product_selling_price": "12000.00"
+     },
+     "100": {
+      "id": 100,
+      "product_id": 69,
+      "product_option_id": 134,
+      "capacity": 3,
+      "reserved": 0,
+      "is_active": 1,
+      "departure_date": "2026-10-20",
+      "stock_quantity": 5,
+      "price_adjustment": "0.00",
+      "option_selling_price": "12000.00",
+      "product_selling_price": "12000.00"
+     },
+     "101": {
+      "id": 101,
+      "product_id": 69,
+      "product_option_id": 135,
+      "capacity": 2,
+      "reserved": 0,
+      "is_active": 1,
+      "departure_date": "2026-10-20",
+      "stock_quantity": 5,
+      "price_adjustment": "0.00",
+      "option_selling_price": "12000.00",
+      "product_selling_price": "12000.00"
+     },
+     "102": {
+      "id": 102,
+      "product_id": 69,
+      "product_option_id": 136,
+      "capacity": 2,
+      "reserved": 0,
+      "is_active": 1,
+      "departure_date": "2026-10-20",
+      "stock_quantity": 5,
+      "price_adjustment": "0.00",
+      "option_selling_price": "12000.00",
+      "product_selling_price": "12000.00"
+     },
+     "103": {
+      "id": 103,
+      "product_id": 69,
+      "product_option_id": 137,
+      "capacity": 2,
+      "reserved": 0,
+      "is_active": 1,
+      "departure_date": "2026-10-20",
+      "stock_quantity": 5,
+      "price_adjustment": "0.00",
+      "option_selling_price": "12000.00",
+      "product_selling_price": "12000.00"
+     }
+    }
+   },
+   "at": "16:07:40"
+  }
+ ]
+}

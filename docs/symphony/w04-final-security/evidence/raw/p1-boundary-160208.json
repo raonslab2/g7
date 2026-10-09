@@ -1,0 +1,101 @@
+{
+ "phase": "p1-boundary-160208",
+ "review_sha": "1052e3fb4bc4cccabb51b8c538116c78655f345b",
+ "base_url": "http://127.0.0.1:18871",
+ "counts": {
+  "PASS": 0,
+  "FAIL": 0,
+  "OBSERVED": 1,
+  "BLOCKED": 0,
+  "NOT_RUN": 0
+ },
+ "results": [
+  {
+   "name": "admin exact public boundary: 600 accepted then 601st 429 inside one 60s own window (4 lanes)",
+   "status": "OBSERVED",
+   "detail": {
+    "role": "admin",
+    "lanes": 4,
+    "first": {
+     "status": 200,
+     "remaining": "599",
+     "limit": "600"
+    },
+    "statuses_2_600": [
+     200
+    ],
+    "count_1_to_600": 600,
+    "min_remaining_2_600": 11,
+    "duplicate_remaining_values": 256,
+    "elapsed_first_to_600th_s": 14.482,
+    "latency_ms_p50_p95": [
+     86.3,
+     147.9
+    ],
+    "request_601": {
+     "status": 200,
+     "limit": "600",
+     "remaining": "10",
+     "retry_after": null,
+     "ms": 49.1
+    },
+    "elapsed_first_to_601_complete_s": 14.531,
+    "post_601_until_429": [
+     [
+      200,
+      "9"
+     ],
+     [
+      200,
+      "8"
+     ],
+     [
+      200,
+      "7"
+     ],
+     [
+      200,
+      "6"
+     ],
+     [
+      200,
+      "5"
+     ],
+     [
+      200,
+      "4"
+     ],
+     [
+      200,
+      "3"
+     ],
+     [
+      200,
+      "2"
+     ],
+     [
+      200,
+      "1"
+     ],
+     [
+      200,
+      "0"
+     ],
+     [
+      429,
+      "0"
+     ]
+    ],
+    "file_counter_after": {
+     "key_kind": "travel-lab-support-public",
+     "present": true,
+     "expires_unix": 1791561788,
+     "value": 600,
+     "mtime_utc": "16:02:23"
+    },
+    "note": "lost FileStore increments under concurrency; exact 601 boundary not established in this run"
+   },
+   "at": "16:02:23"
+  }
+ ]
+}
