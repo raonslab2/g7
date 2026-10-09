@@ -1,0 +1,367 @@
+{
+ "source_sha": "28ada286c1c34606741bcfe4f9d12e06ac50af30",
+ "base_url": "http://127.0.0.1:18871",
+ "db": "req81_travel_lab",
+ "actors": {
+  "member": 12,
+  "other_member": 13,
+  "admin": 14
+ },
+ "summary": {
+  "PASS": 39
+ },
+ "results": [
+  {
+   "check": "health",
+   "method": "GET",
+   "path": "/up",
+   "actor": "anonymous",
+   "expected": 200,
+   "actual": 200,
+   "result": "PASS"
+  },
+  {
+   "check": "anonymous rejected",
+   "method": "GET",
+   "path": "/api/modules/raonslab-travel_lab/cart",
+   "actor": "anonymous",
+   "expected": 401,
+   "actual": 401,
+   "result": "PASS"
+  },
+  {
+   "check": "anonymous rejected",
+   "method": "GET",
+   "path": "/api/modules/raonslab-travel_lab/inquiries",
+   "actor": "anonymous",
+   "expected": 401,
+   "actual": 401,
+   "result": "PASS"
+  },
+  {
+   "check": "anonymous rejected",
+   "method": "GET",
+   "path": "/api/modules/raonslab-travel_lab/admin/inquiries",
+   "actor": "anonymous",
+   "expected": 401,
+   "actual": 401,
+   "result": "PASS"
+  },
+  {
+   "check": "anonymous rejected",
+   "method": "GET",
+   "path": "/api/modules/raonslab-travel_lab/admin/catalog",
+   "actor": "anonymous",
+   "expected": 401,
+   "actual": 401,
+   "result": "PASS"
+  },
+  {
+   "check": "anonymous submit rejected",
+   "method": "POST",
+   "path": "/api/modules/raonslab-travel_lab/inquiries",
+   "actor": "anonymous",
+   "expected": 401,
+   "actual": 401,
+   "result": "PASS"
+  },
+  {
+   "check": "member denied admin read",
+   "method": "GET",
+   "path": "/api/modules/raonslab-travel_lab/admin/inquiries",
+   "actor": "member",
+   "expected": 403,
+   "actual": 403,
+   "result": "PASS"
+  },
+  {
+   "check": "member denied admin read",
+   "method": "GET",
+   "path": "/api/modules/raonslab-travel_lab/admin/catalog",
+   "actor": "member",
+   "expected": 403,
+   "actual": 403,
+   "result": "PASS"
+  },
+  {
+   "check": "member denied admin transition",
+   "method": "PATCH",
+   "path": "/api/modules/raonslab-travel_lab/admin/inquiries/1",
+   "actor": "member",
+   "expected": 403,
+   "actual": 403,
+   "result": "PASS"
+  },
+  {
+   "check": "member denied departure edit",
+   "method": "PUT",
+   "path": "/api/modules/raonslab-travel_lab/admin/catalog/1/departures/1",
+   "actor": "member",
+   "expected": 403,
+   "actual": 403,
+   "result": "PASS"
+  },
+  {
+   "check": "admin reads inquiries",
+   "method": "GET",
+   "path": "/api/modules/raonslab-travel_lab/admin/inquiries?per_page=100",
+   "actor": "admin",
+   "expected": 200,
+   "actual": 200,
+   "result": "PASS"
+  },
+  {
+   "check": "foreign inquiry hidden",
+   "method": "GET",
+   "path": "/api/modules/raonslab-travel_lab/inquiries/11",
+   "actor": "other_member",
+   "expected": 404,
+   "actual": 404,
+   "result": "PASS"
+  },
+  {
+   "check": "foreign inquiry hidden",
+   "method": "GET",
+   "path": "/api/modules/raonslab-travel_lab/inquiries/10",
+   "actor": "other_member",
+   "expected": 404,
+   "actual": 404,
+   "result": "PASS"
+  },
+  {
+   "check": "foreign inquiry hidden",
+   "method": "GET",
+   "path": "/api/modules/raonslab-travel_lab/inquiries/9",
+   "actor": "other_member",
+   "expected": 404,
+   "actual": 404,
+   "result": "PASS"
+  },
+  {
+   "check": "cart rejects client field unit_price",
+   "method": "POST",
+   "path": "/api/modules/raonslab-travel_lab/cart",
+   "actor": "member",
+   "expected": 422,
+   "actual": 422,
+   "result": "PASS"
+  },
+  {
+   "check": "cart rejects client field user_id",
+   "method": "POST",
+   "path": "/api/modules/raonslab-travel_lab/cart",
+   "actor": "member",
+   "expected": 422,
+   "actual": 422,
+   "result": "PASS"
+  },
+  {
+   "check": "cart rejects client field price",
+   "method": "POST",
+   "path": "/api/modules/raonslab-travel_lab/cart",
+   "actor": "member",
+   "expected": 422,
+   "actual": 422,
+   "result": "PASS"
+  },
+  {
+   "check": "cart rejects quantity 0",
+   "method": "POST",
+   "path": "/api/modules/raonslab-travel_lab/cart",
+   "actor": "member",
+   "expected": 422,
+   "actual": 422,
+   "result": "PASS"
+  },
+  {
+   "check": "cart rejects quantity -1",
+   "method": "POST",
+   "path": "/api/modules/raonslab-travel_lab/cart",
+   "actor": "member",
+   "expected": 422,
+   "actual": 422,
+   "result": "PASS"
+  },
+  {
+   "check": "cart rejects quantity 100",
+   "method": "POST",
+   "path": "/api/modules/raonslab-travel_lab/cart",
+   "actor": "member",
+   "expected": 422,
+   "actual": 422,
+   "result": "PASS"
+  },
+  {
+   "check": "cart rejects quantity 1.5",
+   "method": "POST",
+   "path": "/api/modules/raonslab-travel_lab/cart",
+   "actor": "member",
+   "expected": 422,
+   "actual": 422,
+   "result": "PASS"
+  },
+  {
+   "check": "cart rejects quantity abc",
+   "method": "POST",
+   "path": "/api/modules/raonslab-travel_lab/cart",
+   "actor": "member",
+   "expected": 422,
+   "actual": 422,
+   "result": "PASS"
+  },
+  {
+   "check": "cart unknown departure",
+   "method": "POST",
+   "path": "/api/modules/raonslab-travel_lab/cart",
+   "actor": "member",
+   "expected": 404,
+   "actual": 404,
+   "result": "PASS"
+  },
+  {
+   "check": "inquiry rejects client field total_amount",
+   "method": "POST",
+   "path": "/api/modules/raonslab-travel_lab/inquiries",
+   "actor": "member",
+   "expected": 422,
+   "actual": 422,
+   "result": "PASS"
+  },
+  {
+   "check": "inquiry rejects client field status",
+   "method": "POST",
+   "path": "/api/modules/raonslab-travel_lab/inquiries",
+   "actor": "member",
+   "expected": 422,
+   "actual": 422,
+   "result": "PASS"
+  },
+  {
+   "check": "inquiry rejects client field currency_code",
+   "method": "POST",
+   "path": "/api/modules/raonslab-travel_lab/inquiries",
+   "actor": "member",
+   "expected": 422,
+   "actual": 422,
+   "result": "PASS"
+  },
+  {
+   "check": "inquiry rejects bad key",
+   "method": "POST",
+   "path": "/api/modules/raonslab-travel_lab/inquiries",
+   "actor": "member",
+   "expected": 422,
+   "actual": 422,
+   "result": "PASS"
+  },
+  {
+   "check": "inquiry rejects header/body key mismatch",
+   "method": "POST",
+   "path": "/api/modules/raonslab-travel_lab/inquiries",
+   "actor": "member",
+   "expected": 422,
+   "actual": 422,
+   "result": "PASS"
+  },
+  {
+   "check": "member adds own cart row",
+   "method": "POST",
+   "path": "/api/modules/raonslab-travel_lab/cart",
+   "actor": "member",
+   "expected": [
+    200,
+    201
+   ],
+   "actual": 201,
+   "result": "PASS"
+  },
+  {
+   "check": "server totals zero shipping/discount/points",
+   "result": "PASS",
+   "actual": {
+    "subtotal": 189000,
+    "total_shipping": 0,
+    "total_discount": 0,
+    "points_used": 0,
+    "final_amount": 189000
+   }
+  },
+  {
+   "check": "other member cannot patch",
+   "method": "PATCH",
+   "path": "/api/modules/raonslab-travel_lab/cart/17",
+   "actor": "other_member",
+   "expected": 404,
+   "actual": 404,
+   "result": "PASS"
+  },
+  {
+   "check": "other member cannot delete",
+   "method": "DELETE",
+   "path": "/api/modules/raonslab-travel_lab/cart/17",
+   "actor": "other_member",
+   "expected": 404,
+   "actual": 404,
+   "result": "PASS"
+  },
+  {
+   "check": "over-capacity patch rejected",
+   "method": "PATCH",
+   "path": "/api/modules/raonslab-travel_lab/cart/17",
+   "actor": "member",
+   "expected": [
+    409,
+    422
+   ],
+   "actual": 409,
+   "result": "PASS"
+  },
+  {
+   "check": "native checkout item_ids blocked",
+   "method": "POST",
+   "path": "/api/modules/sirsoft-ecommerce/checkout",
+   "actor": "member",
+   "expected": 400,
+   "actual": 400,
+   "result": "PASS"
+  },
+  {
+   "check": "native checkout direct_items blocked",
+   "method": "POST",
+   "path": "/api/modules/sirsoft-ecommerce/checkout",
+   "actor": "member",
+   "expected": 400,
+   "actual": 400,
+   "result": "PASS"
+  },
+  {
+   "check": "no temp order exists",
+   "method": "GET",
+   "path": "/api/modules/sirsoft-ecommerce/checkout",
+   "actor": "member",
+   "expected": [
+    404,
+    400
+   ],
+   "actual": 404,
+   "result": "PASS"
+  },
+  {
+   "check": "cleanup own cart row",
+   "method": "DELETE",
+   "path": "/api/modules/raonslab-travel_lab/cart/17",
+   "actor": "member",
+   "expected": 200,
+   "actual": 200,
+   "result": "PASS"
+  },
+  {
+   "check": "cleanup verified",
+   "result": "PASS"
+  },
+  {
+   "check": "catalog availability unchanged by probe",
+   "result": "PASS"
+  }
+ ]
+}
