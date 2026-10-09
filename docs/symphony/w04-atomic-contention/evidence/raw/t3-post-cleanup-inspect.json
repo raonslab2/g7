@@ -1,0 +1,25 @@
+{
+ "phase": "t3-post-cleanup-inspect",
+ "review_sha": "fa5523175ac494cfbd13bbf89bf06b3ec91835a6",
+ "base_url": "http://127.0.0.1:18871",
+ "counts": {
+  "PASS": 0,
+  "FAIL": 0,
+  "OBSERVED": 1,
+  "BLOCKED": 0,
+  "NOT_RUN": 0
+ },
+ "results": [
+  {
+   "name": "post-cleanup: own product shipping-policy reference after native delete of own policy (observation, ecommerce scope)",
+   "status": "OBSERVED",
+   "detail": {
+    "product_get": 200,
+    "product_shipping_policy_id": 8,
+    "product_display_status": "hidden",
+    "policy_get_after_delete": 404
+   },
+   "at": "17:51:04"
+  }
+ ]
+}

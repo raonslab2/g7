@@ -1,0 +1,202 @@
+{
+ "phase": "t3-races-172855",
+ "review_sha": "fa5523175ac494cfbd13bbf89bf06b3ec91835a6",
+ "base_url": "http://127.0.0.1:18871",
+ "counts": {
+  "PASS": 1,
+  "FAIL": 3,
+  "OBSERVED": 0,
+  "BLOCKED": 0,
+  "NOT_RUN": 0
+ },
+ "results": [
+  {
+   "name": "R1 last seat: different members overlap on own departure lock -> one 201 / one 409, reserved = capacity 1",
+   "status": "PASS",
+   "detail": {
+    "label": "last seat, two members",
+    "lock": {
+     "kind": "departure",
+     "row": 122,
+     "barrier_connection_id": 100851,
+     "db": "req81_travel_lab",
+     "account": "req81_travel",
+     "server_version": "10.11.14-MariaDB-0ubuntu0.24.04.1",
+     "isolation": "REPEATABLE-READ",
+     "table": "g7_travel_lab_departures"
+    },
+    "observed": {
+     "held_for_s": 3.963,
+     "data_lock_waits_visible": false,
+     "innodb_trx_visible": false,
+     "same_waiters_sustained": true,
+     "sustained_s": 3.437,
+     "distinct_waiting_connection_ids": [
+      100854,
+      100855
+     ]
+    },
+    "first_detection_at_s": 0.415,
+    "first_waiting": [
+     {
+      "connection_id": 100855,
+      "command": "Execute",
+      "time_s": 0,
+      "state": "Statistics",
+      "statement_targets_locked_table_for_update": true,
+      "statement_is_locking_read": true,
+      "innodb_lock_wait": false,
+      "waits_on_barrier": false,
+      "waits_on_other": null
+     },
+     {
+      "connection_id": 100854,
+      "command": "Execute",
+      "time_s": 0,
+      "state": "Statistics",
+      "statement_targets_locked_table_for_update": true,
+      "statement_is_locking_read": true,
+      "innodb_lock_wait": false,
+      "waits_on_barrier": false,
+      "waits_on_other": null
+     }
+    ],
+    "last_waiting": [
+     {
+      "connection_id": 100855,
+      "command": "Execute",
+      "time_s": 3,
+      "state": "Statistics",
+      "statement_targets_locked_table_for_update": true,
+      "statement_is_locking_read": true,
+      "innodb_lock_wait": false,
+      "waits_on_barrier": false,
+      "waits_on_other": null
+     },
+     {
+      "connection_id": 100854,
+      "command": "Execute",
+      "time_s": 3,
+      "state": "Statistics",
+      "statement_targets_locked_table_for_update": true,
+      "statement_is_locking_read": true,
+      "innodb_lock_wait": false,
+      "waits_on_barrier": false,
+      "waits_on_other": null
+     }
+    ],
+    "samples_head": [
+     {
+      "t": 0.26,
+      "on_barrier": [
+       100854
+      ],
+      "waiting": [
+       100854
+      ]
+     },
+     {
+      "t": 0.42,
+      "on_barrier": [
+       100855,
+       100854
+      ],
+      "waiting": [
+       100855,
+       100854
+      ]
+     },
+     {
+      "t": 0.61,
+      "on_barrier": [
+       100855,
+       100854
+      ],
+      "waiting": [
+       100855,
+       100854
+      ]
+     }
+    ],
+    "responses_pending_at_release": [
+     true,
+     true
+    ],
+    "responses": [
+     {
+      "status": 201,
+      "message": "성공적으로 처리되었습니다.",
+      "id": 133,
+      "data_status": "TEST_INQUIRY",
+      "sent_before_release_s": 4.907,
+      "completed_after_release_s": 0.14
+     },
+     {
+      "status": 409,
+      "message": "현재 남은 시험 인원보다 많습니다. 인원을 다시 선택해 주세요.",
+      "id": null,
+      "data_status": null,
+      "sent_before_release_s": 4.855,
+      "completed_after_release_s": 0.334
+     }
+    ],
+    "innodb_deadlocks_global": {
+     "before_lock": 6,
+     "at_lock": 6,
+     "end_of_hold": 6,
+     "at_release": 6,
+     "after_responses": 6,
+     "plus_3s": 6
+    },
+    "innodb_deadlocks_global_before_after": [
+     6,
+     6
+    ],
+    "during_hold_probe": {
+     "admission_lock_rows_inflight_actors": {
+      "travel-lab-workflow:member": 0,
+      "travel-lab-submit:member": 0,
+      "travel-lab-workflow:other_member": 0,
+      "travel-lab-submit:other_member": 0
+     },
+     "same_actor_cart_read_during_hold": {
+      "role": "member",
+      "status": 200,
+      "ms": 333.3
+     }
+    },
+    "real_server_overlap": true,
+    "invariant": {
+     "reserved": 1,
+     "capacity": 1,
+     "loser_message": "현재 남은 시험 인원보다 많습니다. 인원을 다시 선택해 주세요."
+    }
+   },
+   "at": "17:29:06"
+  },
+  {
+   "name": "R2 same member same key: overlapping submits -> 201 then 200 same ID, reserved once; changed payload 409",
+   "status": "FAIL",
+   "detail": {
+    "assert": "{\"statuses\": [200, 201], \"distinct_ids\": 1, \"reserved\": 1, \"replay\": [429, false], \"changed_payload\": [429, \"Too Many Attempts.\"], \"sql_rows_for_key_ids\": 1, \"sql_rows_by_user_and_key\": 1, \"items_events_qty\": [[1, 1, \"1\"]], \"reserved_after_replay_and_conflict\": [1, 1], \"waiter_note\": \"submit serialises on the native user row first; the second same-key request waits on the first request's user-row lock (transitive), not directly on the barrier row\"}"
+   },
+   "at": "17:29:17"
+  },
+  {
+   "name": "R3 owner cancel vs admin decline on own inquiry lock -> exactly one release, never negative",
+   "status": "FAIL",
+   "detail": {
+    "assert": "setup submit 429"
+   },
+   "at": "17:29:18"
+  },
+  {
+   "name": "R4 submit qty2 vs admin capacity 2->1 on own departure lock -> one wins, never below reserved",
+   "status": "FAIL",
+   "detail": {
+    "assert": "no sustained two-connection overlap"
+   },
+   "at": "17:29:40"
+  }
+ ]
+}

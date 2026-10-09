@@ -1,0 +1,145 @@
+{
+ "phase": "t2-budget-174223",
+ "review_sha": "fa5523175ac494cfbd13bbf89bf06b3ec91835a6",
+ "base_url": "http://127.0.0.1:18871",
+ "counts": {
+  "PASS": 1,
+  "FAIL": 0,
+  "OBSERVED": 0,
+  "BLOCKED": 0,
+  "NOT_RUN": 0
+ },
+ "results": [
+  {
+   "name": "member question budgets: create 10/11 and aggregate 120/121 counting the rejected write; actor and public prefixes separate",
+   "status": "PASS",
+   "detail": {
+    "first_read": [
+     200,
+     "119"
+    ],
+    "creates": [
+     {
+      "n": 1,
+      "status": 201,
+      "limit": "10",
+      "remaining": "9",
+      "id": 96,
+      "message": null
+     },
+     {
+      "n": 2,
+      "status": 201,
+      "limit": "10",
+      "remaining": "8",
+      "id": 97,
+      "message": null
+     },
+     {
+      "n": 3,
+      "status": 201,
+      "limit": "10",
+      "remaining": "7",
+      "id": 98,
+      "message": null
+     },
+     {
+      "n": 4,
+      "status": 201,
+      "limit": "10",
+      "remaining": "6",
+      "id": 99,
+      "message": null
+     },
+     {
+      "n": 5,
+      "status": 201,
+      "limit": "10",
+      "remaining": "5",
+      "id": 100,
+      "message": null
+     },
+     {
+      "n": 6,
+      "status": 201,
+      "limit": "10",
+      "remaining": "4",
+      "id": 101,
+      "message": null
+     },
+     {
+      "n": 7,
+      "status": 201,
+      "limit": "10",
+      "remaining": "3",
+      "id": 102,
+      "message": null
+     },
+     {
+      "n": 8,
+      "status": 201,
+      "limit": "10",
+      "remaining": "2",
+      "id": 103,
+      "message": null
+     },
+     {
+      "n": 9,
+      "status": 201,
+      "limit": "10",
+      "remaining": "1",
+      "id": 104,
+      "message": null
+     },
+     {
+      "n": 10,
+      "status": 201,
+      "limit": "10",
+      "remaining": "0",
+      "id": 105,
+      "message": null
+     },
+     {
+      "n": 11,
+      "status": 429,
+      "limit": "10",
+      "remaining": "0",
+      "id": null,
+      "message": "Too Many Attempts."
+     }
+    ],
+    "reads_13_120_statuses": [
+     200
+    ],
+    "remaining_after_read_120": "0",
+    "request_121": {
+     "status": 429,
+     "limit": "120",
+     "remaining": "0",
+     "retry_after": "19"
+    },
+    "create_after_aggregate_exhaustion": {
+     "status": 429,
+     "limit": "120",
+     "remaining": "0"
+    },
+    "other_member_question_read": [
+     200,
+     "120",
+     "119"
+    ],
+    "member_public_read": [
+     200,
+     "600",
+     "599"
+    ],
+    "elapsed_first_to_121_s": 41.412,
+    "sql_new_member_posts": 10,
+    "sql_new_member_posts_secret": [
+     1
+    ]
+   },
+   "at": "17:43:05"
+  }
+ ]
+}

@@ -1,0 +1,52 @@
+{
+ "phase": "t2-create_race-174420",
+ "review_sha": "fa5523175ac494cfbd13bbf89bf06b3ec91835a6",
+ "base_url": "http://127.0.0.1:18871",
+ "counts": {
+  "PASS": 1,
+  "FAIL": 0,
+  "OBSERVED": 0,
+  "BLOCKED": 0,
+  "NOT_RUN": 0
+ },
+ "results": [
+  {
+   "name": "bounded concurrent create burst (20 POST, 8 lanes) against the 10/min create budget on native DatabaseStore + admission lock",
+   "status": "PASS",
+   "detail": {
+    "lanes": 8,
+    "requests": 20,
+    "status_counts": {
+     "201": 10,
+     "429": 10
+    },
+    "elapsed_s": 4.947,
+    "sql_new_other_posts": 10,
+    "created_ids": [
+     106,
+     107,
+     109,
+     108,
+     110,
+     111,
+     112,
+     114,
+     113,
+     115
+    ],
+    "db_counters": {
+     "travel-lab-support-create:": {
+      "counter": 10,
+      "admission_lock_rows": 0
+     },
+     "travel-lab-support-questions:": {
+      "counter": 21,
+      "admission_lock_rows": 0
+     }
+    },
+    "note": "bounded runs; exactness under this concurrency, not a formal proof"
+   },
+   "at": "17:44:28"
+  }
+ ]
+}
