@@ -1,0 +1,24 @@
+{
+  "command": [
+    "node",
+    "tests/W04_NATIVE_ADMIN/recovery-recheck.mjs"
+  ],
+  "started": "2026-10-09T17:42:32.772651+00:00",
+  "files": [
+    {
+      "path": "tests/W04_NATIVE_ADMIN/recovery-recheck.mjs",
+      "sha256": "18ca1734b70d8ce0cab2a1730ccc76855204e3417e7697a8047c5c2ea586113e"
+    },
+    {
+      "path": "tests/W04_NATIVE_ADMIN/common.mjs",
+      "sha256": "6dd3942cbee8c1dd92fcf93aeeb521b9c0cc997095e5280dee38157908bd2d6e"
+    },
+    {
+      "path": "tests/W04_NATIVE_ADMIN/render-tools.mjs",
+      "sha256": "1fcf062fc3caa6ef24b99bda64694b51b1fa8b9558ff554be9643d1b58081445"
+    }
+  ],
+  "exit_code": 1,
+  "finished": "2026-10-09T17:47:44.660629+00:00",
+  "sanitized_output": "390 recovery immediate PASS\n390 recovery reload PASS\n390 recovery edited-contact PASS\n390 recovery sessionStorage-quota PASS\n390 owner UUID native logout/relogin isolation FAIL page.evaluate: ReferenceError: G7Core is not defined\n1440 recovery immediate PASS\n1440 recovery reload PASS\n1440 recovery edited-contact PASS\n1440 recovery sessionStorage-quota PASS\n1440 owner UUID native logout/relogin isolation FAIL page.evaluate: ReferenceError: G7Core is not defined\n"
+}
