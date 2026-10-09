@@ -1,0 +1,32 @@
+{
+    "rollback": {
+        "command": [
+            "/usr/bin/php8.3",
+            "docs/symphony/w04-native-final/recovery-runtime.php",
+            "original",
+            "normal"
+        ],
+        "pid": 315513,
+        "exit": 0,
+        "process_gone": true,
+        "seconds": 26.308,
+        "utc": "2026-10-09T17:40:08+00:00",
+        "output_sha256": "a411dd56c7e5a3282c1a4682584f7d8a4032372c3c03fa7fe8d27e008107d611",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "fallback": {
+        "command": [
+            "/usr/bin/php8.3",
+            "docs/symphony/w04-native-final/recovery-runtime.php",
+            "original",
+            "fault"
+        ],
+        "pid": 316508,
+        "exit": 0,
+        "process_gone": true,
+        "seconds": 37.663,
+        "utc": "2026-10-09T17:40:46+00:00",
+        "output_sha256": "614f75b210fc04c36a78169f79a143ccc9ee905ecafd47b769042fcc43ccf98c",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+}

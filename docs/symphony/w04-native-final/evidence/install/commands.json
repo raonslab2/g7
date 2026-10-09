@@ -137,6 +137,54 @@
             "exit": 0,
             "seconds": 7.85,
             "pid": 284728
+        },
+        {
+            "step": "12-template-install-sirsoft-admin_basic",
+            "args": [
+                "template:install",
+                "sirsoft-admin_basic",
+                "--no-interaction"
+            ],
+            "quiesce_wait": 0.185,
+            "exit": 0,
+            "seconds": 18.22,
+            "pid": 285556
+        },
+        {
+            "step": "13-template-activate-sirsoft-admin_basic",
+            "args": [
+                "template:activate",
+                "sirsoft-admin_basic",
+                "--no-interaction"
+            ],
+            "quiesce_wait": 0.106,
+            "exit": 0,
+            "seconds": 15.21,
+            "pid": 287213
+        },
+        {
+            "step": "14-template-install-raonslab-travel_lab",
+            "args": [
+                "template:install",
+                "raonslab-travel_lab",
+                "--no-interaction"
+            ],
+            "quiesce_wait": 0.062,
+            "exit": 0,
+            "seconds": 4.644,
+            "pid": 288256
+        },
+        {
+            "step": "15-template-activate-raonslab-travel_lab",
+            "args": [
+                "template:activate",
+                "raonslab-travel_lab",
+                "--no-interaction"
+            ],
+            "quiesce_wait": 0.187,
+            "exit": 1,
+            "seconds": 1.463,
+            "pid": 288552
         }
     ]
 }

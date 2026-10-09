@@ -1,5 +1,5 @@
 <?php
-/** 单次 unchanged native handleCommand/bootstrap；console 内部重建 app前不额外 boot/purge。 */
+/** 실제 native handleCommand/bootstrap을 한 번 실행하며 사전 boot/purge를 하지 않는다. */
 require_once __DIR__.'/runtime-bootstrap.php';
 try {
     $env=w04Env();$p=w04Pdo();w04fExclusive($p);$p=null;w04fQuiesce();

@@ -1,5 +1,5 @@
 <?php
-/** 公開 extensions.php 조건의 동일 native empty-reference branch. */
+/** 공개 extensions.php 조건과 동일한 native empty-reference 분기이다. */
 require __DIR__.'/runtime-bootstrap.php';
 $app=w04App();
 Illuminate\Support\Facades\Auth::setUser(App\Models\User::where('email',w04Env()['INSTALLER_ADMIN_EMAIL'])->firstOrFail());

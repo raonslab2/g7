@@ -1,0 +1,198 @@
+{
+    "status": "PASS",
+    "lease": "TEST RELEASE",
+    "request": "req_caef46f3473043048b5b4bc2ec41eaea",
+    "release_utc": "2026-10-09T17:53:26+00:00",
+    "pid": 347484,
+    "cwd": "/home/ubuntu/.agentopt-v2/workspaces/req_caef46f3473043048b5b4bc2ec41eaea",
+    "argv": [
+        "docs/symphony/w04-native-final/release.php"
+    ],
+    "tested_product_sha": "fa5523175ac494cfbd13bbf89bf06b3ec91835a6",
+    "tested_product_tree": "fa685339b030ee4efe46b63dc8d98c0e2f7d4f0c",
+    "tables": 55,
+    "rows": 104,
+    "full_digest": "ded72a53ad82a159b88e50a6560625488bb569a55f5f5ffa109cd45ae52d056e",
+    "row_inventory_sha256": "f491092e081db3bd9e999cc81a1eb0c25c1362f002a7cd7ad30ebd8c3b78fa5b",
+    "ddl_inventory_sha256": "23f247d9ee8d400287155a15eb23d9eb0b0ece53d77600b098ad5d0bacf33534",
+    "object_inventory_sha256": "4fd7145664b849158a8cd0da85d622d78e0fdfb9651624b8a5a7713f643b7653",
+    "other_schema_objects": 0,
+    "exact_original_inventory": true,
+    "test_connections_after_pdo_close": 0,
+    "own_native_processes_excluding_observer": {
+        "native_processes": [],
+        "count": 0,
+        "unreadable_pids": [],
+        "excluded_observer_pid": 347484,
+        "method": "exact or descendant own cwd/path-valued argv/FD plus PHP/mysql executable"
+    },
+    "own_http_processes": 0,
+    "own_http_port_closed": true,
+    "exclusive": {
+        "pid": 347484,
+        "cwd": "/home/ubuntu/.agentopt-v2/workspaces/req_caef46f3473043048b5b4bc2ec41eaea",
+        "argv": [
+            "docs/symphony/w04-native-final/release.php"
+        ],
+        "own_connection_id": 112482,
+        "other_test_connections": 0,
+        "own_server_processes": 0,
+        "prior_request_handles": {
+            "req_3e70e7ceddd34beea51a17da727584bc": {
+                "utc": "2026-10-09T17:53:25.605154+00:00",
+                "method": "privileged readonly proc exact cwd/individual bounded argv/fd; proc locks inode",
+                "count": 0,
+                "handles": [],
+                "unreadable_pids": [],
+                "failed_lock_present": true,
+                "lock_holders": []
+            },
+            "req_337b3638df9b4b958b0627e0b262a54a": {
+                "utc": "2026-10-09T17:53:25.806710+00:00",
+                "method": "privileged readonly proc exact cwd/individual bounded argv/fd; proc locks inode",
+                "count": 0,
+                "handles": [],
+                "unreadable_pids": [],
+                "failed_lock_present": false,
+                "lock_holders": []
+            },
+            "req_dd6208f86a0b487796de37b9c4365cd4": {
+                "utc": "2026-10-09T17:53:26.088744+00:00",
+                "method": "privileged readonly proc exact cwd/individual bounded argv/fd; proc locks inode",
+                "count": 0,
+                "handles": [],
+                "unreadable_pids": [],
+                "failed_lock_present": false,
+                "lock_holders": []
+            }
+        },
+        "utc": "2026-10-09T17:53:26+00:00"
+    },
+    "quiesce": {
+        "quiet": true,
+        "waited_seconds": 0.039
+    },
+    "retained_backups": [
+        {
+            "label": "original",
+            "original_sha256": "239ca69bc5ce9b5f93d71b6f59c901613dab7bf7d8a2bb02455d1a60b12b16a3",
+            "original_retained": true
+        },
+        {
+            "label": "w04f-original/safety-059b5822.sql",
+            "safety_sha256": "bd9b8b73d3bc0ac05f847d86e043d52f0cd26ce95816b39fd2934733fa31354a",
+            "safety_retained": true
+        },
+        {
+            "label": "w04f-original/safety-72f928eb.sql",
+            "safety_sha256": "a284353d577b3e3d15aba28ebe3fa2bdd0cc4b80218b9a8a3d170ba4960b97a9",
+            "safety_retained": true
+        },
+        {
+            "label": "w04f-original/safety-9ddb3b91.sql",
+            "safety_sha256": "5b837d72cdf0f00c3b0c6b2ac85ec14b97ff1a9b4d0ab487a8a84c9043999175",
+            "safety_retained": true
+        },
+        {
+            "label": "w04f-original/safety-d1de998e.sql",
+            "safety_sha256": "92832678b2817762496e06b69d428c3283b35ca1e930b638f756ab497c5f5035",
+            "safety_retained": true
+        },
+        {
+            "label": "w04f-original/safety-e812ea37.sql",
+            "safety_sha256": "302efd50f275340c34e24508128c4c2f2515dc8937b146672eadbd36973aa683",
+            "safety_retained": true
+        },
+        {
+            "label": "reg-board-secret",
+            "original_sha256": "87d96f2881ee6ef15556f7533ec7aad75639e1d77eab1f4229f84e63b3199d69",
+            "original_retained": true
+        },
+        {
+            "label": "w04f-reg-board-secret/safety-1c73e0ca.sql",
+            "safety_sha256": "153d0d306c2b73c84ba1819d441b6ea3d2eb3fb1259dd348f4712f7a3b33d849",
+            "safety_retained": true
+        },
+        {
+            "label": "reg-commerce-cart",
+            "original_sha256": "d254491c1cfe48cf90b8423923ed677c7742d1d1c1e281ef98ee1e2dcf4ee972",
+            "original_retained": true
+        },
+        {
+            "label": "w04f-reg-commerce-cart/safety-42f06722.sql",
+            "safety_sha256": "cea725d28df60da96c5db4e53a3fc2507eff6cc4b7194a2ea5fbcaa9e32422b3",
+            "safety_retained": true
+        },
+        {
+            "label": "reg-installation",
+            "original_sha256": "2f665ff7952d7e6511b220a01aed364b79ec55636eee6095bf364ebd9fb8d307",
+            "original_retained": true
+        },
+        {
+            "label": "w04f-reg-installation/safety-ea93ae0e.sql",
+            "safety_sha256": "1b5b2096f63facd58450bd437218f1611599c3a0080da69deb73a445a18d864d",
+            "safety_retained": true
+        },
+        {
+            "label": "reg-installer-context",
+            "original_sha256": "48b9a0de35f7e0741a557665c362dcc24159fd41d2b599d39f996d772543ef4c",
+            "original_retained": true
+        },
+        {
+            "label": "w04f-reg-installer-context/safety-293fc589.sql",
+            "safety_sha256": "980e4973b4e63434b8f8b89a290fe6c2bc755058fd0086d4f192344c035e17fc",
+            "safety_retained": true
+        },
+        {
+            "label": "reg-mysql-workflow",
+            "original_sha256": "5255bb09c1d74576c5e4f5dd4e50400ae8fe43f0ead38f36a986c8ee51b6aea1",
+            "original_retained": true
+        },
+        {
+            "label": "w04f-reg-mysql-workflow/safety-0fae026d.sql",
+            "safety_sha256": "505edd10a4d1fcb59db416f2e0a24924307b8176ed7d48b5e1b8e2d2b674e3d3",
+            "safety_retained": true
+        },
+        {
+            "label": "reg-native-auth",
+            "original_sha256": "273ea4cd651e915c50cc2335b4d1fa9df3f26337d9e3b5cb403d1fc94f426dbc",
+            "original_retained": true
+        },
+        {
+            "label": "w04f-reg-native-auth/safety-bdb3f56b.sql",
+            "safety_sha256": "eeb81d0b863e674b27be36f949b5ad16b236b64cf24f86ae52e66873741c072b",
+            "safety_retained": true
+        },
+        {
+            "label": "reg-support-api",
+            "original_sha256": "4ada4cd7ab5e9307d18a0e9ac95bc59f78f5579e33e58b2b9fbae140a4b83a63",
+            "original_retained": true
+        },
+        {
+            "label": "w04f-reg-support-api/safety-a877834f.sql",
+            "safety_sha256": "96f2877823b534bd6c92172f9ff69084c8b5ae233459688cda00ac402a6782c3",
+            "safety_retained": true
+        },
+        {
+            "label": "reg-support-notifications",
+            "original_sha256": "cab7857499442e8e96f2bac32b059eaaf4018182fca2f3b8f70750fdb2831036",
+            "original_retained": true
+        },
+        {
+            "label": "w04f-reg-support-notifications/safety-f0b22c4a.sql",
+            "safety_sha256": "26d6b13c478af10c3f182af953e3ec85e4d34385b01a72867ff4fe73b0596446",
+            "safety_retained": true
+        },
+        {
+            "label": "reg-support-provision",
+            "original_sha256": "bd1b5f9085012154cd4cb698786ebea3e76e4d842c01fd5dd7e337c2874ca430",
+            "original_retained": true
+        },
+        {
+            "label": "w04f-reg-support-provision/safety-7116b94c.sql",
+            "safety_sha256": "0b20739e1b6ad576086c11491c982901e1ca78459d7d2bcf8236479f1619c07c",
+            "safety_retained": true
+        }
+    ],
+    "original_128_639": "NOT_PROVEN"
+}

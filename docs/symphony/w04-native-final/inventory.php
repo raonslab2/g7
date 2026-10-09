@@ -43,8 +43,8 @@ function w04Measure(PDO $pdo): array
 function w04Exclusive(PDO $pdo): void
 {
     $id = (int) $pdo->query('SELECT CONNECTION_ID()')->fetchColumn();
-    foreach ($pdo->query('SHOW PROCESSLIST')->fetchAll(PDO::FETCH_ASSOC) as $p) {
-        if ($p['db'] === 'req81_travel_lab_test' && (int) $p['Id'] !== $id) {
+    foreach ($pdo->query("SELECT ID FROM information_schema.PROCESSLIST WHERE DB = 'req81_travel_lab_test'")->fetchAll(PDO::FETCH_ASSOC) as $p) {
+        if ((int) $p['ID'] !== $id) {
             throw new RuntimeException('Other TEST connection observed.');
         }
     }

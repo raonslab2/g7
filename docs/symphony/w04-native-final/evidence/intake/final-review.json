@@ -1,0 +1,22 @@
+{
+  "reviewer": "native readonly_review nonauthor",
+  "reviewed_diff_sha256": "e227f6261c99ef444eda763789cd6c7e1ce6f0317e941d80fbef9bc1d47328a8",
+  "reviewed_diff_paths": 204,
+  "source_evidence_review": "PASS bounded",
+  "product_gate": "CHANGES_REQUIRED / regression FAIL",
+  "runtime_reexecuted_by_reviewer": false,
+  "official_Validation": "NOT_RUN",
+  "findings_resolved": [
+    "env-loss comparison occurs after own env restoration and before C startup/HTTP",
+    "own-process scanner includes descendant cwd/path-valued argv/FD"
+  ],
+  "independently_recomputed_public_original_inventory": {
+    "tables": 55,
+    "rows": 104,
+    "digest": "ded72a53ad82a159b88e50a6560625488bb569a55f5f5ffa109cd45ae52d056e"
+  },
+  "release_evidence_reviewed": "2026-10-09T17:53:26+00:00",
+  "remaining_fixed_source_failure": "LiveMysqlTest 1 test8 assertions expected422 actual503; missing database throttle cache fixture binding",
+  "publication": false,
+  "utc": "2026-10-09T18:01:15.070648+00:00"
+}

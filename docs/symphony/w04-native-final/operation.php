@@ -1,5 +1,5 @@
 <?php
-/** 独립 destructive installed suite의 live handle/lease를 유지한다. detach하지 않는다. */
+/** 독립 destructive installed suite의 live handle/lease를 유지한다. detach하지 않는다. */
 require __DIR__.'/guard.php';
 $label=$argv[1]??'original';
 $dir=w04fRequireSnapshot($label);

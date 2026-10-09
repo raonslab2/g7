@@ -1,0 +1,52 @@
+{
+    "table_count": 128,
+    "row_count": 263,
+    "digest": "301e7d5c8d0a782f47400a0ae0ebb0ec596d2dae72c5ce710ab03cfa2b03ac39",
+    "exclusive": {
+        "pid": 333780,
+        "cwd": "/home/ubuntu/.agentopt-v2/workspaces/req_caef46f3473043048b5b4bc2ec41eaea",
+        "argv": [
+            "docs/symphony/w04-native-final/snapshot.php",
+            "reg-board-secret",
+            "run",
+            "/usr/bin/php8.3",
+            "vendor/bin/phpunit",
+            "--bootstrap",
+            "docs/symphony/w04-native-final/test-bootstrap.php",
+            "modules/_bundled/sirsoft-board/tests/Feature/User/SecretPostCommentAccessTest.php"
+        ],
+        "own_connection_id": 111049,
+        "other_test_connections": 0,
+        "own_server_processes": 0,
+        "prior_request_handles": {
+            "req_3e70e7ceddd34beea51a17da727584bc": {
+                "utc": "2026-10-09T17:49:54.673512+00:00",
+                "method": "privileged readonly proc exact cwd/individual bounded argv/fd; proc locks inode",
+                "count": 0,
+                "handles": [],
+                "unreadable_pids": [],
+                "failed_lock_present": true,
+                "lock_holders": []
+            },
+            "req_337b3638df9b4b958b0627e0b262a54a": {
+                "utc": "2026-10-09T17:49:54.813427+00:00",
+                "method": "privileged readonly proc exact cwd/individual bounded argv/fd; proc locks inode",
+                "count": 0,
+                "handles": [],
+                "unreadable_pids": [],
+                "failed_lock_present": false,
+                "lock_holders": []
+            },
+            "req_dd6208f86a0b487796de37b9c4365cd4": {
+                "utc": "2026-10-09T17:49:54.938437+00:00",
+                "method": "privileged readonly proc exact cwd/individual bounded argv/fd; proc locks inode",
+                "count": 0,
+                "handles": [],
+                "unreadable_pids": [],
+                "failed_lock_present": false,
+                "lock_holders": []
+            }
+        },
+        "utc": "2026-10-09T17:49:54+00:00"
+    }
+}

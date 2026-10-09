@@ -204,7 +204,7 @@ try {
     $stateC = $state(); DB::purge();
     travelLabCheck($stateC['inquiry_status'] === 'CANCELLED' && $stateC['reserved'] === 0, 'Phase C state differs.');
     w04fStop($server, 'final'); $server = null;
-    foreach (glob($envCopy.'/*') as $f) { unlink($f); } rmdir($envCopy);
+    foreach (['.env','.env.testing'] as $n) { unlink($envCopy.'/'.$n); } rmdir($envCopy);
     $fullFinal=w04Measure(w04Pdo());
     w04Save($evidence.'/after-C.json',$fullFinal);
     copy($serverDir.'/last-runtime-proof.json',$evidence.'/runtime-cache-proof.json');
