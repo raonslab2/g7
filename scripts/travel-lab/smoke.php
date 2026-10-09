@@ -9,6 +9,19 @@ require __DIR__.'/environment.php';
 try {
     $testing = in_array('--testing', $argv, true);
     $environment = travelLabEnvironment($testing);
+    // Unlike subprocess commands, this smoke bootstraps Laravel in this process.
+    // Remove rejected inherited keys from every adapter before loading Dotenv.
+    $inheritedKeys = array_unique(array_merge(array_keys(getenv()), array_keys($_ENV), array_keys($_SERVER)));
+    foreach ($inheritedKeys as $key) {
+        if (! array_key_exists($key, $environment) && (
+            str_starts_with($key, 'DB_') || $key === 'MYSQL_ATTR_SSL_CA'
+            || str_starts_with($key, 'INSTALLER_ADMIN_')
+            || (str_starts_with($key, 'APP_') && str_ends_with($key, '_CACHE'))
+        )) {
+            putenv($key);
+            unset($_ENV[$key], $_SERVER[$key]);
+        }
+    }
     foreach ($environment as $key => $value) {
         putenv($key.'='.$value);
         $_ENV[$key] = $value;

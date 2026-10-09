@@ -53,6 +53,9 @@ function travelLabEnvironment(bool $testing = false): array
     if (($values['MAIL_MAILER'] ?? null) !== 'array' || ($values['QUEUE_CONNECTION'] ?? null) !== 'sync') {
         throw new RuntimeException('Lab requires array mail and synchronous queue.');
     }
+    if (($values['FILESYSTEM_DISK'] ?? null) !== 'local') {
+        throw new RuntimeException('Lab requires local file storage.');
+    }
     if (($values['G7_ENV_PRIORITY'] ?? null) !== 'true') {
         throw new RuntimeException('Lab environment must own mail/queue/storage configuration.');
     }

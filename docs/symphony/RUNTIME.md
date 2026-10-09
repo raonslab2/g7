@@ -62,3 +62,16 @@ checks took about 1.13 seconds. No simultaneous broad suites were launched.
 
 This document records initial environment evidence, not completed Travel Lab,
 operating load certification, customer-approved design, or 110-page delivery.
+# Hardening after independent preflight review
+
+The original runtime implementation passed15 isolation cases at the initial
+fixed revision. Independent review found that local storage was verified by
+effective smoke but not rejected before every command, and same-process smoke
+retained rejected inherited variables even though the subprocess runner passed
+only its sanitized environment. The lead added a failing external-storage case
+(exit255), required FILESYSTEM_DISK=local, and removed rejected inherited keys
+from putenv/ENV/SERVER adapters before smoke bootstrap. Corrected suite:16 PASS;
+dev/test smoke with unusable local DB_URL injections PASS; Pint PASS. The current
+G7 effective database smoke already passed the DB_URL injection before this
+cleanup, so no foreign-DB connection is claimed. See W00_RUNTIME_REVIEW.md for
+independent revision-bound results, not universal isolation or product PASS.

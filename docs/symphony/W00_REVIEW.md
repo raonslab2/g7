@@ -4,7 +4,8 @@ Target: `6efbf0a57dfb75c0fcea6944407f136f5366e273`
 Scope: committed `SCORE.md`, `CAPACITY.md`, `WAVE_STATUS.md`; reference document checked for contract alignment only.
 Source baseline: `6853f40d58acbf53a2f29cbb9dd422cc439047a9`
 Reviewer: native `reference_runtime`, Request `req_81ac33cac94046b9a2249cd14c0d00ba`
-Status: **CHANGES_REQUIRED for W00 contract/evidence completeness; product validation NOT_RUN.**
+Original status: **CHANGES_REQUIRED for W00 contract/evidence completeness; product validation NOT_RUN.**
+Latest scoped document recheck: **W00 checkpoint acceptable with tracked limits** at `8822971c994955abd196a0d3936c32b4f54c1e51`; see final addendum. This does not approve all files in that commit or establish product PASS.
 
 The reviewer did not implement SCORE/CAPACITY/WAVE_STATUS or travel code. The reviewer authored REFERENCE.md, so this review cannot independently approve that file or the entire four-document target. Another nonauthor must review REFERENCE. This is an internal review, not official AgentOpt Validation. No code, contract file, database, service, publication or deployment was changed by this review.
 
@@ -84,3 +85,24 @@ After findings were sent, the lead amended working-tree SCORE with accepted-test
 Working-tree `INHERITANCE.md` and `WORK_ORDER_VALIDATION.md` were read only as integration leads. They are absent from target commit `6efbf0a57dfb75c0fcea6944407f136f5366e273` and receive no fixed-SHA approval here. They include original-source blob references, private canonical order identity, source validation PASS/89-document output and important scope limits. The next checkpoint should include them after nonauthor review and public-data sanitization, reconcile WAVE_STATUS's still-pending canonical-validation entry, and retain historical coordinator UNKNOWN.
 
 No runtime package or child implementation was present in this review target. PHP/MySQL/browser/rollback/restart/transaction tests are **NOT_RUN by this reviewer**. Lead should resolve contract findings now, then obtain official fixed-SHA contract/security and browser/regression validation against the integrated executable revision.
+
+## Final addendum — fixed revision 8822971
+
+Recheck target: `8822971c994955abd196a0d3936c32b4f54c1e51`. Scope remains SCORE/CAPACITY/WAVE_STATUS and previous finding resolution; no runtime code/product approval or independent REFERENCE approval is given. An uncommitted parent scenario matrix is outside this target and was not evaluated.
+
+| Finding | Fixed-revision disposition |
+| --- | --- |
+| W00-R01 | Contract direction RESOLVED: conservative stock/capacity bound, stock-managed seed, both-domain lock/recheck, capacity floor and no commerce-stock decrement for test allocation are explicit. Implementation tests remain NOT_RUN. Small wording correction tracked below. |
+| W00-R02 | OPEN historical truth, appropriately quarantined: WAVE_STATUS records one asynchronous prior-Request-ID/handoff query, no duplicate-free assertion, and no main/production integration until coordination is resolved. Scoped checkpoint preservation is not final integration approval. |
+| W00-R03 | Contract direction RESOLVED: TEST_ACCEPTED can transition to CANCELLED, owner cancellation includes accepted test requests, declined/cancelled are terminal and simulated release must occur once. Role/transition implementation matrix still requires tests. |
+| W00-R04 | Contract assignment RESOLVED: parent integration explicitly owns separate migration/model/repository/workflow tests; Inquiry.calculation_snapshot stores complete server result and travel_lab_inquiry_events records actor/from/to/note/time append-only in the same transaction. Implementation/persistence/access checks remain pending. |
+| W00-R05 | Evidence-existence gap RESOLVED for checkpoint: INHERITANCE blob `c9f95f318800c0a71d39dfa9695fb9b5a7b022cf` and WORK_ORDER_VALIDATION blob `cb476bd4da7f1f1d483a61b90ecc08b0a22bd3c9` are committed. Receipt explicitly limits its PASS to canonical document/tree validation; prior coordinator absence/product Validation remain unestablished. Catalog/resource observations still retain parent-observed provenance and UNKNOWN limits. This reviewer did not rerun the canonical validator. |
+| W00-R06 | Route alignment observed: lead-selected `/travel/search` is now the list entry in the recorded REFERENCE diff and SCORE; product detail retains `/travel/products/:id`. This resolves cross-document route mismatch without approving the reference evidence authored by this reviewer. |
+
+Residual wording: SCORE's Departure table still says `Availability = capacity-reserved`, while its inventory integration paragraph correctly specifies effective customer availability as `max(0,min(capacity,option.stock_quantity)-reserved)`. Label the former **raw simulated capacity** and the latter **effective customer availability** before implementation contract consumption/review. The detailed inventory rule is authoritative for this checkpoint; no adapter may use the unbounded table shorthand for customer availability.
+
+Lead subsequently reported that this table wording was corrected in the working tree. That wording-only correction is outside revision `8822971`; carry it into the final W00 publication head and verify the recorded diff. No unchanged implementation evidence was rerun.
+
+CAPACITY adds a later host load/memory observation and defers an additional broad build batch on measured host load rather than limiting Providers to two lanes. Official RUNNING remains the last timestamped canonical observation, not newly polled state. Native activity/account/global/PC distinctions and Spring separation remain correctly scoped. WAVE_STATUS distinguishes runtime preflight, baseline regression and future travel journey/official validation.
+
+Decision: the corrected **three-document W00 contract/evidence checkpoint may be preserved and published to its isolated reusable travel branch/PR under the lead's existing Git authority**, subject to the tracked shorthand correction and separate nonauthor review of REFERENCE/runtime/other new files. This preserves scoped work for canonical child consumption and recovery; it does not permit main/production integration while W00-R02 is unresolved and does not waive later independent fixed-SHA product gates. Product tests, full customer/admin journey, browser/security/concurrency/restart validation and integration retest are **NOT_RUN by this reviewer**.

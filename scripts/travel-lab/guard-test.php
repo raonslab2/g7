@@ -39,6 +39,7 @@ try {
         'database socket override' => [$valid."\nDB_SOCKET=/tmp/unrelated.sock\n", 1],
         'outbound mail' => [str_replace('MAIL_MAILER=array', 'MAIL_MAILER=smtp', $valid), 1],
         'background queue' => [str_replace('QUEUE_CONNECTION=sync', 'QUEUE_CONNECTION=database', $valid), 1],
+        'external storage' => [str_replace('FILESYSTEM_DISK=local', 'FILESYSTEM_DISK=s3', $valid), 1],
         'settings override protection absent' => [str_replace('G7_ENV_PRIORITY=true', 'G7_ENV_PRIORITY=false', $valid), 1],
     ];
     foreach ($cases as $label => [$contents, $expected]) {
@@ -61,7 +62,7 @@ try {
         unlink($fixture.'/'.$override);
         echo 'PASS: '.$override.' refusal'.PHP_EOL;
     }
-    echo 'PASS: 15 isolation checks; no live environment mutation or database access.'.PHP_EOL;
+    echo 'PASS: 16 isolation checks; no live environment mutation or database access.'.PHP_EOL;
 } finally {
     unlink($fixture.'/vendor');
     $iterator = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($fixture, FilesystemIterator::SKIP_DOTS), RecursiveIteratorIterator::CHILD_FIRST);
