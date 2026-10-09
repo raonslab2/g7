@@ -1,6 +1,6 @@
 # W04 core/board and evidence checkpoint verification
 
-Root evidence review and build, October9 19:20UTC. Product fixes are local
+Root evidence review and build, October9; build completed19:11:24UTC. Product fixes are local
 until the next meaningful reviewed PR2 publication; official final integration
 verification and canonical Validation are separate pending gates.
 

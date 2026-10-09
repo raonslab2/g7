@@ -161,7 +161,7 @@ The once-only diagnostic21/2209 PASS at lower observed load and targeted worker
 retained privately, public hashes published. No stress/repeat loop was used.
 
 
-## October9 19:10 UTC — disjoint work and measured resource snapshot
+## October9 continuation — disjoint work and measured resource snapshot
 
 Own cumulative27official attempts:21COMPLETED/4FAILED/1INTERRUPTED/1RUNNING/
 0QUEUED. Active PageCLAUDE is implementation, not a verified result. RecipeCODEX
@@ -183,7 +183,7 @@ as measured account usage. TEST restored/released18:42:38 by independent recipe;
 next exclusive schema owner must remeasure, not trust the old55/104 value.
 
 
-## Published core/board checkpoint and next official runtime gate — October9 19:28UTC
+## Published core/board checkpoint and next official runtime gate — October9 — source commit19:15:45UTC
 
 Published fc54b6ae091cd6cef2d0fabc48d2ec4fe4fdba8c, tree
 b377aeabad7f240061ae12cde8fae7ddc6f7e7d1, same OPEN/DRAFT PR2. Core source6584018b
@@ -208,7 +208,7 @@ Do not duplicate either key. Own cumulative28 attempts by creationledger:
 21COMPLETED/4FAILED/1INTERRUPTED +2nonterminal (PageRUNNING, newgateQUEUED atcreation),
 not guaranteed model-stream state. Supported native authors/reviewers have now
 finished; no internalagent counted asPC orofficialRequest. DeadlineOct11 23:59KST
-about43h30m; global/Spring/accountusage UNKNOWN, existingadmission unchanged.
+about43h40m at19:19UTC; global/Spring/accountusage UNKNOWN, existingadmission unchanged.
 
 On automaticresume: compare returned Page source/contracts/metadata/tests/build;
 wait newruntime verification before any installedPage/core/cache change. Integrate

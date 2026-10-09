@@ -1,7 +1,7 @@
 # G7 Travel Lab delivery audit — IN_PROGRESS
 
 This is the accumulated delivery audit, not a completion declaration. Updated
-2026-10-09 19:28 UTC (October 10 KST). Deadline: October 11 23:59 KST /
+2026-10-09 19:20:08 UTC (October 10 KST). Deadline: October 11 23:59 KST /
 14:59 UTC; approximately 43 hours remain. Customer-approved design/database:
 NONE. The implementation is a RAON demonstration, not delivery of Lotte Tour's
 110 customer screens.
@@ -95,7 +95,7 @@ unique-test total. Full commands/environment/raw logs are in linked reports.
 
 ## Requests, integration and capacity
 
-Canonical observation at October 9 19:10 UTC: **27 cumulative official attempts**,
+Canonical observation during October9 continuation: **27 cumulative official attempts**,
 **21 COMPLETED / 4 FAILED / 1 INTERRUPTED / 1 RUNNING**, no queued child. This
 does not mean 27 simultaneous executions or 21 verified products. Current open
 Request: `w04-page-campaign-implementation` attempt 1,
