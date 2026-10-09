@@ -1,31 +1,60 @@
 # G7 Travel Lab score — contract v2 (integration)
 
-## Current execution overlay — 2026-10-09 18:35 UTC
+## Current execution overlay — 2026-10-09 21:15 UTC
 
-Earlier tables are historical contracts and wave observations; their original
-RETURNED/pending statuses do not override this overlay. Runtime product target
-`fa5523175ac494cfbd13bbf89bf06b3ec91835a6`, PR2. Current product delivery is
-IN_PROGRESS, with initial installer/cache and standalone MySQL fixture repairs
-awaiting a separately published independent execution. Native Page-backed
-campaign/publication consumption is a newly identified implementation gap;
-installation alone was not counted as reuse. Its concrete contract is being
-prepared while native creation/browser verification continues.
+**IN_PROGRESS; approximately41h44m to October11 14:59 UTC /23:59 KST.**
+All later timestamped WAVE tables are historical observations; their RETURNED,
+QUEUED/RUNNING/pending states do not override this current overlay. No earlier
+failure or source pin is rewritten. Customer-approved design/database: NONE.
 
-- Canonical attempts24:18 COMPLETED,4 FAILED,1 INTERRUPTED,1 RUNNING.
-- Native admin creation/browser: `w04-native-admin-create-final` attempt1,
-  `req_c2e43e4188284ec78b8702e7e3e0d45a`, RUNNING; no duplicate Request.
-- Atomic `w04-atomic-contention-final` attempt1 is canonically FAILED.
-  Evidence commit `c38ee592` was accepted only within independently compared
-  bounds; terminal state/cause remain distinct. [Intake](W04_ATOMIC_FINAL_INTAKE.md).
-- Fresh installer attempt3 COMPLETED, product CHANGES_REQUIRED. Original
-  `94c3f75b`/`0eb9e68f` and [intake](W04_INSTALL_FINAL_INTAKE.md) preserve failures.
-- [Installer source review](W04_INSTALL_BOOTSTRAP_REVIEW.md) and
-  [worker diagnostic](W04_ATOMIC_WORKER_DIAGNOSTIC.md) bind repair source/tests;
-  source review alone is not live MySQL PASS.
-- [Delivery audit](FINAL_REPORT.md) accumulates exact SHA, requirements,
-  commands, limits, package, capacity and next execution. Formal Validation and
-  hosted CI remain NOT_RUN. Customer-approved design/database remains NONE.
+- Canonical **30 attempts:24 COMPLETED /5 FAILED /1 INTERRUPTED /0 RUNNING**.
+  Completed campaign installer req812d and browser reqfc51 public evidence is
+  accepted within bounds; original productFAIL and canonical failures remain.
+- Published campaign activation31a18318/treec098; installer tested d059/tree6dc.
+  [Installer intake](W04_CAMPAIGN_INSTALL_INTAKE.md): TEST exactly55/104 restored
+  and released20:02:30 UTC, whole row/DDL digest
+  `ded72a53ad82a159b88e50a6560625488bb569a55f5f5ffa109cd45ae52d056e`.
+  Earlier128/639 NOT_PROVEN; new owner must independently snapshot before writes.
+- [Browser intake](W04_CAMPAIGN_BROWSER_INTAKE.md): real Page/admin/customer
+  flows390/1440 and transaction/support segments observed; **original admin
+  RetryFAIL** retains error after native200. Scoped actors/servedSEO/full matrix
+  limitations stay explicit. Evidence original2df009/ca21cb7 locally retained;
+  lead owns ancestry-preserving next publication.
+- DefaultzeroTOTALPages was **our internal overbroad assumption, not a user
+  requirement**. Native six basic/legal sample Pages remain; default travel
+  campaign Pages0. Explicit two-slot provisioning preserves edits. Original
+  contract/zero-totalFAIL retained; no stripping native defaults or user waiver.
+- Current **local** repair `0b446a608aa9d76c1e046115d8ea2805a1dd92f2`, tree
+  `10ba36318652b96dc7dc769ec8405381cbded1f8`. TemplateApp source SHA256
+  `62e89b9dedb93c932a92e1b01944cffb11e88cf0c5cd5a79dc41ca8835f5b76e`.
+  [Independent focused review](W04_CAMPAIGN_RETRY_SOURCE_REVIEW.md):12/12 PASS.
+  Author158 PASS/1 existing SKIP includes12; no additive count or browserPASS.
+- Official production core build21:01:32 UTC exit0; servedengine SHA256
+  `738ee97c6eebc33bc75d29f24397daabb54f124bede254689ca68a18fdb64a0b`.
+  ActionDispatcher/Board/TravelIIFE unchanged. Actual repaired browser verification
+  NOT_RUN; new published fixed target forthcoming, not remotely integrated yet.
+- Two ready new official scopes (repaired browser/scoped actors; isolated TEST
+  transaction/persistence) are **not assigned/running** at this cutoff. Readers57/
+  role13(NULL read scope) and58/role14(self) are new own synthetic fixtures only;
+  no existing actors changed. Wronglogout404 preserved; native AuthService removed
+  only own3tokens569/570/571, remaining0; exactoldHTTP401 NOT_RUN. Suppliedtokens
+  preserved; removedempty own scratchrole12 records wrongscope harness input.
+- Main6853 unchanged. Hosted Actions/checks0/no workflows/rulesets[]/unprotected
+  main; hostedCI and canonicalValidation NOT_RUN, not waived. Productionautomatic
+  deployment UNKNOWN. Package/loopback18871 not a public hostedpreview.
+- Catalog21:14 unchanged7f77/2ca, parent10/50 configuredCODEX8/CLAUDE3;
+  limits are not actual streams/account availability. Historical multichild/native
+  concurrency retained in CAPACITY; no artificial2Lane cap/no resource expansion.
+  Sharedquota/Springusage UNKNOWN, CENTRALobserved1PC.
+- [Delivery audit](FINAL_REPORT.md) binds commands, source/results, package,
+  restoration and remaining gates. Lead publishes the reviewed checkpoint,
+  runs applicable work-order validator, then independent same-version scopes and
+  integration retest. No completed task key regenerated; Spring/business untouched.
 
+## Historical contracts and wave ledger
+
+The following ledger preserves each original timestamp/source/status. Use the
+current overlay above for present execution, not a historical pending entry.
 
 Work: `work-20261009-g7-symphony-max-child-c7ae42d1`; parent Request: `req_81ac33cac94046b9a2249cd14c0d00ba`.
 Input G7 SHA: `6853f40d58acbf53a2f29cbb9dd422cc439047a9`; repository: https://github.com/raonslab2/g7 (public).

@@ -238,8 +238,11 @@ prove that application contract.
 
 ## Page-backed campaigns (explicit opt-in)
 
-Travel0.1.3 consumes two fixed native sirsoft-page publication slots. Default
-installation, samples, extension updates and ordinary requests create zero Pages.
+Travel0.1.3 consumes two fixed native sirsoft-page publication slots. Travel's
+default installation, samples, extension updates and ordinary requests create
+zero campaign Pages. Native sirsoft-page separately retains its six established
+basic documents: terms, privacy, refund, about, faq and contact. They are not
+travel campaign slots and are not removed by this package.
 After installing/updating the published0.1.3 module/template and board1.1.3,
 a permitted administrator may manage the fixed slots in the native Page editor
 through the travel admin adapter. Public home/list/detail show published Pages
@@ -253,6 +256,17 @@ existing native Page administrator ID, then run the guarded command below. Repla
 are granted. The isolated marker, dedicated flag, --lab-confirm and native
 read/create permissions are all required. Do not run setup again to enable this
 feature or share environment credentials.
+
+For the explicitly documented installer account in this isolated package, the
+native repository can show its internal ID without printing credentials:
+
+```bash
+php scripts/travel-lab/run.php artisan tinker --execute='echo app(\App\Contracts\Repositories\UserRepositoryInterface::class)->findByEmail("admin@travel-lab.example.invalid")?->id, PHP_EOL;'
+```
+
+This is a lookup for that supplied account, not automatic super-admin selection.
+Use the returned ID only after confirming it is the intended Page administrator;
+the provisioning command independently verifies its native read/create rights.
 
 ```bash
 php scripts/travel-lab/run.php artisan raonslab-travel_lab:campaigns-provision --lab-confirm --actor=123

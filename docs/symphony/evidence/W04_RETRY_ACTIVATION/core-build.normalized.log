@@ -1,0 +1,53 @@
+🔨 코어 빌드 시작 (템플릿 엔진) (프로덕션)
+
+> build:core
+> vite build --config vite.config.core.js
+
+vite v7.1.12 building for production...
+transforming...
+✓ 148 modules transformed.
+rendering chunks...
+computing gzip size...
+public/build/core/template-engine.min.js  819.48 kB │ gzip: 248.28 kB
+✓ built in 8.35s
+🔨 코어 빌드 시작 (레이아웃 편집기) (프로덕션)
+
+> build:core-editor
+> vite build --config vite.config.editor.js
+
+vite v7.1.12 building for production...
+transforming...
+✓ 205 modules transformed.
+rendering chunks...
+computing gzip size...
+public/build/core/layout-editor.min.js  816.98 kB │ gzip: 218.51 kB
+✓ built in 6.01s
+🔨 코어 빌드 시작 (DevTools) (프로덕션)
+
+> build:core-devtools
+> vite build --config vite.config.devtools.js
+
+vite v7.1.12 building for production...
+transforming...
+✓ 34 modules transformed.
+rendering chunks...
+computing gzip size...
+public/build/core/devtools.min.js  197.86 kB │ gzip: 41.42 kB
+✓ built in 1.19s
+🔨 코어 빌드 시작 (개발 대시보드 CSS) (프로덕션)
+
+> build:core-devdashboard
+> vite build --config vite.config.devdashboard.js
+
+vite v7.1.12 building for production...
+transforming...
+✓ 1 modules transformed.
+rendering chunks...
+computing gzip size...
+public/build/core/dev-dashboard.css  39.37 kB │ gzip: 7.06 kB
+✓ built in 418ms
+✅ 코어 빌드 완료 (템플릿 엔진 + 레이아웃 편집기 + DevTools + 개발 대시보드 CSS)
+   빌드 결과:
+   - template-engine.min.js (800.27 KB)
+   - layout-editor.min.js (797.83 KB, lazy)
+   - devtools.min.js (193.22 KB, lazy/debug)

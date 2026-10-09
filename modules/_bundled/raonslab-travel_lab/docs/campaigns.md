@@ -45,7 +45,7 @@ TRAVEL_LAB_ISOLATED=1 TRAVEL_LAB_CAMPAIGN_PROVISIONING=1 \
   php artisan raonslab-travel_lab:campaigns-provision --lab-confirm --actor=<관리자 사용자 ID>
 ```
 
-모든 검사는 쓰기 전에 끝납니다: 설정 플래그(기본 false) · `--lab-confirm` · `mail.default=array` · `queue.default=sync` · `scout.driver=mysql-fulltext` · 기본 디스크 local · `--actor` 가 native `UserRepositoryInterface::findById` 로 찾은 사용자이며 `sirsoft-page.pages.read`·`create` 관리자 권한 보유. actor 는 실행 범위에서만 기본 guard 에 설정되고 이전 상태로 복원되며 토큰은 만들지 않습니다. 기존 Page 는 초안·편집본·버전·발행 상태를 포함해 건드리지 않고, 확인과 생성 사이에 같은 slug 가 생기면 덮어쓰지 않고 오류로 멈춥니다. 생성분은 ko/en 합성 문구(가격·링크·이미지 없음), `content_mode=text`, `published=true` 입니다. native 버전 스냅샷·활동 로그·SEO/사이트맵 리스너(사이트맵 잡 포함)는 그대로 실행됩니다 — "잡 없음"이 아닙니다. 기본 설치·업데이트·`--sample` 시드는 Page 를 만들지 않습니다.
+모든 검사는 쓰기 전에 끝납니다: 설정 플래그(기본 false) · `--lab-confirm` · `mail.default=array` · `queue.default=sync` · `scout.driver=mysql-fulltext` · 기본 디스크 local · `--actor` 가 native `UserRepositoryInterface::findById` 로 찾은 사용자이며 `sirsoft-page.pages.read`·`create` 관리자 권한 보유. actor 는 실행 범위에서만 기본 guard 에 설정되고 이전 상태로 복원되며 토큰은 만들지 않습니다. 기존 Page 는 초안·편집본·버전·발행 상태를 포함해 건드리지 않고, 확인과 생성 사이에 같은 slug 가 생기면 덮어쓰지 않고 오류로 멈춥니다. 생성분은 ko/en 합성 문구(가격·링크·이미지 없음), `content_mode=text`, `published=true` 입니다. native 버전 스냅샷·활동 로그·SEO/사이트맵 리스너(사이트맵 잡 포함)는 그대로 실행됩니다. Travel 기본 설치·업데이트·`--sample`·지원 시드는 캠페인 Page 를 만들지 않습니다. 별도 native `sirsoft-page` 설치는 기존 기본 문서 6건(`terms`, `privacy`, `refund`, `about`, `faq`, `contact`)을 유지하며, 이들은 여행 캠페인이 아닙니다.
 
 ## 고객 화면 (템플릿 소유)
 

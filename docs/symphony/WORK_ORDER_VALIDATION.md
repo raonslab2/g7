@@ -116,3 +116,15 @@ October9 18:35 UTC publication precheck: unchanged canonical source
 October9 pre-publication rerun (before source commit19:15:37UTC): identical canonical10bc5eff validator/source
 command, exit0,89documents/errors0 PASS before repairedfc54 checkpoint publication.
 This is source order validation only, not product/fixed-head CI/Validation receipt.
+
+## Retry source/assets and evidence checkpoint — 2026-10-09 21:15 UTC
+
+Before this publication, ran unchanged canonical source validator at AI_GCS
+`10bc5eff5f777aa49760387778303063b0222129`:
+
+```sh
+/tmp/g7-canonical-evidence.fL6sSp/source/scripts/validate-work-orders --revision 10bc5eff5f777aa49760387778303063b0222129 --json work/orders/work-20261009-g7-symphony-max-child-c7ae42d1.md
+```
+
+Exit0, `valid=true`, documents89, errors0. This validates the work-order corpus,
+not the new product/browser/runtime or canonical Validation/hosted CI.
