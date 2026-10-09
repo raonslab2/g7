@@ -1,13 +1,13 @@
 # G7 Travel Lab score — contract v2 (integration)
 
-## Current execution overlay — 2026-10-09 21:15 UTC
+## Current execution overlay — source repair 21:15 / dispatch 21:22 UTC
 
 **IN_PROGRESS; approximately41h44m to October11 14:59 UTC /23:59 KST.**
 All later timestamped WAVE tables are historical observations; their RETURNED,
 QUEUED/RUNNING/pending states do not override this current overlay. No earlier
 failure or source pin is rewritten. Customer-approved design/database: NONE.
 
-- Canonical **30 attempts:24 COMPLETED /5 FAILED /1 INTERRUPTED /0 RUNNING**.
+- Before final dispatch: **30 attempts:24 COMPLETED /5 FAILED /1 INTERRUPTED /0 RUNNING**. New32 cumulative creations include two QUEUED on assignment: CLAUDEreq4d7d/browser and CODEXreq95d/TEST, independent target5783; subsequent RUNNING is not inferred.
   Completed campaign installer req812d and browser reqfc51 public evidence is
   accepted within bounds; original productFAIL and canonical failures remain.
 - Published campaign activation31a18318/treec098; installer tested d059/tree6dc.
@@ -360,3 +360,14 @@ exactrowDDLrestore, noAPP/privatehandoff access. Separate actors/resources and
 originalfailures/sourcepins remain distinct. No main/production/business/Spring
 changes; approximately43h5m todeadlineOct11 14:59UTC. Next: comparefinishedfixed
 results, repaironlyreporteddefects, rerunaffectedgates andmeaningfulfinalGitpack.
+
+
+## Published Retry candidate and final parallel dispatch — 2026-10-09 21:22:21 UTC
+
+Fixed product/evidence integration target **5783e6ba124061bdfae639cdaf9b1c14a83cdf03**, tree **361f9a142572f8a6c0c28326c461a233a92aec4e**, pushed to reused branch/PR2. Original2df009/ca21cb7 are actual reachable ancestors, not just copied reports. Activation SHA256 manifest matches all three published files; canonical work-order89/errors0 and diffcheck PASS. Exact-target Actions/checkruns0/0 NOT_RUN. Main remains6853. This dispatch-record checkpoint changes documentation only and does not change either independent review target or any installed/served runtime source/assets.
+
+New canonical32nd cumulative attempts: CLAUDE **req_4d7d64bbb8754974867adc0d9edbe971**, task w04-campaign-retry-browser-closure attempt1, returnedQUEUED on creation; CODEX **req_95d0024e7b144a5bb903cc7daad1fb5f**, task w04-final-contract-persistence attempt1, returnedQUEUED on creation. They are independently ready APP browser/exclusiveTEST scopes at exact5783, not regenerated completed keys or waiting placeholders. Actual subsequent RUNNING/queue/modelstream counts are not inferred. Three parent native followups completed bounded source-derived contract/docs/activation intake; internal native usage is part of same provider accounts, not PCs. Global/Spring usage and quotas UNKNOWN; no capacity changes.
+
+APP is frozen for browser source/runtime/env/cache/service parity; own private minimum handoff source5783/tree361f/expiresOctober10 01:00UTC, five synthetic actors,0600/0700. TEST verifier independently measures/backups before writes and owns only TEST/own18880 service. Parent preliminary catalog query per_page100 returned422 (caller bound exceeded48); valid48 read returned nature IDs1/3 andwellness2/4. Only parent synthetic nature published flags1/3 may be temporarily changed under explicit snapshot/restoration window for real empty-campaign testing, no transaction test during it; no foreign rows or price/stock/capacity edits. These are preflight observations, not independent browserPASS.
+
+Next: officialwait yields parent slot, automatic resume with results, compare safe Git evidence/original failures, repair only observed issues, and produce final package/source integration/revalidation. Deadline stillOctober11 14:59UTC; approximately41h37m remain. No user action required.

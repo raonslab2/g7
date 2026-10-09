@@ -1,6 +1,6 @@
 # Repaired campaign Retry and final persistence — fixed-source review contract
 
-Prepared 2026-10-09 21:22 UTC. Lead publishes the next reviewed checkpoint on the
+Prepared during 2026-10-09 21:15–21:22 UTC. Lead publishes the next reviewed checkpoint on the
 existing integration branch/PR2, then binds both official review_target SHAs to
 that exact commit. Product code is read-only for the two new verifiers. Existing
 COMPLETED task keys are not regenerated; original failure reports remain intact.
@@ -101,7 +101,7 @@ their fixed-source guards in own verifier files, never silently reuse old pins.
 
 Lead authorizes one bounded APP empty-catalog window for parent synthetic seed
 travel product IDs **1 and3 only**, theme nature, while its published campaign
-Page7 remains available. Parent public readonly API21:27 observed those exact two
+Page7 remains available. Parent public readonly API preflight observed those exact two
 nature products and wellness IDs2/4. Before mutation exhaust valid pagination
 (per_page maximum48;100 is rejected422), verify only1/3 and read native admin
 snapshots. Use PATCH only published=false, verify real customer Page/body200 and
