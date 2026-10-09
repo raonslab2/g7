@@ -1,0 +1,26 @@
+{
+  "kind": "native_readonly_source_and_evidence_review",
+  "request_id": "req_a5d9c7a3024a40d894da4299a116e226",
+  "reviewer": "/root/readonly_review",
+  "reviewed_staged_diff_sha256": "4abdcd6356cbd7db3afb824182e3992018ac469fa1f4cb748a2769e1e38dc34f",
+  "product_commit_sha": "7de0c4441b68b1c012dbf4a75114200e322051c9",
+  "remaining_concrete_harness_report_findings": [],
+  "corrections_verified": [
+    "HTTP exit provenance",
+    "private historical BLOCKED handling",
+    "snapshot label distinct from actor loop variables"
+  ],
+  "evidence_counts": {
+    "native_lifecycle_exits_0": 18,
+    "native_test_executions": 111,
+    "assertions": 463,
+    "installed_http_requests": 37,
+    "final_tables": 55,
+    "final_rows": 104
+  },
+  "product_verdict": "CHANGES_REQUIRED",
+  "reviewer_database_lifecycle_publication_service_operations": "NONE",
+  "canonical_validation_receipt": "UNAVAILABLE",
+  "late_helper_hardening_native_integration": "NOT_RERUN",
+  "receipt_scope": "Reviewer findings and observed evidence, not independent runtime validation or product PASS"
+}

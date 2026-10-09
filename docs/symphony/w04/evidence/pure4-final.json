@@ -1,0 +1,39 @@
+{
+    "status": "PASS_CONTROL_FLOW_ONLY",
+    "source_sha256": "9e65fd5f1440fc827aef3eb4c4e2fa2dc51608d15d9d7b34d0258fae493fe62e",
+    "cases": [
+        {
+            "scenario": "verified",
+            "status": "PASS",
+            "imports": 1,
+            "purges": 1,
+            "digest_checks": 1,
+            "private_snapshot_retained": false
+        },
+        {
+            "scenario": "mismatch",
+            "status": "PASS",
+            "imports": 1,
+            "purges": 1,
+            "digest_checks": 1,
+            "private_snapshot_retained": true
+        },
+        {
+            "scenario": "import_failure",
+            "status": "PASS",
+            "imports": 1,
+            "purges": 0,
+            "digest_checks": 0,
+            "private_snapshot_retained": true
+        },
+        {
+            "scenario": "digest_exception",
+            "status": "PASS",
+            "imports": 1,
+            "purges": 1,
+            "digest_checks": 1,
+            "private_snapshot_retained": true
+        }
+    ],
+    "actual_mysql_restore": "NOT_RUN"
+}
