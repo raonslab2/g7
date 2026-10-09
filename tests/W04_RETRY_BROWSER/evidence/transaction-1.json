@@ -1,0 +1,4387 @@
+{
+  "phase": "transaction-1",
+  "tested_sha": "5783e6ba124061bdfae639cdaf9b1c14a83cdf03",
+  "tree": "361f9a142572f8a6c0c28326c461a233a92aec4e",
+  "actual_head": "5783e6ba124061bdfae639cdaf9b1c14a83cdf03",
+  "argv": [
+    "transaction-1"
+  ],
+  "started": "2026-10-09T21:34:48.397Z",
+  "checks": [
+    {
+      "width": 390,
+      "name": "native API own synthetic product fixture preparation only (not UI create)",
+      "status": "PASS",
+      "data": {
+        "id": 94,
+        "title": "W04 4D7D transaction-1 1791581688740 390 합성 여행",
+        "departure": 150,
+        "theme": "nature",
+        "uiCreatePass": false,
+        "referenceCategory": 26,
+        "ownNondefaultFreePolicy": true
+      }
+    },
+    {
+      "width": 390,
+      "name": "customer menu actual trusted navigation (390 drawer tap / 1440 header click + keyboard Enter)",
+      "status": "PASS",
+      "data": {
+        "drawer": "mobile-nav-campaigns",
+        "tab": "tab-requests",
+        "events": [
+          {
+            "type": "click",
+            "key": null,
+            "trusted": true,
+            "tag": "BUTTON",
+            "testid": "menu-toggle",
+            "pointerType": "touch"
+          },
+          {
+            "type": "click",
+            "key": null,
+            "trusted": true,
+            "tag": "BUTTON",
+            "testid": "mobile-nav-campaigns",
+            "pointerType": "touch"
+          },
+          {
+            "type": "click",
+            "key": null,
+            "trusted": true,
+            "tag": "BUTTON",
+            "testid": "tab-requests",
+            "pointerType": "touch"
+          }
+        ],
+        "directPathUsedAsPass": false
+      }
+    },
+    {
+      "name": "masked screenshot filtered-search-transaction-1",
+      "width": 390,
+      "status": "PASS",
+      "known_private_ocr_hits": 0,
+      "path": "tests/W04_RETRY_BROWSER/evidence/filtered-search-transaction-1-390.png",
+      "sha256": "a76016689b47371749bbb95b6019b144e144bc1a7d1160b47169e175bf601a77",
+      "geometry": {
+        "viewport": 390,
+        "document": 390
+      }
+    },
+    {
+      "width": 390,
+      "name": "campaign real filtered catalog CTA product and Korean keyword",
+      "status": "PASS",
+      "data": {
+        "theme": "nature",
+        "product": 94,
+        "koreanKeyword": "합성 여행",
+        "native200": true,
+        "pointer": "tap"
+      }
+    },
+    {
+      "name": "masked screenshot test-inquiry-transaction-1",
+      "width": 390,
+      "status": "PASS",
+      "known_private_ocr_hits": 0,
+      "path": "tests/W04_RETRY_BROWSER/evidence/test-inquiry-transaction-1-390.png",
+      "sha256": "b658ea2909410f96a6852724323ffad61a360752e21f9c18d85ff66bda1fadd0",
+      "geometry": {
+        "viewport": 390,
+        "document": 390
+      }
+    },
+    {
+      "width": 390,
+      "name": "actual detail date quantity cart server-price native TEST inquiry201",
+      "status": "PASS",
+      "data": {
+        "id": 181,
+        "add": {
+          "http": 201,
+          "request": {
+            "departure_id": 150,
+            "quantity": 2
+          },
+          "items": [
+            {
+              "id": 262,
+              "quantity": 2,
+              "unit": 13700
+            }
+          ]
+        },
+        "http": 201,
+        "status": "TEST_INQUIRY",
+        "total": 27400,
+        "unit": 13700,
+        "requestKeys": [
+          "cart_ids",
+          "contact",
+          "idempotency_key"
+        ],
+        "priceNotSent": true,
+        "key_hash": "849a2be2c90aca595720e0c12927c259fa71a35a9b8f54de84f1fb94b1e56f07"
+      }
+    },
+    {
+      "width": 390,
+      "name": "native admin list ActionMenu actual trusted pointer (explicit scroll+stabilize) and keyboard",
+      "status": "PASS",
+      "data": {
+        "id": 181,
+        "method": "tap",
+        "keyboard": null,
+        "stabilizationMs": 750,
+        "explicitScroll": true,
+        "events": [
+          {
+            "type": "click",
+            "key": null,
+            "trusted": true,
+            "tag": "BUTTON",
+            "testid": null,
+            "pointerType": "touch"
+          },
+          {
+            "type": "click",
+            "key": null,
+            "trusted": true,
+            "pointerType": "touch"
+          }
+        ]
+      }
+    },
+    {
+      "name": "masked screenshot relogin-lifecycle-transaction-1",
+      "width": 390,
+      "status": "PASS",
+      "known_private_ocr_hits": 0,
+      "path": "tests/W04_RETRY_BROWSER/evidence/relogin-lifecycle-transaction-1-390.png",
+      "sha256": "a0cd808181fe0658bed719d43a84662ff65331d473432910c96285505586470b",
+      "geometry": {
+        "viewport": 390,
+        "document": 390
+      }
+    },
+    {
+      "width": 390,
+      "name": "native admin rapid status select→immediate save lifecycle, owner UI logout/relogin requery, cancel boundary",
+      "status": "PASS",
+      "data": {
+        "id": 181,
+        "target": "TEST_ACCEPTED",
+        "transitions": [
+          {
+            "selected": "검토 중",
+            "sentStatus": "UNDER_REVIEW",
+            "status": "UNDER_REVIEW",
+            "http": 200,
+            "events": [
+              {
+                "id": 400,
+                "to": "TEST_INQUIRY"
+              },
+              {
+                "id": 401,
+                "to": "UNDER_REVIEW"
+              }
+            ]
+          },
+          {
+            "selected": "테스트 수락",
+            "sentStatus": "TEST_ACCEPTED",
+            "status": "TEST_ACCEPTED",
+            "http": 200,
+            "events": [
+              {
+                "id": 400,
+                "to": "TEST_INQUIRY"
+              },
+              {
+                "id": 401,
+                "to": "UNDER_REVIEW"
+              },
+              {
+                "id": 402,
+                "to": "TEST_ACCEPTED"
+              }
+            ]
+          }
+        ],
+        "uiLogout": {
+          "logout": 200,
+          "sentExactOwnToken": true,
+          "oldTokenUser": 401,
+          "token_hash": "2dd6a6d7713a98e68592557f1886fd559a4dfc08bf45013d0d7afe9eeb00d1db",
+          "status": "PASS"
+        },
+        "foreign": 404,
+        "cancel": 200
+      }
+    },
+    {
+      "name": "masked screenshot response-lost-retry-transaction-1",
+      "width": 390,
+      "status": "PASS",
+      "known_private_ocr_hits": 0,
+      "path": "tests/W04_RETRY_BROWSER/evidence/response-lost-retry-transaction-1-390.png",
+      "sha256": "2f7b2402d353d283e9a766c78c222ca71f6cdce163761a28bc6264504d56cccb",
+      "geometry": {
+        "viewport": 390,
+        "document": 390
+      }
+    },
+    {
+      "width": 390,
+      "name": "response-lost: real upstream201 delivery aborted → reload → same key/payload/ID native200, effects unchanged",
+      "status": "PASS",
+      "data": {
+        "id": 182,
+        "upstream": 201,
+        "retry": 200,
+        "sameKey": true,
+        "samePayload": true,
+        "body_hash": "86ce8111ae732ac86086ef5aa42ea51f38143bf9809ba7d6d39a3dec910e9620",
+        "effects_before": {
+          "id": 182,
+          "status": "TEST_INQUIRY",
+          "total": 13700,
+          "items": [
+            {
+              "id": 194,
+              "product": 94,
+              "quantity": 1,
+              "unit": 13700,
+              "line": 13700
+            }
+          ],
+          "events": [
+            {
+              "id": 404,
+              "to": "TEST_INQUIRY"
+            }
+          ],
+          "calculation_hash": "b4c06237bba0dec9cadd5bf9b7867c0ddfa0f47cab42a135f419f4c7abfe6864",
+          "allocation": [
+            {
+              "id": 150,
+              "reserved": 1,
+              "capacity": 8
+            }
+          ]
+        },
+        "effects_after": {
+          "id": 182,
+          "status": "TEST_INQUIRY",
+          "total": 13700,
+          "items": [
+            {
+              "id": 194,
+              "product": 94,
+              "quantity": 1,
+              "unit": 13700,
+              "line": 13700
+            }
+          ],
+          "events": [
+            {
+              "id": 404,
+              "to": "TEST_INQUIRY"
+            }
+          ],
+          "calculation_hash": "b4c06237bba0dec9cadd5bf9b7867c0ddfa0f47cab42a135f419f4c7abfe6864",
+          "allocation": [
+            {
+              "id": 150,
+              "reserved": 1,
+              "capacity": 8
+            }
+          ]
+        },
+        "measurement": "native HTTP API snapshots; SQL NOT_RUN"
+      }
+    },
+    {
+      "width": 390,
+      "name": "request list geometry",
+      "status": "PASS",
+      "data": {
+        "width": 390,
+        "scrollWidth": 390
+      }
+    },
+    {
+      "width": 1440,
+      "name": "native API own synthetic product fixture preparation only (not UI create)",
+      "status": "PASS",
+      "data": {
+        "id": 95,
+        "title": "W04 4D7D transaction-1 1791581688740 1440 합성 여행",
+        "departure": 151,
+        "theme": "wellness",
+        "uiCreatePass": false,
+        "referenceCategory": 26,
+        "ownNondefaultFreePolicy": true
+      }
+    },
+    {
+      "width": 1440,
+      "name": "customer menu actual trusted navigation (390 drawer tap / 1440 header click + keyboard Enter)",
+      "status": "PASS",
+      "data": {
+        "keyboard": "nav-requests Enter",
+        "events": [
+          {
+            "type": "click",
+            "key": null,
+            "trusted": true,
+            "tag": "BUTTON",
+            "testid": "nav-campaigns",
+            "pointerType": "mouse"
+          },
+          {
+            "type": "keydown",
+            "key": "Enter",
+            "trusted": true,
+            "tag": "BUTTON",
+            "testid": "nav-requests",
+            "pointerType": null
+          },
+          {
+            "type": "click",
+            "key": null,
+            "trusted": true,
+            "tag": "BUTTON",
+            "testid": "nav-requests",
+            "pointerType": ""
+          }
+        ],
+        "directPathUsedAsPass": false
+      }
+    },
+    {
+      "name": "masked screenshot filtered-search-transaction-1",
+      "width": 1440,
+      "status": "PASS",
+      "known_private_ocr_hits": 0,
+      "path": "tests/W04_RETRY_BROWSER/evidence/filtered-search-transaction-1-1440.png",
+      "sha256": "1927adaf28c3d2471580cbfbbf7cbe9e3fbd8cbefaf99cda3c5c1c1395222bda",
+      "geometry": {
+        "viewport": 1440,
+        "document": 1440
+      }
+    },
+    {
+      "width": 1440,
+      "name": "campaign real filtered catalog CTA product and Korean keyword",
+      "status": "PASS",
+      "data": {
+        "theme": "wellness",
+        "product": 95,
+        "koreanKeyword": "합성 여행",
+        "native200": true,
+        "pointer": "click"
+      }
+    },
+    {
+      "name": "masked screenshot test-inquiry-transaction-1",
+      "width": 1440,
+      "status": "PASS",
+      "known_private_ocr_hits": 0,
+      "path": "tests/W04_RETRY_BROWSER/evidence/test-inquiry-transaction-1-1440.png",
+      "sha256": "e5fecfceb2beb3be9766a8e08e0dc477c903f8fec19ddcf2414a8c5985f5a368",
+      "geometry": {
+        "viewport": 1440,
+        "document": 1440
+      }
+    },
+    {
+      "width": 1440,
+      "name": "actual detail date quantity cart server-price native TEST inquiry201",
+      "status": "PASS",
+      "data": {
+        "id": 183,
+        "add": {
+          "http": 201,
+          "request": {
+            "departure_id": 151,
+            "quantity": 2
+          },
+          "items": [
+            {
+              "id": 264,
+              "quantity": 2,
+              "unit": 13700
+            }
+          ]
+        },
+        "http": 201,
+        "status": "TEST_INQUIRY",
+        "total": 27400,
+        "unit": 13700,
+        "requestKeys": [
+          "cart_ids",
+          "contact",
+          "idempotency_key"
+        ],
+        "priceNotSent": true,
+        "key_hash": "999e538686519f3d6fe5f680cf1f33fcf458a533423295c348ce2813a22bf3e2"
+      }
+    },
+    {
+      "width": 1440,
+      "name": "native admin list ActionMenu actual trusted pointer (explicit scroll+stabilize) and keyboard",
+      "status": "FAIL",
+      "error": "expect(locator).toBeVisible() failed\n\nLocator: getByText('상세 보기', { exact: true })\nExpected: visible\nTimeout: 12000ms\nError: element(s) not found\n\nCall log:\n  - Expect \"to.be.visible\" with timeout 12000ms\n  - waiting for getByText('상세 보기', { exact: true })\n"
+    },
+    {
+      "name": "masked screenshot relogin-lifecycle-transaction-1",
+      "width": 1440,
+      "status": "PASS",
+      "known_private_ocr_hits": 0,
+      "path": "tests/W04_RETRY_BROWSER/evidence/relogin-lifecycle-transaction-1-1440.png",
+      "sha256": "9852eae9c1c8b3c8f14544b5e7411d42c949bab9d90e7aa2ea3eb3875673d695",
+      "geometry": {
+        "viewport": 1440,
+        "document": 1440
+      }
+    },
+    {
+      "width": 1440,
+      "name": "native admin rapid status select→immediate save lifecycle, owner UI logout/relogin requery, cancel boundary",
+      "status": "PASS",
+      "data": {
+        "id": 183,
+        "target": "DECLINED",
+        "transitions": [
+          {
+            "selected": "검토 중",
+            "sentStatus": "UNDER_REVIEW",
+            "status": "UNDER_REVIEW",
+            "http": 200,
+            "events": [
+              {
+                "id": 406,
+                "to": "TEST_INQUIRY"
+              },
+              {
+                "id": 407,
+                "to": "UNDER_REVIEW"
+              }
+            ]
+          },
+          {
+            "selected": "거절",
+            "sentStatus": "DECLINED",
+            "status": "DECLINED",
+            "http": 200,
+            "events": [
+              {
+                "id": 406,
+                "to": "TEST_INQUIRY"
+              },
+              {
+                "id": 407,
+                "to": "UNDER_REVIEW"
+              },
+              {
+                "id": 408,
+                "to": "DECLINED"
+              }
+            ]
+          }
+        ],
+        "uiLogout": {
+          "logout": 200,
+          "sentExactOwnToken": true,
+          "oldTokenUser": 401,
+          "token_hash": "875b8ffee09b2c8e6e46e8ef2c5c805211dcde4b36b0545580217c8fd92fe2a8",
+          "status": "PASS"
+        },
+        "foreign": 404,
+        "cancel": 409
+      }
+    },
+    {
+      "name": "masked screenshot response-lost-retry-transaction-1",
+      "width": 1440,
+      "status": "PASS",
+      "known_private_ocr_hits": 0,
+      "path": "tests/W04_RETRY_BROWSER/evidence/response-lost-retry-transaction-1-1440.png",
+      "sha256": "28b584e28288c8b2e6dcb9b590f2437e852f17fe5f27c8b1ad251dee5193c639",
+      "geometry": {
+        "viewport": 1440,
+        "document": 1440
+      }
+    },
+    {
+      "width": 1440,
+      "name": "response-lost: real upstream201 delivery aborted → reload → same key/payload/ID native200, effects unchanged",
+      "status": "PASS",
+      "data": {
+        "id": 184,
+        "upstream": 201,
+        "retry": 200,
+        "sameKey": true,
+        "samePayload": true,
+        "body_hash": "96a98f656d16c7843627bb0e28fdfcfdfd472c7454336de4366139cca289e9f9",
+        "effects_before": {
+          "id": 184,
+          "status": "TEST_INQUIRY",
+          "total": 13700,
+          "items": [
+            {
+              "id": 196,
+              "product": 95,
+              "quantity": 1,
+              "unit": 13700,
+              "line": 13700
+            }
+          ],
+          "events": [
+            {
+              "id": 409,
+              "to": "TEST_INQUIRY"
+            }
+          ],
+          "calculation_hash": "b0b065892243717f31b6ce82ded0ce7048b5d870e256ce29eceb788a101d5cf1",
+          "allocation": [
+            {
+              "id": 151,
+              "reserved": 1,
+              "capacity": 8
+            }
+          ]
+        },
+        "effects_after": {
+          "id": 184,
+          "status": "TEST_INQUIRY",
+          "total": 13700,
+          "items": [
+            {
+              "id": 196,
+              "product": 95,
+              "quantity": 1,
+              "unit": 13700,
+              "line": 13700
+            }
+          ],
+          "events": [
+            {
+              "id": 409,
+              "to": "TEST_INQUIRY"
+            }
+          ],
+          "calculation_hash": "b0b065892243717f31b6ce82ded0ce7048b5d870e256ce29eceb788a101d5cf1",
+          "allocation": [
+            {
+              "id": 151,
+              "reserved": 1,
+              "capacity": 8
+            }
+          ]
+        },
+        "measurement": "native HTTP API snapshots; SQL NOT_RUN"
+      }
+    },
+    {
+      "width": 1440,
+      "name": "request list geometry",
+      "status": "PASS",
+      "data": {
+        "width": 1440,
+        "scrollWidth": 1440
+      }
+    },
+    {
+      "width": null,
+      "name": "own fixtures closed native API readback",
+      "status": "PASS"
+    }
+  ],
+  "metrics": [
+    {
+      "width": 390,
+      "role": "member",
+      "pageerrors": [],
+      "external_attempts": [],
+      "external_connections": [],
+      "http": [
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/vendor/font-awesome/6.4.0/css/all.inlined.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/css/components.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/js/components.iife.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/ko.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/en.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/components.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/routes.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/config.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/layouts/raonslab-travel_lab/auth/login.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/auth/login",
+          "method": "POST",
+          "status": 200
+        },
+        {
+          "path": "/api/layouts/raonslab-travel_lab/travel/home.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/facets",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/auth/user",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/cart",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/campaigns",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/css/components.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/vendor/font-awesome/6.4.0/css/all.inlined.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/js/components.iife.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/routes.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/ko.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/en.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/auth/user",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/config.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/components.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/layouts/raonslab-travel_lab/travel/home.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/facets",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/auth/user",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/cart",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/campaigns",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/layouts/raonslab-travel_lab/travel/campaigns.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/cart",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/auth/user",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/campaigns",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/layouts/raonslab-travel_lab/travel/requests.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/cart",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/vendor/font-awesome/6.4.0/css/all.inlined.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/css/components.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/js/components.iife.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/config.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/routes.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/components.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/en.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/ko.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/auth/user",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/layouts/raonslab-travel_lab/travel/campaign_detail.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/auth/user",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/campaigns/travel-lab-campaign-autumn-escape",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/cart",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/layouts/raonslab-travel_lab/travel/search.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/facets",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/auth/user",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/cart",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/layouts/raonslab-travel_lab/travel/product.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog/94",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/js/components.iife.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/vendor/font-awesome/6.4.0/css/all.inlined.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/css/components.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/ko.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/config.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/en.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/components.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/routes.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/auth/user",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/layouts/raonslab-travel_lab/travel/home.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/facets",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/auth/user",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/campaigns",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/cart",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/layouts/raonslab-travel_lab/travel/search.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/facets",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/auth/user",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/cart",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/js/components.iife.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/css/components.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/vendor/font-awesome/6.4.0/css/all.inlined.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/components.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/ko.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/en.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/routes.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/config.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/auth/user",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/layouts/raonslab-travel_lab/travel/product.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog/94/departures",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog/94",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/cart",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/auth/user",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/cart",
+          "method": "POST",
+          "status": 201
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/cart",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/layouts/raonslab-travel_lab/travel/cart.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/auth/user",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/cart",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/cart",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/cart/262",
+          "method": "PATCH",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/cart",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/cart",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/cart/262",
+          "method": "PATCH",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/cart",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/cart",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/inquiries",
+          "method": "POST",
+          "status": 201
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/cart",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/layouts/raonslab-travel_lab/travel/request_detail.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/auth/user",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/cart",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/inquiries/181",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/vendor/font-awesome/6.4.0/css/all.inlined.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/js/components.iife.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/css/components.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/components.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/routes.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/en.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/ko.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/config.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/auth/user",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/layouts/raonslab-travel_lab/travel/home.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/facets",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/auth/user",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/cart",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/campaigns",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/auth/logout",
+          "method": "POST",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/facets",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/campaigns",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/css/components.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/vendor/font-awesome/6.4.0/css/all.inlined.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/js/components.iife.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/routes.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/en.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/components.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/config.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/ko.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/layouts/raonslab-travel_lab/auth/login.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/auth/login",
+          "method": "POST",
+          "status": 200
+        },
+        {
+          "path": "/api/layouts/raonslab-travel_lab/travel/home.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/facets",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/vendor/font-awesome/6.4.0/css/all.inlined.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/css/components.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/js/components.iife.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/components.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/ko.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/en.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/auth/user",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/routes.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/config.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/layouts/raonslab-travel_lab/travel/request_detail.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/cart",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/auth/user",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/inquiries/181",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/inquiries/181/cancel",
+          "method": "POST",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/inquiries/181",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/css/components.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/vendor/font-awesome/6.4.0/css/all.inlined.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/js/components.iife.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/components.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/ko.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/routes.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/en.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/config.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/auth/user",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/layouts/raonslab-travel_lab/travel/product.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/cart",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog/94",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog/94/departures",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/auth/user",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/cart",
+          "method": "POST",
+          "status": 201
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/cart",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/layouts/raonslab-travel_lab/travel/cart.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/auth/user",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/cart",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/cart",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/vendor/font-awesome/6.4.0/css/all.inlined.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/js/components.iife.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/css/components.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/config.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/en.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/ko.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/routes.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/components.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/auth/user",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/layouts/raonslab-travel_lab/travel/cart.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/auth/user",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/cart",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/cart",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/inquiries",
+          "method": "POST",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/cart",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/layouts/raonslab-travel_lab/travel/request_detail.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/auth/user",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/cart",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/inquiries/182",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/inquiries/182/cancel",
+          "method": "POST",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/inquiries/182",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/css/components.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/vendor/font-awesome/6.4.0/css/all.inlined.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/js/components.iife.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/components.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/ko.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/routes.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/auth/user",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/config.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/en.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/layouts/raonslab-travel_lab/travel/requests.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/auth/user",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/inquiries",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/cart",
+          "method": "GET",
+          "status": 200
+        }
+      ],
+      "assets": [
+        {
+          "path": "/build/core/template-engine.min.js",
+          "sha256": "738ee97c6eebc33bc75d29f24397daabb54f124bede254689ca68a18fdb64a0b",
+          "status": 200,
+          "bytes": 819481
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/vendor/font-awesome/6.4.0/css/all.inlined.css",
+          "sha256": "681dfabb239fcbfccb31b4fdb510ea3c094c5f0fe7d3aab724ade82f10556831",
+          "status": 200,
+          "bytes": 480419
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/css/components.css",
+          "sha256": "8b372bcc681e6b78fbac301ddb274e75703f3e50a9e76d0472243c23c571d207",
+          "status": 200,
+          "bytes": 51039
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/js/components.iife.js",
+          "sha256": "8941442d1a921c2f366063359e39f79ed3a719bce77a174b6c0aa5657b691d63",
+          "status": 200,
+          "bytes": 68911
+        },
+        {
+          "path": "/api/modules/bundle.js",
+          "sha256": "a69dc60260eef16feb33b5433426d974164fcc5a9b15d3577a710a9212b9f2ce",
+          "status": 200,
+          "bytes": 153543
+        },
+        {
+          "path": "/api/modules/bundle.css",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "status": 200,
+          "bytes": 0
+        }
+      ],
+      "geometry": [
+        {
+          "name": "filtered-search-transaction-1",
+          "viewport": 390,
+          "document": 390
+        },
+        {
+          "name": "test-inquiry-transaction-1",
+          "viewport": 390,
+          "document": 390
+        },
+        {
+          "name": "relogin-lifecycle-transaction-1",
+          "viewport": 390,
+          "document": 390
+        },
+        {
+          "name": "response-lost-retry-transaction-1",
+          "viewport": 390,
+          "document": 390
+        }
+      ],
+      "inputs": [
+        {
+          "path": "/travel/search",
+          "events": [
+            {
+              "type": "click",
+              "key": null,
+              "trusted": true,
+              "tag": "BUTTON",
+              "testid": "hero-search-button",
+              "pointerType": "touch"
+            }
+          ]
+        },
+        {
+          "path": "/travel/requests/181",
+          "events": [
+            {
+              "type": "click",
+              "key": null,
+              "trusted": true,
+              "tag": "BUTTON",
+              "testid": "departure-option",
+              "pointerType": "touch"
+            },
+            {
+              "type": "click",
+              "key": null,
+              "trusted": true,
+              "tag": "BUTTON",
+              "testid": "people-increase",
+              "pointerType": "touch"
+            },
+            {
+              "type": "click",
+              "key": null,
+              "trusted": true,
+              "tag": "BUTTON",
+              "testid": "add-to-cart",
+              "pointerType": "touch"
+            },
+            {
+              "type": "click",
+              "key": null,
+              "trusted": true,
+              "tag": "BUTTON",
+              "testid": "go-cart",
+              "pointerType": "touch"
+            },
+            {
+              "type": "click",
+              "key": null,
+              "trusted": true,
+              "tag": "BUTTON",
+              "testid": "cart-qty-increase",
+              "pointerType": "touch"
+            },
+            {
+              "type": "click",
+              "key": null,
+              "trusted": true,
+              "tag": "BUTTON",
+              "testid": "cart-qty-decrease",
+              "pointerType": "touch"
+            },
+            {
+              "type": "click",
+              "key": null,
+              "trusted": true,
+              "tag": "INPUT",
+              "testid": "ack-test",
+              "pointerType": "touch"
+            },
+            {
+              "type": "click",
+              "key": null,
+              "trusted": true,
+              "tag": "BUTTON",
+              "testid": "submit-inquiry",
+              "pointerType": "touch"
+            }
+          ]
+        },
+        {
+          "path": "/travel/requests/181",
+          "events": []
+        },
+        {
+          "path": "/travel/requests/182",
+          "events": [
+            {
+              "type": "click",
+              "key": null,
+              "trusted": true,
+              "tag": "INPUT",
+              "testid": "ack-test",
+              "pointerType": "touch"
+            },
+            {
+              "type": "click",
+              "key": null,
+              "trusted": true,
+              "tag": "BUTTON",
+              "testid": "submit-inquiry",
+              "pointerType": "touch"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "width": 390,
+      "role": "admin",
+      "pageerrors": [],
+      "external_attempts": [],
+      "external_connections": [],
+      "http": [
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/vendor/font-awesome/6.4.0/css/all.inlined.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/js/components.iife.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/css/components.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/ko.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/config.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/en.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/components.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/routes.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/layouts/raonslab-travel_lab/auth/login.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/auth/login",
+          "method": "POST",
+          "status": 200
+        },
+        {
+          "path": "/api/layouts/raonslab-travel_lab/travel/home.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/facets",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/cart",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/auth/user",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/campaigns",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/vendor/pretendard/1.3.9/pretendard-variable.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/vendor/flag-icons/7.2.3/css/flag-icons.min.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/vendor/font-awesome/6.4.0/css/all.inlined.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/css/components.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/js/components.iife.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/sirsoft-admin_basic/components.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/sirsoft-admin_basic/lang/ko.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/sirsoft-admin_basic/lang/en.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/auth/user",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/sirsoft-admin_basic/routes.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/sirsoft-admin_basic/config.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/layouts/sirsoft-admin_basic/raonslab-travel_lab.admin_travel_lab_inquiry_list.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/menus/active",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/auth/user",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/notifications",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/plugins/installed",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/modules/installed",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/notifications/unread-count",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/admin/inquiries",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/vendor/pretendard/1.3.9/woff2/PretendardVariable.woff2",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/layouts/sirsoft-admin_basic/raonslab-travel_lab.admin_travel_lab_inquiry_detail.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/vendor/font-awesome/6.4.0/css/all.inlined.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/css/components.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/vendor/pretendard/1.3.9/pretendard-variable.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/vendor/flag-icons/7.2.3/css/flag-icons.min.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/js/components.iife.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/sirsoft-admin_basic/lang/ko.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/sirsoft-admin_basic/config.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/sirsoft-admin_basic/lang/en.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/sirsoft-admin_basic/components.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/sirsoft-admin_basic/routes.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/auth/user",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/layouts/sirsoft-admin_basic/raonslab-travel_lab.admin_travel_lab_inquiry_detail.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/notifications/unread-count",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/plugins/installed",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/modules/installed",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/menus/active",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/auth/user",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/notifications",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/admin/inquiries/181",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/vendor/pretendard/1.3.9/woff2/PretendardVariable.woff2",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/admin/inquiries/181",
+          "method": "PATCH",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/admin/inquiries/181",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/admin/inquiries/181",
+          "method": "PATCH",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/admin/inquiries/181",
+          "method": "GET",
+          "status": 200
+        }
+      ],
+      "assets": [
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/vendor/font-awesome/6.4.0/css/all.inlined.css",
+          "sha256": "681dfabb239fcbfccb31b4fdb510ea3c094c5f0fe7d3aab724ade82f10556831",
+          "status": 200,
+          "bytes": 480419
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/js/components.iife.js",
+          "sha256": "8941442d1a921c2f366063359e39f79ed3a719bce77a174b6c0aa5657b691d63",
+          "status": 200,
+          "bytes": 68911
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/css/components.css",
+          "sha256": "8b372bcc681e6b78fbac301ddb274e75703f3e50a9e76d0472243c23c571d207",
+          "status": 200,
+          "bytes": 51039
+        },
+        {
+          "path": "/build/core/template-engine.min.js",
+          "sha256": "738ee97c6eebc33bc75d29f24397daabb54f124bede254689ca68a18fdb64a0b",
+          "status": 200,
+          "bytes": 819481
+        },
+        {
+          "path": "/api/modules/bundle.css",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "status": 200,
+          "bytes": 0
+        },
+        {
+          "path": "/api/modules/bundle.js",
+          "sha256": "a69dc60260eef16feb33b5433426d974164fcc5a9b15d3577a710a9212b9f2ce",
+          "status": 200,
+          "bytes": 153543
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/vendor/pretendard/1.3.9/pretendard-variable.css",
+          "sha256": "889d7b2b3dbadd64d7d8a6f9dfff87a57b43d067374b25ca57a49941a2fe04a5",
+          "status": 200,
+          "bytes": 558
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/vendor/flag-icons/7.2.3/css/flag-icons.min.css",
+          "sha256": "1fc43f995407b1a577d986afaa27a61664914b45221e88e7c8acb36bbe6d288e",
+          "status": 200,
+          "bytes": 70024
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/vendor/font-awesome/6.4.0/css/all.inlined.css",
+          "sha256": "43b85c89be42085da539891a6d29dfa910c7c35c78138f130ff9984715b4e6c1",
+          "status": 200,
+          "bytes": 480419
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/css/components.css",
+          "sha256": "3aafccf49bb7fc4521c2bb95ab2dcb550fc04b89848618aca6232fecfe10692c",
+          "status": 200,
+          "bytes": 592888
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/js/components.iife.js",
+          "sha256": "d25eb47e1308a83a456b17fe86953fec8fefc46a38769c0c225be72b0028e6c9",
+          "status": 200,
+          "bytes": 728609
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/vendor/pretendard/1.3.9/woff2/PretendardVariable.woff2",
+          "sha256": "9599f12fd42fc0bce1cd50b47a0c022e108d7aa64dd0d1bb0ed44f3282d900b4",
+          "status": 200,
+          "bytes": 2057688
+        }
+      ],
+      "geometry": []
+    },
+    {
+      "width": 1440,
+      "role": "member",
+      "pageerrors": [],
+      "external_attempts": [],
+      "external_connections": [],
+      "http": [
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/vendor/font-awesome/6.4.0/css/all.inlined.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/js/components.iife.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/css/components.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/routes.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/en.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/ko.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/components.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/config.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/layouts/raonslab-travel_lab/auth/login.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/auth/login",
+          "method": "POST",
+          "status": 200
+        },
+        {
+          "path": "/api/layouts/raonslab-travel_lab/travel/home.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/facets",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/auth/user",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/cart",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/campaigns",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/vendor/font-awesome/6.4.0/css/all.inlined.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/css/components.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/js/components.iife.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/auth/user",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/components.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/routes.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/ko.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/config.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/en.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/layouts/raonslab-travel_lab/travel/home.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/facets",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/cart",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/campaigns",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/auth/user",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/layouts/raonslab-travel_lab/travel/campaigns.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/auth/user",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/cart",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/campaigns",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/layouts/raonslab-travel_lab/travel/requests.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/auth/user",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/cart",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/css/components.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/js/components.iife.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/vendor/font-awesome/6.4.0/css/all.inlined.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/ko.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/en.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/components.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/routes.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/config.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/auth/user",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/layouts/raonslab-travel_lab/travel/campaign_detail.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/auth/user",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/cart",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/campaigns/travel-lab-campaign-weekend-reset",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/layouts/raonslab-travel_lab/travel/search.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/facets",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/auth/user",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/cart",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/layouts/raonslab-travel_lab/travel/product.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/vendor/font-awesome/6.4.0/css/all.inlined.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/js/components.iife.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/css/components.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/routes.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/config.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/ko.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/components.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/en.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/auth/user",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/layouts/raonslab-travel_lab/travel/home.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/facets",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/cart",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/auth/user",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/campaigns",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/layouts/raonslab-travel_lab/travel/search.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/facets",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/auth/user",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/cart",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/css/components.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/vendor/font-awesome/6.4.0/css/all.inlined.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/js/components.iife.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/en.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/ko.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/components.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/routes.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/config.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/auth/user",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/layouts/raonslab-travel_lab/travel/product.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog/95",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/auth/user",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog/95/departures",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/cart",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/cart",
+          "method": "POST",
+          "status": 201
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/cart",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/layouts/raonslab-travel_lab/travel/cart.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/auth/user",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/cart",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/cart",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/cart/264",
+          "method": "PATCH",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/cart",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/cart",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/cart/264",
+          "method": "PATCH",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/cart",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/cart",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/inquiries",
+          "method": "POST",
+          "status": 201
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/cart",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/layouts/raonslab-travel_lab/travel/request_detail.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/auth/user",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/cart",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/inquiries/183",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/css/components.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/vendor/font-awesome/6.4.0/css/all.inlined.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/js/components.iife.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/ko.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/config.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/routes.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/en.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/components.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/auth/user",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/layouts/raonslab-travel_lab/travel/home.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/facets",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/campaigns",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/auth/user",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/cart",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/auth/logout",
+          "method": "POST",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/facets",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/css/components.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/js/components.iife.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/vendor/font-awesome/6.4.0/css/all.inlined.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/en.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/components.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/ko.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/config.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/routes.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/layouts/raonslab-travel_lab/auth/login.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/auth/login",
+          "method": "POST",
+          "status": 200
+        },
+        {
+          "path": "/api/layouts/raonslab-travel_lab/travel/home.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/facets",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/cart",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/auth/user",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/campaigns",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/vendor/font-awesome/6.4.0/css/all.inlined.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/js/components.iife.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/css/components.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/en.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/ko.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/components.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/routes.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/config.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/auth/user",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/layouts/raonslab-travel_lab/travel/request_detail.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/auth/user",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/cart",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/inquiries/183",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/js/components.iife.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/vendor/font-awesome/6.4.0/css/all.inlined.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/css/components.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/components.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/ko.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/auth/user",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/routes.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/en.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/config.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/layouts/raonslab-travel_lab/travel/product.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog/95/departures",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/cart",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/auth/user",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog/95",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/cart",
+          "method": "POST",
+          "status": 201
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/cart",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/layouts/raonslab-travel_lab/travel/cart.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/auth/user",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/cart",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/cart",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/vendor/font-awesome/6.4.0/css/all.inlined.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/css/components.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/js/components.iife.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/en.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/components.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/ko.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/config.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/routes.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/auth/user",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/layouts/raonslab-travel_lab/travel/cart.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/auth/user",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/cart",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/cart",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/inquiries",
+          "method": "POST",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/cart",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/layouts/raonslab-travel_lab/travel/request_detail.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/inquiries/184",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/auth/user",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/cart",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/inquiries/184/cancel",
+          "method": "POST",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/inquiries/184",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/js/components.iife.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/vendor/font-awesome/6.4.0/css/all.inlined.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/css/components.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/en.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/routes.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/ko.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/components.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/auth/user",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/config.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/layouts/raonslab-travel_lab/travel/requests.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/cart",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/auth/user",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/inquiries",
+          "method": "GET",
+          "status": 200
+        }
+      ],
+      "assets": [
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/vendor/font-awesome/6.4.0/css/all.inlined.css",
+          "sha256": "681dfabb239fcbfccb31b4fdb510ea3c094c5f0fe7d3aab724ade82f10556831",
+          "status": 200,
+          "bytes": 480419
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/js/components.iife.js",
+          "sha256": "8941442d1a921c2f366063359e39f79ed3a719bce77a174b6c0aa5657b691d63",
+          "status": 200,
+          "bytes": 68911
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/css/components.css",
+          "sha256": "8b372bcc681e6b78fbac301ddb274e75703f3e50a9e76d0472243c23c571d207",
+          "status": 200,
+          "bytes": 51039
+        },
+        {
+          "path": "/build/core/template-engine.min.js",
+          "sha256": "738ee97c6eebc33bc75d29f24397daabb54f124bede254689ca68a18fdb64a0b",
+          "status": 200,
+          "bytes": 819481
+        },
+        {
+          "path": "/api/modules/bundle.css",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "status": 200,
+          "bytes": 0
+        },
+        {
+          "path": "/api/modules/bundle.js",
+          "sha256": "a69dc60260eef16feb33b5433426d974164fcc5a9b15d3577a710a9212b9f2ce",
+          "status": 200,
+          "bytes": 153543
+        }
+      ],
+      "geometry": [
+        {
+          "name": "filtered-search-transaction-1",
+          "viewport": 1440,
+          "document": 1440
+        },
+        {
+          "name": "test-inquiry-transaction-1",
+          "viewport": 1440,
+          "document": 1440
+        },
+        {
+          "name": "relogin-lifecycle-transaction-1",
+          "viewport": 1440,
+          "document": 1440
+        },
+        {
+          "name": "response-lost-retry-transaction-1",
+          "viewport": 1440,
+          "document": 1440
+        }
+      ],
+      "inputs": [
+        {
+          "path": "/travel/search",
+          "events": [
+            {
+              "type": "click",
+              "key": null,
+              "trusted": true,
+              "tag": "BUTTON",
+              "testid": "hero-search-button",
+              "pointerType": "mouse"
+            }
+          ]
+        },
+        {
+          "path": "/travel/requests/183",
+          "events": [
+            {
+              "type": "click",
+              "key": null,
+              "trusted": true,
+              "tag": "BUTTON",
+              "testid": "departure-option",
+              "pointerType": "mouse"
+            },
+            {
+              "type": "click",
+              "key": null,
+              "trusted": true,
+              "tag": "BUTTON",
+              "testid": "people-increase",
+              "pointerType": "mouse"
+            },
+            {
+              "type": "click",
+              "key": null,
+              "trusted": true,
+              "tag": "BUTTON",
+              "testid": "add-to-cart",
+              "pointerType": "mouse"
+            },
+            {
+              "type": "click",
+              "key": null,
+              "trusted": true,
+              "tag": "BUTTON",
+              "testid": "go-cart",
+              "pointerType": "mouse"
+            },
+            {
+              "type": "click",
+              "key": null,
+              "trusted": true,
+              "tag": "BUTTON",
+              "testid": "cart-qty-increase",
+              "pointerType": "mouse"
+            },
+            {
+              "type": "click",
+              "key": null,
+              "trusted": true,
+              "tag": "BUTTON",
+              "testid": "cart-qty-decrease",
+              "pointerType": "mouse"
+            },
+            {
+              "type": "click",
+              "key": null,
+              "trusted": true,
+              "tag": "INPUT",
+              "testid": "ack-test",
+              "pointerType": "mouse"
+            },
+            {
+              "type": "click",
+              "key": null,
+              "trusted": true,
+              "tag": "BUTTON",
+              "testid": "submit-inquiry",
+              "pointerType": "mouse"
+            }
+          ]
+        },
+        {
+          "path": "/travel/requests/183",
+          "events": []
+        },
+        {
+          "path": "/travel/requests/184",
+          "events": [
+            {
+              "type": "click",
+              "key": null,
+              "trusted": true,
+              "tag": "INPUT",
+              "testid": "ack-test",
+              "pointerType": "mouse"
+            },
+            {
+              "type": "click",
+              "key": null,
+              "trusted": true,
+              "tag": "BUTTON",
+              "testid": "submit-inquiry",
+              "pointerType": "mouse"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "role": "admin",
+      "pageerrors": [],
+      "external_attempts": [],
+      "external_connections": [],
+      "http": [
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/css/components.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/vendor/font-awesome/6.4.0/css/all.inlined.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/js/components.iife.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/components.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/routes.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/en.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/ko.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/config.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/layouts/raonslab-travel_lab/auth/login.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/auth/login",
+          "method": "POST",
+          "status": 200
+        },
+        {
+          "path": "/api/layouts/raonslab-travel_lab/travel/home.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/facets",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/auth/user",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/cart",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/campaigns",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/vendor/font-awesome/6.4.0/css/all.inlined.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/vendor/pretendard/1.3.9/pretendard-variable.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/css/components.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/vendor/flag-icons/7.2.3/css/flag-icons.min.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/js/components.iife.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/sirsoft-admin_basic/routes.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/sirsoft-admin_basic/components.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/sirsoft-admin_basic/lang/ko.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/sirsoft-admin_basic/config.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/sirsoft-admin_basic/lang/en.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/auth/user",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/layouts/sirsoft-admin_basic/raonslab-travel_lab.admin_travel_lab_inquiry_list.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/menus/active",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/plugins/installed",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/notifications/unread-count",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/modules/installed",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/notifications",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/auth/user",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/admin/inquiries",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/vendor/pretendard/1.3.9/woff2/PretendardVariable.woff2",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/layouts/sirsoft-admin_basic/raonslab-travel_lab.admin_travel_lab_inquiry_detail.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/menus/active",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/notifications/unread-count",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/notifications",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/modules/installed",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/auth/user",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/admin/inquiries",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/plugins/installed",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/vendor/pretendard/1.3.9/pretendard-variable.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/css/components.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/vendor/flag-icons/7.2.3/css/flag-icons.min.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/vendor/font-awesome/6.4.0/css/all.inlined.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/js/components.iife.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/sirsoft-admin_basic/lang/ko.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/sirsoft-admin_basic/routes.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/auth/user",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/sirsoft-admin_basic/config.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/sirsoft-admin_basic/lang/en.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/sirsoft-admin_basic/components.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/layouts/sirsoft-admin_basic/raonslab-travel_lab.admin_travel_lab_inquiry_detail.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/menus/active",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/notifications",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/vendor/pretendard/1.3.9/woff2/PretendardVariable.woff2",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/auth/user",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/modules/installed",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/notifications/unread-count",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/admin/inquiries/183",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/plugins/installed",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/admin/inquiries/183",
+          "method": "PATCH",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/admin/inquiries/183",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/admin/inquiries/183",
+          "method": "PATCH",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/admin/inquiries/183",
+          "method": "GET",
+          "status": 200
+        }
+      ],
+      "assets": [
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/css/components.css",
+          "sha256": "8b372bcc681e6b78fbac301ddb274e75703f3e50a9e76d0472243c23c571d207",
+          "status": 200,
+          "bytes": 51039
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/vendor/font-awesome/6.4.0/css/all.inlined.css",
+          "sha256": "681dfabb239fcbfccb31b4fdb510ea3c094c5f0fe7d3aab724ade82f10556831",
+          "status": 200,
+          "bytes": 480419
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/js/components.iife.js",
+          "sha256": "8941442d1a921c2f366063359e39f79ed3a719bce77a174b6c0aa5657b691d63",
+          "status": 200,
+          "bytes": 68911
+        },
+        {
+          "path": "/build/core/template-engine.min.js",
+          "sha256": "738ee97c6eebc33bc75d29f24397daabb54f124bede254689ca68a18fdb64a0b",
+          "status": 200,
+          "bytes": 819481
+        },
+        {
+          "path": "/api/modules/bundle.css",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "status": 200,
+          "bytes": 0
+        },
+        {
+          "path": "/api/modules/bundle.js",
+          "sha256": "a69dc60260eef16feb33b5433426d974164fcc5a9b15d3577a710a9212b9f2ce",
+          "status": 200,
+          "bytes": 153543
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/vendor/font-awesome/6.4.0/css/all.inlined.css",
+          "sha256": "43b85c89be42085da539891a6d29dfa910c7c35c78138f130ff9984715b4e6c1",
+          "status": 200,
+          "bytes": 480419
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/vendor/pretendard/1.3.9/pretendard-variable.css",
+          "sha256": "889d7b2b3dbadd64d7d8a6f9dfff87a57b43d067374b25ca57a49941a2fe04a5",
+          "status": 200,
+          "bytes": 558
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/css/components.css",
+          "sha256": "3aafccf49bb7fc4521c2bb95ab2dcb550fc04b89848618aca6232fecfe10692c",
+          "status": 200,
+          "bytes": 592888
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/vendor/flag-icons/7.2.3/css/flag-icons.min.css",
+          "sha256": "1fc43f995407b1a577d986afaa27a61664914b45221e88e7c8acb36bbe6d288e",
+          "status": 200,
+          "bytes": 70024
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/js/components.iife.js",
+          "sha256": "d25eb47e1308a83a456b17fe86953fec8fefc46a38769c0c225be72b0028e6c9",
+          "status": 200,
+          "bytes": 728609
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/vendor/pretendard/1.3.9/woff2/PretendardVariable.woff2",
+          "sha256": "9599f12fd42fc0bce1cd50b47a0c022e108d7aa64dd0d1bb0ed44f3282d900b4",
+          "status": 200,
+          "bytes": 2057688
+        }
+      ],
+      "geometry": []
+    }
+  ],
+  "cleanup": [
+    {
+      "type": "own-inquiry-terminal",
+      "id": 181,
+      "status": "PASS",
+      "state": "CANCELLED"
+    },
+    {
+      "type": "own-inquiry-terminal",
+      "id": 182,
+      "status": "PASS",
+      "state": "CANCELLED"
+    },
+    {
+      "type": "own-inquiry-terminal",
+      "id": 183,
+      "status": "PASS",
+      "state": "DECLINED"
+    },
+    {
+      "type": "own-inquiry-terminal",
+      "id": 184,
+      "status": "PASS",
+      "state": "CANCELLED"
+    },
+    {
+      "type": "own-product-closed",
+      "id": 94,
+      "status": "PASS",
+      "published": false,
+      "public": 404,
+      "departures": [
+        {
+          "id": 150,
+          "reserved": 0,
+          "is_active": false
+        }
+      ]
+    },
+    {
+      "type": "own-product-closed",
+      "id": 95,
+      "status": "PASS",
+      "published": false,
+      "public": 404,
+      "departures": [
+        {
+          "id": 151,
+          "reserved": 0,
+          "is_active": false
+        }
+      ]
+    },
+    {
+      "type": "own-policy-inactive",
+      "id": 12,
+      "active": false,
+      "default": false,
+      "status": "PASS"
+    },
+    {
+      "type": "own-policy-inactive",
+      "id": 13,
+      "active": false,
+      "default": false,
+      "status": "PASS"
+    },
+    {
+      "type": "native-cart-readback",
+      "role": "member",
+      "count": 0,
+      "status": "PASS"
+    },
+    {
+      "type": "native-cart-readback",
+      "role": "other_member",
+      "count": 0,
+      "status": "PASS"
+    },
+    {
+      "type": "exact-own-token",
+      "role": "member",
+      "hash": "2dd6a6d7713a98e68592557f1886fd559a4dfc08bf45013d0d7afe9eeb00d1db",
+      "via": "ui",
+      "requery": 401,
+      "status": "PASS"
+    },
+    {
+      "type": "exact-own-token",
+      "role": "admin",
+      "hash": "0f92872571ac36c8d12234986581162e9431e5fc9cca6fa7b7b518a5e28dfebf",
+      "via": "api",
+      "logout": 200,
+      "requery": 401,
+      "status": "PASS"
+    },
+    {
+      "type": "exact-own-token",
+      "role": "member",
+      "hash": "40a1bbca156b3abd1465341ab4d76e97045079514a6784385fd56397ec2268be",
+      "via": "api",
+      "logout": 200,
+      "requery": 401,
+      "status": "PASS"
+    },
+    {
+      "type": "exact-own-token",
+      "role": "other_member",
+      "hash": "b11e88864bb89a0b6493791998bf1f6cd6cc061aa31413322d29a0e4a9f6b03e",
+      "via": "api",
+      "logout": 200,
+      "requery": 401,
+      "status": "PASS"
+    },
+    {
+      "type": "exact-own-token",
+      "role": "member",
+      "hash": "875b8ffee09b2c8e6e46e8ef2c5c805211dcde4b36b0545580217c8fd92fe2a8",
+      "via": "ui",
+      "requery": 401,
+      "status": "PASS"
+    },
+    {
+      "type": "exact-own-token",
+      "role": "admin",
+      "hash": "902cf28b6103ac8548548bfe3ccbfa672a8599116d9951350c1e1a87b4b88d7e",
+      "via": "api",
+      "logout": 200,
+      "requery": 401,
+      "status": "PASS"
+    },
+    {
+      "type": "exact-own-token",
+      "role": "member",
+      "hash": "293e3cc0fa3e08045f6cd53f41effa9fcd6a7f98950c510b3edeb8ae2286ca8d",
+      "via": "api",
+      "logout": 200,
+      "requery": 401,
+      "status": "PASS"
+    },
+    {
+      "type": "supplied-handoff-observed",
+      "role": "admin",
+      "http": 401,
+      "status": "OBSERVED",
+      "note": "supplied bearer already 401 at first preflight probe-1 before any write; never used for logout/revocation by this verifier"
+    },
+    {
+      "type": "supplied-handoff-observed",
+      "role": "member",
+      "http": 401,
+      "status": "OBSERVED",
+      "note": "supplied bearer already 401 at first preflight probe-1 before any write; never used for logout/revocation by this verifier"
+    },
+    {
+      "type": "supplied-handoff-observed",
+      "role": "other_member",
+      "http": 401,
+      "status": "OBSERVED",
+      "note": "supplied bearer already 401 at first preflight probe-1 before any write; never used for logout/revocation by this verifier"
+    }
+  ],
+  "chromium": "156.0.8078.4",
+  "elapsed_seconds": 187.071,
+  "finished": "2026-10-09T21:37:55.468Z"
+}

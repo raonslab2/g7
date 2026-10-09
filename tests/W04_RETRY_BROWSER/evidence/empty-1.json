@@ -1,0 +1,558 @@
+{
+  "phase": "empty-1",
+  "tested_sha": "5783e6ba124061bdfae639cdaf9b1c14a83cdf03",
+  "tree": "361f9a142572f8a6c0c28326c461a233a92aec4e",
+  "actual_head": "5783e6ba124061bdfae639cdaf9b1c14a83cdf03",
+  "argv": [
+    "empty-1"
+  ],
+  "started": "2026-10-09T21:34:25.381Z",
+  "checks": [
+    {
+      "width": null,
+      "name": "preflight: exhaust per_page48 pagination, nature IDs exactly 1/3, private native admin snapshots",
+      "status": "PASS",
+      "data": {
+        "nature": {
+          "ids": [
+            1,
+            3
+          ],
+          "pages": 1
+        },
+        "allPublic": {
+          "ids": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8
+          ],
+          "pages": 1
+        },
+        "perPage100": 422,
+        "facets": {
+          "1": {
+            "published": true,
+            "theme": "nature",
+            "semantic": "57f37bb1a7669467f14a1c404cd825483fcaaf5a45478ded5ba9bef45aa61add",
+            "departures": "678d0eb61fe6b5c2fb809150e85c5117671a1af01d5cc6e7bfca37e8de5a037e",
+            "price": "3fe34e1dc1bc61011cceadcf055bd08c0affe9d1d2987054716edf4ead8b97c7",
+            "options": "f8753cdab1bd1b6cde2ea384248e8de6256da6802ba74cc29cadf477032cf190",
+            "stock": "a37c183073fa4f5a0d93e4cbd3b7607379576f307c3baf3e1f284d2fc1f8bee0",
+            "reserved": [
+              0,
+              0,
+              0
+            ]
+          },
+          "3": {
+            "published": true,
+            "theme": "nature",
+            "semantic": "52826291b64daecb20e95d8d5125ea9f83043c159a211f504cb8965af3e19b21",
+            "departures": "9b19fbb38fd30723985465ed9ea8cdd40cf5ae4cac02c2a4d4d284dd0ad7953f",
+            "price": "a76762e9ef1ac59e6239545983c54496bd0c1d70407a64c4c8338dd4867cfc4d",
+            "options": "1883059f7493ba2ab45a4b7041f6946624b69069e337aa35ccf22556df090933",
+            "stock": "a37c183073fa4f5a0d93e4cbd3b7607379576f307c3baf3e1f284d2fc1f8bee0",
+            "reserved": [
+              0,
+              0,
+              0
+            ]
+          }
+        },
+        "private_snapshot_sha256": "fcc7e70b6494716d2bb2ef7afa3478fc315ceb6277d1a225d0bd6e8067b6538c"
+      }
+    },
+    {
+      "width": null,
+      "name": "PATCH only published=false for 1/3 (native admin)",
+      "status": "PASS",
+      "data": {
+        "patch": {
+          "1": {
+            "http": 200,
+            "published": false
+          },
+          "3": {
+            "http": 200,
+            "published": false
+          }
+        },
+        "natureNow": {
+          "ids": [],
+          "pages": 1
+        },
+        "page7PublicCampaign": 200,
+        "catalogQuery": {
+          "theme": "nature",
+          "sort": "recommended"
+        }
+      }
+    },
+    {
+      "name": "masked screenshot empty-campaign-catalog",
+      "width": 390,
+      "status": "PASS",
+      "known_private_ocr_hits": 0,
+      "path": "tests/W04_RETRY_BROWSER/evidence/empty-campaign-catalog-390.png",
+      "sha256": "ad3cafae614704d6f3bd6fc6a03af6fba31a048228adec125ead6c5bcfce2080",
+      "geometry": {
+        "viewport": 390,
+        "document": 390
+      }
+    },
+    {
+      "width": 390,
+      "name": "actual guest campaign Page body200, catalog200 data.data[] → campaign_trips-empty + all-trips CTA",
+      "status": "PASS",
+      "data": {
+        "campaignHttp": 200,
+        "catalogHttp": 200,
+        "catalogRows": 0,
+        "bodyTextLength": 100,
+        "emptyVisible": true,
+        "ctaNavigated": "/travel/search",
+        "pointer": "tap"
+      }
+    },
+    {
+      "name": "masked screenshot empty-campaign-catalog",
+      "width": 1440,
+      "status": "PASS",
+      "known_private_ocr_hits": 0,
+      "path": "tests/W04_RETRY_BROWSER/evidence/empty-campaign-catalog-1440.png",
+      "sha256": "3757570df76097f25e16cb5a48e8632cfa62a8575d60c22fa8adf6957a868c87",
+      "geometry": {
+        "viewport": 1440,
+        "document": 1440
+      }
+    },
+    {
+      "width": 1440,
+      "name": "actual guest campaign Page body200, catalog200 data.data[] → campaign_trips-empty + all-trips CTA",
+      "status": "PASS",
+      "data": {
+        "campaignHttp": 200,
+        "catalogHttp": 200,
+        "catalogRows": 0,
+        "bodyTextLength": 100,
+        "emptyVisible": true,
+        "ctaNavigated": "/travel/search",
+        "pointer": "click"
+      }
+    },
+    {
+      "width": null,
+      "name": "restore original published booleans and verify exact semantic catalog/departure/price/option/stock state",
+      "status": "PASS",
+      "data": {
+        "status": "PASS",
+        "restorePatch": {
+          "1": 200,
+          "3": 200
+        },
+        "before": {
+          "1": {
+            "published": true,
+            "theme": "nature",
+            "semantic": "57f37bb1a7669467f14a1c404cd825483fcaaf5a45478ded5ba9bef45aa61add",
+            "departures": "678d0eb61fe6b5c2fb809150e85c5117671a1af01d5cc6e7bfca37e8de5a037e",
+            "price": "3fe34e1dc1bc61011cceadcf055bd08c0affe9d1d2987054716edf4ead8b97c7",
+            "options": "f8753cdab1bd1b6cde2ea384248e8de6256da6802ba74cc29cadf477032cf190",
+            "stock": "a37c183073fa4f5a0d93e4cbd3b7607379576f307c3baf3e1f284d2fc1f8bee0",
+            "reserved": [
+              0,
+              0,
+              0
+            ]
+          },
+          "3": {
+            "published": true,
+            "theme": "nature",
+            "semantic": "52826291b64daecb20e95d8d5125ea9f83043c159a211f504cb8965af3e19b21",
+            "departures": "9b19fbb38fd30723985465ed9ea8cdd40cf5ae4cac02c2a4d4d284dd0ad7953f",
+            "price": "a76762e9ef1ac59e6239545983c54496bd0c1d70407a64c4c8338dd4867cfc4d",
+            "options": "1883059f7493ba2ab45a4b7041f6946624b69069e337aa35ccf22556df090933",
+            "stock": "a37c183073fa4f5a0d93e4cbd3b7607379576f307c3baf3e1f284d2fc1f8bee0",
+            "reserved": [
+              0,
+              0,
+              0
+            ]
+          }
+        },
+        "after": {
+          "1": {
+            "published": true,
+            "theme": "nature",
+            "semantic": "57f37bb1a7669467f14a1c404cd825483fcaaf5a45478ded5ba9bef45aa61add",
+            "departures": "678d0eb61fe6b5c2fb809150e85c5117671a1af01d5cc6e7bfca37e8de5a037e",
+            "price": "3fe34e1dc1bc61011cceadcf055bd08c0affe9d1d2987054716edf4ead8b97c7",
+            "options": "f8753cdab1bd1b6cde2ea384248e8de6256da6802ba74cc29cadf477032cf190",
+            "stock": "a37c183073fa4f5a0d93e4cbd3b7607379576f307c3baf3e1f284d2fc1f8bee0",
+            "reserved": [
+              0,
+              0,
+              0
+            ]
+          },
+          "3": {
+            "published": true,
+            "theme": "nature",
+            "semantic": "52826291b64daecb20e95d8d5125ea9f83043c159a211f504cb8965af3e19b21",
+            "departures": "9b19fbb38fd30723985465ed9ea8cdd40cf5ae4cac02c2a4d4d284dd0ad7953f",
+            "price": "a76762e9ef1ac59e6239545983c54496bd0c1d70407a64c4c8338dd4867cfc4d",
+            "options": "1883059f7493ba2ab45a4b7041f6946624b69069e337aa35ccf22556df090933",
+            "stock": "a37c183073fa4f5a0d93e4cbd3b7607379576f307c3baf3e1f284d2fc1f8bee0",
+            "reserved": [
+              0,
+              0,
+              0
+            ]
+          }
+        },
+        "natureIds": [
+          1,
+          3
+        ],
+        "allPublicIds": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ],
+        "updated_at": [
+          {
+            "id": 1,
+            "before": null,
+            "after": null
+          },
+          {
+            "id": 3,
+            "before": null,
+            "after": null
+          }
+        ],
+        "note": "updated_at excluded from semantic comparison; may legitimately increase"
+      }
+    }
+  ],
+  "metrics": [
+    {
+      "width": 390,
+      "role": "guest",
+      "pageerrors": [],
+      "external_attempts": [],
+      "external_connections": [],
+      "http": [
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/css/components.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/js/components.iife.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/vendor/font-awesome/6.4.0/css/all.inlined.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/routes.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/ko.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/components.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/en.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/config.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/layouts/raonslab-travel_lab/travel/campaign_detail.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/campaigns/travel-lab-campaign-autumn-escape",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog",
+          "method": "GET",
+          "status": 200
+        }
+      ],
+      "assets": [
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/css/components.css",
+          "sha256": "8b372bcc681e6b78fbac301ddb274e75703f3e50a9e76d0472243c23c571d207",
+          "status": 200,
+          "bytes": 51039
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/js/components.iife.js",
+          "sha256": "8941442d1a921c2f366063359e39f79ed3a719bce77a174b6c0aa5657b691d63",
+          "status": 200,
+          "bytes": 68911
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/vendor/font-awesome/6.4.0/css/all.inlined.css",
+          "sha256": "681dfabb239fcbfccb31b4fdb510ea3c094c5f0fe7d3aab724ade82f10556831",
+          "status": 200,
+          "bytes": 480419
+        },
+        {
+          "path": "/build/core/template-engine.min.js",
+          "sha256": "738ee97c6eebc33bc75d29f24397daabb54f124bede254689ca68a18fdb64a0b",
+          "status": 200,
+          "bytes": 819481
+        },
+        {
+          "path": "/api/modules/bundle.css",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "status": 200,
+          "bytes": 0
+        },
+        {
+          "path": "/api/modules/bundle.js",
+          "sha256": "a69dc60260eef16feb33b5433426d974164fcc5a9b15d3577a710a9212b9f2ce",
+          "status": 200,
+          "bytes": 153543
+        }
+      ],
+      "geometry": [
+        {
+          "name": "empty-campaign-catalog",
+          "viewport": 390,
+          "document": 390
+        }
+      ],
+      "inputs": [
+        {
+          "path": "/travel/campaigns/travel-lab-campaign-autumn-escape",
+          "events": []
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "role": "guest",
+      "pageerrors": [],
+      "external_attempts": [],
+      "external_connections": [],
+      "http": [
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/vendor/font-awesome/6.4.0/css/all.inlined.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/css/components.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/js/components.iife.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/components.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/config.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/ko.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/routes.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/en.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/layouts/raonslab-travel_lab/travel/campaign_detail.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/campaigns/travel-lab-campaign-autumn-escape",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog",
+          "method": "GET",
+          "status": 200
+        }
+      ],
+      "assets": [
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/vendor/font-awesome/6.4.0/css/all.inlined.css",
+          "sha256": "681dfabb239fcbfccb31b4fdb510ea3c094c5f0fe7d3aab724ade82f10556831",
+          "status": 200,
+          "bytes": 480419
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/css/components.css",
+          "sha256": "8b372bcc681e6b78fbac301ddb274e75703f3e50a9e76d0472243c23c571d207",
+          "status": 200,
+          "bytes": 51039
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/js/components.iife.js",
+          "sha256": "8941442d1a921c2f366063359e39f79ed3a719bce77a174b6c0aa5657b691d63",
+          "status": 200,
+          "bytes": 68911
+        },
+        {
+          "path": "/build/core/template-engine.min.js",
+          "sha256": "738ee97c6eebc33bc75d29f24397daabb54f124bede254689ca68a18fdb64a0b",
+          "status": 200,
+          "bytes": 819481
+        },
+        {
+          "path": "/api/modules/bundle.css",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "status": 200,
+          "bytes": 0
+        },
+        {
+          "path": "/api/modules/bundle.js",
+          "sha256": "a69dc60260eef16feb33b5433426d974164fcc5a9b15d3577a710a9212b9f2ce",
+          "status": 200,
+          "bytes": 153543
+        }
+      ],
+      "geometry": [
+        {
+          "name": "empty-campaign-catalog",
+          "viewport": 1440,
+          "document": 1440
+        }
+      ],
+      "inputs": [
+        {
+          "path": "/travel/campaigns/travel-lab-campaign-autumn-escape",
+          "events": []
+        }
+      ]
+    }
+  ],
+  "cleanup": [
+    {
+      "type": "parent-synthetic-nature-1-3-restored",
+      "status": "PASS",
+      "patch": {
+        "1": 200,
+        "3": 200
+      },
+      "semanticEqual": true,
+      "natureIds": [
+        1,
+        3
+      ],
+      "allPublic": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ]
+    },
+    {
+      "type": "exact-own-token",
+      "role": "admin",
+      "hash": "e01374edca39827ef35caba02c8797aac7b90021de26d1b261d36a123d31e657",
+      "via": "api",
+      "logout": 200,
+      "requery": 401,
+      "status": "PASS"
+    },
+    {
+      "type": "supplied-handoff-observed",
+      "role": "admin",
+      "http": 401,
+      "status": "OBSERVED",
+      "note": "supplied bearer already 401 at first preflight probe-1 before any write; never used for logout/revocation by this verifier"
+    },
+    {
+      "type": "supplied-handoff-observed",
+      "role": "member",
+      "http": 401,
+      "status": "OBSERVED",
+      "note": "supplied bearer already 401 at first preflight probe-1 before any write; never used for logout/revocation by this verifier"
+    },
+    {
+      "type": "supplied-handoff-observed",
+      "role": "other_member",
+      "http": 401,
+      "status": "OBSERVED",
+      "note": "supplied bearer already 401 at first preflight probe-1 before any write; never used for logout/revocation by this verifier"
+    }
+  ],
+  "chromium": "156.0.8078.4",
+  "elapsed_seconds": 16.345,
+  "finished": "2026-10-09T21:34:41.726Z"
+}

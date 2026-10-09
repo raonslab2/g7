@@ -1,0 +1,604 @@
+{
+  "phase": "retry-2",
+  "tested_sha": "5783e6ba124061bdfae639cdaf9b1c14a83cdf03",
+  "tree": "361f9a142572f8a6c0c28326c461a233a92aec4e",
+  "actual_head": "5783e6ba124061bdfae639cdaf9b1c14a83cdf03",
+  "argv": [
+    "retry-2",
+    "1440",
+    "A"
+  ],
+  "started": "2026-10-09T21:33:10.003Z",
+  "checks": [
+    {
+      "name": "masked screenshot retry-A-error",
+      "width": 1440,
+      "status": "PASS",
+      "known_private_ocr_hits": 0,
+      "path": "tests/W04_RETRY_BROWSER/evidence/retry-A-error-1440.png",
+      "sha256": "7e03a778ef1b91e5730c70f21e7d9d4c19d9f5dedf0ca3accf18658184700c98",
+      "geometry": {
+        "viewport": 1440,
+        "document": 1440
+      }
+    },
+    {
+      "name": "masked screenshot retry-A-recovered",
+      "width": 1440,
+      "status": "PASS",
+      "known_private_ocr_hits": 0,
+      "path": "tests/W04_RETRY_BROWSER/evidence/retry-A-recovered-1440.png",
+      "sha256": "a2fcad008d6e8d8dd393e4e8a37188793e1b9c0d2b26fe71de003ba58cdcfe36",
+      "geometry": {
+        "viewport": 1440,
+        "document": 1440
+      }
+    },
+    {
+      "width": 1440,
+      "name": "A strict: aborted list GET → error → abort removed → wait native200 installed → Retry → settled recovery, no reload",
+      "status": "PASS",
+      "data": {
+        "aborted": 1,
+        "errorBefore": {
+          "error": 1,
+          "loading": 0,
+          "titles": 0,
+          "titleText": [],
+          "edit": 0,
+          "detail": 0,
+          "publish": 0,
+          "unpublish": 0,
+          "create": 0,
+          "missing": 0,
+          "noUpdate": 0,
+          "marker": "set-0.29789327950410505",
+          "navEntries": 1,
+          "timeOrigin": 1791581597624.1
+        },
+        "pendingAtRequestStart": {
+          "error": 1,
+          "loading": 0,
+          "titles": 0,
+          "titleText": [],
+          "edit": 0,
+          "detail": 0,
+          "publish": 0,
+          "unpublish": 0,
+          "create": 0,
+          "missing": 0,
+          "noUpdate": 0,
+          "marker": "set-0.29789327950410505",
+          "navEntries": 1,
+          "timeOrigin": 1791581597624.1
+        },
+        "retryHttp": 200,
+        "after": {
+          "error": 0,
+          "loading": 0,
+          "titles": 2,
+          "titleText": [
+            "가을, 숲으로 떠나는 느린 여행",
+            "주말 리셋, 쉼이 있는 짧은 여행"
+          ],
+          "edit": 2,
+          "detail": 2,
+          "publish": 0,
+          "unpublish": 2,
+          "create": 0,
+          "missing": 0,
+          "noUpdate": 0,
+          "marker": "set-0.29789327950410505",
+          "navEntries": 1,
+          "timeOrigin": 1791581597624.1
+        },
+        "abilitiesUnchangedVsAdminAPI": true,
+        "reload": false,
+        "pointer": "click"
+      }
+    },
+    {
+      "width": 1440,
+      "name": "own issued token actual UI logout then exact old token 401",
+      "status": "PASS",
+      "data": {
+        "logout": 200,
+        "sentExactOwnToken": true,
+        "oldTokenUser": 401,
+        "token_hash": "bf4966afca198079dbda43c56f1ab82e546bafe2e0c3f79e2e2c3e381fb66ee3",
+        "status": "PASS"
+      }
+    },
+    {
+      "width": null,
+      "name": "Pages7/8 unchanged by Retry phase (native admin readback digest)",
+      "status": "PASS",
+      "data": {
+        "equal": true,
+        "status": "PASS"
+      }
+    }
+  ],
+  "metrics": [
+    {
+      "width": 1440,
+      "role": "admin",
+      "pageerrors": [],
+      "external_attempts": [],
+      "external_connections": [],
+      "http": [
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/css/components.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/vendor/font-awesome/6.4.0/css/all.inlined.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/js/components.iife.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/routes.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/components.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/ko.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/config.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/en.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/layouts/raonslab-travel_lab/auth/login.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/auth/login",
+          "method": "POST",
+          "status": 200
+        },
+        {
+          "path": "/api/layouts/raonslab-travel_lab/travel/home.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/facets",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/vendor/pretendard/1.3.9/pretendard-variable.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/vendor/font-awesome/6.4.0/css/all.inlined.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/vendor/flag-icons/7.2.3/css/flag-icons.min.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/css/components.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/js/components.iife.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/sirsoft-admin_basic/config.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/sirsoft-admin_basic/components.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/sirsoft-admin_basic/lang/en.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/sirsoft-admin_basic/lang/ko.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/sirsoft-admin_basic/routes.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/auth/user",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/layouts/sirsoft-admin_basic/raonslab-travel_lab.admin_travel_lab_campaigns.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/menus/active",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/auth/user",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/vendor/pretendard/1.3.9/woff2/PretendardVariable.woff2",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/plugins/installed",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/notifications",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/notifications/unread-count",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/modules/installed",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/sirsoft-page/admin/pages",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/css/components.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/vendor/font-awesome/6.4.0/css/all.inlined.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/js/components.iife.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/config.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/ko.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/components.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/en.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/routes.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/auth/user",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/layouts/raonslab-travel_lab/travel/home.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/facets",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/cart",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/auth/user",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/campaigns",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/auth/logout",
+          "method": "POST",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/facets",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog",
+          "method": "GET",
+          "status": 200
+        }
+      ],
+      "assets": [
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/css/components.css",
+          "sha256": "8b372bcc681e6b78fbac301ddb274e75703f3e50a9e76d0472243c23c571d207",
+          "status": 200,
+          "bytes": 51039
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/vendor/font-awesome/6.4.0/css/all.inlined.css",
+          "sha256": "681dfabb239fcbfccb31b4fdb510ea3c094c5f0fe7d3aab724ade82f10556831",
+          "status": 200,
+          "bytes": 480419
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/js/components.iife.js",
+          "sha256": "8941442d1a921c2f366063359e39f79ed3a719bce77a174b6c0aa5657b691d63",
+          "status": 200,
+          "bytes": 68911
+        },
+        {
+          "path": "/build/core/template-engine.min.js",
+          "sha256": "738ee97c6eebc33bc75d29f24397daabb54f124bede254689ca68a18fdb64a0b",
+          "status": 200,
+          "bytes": 819481
+        },
+        {
+          "path": "/api/modules/bundle.css",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "status": 200,
+          "bytes": 0
+        },
+        {
+          "path": "/api/modules/bundle.js",
+          "sha256": "a69dc60260eef16feb33b5433426d974164fcc5a9b15d3577a710a9212b9f2ce",
+          "status": 200,
+          "bytes": 153543
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/vendor/pretendard/1.3.9/pretendard-variable.css",
+          "sha256": "889d7b2b3dbadd64d7d8a6f9dfff87a57b43d067374b25ca57a49941a2fe04a5",
+          "status": 200,
+          "bytes": 558
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/vendor/flag-icons/7.2.3/css/flag-icons.min.css",
+          "sha256": "1fc43f995407b1a577d986afaa27a61664914b45221e88e7c8acb36bbe6d288e",
+          "status": 200,
+          "bytes": 70024
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/vendor/font-awesome/6.4.0/css/all.inlined.css",
+          "sha256": "43b85c89be42085da539891a6d29dfa910c7c35c78138f130ff9984715b4e6c1",
+          "status": 200,
+          "bytes": 480419
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/css/components.css",
+          "sha256": "3aafccf49bb7fc4521c2bb95ab2dcb550fc04b89848618aca6232fecfe10692c",
+          "status": 200,
+          "bytes": 592888
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/js/components.iife.js",
+          "sha256": "d25eb47e1308a83a456b17fe86953fec8fefc46a38769c0c225be72b0028e6c9",
+          "status": 200,
+          "bytes": 728609
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/vendor/pretendard/1.3.9/woff2/PretendardVariable.woff2",
+          "sha256": "9599f12fd42fc0bce1cd50b47a0c022e108d7aa64dd0d1bb0ed44f3282d900b4",
+          "status": 200,
+          "bytes": 2057688
+        }
+      ],
+      "geometry": [
+        {
+          "name": "retry-A-error",
+          "viewport": 1440,
+          "document": 1440
+        },
+        {
+          "name": "retry-A-recovered",
+          "viewport": 1440,
+          "document": 1440
+        }
+      ],
+      "aborted": 1,
+      "inputs": [
+        {
+          "path": "/admin/travel-lab/campaigns",
+          "events": []
+        },
+        {
+          "path": "/admin/travel-lab/campaigns",
+          "events": [
+            {
+              "type": "click",
+              "key": null,
+              "trusted": true,
+              "tag": "BUTTON",
+              "testid": "campaign-pages-retry",
+              "pointerType": "mouse"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "cleanup": [
+    {
+      "type": "exact-own-token",
+      "role": "admin",
+      "hash": "a80b513fd3d3d1c4132459a657d46c2e75f02a9233c2a0864734ce82b49721c3",
+      "via": "api",
+      "logout": 200,
+      "requery": 401,
+      "status": "PASS"
+    },
+    {
+      "type": "exact-own-token",
+      "role": "admin",
+      "hash": "bf4966afca198079dbda43c56f1ab82e546bafe2e0c3f79e2e2c3e381fb66ee3",
+      "via": "ui",
+      "requery": 401,
+      "status": "PASS"
+    },
+    {
+      "type": "supplied-handoff-observed",
+      "role": "admin",
+      "http": 401,
+      "status": "OBSERVED",
+      "note": "supplied bearer already 401 at first preflight probe-1 before any write; never used for logout/revocation by this verifier"
+    },
+    {
+      "type": "supplied-handoff-observed",
+      "role": "member",
+      "http": 401,
+      "status": "OBSERVED",
+      "note": "supplied bearer already 401 at first preflight probe-1 before any write; never used for logout/revocation by this verifier"
+    },
+    {
+      "type": "supplied-handoff-observed",
+      "role": "other_member",
+      "http": 401,
+      "status": "OBSERVED",
+      "note": "supplied bearer already 401 at first preflight probe-1 before any write; never used for logout/revocation by this verifier"
+    }
+  ],
+  "chromium": "156.0.8078.4",
+  "baseline": {
+    "abilities": {
+      "list": {
+        "can_create": true,
+        "can_update": true,
+        "can_delete": true
+      },
+      "rows": [
+        {
+          "id": 8,
+          "slug": "travel-lab-campaign-weekend-reset",
+          "published": true,
+          "abilities": {
+            "can_create": true,
+            "can_update": true,
+            "can_delete": true
+          }
+        },
+        {
+          "id": 7,
+          "slug": "travel-lab-campaign-autumn-escape",
+          "published": true,
+          "abilities": {
+            "can_create": true,
+            "can_update": true,
+            "can_delete": true
+          }
+        }
+      ]
+    },
+    "pages78_private_snapshot_digest": "b27c211f5f3e94ee2733b658bd194d84f5ac6c5e19d016ff590fc4e96e4a6df2"
+  },
+  "elapsed_seconds": 24.207,
+  "finished": "2026-10-09T21:33:34.210Z"
+}

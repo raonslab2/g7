@@ -1,0 +1,3093 @@
+{
+  "phase": "scope-1",
+  "tested_sha": "5783e6ba124061bdfae639cdaf9b1c14a83cdf03",
+  "tree": "361f9a142572f8a6c0c28326c461a233a92aec4e",
+  "actual_head": "5783e6ba124061bdfae639cdaf9b1c14a83cdf03",
+  "argv": [
+    "scope-1"
+  ],
+  "started": "2026-10-09T21:31:51.963Z",
+  "checks": [
+    {
+      "name": "masked screenshot readonly-campaigns",
+      "width": 390,
+      "status": "PASS",
+      "known_private_ocr_hits": 0,
+      "path": "tests/W04_RETRY_BROWSER/evidence/readonly-campaigns-390.png",
+      "sha256": "0d0a62a68ad79c7b0cd4192bcc1ee9806c92807159c4b47618d91b4a44292c6d",
+      "geometry": {
+        "viewport": 390,
+        "document": 390
+      }
+    },
+    {
+      "width": 390,
+      "name": "readonly57 campaign adapter: 2 slot titles, abilities false, no create/edit/publish controls",
+      "status": "PASS",
+      "data": {
+        "http": 200,
+        "dom": {
+          "error": 0,
+          "titles": 2,
+          "titleText": [
+            "가을, 숲으로 떠나는 느린 여행",
+            "주말 리셋, 쉼이 있는 짧은 여행"
+          ],
+          "edit": 0,
+          "detail": 2,
+          "publish": 0,
+          "unpublish": 0,
+          "create": 0,
+          "missing": 0,
+          "hint": 0,
+          "noUpdate": 2
+        },
+        "abilities": {
+          "list": {
+            "can_create": false,
+            "can_update": false,
+            "can_delete": false
+          },
+          "rows": [
+            {
+              "id": 8,
+              "can_create": false,
+              "can_update": false,
+              "can_delete": false
+            },
+            {
+              "id": 7,
+              "can_create": false,
+              "can_update": false,
+              "can_delete": false
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "masked screenshot readonly-page7-detail",
+      "width": 390,
+      "status": "PASS",
+      "known_private_ocr_hits": 0,
+      "path": "tests/W04_RETRY_BROWSER/evidence/readonly-page7-detail-390.png",
+      "sha256": "88a8e859ee30b6c64ba1a87424dedeff48039b898d0ca0b7cd1abbb1c0057c93",
+      "geometry": {
+        "viewport": 390,
+        "document": 390
+      }
+    },
+    {
+      "width": 390,
+      "name": "readonly57 actual detail navigation Page7 and Page8 detail: write controls not enabled",
+      "status": "PASS",
+      "data": {
+        "pages": [
+          {
+            "id": 7,
+            "detail": 200,
+            "titleVisible": true,
+            "enabledWriteButtons": 0
+          },
+          {
+            "id": 8,
+            "detail": 200,
+            "titleVisible": true,
+            "enabledWriteButtons": 0
+          }
+        ],
+        "versionsHttp": 200
+      }
+    },
+    {
+      "width": 390,
+      "name": "readonly57 own token actual UI logout then exact old token 401",
+      "status": "PASS",
+      "data": {
+        "logout": 200,
+        "sentExactOwnToken": true,
+        "oldTokenUser": 401,
+        "token_hash": "1d2c1fa2196e3463d0707d92302971306660351e3095b1f79e3bc728f055b203",
+        "status": "PASS"
+      }
+    },
+    {
+      "name": "masked screenshot self-reader-campaigns",
+      "width": 390,
+      "status": "PASS",
+      "known_private_ocr_hits": 0,
+      "path": "tests/W04_RETRY_BROWSER/evidence/self-reader-campaigns-390.png",
+      "sha256": "b941c5b362a3c598ef2fb155db59047fd73b48cd8772dac83820003f1be916a2",
+      "geometry": {
+        "viewport": 390,
+        "document": 390
+      }
+    },
+    {
+      "width": 390,
+      "name": "self58 campaign adapter: native200 scoped empty list, missing hints, no create",
+      "status": "PASS",
+      "data": {
+        "http": 200,
+        "rows": 0,
+        "total": 0,
+        "dom": {
+          "error": 0,
+          "titles": 0,
+          "titleText": [],
+          "edit": 0,
+          "detail": 0,
+          "publish": 0,
+          "unpublish": 0,
+          "create": 0,
+          "missing": 2,
+          "hint": 2,
+          "noUpdate": 0
+        },
+        "abilities": {
+          "can_create": false,
+          "can_update": false,
+          "can_delete": false
+        }
+      }
+    },
+    {
+      "name": "masked screenshot self-reader-foreign-detail",
+      "width": 390,
+      "status": "PASS",
+      "known_private_ocr_hits": 0,
+      "path": "tests/W04_RETRY_BROWSER/evidence/self-reader-foreign-detail-390.png",
+      "sha256": "dc03c848231f2eecff092634e36c61170ac276f30f09aa4dc3a8f13c926b070c",
+      "geometry": {
+        "viewport": 390,
+        "document": 390
+      }
+    },
+    {
+      "width": 390,
+      "name": "self58 actual browser direct foreign Page7 detail URL: native403 (not 404)",
+      "status": "PASS",
+      "data": {
+        "http": 403,
+        "titleLeaked": false,
+        "url": "/admin/pages/7"
+      }
+    },
+    {
+      "width": 390,
+      "name": "self58 own token actual UI logout then exact old token 401",
+      "status": "PASS",
+      "data": {
+        "logout": 200,
+        "sentExactOwnToken": true,
+        "oldTokenUser": 401,
+        "token_hash": "eb828dea970ed9e2be3314b8e81596f7385ed8bab7b18cec05f82aa5675e761b",
+        "status": "PASS"
+      }
+    },
+    {
+      "name": "masked screenshot readonly-campaigns",
+      "width": 1440,
+      "status": "PASS",
+      "known_private_ocr_hits": 0,
+      "path": "tests/W04_RETRY_BROWSER/evidence/readonly-campaigns-1440.png",
+      "sha256": "680b62717206cd8d6284f817860a4c964b8339fd348be5644038f0e9b32ae865",
+      "geometry": {
+        "viewport": 1440,
+        "document": 1440
+      }
+    },
+    {
+      "width": 1440,
+      "name": "readonly57 campaign adapter: 2 slot titles, abilities false, no create/edit/publish controls",
+      "status": "PASS",
+      "data": {
+        "http": 200,
+        "dom": {
+          "error": 0,
+          "titles": 2,
+          "titleText": [
+            "가을, 숲으로 떠나는 느린 여행",
+            "주말 리셋, 쉼이 있는 짧은 여행"
+          ],
+          "edit": 0,
+          "detail": 2,
+          "publish": 0,
+          "unpublish": 0,
+          "create": 0,
+          "missing": 0,
+          "hint": 0,
+          "noUpdate": 2
+        },
+        "abilities": {
+          "list": {
+            "can_create": false,
+            "can_update": false,
+            "can_delete": false
+          },
+          "rows": [
+            {
+              "id": 8,
+              "can_create": false,
+              "can_update": false,
+              "can_delete": false
+            },
+            {
+              "id": 7,
+              "can_create": false,
+              "can_update": false,
+              "can_delete": false
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "masked screenshot readonly-page7-detail",
+      "width": 1440,
+      "status": "PASS",
+      "known_private_ocr_hits": 0,
+      "path": "tests/W04_RETRY_BROWSER/evidence/readonly-page7-detail-1440.png",
+      "sha256": "8857363e1cd752cac7a463a7fd5bbba7d994594fa910108b0d48745f7c011764",
+      "geometry": {
+        "viewport": 1440,
+        "document": 1440
+      }
+    },
+    {
+      "width": 1440,
+      "name": "readonly57 actual detail navigation Page7 and Page8 detail: write controls not enabled",
+      "status": "PASS",
+      "data": {
+        "pages": [
+          {
+            "id": 7,
+            "detail": 200,
+            "titleVisible": true,
+            "enabledWriteButtons": 0
+          },
+          {
+            "id": 8,
+            "detail": 200,
+            "titleVisible": true,
+            "enabledWriteButtons": 0
+          }
+        ],
+        "versionsHttp": 200
+      }
+    },
+    {
+      "width": 1440,
+      "name": "readonly57 own token actual UI logout then exact old token 401",
+      "status": "PASS",
+      "data": {
+        "logout": 200,
+        "sentExactOwnToken": true,
+        "oldTokenUser": 401,
+        "token_hash": "c7e0eced1cd460045e239c5133fde4b1eb83f2fd55434aa63cb4a7c2f49fcc94",
+        "status": "PASS"
+      }
+    },
+    {
+      "name": "masked screenshot self-reader-campaigns",
+      "width": 1440,
+      "status": "PASS",
+      "known_private_ocr_hits": 0,
+      "path": "tests/W04_RETRY_BROWSER/evidence/self-reader-campaigns-1440.png",
+      "sha256": "e2b11d47a6b6208b9af9d0825b8f3e45b8725d960406c37bde29072bfc88a45f",
+      "geometry": {
+        "viewport": 1440,
+        "document": 1440
+      }
+    },
+    {
+      "width": 1440,
+      "name": "self58 campaign adapter: native200 scoped empty list, missing hints, no create",
+      "status": "PASS",
+      "data": {
+        "http": 200,
+        "rows": 0,
+        "total": 0,
+        "dom": {
+          "error": 0,
+          "titles": 0,
+          "titleText": [],
+          "edit": 0,
+          "detail": 0,
+          "publish": 0,
+          "unpublish": 0,
+          "create": 0,
+          "missing": 2,
+          "hint": 2,
+          "noUpdate": 0
+        },
+        "abilities": {
+          "can_create": false,
+          "can_update": false,
+          "can_delete": false
+        }
+      }
+    },
+    {
+      "name": "masked screenshot self-reader-foreign-detail",
+      "width": 1440,
+      "status": "PASS",
+      "known_private_ocr_hits": 0,
+      "path": "tests/W04_RETRY_BROWSER/evidence/self-reader-foreign-detail-1440.png",
+      "sha256": "c56e32c883560df501e62ce2e369573eac95df487b208e932a212859918af317",
+      "geometry": {
+        "viewport": 1440,
+        "document": 1440
+      }
+    },
+    {
+      "width": 1440,
+      "name": "self58 actual browser direct foreign Page7 detail URL: native403 (not 404)",
+      "status": "PASS",
+      "data": {
+        "http": 403,
+        "titleLeaked": false,
+        "url": "/admin/pages/7"
+      }
+    },
+    {
+      "width": 1440,
+      "name": "self58 own token actual UI logout then exact old token 401",
+      "status": "PASS",
+      "data": {
+        "logout": 200,
+        "sentExactOwnToken": true,
+        "oldTokenUser": 401,
+        "token_hash": "befaf3d48ce06e1a934e92f4c2f0af214084bde424dfab2e744eb1e23bc23d29",
+        "status": "PASS"
+      }
+    },
+    {
+      "width": null,
+      "name": "native API scope matrix: self403 foreign detail/versions, readonly200, guest401, member403, own customer draft404",
+      "status": "PASS",
+      "data": {
+        "observed": {
+          "self_show_7": 403,
+          "self_versions_7": 403,
+          "readonly_show_7": 200,
+          "readonly_versions_7": 200,
+          "self_show_8": 403,
+          "self_versions_8": 403,
+          "readonly_show_8": 200,
+          "readonly_versions_8": 200,
+          "self_version_item": 403,
+          "readonly_version_item": 200,
+          "guest_list": 401,
+          "member_list": 403,
+          "member_show_7": 403,
+          "customer_draft_public": 404,
+          "guest_draft_public": 404,
+          "self_own_draft": 403,
+          "travel_campaign_unknown": 404
+        },
+        "ownDraftFixture": 18
+      }
+    },
+    {
+      "width": null,
+      "name": "scoped actors valid writes all 403 and no rows changed",
+      "status": "PASS",
+      "data": {
+        "observed": {
+          "readonly": {
+            "create": 403,
+            "update": 403,
+            "publish": 403,
+            "bulk": 403,
+            "delete": 403,
+            "checkSlug": 403,
+            "restore": 403
+          },
+          "self_reader": {
+            "create": 403,
+            "update": 403,
+            "publish": 403,
+            "bulk": 403,
+            "delete": 403,
+            "checkSlug": 403,
+            "restore": 403
+          }
+        },
+        "pages78DigestUnchanged": true,
+        "idsOnlyPlusOwnDraft": true,
+        "status": "PASS"
+      }
+    }
+  ],
+  "metrics": [
+    {
+      "width": 390,
+      "role": "readonly",
+      "pageerrors": [],
+      "external_attempts": [],
+      "external_connections": [],
+      "http": [
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/vendor/font-awesome/6.4.0/css/all.inlined.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/css/components.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/js/components.iife.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/ko.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/en.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/components.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/routes.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/config.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/layouts/raonslab-travel_lab/auth/login.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/auth/login",
+          "method": "POST",
+          "status": 200
+        },
+        {
+          "path": "/api/layouts/raonslab-travel_lab/travel/home.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/facets",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/cart",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/auth/user",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/campaigns",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/vendor/pretendard/1.3.9/pretendard-variable.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/vendor/font-awesome/6.4.0/css/all.inlined.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/css/components.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/vendor/flag-icons/7.2.3/css/flag-icons.min.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/js/components.iife.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/sirsoft-admin_basic/lang/ko.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/sirsoft-admin_basic/config.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/sirsoft-admin_basic/lang/en.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/sirsoft-admin_basic/components.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/auth/user",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/sirsoft-admin_basic/routes.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/layouts/sirsoft-admin_basic/raonslab-travel_lab.admin_travel_lab_campaigns.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/menus/active",
+          "method": "GET",
+          "status": 403
+        },
+        {
+          "path": "/api/admin/notifications",
+          "method": "GET",
+          "status": 403
+        },
+        {
+          "path": "/api/admin/auth/user",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/notifications/unread-count",
+          "method": "GET",
+          "status": 403
+        },
+        {
+          "path": "/api/admin/modules/installed",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/plugins/installed",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/sirsoft-page/admin/pages",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/vendor/pretendard/1.3.9/woff2/PretendardVariable.woff2",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/vendor/pretendard/1.3.9/pretendard-variable.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/vendor/font-awesome/6.4.0/css/all.inlined.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/vendor/flag-icons/7.2.3/css/flag-icons.min.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/css/components.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/js/components.iife.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/sirsoft-admin_basic/config.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/sirsoft-admin_basic/components.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/sirsoft-admin_basic/lang/ko.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/sirsoft-admin_basic/lang/en.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/sirsoft-admin_basic/routes.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/auth/user",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/layouts/sirsoft-admin_basic/raonslab-travel_lab.admin_travel_lab_campaigns.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/menus/active",
+          "method": "GET",
+          "status": 403
+        },
+        {
+          "path": "/api/admin/auth/user",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/modules/installed",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/plugins/installed",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/sirsoft-page/admin/pages",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/notifications",
+          "method": "GET",
+          "status": 403
+        },
+        {
+          "path": "/api/admin/notifications/unread-count",
+          "method": "GET",
+          "status": 403
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/vendor/pretendard/1.3.9/woff2/PretendardVariable.woff2",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/layouts/sirsoft-admin_basic/sirsoft-page.admin_page_detail.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/menus/active",
+          "method": "GET",
+          "status": 403
+        },
+        {
+          "path": "/api/admin/auth/user",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/notifications",
+          "method": "GET",
+          "status": 403
+        },
+        {
+          "path": "/api/admin/plugins/installed",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/modules/installed",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/notifications/unread-count",
+          "method": "GET",
+          "status": 403
+        },
+        {
+          "path": "/api/modules/sirsoft-page/admin/pages/7",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/sirsoft-page/admin/pages/7/versions",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/vendor/pretendard/1.3.9/pretendard-variable.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/vendor/flag-icons/7.2.3/css/flag-icons.min.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/vendor/font-awesome/6.4.0/css/all.inlined.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/css/components.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/js/components.iife.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/sirsoft-admin_basic/config.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/sirsoft-admin_basic/routes.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/sirsoft-admin_basic/components.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/sirsoft-admin_basic/lang/ko.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/sirsoft-admin_basic/lang/en.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/auth/user",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/layouts/sirsoft-admin_basic/raonslab-travel_lab.admin_travel_lab_campaigns.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/menus/active",
+          "method": "GET",
+          "status": 403
+        },
+        {
+          "path": "/api/admin/notifications",
+          "method": "GET",
+          "status": 403
+        },
+        {
+          "path": "/api/admin/auth/user",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/notifications/unread-count",
+          "method": "GET",
+          "status": 403
+        },
+        {
+          "path": "/api/admin/plugins/installed",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/modules/installed",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/sirsoft-page/admin/pages",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/layouts/sirsoft-admin_basic/sirsoft-page.admin_page_detail.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/vendor/pretendard/1.3.9/woff2/PretendardVariable.woff2",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/menus/active",
+          "method": "GET",
+          "status": 403
+        },
+        {
+          "path": "/api/admin/plugins/installed",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/auth/user",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/modules/installed",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/notifications",
+          "method": "GET",
+          "status": 403
+        },
+        {
+          "path": "/api/admin/notifications/unread-count",
+          "method": "GET",
+          "status": 403
+        },
+        {
+          "path": "/api/modules/sirsoft-page/admin/pages/8",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/sirsoft-page/admin/pages/8/versions",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/css/components.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/js/components.iife.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/vendor/font-awesome/6.4.0/css/all.inlined.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/ko.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/en.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/components.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/auth/user",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/routes.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/config.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/layouts/raonslab-travel_lab/travel/home.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/facets",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/auth/user",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/cart",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/campaigns",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/auth/logout",
+          "method": "POST",
+          "status": 200
+        }
+      ],
+      "assets": [
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/vendor/font-awesome/6.4.0/css/all.inlined.css",
+          "sha256": "681dfabb239fcbfccb31b4fdb510ea3c094c5f0fe7d3aab724ade82f10556831",
+          "status": 200,
+          "bytes": 480419
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/css/components.css",
+          "sha256": "8b372bcc681e6b78fbac301ddb274e75703f3e50a9e76d0472243c23c571d207",
+          "status": 200,
+          "bytes": 51039
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/js/components.iife.js",
+          "sha256": "8941442d1a921c2f366063359e39f79ed3a719bce77a174b6c0aa5657b691d63",
+          "status": 200,
+          "bytes": 68911
+        },
+        {
+          "path": "/build/core/template-engine.min.js",
+          "sha256": "738ee97c6eebc33bc75d29f24397daabb54f124bede254689ca68a18fdb64a0b",
+          "status": 200,
+          "bytes": 819481
+        },
+        {
+          "path": "/api/modules/bundle.css",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "status": 200,
+          "bytes": 0
+        },
+        {
+          "path": "/api/modules/bundle.js",
+          "sha256": "a69dc60260eef16feb33b5433426d974164fcc5a9b15d3577a710a9212b9f2ce",
+          "status": 200,
+          "bytes": 153543
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/vendor/pretendard/1.3.9/pretendard-variable.css",
+          "sha256": "889d7b2b3dbadd64d7d8a6f9dfff87a57b43d067374b25ca57a49941a2fe04a5",
+          "status": 200,
+          "bytes": 558
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/vendor/font-awesome/6.4.0/css/all.inlined.css",
+          "sha256": "43b85c89be42085da539891a6d29dfa910c7c35c78138f130ff9984715b4e6c1",
+          "status": 200,
+          "bytes": 480419
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/css/components.css",
+          "sha256": "3aafccf49bb7fc4521c2bb95ab2dcb550fc04b89848618aca6232fecfe10692c",
+          "status": 200,
+          "bytes": 592888
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/vendor/flag-icons/7.2.3/css/flag-icons.min.css",
+          "sha256": "1fc43f995407b1a577d986afaa27a61664914b45221e88e7c8acb36bbe6d288e",
+          "status": 200,
+          "bytes": 70024
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/js/components.iife.js",
+          "sha256": "d25eb47e1308a83a456b17fe86953fec8fefc46a38769c0c225be72b0028e6c9",
+          "status": 200,
+          "bytes": 728609
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/vendor/pretendard/1.3.9/woff2/PretendardVariable.woff2",
+          "sha256": "9599f12fd42fc0bce1cd50b47a0c022e108d7aa64dd0d1bb0ed44f3282d900b4",
+          "status": 200,
+          "bytes": 2057688
+        }
+      ],
+      "geometry": [
+        {
+          "name": "readonly-campaigns",
+          "viewport": 390,
+          "document": 390
+        },
+        {
+          "name": "readonly-page7-detail",
+          "viewport": 390,
+          "document": 390
+        }
+      ],
+      "inputs": [
+        {
+          "path": "/admin/travel-lab/campaigns",
+          "events": []
+        },
+        {
+          "path": "/admin/pages/7",
+          "events": [
+            {
+              "type": "click",
+              "key": null,
+              "trusted": true,
+              "tag": "BUTTON",
+              "testid": "campaign-slot-detail",
+              "pointerType": "touch"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "width": 390,
+      "role": "self_reader",
+      "pageerrors": [],
+      "external_attempts": [],
+      "external_connections": [],
+      "http": [
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/vendor/font-awesome/6.4.0/css/all.inlined.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/css/components.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/js/components.iife.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/routes.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/ko.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/components.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/en.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/config.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/layouts/raonslab-travel_lab/auth/login.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/auth/login",
+          "method": "POST",
+          "status": 200
+        },
+        {
+          "path": "/api/layouts/raonslab-travel_lab/travel/home.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/facets",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/campaigns",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/vendor/pretendard/1.3.9/pretendard-variable.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/css/components.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/vendor/flag-icons/7.2.3/css/flag-icons.min.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/vendor/font-awesome/6.4.0/css/all.inlined.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/js/components.iife.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/sirsoft-admin_basic/routes.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/sirsoft-admin_basic/components.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/sirsoft-admin_basic/config.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/sirsoft-admin_basic/lang/en.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/sirsoft-admin_basic/lang/ko.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/auth/user",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/layouts/sirsoft-admin_basic/raonslab-travel_lab.admin_travel_lab_campaigns.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/menus/active",
+          "method": "GET",
+          "status": 403
+        },
+        {
+          "path": "/api/admin/auth/user",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/notifications",
+          "method": "GET",
+          "status": 403
+        },
+        {
+          "path": "/api/admin/notifications/unread-count",
+          "method": "GET",
+          "status": 403
+        },
+        {
+          "path": "/api/admin/modules/installed",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/plugins/installed",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/sirsoft-page/admin/pages",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/vendor/pretendard/1.3.9/woff2/PretendardVariable.woff2",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/vendor/pretendard/1.3.9/pretendard-variable.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/vendor/font-awesome/6.4.0/css/all.inlined.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/vendor/flag-icons/7.2.3/css/flag-icons.min.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/css/components.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/js/components.iife.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/auth/user",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/sirsoft-admin_basic/lang/en.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/sirsoft-admin_basic/lang/ko.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/sirsoft-admin_basic/routes.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/sirsoft-admin_basic/components.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/sirsoft-admin_basic/config.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/layouts/sirsoft-admin_basic/sirsoft-page.admin_page_detail.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/menus/active",
+          "method": "GET",
+          "status": 403
+        },
+        {
+          "path": "/api/admin/auth/user",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/notifications",
+          "method": "GET",
+          "status": 403
+        },
+        {
+          "path": "/api/admin/notifications/unread-count",
+          "method": "GET",
+          "status": 403
+        },
+        {
+          "path": "/api/modules/sirsoft-page/admin/pages/7",
+          "method": "GET",
+          "status": 403
+        },
+        {
+          "path": "/api/admin/plugins/installed",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/modules/installed",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/sirsoft-page/admin/pages/7/versions",
+          "method": "GET",
+          "status": 403
+        },
+        {
+          "path": "/api/templates/sirsoft-admin_basic/config.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/layouts/sirsoft-admin_basic/errors/403.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/vendor/pretendard/1.3.9/woff2/PretendardVariable.woff2",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/menus/active",
+          "method": "GET",
+          "status": 403
+        },
+        {
+          "path": "/api/admin/auth/user",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/notifications",
+          "method": "GET",
+          "status": 403
+        },
+        {
+          "path": "/api/admin/modules/installed",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/plugins/installed",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/notifications/unread-count",
+          "method": "GET",
+          "status": 403
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/vendor/font-awesome/6.4.0/css/all.inlined.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/css/components.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/js/components.iife.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/routes.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/ko.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/config.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/en.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/components.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/auth/user",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/layouts/raonslab-travel_lab/travel/home.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/cart",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/facets",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/auth/user",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/campaigns",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/auth/logout",
+          "method": "POST",
+          "status": 200
+        }
+      ],
+      "assets": [
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/vendor/font-awesome/6.4.0/css/all.inlined.css",
+          "sha256": "681dfabb239fcbfccb31b4fdb510ea3c094c5f0fe7d3aab724ade82f10556831",
+          "status": 200,
+          "bytes": 480419
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/css/components.css",
+          "sha256": "8b372bcc681e6b78fbac301ddb274e75703f3e50a9e76d0472243c23c571d207",
+          "status": 200,
+          "bytes": 51039
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/js/components.iife.js",
+          "sha256": "8941442d1a921c2f366063359e39f79ed3a719bce77a174b6c0aa5657b691d63",
+          "status": 200,
+          "bytes": 68911
+        },
+        {
+          "path": "/build/core/template-engine.min.js",
+          "sha256": "738ee97c6eebc33bc75d29f24397daabb54f124bede254689ca68a18fdb64a0b",
+          "status": 200,
+          "bytes": 819481
+        },
+        {
+          "path": "/api/modules/bundle.css",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "status": 200,
+          "bytes": 0
+        },
+        {
+          "path": "/api/modules/bundle.js",
+          "sha256": "a69dc60260eef16feb33b5433426d974164fcc5a9b15d3577a710a9212b9f2ce",
+          "status": 200,
+          "bytes": 153543
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/vendor/pretendard/1.3.9/pretendard-variable.css",
+          "sha256": "889d7b2b3dbadd64d7d8a6f9dfff87a57b43d067374b25ca57a49941a2fe04a5",
+          "status": 200,
+          "bytes": 558
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/vendor/flag-icons/7.2.3/css/flag-icons.min.css",
+          "sha256": "1fc43f995407b1a577d986afaa27a61664914b45221e88e7c8acb36bbe6d288e",
+          "status": 200,
+          "bytes": 70024
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/css/components.css",
+          "sha256": "3aafccf49bb7fc4521c2bb95ab2dcb550fc04b89848618aca6232fecfe10692c",
+          "status": 200,
+          "bytes": 592888
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/vendor/font-awesome/6.4.0/css/all.inlined.css",
+          "sha256": "43b85c89be42085da539891a6d29dfa910c7c35c78138f130ff9984715b4e6c1",
+          "status": 200,
+          "bytes": 480419
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/js/components.iife.js",
+          "sha256": "d25eb47e1308a83a456b17fe86953fec8fefc46a38769c0c225be72b0028e6c9",
+          "status": 200,
+          "bytes": 728609
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/vendor/pretendard/1.3.9/woff2/PretendardVariable.woff2",
+          "sha256": "9599f12fd42fc0bce1cd50b47a0c022e108d7aa64dd0d1bb0ed44f3282d900b4",
+          "status": 200,
+          "bytes": 2057688
+        }
+      ],
+      "geometry": [
+        {
+          "name": "self-reader-campaigns",
+          "viewport": 390,
+          "document": 390
+        },
+        {
+          "name": "self-reader-foreign-detail",
+          "viewport": 390,
+          "document": 390
+        }
+      ],
+      "inputs": [
+        {
+          "path": "/admin/travel-lab/campaigns",
+          "events": []
+        },
+        {
+          "path": "/admin/pages/7",
+          "events": []
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "role": "readonly",
+      "pageerrors": [],
+      "external_attempts": [],
+      "external_connections": [],
+      "http": [
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/css/components.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/js/components.iife.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/vendor/font-awesome/6.4.0/css/all.inlined.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/ko.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/routes.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/en.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/components.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/config.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/layouts/raonslab-travel_lab/auth/login.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/auth/login",
+          "method": "POST",
+          "status": 200
+        },
+        {
+          "path": "/api/layouts/raonslab-travel_lab/travel/home.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/facets",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/cart",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/auth/user",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/campaigns",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/vendor/pretendard/1.3.9/pretendard-variable.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/vendor/flag-icons/7.2.3/css/flag-icons.min.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/vendor/font-awesome/6.4.0/css/all.inlined.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/css/components.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/js/components.iife.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/sirsoft-admin_basic/routes.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/sirsoft-admin_basic/config.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/sirsoft-admin_basic/lang/ko.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/sirsoft-admin_basic/lang/en.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/sirsoft-admin_basic/components.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/auth/user",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/layouts/sirsoft-admin_basic/raonslab-travel_lab.admin_travel_lab_campaigns.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/notifications",
+          "method": "GET",
+          "status": 403
+        },
+        {
+          "path": "/api/admin/menus/active",
+          "method": "GET",
+          "status": 403
+        },
+        {
+          "path": "/api/admin/auth/user",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/notifications/unread-count",
+          "method": "GET",
+          "status": 403
+        },
+        {
+          "path": "/api/modules/sirsoft-page/admin/pages",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/modules/installed",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/plugins/installed",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/vendor/pretendard/1.3.9/woff2/PretendardVariable.woff2",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/vendor/pretendard/1.3.9/pretendard-variable.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/vendor/flag-icons/7.2.3/css/flag-icons.min.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/vendor/font-awesome/6.4.0/css/all.inlined.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/js/components.iife.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/css/components.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/sirsoft-admin_basic/routes.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/sirsoft-admin_basic/lang/en.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/sirsoft-admin_basic/lang/ko.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/sirsoft-admin_basic/components.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/sirsoft-admin_basic/config.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/auth/user",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/layouts/sirsoft-admin_basic/raonslab-travel_lab.admin_travel_lab_campaigns.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/notifications",
+          "method": "GET",
+          "status": 403
+        },
+        {
+          "path": "/api/admin/menus/active",
+          "method": "GET",
+          "status": 403
+        },
+        {
+          "path": "/api/admin/auth/user",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/plugins/installed",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/sirsoft-page/admin/pages",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/notifications/unread-count",
+          "method": "GET",
+          "status": 403
+        },
+        {
+          "path": "/api/admin/modules/installed",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/vendor/pretendard/1.3.9/woff2/PretendardVariable.woff2",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/layouts/sirsoft-admin_basic/sirsoft-page.admin_page_detail.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/menus/active",
+          "method": "GET",
+          "status": 403
+        },
+        {
+          "path": "/api/admin/auth/user",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/notifications/unread-count",
+          "method": "GET",
+          "status": 403
+        },
+        {
+          "path": "/api/admin/notifications",
+          "method": "GET",
+          "status": 403
+        },
+        {
+          "path": "/api/admin/modules/installed",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/plugins/installed",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/sirsoft-page/admin/pages/7",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/sirsoft-page/admin/pages/7/versions",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/vendor/flag-icons/7.2.3/css/flag-icons.min.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/vendor/font-awesome/6.4.0/css/all.inlined.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/vendor/pretendard/1.3.9/pretendard-variable.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/css/components.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/js/components.iife.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/sirsoft-admin_basic/config.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/sirsoft-admin_basic/lang/ko.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/sirsoft-admin_basic/components.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/sirsoft-admin_basic/lang/en.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/sirsoft-admin_basic/routes.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/auth/user",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/layouts/sirsoft-admin_basic/raonslab-travel_lab.admin_travel_lab_campaigns.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/menus/active",
+          "method": "GET",
+          "status": 403
+        },
+        {
+          "path": "/api/admin/plugins/installed",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/auth/user",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/modules/installed",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/notifications",
+          "method": "GET",
+          "status": 403
+        },
+        {
+          "path": "/api/modules/sirsoft-page/admin/pages",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/notifications/unread-count",
+          "method": "GET",
+          "status": 403
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/vendor/pretendard/1.3.9/woff2/PretendardVariable.woff2",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/layouts/sirsoft-admin_basic/sirsoft-page.admin_page_detail.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/notifications/unread-count",
+          "method": "GET",
+          "status": 403
+        },
+        {
+          "path": "/api/admin/menus/active",
+          "method": "GET",
+          "status": 403
+        },
+        {
+          "path": "/api/admin/auth/user",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/plugins/installed",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/modules/installed",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/sirsoft-page/admin/pages/8",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/notifications",
+          "method": "GET",
+          "status": 403
+        },
+        {
+          "path": "/api/modules/sirsoft-page/admin/pages/8/versions",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/js/components.iife.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/vendor/font-awesome/6.4.0/css/all.inlined.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/css/components.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/components.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/ko.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/en.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/auth/user",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/routes.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/config.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/layouts/raonslab-travel_lab/travel/home.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/auth/user",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/facets",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/campaigns",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/cart",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/auth/logout",
+          "method": "POST",
+          "status": 200
+        }
+      ],
+      "assets": [
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/css/components.css",
+          "sha256": "8b372bcc681e6b78fbac301ddb274e75703f3e50a9e76d0472243c23c571d207",
+          "status": 200,
+          "bytes": 51039
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/js/components.iife.js",
+          "sha256": "8941442d1a921c2f366063359e39f79ed3a719bce77a174b6c0aa5657b691d63",
+          "status": 200,
+          "bytes": 68911
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/vendor/font-awesome/6.4.0/css/all.inlined.css",
+          "sha256": "681dfabb239fcbfccb31b4fdb510ea3c094c5f0fe7d3aab724ade82f10556831",
+          "status": 200,
+          "bytes": 480419
+        },
+        {
+          "path": "/build/core/template-engine.min.js",
+          "sha256": "738ee97c6eebc33bc75d29f24397daabb54f124bede254689ca68a18fdb64a0b",
+          "status": 200,
+          "bytes": 819481
+        },
+        {
+          "path": "/api/modules/bundle.css",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "status": 200,
+          "bytes": 0
+        },
+        {
+          "path": "/api/modules/bundle.js",
+          "sha256": "a69dc60260eef16feb33b5433426d974164fcc5a9b15d3577a710a9212b9f2ce",
+          "status": 200,
+          "bytes": 153543
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/vendor/pretendard/1.3.9/pretendard-variable.css",
+          "sha256": "889d7b2b3dbadd64d7d8a6f9dfff87a57b43d067374b25ca57a49941a2fe04a5",
+          "status": 200,
+          "bytes": 558
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/vendor/flag-icons/7.2.3/css/flag-icons.min.css",
+          "sha256": "1fc43f995407b1a577d986afaa27a61664914b45221e88e7c8acb36bbe6d288e",
+          "status": 200,
+          "bytes": 70024
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/vendor/font-awesome/6.4.0/css/all.inlined.css",
+          "sha256": "43b85c89be42085da539891a6d29dfa910c7c35c78138f130ff9984715b4e6c1",
+          "status": 200,
+          "bytes": 480419
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/css/components.css",
+          "sha256": "3aafccf49bb7fc4521c2bb95ab2dcb550fc04b89848618aca6232fecfe10692c",
+          "status": 200,
+          "bytes": 592888
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/js/components.iife.js",
+          "sha256": "d25eb47e1308a83a456b17fe86953fec8fefc46a38769c0c225be72b0028e6c9",
+          "status": 200,
+          "bytes": 728609
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/vendor/pretendard/1.3.9/woff2/PretendardVariable.woff2",
+          "sha256": "9599f12fd42fc0bce1cd50b47a0c022e108d7aa64dd0d1bb0ed44f3282d900b4",
+          "status": 200,
+          "bytes": 2057688
+        }
+      ],
+      "geometry": [
+        {
+          "name": "readonly-campaigns",
+          "viewport": 1440,
+          "document": 1440
+        },
+        {
+          "name": "readonly-page7-detail",
+          "viewport": 1440,
+          "document": 1440
+        }
+      ],
+      "inputs": [
+        {
+          "path": "/admin/travel-lab/campaigns",
+          "events": []
+        },
+        {
+          "path": "/admin/pages/7",
+          "events": [
+            {
+              "type": "click",
+              "key": null,
+              "trusted": true,
+              "tag": "BUTTON",
+              "testid": "campaign-slot-detail",
+              "pointerType": "mouse"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "role": "self_reader",
+      "pageerrors": [],
+      "external_attempts": [],
+      "external_connections": [],
+      "http": [
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/css/components.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/vendor/font-awesome/6.4.0/css/all.inlined.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/js/components.iife.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/config.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/ko.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/routes.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/en.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/components.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/layouts/raonslab-travel_lab/auth/login.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/auth/login",
+          "method": "POST",
+          "status": 200
+        },
+        {
+          "path": "/api/layouts/raonslab-travel_lab/travel/home.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/facets",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/campaigns",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/auth/user",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/cart",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/vendor/flag-icons/7.2.3/css/flag-icons.min.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/vendor/font-awesome/6.4.0/css/all.inlined.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/vendor/pretendard/1.3.9/pretendard-variable.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/css/components.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/js/components.iife.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/auth/user",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/sirsoft-admin_basic/lang/en.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/sirsoft-admin_basic/components.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/sirsoft-admin_basic/lang/ko.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/sirsoft-admin_basic/routes.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/sirsoft-admin_basic/config.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/layouts/sirsoft-admin_basic/raonslab-travel_lab.admin_travel_lab_campaigns.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/modules/installed",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/menus/active",
+          "method": "GET",
+          "status": 403
+        },
+        {
+          "path": "/api/admin/notifications",
+          "method": "GET",
+          "status": 403
+        },
+        {
+          "path": "/api/admin/auth/user",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/plugins/installed",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/notifications/unread-count",
+          "method": "GET",
+          "status": 403
+        },
+        {
+          "path": "/api/modules/sirsoft-page/admin/pages",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/vendor/pretendard/1.3.9/woff2/PretendardVariable.woff2",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/vendor/pretendard/1.3.9/pretendard-variable.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/vendor/flag-icons/7.2.3/css/flag-icons.min.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/vendor/font-awesome/6.4.0/css/all.inlined.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/css/components.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/js/components.iife.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/sirsoft-admin_basic/components.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/sirsoft-admin_basic/config.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/sirsoft-admin_basic/lang/en.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/sirsoft-admin_basic/lang/ko.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/auth/user",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/sirsoft-admin_basic/routes.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/layouts/sirsoft-admin_basic/sirsoft-page.admin_page_detail.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/menus/active",
+          "method": "GET",
+          "status": 403
+        },
+        {
+          "path": "/api/admin/notifications",
+          "method": "GET",
+          "status": 403
+        },
+        {
+          "path": "/api/admin/notifications/unread-count",
+          "method": "GET",
+          "status": 403
+        },
+        {
+          "path": "/api/admin/auth/user",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/plugins/installed",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/modules/installed",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/sirsoft-page/admin/pages/7",
+          "method": "GET",
+          "status": 403
+        },
+        {
+          "path": "/api/modules/sirsoft-page/admin/pages/7/versions",
+          "method": "GET",
+          "status": 403
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/vendor/pretendard/1.3.9/woff2/PretendardVariable.woff2",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/sirsoft-admin_basic/config.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/layouts/sirsoft-admin_basic/errors/403.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/plugins/installed",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/auth/user",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/menus/active",
+          "method": "GET",
+          "status": 403
+        },
+        {
+          "path": "/api/admin/notifications",
+          "method": "GET",
+          "status": 403
+        },
+        {
+          "path": "/api/admin/notifications/unread-count",
+          "method": "GET",
+          "status": 403
+        },
+        {
+          "path": "/api/admin/modules/installed",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/css/components.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/js/components.iife.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/vendor/font-awesome/6.4.0/css/all.inlined.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/components.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/routes.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/ko.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/en.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/config.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/auth/user",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/layouts/raonslab-travel_lab/travel/home.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/facets",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/auth/user",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/cart",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/campaigns",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/auth/logout",
+          "method": "POST",
+          "status": 200
+        }
+      ],
+      "assets": [
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/css/components.css",
+          "sha256": "8b372bcc681e6b78fbac301ddb274e75703f3e50a9e76d0472243c23c571d207",
+          "status": 200,
+          "bytes": 51039
+        },
+        {
+          "path": "/build/core/template-engine.min.js",
+          "sha256": "738ee97c6eebc33bc75d29f24397daabb54f124bede254689ca68a18fdb64a0b",
+          "status": 200,
+          "bytes": 819481
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/vendor/font-awesome/6.4.0/css/all.inlined.css",
+          "sha256": "681dfabb239fcbfccb31b4fdb510ea3c094c5f0fe7d3aab724ade82f10556831",
+          "status": 200,
+          "bytes": 480419
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/js/components.iife.js",
+          "sha256": "8941442d1a921c2f366063359e39f79ed3a719bce77a174b6c0aa5657b691d63",
+          "status": 200,
+          "bytes": 68911
+        },
+        {
+          "path": "/api/modules/bundle.css",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "status": 200,
+          "bytes": 0
+        },
+        {
+          "path": "/api/modules/bundle.js",
+          "sha256": "a69dc60260eef16feb33b5433426d974164fcc5a9b15d3577a710a9212b9f2ce",
+          "status": 200,
+          "bytes": 153543
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/vendor/flag-icons/7.2.3/css/flag-icons.min.css",
+          "sha256": "1fc43f995407b1a577d986afaa27a61664914b45221e88e7c8acb36bbe6d288e",
+          "status": 200,
+          "bytes": 70024
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/vendor/font-awesome/6.4.0/css/all.inlined.css",
+          "sha256": "43b85c89be42085da539891a6d29dfa910c7c35c78138f130ff9984715b4e6c1",
+          "status": 200,
+          "bytes": 480419
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/vendor/pretendard/1.3.9/pretendard-variable.css",
+          "sha256": "889d7b2b3dbadd64d7d8a6f9dfff87a57b43d067374b25ca57a49941a2fe04a5",
+          "status": 200,
+          "bytes": 558
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/css/components.css",
+          "sha256": "3aafccf49bb7fc4521c2bb95ab2dcb550fc04b89848618aca6232fecfe10692c",
+          "status": 200,
+          "bytes": 592888
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/js/components.iife.js",
+          "sha256": "d25eb47e1308a83a456b17fe86953fec8fefc46a38769c0c225be72b0028e6c9",
+          "status": 200,
+          "bytes": 728609
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/vendor/pretendard/1.3.9/woff2/PretendardVariable.woff2",
+          "sha256": "9599f12fd42fc0bce1cd50b47a0c022e108d7aa64dd0d1bb0ed44f3282d900b4",
+          "status": 200,
+          "bytes": 2057688
+        }
+      ],
+      "geometry": [
+        {
+          "name": "self-reader-campaigns",
+          "viewport": 1440,
+          "document": 1440
+        },
+        {
+          "name": "self-reader-foreign-detail",
+          "viewport": 1440,
+          "document": 1440
+        }
+      ],
+      "inputs": [
+        {
+          "path": "/admin/travel-lab/campaigns",
+          "events": []
+        },
+        {
+          "path": "/admin/pages/7",
+          "events": []
+        }
+      ]
+    }
+  ],
+  "cleanup": [
+    {
+      "type": "own-draft-page-deleted",
+      "id": 18,
+      "delete": 200,
+      "adminRead": 404,
+      "public": 404,
+      "status": "PASS"
+    },
+    {
+      "type": "exact-own-token",
+      "role": "admin",
+      "hash": "a53757d02ec0f12678173744510f8f27bd29144e4b4f4f72d78ced33851ef7ee",
+      "via": "api",
+      "logout": 200,
+      "requery": 401,
+      "status": "PASS"
+    },
+    {
+      "type": "exact-own-token",
+      "role": "readonly",
+      "hash": "1d2c1fa2196e3463d0707d92302971306660351e3095b1f79e3bc728f055b203",
+      "via": "ui",
+      "requery": 401,
+      "status": "PASS"
+    },
+    {
+      "type": "exact-own-token",
+      "role": "self_reader",
+      "hash": "eb828dea970ed9e2be3314b8e81596f7385ed8bab7b18cec05f82aa5675e761b",
+      "via": "ui",
+      "requery": 401,
+      "status": "PASS"
+    },
+    {
+      "type": "exact-own-token",
+      "role": "readonly",
+      "hash": "c7e0eced1cd460045e239c5133fde4b1eb83f2fd55434aa63cb4a7c2f49fcc94",
+      "via": "ui",
+      "requery": 401,
+      "status": "PASS"
+    },
+    {
+      "type": "exact-own-token",
+      "role": "self_reader",
+      "hash": "befaf3d48ce06e1a934e92f4c2f0af214084bde424dfab2e744eb1e23bc23d29",
+      "via": "ui",
+      "requery": 401,
+      "status": "PASS"
+    },
+    {
+      "type": "exact-own-token",
+      "role": "self_reader",
+      "hash": "1f6a6a570c04865e968608f49e9327f72654bad8b34b6578393890ddc747926b",
+      "via": "api",
+      "logout": 200,
+      "requery": 401,
+      "status": "PASS"
+    },
+    {
+      "type": "exact-own-token",
+      "role": "readonly",
+      "hash": "9110c2877f619fac9a49c5a217a563c75cfecb97308f5974769ee814ade4580f",
+      "via": "api",
+      "logout": 200,
+      "requery": 401,
+      "status": "PASS"
+    },
+    {
+      "type": "exact-own-token",
+      "role": "member",
+      "hash": "f816a37abccce9784db064629e7e716f82bbe4d374e1c3f3c812a8eefa27754f",
+      "via": "api",
+      "logout": 200,
+      "requery": 401,
+      "status": "PASS"
+    },
+    {
+      "type": "supplied-handoff-observed",
+      "role": "admin",
+      "http": 401,
+      "status": "OBSERVED",
+      "note": "supplied bearer already 401 at first preflight probe-1 before any write; never used for logout/revocation by this verifier"
+    },
+    {
+      "type": "supplied-handoff-observed",
+      "role": "member",
+      "http": 401,
+      "status": "OBSERVED",
+      "note": "supplied bearer already 401 at first preflight probe-1 before any write; never used for logout/revocation by this verifier"
+    },
+    {
+      "type": "supplied-handoff-observed",
+      "role": "other_member",
+      "http": 401,
+      "status": "OBSERVED",
+      "note": "supplied bearer already 401 at first preflight probe-1 before any write; never used for logout/revocation by this verifier"
+    }
+  ],
+  "chromium": "156.0.8078.4",
+  "before": {
+    "total": 8,
+    "ids": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+    ]
+  },
+  "elapsed_seconds": 137.087,
+  "finished": "2026-10-09T21:34:09.050Z"
+}

@@ -1,0 +1,432 @@
+{
+  "phase": "final-audit-1",
+  "tested_sha": "5783e6ba124061bdfae639cdaf9b1c14a83cdf03",
+  "tree": "361f9a142572f8a6c0c28326c461a233a92aec4e",
+  "actual_head": "5783e6ba124061bdfae639cdaf9b1c14a83cdf03",
+  "argv": [
+    "final-audit-1"
+  ],
+  "started": "2026-10-09T21:39:05.015Z",
+  "checks": [
+    {
+      "width": null,
+      "name": "Pages7/8 ID/slug/title/content/mode/publication equal private original",
+      "status": "PASS",
+      "data": {
+        "pages": {
+          "7": {
+            "fieldsEqual": true,
+            "wholeEqual": true,
+            "version": 11,
+            "origVersion": 11
+          },
+          "8": {
+            "fieldsEqual": true,
+            "wholeEqual": true,
+            "version": 9,
+            "origVersion": 9
+          }
+        },
+        "status": "PASS"
+      }
+    },
+    {
+      "width": null,
+      "name": "parent synthetic nature 1/3 semantic state equals pre-window snapshot; public nature set {1,3}",
+      "status": "PASS",
+      "data": {
+        "semanticEqual": {
+          "1": true,
+          "3": true
+        },
+        "natureIds": [
+          1,
+          3
+        ],
+        "status": "PASS"
+      }
+    },
+    {
+      "width": null,
+      "name": "own fixtures terminal state readback",
+      "status": "PASS",
+      "data": {
+        "inquiries": [
+          {
+            "id": 181,
+            "status": "CANCELLED"
+          },
+          {
+            "id": 182,
+            "status": "CANCELLED"
+          },
+          {
+            "id": 183,
+            "status": "DECLINED"
+          },
+          {
+            "id": 184,
+            "status": "CANCELLED"
+          }
+        ],
+        "products": [
+          {
+            "id": 94,
+            "published": false,
+            "public": 404,
+            "departures": [
+              {
+                "id": 150,
+                "active": false,
+                "reserved": 0
+              }
+            ]
+          },
+          {
+            "id": 95,
+            "published": false,
+            "public": 404,
+            "departures": [
+              {
+                "id": 151,
+                "active": false,
+                "reserved": 0
+              }
+            ]
+          }
+        ],
+        "policies": [
+          {
+            "id": 12,
+            "active": false,
+            "default": false
+          },
+          {
+            "id": 13,
+            "active": false,
+            "default": false
+          }
+        ],
+        "support": [
+          {
+            "id": 124,
+            "channel": "notices",
+            "public": 404
+          },
+          {
+            "id": 125,
+            "channel": "faqs",
+            "public": 404
+          },
+          {
+            "id": 126,
+            "channel": "questions",
+            "public": 404
+          },
+          {
+            "id": 127,
+            "channel": "notices",
+            "public": 404
+          },
+          {
+            "id": 128,
+            "channel": "faqs",
+            "public": 404
+          },
+          {
+            "id": 129,
+            "channel": "questions",
+            "public": 404
+          }
+        ],
+        "drafts": [
+          {
+            "id": 18,
+            "admin": 404
+          }
+        ],
+        "carts": {
+          "member": 0,
+          "other_member": 0
+        },
+        "status": "PASS"
+      }
+    },
+    {
+      "width": null,
+      "name": "every own issued token from earlier phases exact /api/auth/user 401",
+      "status": "PASS",
+      "data": {
+        "count": 27,
+        "byRole": {
+          "admin": 13,
+          "readonly": 4,
+          "self_reader": 4,
+          "member": 5,
+          "other_member": 1
+        },
+        "non401": [],
+        "rows": [
+          {
+            "phase": "probe-2",
+            "role": "admin",
+            "hash": "0a6e52864a675a8be9cd98abe8552c9750e295c574a4be88a161c89eea886a1f",
+            "via": "api",
+            "http": 401
+          },
+          {
+            "phase": "probe-2",
+            "role": "readonly",
+            "hash": "927e7b1456df52711a28232c515b8b4fd2659a07248a18771a350aba27315d5e",
+            "via": "api",
+            "http": 401
+          },
+          {
+            "phase": "probe-2",
+            "role": "self_reader",
+            "hash": "b99c7e8f382f9ee153d939f0e2758e35a46002fa5b6d98000f1ff9dde85cf46b",
+            "via": "api",
+            "http": 401
+          },
+          {
+            "phase": "retry-1",
+            "role": "admin",
+            "hash": "6cc30bc70a7275112d09e86c668120bf53468039ebec3b3604f4836d620aa3cf",
+            "via": "api",
+            "http": 401
+          },
+          {
+            "phase": "retry-1",
+            "role": "admin",
+            "hash": "75317123e11bbb27e8a61fb465cf9d4bafa1288a49e45be5291681d27ff1ebbc",
+            "via": "ui",
+            "http": 401
+          },
+          {
+            "phase": "retry-1",
+            "role": "admin",
+            "hash": "390c9ccc49c21931984806cabd5ebedaf2994a12877517d01a24753241ab85ea",
+            "via": "ui",
+            "http": 401
+          },
+          {
+            "phase": "scope-1",
+            "role": "admin",
+            "hash": "a53757d02ec0f12678173744510f8f27bd29144e4b4f4f72d78ced33851ef7ee",
+            "via": "api",
+            "http": 401
+          },
+          {
+            "phase": "scope-1",
+            "role": "readonly",
+            "hash": "1d2c1fa2196e3463d0707d92302971306660351e3095b1f79e3bc728f055b203",
+            "via": "ui",
+            "http": 401
+          },
+          {
+            "phase": "scope-1",
+            "role": "self_reader",
+            "hash": "eb828dea970ed9e2be3314b8e81596f7385ed8bab7b18cec05f82aa5675e761b",
+            "via": "ui",
+            "http": 401
+          },
+          {
+            "phase": "scope-1",
+            "role": "readonly",
+            "hash": "c7e0eced1cd460045e239c5133fde4b1eb83f2fd55434aa63cb4a7c2f49fcc94",
+            "via": "ui",
+            "http": 401
+          },
+          {
+            "phase": "scope-1",
+            "role": "self_reader",
+            "hash": "befaf3d48ce06e1a934e92f4c2f0af214084bde424dfab2e744eb1e23bc23d29",
+            "via": "ui",
+            "http": 401
+          },
+          {
+            "phase": "scope-1",
+            "role": "self_reader",
+            "hash": "1f6a6a570c04865e968608f49e9327f72654bad8b34b6578393890ddc747926b",
+            "via": "api",
+            "http": 401
+          },
+          {
+            "phase": "scope-1",
+            "role": "readonly",
+            "hash": "9110c2877f619fac9a49c5a217a563c75cfecb97308f5974769ee814ade4580f",
+            "via": "api",
+            "http": 401
+          },
+          {
+            "phase": "scope-1",
+            "role": "member",
+            "hash": "f816a37abccce9784db064629e7e716f82bbe4d374e1c3f3c812a8eefa27754f",
+            "via": "api",
+            "http": 401
+          },
+          {
+            "phase": "empty-1",
+            "role": "admin",
+            "hash": "e01374edca39827ef35caba02c8797aac7b90021de26d1b261d36a123d31e657",
+            "via": "api",
+            "http": 401
+          },
+          {
+            "phase": "transaction-1",
+            "role": "member",
+            "hash": "2dd6a6d7713a98e68592557f1886fd559a4dfc08bf45013d0d7afe9eeb00d1db",
+            "via": "ui",
+            "http": 401
+          },
+          {
+            "phase": "transaction-1",
+            "role": "admin",
+            "hash": "0f92872571ac36c8d12234986581162e9431e5fc9cca6fa7b7b518a5e28dfebf",
+            "via": "api",
+            "http": 401
+          },
+          {
+            "phase": "transaction-1",
+            "role": "member",
+            "hash": "40a1bbca156b3abd1465341ab4d76e97045079514a6784385fd56397ec2268be",
+            "via": "api",
+            "http": 401
+          },
+          {
+            "phase": "transaction-1",
+            "role": "other_member",
+            "hash": "b11e88864bb89a0b6493791998bf1f6cd6cc061aa31413322d29a0e4a9f6b03e",
+            "via": "api",
+            "http": 401
+          },
+          {
+            "phase": "transaction-1",
+            "role": "member",
+            "hash": "875b8ffee09b2c8e6e46e8ef2c5c805211dcde4b36b0545580217c8fd92fe2a8",
+            "via": "ui",
+            "http": 401
+          },
+          {
+            "phase": "transaction-1",
+            "role": "admin",
+            "hash": "902cf28b6103ac8548548bfe3ccbfa672a8599116d9951350c1e1a87b4b88d7e",
+            "via": "api",
+            "http": 401
+          },
+          {
+            "phase": "transaction-1",
+            "role": "member",
+            "hash": "293e3cc0fa3e08045f6cd53f41effa9fcd6a7f98950c510b3edeb8ae2286ca8d",
+            "via": "api",
+            "http": 401
+          },
+          {
+            "phase": "menu-diag-1",
+            "role": "admin",
+            "hash": "75067a137f82f1897d4531c6f54ef328d81c199f3f6621e38a2bb8fae1cd8d57",
+            "via": "api",
+            "http": 401
+          },
+          {
+            "phase": "menu-diag-1",
+            "role": "admin",
+            "hash": "4ff9e8af5bc67852f001c109e47f55ca6f723da442d537cc1753096edae87bae",
+            "via": "api",
+            "http": 401
+          },
+          {
+            "phase": "menu-diag-1",
+            "role": "admin",
+            "hash": "a18ee1809613a34f210a8f2a34a9c7ecfc6f71362b293c0098f8c141b9158ba4",
+            "via": "api",
+            "http": 401
+          },
+          {
+            "phase": "menu-diag-1",
+            "role": "admin",
+            "hash": "4e1f04da64a6dfa6872bd1af83e5f02b46fe5779026e0a414305b5273339e671",
+            "via": "api",
+            "http": 401
+          },
+          {
+            "phase": "menu-diag-1",
+            "role": "admin",
+            "hash": "e026c21cc53d1a933d37810a3fe6cdba984c16215f6a8e781ec8830a6cfebe56",
+            "via": "api",
+            "http": 401
+          }
+        ],
+        "status": "PASS"
+      }
+    },
+    {
+      "width": null,
+      "name": "supplied handoff bearer status (GET only)",
+      "status": "OBSERVED",
+      "data": {
+        "supplied": {
+          "admin": 401,
+          "member": 401,
+          "other_member": 401
+        },
+        "status": "OBSERVED",
+        "note": "all three were 401 at first preflight probe-1 21:24:42Z before any verifier write"
+      }
+    }
+  ],
+  "metrics": [],
+  "cleanup": [
+    {
+      "type": "exact-own-token",
+      "role": "admin",
+      "hash": "fb64c700bcb9fd16b8999e5b7e2f0dd40bcc150ee6ea1c48f490150fac51782e",
+      "via": "api",
+      "logout": 200,
+      "requery": 401,
+      "status": "PASS"
+    },
+    {
+      "type": "exact-own-token",
+      "role": "member",
+      "hash": "1cf60e734a05f8055025388632bc6f8040faa4342993c70f01dc7d0140d5f87f",
+      "via": "api",
+      "logout": 200,
+      "requery": 401,
+      "status": "PASS"
+    },
+    {
+      "type": "exact-own-token",
+      "role": "other_member",
+      "hash": "32974427c031a2401b9c5bb7da2d422a32a4e2b4655ba6e38a51c3d98204e482",
+      "via": "api",
+      "logout": 200,
+      "requery": 401,
+      "status": "PASS"
+    },
+    {
+      "type": "supplied-handoff-observed",
+      "role": "admin",
+      "http": 401,
+      "status": "OBSERVED",
+      "note": "supplied bearer already 401 at first preflight probe-1 before any write; never used for logout/revocation by this verifier"
+    },
+    {
+      "type": "supplied-handoff-observed",
+      "role": "member",
+      "http": 401,
+      "status": "OBSERVED",
+      "note": "supplied bearer already 401 at first preflight probe-1 before any write; never used for logout/revocation by this verifier"
+    },
+    {
+      "type": "supplied-handoff-observed",
+      "role": "other_member",
+      "http": 401,
+      "status": "OBSERVED",
+      "note": "supplied bearer already 401 at first preflight probe-1 before any write; never used for logout/revocation by this verifier"
+    }
+  ],
+  "chromium": "156.0.8078.4",
+  "elapsed_seconds": 5.578,
+  "finished": "2026-10-09T21:39:10.593Z"
+}
