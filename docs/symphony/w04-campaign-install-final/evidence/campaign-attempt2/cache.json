@@ -1,0 +1,44 @@
+{
+    "status": "PASS",
+    "implementation": "App\\Seo\\SeoCacheManager",
+    "records": {
+        "update": {
+            "before_native_cache_rows": 291,
+            "after": {
+                "travel/home": true,
+                "travel/campaigns": true,
+                "travel/campaign_detail": true,
+                "page/show": true
+            }
+        },
+        "unpublish": {
+            "before_native_cache_rows": 293,
+            "after": {
+                "travel/home": true,
+                "travel/campaigns": true,
+                "travel/campaign_detail": true,
+                "page/show": true
+            }
+        },
+        "restore": {
+            "before_native_cache_rows": 293,
+            "after": {
+                "travel/home": true,
+                "travel/campaigns": true,
+                "travel/campaign_detail": true,
+                "page/show": true
+            }
+        },
+        "publish": {
+            "before_native_cache_rows": 293,
+            "after": {
+                "travel/home": true,
+                "travel/campaigns": true,
+                "travel/campaign_detail": true,
+                "page/show": true
+            }
+        }
+    },
+    "recorder_mock": false,
+    "static_html_browser_privacy": "NOT_RUN"
+}

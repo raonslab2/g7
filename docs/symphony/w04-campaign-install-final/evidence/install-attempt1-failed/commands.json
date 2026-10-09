@@ -1,0 +1,142 @@
+{
+    "commands": [
+        {
+            "step": "01-db-wipe",
+            "args": [
+                "db:wipe",
+                "--database=mysql",
+                "--drop-views",
+                "--force",
+                "--no-interaction"
+            ],
+            "quiesce_wait": 0,
+            "exit": 0,
+            "seconds": 1.011,
+            "pid": 609193
+        },
+        {
+            "step": "02-settings-install",
+            "args": [
+                "settings:install",
+                "--no-interaction"
+            ],
+            "quiesce_wait": 0,
+            "exit": 0,
+            "seconds": 0.665,
+            "pid": 609978
+        },
+        {
+            "step": "03-db-seed",
+            "args": [
+                "db:seed",
+                "--class=DatabaseSeeder",
+                "--force",
+                "--no-interaction"
+            ],
+            "quiesce_wait": 0,
+            "exit": 0,
+            "seconds": 1.23,
+            "pid": 610041
+        },
+        {
+            "step": "04-module-install-sirsoft-board",
+            "args": [
+                "module:install",
+                "sirsoft-board",
+                "--vendor-mode=bundled",
+                "--no-interaction"
+            ],
+            "quiesce_wait": 0,
+            "exit": 0,
+            "seconds": 4.982,
+            "pid": 610158
+        },
+        {
+            "step": "05-module-activate-sirsoft-board",
+            "args": [
+                "module:activate",
+                "sirsoft-board",
+                "--no-interaction"
+            ],
+            "quiesce_wait": 0,
+            "exit": 0,
+            "seconds": 0.611,
+            "pid": 610419
+        },
+        {
+            "step": "06-module-install-sirsoft-page",
+            "args": [
+                "module:install",
+                "sirsoft-page",
+                "--vendor-mode=bundled",
+                "--no-interaction"
+            ],
+            "quiesce_wait": 0,
+            "exit": 0,
+            "seconds": 1.677,
+            "pid": 610426
+        },
+        {
+            "step": "07-module-activate-sirsoft-page",
+            "args": [
+                "module:activate",
+                "sirsoft-page",
+                "--no-interaction"
+            ],
+            "quiesce_wait": 0,
+            "exit": 0,
+            "seconds": 0.614,
+            "pid": 610484
+        },
+        {
+            "step": "08-module-install-sirsoft-ecommerce",
+            "args": [
+                "module:install",
+                "sirsoft-ecommerce",
+                "--vendor-mode=bundled",
+                "--no-interaction"
+            ],
+            "quiesce_wait": 0,
+            "exit": 0,
+            "seconds": 14.111,
+            "pid": 610493
+        },
+        {
+            "step": "09-module-activate-sirsoft-ecommerce",
+            "args": [
+                "module:activate",
+                "sirsoft-ecommerce",
+                "--no-interaction"
+            ],
+            "quiesce_wait": 0,
+            "exit": 0,
+            "seconds": 0.684,
+            "pid": 611286
+        },
+        {
+            "step": "10-module-install-raonslab-travel_lab",
+            "args": [
+                "module:install",
+                "raonslab-travel_lab",
+                "--vendor-mode=bundled",
+                "--no-interaction"
+            ],
+            "quiesce_wait": 0,
+            "exit": 0,
+            "seconds": 1.598,
+            "pid": 611310
+        },
+        {
+            "step": "11-module-activate-raonslab-travel_lab",
+            "args": [
+                "module:activate",
+                "raonslab-travel_lab",
+                "--no-interaction"
+            ],
+            "quiesce_wait": 0,
+            "exit": 0,
+            "seconds": 0.709,
+            "pid": 611401
+        }
+    ]
+}

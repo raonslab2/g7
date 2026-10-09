@@ -1,0 +1,18 @@
+{
+  "command": [
+    "/usr/bin/php8.3",
+    "docs/symphony/w04-campaign-install-final/snapshot.php",
+    "board-regression",
+    "run",
+    "/usr/bin/php8.3",
+    "vendor/bin/phpunit",
+    "--bootstrap",
+    "docs/symphony/w04-campaign-install-final/test-bootstrap.php",
+    "modules/_bundled/sirsoft-board/tests/Feature/User/SecretPostCommentAccessTest.php"
+  ],
+  "exit": 1,
+  "seconds": 37.383,
+  "native_log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "summary": [],
+  "restored_exactly": false
+}

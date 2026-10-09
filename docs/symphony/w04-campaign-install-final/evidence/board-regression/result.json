@@ -1,0 +1,89 @@
+{
+    "label": "board-regression",
+    "child_exit": null,
+    "wipe_exit": 0,
+    "empty_tables_after_wipe": 0,
+    "import_exit": 0,
+    "import_seconds": 1.635,
+    "import_pid": 656612,
+    "import_process_gone": true,
+    "import_handles": {
+        "utc": "2026-10-09T19:58:25.579227+00:00",
+        "count": 0,
+        "handles": [],
+        "unreadable_pids": [],
+        "lock_holders": [],
+        "excluded_ancestor_pids": [
+            603659,
+            656581,
+            656721,
+            656722,
+            3650359
+        ],
+        "method": "proc-only bounded cwd/argv/FD; known TEST owners and own nonancestor native processes"
+    },
+    "exact_tables_rows_ddl": true,
+    "restored_digest": "ded72a53ad82a159b88e50a6560625488bb569a55f5f5ffa109cd45ae52d056e",
+    "expected_digest": "ded72a53ad82a159b88e50a6560625488bb569a55f5f5ffa109cd45ae52d056e",
+    "equals_original_baseline": true,
+    "table_count": 55,
+    "row_count": 104,
+    "exclusive_pre_import": {
+        "pid": 656581,
+        "cwd": "/home/ubuntu/.agentopt-v2/workspaces/req_812d0334c2064f5d88339114e7954235",
+        "argv": [
+            "docs/symphony/w04-campaign-install-final/snapshot.php",
+            "board-regression",
+            "restore-keep"
+        ],
+        "own_connection_id": 123444,
+        "other_test_connections": 0,
+        "own_server_processes": 0,
+        "prior_request_handles": {
+            "utc": "2026-10-09T19:58:23.943247+00:00",
+            "count": 0,
+            "handles": [],
+            "unreadable_pids": [],
+            "lock_holders": [],
+            "excluded_ancestor_pids": [
+                603659,
+                656581,
+                656605,
+                656611,
+                3650359
+            ],
+            "method": "proc-only bounded cwd/argv/FD; known TEST owners and own nonancestor native processes"
+        },
+        "utc": "2026-10-09T19:58:23+00:00"
+    },
+    "exclusive_post": {
+        "pid": 656581,
+        "cwd": "/home/ubuntu/.agentopt-v2/workspaces/req_812d0334c2064f5d88339114e7954235",
+        "argv": [
+            "docs/symphony/w04-campaign-install-final/snapshot.php",
+            "board-regression",
+            "restore-keep"
+        ],
+        "own_connection_id": 123446,
+        "other_test_connections": 0,
+        "own_server_processes": 0,
+        "prior_request_handles": {
+            "utc": "2026-10-09T19:58:25.687278+00:00",
+            "count": 0,
+            "handles": [],
+            "unreadable_pids": [],
+            "lock_holders": [],
+            "excluded_ancestor_pids": [
+                603659,
+                656581,
+                656723,
+                656724,
+                3650359
+            ],
+            "method": "proc-only bounded cwd/argv/FD; known TEST owners and own nonancestor native processes"
+        },
+        "utc": "2026-10-09T19:58:25+00:00"
+    },
+    "backup_retained": true,
+    "utc": "2026-10-09T19:58:25+00:00"
+}

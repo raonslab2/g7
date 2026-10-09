@@ -1,0 +1,41 @@
+{
+    "table_count": 128,
+    "row_count": 252,
+    "digest": "a6391c0c9acfea564fd7a2f9af8b5530e87493ddccdae5ceb421e63df6e23aaa",
+    "exclusive": {
+        "pid": 644604,
+        "cwd": "/home/ubuntu/.agentopt-v2/workspaces/req_812d0334c2064f5d88339114e7954235",
+        "argv": [
+            "docs/symphony/w04-campaign-install-final/snapshot.php",
+            "page-regression",
+            "run",
+            "/usr/bin/php8.3",
+            "vendor/bin/phpunit",
+            "--bootstrap",
+            "docs/symphony/w04-campaign-install-final/test-bootstrap.php",
+            "modules/_bundled/sirsoft-page/tests",
+            "--filter",
+            "^(.*\\\\)?(PageServiceTest|PageControllerTest|PageVersionScopeTest|PublicPageControllerTest|PageSitemapIndexTest)::"
+        ],
+        "own_connection_id": 123189,
+        "other_test_connections": 0,
+        "own_server_processes": 0,
+        "prior_request_handles": {
+            "utc": "2026-10-09T19:56:41.657246+00:00",
+            "count": 0,
+            "handles": [],
+            "unreadable_pids": [],
+            "lock_holders": [],
+            "excluded_ancestor_pids": [
+                603659,
+                644602,
+                644604,
+                650861,
+                650863,
+                3650359
+            ],
+            "method": "proc-only bounded cwd/argv/FD; known TEST owners and own nonancestor native processes"
+        },
+        "utc": "2026-10-09T19:56:41+00:00"
+    }
+}
