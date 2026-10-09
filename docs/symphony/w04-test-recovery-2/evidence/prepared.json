@@ -1,0 +1,92 @@
+{
+    "source_sha": "1052e3fb4bc4cccabb51b8c538116c78655f345b",
+    "source_tree": "f18fa2056a031353c889785d768f87824e3083f5",
+    "source_branch": "fixed exact detached source",
+    "request_id": "req_dd6208f86a0b487796de37b9c4365cd4",
+    "original": {
+        "table_count": 55,
+        "row_count": 104,
+        "inventory_digest_sha256": "ded72a53ad82a159b88e50a6560625488bb569a55f5f5ffa109cd45ae52d056e",
+        "dump_sha256": "f8e6aed98484864daf1ae08436c8e229d4eeda5774f1afec5a6a80e1ddb447ff",
+        "sql_boundary_check": {
+            "exact_create_drop_table_inventory": true,
+            "other_schema_objects": 0,
+            "statement_counts": {
+                "ALTER KEYS": 110,
+                "CREATE TABLE": 55,
+                "DROP TABLE": 55,
+                "INSERT": 1,
+                "LOCK": 55,
+                "SET": 183,
+                "UNLOCK": 55
+            },
+            "table_count": 55
+        }
+    },
+    "current": {
+        "table_count": 55,
+        "row_count": 419,
+        "inventory_digest_sha256": "f9ba89d77dac19888cfe5982292c782d08b640453493ceaacea923dc1456dfe1",
+        "safety_dump_sha256": "f15e10a0ff973f84e9a37c903b458e65278af00ab4577f322462e0fecacd15f2",
+        "sql_boundary_check": {
+            "exact_create_drop_table_inventory": true,
+            "other_schema_objects": 0,
+            "statement_counts": {
+                "ALTER KEYS": 110,
+                "CREATE TABLE": 55,
+                "DROP TABLE": 55,
+                "INSERT": 15,
+                "LOCK": 55,
+                "SET": 183,
+                "UNLOCK": 55
+            },
+            "table_count": 55
+        }
+    },
+    "source_private_file_sha256": {
+        "manifest.json": "1033215bdd245fd1bf91fa07665c6bf7bb47ef35a1bb2be95c42b7e3db2292df",
+        "before.json": "4d48b2f40cad00e234aa8bd32b0a2ead19f5bae81555d0565ce8601dfedbdc16",
+        "snapshot.sql": "f8e6aed98484864daf1ae08436c8e229d4eeda5774f1afec5a6a80e1ddb447ff",
+        "BLOCKED": "3428755b127fa3dd0c37f07230b6272646a598bbddb347751429c2d5c7df7ff7",
+        "phase.json": "35d6289948393cec1795e573ca60d129d3d5a19bc59db8d6c7aaf9f2a4ee8f50"
+    },
+    "directory_mode": "0700",
+    "snapshot_manifest_options_modes": "0600",
+    "orphans": {
+        "utc": "2026-10-09T16:32:51.124861+00:00",
+        "method": "privileged readonly proc exact cwd/individual bounded argv/fd; proc locks inode",
+        "count": 0,
+        "handles": [],
+        "unreadable_pids": [],
+        "failed_lock_present": true,
+        "lock_holders": []
+    },
+    "connection": {
+        "database": "req81_travel_lab_test",
+        "account": "req81_travel@127.0.0.1",
+        "own_connection_id": 94357,
+        "other_test_handles": [],
+        "other_test_connections": 0,
+        "visibility": "scoped SHOW PROCESSLIST plus readonly local-socket global PROCESSLIST filtered to exact TEST",
+        "readonly_socket_probe_seconds": 0.032,
+        "globally_observed_test_connection_ids": [
+            94357
+        ]
+    },
+    "safety_dump_command": {
+        "command": [
+            "mysqldump",
+            "--defaults-file=<private TEST-only options>",
+            "--single-transaction",
+            "--hex-blob",
+            "--no-tablespaces",
+            "--skip-lock-tables",
+            "req81_travel_lab_test"
+        ],
+        "child_pid": 125581,
+        "exit": 0,
+        "seconds": 0.196
+    },
+    "seconds": 1.779,
+    "database_mutations": 0
+}
