@@ -1,0 +1,16 @@
+{
+  "request_id": "req_b3b4d5373a384cfd8e0b7b8f55fb011f",
+  "source_sha": "28ada286c1c34606741bcfe4f9d12e06ac50af30",
+  "source_tree": "a821bd89f6cf8bdf8cad3b8b35d8758ce8446d9c",
+  "started_utc": "2026-10-09T10:23:51.365110+00:00",
+  "duration_seconds": 7.69,
+  "command": [
+    "php",
+    "scripts/travel-lab/guard-test.php"
+  ],
+  "environment_scope": "no-DB temporary isolation fixture",
+  "exit_code": 0,
+  "execution_provenance": "W03 nonauthor independent execution; harness labels are not formal Validation",
+  "output": "PASS: valid scoped environment\nPASS: unmarked environment\nPASS: foreign write DB\nPASS: foreign read DB\nPASS: foreign fallback DB\nPASS: external host\nPASS: privileged user\nPASS: external port\nPASS: database URL override\nPASS: database socket override\nPASS: outbound mail\nPASS: background queue\nPASS: external storage\nPASS: settings override protection absent\nPASS: bootstrap/cache/config.php refusal\nPASS: storage/installer/runtime.php refusal\nPASS: marked generated cache removal\nPASS: unmarked cache preserved\nPASS: foreign DB cache preserved\nPASS: symlink cache preserved\nPASS: 20 isolation checks; no live environment mutation or database access.\n",
+  "result_status": "PASS"
+}

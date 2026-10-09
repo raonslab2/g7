@@ -1,0 +1,18 @@
+{
+  "request_id": "req_b3b4d5373a384cfd8e0b7b8f55fb011f",
+  "source_sha": "28ada286c1c34606741bcfe4f9d12e06ac50af30",
+  "source_tree": "a821bd89f6cf8bdf8cad3b8b35d8758ce8446d9c",
+  "started_utc": "2026-10-09T10:23:58.596243+00:00",
+  "duration_seconds": 0.757,
+  "command": [
+    "php",
+    "scripts/travel-lab/run.php",
+    "test",
+    "scripts/travel-lab/LiveMysqlTest.php"
+  ],
+  "environment_scope": "no-bootstrap; identical TEST env copy triggers native production-DB name guard",
+  "exit_code": 1,
+  "execution_provenance": "W03 nonauthor independent execution; harness labels are not formal Validation",
+  "output": "\n============================================================\n  ERROR: 프로덕션 DB 오염 위험 — 테스트 중단.\n\n  .env 와 .env.testing 의 DB_WRITE_DATABASE 가 동일합니다: req81_travel_lab_test\n\n  테스트용 별도 DB 를 사용하도록 .env.testing 을 수정하세요.\n  (예: DB_WRITE_DATABASE=req81_travel_lab_test_testing)\n============================================================\n\n",
+  "result_status": "BLOCKED"
+}

@@ -1,0 +1,27 @@
+{
+  "request_id": "req_b3b4d5373a384cfd8e0b7b8f55fb011f",
+  "source_sha": "28ada286c1c34606741bcfe4f9d12e06ac50af30",
+  "source_tree": "a821bd89f6cf8bdf8cad3b8b35d8758ce8446d9c",
+  "started_utc": "2026-10-09T10:31:31.649993+00:00",
+  "duration_seconds": 35.569,
+  "command": [
+    "composer",
+    "install",
+    "--no-scripts",
+    "--no-interaction",
+    "--prefer-dist"
+  ],
+  "environment_scope": "own Composer lock install --no-scripts; no app bootstrap",
+  "exit_code": 0,
+  "execution_provenance": "W03 nonauthor independent execution; harness labels are not formal Validation",
+  "review_helpers_sha256_at_start": {
+    "recovery-failure-probe.php": "7d986ad6ccdeac437e205470e1114aacc40094e8854ee7e6ebaae364ddad2c52",
+    "test-bootstrap.php": "016f9df1e625867af81515531c107e725316a102611c909207803069ef5dbc4c",
+    "record.py": "4bfb24509359cf9af5b140e37b834318b10e20eb34ac71b91db8ab00c9ae304b",
+    "capture-test.php": "34d804cc6c0f4865d4531e4c477a4e098ed000b09a196605d97e119011aca52e",
+    "verify-capture.php": "65dae202ab746f6449b5ddfa89a76eea056af1ffa951b816ebbddf8c55c45699",
+    "schema-snapshot.php": "010f920ac19f182d0c06e54e02ebbe67fb8991cbd9dcee9003ef86ce5c455644"
+  },
+  "output": "Installing dependencies from lock file (including require-dev)\nVerifying lock file contents can be installed on current platform.\nNothing to install, update or remove\nGenerating optimized autoload files\nClass Tests\\Unit\\Extension\\FixtureRepositoryInterface located in ./tests/Unit/Extension/ServiceProviderTestFixtures.php does not comply with psr-4 autoloading standard. Skipping.\nClass Tests\\Unit\\Extension\\FixtureRepositoryImpl located in ./tests/Unit/Extension/ServiceProviderTestFixtures.php does not comply with psr-4 autoloading standard. Skipping.\nClass Tests\\Unit\\Extension\\FixtureCacheConsumer located in ./tests/Unit/Extension/ServiceProviderTestFixtures.php does not comply with psr-4 autoloading standard. Skipping.\nClass Tests\\Unit\\Extension\\FixtureStorageConsumer located in ./tests/Unit/Extension/ServiceProviderTestFixtures.php does not comply with psr-4 autoloading standard. Skipping.\n97 packages you are using are looking for funding.\nUse the `composer fund` command to find out more!\n",
+  "result_status": "PASS"
+}
