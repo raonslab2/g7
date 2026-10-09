@@ -1,0 +1,169 @@
+{
+    "version": "1.0.0",
+    "layout_name": "errors/404",
+    "extends": "_user_base",
+    "meta": {
+        "title": "$t:travel.errors.e404.title"
+    },
+    "slots": {
+        "content": [
+            {
+                "type": "basic",
+                "name": "Div",
+                "props": {
+                    "className": "mx-auto w-full max-w-6xl px-4 md:px-6 py-12 md:py-20"
+                },
+                "children": [
+                    {
+                        "type": "basic",
+                        "name": "Div",
+                        "props": {
+                            "className": "mx-auto flex max-w-xl flex-col items-center gap-5 text-center"
+                        },
+                        "children": [
+                            {
+                                "type": "basic",
+                                "name": "Div",
+                                "props": {
+                                    "className": "relative h-48 w-full overflow-hidden rounded-3xl shadow-sm md:h-56"
+                                },
+                                "children": [
+                                    {
+                                        "type": "composite",
+                                        "name": "ScenicArt",
+                                        "props": {
+                                            "variant": "island",
+                                            "className": "h-full w-full"
+                                        }
+                                    },
+                                    {
+                                        "type": "basic",
+                                        "name": "Div",
+                                        "props": {
+                                            "className": "absolute inset-0 flex items-center justify-center"
+                                        },
+                                        "children": [
+                                            {
+                                                "type": "basic",
+                                                "name": "Span",
+                                                "props": {
+                                                    "className": "text-6xl font-black text-white/90 drop-shadow md:text-7xl"
+                                                },
+                                                "text": "404"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "basic",
+                                "name": "Div",
+                                "props": {
+                                    "className": "flex h-12 w-12 items-center justify-center rounded-full bg-raon-50 text-raon-600"
+                                },
+                                "children": [
+                                    {
+                                        "type": "basic",
+                                        "name": "Icon",
+                                        "props": {
+                                            "name": "map-marker-alt",
+                                            "className": "text-xl"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "basic",
+                                "name": "H1",
+                                "props": {
+                                    "className": "text-2xl font-black text-ink-900 md:text-3xl",
+                                    "data-testid": "error-title"
+                                },
+                                "text": "$t:travel.errors.e404.title"
+                            },
+                            {
+                                "type": "basic",
+                                "name": "P",
+                                "props": {
+                                    "className": "text-base text-ink-500"
+                                },
+                                "text": "$t:travel.errors.e404.desc"
+                            },
+                            {
+                                "type": "basic",
+                                "name": "Div",
+                                "props": {
+                                    "className": "flex flex-wrap justify-center gap-2"
+                                },
+                                "children": [
+                                    {
+                                        "type": "basic",
+                                        "name": "Button",
+                                        "props": {
+                                            "type": "button",
+                                            "className": "inline-flex items-center justify-center gap-2 rounded-xl bg-raon-600 px-5 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-raon-700 disabled:cursor-not-allowed disabled:opacity-50",
+                                            "data-testid": "error-home"
+                                        },
+                                        "children": [
+                                            {
+                                                "type": "basic",
+                                                "name": "Icon",
+                                                "props": {
+                                                    "name": "home",
+                                                    "className": "text-sm"
+                                                }
+                                            },
+                                            {
+                                                "type": "basic",
+                                                "name": "Span",
+                                                "text": "$t:travel.errors.go_home"
+                                            }
+                                        ],
+                                        "actions": [
+                                            {
+                                                "type": "click",
+                                                "handler": "navigate",
+                                                "params": {
+                                                    "path": "/travel"
+                                                }
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "type": "basic",
+                                        "name": "Button",
+                                        "props": {
+                                            "type": "button",
+                                            "className": "inline-flex items-center justify-center gap-2 rounded-xl border border-slate-300 bg-white px-5 py-3 text-sm font-semibold text-ink-700 transition hover:border-raon-400 hover:text-raon-700 disabled:cursor-not-allowed disabled:opacity-50"
+                                        },
+                                        "children": [
+                                            {
+                                                "type": "basic",
+                                                "name": "Icon",
+                                                "props": {
+                                                    "name": "arrow-left",
+                                                    "className": "text-sm"
+                                                }
+                                            },
+                                            {
+                                                "type": "basic",
+                                                "name": "Span",
+                                                "text": "$t:travel.errors.go_back"
+                                            }
+                                        ],
+                                        "actions": [
+                                            {
+                                                "type": "click",
+                                                "handler": "navigateBack"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+}

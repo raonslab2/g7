@@ -1,0 +1,83 @@
+{
+    "version": "1.0.0",
+    "description": "raonslab-travel_lab 사용자 템플릿 라우트 정의 — 여행 홈/검색/상세/장바구니/상담 요청(테스트)/고객센터",
+    "routes": [
+        {
+            "_comment": "=== 홈 — 이 템플릿의 첫 화면은 여행 홈 ===",
+            "path": "/",
+            "layout": "travel/home",
+            "auth_required": false,
+            "meta": {
+                "title": "$t:travel.meta.home_title"
+            }
+        },
+        {
+            "path": "/travel",
+            "layout": "travel/home",
+            "auth_required": false,
+            "meta": {
+                "title": "$t:travel.meta.home_title"
+            }
+        },
+        {
+            "path": "/travel/search",
+            "layout": "travel/search",
+            "auth_required": false,
+            "meta": {
+                "title": "$t:travel.meta.search_title"
+            }
+        },
+        {
+            "path": "/travel/products/:id",
+            "layout": "travel/product",
+            "auth_required": false,
+            "meta": {
+                "title": "$t:travel.meta.product_title"
+            }
+        },
+        {
+            "_comment": "=== 로그인 필요 — Sanctum 토큰 기반 ===",
+            "path": "/travel/cart",
+            "layout": "travel/cart",
+            "auth_required": true,
+            "meta": {
+                "title": "$t:travel.meta.cart_title"
+            }
+        },
+        {
+            "path": "/travel/requests",
+            "layout": "travel/requests",
+            "auth_required": true,
+            "meta": {
+                "title": "$t:travel.meta.requests_title"
+            }
+        },
+        {
+            "path": "/travel/requests/:id",
+            "layout": "travel/request_detail",
+            "auth_required": true,
+            "meta": {
+                "title": "$t:travel.meta.request_detail_title"
+            }
+        },
+        {
+            "_comment": "=== 고객센터 — 공지/FAQ 공개, 1:1 문의는 화면 안에서 로그인 안내 ===",
+            "path": "/travel/help",
+            "layout": "travel/help",
+            "auth_required": false,
+            "meta": {
+                "title": "$t:travel.meta.help_title"
+            }
+        },
+        {
+            "_comment": "=== 인증 — 코어 AuthManager 기본 loginPath ===",
+            "path": "/login",
+            "layout": "auth/login",
+            "auth_required": false,
+            "guest_only": true,
+            "meta": {
+                "title": "$t:travel.meta.login_title"
+            }
+        }
+    ]
+}

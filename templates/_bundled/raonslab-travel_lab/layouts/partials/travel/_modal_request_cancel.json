@@ -1,0 +1,132 @@
+{
+    "meta": {
+        "is_partial": true,
+        "description": "상담 요청(테스트) 취소 확인"
+    },
+    "id": "travel_request_cancel_modal",
+    "type": "composite",
+    "name": "Modal",
+    "props": {
+        "title": "$t:travel.requests.cancel_title",
+        "size": "sm"
+    },
+    "children": [
+        {
+            "type": "basic",
+            "name": "Div",
+            "props": {
+                "className": "space-y-4"
+            },
+            "children": [
+                {
+                    "type": "basic",
+                    "name": "P",
+                    "props": {
+                        "className": "text-sm text-ink-700"
+                    },
+                    "text": "$t:travel.requests.cancel_desc"
+                },
+                {
+                    "type": "basic",
+                    "name": "Div",
+                    "props": {
+                        "className": "flex justify-end gap-2"
+                    },
+                    "children": [
+                        {
+                            "type": "basic",
+                            "name": "Button",
+                            "props": {
+                                "type": "button",
+                                "className": "inline-flex items-center justify-center gap-2 rounded-xl border border-slate-300 bg-white px-5 py-3 text-sm font-semibold text-ink-700 transition hover:border-raon-400 hover:text-raon-700 disabled:cursor-not-allowed disabled:opacity-50",
+                                "disabled": "{{!!_global.travelCancelling}}"
+                            },
+                            "text": "$t:travel.requests.keep",
+                            "actions": [
+                                {
+                                    "type": "click",
+                                    "handler": "closeModal"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "basic",
+                            "name": "Button",
+                            "props": {
+                                "type": "button",
+                                "className": "inline-flex items-center justify-center rounded-xl bg-rose-600 px-5 py-3 text-sm font-semibold text-white hover:bg-rose-700 disabled:opacity-50",
+                                "disabled": "{{!!_global.travelCancelling}}",
+                                "data-testid": "cancel-confirm"
+                            },
+                            "text": "$t:travel.requests.cancel_confirm",
+                            "actions": [
+                                {
+                                    "type": "click",
+                                    "handler": "sequence",
+                                    "actions": [
+                                        {
+                                            "handler": "setState",
+                                            "params": {
+                                                "target": "global",
+                                                "travelCancelling": true
+                                            }
+                                        },
+                                        {
+                                            "handler": "apiCall",
+                                            "auth_mode": "required",
+                                            "target": "/api/modules/raonslab-travel_lab/inquiries/{{_global.travelCancelTargetId}}/cancel",
+                                            "params": {
+                                                "method": "POST"
+                                            },
+                                            "onSuccess": [
+                                                {
+                                                    "handler": "setState",
+                                                    "params": {
+                                                        "target": "global",
+                                                        "travelCancelling": false
+                                                    }
+                                                },
+                                                {
+                                                    "handler": "closeModal"
+                                                },
+                                                {
+                                                    "handler": "refetchDataSource",
+                                                    "params": {
+                                                        "dataSourceId": "inquiry"
+                                                    }
+                                                },
+                                                {
+                                                    "handler": "toast",
+                                                    "params": {
+                                                        "type": "success",
+                                                        "message": "$t:travel.requests.cancelled_toast"
+                                                    }
+                                                }
+                                            ],
+                                            "onError": [
+                                                {
+                                                    "handler": "setState",
+                                                    "params": {
+                                                        "target": "global",
+                                                        "travelCancelling": false
+                                                    }
+                                                },
+                                                {
+                                                    "handler": "toast",
+                                                    "params": {
+                                                        "type": "error",
+                                                        "message": "{{error.message ?? '$t:travel.requests.cancel_failed'}}"
+                                                    }
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
