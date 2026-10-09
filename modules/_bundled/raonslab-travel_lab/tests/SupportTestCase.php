@@ -47,6 +47,7 @@ spl_autoload_register(function (string $class): void {
 abstract class SupportTestCase extends TestCase
 {
     use RefreshDatabase;
+    use UsesDatabaseThrottleCache;
 
     protected const API = '/api/modules/raonslab-travel_lab';
 
@@ -64,6 +65,7 @@ abstract class SupportTestCase extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
+        $this->useDatabaseThrottleCache();
 
         config(['sirsoft-board' => require base_path('modules/_bundled/sirsoft-board/config/board.php')]);
         $this->app->register(BoardServiceProvider::class);

@@ -1,0 +1,66 @@
+[
+  {
+    "check": "domain initial",
+    "command": "php vendor/bin/phpunit -c modules/_bundled/raonslab-travel_lab/tests/phpunit.xml",
+    "result": "FAIL",
+    "tests_or_documents": 154,
+    "assertions": 2519,
+    "scope": "One old literal throttle alias expectation, subsequently adapted; original log retained privately"
+  },
+  {
+    "check": "domain final",
+    "command": "php vendor/bin/phpunit -c modules/_bundled/raonslab-travel_lab/tests/phpunit.xml",
+    "result": "PASS",
+    "tests_or_documents": 154,
+    "assertions": 2539,
+    "scope": "71.450 s; SQLite only, no MySQL row-lock proof"
+  },
+  {
+    "check": "atomic and native route fixtures",
+    "command": "php vendor/bin/phpunit --no-configuration --bootstrap vendor/autoload.php tests/Unit/Extension/TravelAtomicThrottleTest.php tests/Unit/Extension/TravelSupportThrottleIsolationTest.php tests/Unit/Extension/TravelSupportAuthThrottleOrderingTest.php",
+    "result": "PASS",
+    "tests_or_documents": 21,
+    "assertions": 2209,
+    "scope": "Author tests: separate from lead domain suite; 4 actual PHP workers on temporary SQLite, not installed MySQL"
+  },
+  {
+    "check": "isolation",
+    "command": "php scripts/travel-lab/guard-test.php",
+    "result": "PASS",
+    "tests_or_documents": 27,
+    "assertions": null,
+    "scope": "No DB or live environment mutation"
+  },
+  {
+    "check": "canonical work-order",
+    "command": "/tmp/g7-canonical-evidence.fL6sSp/source/scripts/validate-work-orders --revision 10bc5eff5f777aa49760387778303063b0222129 --json work/orders/work-20261009-g7-symphony-max-child-c7ae42d1.md",
+    "result": "PASS",
+    "tests_or_documents": 89,
+    "assertions": null,
+    "scope": "Owning work-order validator; 0 errors; not product Validation"
+  },
+  {
+    "check": "API metadata",
+    "command": "php scripts/travel-lab/run.php artisan api:docgen --scope=module:raonslab-travel_lab --check",
+    "result": "PASS",
+    "tests_or_documents": 31,
+    "assertions": null,
+    "scope": "No drift. 20 unresolved/auth probes skipped, not 31 live endpoint passes"
+  },
+  {
+    "check": "hosted CI",
+    "command": "GitHub final fixed SHA actions/check-runs",
+    "result": "NOT_RUN",
+    "tests_or_documents": 0,
+    "assertions": null,
+    "scope": "Requery after publication; no required gate waived"
+  },
+  {
+    "check": "MySQL repaired contention",
+    "command": "Independent fixed-SHA same-gap admission races",
+    "result": "NOT_RUN",
+    "tests_or_documents": null,
+    "assertions": null,
+    "scope": "Next official independent ready scope"
+  }
+]

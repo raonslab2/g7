@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'throttle_busy' => '요청이 일시적으로 혼잡합니다. 잠시 후 다시 시도해 주세요.',
     'already_registered' => '이미 여행 상품으로 등록된 커머스 상품입니다.',
     'catalog_loaded' => '여행 카탈로그를 조회했습니다.',
     'catalog_saved' => '여행 카탈로그를 저장했습니다.',

@@ -17,7 +17,8 @@ $probe = <<<'PHP'
 require __DIR__.'/environment.php';
 try {
     if (($argv[1] ?? '') === 'clear') { travelLabClearGeneratedConfig(); exit(0); }
-    $env = travelLabEnvironment();
+    $env = travelLabEnvironment(($argv[1] ?? '') === 'test');
+    if (($argv[1] ?? '') === 'test' && ($env['CACHE_STORE'] ?? null) !== 'array') { exit(3); }
     if (isset($env['DB_URL'])) { exit(2); }
     exit(0);
 } catch (Throwable $error) {
@@ -41,6 +42,12 @@ try {
         'outbound mail' => [str_replace('MAIL_MAILER=array', 'MAIL_MAILER=smtp', $valid), 1],
         'background queue' => [str_replace('QUEUE_CONNECTION=sync', 'QUEUE_CONNECTION=database', $valid), 1],
         'external storage' => [str_replace('FILESYSTEM_DISK=local', 'FILESYSTEM_DISK=s3', $valid), 1],
+        'nonatomic file cache' => [str_replace('CACHE_STORE=database', 'CACHE_STORE=file', $valid), 1],
+        'foreign cache connection' => [str_replace('DB_CACHE_CONNECTION=mysql', 'DB_CACHE_CONNECTION=unrelated', $valid), 1],
+        'foreign lock connection' => [str_replace('DB_CACHE_LOCK_CONNECTION=mysql', 'DB_CACHE_LOCK_CONNECTION=unrelated', $valid), 1],
+        'foreign cache table' => [str_replace('DB_CACHE_TABLE=cache', 'DB_CACHE_TABLE=unrelated', $valid), 1],
+        'foreign lock table' => [str_replace('DB_CACHE_LOCK_TABLE=cache_locks', 'DB_CACHE_LOCK_TABLE=unrelated', $valid), 1],
+        'separate limiter override' => [$valid."\nCACHE_LIMITER=file\n", 1],
         'settings override protection absent' => [str_replace('G7_ENV_PRIORITY=true', 'G7_ENV_PRIORITY=false', $valid), 1],
     ];
     foreach ($cases as $label => [$contents, $expected]) {
@@ -86,7 +93,13 @@ try {
     }
     unlink($fixture.'/bootstrap/cache/config.php');
     echo 'PASS: symlink cache preserved'.PHP_EOL;
-    echo 'PASS: 20 isolation checks; no live environment mutation or database access.'.PHP_EOL;
+    file_put_contents($fixture.'/.env.testing', str_replace('req81_travel_lab', 'req81_travel_lab_test', $valid));
+    $process = proc_open([PHP_BINARY, $fixture.'/scripts/travel-lab/probe.php', 'test'], [0 => STDIN, 1 => STDOUT, 2 => STDERR], $pipes, $fixture);
+    if (proc_close($process) !== 0) {
+        throw new RuntimeException('Ordinary TEST must use isolated array cache even with a surviving database-cache env.');
+    }
+    echo 'PASS: surviving TEST cache isolated to array'.PHP_EOL;
+    echo 'PASS: '.(count($cases) + 7).' isolation checks; no live environment mutation or database access.'.PHP_EOL;
 } finally {
     unlink($fixture.'/vendor');
     $iterator = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($fixture, FilesystemIterator::SKIP_DOTS), RecursiveIteratorIterator::CHILD_FIRST);

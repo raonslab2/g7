@@ -4,21 +4,23 @@ namespace Tests\Unit\Extension;
 
 use Composer\Autoload\ClassLoader;
 use Illuminate\Auth\GenericUser;
-use Illuminate\Cache\ArrayStore;
+use Illuminate\Cache\CacheManager;
 use Illuminate\Cache\RateLimiter;
-use Illuminate\Cache\Repository;
+use Illuminate\Config\Repository as ConfigRepository;
 use Illuminate\Container\Container;
+use Illuminate\Database\Capsule\Manager as Capsule;
+use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Events\Dispatcher;
 use Illuminate\Http\Exceptions\ThrottleRequestsException;
 use Illuminate\Http\Request;
 use Illuminate\Pipeline\Pipeline;
-use Illuminate\Routing\Middleware\ThrottleRequests;
 use Illuminate\Routing\Route;
 use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Facade;
 use Mockery;
 use Modules\Raonslab\TravelLab\Http\Controllers\Api\SupportController;
 use Modules\Raonslab\TravelLab\Http\Middleware\TravelOptionalSanctum;
+use Modules\Raonslab\TravelLab\Http\Middleware\TravelThrottleRequests;
 use Modules\Raonslab\TravelLab\Services\TravelSupportService;
 use PHPUnit\Framework\Attributes\PreserveGlobalState;
 use PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses;
@@ -26,9 +28,9 @@ use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
- * Actual support RouteCollection + native throttle pipeline/RateLimiter/ArrayStore. No application
- * boot, auth provider or environment file is involved; no controller action, SQL or service process
- * executes. Actual controller metadata is resolved with an unused service fixture. Actors are
+ * Actual support routes + travel admission/native RateLimiter/DatabaseStore on SQLite :memory:.
+ * No application boot, auth provider, environment or installed schema is involved; no controller
+ * action or service process executes. Actual controller metadata uses an unused service. Actors are
  * injected authenticated identifiers so only rate-budget isolation is exercised, not authorization
  * or native auth ordering. TravelSupportAuthThrottleOrderingTest exercises the latter separately.
  */
@@ -55,10 +57,30 @@ class TravelSupportThrottleIsolationTest extends TestCase
         Container::setInstance($this->app);
         $this->router = new Router(new Dispatcher($this->app), $this->app);
         $this->app->instance('router', $this->router);
-        $this->app->instance(ThrottleRequests::class, new ThrottleRequests(new RateLimiter(new Repository(new ArrayStore))));
         $this->moduleLoader = new ClassLoader;
         $this->moduleLoader->addPsr4('Modules\\Raonslab\\TravelLab\\', dirname(__DIR__, 3).'/modules/_bundled/raonslab-travel_lab/src');
         $this->moduleLoader->register(true);
+        $this->app->instance('config', new ConfigRepository(['cache' => [
+            'default' => 'fixture', 'limiter' => 'fixture', 'stores' => ['fixture' => [
+                'driver' => 'database', 'table' => 'cache', 'lock_table' => 'cache_locks', 'lock_lottery' => [0, 100], 'prefix' => '',
+            ]],
+        ]]));
+        $capsule = new Capsule($this->app);
+        $capsule->addConnection(['driver' => 'sqlite', 'database' => ':memory:', 'prefix' => '']);
+        $this->app->instance('db', $capsule->getDatabaseManager());
+        $schema = $capsule->getConnection()->getSchemaBuilder();
+        $schema->create('cache', static function (Blueprint $table): void {
+            $table->string('key')->primary();
+            $table->text('value');
+            $table->integer('expiration');
+        });
+        $schema->create('cache_locks', static function (Blueprint $table): void {
+            $table->string('key')->primary();
+            $table->string('owner');
+            $table->integer('expiration');
+        });
+        $cache = new CacheManager($this->app);
+        $this->app->instance(TravelThrottleRequests::class, new TravelThrottleRequests(new RateLimiter($cache->store('fixture')), $cache));
         // Native route metadata may resolve this controller after another test registered its class.
         // Preserve its real constructor/metadata; isolate only the unused no-SQL service boundary.
         $this->app->instance(SupportController::class, new SupportController(Mockery::mock(TravelSupportService::class)));
@@ -96,10 +118,7 @@ class TravelSupportThrottleIsolationTest extends TestCase
     /** Parameters come only from actual registered middleware, never a duplicated throttle policy. */
     private function middleware(Route $route): array
     {
-        return array_values(array_map(
-            static fn ($name) => ThrottleRequests::class.substr($name, strlen('throttle')),
-            array_filter($route->gatherMiddleware(), static fn ($name) => str_starts_with($name, 'throttle:')),
-        ));
+        return array_values(array_filter($route->gatherMiddleware(), static fn ($name) => str_starts_with($name, TravelThrottleRequests::class.':')));
     }
 
     private function request(Route $route, int $actor): array
@@ -183,7 +202,7 @@ class TravelSupportThrottleIsolationTest extends TestCase
             $this->assertContains('api', $route->gatherMiddleware());
             $this->assertContains('auth:sanctum', $route->gatherMiddleware());
         }
-        $limits = static fn ($route) => array_map(static fn ($middleware) => (int) explode(':', $middleware, 2)[1], array_filter($route->gatherMiddleware(), static fn ($middleware) => str_starts_with($middleware, 'throttle:')));
+        $limits = static fn ($route) => array_map(static fn ($middleware) => (int) explode(':', $middleware, 2)[1], array_filter($route->gatherMiddleware(), static fn ($middleware) => str_starts_with($middleware, TravelThrottleRequests::class.':')));
         $this->assertSame([600], array_values($limits($public)));
         $this->assertSame([120], array_values($limits($questions)));
         $this->assertSame([120, 10], array_values($limits($create)));

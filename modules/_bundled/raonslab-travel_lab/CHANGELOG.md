@@ -2,6 +2,17 @@
 
 ## [Unreleased]
 
+## [0.1.2] - 2026-10-09
+
+### Fixed
+
+- 사용자 PK 잠금 뒤 멱등 키를 일관 읽기로 확인하여 없는 키의 InnoDB gap lock과 출발 정원 잠금 사이의 교착 가능성을 줄였습니다. 동일 사용자 직렬화·고유 키·native 가격 계산·3회 transaction 재시도는 유지합니다. 실제 MySQL 재검증 전에는 새 P3를 CLOSED로 표시하지 않습니다.
+- 여행 API의 native numeric 한도 검사를 scoped DatabaseStore/DatabaseLock의 짧은 입장 잠금으로 직렬화합니다. 컨트롤러는 잠금 밖에서 실행하며 한도 수치·사용자/익명 카운터 분리·native 429를 유지합니다. 잠금 timeout/지원되지 않는 store/유실된 lease는 Retry-After: 1의 503입니다. backend 오류는 native 오류로 남고 cleanup 오류가 원래 오류를 덮지 않습니다.
+
+### Compatibility
+
+- 격리 일반 런타임은 native database cache와 cache_locks가 필요하며 일반 guarded TEST는 array cache를 사용합니다. 한도 기능 테스트만 실제 DB cache를 명시적으로 사용합니다. 여행 템플릿이 유일한 소비 확장이므로 최소 모듈 의존성을 >=0.1.2로 올립니다. 코어/이커머스/게시판의 공개 API는 바뀌지 않습니다.
+
 ### Changed
 
 - bundled 의존성의 정상 신규 설치와 실패 중단을 보장하는 코어 최소 요구 버전을 7.0.12로 상향했습니다. 기존 모듈 Service·Route·가격 계약은 바뀌지 않아 확장 간 최소 API 버전은 유지합니다.

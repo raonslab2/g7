@@ -11,13 +11,14 @@ use Illuminate\Auth\AuthManager;
 use Illuminate\Auth\GenericUser;
 use Illuminate\Auth\Middleware\Authenticate;
 use Illuminate\Auth\RequestGuard;
-use Illuminate\Cache\ArrayStore;
+use Illuminate\Cache\CacheManager;
 use Illuminate\Cache\RateLimiter;
-use Illuminate\Cache\Repository;
 use Illuminate\Config\Repository as ConfigRepository;
 use Illuminate\Container\Container;
 use Illuminate\Contracts\Routing\ResponseFactory as ResponseFactoryContract;
 use Illuminate\Contracts\View\Factory as ViewFactory;
+use Illuminate\Database\Capsule\Manager as Capsule;
+use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Events\Dispatcher;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Middleware;
@@ -36,6 +37,7 @@ use Illuminate\Translation\ArrayLoader;
 use Illuminate\Translation\Translator;
 use Mockery;
 use Modules\Raonslab\TravelLab\Http\Controllers\Api\SupportController;
+use Modules\Raonslab\TravelLab\Http\Middleware\TravelThrottleRequests;
 use Modules\Raonslab\TravelLab\Services\TravelSupportService;
 use PHPUnit\Framework\Attributes\PreserveGlobalState;
 use PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses;
@@ -43,7 +45,8 @@ use PHPUnit\Framework\TestCase;
 
 /**
  * Native ordering/optional-auth decision, with SQL token lookup and user-provider data isolated.
- * No preassigned authenticated identity, dotenv/application boot, controller or installed DB/cache.
+ * No preassigned identity, dotenv/application boot, controller action or installed DB/cache.
+ * The admission cache is actual native DatabaseStore on isolated SQLite :memory:.
  */
 #[RunTestsInSeparateProcesses]
 #[PreserveGlobalState(false)]
@@ -81,11 +84,13 @@ class TravelSupportAuthThrottleOrderingTest extends TestCase
                 'web' => ['driver' => 'fixture-guest'],
                 'sanctum' => ['driver' => 'fixture-token'],
             ]],
+            'cache' => ['default' => 'fixture', 'limiter' => 'fixture', 'stores' => ['fixture' => [
+                'driver' => 'database', 'table' => 'cache', 'lock_table' => 'cache_locks', 'lock_lottery' => [0, 100], 'prefix' => '',
+            ]]],
         ]));
         $this->app->instance('translator', new Translator(new ArrayLoader, 'en'));
         $this->router = new Router(new Dispatcher($this->app), $this->app);
         $this->app->instance('router', $this->router);
-        $this->app->instance(ThrottleRequests::class, new ThrottleRequests(new RateLimiter(new Repository(new ArrayStore))));
         (new Kernel($this->app, $this->router)); // copies native middlewarePriority to Router
         $definition = new Middleware;
         foreach ($definition->getMiddlewareAliases() as $name => $class) {
@@ -105,12 +110,28 @@ class TravelSupportAuthThrottleOrderingTest extends TestCase
             return $record ? new GenericUser(['id' => $record->actor]) : null;
         }, $this->app['request']));
         $this->app->instance(Authenticate::class, new Authenticate($this->auth));
-        // Token lookup is the only native OptionalSanctum dependency stub; no SQL driver exists.
+        // Token lookup is the only native OptionalSanctum dependency stub; cache SQL stays in memory.
         Mockery::mock('alias:Laravel\\Sanctum\\PersonalAccessToken')->shouldReceive('findToken')
             ->andReturnUsing(fn ($token) => $this->tokens[$token] ?? null);
         $this->moduleLoader = new ClassLoader;
         $this->moduleLoader->addPsr4('Modules\\Raonslab\\TravelLab\\', dirname(__DIR__, 3).'/modules/_bundled/raonslab-travel_lab/src');
         $this->moduleLoader->register();
+        $capsule = new Capsule($this->app);
+        $capsule->addConnection(['driver' => 'sqlite', 'database' => ':memory:', 'prefix' => '']);
+        $this->app->instance('db', $capsule->getDatabaseManager());
+        $schema = $capsule->getConnection()->getSchemaBuilder();
+        $schema->create('cache', static function (Blueprint $table): void {
+            $table->string('key')->primary();
+            $table->text('value');
+            $table->integer('expiration');
+        });
+        $schema->create('cache_locks', static function (Blueprint $table): void {
+            $table->string('key')->primary();
+            $table->string('owner');
+            $table->integer('expiration');
+        });
+        $cache = new CacheManager($this->app);
+        $this->app->instance(TravelThrottleRequests::class, new TravelThrottleRequests(new RateLimiter($cache->store('fixture')), $cache));
         // Keep native controller metadata while its unused service stays a no-SQL boundary.
         $this->app->instance(SupportController::class, new SupportController(Mockery::mock(TravelSupportService::class)));
         Facade::clearResolvedInstances();
@@ -190,7 +211,7 @@ class TravelSupportAuthThrottleOrderingTest extends TestCase
     {
         $resolved = $this->router->gatherRouteMiddleware($this->route('notices.index'));
         $auth = array_keys(array_filter($resolved, static fn ($name) => is_a(explode(':', $name, 2)[0], OptionalSanctumMiddleware::class, true)));
-        $throttle = array_keys(array_filter($resolved, static fn ($name) => str_starts_with($name, ThrottleRequests::class.':')));
+        $throttle = array_keys(array_filter($resolved, static fn ($name) => is_a(explode(':', $name, 2)[0], ThrottleRequests::class, true)));
         $this->assertCount(1, $auth);
         $this->assertCount(1, $throttle);
         $this->assertLessThan($throttle[0], $auth[0], 'Native priority sorting must resolve the actor before signing its public throttle key.');

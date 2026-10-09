@@ -19,9 +19,12 @@ use Modules\Sirsoft\Ecommerce\Support\CurrencySettingsCache;
 /** Actual domain model/migration/provider, real ecommerce services, isolated SQLite only. */
 abstract class WorkflowTestCase extends ModuleTestCase
 {
+    use UsesDatabaseThrottleCache;
+
     protected function setUp(): void
     {
         parent::setUp();
+        $this->useDatabaseThrottleCache();
         PermissionHelper::clearPermissionScopeCache();
         CurrencySettingsCache::clear();
         app('translator')->addNamespace('raonslab-travel_lab', dirname(__DIR__).'/src/lang');

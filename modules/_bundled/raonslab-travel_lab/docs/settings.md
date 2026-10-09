@@ -67,7 +67,7 @@ ModuleRouteServiceProvider가 /api/modules/raonslab-travel_lab 및 api.modules.r
 
 | 확장 | 유형 | 요구 버전 |
 |---|---|---|
-| `raonslab-travel_lab` | 템플릿 | `>=0.1.1` |
+| `raonslab-travel_lab` | 템플릿 | `>=0.1.2` |
 <!-- @generated:dependencies END -->
 
 <!-- @intent START -->

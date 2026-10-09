@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Validation\ValidationException;
+use Modules\Raonslab\TravelLab\Http\Middleware\TravelThrottleRequests;
 use Modules\Raonslab\TravelLab\Listeners\ProtectTravelCommerceCatalog;
 use Modules\Raonslab\TravelLab\Models\Departure;
 use Modules\Raonslab\TravelLab\Module;
@@ -154,13 +155,13 @@ class W03SecurityRecheckTest extends WorkflowTestCase
     public function test_workflow_routes_carry_distinct_per_actor_throttle_buckets(): void
     {
         $expect = [
-            'cart.index' => ['throttle:120,1,travel-lab-workflow:'],
-            'cart.store' => ['throttle:120,1,travel-lab-workflow:', 'throttle:60,1,travel-lab-cart:'],
-            'cart.update' => ['throttle:60,1,travel-lab-cart:'],
-            'cart.destroy' => ['throttle:60,1,travel-lab-cart:'],
-            'inquiries.store' => ['throttle:10,1,travel-lab-submit:'],
-            'inquiries.cancel' => ['throttle:20,1,travel-lab-cancel:'],
-            'admin.inquiries.update' => ['throttle:60,1,travel-lab-admin:', 'permission:admin,raonslab-travel_lab.inquiries.update'],
+            'cart.index' => [TravelThrottleRequests::with(120, 1, 'travel-lab-workflow:')],
+            'cart.store' => [TravelThrottleRequests::with(120, 1, 'travel-lab-workflow:'), TravelThrottleRequests::with(60, 1, 'travel-lab-cart:')],
+            'cart.update' => [TravelThrottleRequests::with(60, 1, 'travel-lab-cart:')],
+            'cart.destroy' => [TravelThrottleRequests::with(60, 1, 'travel-lab-cart:')],
+            'inquiries.store' => [TravelThrottleRequests::with(10, 1, 'travel-lab-submit:')],
+            'inquiries.cancel' => [TravelThrottleRequests::with(20, 1, 'travel-lab-cancel:')],
+            'admin.inquiries.update' => [TravelThrottleRequests::with(60, 1, 'travel-lab-admin:'), 'permission:admin,raonslab-travel_lab.inquiries.update'],
         ];
         foreach ($expect as $name => $middleware) {
             $route = Route::getRoutes()->getByName('api.modules.raonslab-travel_lab.'.$name);

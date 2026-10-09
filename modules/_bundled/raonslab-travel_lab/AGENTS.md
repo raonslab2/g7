@@ -85,7 +85,7 @@ API 상품 식별자에 TravelProduct 메타 ID를 쓰지 않습니다. Departur
 <!-- @generated:test-commands START — ext:docgen 이 갱신. 이 블록 안은 직접 수정하지 않는다 -->
 | 종류 | 개수 | 위치 |
 |---|---|---|
-| PHPUnit | 16개 | `modules/_bundled/raonslab-travel_lab/tests` |
+| PHPUnit | 17개 | `modules/_bundled/raonslab-travel_lab/tests` |
 | Vitest | 1개 | `vitest.config.ts` |
 | Playwright | 0개 | — |
 | 시나리오 매니페스트 | 3개 | `tests/scenarios` |

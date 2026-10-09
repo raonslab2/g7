@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'throttle_busy' => 'Requests are temporarily busy. Please try again shortly.',
     'already_registered' => 'This ecommerce product is already registered in Travel Lab.',
     'catalog_loaded' => 'Travel catalog loaded.',
     'catalog_saved' => 'Travel catalog saved.',

@@ -62,6 +62,15 @@ try {
             throw new RuntimeException('Extension command failed: '.implode(' ', $command));
         }
     }
+    // Native install omits these reference types; the full ecommerce seeder includes
+    // unrelated sample paths. Run only this native reference seeder, only when empty:
+    // its cleanupStale must never remove an existing operator-defined shipping type.
+    if ((int) $pdo->query('SELECT COUNT(*) FROM g7_ecommerce_shipping_types')->fetchColumn() === 0) {
+        if (travelLabLifecycleProcess([PHP_BINARY, 'artisan', 'db:seed',
+            '--class=Modules\\Sirsoft\\Ecommerce\\Database\\Seeders\\ShippingTypeSeeder', '--no-interaction'], $environment) !== 0) {
+            throw new RuntimeException('Native empty-table shipping reference initialization failed.');
+        }
+    }
     if (travelLabLifecycleProcess([PHP_BINARY, 'artisan', 'module:seed', 'raonslab-travel_lab', '--sample', '--no-interaction'], $environment) !== 0) {
         throw new RuntimeException('Travel module seed failed.');
     }

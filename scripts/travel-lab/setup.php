@@ -32,6 +32,7 @@ try {
     }
     if (! is_file($root.'/.env.testing')) {
         $contents = str_replace(['APP_ENV=local', 'req81_travel_lab'], ['APP_ENV=testing', 'req81_travel_lab_test'], file_get_contents($root.'/.env'));
+        $contents = preg_replace('/^CACHE_STORE=.*$/m', 'CACHE_STORE=array', $contents);
         file_put_contents($root.'/.env.testing', $contents);
         chmod($root.'/.env.testing', 0600);
     }

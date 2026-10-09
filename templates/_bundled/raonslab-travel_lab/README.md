@@ -5,7 +5,7 @@
 
 <!-- @generated:badges START — ext:docgen 이 갱신. 이 블록 안은 직접 수정하지 않는다 -->
 <p align="center">
-  <img src="https://img.shields.io/badge/version-0.1.1-0066FF?style=flat-square" alt="version 0.1.1">
+  <img src="https://img.shields.io/badge/version-0.1.2-0066FF?style=flat-square" alt="version 0.1.2">
   <img src="https://img.shields.io/badge/type-%ED%85%9C%ED%94%8C%EB%A6%BF-555555?style=flat-square" alt="type 템플릿">
   <img src="https://img.shields.io/badge/%EA%B7%B8%EB%88%84%EB%B3%B4%EB%93%9C7-%3E%3D7.0.12-1F883D?style=flat-square" alt="그누보드7 &gt;=7.0.12">
   <img src="https://img.shields.io/badge/license-MIT-8250DF?style=flat-square" alt="license MIT">
@@ -99,7 +99,7 @@ flowchart LR
 |---|---|
 | 그누보드7 코어 | `>=7.0.12` |
 | PHP | `^8.2` |
-| 의존 모듈 | `raonslab-travel_lab` `>=0.1.1` |
+| 의존 모듈 | `raonslab-travel_lab` `>=0.1.2` |
 | 의존 모듈 | `sirsoft-board` `>=1.1.2` |
 | 의존 모듈 | `sirsoft-ecommerce` `>=1.2.1` |
 | 의존 모듈 | `sirsoft-page` `>=1.1.2` |
@@ -183,7 +183,7 @@ php artisan template:activate raonslab-travel_lab
 
 | 확장 | 유형 | 버전 제약 | 번들 |
 |---|---|---|---|
-| `raonslab-travel_lab` | 모듈 | `>=0.1.1` | ✅ |
+| `raonslab-travel_lab` | 모듈 | `>=0.1.2` | ✅ |
 | `sirsoft-board` | 모듈 | `>=1.1.2` | ✅ |
 | `sirsoft-ecommerce` | 모듈 | `>=1.2.1` | ✅ |
 | `sirsoft-page` | 모듈 | `>=1.1.2` | ✅ |

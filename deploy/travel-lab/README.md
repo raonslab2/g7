@@ -59,7 +59,28 @@ Git ignored. The synthetic administrator address is
 the generated `.env` as `INSTALLER_ADMIN_PASSWORD`. Do not publish that file.
 
 The databases are `req81_travel_lab` and `req81_travel_lab_test`. User
-`req81_travel` has privileges only on those databases. Test commands must use:
+`req81_travel` has privileges only on those databases.
+
+Normal preview uses native database cache and `cache_locks` on the same scoped
+MySQL connection. Travel numeric throttles hold a native per-budget/actor lock
+only while checking and incrementing the limit, then release it before controllers.
+Lock timeout, unsupported stores and lost admission leases return a retryable 503;
+quota exhaustion remains 429. Database/backend failures retain their native error
+response. A failed lock cleanup cannot replace an already raised error or 429;
+the native lock lease bounds abandoned cleanup.
+File/array stores are refused for this preview, rather than silently losing counts
+under concurrent calls. Existing marked lab environments must change `CACHE_STORE`
+to `database` and use the example's four `DB_CACHE_*` fields without changing
+credentials, database names or other applications. Stop the request-owned preview
+before changing its private environment, verify core cache migrations exist, then
+restart through the guarded runner. PHPUnit's general array cache stays isolated;
+travel HTTP tests bind real native cache tables within their own test database.
+
+Focused native core regression (no application DB):
+
+```bash
+php vendor/bin/phpunit tests/Unit/Extension/ModuleVendorModePersistenceTest.php tests/Unit/Extension/TravelSupportAuthThrottleOrderingTest.php tests/Unit/Extension/TravelSupportThrottleIsolationTest.php tests/Unit/Extension/ModuleVendorInstallGateTest.php tests/Unit/Extension/TravelAtomicThrottleTest.php
+```
 
 ```bash
 php scripts/travel-lab/run.php test tests/Unit/Support/InstallerContextTest.php

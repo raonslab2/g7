@@ -11,10 +11,11 @@
 use Illuminate\Support\Facades\Route;
 use Modules\Raonslab\TravelLab\Http\Controllers\Api\SupportController;
 use Modules\Raonslab\TravelLab\Http\Middleware\TravelOptionalSanctum;
+use Modules\Raonslab\TravelLab\Http\Middleware\TravelThrottleRequests;
 
 Route::prefix('support')->name('support.')->group(function () {
     // 공개 채널: 비로그인 열람 허용 (토큰이 있으면 사용자 해석만 수행)
-    Route::middleware([TravelOptionalSanctum::class, 'throttle:600,1,travel-lab-support-public:'])->group(function () {
+    Route::middleware([TravelOptionalSanctum::class, TravelThrottleRequests::with(600, 1, 'travel-lab-support-public:')])->group(function () {
         Route::get('/notices', [SupportController::class, 'notices'])->name('notices.index');
         Route::get('/notices/{id}', [SupportController::class, 'notice'])->whereNumber('id')->name('notices.show');
         Route::get('/faqs', [SupportController::class, 'faqs'])->name('faqs.index');
@@ -23,11 +24,11 @@ Route::prefix('support')->name('support.')->group(function () {
 
     // 1:1 문의: Sanctum Bearer 인증 필수, 작성자·관리자 격리는 서비스가 판정
     Route::prefix('questions')
-        ->middleware(['auth:sanctum', 'throttle:120,1,travel-lab-support-questions:'])
+        ->middleware(['auth:sanctum', TravelThrottleRequests::with(120, 1, 'travel-lab-support-questions:')])
         ->name('questions.')
         ->group(function () {
             Route::get('/', [SupportController::class, 'questions'])->name('index');
-            Route::post('/', [SupportController::class, 'storeQuestion'])->middleware('throttle:10,1,travel-lab-support-create:')->name('store');
+            Route::post('/', [SupportController::class, 'storeQuestion'])->middleware(TravelThrottleRequests::with(10, 1, 'travel-lab-support-create:'))->name('store');
             Route::get('/{id}', [SupportController::class, 'showQuestion'])->whereNumber('id')->name('show');
             Route::patch('/{id}', [SupportController::class, 'updateQuestion'])->whereNumber('id')->name('update');
         });

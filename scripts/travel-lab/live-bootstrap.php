@@ -25,6 +25,14 @@ function travelLabApp(bool $testing = false): Application
         || config('filesystems.default') !== 'local') {
         throw new RuntimeException('Effective application egress settings violate lab isolation.');
     }
+    if (! $testing && (config('cache.default') !== 'database'
+        || config('cache.stores.database.connection') !== 'mysql'
+        || config('cache.stores.database.lock_connection') !== 'mysql'
+        || config('cache.stores.database.table') !== 'cache'
+        || config('cache.stores.database.lock_table') !== 'cache_locks'
+        || config('cache.limiter') !== null)) {
+        throw new RuntimeException('Effective application cache escaped the scoped database admission contract.');
+    }
     $identity = DB::selectOne('SELECT DATABASE() AS db, CURRENT_USER() AS account');
     if ($identity->db !== $expected || $identity->account !== 'req81_travel@127.0.0.1') {
         throw new RuntimeException('Live connection escaped the marked schema/account.');

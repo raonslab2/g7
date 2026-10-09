@@ -56,6 +56,14 @@ function travelLabEnvironment(bool $testing = false, bool $allowGeneratedConfigF
     if (($values['FILESYSTEM_DISK'] ?? null) !== 'local') {
         throw new RuntimeException('Lab requires local file storage.');
     }
+    if (! $testing && (($values['CACHE_STORE'] ?? null) !== 'database'
+        || ($values['DB_CACHE_CONNECTION'] ?? null) !== 'mysql'
+        || ($values['DB_CACHE_LOCK_CONNECTION'] ?? null) !== 'mysql'
+        || ($values['DB_CACHE_TABLE'] ?? null) !== 'cache'
+        || ($values['DB_CACHE_LOCK_TABLE'] ?? null) !== 'cache_locks'
+        || ! empty($values['CACHE_LIMITER']))) {
+        throw new RuntimeException('Lab requires native scoped database cache and admission locks.');
+    }
     if (($values['G7_ENV_PRIORITY'] ?? null) !== 'true') {
         throw new RuntimeException('Lab environment must own mail/queue/storage configuration.');
     }
@@ -69,7 +77,8 @@ function travelLabEnvironment(bool $testing = false, bool $allowGeneratedConfigF
         }
     }
 
-    return array_merge($environment, $values, ['APP_ENV' => $testing ? 'testing' : 'local']);
+    return array_merge($environment, $values, ['APP_ENV' => $testing ? 'testing' : 'local'],
+        $testing ? ['CACHE_STORE' => 'array'] : []);
 }
 
 /** Remove only this marked checkout's generated config after native lifecycle work. */

@@ -33,10 +33,11 @@ class InquiryService
         $payloadHash = hash('sha256', json_encode(['cart_ids' => $cartIds, 'contact' => $contact], JSON_THROW_ON_ERROR));
 
         return DB::transaction(function () use ($userId, $cartIds, $contact, $key, $payloadHash) {
-            // 같은 사용자/키의 동시 호출은 사용자 행에서 직렬화된다. UNIQUE(user_id,key)도 필수다.
-            // locking read는 MySQL REPEATABLE READ에서도 직전 승자의 완료된 기록을 읽는다.
+            // 같은 사용자의 submit/cancel은 사용자 행에서 직렬화된다. UNIQUE(user_id,key)도 유지한다.
+            // 이 transaction의 첫 일반 조회는 사용자 잠금을 얻은 뒤라 직전 승자의 commit을 읽는다.
+            // 없는 키를 FOR UPDATE로 읽으면 다른 사용자의 INSERT까지 막는 gap lock이 생긴다.
             $this->requireUser($userId, true);
-            $existing = $this->inquiries->byKey($userId, $key, true);
+            $existing = $this->inquiries->byKey($userId, $key);
             if ($existing) {
                 if (! hash_equals($existing->payload_hash, $payloadHash)) {
                     $this->fail('idempotency_conflict');
