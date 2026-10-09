@@ -5,8 +5,9 @@ Request: `req_81ac33cac94046b9a2249cd14c0d00ba`
 Reviewer: parent native `inheritance_capacity`, who did not implement runtime
 scripts, REFERENCE.md or SCORE.md
 Date: 2026-10-09 UTC
-Decision: **PASS for the observed clean-environment, quarantined W00 preflight;
-two isolation hardening findings remain before general harness use.**
+Initial decision: **PASS for the observed clean-environment, quarantined W00
+preflight; two isolation hardening findings required repair.** The fixed-source
+follow-up below closes both findings for this W00 harness scope.
 
 This is an internal independent source/preflight review, not official Validation
 or a Travel Lab product PASS. The reviewer authored INHERITANCE.md and
@@ -127,3 +128,63 @@ departure/option-stock reconciliation as implementation obligations. Independent
 product tests remain explicitly NOT_RUN. The reference and score documents are
 safe to preserve as W00 evidence with the quarantine and open findings stated;
 they do not prove the implementations already satisfy those contracts.
+
+## Focused repair verification — 09f7fe71
+
+New fixed target: `09f7fe71b3439cac00a497513cd63e27dcaffb14`.
+HEAD equaled that SHA during independent verification. The reviewer inspected
+the exact runtime diff from `8822971c` and made no runtime implementation edits.
+
+- F1 repair: smoke now clears rejected inherited keys from `getenv`, `$_ENV`
+  and `$_SERVER` before applying the sanitized environment and bootstrapping
+  Laravel. Source inspection plus an independent adapter-level postcondition
+  confirms cleanup. The earlier finding established retained key state; it
+  did **not** establish a foreign connection or show that the unmodified G7
+  configuration actually selected a foreign database.
+- F2 repair: the common environment guard now requires FILESYSTEM_DISK=local.
+  A new negative fixture changes it to s3 and must be refused. That fixture
+  independently passed, bringing the guard total to 16.
+
+Exact focused commands:
+
+```bash
+php scripts/travel-lab/guard-test.php
+DB_URL=mysql://127.0.0.1:1/outside_lab \
+DB_SOCKET=/tmp/req81-review-nonexistent.sock \
+php scripts/travel-lab/smoke.php
+DB_URL=mysql://127.0.0.1:1/outside_lab \
+php scripts/travel-lab/smoke.php --testing
+```
+
+All exited 0. Guard stdout includes `PASS: external storage` and
+`PASS: 16 isolation checks; no live environment mutation or database access.`
+Development and testing smoke stdout still identifies only
+`req81_travel_lab` and `req81_travel_lab_test`, with mail=array, queue=sync and
+storage=local. The injected override URL uses loopback port 1 and the supplied
+socket does not exist; no external target or production credential was used.
+
+An additional focused PHP invocation populated the three adapters separately,
+included `smoke.php`, then checked that both rejected keys were absent:
+
+```php
+putenv('DB_URL=mysql://127.0.0.1:1/outside_lab');
+$_ENV['DB_URL'] = 'mysql://127.0.0.1:1/outside_lab';
+$_SERVER['DB_SOCKET'] = '/tmp/req81-review-nonexistent.sock';
+require 'scripts/travel-lab/smoke.php';
+foreach (['DB_URL', 'DB_SOCKET'] as $key) {
+    if (getenv($key) !== false || isset($_ENV[$key]) || isset($_SERVER[$key])) {
+        exit(2);
+    }
+}
+```
+
+Exit 0; final stdout: `PASS: rejected overrides removed from process, ENV and SERVER.`
+This invocation ran the same read-only development smoke and no provisioning,
+extension activation, seeding or production operation.
+
+**Final bounded decision: F1/F2 RESOLVED at `09f7fe71`; PASS for W00 runtime
+preflight and safe quarantined checkpoint publication.** Extension installation
+remains expected BLOCKED while complete scoped artifacts are pending. Product
+behavior, browser/mobile quality, concurrency, integration and official
+Validation remain **NOT_RUN**, and this review grants no production deployment
+approval or universal network-egress certification.
