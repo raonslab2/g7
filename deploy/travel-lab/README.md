@@ -4,17 +4,25 @@ This package is a nonoperational demonstration. Use a fresh isolated checkout of
 the published integration SHA. Do not copy a business site's `.env`, database,
 storage, settings, or customer assets into it. It does not provision public hosting.
 
-Prerequisites: PHP 8.2+ with the project's required extensions, Composer, Node/npm,
-MySQL/MariaDB on local port 3306, and local administrative socket access through
-`sudo -n mysql --protocol=socket -uroot`. Use the repository requirements guide;
-the initial execution used PHP 8.3.6 and MariaDB 10.11.14.
+Prerequisites: PHP 8.2+, Composer with the committed lockfile, and Node satisfying
+the locked Vite engine **`^20.19.0 || >=22.12.0`** (Node 20.19+ within the 20.x
+series, or Node 22.12+), with npm. PHP must provide the 16 required extensions in
+[the repository requirements guide](../../docs/requirements.md#14-php-확장-모듈),
+including `pdo_mysql` and `zip`; the canonical SQLite suite additionally requires
+`pdo_sqlite`. CLI `proc_open`, `exec` and `shell_exec` must be available.
+Use a dedicated local MySQL 8+ or MariaDB 10.3+ instance on port 3306 and install
+the `mysql` and `mysqldump` client tools. Setup requires existing local
+administrative socket access through `sudo -n mysql --protocol=socket -uroot`;
+it does not obtain that privilege or configure a shared/production server.
+The checkout's `storage/` and `bootstrap/cache/` must be writable by the executing
+user. The initial execution used PHP 8.3.6 and MariaDB 10.11.14.
 
 ```bash
 composer install --no-interaction --prefer-dist
 npm ci
 cd templates/_bundled/raonslab-travel_lab
 npm ci --legacy-peer-deps
-npm run build
+G7_BUILD_SOURCEMAP=0 npm run build
 npm run type-check
 npm run test:run
 cd ../../..
@@ -25,6 +33,24 @@ php scripts/travel-lab/guard-test.php
 php scripts/travel-lab/extensions.php
 php scripts/travel-lab/run.php preview
 ```
+
+The template build above uses the production no-sourcemap setting before initial
+installation. For subsequent source changes in the marked lab, use the official
+command from the checkout root, then update the installed template:
+
+```bash
+php scripts/travel-lab/run.php artisan template:build raonslab-travel_lab --production
+php scripts/travel-lab/run.php artisan template:update raonslab-travel_lab --force --source=bundled --no-interaction
+```
+
+Committed core/admin/ecommerce assets are part of the fixed checkout. If those
+sources change, use their official `core:build --production`, `template:build
+sirsoft-admin_basic --production`, or `module:build sirsoft-ecommerce --production`
+commands and publish the matching production assets at the same reviewed SHA.
+Do not use plain `npm run build` for published template assets: its default
+sourcemap references do not satisfy the G7 distribution rule. These instructions
+are a reproduction procedure, not evidence that every fresh dependency/build
+combination has already passed.
 
 The preview listens only at <http://127.0.0.1:18871>. The script refuses unrelated
 environment files. Generated `.env` and `.env.testing` have mode 0600 and remain
@@ -103,7 +129,16 @@ actual domain services: last seat, identical idempotency key, cancel/decline,
 and locked commerce-stock edit. It is service concurrency evidence; independent
 fixed-SHA validation must additionally exercise the HTTP/browser boundaries.
 The recovery check snapshots only the testing schema privately, rolls back and
-replays travel migrations, restores the snapshot, and compares record digests.
+replays travel migrations, restores the snapshot, and compares all eight selected
+table digests (not a full-schema digest). Both the normal and fallback restore
+paths purge the DB connection and require exact pre-rollback digest equality
+before deleting the snapshot. An import failure, mismatch or digest-query failure
+retains the mode-0600 dump/options within the mode-0700 private directory and
+returns exit 1 without printing raw SQL or credential diagnostics. A verified
+fallback still returns exit 1 for the original failed check; `RECOVERED` alone
+is not a successful migration verification. The no-DB control-flow checks are
+`php scripts/travel-lab/recovery-failure-test.php`; actual MySQL restore is a
+separate gate.
 It changes the testing schema; never overlap another suite. The env-loss check
 privately moves generated env files, regenerates scoped authentication, preserves
 user IDs/travel records, and leaves new local credentials. A new APP_KEY invalidates

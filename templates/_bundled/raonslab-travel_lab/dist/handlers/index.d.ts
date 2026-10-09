@@ -1,3 +1,3 @@
-import { ensureInquiryKeyHandler, clearInquiryKeyHandler } from './inquiryKey';
+import { ensureInquiryKeyHandler, clearInquiryKeyHandler, prepareInquiryHandler } from './inquiryKey';
 export declare const handlerMap: Record<string, (...args: any[]) => any>;
-export { ensureInquiryKeyHandler, clearInquiryKeyHandler };
+export { ensureInquiryKeyHandler, clearInquiryKeyHandler, prepareInquiryHandler };

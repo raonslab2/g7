@@ -3,7 +3,9 @@
 namespace Modules\Raonslab\TravelLab\Providers;
 
 use App\Extension\BaseModuleServiceProvider;
+use Illuminate\Routing\Router;
 use Modules\Raonslab\TravelLab\Console\Commands\ProvisionTravelSupportCommand;
+use Modules\Raonslab\TravelLab\Http\Middleware\TravelCatalogConflictResponse;
 use Modules\Raonslab\TravelLab\Repositories\CatalogRepository;
 use Modules\Raonslab\TravelLab\Repositories\Contracts\CatalogRepositoryInterface;
 use Modules\Raonslab\TravelLab\Repositories\Contracts\TravelSupportPostRepositoryInterface;
@@ -34,6 +36,7 @@ class TravelLabServiceProvider extends BaseModuleServiceProvider
     public function boot(): void
     {
         parent::boot();
+        $this->app->make(Router::class)->pushMiddlewareToGroup('api', TravelCatalogConflictResponse::class);
         if ($this->app->runningInConsole()) {
             $this->commands([ProvisionTravelSupportCommand::class]);
         }

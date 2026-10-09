@@ -41,4 +41,14 @@ class CatalogService
     {
         return $this->repository->updateMetadata($productId, $data);
     }
+
+    public function candidates(array $filters): LengthAwarePaginator
+    {
+        return $this->repository->candidates($filters);
+    }
+
+    public function registerMetadata(int $productId, array $data): TravelProduct
+    {
+        return $this->repository->registerMetadata($productId, $data);
+    }
 }

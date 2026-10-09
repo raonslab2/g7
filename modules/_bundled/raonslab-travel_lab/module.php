@@ -6,6 +6,7 @@ use App\Extension\AbstractModule;
 use Modules\Raonslab\TravelLab\Database\Seeders\DatabaseSeeder;
 use Modules\Raonslab\TravelLab\Listeners\BlockTravelCommerceCheckout;
 use Modules\Raonslab\TravelLab\Listeners\ExcludeTravelSupportQuestionsFromSearch;
+use Modules\Raonslab\TravelLab\Listeners\ProtectTravelCommerceCatalog;
 use Modules\Raonslab\TravelLab\Listeners\SuppressTravelSupportNotifications;
 
 class Module extends AbstractModule
@@ -20,6 +21,7 @@ class Module extends AbstractModule
     {
         return [
             BlockTravelCommerceCheckout::class,
+            ProtectTravelCommerceCatalog::class,
             SuppressTravelSupportNotifications::class,
             ExcludeTravelSupportQuestionsFromSearch::class,
         ];
@@ -48,7 +50,7 @@ class Module extends AbstractModule
                     'name' => ['ko' => $labels[0].' '.$verbs[0], 'en' => $verbs[1].' '.$labels[1]],
                     'description' => ['ko' => $labels[0].' '.$verbs[0].' 권한', 'en' => $verbs[1].' '.$labels[1]],
                     'type' => 'admin',
-                    'roles' => ['admin', 'manager'],
+                    'roles' => $identifier === 'support' ? ['admin'] : ['admin', 'manager'],
                 ];
             }
             $categories[] = ['identifier' => $identifier, 'owner_key' => $identifier === 'inquiries' ? 'user_id' : null, 'resource_route_key' => $identifier === 'inquiries' ? 'inquiry' : null, 'name' => ['ko' => $labels[0], 'en' => $labels[1]], 'description' => ['ko' => $labels[0].' 관리 권한', 'en' => $labels[1].' permissions'], 'permissions' => $permissions];

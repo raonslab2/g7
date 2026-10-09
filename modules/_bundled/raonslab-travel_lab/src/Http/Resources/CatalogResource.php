@@ -19,7 +19,7 @@ class CatalogResource extends BaseApiResource
             'duration_days' => $this->duration_days,
             'summary' => $summary[app()->getLocale()] ?? $summary[config('app.fallback_locale', 'ko')] ?? reset($summary) ?: '',
             'itinerary' => $this->itinerary ?? [],
-            'from_price' => $this->departures->min(fn ($departure) => $departure->option->getSellingPrice()),
+            'from_price' => $this->departures->filter(fn ($departure) => $departure->available > 0)->min(fn ($departure) => $departure->option->getSellingPrice()),
             'currency_code' => $this->product->currency_code,
             'image_url' => $this->product->getThumbnailUrl(),
             'departures' => DepartureResource::collection($this->departures)->resolve($request),

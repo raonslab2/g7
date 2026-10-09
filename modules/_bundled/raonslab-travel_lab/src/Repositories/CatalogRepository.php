@@ -15,6 +15,7 @@ use Modules\Raonslab\TravelLab\Models\Departure;
 use Modules\Raonslab\TravelLab\Models\InquiryItem;
 use Modules\Raonslab\TravelLab\Models\TravelProduct;
 use Modules\Raonslab\TravelLab\Repositories\Contracts\CatalogRepositoryInterface;
+use Modules\Raonslab\TravelLab\Support\TravelDate;
 use Modules\Sirsoft\Ecommerce\Enums\ProductDisplayStatus;
 use Modules\Sirsoft\Ecommerce\Enums\ProductSalesStatus;
 use Modules\Sirsoft\Ecommerce\Models\Product;
@@ -34,7 +35,7 @@ class CatalogRepository implements CatalogRepositoryInterface
     private function eligibleDepartures(Builder $query, array $filters = []): void
     {
         $query->where('travel_lab_departures.is_active', true)
-            ->where('departure_date', '>', now()->toDateString())
+            ->where('departure_date', '>', TravelDate::today()->toDateString())
             ->whereColumn('capacity', '>', 'reserved')
             ->whereHas('option', function (Builder $option) use ($filters) {
                 $option->where('ecommerce_product_options.is_active', true)
@@ -81,9 +82,11 @@ class CatalogRepository implements CatalogRepositoryInterface
             }
         }
         if (isset($filters['q']) && trim($filters['q']) !== '') {
-            $query->whereHas('product', fn (Builder $product) => KeywordSearch::applyAny($product, ['name', 'description'], $filters['q']));
+            // Search decoded translations, including short Korean names. Raw JSON
+            // FULLTEXT under MariaDB's default parser misses these visible titles.
+            $query->whereHas('product', fn (Builder $product) => KeywordSearch::applyAny($product, ['name->ko', 'name->en', 'description->ko', 'description->en'], $filters['q']));
         }
-        $query->with(['product.images', 'departures' => function ($departure) use ($public, $filters) {
+        $query->with(['product.images', 'product.options', 'departures' => function ($departure) use ($public, $filters) {
             if ($public) {
                 $this->eligibleDepartures($departure->getQuery(), $filters);
             }
@@ -112,9 +115,13 @@ class CatalogRepository implements CatalogRepositoryInterface
     public function find(int $productId, bool $public = true): TravelProduct
     {
         return $this->catalogQuery($public)->where('product_id', $productId)
-            ->with(['product.images', 'departures' => function ($query) use ($public) {
+            ->with(['product.images', 'product.options', 'departures' => function ($query) use ($public) {
                 if ($public) {
-                    $this->eligibleDepartures($query->getQuery());
+                    // Detail also shows future sold-out dates as disabled choices.
+                    // Discovery still requires at least one available departure.
+                    $query->where('is_active', true)->where('departure_date', '>', TravelDate::today()->toDateString())
+                        ->whereHas('option', fn (Builder $option) => $option->where('is_active', true)
+                            ->whereColumn('ecommerce_product_options.product_id', 'travel_lab_departures.product_id'));
                 }
                 $query->with('option.product')->orderBy('departure_date')->orderBy('id');
             }])->firstOrFail();
@@ -172,6 +179,33 @@ class CatalogRepository implements CatalogRepositoryInterface
         $travel->update($data);
 
         return $travel;
+    }
+
+    public function candidates(array $filters): LengthAwarePaginator
+    {
+        $query = Product::query()->whereNotIn('id', TravelProduct::query()->select('product_id'))
+            ->with(['options', 'shippingPolicy.countrySettings']);
+        if (isset($filters['q']) && trim($filters['q']) !== '') {
+            $query->where(function (Builder $product) use ($filters) {
+                KeywordSearch::applyAny($product, ['name->ko', 'name->en'], $filters['q']);
+                $product->orWhere('product_code', 'like', '%'.KeywordSearch::escapeLikeWildcards($filters['q']).'%');
+            });
+        }
+
+        return BoundedPaginator::paginate($query->orderBy('id'), min(48, max(1, (int) ($filters['per_page'] ?? 12))), (int) ($filters['page'] ?? 1), PaginationLimits::resultCap('travel_lab.catalog'));
+    }
+
+    public function registerMetadata(int $productId, array $data): TravelProduct
+    {
+        return DB::transaction(function () use ($productId, $data) {
+            Product::query()->whereKey($productId)->lockForUpdate()->firstOrFail();
+            if (TravelProduct::query()->where('product_id', $productId)->exists()) {
+                throw new CatalogConflictException('messages.already_registered');
+            }
+            TravelProduct::create([...$data, 'product_id' => $productId, 'published' => $data['published'] ?? false, 'itinerary' => $data['itinerary'] ?? []]);
+
+            return $this->find($productId, false);
+        }, 3);
     }
 
     public function findSampleProduct(string $code): ?Product

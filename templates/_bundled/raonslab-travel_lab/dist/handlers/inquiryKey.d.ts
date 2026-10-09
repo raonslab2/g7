@@ -8,8 +8,17 @@
  * 네트워크 오류 시에는 이 모듈의 어떤 핸들러도 부르지 않는다 — 키를 새로 만들지 않는 것이
  * 서버 측 중복 차단의 전제다.
  *
- * 결과는 전역 상태 `_global.travelInquiryKey` 에 둔다(레이아웃 apiCall body 가 읽는다).
+ * 전역 키는 화면 활성화에 사용한다. 제출 본문은 prepare 반환값을 sequence의 $prev에서
+ * 명시적 setState(local)로 캡처하므로 오래된 전역 렌더 스냅샷을 읽지 않는다.
  */
+export interface InquiryPayload {
+    cart_ids: number[];
+    contact: {
+        name: string;
+        phone: string | null;
+    };
+    idempotency_key: string;
+}
 interface HandlerAction {
     handler: string;
     params?: Record<string, any>;
@@ -34,4 +43,6 @@ export declare function ensureInquiryKeyHandler(action: HandlerAction): string |
  * 요청이 성공적으로 접수된 뒤 키를 폐기한다 — 다음 요청은 새 키를 받는다.
  */
 export declare function clearInquiryKeyHandler(): void;
+/** Return the exact durable body to sequence $prev → setState(local), avoiding the core global-refresh seam. */
+export declare function prepareInquiryHandler(action: HandlerAction): InquiryPayload | null;
 export {};

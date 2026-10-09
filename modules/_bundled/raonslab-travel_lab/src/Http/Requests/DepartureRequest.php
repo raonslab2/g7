@@ -4,6 +4,7 @@ namespace Modules\Raonslab\TravelLab\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
+use Modules\Raonslab\TravelLab\Support\TravelDate;
 use Modules\Sirsoft\Ecommerce\Models\ProductOption;
 
 class DepartureRequest extends FormRequest
@@ -17,7 +18,7 @@ class DepartureRequest extends FormRequest
     {
         return [
             'product_option_id' => ['required', 'integer', Rule::exists(ProductOption::class, 'id')->where('product_id', (int) $this->route('product'))],
-            'departure_date' => ['required', 'date_format:Y-m-d'],
+            'departure_date' => ['required', 'date_format:Y-m-d', 'after:'.TravelDate::today()->toDateString()],
             'return_date' => ['required', 'date_format:Y-m-d', 'after_or_equal:departure_date'],
             'capacity' => ['required', 'integer', 'min:1', 'max:100000'],
             'is_active' => ['sometimes', 'boolean'],

@@ -23,6 +23,10 @@ interface CatalogRepositoryInterface
 
     public function updateMetadata(int $productId, array $data): TravelProduct;
 
+    public function candidates(array $filters): LengthAwarePaginator;
+
+    public function registerMetadata(int $productId, array $data): TravelProduct;
+
     public function findSampleProduct(string $code): ?Product;
 
     public function findSampleShippingPolicy(): ?ShippingPolicy;

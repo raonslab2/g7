@@ -17,4 +17,6 @@ return [
     'capacity_inconsistent' => '시험 인원 기록을 확인해야 합니다. 관리자에게 문의해 주세요.',
     'unsupported_field' => '허용되지 않은 입력 항목입니다.',
     'checkout_not_allowed' => 'Travel Lab 상품은 시험 문의로만 접수할 수 있으며 실제 주문·결제는 사용할 수 없습니다.',
+    'product_delete_restricted' => '여행 기록에 연결된 상품은 삭제할 수 없습니다. 여행 게시를 해제해 주세요.',
+    'option_delete_restricted' => '출발일에 연결된 옵션을 유지해 주세요. 가격·재고 수정과 새 옵션 추가는 가능합니다.',
 ];

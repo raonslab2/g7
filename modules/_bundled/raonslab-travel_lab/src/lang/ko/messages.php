@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'already_registered' => '이미 여행 상품으로 등록된 커머스 상품입니다.',
     'catalog_loaded' => '여행 카탈로그를 조회했습니다.',
     'catalog_saved' => '여행 카탈로그를 저장했습니다.',
     'not_found' => '여행 상품 또는 출발 일정을 찾을 수 없습니다.',

@@ -8,12 +8,15 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Modules\Raonslab\TravelLab\Exceptions\CatalogConflictException;
+use Modules\Raonslab\TravelLab\Http\Requests\CatalogCandidatesRequest;
 use Modules\Raonslab\TravelLab\Http\Requests\CatalogListRequest;
+use Modules\Raonslab\TravelLab\Http\Requests\CatalogRegisterRequest;
 use Modules\Raonslab\TravelLab\Http\Requests\CatalogUpdateRequest;
 use Modules\Raonslab\TravelLab\Http\Requests\DepartureRequest;
 use Modules\Raonslab\TravelLab\Http\Resources\AdminCatalogCollection;
 use Modules\Raonslab\TravelLab\Http\Resources\AdminCatalogResource;
 use Modules\Raonslab\TravelLab\Http\Resources\AdminDepartureResource;
+use Modules\Raonslab\TravelLab\Http\Resources\CatalogCandidateCollection;
 use Modules\Raonslab\TravelLab\Services\CatalogService;
 
 class AdminCatalogController extends AdminBaseController
@@ -34,6 +37,34 @@ class AdminCatalogController extends AdminBaseController
             return ResponseHelper::moduleSuccess('raonslab-travel_lab', 'messages.catalog_saved', (new AdminCatalogResource($this->catalog->updateMetadata($product, $request->validated())))->resolve($request));
         } catch (ModelNotFoundException) {
             return ResponseHelper::moduleError('raonslab-travel_lab', 'messages.not_found', 404);
+        }
+    }
+
+    public function candidates(CatalogCandidatesRequest $request): JsonResponse
+    {
+        return ResponseHelper::moduleSuccess('raonslab-travel_lab', 'messages.catalog_loaded', (new CatalogCandidateCollection($this->catalog->candidates($request->validated())))->toArray($request));
+    }
+
+    public function show(Request $request, int $product): JsonResponse
+    {
+        try {
+            return ResponseHelper::moduleSuccess('raonslab-travel_lab', 'messages.catalog_loaded', (new AdminCatalogResource($this->catalog->find($product, false)))->resolve($request));
+        } catch (ModelNotFoundException) {
+            return ResponseHelper::moduleError('raonslab-travel_lab', 'messages.not_found', 404);
+        }
+    }
+
+    public function store(CatalogRegisterRequest $request): JsonResponse
+    {
+        $data = $request->validated();
+        $product = (int) $data['product_id'];
+        unset($data['product_id']);
+        try {
+            return ResponseHelper::moduleSuccess('raonslab-travel_lab', 'messages.catalog_saved', (new AdminCatalogResource($this->catalog->registerMetadata($product, $data)))->resolve($request), 201);
+        } catch (ModelNotFoundException) {
+            return ResponseHelper::moduleError('raonslab-travel_lab', 'messages.not_found', 404);
+        } catch (CatalogConflictException $exception) {
+            return ResponseHelper::moduleError('raonslab-travel_lab', $exception->getMessageKey(), 409);
         }
     }
 

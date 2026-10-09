@@ -8,7 +8,8 @@
  * 네트워크 오류 시에는 이 모듈의 어떤 핸들러도 부르지 않는다 — 키를 새로 만들지 않는 것이
  * 서버 측 중복 차단의 전제다.
  *
- * 결과는 전역 상태 `_global.travelInquiryKey` 에 둔다(레이아웃 apiCall body 가 읽는다).
+ * 전역 키는 화면 활성화에 사용한다. 제출 본문은 prepare 반환값을 sequence의 $prev에서
+ * 명시적 setState(local)로 캡처하므로 오래된 전역 렌더 스냅샷을 읽지 않는다.
  */
 
 const STORAGE_KEY = 'raon_travel_inquiry_key';
@@ -18,9 +19,20 @@ interface StoredKey {
   key: string;
   fingerprint: string;
   contact?: { name: string; phone: string | null };
+  payload?: InquiryPayload;
+  ownerId?: string;
+}
+
+export interface InquiryPayload {
+  cart_ids: number[];
+  contact: { name: string; phone: string | null };
+  idempotency_key: string;
 }
 
 let memoryStored: StoredKey | null = null;
+// A failed write/removal leaves older readable bytes behind. Keep the newest value
+// (including null as a deletion tombstone) authoritative for the current tab.
+let memoryOverridesStorage = false;
 
 interface HandlerAction {
   handler: string;
@@ -67,6 +79,7 @@ export function generateInquiryKey(): string {
 }
 
 function readStored(): StoredKey | null {
+  if (memoryOverridesStorage) return memoryStored;
   try {
     const raw = window.sessionStorage.getItem(STORAGE_KEY);
     if (!raw) return memoryStored;
@@ -89,13 +102,15 @@ function writeStored(value: StoredKey | null): void {
     } else {
       window.sessionStorage.removeItem(STORAGE_KEY);
     }
+    memoryOverridesStorage = false;
   } catch {
-    // 저장소를 쓸 수 없으면 전역 상태만 유지한다
+    memoryOverridesStorage = true;
+    // Readable old storage must not shadow the latest body or deletion tombstone.
   }
 }
 
 function setGlobalKey(key: string | null, contact?: StoredKey['contact']): void {
-  (window as any).G7Core?.state?.set?.({ [STATE_KEY]: key, ...(contact ? { travelInquiryContact: contact } : {}) });
+  (window as any).G7Core?.state?.set?.({ [STATE_KEY]: key, travelInquiryContact: contact ?? null, travelInquiryPending: readStored()?.payload ?? null });
 }
 
 /**
@@ -104,8 +119,18 @@ function setGlobalKey(key: string | null, contact?: StoredKey['contact']): void 
  * params.cartIds: number[], params.quantities?: number[] (cartIds 와 같은 순서), params.contact?: {name,phone}
  */
 export function ensureInquiryKeyHandler(action: HandlerAction): string | null {
+  // An acknowledged native cart edit is a new intent, not an uncertain intake retry.
+  if (action.params?.cartChanged === true) writeStored(null);
+  const ownerId = String(action.params?.ownerId ?? "").trim() || undefined;
+  const prior = readStored();
+  if (ownerId && prior && ownerId !== prior.ownerId) writeStored(null);
   const cartFingerprint = fingerprintCartIds(action?.params?.cartIds, action?.params?.quantities);
   if (!cartFingerprint) {
+    const pending = readStored();
+    if (pending?.payload) {
+      setGlobalKey(pending.key, pending.contact);
+      return pending.key;
+    }
     setGlobalKey(null);
     return null;
   }
@@ -129,7 +154,7 @@ export function ensureInquiryKeyHandler(action: HandlerAction): string | null {
   }
 
   const key = generateInquiryKey();
-  writeStored({ key, fingerprint, contact });
+  writeStored({ key, fingerprint, contact, ownerId });
   setGlobalKey(key, contact);
   logger.log('New inquiry key prepared');
   return key;
@@ -141,4 +166,21 @@ export function ensureInquiryKeyHandler(action: HandlerAction): string | null {
 export function clearInquiryKeyHandler(): void {
   writeStored(null);
   setGlobalKey(null);
+}
+
+/** Return the exact durable body to sequence $prev → setState(local), avoiding the core global-refresh seam. */
+export function prepareInquiryHandler(action: HandlerAction): InquiryPayload | null {
+  const ids = Array.isArray(action.params?.cartIds) ? action.params!.cartIds.map(Number).filter((id: number) => Number.isInteger(id) && id > 0).sort((a: number, b: number) => a - b) : [];
+  if (!ids.length) {
+    ensureInquiryKeyHandler(action);
+    // A successful intake consumes the cart before an uncertain response. Recover that body.
+    return readStored()?.payload ?? null;
+  }
+  const key = ensureInquiryKeyHandler(action);
+  const stored = readStored();
+  if (!key || !stored?.contact) return null;
+  const payload: InquiryPayload = { cart_ids: ids, contact: stored.contact, idempotency_key: key };
+  writeStored({ ...stored, payload });
+  setGlobalKey(key, stored.contact);
+  return payload;
 }

@@ -22,6 +22,9 @@ interface WorkflowCartRepositoryInterface
 
     public function containsTravelCommerceItems(array $productIds, array $optionIds): bool;
 
+    /** Departure-linked options which a native full options sync must retain. */
+    public function linkedOptionIds(int $productId): array;
+
     public function orderCommerceItems(int $orderId): array;
 
     public function reserve(Departure $departure, int $quantity): bool;

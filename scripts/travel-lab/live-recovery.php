@@ -70,13 +70,16 @@ try {
     if ($damaged && isset($dump, $options) && is_file($dump)) {
         try {
             travelLabMysqlTool(['mysql', '--defaults-extra-file='.$options, '--database=req81_travel_lab_test'], $dump, $directory.'/restore-output');
+            DB::purge();
+            travelLabCheck(travelLabTestDigest() === $before, 'Fallback restore differs from the pre-rollback digest.');
             $damaged = false;
-            fwrite(STDERR, 'RECOVERED: testing schema restored from its private local dump after a failed check.'.PHP_EOL);
-        } catch (Throwable) {
-            fwrite(STDERR, 'BLOCKED: testing restore requires the retained private recovery dump.'.PHP_EOL);
+            fwrite(STDERR, 'RECOVERED: testing schema restored and all selected-table digests verified after a failed check.'.PHP_EOL);
+        } catch (Throwable $restoreError) {
+            fwrite(STDERR, 'BLOCKED: testing restore verification failed ('.get_class($restoreError).'); retained private recovery dump required.'.PHP_EOL);
         }
     }
-    fwrite(STDERR, 'FAIL: '.$error->getMessage().PHP_EOL);
+    // Query/tool exception messages can contain SQL or credentials; classify only.
+    fwrite(STDERR, 'FAIL: testing rollback/replay or restore verification failed ('.get_class($error).').'.PHP_EOL);
     $exitCode = 1;
 } finally {
     // Retain the private snapshot only if recovery itself failed.

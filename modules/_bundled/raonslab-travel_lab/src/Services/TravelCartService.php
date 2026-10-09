@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\DB;
 use Modules\Raonslab\TravelLab\Models\Departure;
 use Modules\Raonslab\TravelLab\Repositories\Contracts\WorkflowCartRepositoryInterface;
+use Modules\Raonslab\TravelLab\Support\TravelDate;
 use Modules\Sirsoft\Ecommerce\Enums\ChargePolicyEnum;
 use Modules\Sirsoft\Ecommerce\Exceptions\CartOperationException;
 use Modules\Sirsoft\Ecommerce\Exceptions\CartQuantityLimitException;
@@ -208,7 +209,7 @@ class TravelCartService
             || ! $departure->is_active || ! $departure->product?->isPurchasable()
             || ! $departure->option?->is_active
             || (int) $departure->option->product_id !== (int) $departure->product_id
-            || Carbon::parse($departure->departure_date)->startOfDay()->lte(now()->startOfDay())
+            || Carbon::parse($departure->departure_date)->toDateString() <= TravelDate::today()->toDateString()
             || Carbon::parse($departure->return_date)->startOfDay()->lt(Carbon::parse($departure->departure_date)->startOfDay())) {
             return 'departure_unavailable';
         }

@@ -10,6 +10,7 @@ import {
   clearInquiryKeyHandler,
   fingerprintCartIds,
   generateInquiryKey,
+  prepareInquiryHandler,
 } from '../../src/handlers/inquiryKey';
 import { handlerMap } from '../../src/handlers';
 
@@ -101,6 +102,85 @@ describe('ensure / clear', () => {
   });
 
   it('handlerMap 은 travelLab 접두사 핸들러만 노출한다', () => {
-    expect(Object.keys(handlerMap).sort()).toEqual(['travelLabClearInquiryKey', 'travelLabEnsureInquiryKey']);
+    expect(Object.keys(handlerMap).sort()).toEqual(['travelLabClearInquiryKey', 'travelLabEnsureInquiryKey', 'travelLabPrepareInquiry']);
+  });
+});
+
+describe('durable inquiry preparation', () => {
+  const action = { handler: 'travelLabPrepareInquiry', params: { cartIds: [5], quantities: [2], contact: { name: ' 고객 ', phone: '01000000000' } } };
+  it('captures the exact normalized body, rather than a stale render key', () => {
+    const renderKey = ensure([5], [2]);
+    const body = prepareInquiryHandler(action)!;
+    expect(body.idempotency_key).not.toBe(renderKey);
+    expect(body).toEqual({cart_ids:[5],contact:{name:'고객',phone:'01000000000'},idempotency_key:globalState.travelInquiryKey});
+    expect(prepareInquiryHandler(action)).toEqual(body);
+  });
+  it('recovers the same body after a consumed cart reload; success clears it', () => {
+    const body = prepareInquiryHandler(action);
+    globalState = {};
+    expect(ensure([], [])).toBe(body!.idempotency_key);
+    expect(globalState.travelInquiryPending).toEqual(body);
+    expect(prepareInquiryHandler({handler:'travelLabPrepareInquiry',params:{cartIds:[],quantities:[]}})).toEqual(body);
+    clearInquiryKeyHandler();
+    expect(ensure([], [])).toBeNull();
+    expect(globalState.travelInquiryPending).toBeNull();
+  });
+});
+
+it('does not restore another logged-in member’s pending contact or body', () => {
+  prepareInquiryHandler({handler:'travelLabPrepareInquiry',params:{ownerId:1,cartIds:[5],quantities:[1],contact:{name:'Owner one',phone:null}}});
+  expect(ensureInquiryKeyHandler({handler:'travelLabEnsureInquiryKey',params:{ownerId:2,cartIds:[]}})).toBeNull();
+  expect(globalState.travelInquiryPending).toBeNull();
+  expect(globalState.travelInquiryContact).toBeNull();
+});
+
+it('an acknowledged cart deletion clears uncertain pending recovery before a fresh cart load', () => {
+  prepareInquiryHandler({handler:'travelLabPrepareInquiry',params:{ownerId:1,cartIds:[5],quantities:[1],contact:{name:'Owner',phone:null}}});
+  expect(ensureInquiryKeyHandler({handler:'travelLabEnsureInquiryKey',params:{ownerId:1,cartChanged:true,cartIds:[]}})).toBeNull();
+  expect(globalState.travelInquiryPending).toBeNull();
+  expect(ensure([])).toBeNull();
+});
+
+describe('persisted stale storage after write-only failures', () => {
+  const action = { handler: 'travelLabPrepareInquiry', params: { ownerId: 'member-one', cartIds: [5], quantities: [2], contact: { name: 'Customer', phone: '01000000000' } } };
+  it('an existing persisted cart key does not shadow the prepared body after setItem fails', () => {
+    const initial = ensureInquiryKeyHandler({ handler: 'travelLabEnsureInquiryKey', params: { ownerId: 'member-one', cartIds: [5], quantities: [2] } });
+    const write = vi.spyOn(Storage.prototype, 'setItem').mockImplementation(() => { throw new DOMException('quota', 'QuotaExceededError'); });
+    try {
+      const body = prepareInquiryHandler(action);
+      expect(body).not.toBeNull();
+      expect(body!.contact).toEqual({ name: 'Customer', phone: '01000000000' });
+      expect(body!.idempotency_key).not.toBe(initial);
+      expect(prepareInquiryHandler(action)).toEqual(body);
+      expect(globalState.travelInquiryPending).toEqual(body);
+      expect(JSON.parse(window.sessionStorage.getItem('raon_travel_inquiry_key')!).key).toBe(initial);
+    } finally { write.mockRestore(); }
+  });
+  it('the latest changed contact stays authoritative over an earlier persisted request', () => {
+    const initial = prepareInquiryHandler(action)!;
+    const editedAction = { ...action, params: { ...action.params, contact: { name: 'Customer', phone: '01011111111' } } };
+    const write = vi.spyOn(Storage.prototype, 'setItem').mockImplementation(() => { throw new DOMException('quota', 'QuotaExceededError'); });
+    try {
+      const changed = prepareInquiryHandler(editedAction)!;
+      expect(changed.contact.phone).toBe('01011111111');
+      expect(changed.idempotency_key).not.toBe(initial.idempotency_key);
+      expect(prepareInquiryHandler(editedAction)).toEqual(changed);
+      expect(ensureInquiryKeyHandler({ handler: 'travelLabEnsureInquiryKey', params: { ownerId: 'member-one', cartIds: [] } })).toBe(changed.idempotency_key);
+      expect(globalState.travelInquiryPending).toEqual(changed);
+    } finally { write.mockRestore(); }
+  });
+  it('a failed clear leaves a tombstone instead of resurrecting the persisted pending request', () => {
+    const initial = prepareInquiryHandler(action)!;
+    const remove = vi.spyOn(Storage.prototype, 'removeItem').mockImplementation(() => { throw new DOMException('denied', 'SecurityError'); });
+    try {
+      clearInquiryKeyHandler();
+      expect(globalState.travelInquiryPending).toBeNull();
+      expect(ensureInquiryKeyHandler({ handler: 'travelLabEnsureInquiryKey', params: { ownerId: 'member-one', cartIds: [] } })).toBeNull();
+      expect(prepareInquiryHandler({ handler: 'travelLabPrepareInquiry', params: { ownerId: 'member-one', cartIds: [] } })).toBeNull();
+      expect(JSON.parse(window.sessionStorage.getItem('raon_travel_inquiry_key')!).key).toBe(initial.idempotency_key);
+    } finally { remove.mockRestore(); }
+    const next = prepareInquiryHandler(action)!;
+    expect(next.idempotency_key).not.toBe(initial.idempotency_key);
+    expect(prepareInquiryHandler(action)).toEqual(next);
   });
 });

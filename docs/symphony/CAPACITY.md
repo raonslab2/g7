@@ -69,3 +69,20 @@ releasesits Provider slot after durablehandoff. Existing readyreviews continue; 
 TESTDB gates haveoneowner. Reexpandheavybatches when hostCPUqueuefalls and an additional
 nonduplicate scope is ready; do not reserve idleRequestslots to reach a numericmaximum.
 Exactaccountremainingusage/Springlivecounts/sharedglobalrequests remainUNKNOWN; notzero.
+
+
+## W03 repair observations — 2026-10-09 11 UTC
+
+Eight official children are terminal COMPLETED (five implementation/preflight and three independent W03 reviews), nine cumulative creations after new w03-support-hardening attempt1 req_df8c3723d05c42f0b85c3ebcb7ddf540. Its creation was QUEUED and subsequent canonical status was RUNNING, CENTRAL verified 1PC; no separate PC or account is claimed. No former Request cancelled or deleted.
+
+Parent repair work initially used three native agents simultaneously plus lead, matching the supported four-slot tree. Recovery repair completed and that native agent was explicitly resumed for nonauthor catalogue review; commerce guard author completed and was resumed for read-only integration/fresh-install investigation; UI author remains active. Native lifecycle counts describe actual supported tool observations, not official child counts. Returned official security/browser/runtime reports each declare one native helper; exact aggregate simultaneous internal execution remains UNKNOWN.
+
+Host at 10:58 UTC: 4 CPUs, load1/5/15=16.15/19.75/21.53, available RAM9.4Gi of15Gi, swap4.9Gi of8Gi. Shared host load cannot be attributed to G7 or Spring separately. Frontend default five-second tests timed out under contention; a single-worker rerun with 20-second test timeout passed126 unchanged assertions/tests in55.64s. Heavy builds/tests are sequenced, disjoint implementation/review remains parallel. Expansion condition: genuinely ready scopes and stable memory/admission, with DB-exclusive recovery isolated from browser work. No two-lane cap, quota change, extra account, scheduler or fabricated load-test PASS.
+
+
+11:31 UTC host load1/5/15=10.02/11.68/18.56 (previous29.48 at11:19); memory available remained8.5Gi in the earlier snapshot. Request-owned loopback preview restarted with application-only PHP_CLI_SERVER_WORKERS=4 and --no-reload. Observed mainPHPserver3338809 plus fork workers3338811–3338814; Laravel/launcher processes are separate. These are application HTTP workers, not model slots, official children, accounts or PCs. Real overlapping HTTP contention is still NOT_RUN until independent connection/lock evidence; a running process count is not concurrency PASS.
+
+Support-hardening attempt1 became canonicalFAILED, retaining code3d0f7a99 but untracked final evidence and no verification completion. Lead compared its12paths and cherry-picked code locally as1f4690d5; this is unverified recovery intake. New ready independent CODEX w03-support-recovery-check attempt1 req_360fde09455c407f9fa817a3c3767351 was createdQUEUED; ten cumulative official creations. Its scope first measures/preserves currentTEST state, then independently verifies the CLAUDE artefact and restores all starting tables/digests. Prior TEST baseline restoration by the failed Request is UNKNOWN, not assumed. APP remains separate. Old Request/task untouched; no limit/credential/config bypass or broad shutdown.
+
+
+11:55UTC: canonical support recovery Request becameCOMPLETED; cumulative10 creations =9COMPLETED/1FAILED, no active official Request at this observation. It declares one native read-only reviewer, not another PC/account. Parent still uses supported four-slot tree as source/doc/review tasks complete; official independent recheck ready scopes will be submitted after one fixed Git checkpoint. Source and DB gates are sequenced while documentation/evidence reviews run independently. Same CODEX/CLAUDE accounts retained; exact account/global/Spring usage remainsUNKNOWN.

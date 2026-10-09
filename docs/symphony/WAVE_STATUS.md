@@ -196,3 +196,41 @@ and new attempts as needed, integrate and rerun postintegration gates. Rehydrate
 published task branch, never assume ignored credentials/service/path survive. Native
 conversation/canonical Request records retain the private auth paths. No whole-goal PASS,
 main merge or production deployment at this handoff.
+
+
+## W03 independent findings and repair wave — 2026-10-09
+
+The three fixed-source reviewers tested 28ada286c1c34606741bcfe4f9d12e06ac50af30. Their original FAIL/CHANGES_REQUIRED decisions remain immutable evidence; no canonical Validation receipt exists. Reports and sanitized evidence are integrated locally in a7883204 (security), 5d3a3195 (browser), fe3b2f23 (runtime), not yet published at this repair checkpoint.
+
+- Browser: 76 PASS / 6 FAIL / 4 NOT_RUN; real Korean keyword search and response-loss idempotency failed, new product-to-travel registration/departure writes blocked. Normal customer and native administrator journeys, private answers, relogin persistence passed at both widths. Numeric IDs provide the native commerce product-edit adapter for codes containing hyphens; no native route rewrite is needed.
+- Security: product delete can remove image files before the departure FK produces a 500; option removal has an opaque FK error; business-day cutoff, write throttles and support permission/audit checks need correction.
+- Runtime: fallback SQL restore could delete its snapshot without validating restored digests. Fresh-empty install, actual env-loss and APP restart were not independently executed. The two Installation tests cover IDV schema only.
+
+Ready work was allocated to three native agents plus one official CLAUDE support-hardening child. Lead owns catalogue/search/registration/common declarations; file ownership prevents shared edits. The support child owns TEST-schema writes exclusively while root/native catalogue checks use isolated in-memory SQLite and recovery checks use pure fault-injection controls. No APP account rotation or destructive recovery occurs during other live journeys.
+
+Repair assertions awaiting fixed-SHA independent recheck: workflow/native guard 17 tests / 258 assertions; frontend 126 tests; fallback control-flow 4 cases. These are implementer results, not release PASS. Root catalogue tests and integration review are assigned to a different native reviewer. Recheck the actual installed artefacts after all fixes, then publish one meaningful reviewed checkpoint in PR2 and delegate new verification attempts. No completed implementation task key is regenerated.
+
+
+Lead installed repair checks: official bundled module/template updates to0.1.1 completed in the isolated APP schema. Actual HTTP Korean `제주` search nowreturns2 visible products (before0). Canonical SQLite full-module integration regression **144 tests /2327 assertions PASS** in111.736s, source-bound bootstrap. Actual Playwright response-loss check passed6 scenarios (390/1440: immediate committed-response loss retry200 same body/ID; consumed-cart reload recovery200; aborted-before-upstream contact editnewkey201), with8 own-fixture cleanup checks. Own inquiries21–26 cancelled and both actors' carts empty. Six sanitized PNGs/body hashes and explicit working-tree source mapping in evidence/W03_REPAIR; no tokens/passwords/contact values copied. This is lead/implementer integration evidence, not independent fixed-SHA Validation.
+
+Independent UI source reviewer found anotherP1 before final freezing: registration candidates requestedper_page50 butservermax48, producing422. Owner corrected48 and added actualserver-rule boundary test; only the affected admin/contract files are rerun. Old evidence is not overwritten or relabeled as a whole-product PASS.
+
+
+Support recovery intake: canonical w03-support-hardening FAILED, local saved source3d0f7a99d012c6f50c462fa3ee73d80b8dc93478, untracked final report/evidence unavailable. Lead isolated its12source/test/document paths and preserved the source in local cherry-pick1f4690d5. New CODEX nonauthor recovery/verification Request req_360fde09455c407f9fa817a3c3767351 targets exact3d0f7a99 and ownsTEST exclusively; initial schema/digest measurement, safe snapshot, native checks and complete restore evidence are required. No source/TEST preservation PASS is inferred from the former Request. Other work proceeds.
+
+Native UI source reviewer also reproduced an existing-key sessionStorage quota failure returning null preparation and stale pending-body resurrection after failed remove. Owner repaired authoritative in-memory fallback including null tombstones;32 affected handler/cart tests pass, production rebuild complete. The first six browser results remain previous-revision evidence; quota-specific and affected normal retry checks are required after resync.
+
+Native extension documentation scaffolding aligned9module documents and reports0issues. Actual parser initially reports0split-file routes; human notes link actualcatalogue12HTTPinventory instead of misrepresenting that scanner. All31runtime API routes require source-derived reference coverage; native whole-module API generation is in progress.
+
+
+## W03 repair checkpoint preparation — 2026-10-09 11:56 UTC
+
+Original independent verdicts remain FAIL/CHANGES_REQUIRED at28ada286; they are not overwritten by repair assertions. Security1e44fe87/browser46c1c6be/runtimeec2ab6b6 reports were reviewed and cherry-picked, retaining source targets. Failed support child3d0f7a99 recovered separately; CODEX recovery verifier req_360fde09455c407f9fa817a3c3767351 completed at5e3c04bc with authored scope fixdf063262. Lead compared and cherry-picked the two commits as7689149f/ef44bf21. Original foreign-question scoped grant returned200 instead of404; fixed native owner-scope checking has fail-first and green tests. Native support/board/scopes93 tests607 assertions plus separate auth14/40 =107/647 PASS on that child revision; this is bounded verification and authored repair, not final independent product PASS or canonical Validation.
+
+TEST at recovery intake had55 tables104 rows, differing from prior independent128/639. Original baseline preservation is unproven; failed request's completed verification is not inferred. Recovery verifier saved and restored its actual starting55/104 with table/row/DDL digests and no APP change. Current TEST is available for the next exclusive fresh-install verifier; root does not infer old128-table schema completeness.
+
+Latest lead actual browser rerun on working tree (base1f4690d5) pinned bundle4488241bc757d3d3f60df16de7ea715bd75ad9e628e933dc92486173714f992a: immediate committed-response loss, consumed-cart reload, edited contact before submission and browser-storage quota, each390/1440 PASS8 scenarios;10 own cleanup checks PASS. All requests27–34 cancelled, both own carts empty. Nine sanitized result/screenshot files plus digest manifest in evidence/W03_REPAIR_FINAL. This is implementer integration evidence; latest support scope fix was not yet installed during this UI-only run.
+
+Native api:docgen --check PASS,31 route inventory/no drift; generation recorded11 probes including transaction-rollback POST and20 skipped. Catalogue's separate isolated kernel generator measured12 endpoint responses. Do not add counts or claim all31 livePASS. Canonical owning-repository work-order validator at10bc5eff PASS89 documents/noerrors before checkpoint. Module/editor docs and final source-bound domain regression completing; next publish reusesPR2 then ready fixed-SHA official browser/security/runtime reviews. Hosted CI and canonical Validation receipt remain NOT_RUN/unavailable. Deadline remaining about51h to October11 14:59UTC.
+
+Final combined working-tree SQLite regression144/2327 PASS176.146s after support scope integration; PintPASS; runtime bundled/installed209files match0mismatch. Native module forceupdate0.1.1 includes final scope/editor, native extdocgen0issues. W03_REPAIR_CHECKPOINT.md binds exact bounded validation limits and next fixed-SHA reviews.

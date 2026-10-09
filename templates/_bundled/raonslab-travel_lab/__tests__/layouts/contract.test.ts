@@ -43,11 +43,11 @@ function strings(node: any): string[] {
 describe('매니페스트 · 버전', () => {
   it('식별자·버전·의존 제약이 요청 계약과 같다', () => {
     expect(templateJson.identifier).toBe('raonslab-travel_lab');
-    expect(templateJson.version).toBe('0.1.0');
+    expect(templateJson.version).toBe('0.1.1');
     expect(pkg.version).toBe(templateJson.version);
     expect(templateJson.g7_version).toBe('>=7.0.11');
     expect(templateJson.dependencies.modules).toMatchObject({
-      'raonslab-travel_lab': '>=0.1.0',
+      'raonslab-travel_lab': '>=0.1.1',
       'sirsoft-ecommerce': '>=1.2.1',
       'sirsoft-board': '>=1.1.2',
       'sirsoft-page': '>=1.1.2',
@@ -214,7 +214,7 @@ describe('상담 요청(테스트) 멱등성', () => {
 
   it('요청 body 는 cart_ids · contact · idempotency_key 만 담는다', () => {
     expect(Object.keys(submit.params.body).sort()).toEqual(['cart_ids', 'contact', 'idempotency_key']);
-    expect(submit.params.body.idempotency_key).toBe('{{_global.travelInquiryKey}}');
+    expect(submit.params.body.idempotency_key).toBe('{{_local.travelInquiryPayload?.idempotency_key}}');
   });
 
   it('키는 장바구니 로드 시 확보되고(묶음 지문), 성공 시에만 폐기된다', () => {

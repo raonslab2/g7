@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'already_registered' => 'This ecommerce product is already registered in Travel Lab.',
     'catalog_loaded' => 'Travel catalog loaded.',
     'catalog_saved' => 'Travel catalog saved.',
     'not_found' => 'Travel product or departure not found.',

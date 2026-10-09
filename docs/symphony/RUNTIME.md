@@ -133,3 +133,32 @@ test history; race fixture products are unpublished afterward. A populated/appli
 travel installation is never reset by the partial-install helper. Generated env
 recovery has no customer-encryption/session continuity claim: it is a synthetic
 lab recovery procedure before preview/reviewer credentials are issued.
+
+## W03 bounded recovery/package repairs
+
+W03-R01's failure branch now performs `DB::purge()` and exact equality of the
+entire original eight-selected-table `$before` digest after fallback import.
+Only verified equality clears `$damaged` and permits snapshot deletion. Failed
+import, digest mismatch or digest query retain the private mode-0700 directory
+and mode-0600 dump/options; exception diagnostics report class only, not raw
+SQL or secrets. A verified fallback still exits 1 for the original failed gate.
+The original W03 review and evidence remain unchanged.
+
+The new `scripts/travel-lab/recovery-failure-test.php` executes the product's
+catch/finally text with import/DB/digest stubs and synthetic private files. Four
+branches cover verified restore, mismatch, import failure and digest-query
+failure. It fails against the original `28ada286` recovery source and passes
+against the repaired source. This is control-flow evidence, **not actual MySQL
+restore**, fresh install or independent Validation. No shared DB/environment or
+preview was touched in this repair.
+
+W03-R02/R03 reproduction instructions now state the locked Node engine
+`^20.19.0 || >=22.12.0`, PHP extensions including the SQLite test driver, local
+SQL clients/admin prerequisite, and production template build/no-sourcemap
+setting. The official subsequent `template:build --production` and bundled
+template update path are documented. Actual fresh dependency/build execution is
+not inferred from a documentation correction. Scoped hashes, commands and pending
+actual/independent gates are recorded in [W03_RECOVERY_REPAIR.md](W03_RECOVERY_REPAIR.md).
+
+
+W03 support recovery measured TEST55tables104rows and restored exact initial digest at5e3c04bc; earlier128tables639rows preservation is UNKNOWN following terminalFAILED support hardening. APP and own preview were untouched by that child. Final fresh install is still NOT_RUN and must use an exclusive TEST snapshot with actual starting table set. Preview now has four fork workers plus main accepting process; no measured overlapping contention PASS yet.

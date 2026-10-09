@@ -12,6 +12,9 @@ Route::get('facets', [CatalogController::class, 'facets'])->name('catalog.facets
 
 Route::prefix('admin/catalog')->middleware(['auth:sanctum', 'admin'])->group(function () {
     Route::get('', [AdminCatalogController::class, 'index'])->middleware('permission:admin,raonslab-travel_lab.catalog.read')->name('admin.catalog.index');
+    Route::get('candidates', [AdminCatalogController::class, 'candidates'])->middleware('permission:admin,raonslab-travel_lab.catalog.read')->name('admin.catalog.candidates');
+    Route::post('', [AdminCatalogController::class, 'store'])->middleware('permission:admin,raonslab-travel_lab.catalog.update')->name('admin.catalog.store');
+    Route::get('{product}', [AdminCatalogController::class, 'show'])->whereNumber('product')->middleware('permission:admin,raonslab-travel_lab.catalog.read')->name('admin.catalog.show');
     Route::patch('{product}', [AdminCatalogController::class, 'update'])->whereNumber('product')->middleware('permission:admin,raonslab-travel_lab.catalog.update')->name('admin.catalog.update');
     Route::get('{product}/departures', [AdminCatalogController::class, 'departures'])->whereNumber('product')->middleware('permission:admin,raonslab-travel_lab.catalog.read')->name('admin.catalog.departures.index');
     Route::post('{product}/departures', [AdminCatalogController::class, 'storeDeparture'])->whereNumber('product')->middleware('permission:admin,raonslab-travel_lab.catalog.update')->name('admin.catalog.departures.store');

@@ -126,7 +126,13 @@ class WorkflowCartRepository implements WorkflowCartRepositoryInterface
     public function containsTravelCommerceItems(array $productIds, array $optionIds): bool
     {
         return TravelProduct::query()->whereIn('product_id', $productIds)->exists()
-            || Departure::query()->whereIn('product_option_id', $optionIds)->exists();
+            || Departure::query()->where(fn ($query) => $query->whereIn('product_id', $productIds)
+                ->orWhereIn('product_option_id', $optionIds))->exists();
+    }
+
+    public function linkedOptionIds(int $productId): array
+    {
+        return Departure::query()->where('product_id', $productId)->pluck('product_option_id')->map(fn ($id) => (int) $id)->all();
     }
 
     public function orderCommerceItems(int $orderId): array

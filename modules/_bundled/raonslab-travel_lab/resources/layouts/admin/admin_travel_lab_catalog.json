@@ -62,6 +62,38 @@
         }
       },
       "auth_mode": "required"
+    },
+    {
+      "id": "travel_candidates",
+      "type": "api",
+      "endpoint": "/api/modules/raonslab-travel_lab/admin/catalog/candidates",
+      "method": "GET",
+      "auto_fetch": false,
+      "auth_mode": "required",
+      "cache": false,
+      "params": {
+        "q": "{{_global.travelCandidateQuery ?? \"\"}}",
+        "per_page": 48,
+        "page": "{{_global.travelCandidatePage ?? 1}}"
+      },
+      "onError": [
+        {
+          "handler": "setState",
+          "params": {
+            "target": "global",
+            "travelCandidateError": "{{error.message ?? \"\"}}"
+          }
+        }
+      ],
+      "onSuccess": [
+        {
+          "handler": "setState",
+          "params": {
+            "target": "global",
+            "travelCandidateError": ""
+          }
+        }
+      ]
     }
   ],
   "slots": {
@@ -113,6 +145,58 @@
                   "className": "flex-center gap-2 flex-shrink-0"
                 },
                 "children": [
+                  {
+                    "type": "basic",
+                    "name": "Button",
+                    "id": "travel_register_product",
+                    "text": "$t:raonslab-travel_lab.admin.catalog.metadata.register",
+                    "props": {
+                      "type": "button",
+                      "className": "btn btn-secondary btn-sm",
+                      "data-testid": "travel_register_product",
+                      "disabled": "{{catalog?.data?.abilities?.can_update !== true}}"
+                    },
+                    "actions": [
+                      {
+                        "type": "click",
+                        "handler": "sequence",
+                        "actions": [
+                          {
+                            "handler": "setState",
+                            "params": {
+                              "target": "global",
+                              "travelMetadataEdit": {
+                                "product_id": null,
+                                "region": "jeju",
+                                "theme": "nature",
+                                "duration_days": 1,
+                                "summary_ko": "",
+                                "summary_en": "",
+                                "itinerary_json": "[]",
+                                "published": false
+                              },
+                              "travelMetadataExisting": false,
+                              "travelMetadataSaving": false,
+                              "travelMetadataError": "",
+                              "travelCandidatePage": 1,
+                              "travelCandidateError": "",
+                              "travelCandidateQuery": ""
+                            }
+                          },
+                          {
+                            "handler": "refetchDataSource",
+                            "params": {
+                              "dataSourceId": "travel_candidates"
+                            }
+                          },
+                          {
+                            "handler": "openModal",
+                            "target": "travel_metadata_modal"
+                          }
+                        ]
+                      }
+                    ]
+                  },
                   {
                     "id": "catalog_refresh",
                     "type": "basic",
@@ -308,6 +392,74 @@
                         },
                         "children": [
                           {
+                            "type": "basic",
+                            "name": "Button",
+                            "id": "travel_edit_metadata",
+                            "text": "$t:raonslab-travel_lab.admin.catalog.metadata.edit",
+                            "props": {
+                              "type": "button",
+                              "className": "btn btn-secondary btn-sm",
+                              "data-testid": "travel_edit_metadata",
+                              "disabled": "{{catalog?.data?.abilities?.can_update !== true}}"
+                            },
+                            "actions": [
+                              {
+                                "type": "click",
+                                "handler": "sequence",
+                                "actions": [
+                                  {
+                                    "handler": "setState",
+                                    "params": {
+                                      "target": "global",
+                                      "travelMetadataError": "",
+                                      "travelMetadataSaving": false,
+                                      "travelMetadataExisting": true
+                                    }
+                                  },
+                                  {
+                                    "handler": "apiCall",
+                                    "target": "/api/modules/raonslab-travel_lab/admin/catalog/{{trip.id}}",
+                                    "auth_mode": "required",
+                                    "params": {
+                                      "method": "GET"
+                                    },
+                                    "onSuccess": [
+                                      {
+                                        "handler": "setState",
+                                        "params": {
+                                          "target": "global",
+                                          "travelMetadataEdit": {
+                                            "product_id": "{{response.data?.id}}",
+                                            "region": "{{response.data?.region}}",
+                                            "theme": "{{response.data?.theme}}",
+                                            "duration_days": "{{response.data?.duration_days}}",
+                                            "summary_ko": "{{response.data?.summary_translations?.ko ?? \"\"}}",
+                                            "summary_en": "{{response.data?.summary_translations?.en ?? \"\"}}",
+                                            "itinerary_json": "{{JSON.stringify(response.data?.itinerary_translations ?? response.data?.itinerary ?? [])}}",
+                                            "published": "{{response.data?.published === true}}"
+                                          }
+                                        }
+                                      },
+                                      {
+                                        "handler": "openModal",
+                                        "target": "travel_metadata_modal"
+                                      }
+                                    ],
+                                    "onError": [
+                                      {
+                                        "handler": "toast",
+                                        "params": {
+                                          "type": "error",
+                                          "message": "{{error.message ?? \"\"}}"
+                                        }
+                                      }
+                                    ]
+                                  }
+                                ]
+                              }
+                            ]
+                          },
+                          {
                             "id": "open_product_admin_button",
                             "type": "basic",
                             "name": "Button",
@@ -336,7 +488,7 @@
                                 "handler": "navigate",
                                 "comment": "audit:allow layout-list-context-navigate-merge-query 이커머스 상품 관리로 이동 — 가격·옵션 원본은 이커머스가 소유하며 여행 목록 상태를 승계하지 않는다",
                                 "params": {
-                                  "path": "/admin/ecommerce/products/{{trip.product_code}}/edit",
+                                  "path": "/admin/ecommerce/products/{{trip.id}}/edit",
                                   "mergeQuery": false,
                                   "query": {}
                                 }
@@ -512,7 +664,8 @@
                                         "return_date": "{{departure.return_date}}",
                                         "capacity": "{{departure.capacity}}",
                                         "reserved": "{{departure.reserved}}",
-                                        "is_active": "{{departure.is_active}}"
+                                        "is_active": "{{departure.is_active}}",
+                                        "options": "{{trip.options ?? []}}"
                                       },
                                       "travelDepartureSaving": false
                                     }
@@ -571,7 +724,8 @@
                                 "return_date": "",
                                 "capacity": 1,
                                 "reserved": 0,
-                                "is_active": true
+                                "is_active": true,
+                                "options": "{{trip.options ?? []}}"
                               },
                               "travelDepartureSaving": false
                             }
@@ -760,7 +914,31 @@
                         "travelDepartureEdit.product_option_id": "{{Number($event.target.value)}}"
                       }
                     }
-                  ]
+                  ],
+                  "if": "{{!!_global.travelDepartureEdit?.id}}"
+                },
+                {
+                  "id": "departure_product_option_select",
+                  "type": "basic",
+                  "name": "Select",
+                  "props": {
+                    "className": "w-full border rounded-lg p-2",
+                    "value": "{{String(_global.travelDepartureEdit?.product_option_id ?? \"\")}}",
+                    "data-testid": "departure_product_option_select",
+                    "id": "departure_product_option_select",
+                    "options": "{{(_global.travelDepartureEdit?.options ?? []).filter(o => o.is_active === true).map(o => ({value:String(o.id),label:o.option_name + \" · \" + o.id + \" · \" + o.stock_quantity}))}}"
+                  },
+                  "actions": [
+                    {
+                      "type": "change",
+                      "handler": "setState",
+                      "params": {
+                        "target": "global",
+                        "travelDepartureEdit.product_option_id": "{{Number($event.target.value)}}"
+                      }
+                    }
+                  ],
+                  "if": "{{!_global.travelDepartureEdit?.id}}"
                 }
               ]
             },
@@ -1033,6 +1211,753 @@
                           ]
                         }
                       ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "travel_metadata_modal",
+      "type": "composite",
+      "name": "Modal",
+      "props": {
+        "title": "$t:raonslab-travel_lab.admin.catalog.metadata.title",
+        "size": "lg"
+      },
+      "children": [
+        {
+          "type": "basic",
+          "name": "Div",
+          "props": {
+            "className": "flex flex-col gap-4"
+          },
+          "children": [
+            {
+              "type": "basic",
+              "name": "Div",
+              "children": [
+                {
+                  "type": "basic",
+                  "name": "Label",
+                  "text": "$t:raonslab-travel_lab.admin.catalog.metadata.product_id",
+                  "props": {
+                    "htmlFor": "travel_metadata_product_id",
+                    "className": "text-sm font-medium"
+                  }
+                },
+                {
+                  "type": "basic",
+                  "name": "Select",
+                  "id": "travel_metadata_product_id",
+                  "props": {
+                    "id": "travel_metadata_product_id",
+                    "data-testid": "travel_metadata_product_id",
+                    "className": "w-full border rounded-lg p-2",
+                    "value": "{{String(_global.travelMetadataEdit?.product_id ?? \"\")}}",
+                    "options": "{{(travel_candidates?.data?.data ?? []).map(p => ({value:String(p.id),label:p.title + \" · \" + p.product_code}))}}"
+                  },
+                  "actions": [
+                    {
+                      "type": "change",
+                      "handler": "setState",
+                      "params": {
+                        "target": "global",
+                        "travelMetadataEdit.product_id": "{{Number($event.target.value)}}"
+                      }
+                    }
+                  ]
+                }
+              ],
+              "if": "{{_global.travelMetadataExisting !== true}}"
+            },
+            {
+              "type": "basic",
+              "name": "P",
+              "if": "{{_global.travelMetadataExisting !== true && !!_global.travelMetadataEdit?.product_id}}",
+              "props": {
+                "className": "text-sm text-gray-600"
+              },
+              "text": "$t:raonslab-travel_lab.admin.catalog.metadata.option_hint"
+            },
+            {
+              "type": "basic",
+              "name": "P",
+              "iteration": {
+                "source": "{{(travel_candidates?.data?.data ?? []).find(p => p.id === Number(_global.travelMetadataEdit?.product_id))?.options ?? []}}",
+                "item_var": "candidateOption",
+                "index_var": "candidateOptionIndex"
+              },
+              "props": {
+                "className": "text-xs text-gray-600"
+              },
+              "text": "$t:raonslab-travel_lab.admin.catalog.metadata.option_line|id={{candidateOption.id}}|name={{candidateOption.option_name ?? \"\"}}|stock={{candidateOption.stock_quantity ?? 0}}"
+            },
+            {
+              "type": "basic",
+              "name": "P",
+              "text": "$t:raonslab-travel_lab.admin.catalog.metadata.loading",
+              "if": "{{_global.travelMetadataExisting !== true && travel_candidates === undefined && !_global.travelCandidateError}}"
+            },
+            {
+              "type": "basic",
+              "name": "P",
+              "text": "$t:raonslab-travel_lab.admin.catalog.metadata.no_candidates",
+              "if": "{{_global.travelMetadataExisting !== true && travel_candidates !== undefined && (travel_candidates?.data?.data ?? []).length === 0}}"
+            },
+            {
+              "type": "basic",
+              "name": "P",
+              "text": "{{_global.travelCandidateError ?? \"\"}}",
+              "props": {
+                "className": "text-red-600"
+              },
+              "if": "{{!!_global.travelCandidateError}}"
+            },
+            {
+              "type": "basic",
+              "name": "Div",
+              "if": "{{_global.travelMetadataExisting !== true}}",
+              "props": {
+                "className": "flex gap-2"
+              },
+              "children": [
+                {
+                  "type": "basic",
+                  "name": "Button",
+                  "id": "travel_candidates_prev",
+                  "props": {
+                    "type": "button",
+                    "className": "btn btn-secondary btn-sm",
+                    "disabled": "{{(travel_candidates?.data?.pagination?.current_page ?? 1) <= 1}}"
+                  },
+                  "text": "$t:raonslab-travel_lab.admin.common.prev",
+                  "actions": [
+                    {
+                      "type": "click",
+                      "handler": "sequence",
+                      "actions": [
+                        {
+                          "handler": "setState",
+                          "params": {
+                            "target": "global",
+                            "travelCandidatePage": "{{Math.max(1, (travel_candidates?.data?.pagination?.current_page ?? 1) - 1)}}"
+                          }
+                        },
+                        {
+                          "handler": "refetchDataSource",
+                          "params": {
+                            "dataSourceId": "travel_candidates"
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "basic",
+                  "name": "Button",
+                  "id": "travel_candidates_next",
+                  "props": {
+                    "type": "button",
+                    "className": "btn btn-secondary btn-sm",
+                    "disabled": "{{(travel_candidates?.data?.pagination?.current_page ?? 1) >= (travel_candidates?.data?.pagination?.last_page ?? 1)}}"
+                  },
+                  "text": "$t:raonslab-travel_lab.admin.common.next",
+                  "actions": [
+                    {
+                      "type": "click",
+                      "handler": "sequence",
+                      "actions": [
+                        {
+                          "handler": "setState",
+                          "params": {
+                            "target": "global",
+                            "travelCandidatePage": "{{(travel_candidates?.data?.pagination?.current_page ?? 1) + 1}}"
+                          }
+                        },
+                        {
+                          "handler": "refetchDataSource",
+                          "params": {
+                            "dataSourceId": "travel_candidates"
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "basic",
+              "name": "Div",
+              "children": [
+                {
+                  "type": "basic",
+                  "name": "Input",
+                  "id": "travel_candidate_query",
+                  "props": {
+                    "id": "travel_candidate_query",
+                    "data-testid": "travel_candidate_query",
+                    "type": "search",
+                    "className": "w-full border rounded-lg p-2",
+                    "placeholder": "$t:raonslab-travel_lab.admin.catalog.metadata.search",
+                    "value": "{{_global.travelCandidateQuery ?? \"\"}}"
+                  },
+                  "actions": [
+                    {
+                      "type": "change",
+                      "handler": "setState",
+                      "params": {
+                        "target": "global",
+                        "travelCandidateQuery": "{{$event.target.value}}"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "type": "basic",
+                  "name": "Button",
+                  "id": "travel_candidates_search",
+                  "text": "$t:raonslab-travel_lab.admin.catalog.metadata.search",
+                  "props": {
+                    "type": "button",
+                    "className": "btn btn-secondary btn-sm",
+                    "data-testid": "travel_candidates_search"
+                  },
+                  "actions": [
+                    {
+                      "type": "click",
+                      "handler": "sequence",
+                      "actions": [
+                        {
+                          "handler": "setState",
+                          "params": {
+                            "target": "global",
+                            "travelCandidatePage": 1,
+                            "travelCandidateError": ""
+                          }
+                        },
+                        {
+                          "handler": "refetchDataSource",
+                          "params": {
+                            "dataSourceId": "travel_candidates"
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "if": "{{_global.travelMetadataExisting !== true}}"
+            },
+            {
+              "type": "basic",
+              "name": "Div",
+              "children": [
+                {
+                  "type": "basic",
+                  "name": "Label",
+                  "text": "$t:raonslab-travel_lab.admin.catalog.metadata.region",
+                  "props": {
+                    "htmlFor": "travel_metadata_region",
+                    "className": "text-sm font-medium"
+                  }
+                },
+                {
+                  "type": "basic",
+                  "name": "Select",
+                  "id": "travel_metadata_region",
+                  "props": {
+                    "id": "travel_metadata_region",
+                    "data-testid": "travel_metadata_region",
+                    "className": "w-full border rounded-lg p-2",
+                    "value": "{{_global.travelMetadataEdit?.region ?? \"\"}}",
+                    "options": [
+                      {
+                        "value": "jeju",
+                        "label": "$t:raonslab-travel_lab.admin.catalog.metadata.region_jeju"
+                      },
+                      {
+                        "value": "gangwon",
+                        "label": "$t:raonslab-travel_lab.admin.catalog.metadata.region_gangwon"
+                      },
+                      {
+                        "value": "busan",
+                        "label": "$t:raonslab-travel_lab.admin.catalog.metadata.region_busan"
+                      },
+                      {
+                        "value": "seoul",
+                        "label": "$t:raonslab-travel_lab.admin.catalog.metadata.region_seoul"
+                      }
+                    ]
+                  },
+                  "actions": [
+                    {
+                      "type": "change",
+                      "handler": "setState",
+                      "params": {
+                        "target": "global",
+                        "travelMetadataEdit.region": "{{$event.target.value}}"
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "basic",
+              "name": "Div",
+              "children": [
+                {
+                  "type": "basic",
+                  "name": "Label",
+                  "text": "$t:raonslab-travel_lab.admin.catalog.metadata.theme",
+                  "props": {
+                    "htmlFor": "travel_metadata_theme",
+                    "className": "text-sm font-medium"
+                  }
+                },
+                {
+                  "type": "basic",
+                  "name": "Select",
+                  "id": "travel_metadata_theme",
+                  "props": {
+                    "id": "travel_metadata_theme",
+                    "data-testid": "travel_metadata_theme",
+                    "className": "w-full border rounded-lg p-2",
+                    "value": "{{_global.travelMetadataEdit?.theme ?? \"\"}}",
+                    "options": [
+                      {
+                        "value": "nature",
+                        "label": "$t:raonslab-travel_lab.admin.catalog.metadata.theme_nature"
+                      },
+                      {
+                        "value": "culture",
+                        "label": "$t:raonslab-travel_lab.admin.catalog.metadata.theme_culture"
+                      },
+                      {
+                        "value": "city",
+                        "label": "$t:raonslab-travel_lab.admin.catalog.metadata.theme_city"
+                      },
+                      {
+                        "value": "wellness",
+                        "label": "$t:raonslab-travel_lab.admin.catalog.metadata.theme_wellness"
+                      }
+                    ]
+                  },
+                  "actions": [
+                    {
+                      "type": "change",
+                      "handler": "setState",
+                      "params": {
+                        "target": "global",
+                        "travelMetadataEdit.theme": "{{$event.target.value}}"
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "basic",
+              "name": "Div",
+              "children": [
+                {
+                  "type": "basic",
+                  "name": "Label",
+                  "text": "$t:raonslab-travel_lab.admin.catalog.metadata.duration_days",
+                  "props": {
+                    "htmlFor": "travel_metadata_duration_days",
+                    "className": "text-sm font-medium"
+                  }
+                },
+                {
+                  "type": "basic",
+                  "name": "Input",
+                  "id": "travel_metadata_duration_days",
+                  "props": {
+                    "id": "travel_metadata_duration_days",
+                    "data-testid": "travel_metadata_duration_days",
+                    "className": "w-full border rounded-lg p-2",
+                    "value": "{{_global.travelMetadataEdit?.duration_days ?? \"\"}}",
+                    "type": "number",
+                    "min": 1,
+                    "max": 365
+                  },
+                  "actions": [
+                    {
+                      "type": "change",
+                      "handler": "setState",
+                      "params": {
+                        "target": "global",
+                        "travelMetadataEdit.duration_days": "{{Number($event.target.value)}}"
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "basic",
+              "name": "Div",
+              "children": [
+                {
+                  "type": "basic",
+                  "name": "Label",
+                  "text": "$t:raonslab-travel_lab.admin.catalog.metadata.summary_ko",
+                  "props": {
+                    "htmlFor": "travel_metadata_summary_ko",
+                    "className": "text-sm font-medium"
+                  }
+                },
+                {
+                  "type": "basic",
+                  "name": "Textarea",
+                  "id": "travel_metadata_summary_ko",
+                  "props": {
+                    "id": "travel_metadata_summary_ko",
+                    "data-testid": "travel_metadata_summary_ko",
+                    "className": "w-full border rounded-lg p-2",
+                    "value": "{{_global.travelMetadataEdit?.summary_ko ?? \"\"}}"
+                  },
+                  "actions": [
+                    {
+                      "type": "change",
+                      "handler": "setState",
+                      "params": {
+                        "target": "global",
+                        "travelMetadataEdit.summary_ko": "{{$event.target.value}}"
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "basic",
+              "name": "Div",
+              "children": [
+                {
+                  "type": "basic",
+                  "name": "Label",
+                  "text": "$t:raonslab-travel_lab.admin.catalog.metadata.summary_en",
+                  "props": {
+                    "htmlFor": "travel_metadata_summary_en",
+                    "className": "text-sm font-medium"
+                  }
+                },
+                {
+                  "type": "basic",
+                  "name": "Textarea",
+                  "id": "travel_metadata_summary_en",
+                  "props": {
+                    "id": "travel_metadata_summary_en",
+                    "data-testid": "travel_metadata_summary_en",
+                    "className": "w-full border rounded-lg p-2",
+                    "value": "{{_global.travelMetadataEdit?.summary_en ?? \"\"}}"
+                  },
+                  "actions": [
+                    {
+                      "type": "change",
+                      "handler": "setState",
+                      "params": {
+                        "target": "global",
+                        "travelMetadataEdit.summary_en": "{{$event.target.value}}"
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "basic",
+              "name": "Div",
+              "children": [
+                {
+                  "type": "basic",
+                  "name": "Label",
+                  "text": "$t:raonslab-travel_lab.admin.catalog.metadata.itinerary_json",
+                  "props": {
+                    "htmlFor": "travel_metadata_itinerary_json",
+                    "className": "text-sm font-medium"
+                  }
+                },
+                {
+                  "type": "basic",
+                  "name": "Textarea",
+                  "id": "travel_metadata_itinerary_json",
+                  "props": {
+                    "id": "travel_metadata_itinerary_json",
+                    "data-testid": "travel_metadata_itinerary_json",
+                    "className": "w-full border rounded-lg p-2",
+                    "value": "{{_global.travelMetadataEdit?.itinerary_json ?? \"\"}}"
+                  },
+                  "actions": [
+                    {
+                      "type": "change",
+                      "handler": "setState",
+                      "params": {
+                        "target": "global",
+                        "travelMetadataEdit.itinerary_json": "{{$event.target.value}}"
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "basic",
+              "name": "P",
+              "text": "$t:raonslab-travel_lab.admin.catalog.metadata.itinerary_help",
+              "props": {
+                "className": "text-xs text-gray-500"
+              }
+            },
+            {
+              "type": "basic",
+              "name": "Div",
+              "children": [
+                {
+                  "type": "basic",
+                  "name": "Label",
+                  "text": "$t:raonslab-travel_lab.admin.catalog.metadata.published",
+                  "props": {
+                    "htmlFor": "travel_metadata_published",
+                    "className": "text-sm font-medium"
+                  }
+                },
+                {
+                  "type": "basic",
+                  "name": "Select",
+                  "id": "travel_metadata_published",
+                  "props": {
+                    "id": "travel_metadata_published",
+                    "data-testid": "travel_metadata_published",
+                    "className": "w-full border rounded-lg p-2",
+                    "value": "{{_global.travelMetadataEdit?.published ? '1' : '0'}}",
+                    "options": [
+                      {
+                        "value": "1",
+                        "label": "$t:raonslab-travel_lab.admin.catalog.publish"
+                      },
+                      {
+                        "value": "0",
+                        "label": "$t:raonslab-travel_lab.admin.catalog.unpublish"
+                      }
+                    ]
+                  },
+                  "actions": [
+                    {
+                      "type": "change",
+                      "handler": "setState",
+                      "params": {
+                        "target": "global",
+                        "travelMetadataEdit.published": "{{$event.target.value === '1'}}"
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "basic",
+              "name": "P",
+              "text": "{{_global.travelMetadataError ?? \"\"}}",
+              "props": {
+                "className": "text-red-600",
+                "role": "alert",
+                "data-testid": "travel_metadata_error"
+              },
+              "if": "{{!!_global.travelMetadataError}}"
+            },
+            {
+              "type": "basic",
+              "name": "Button",
+              "id": "travel_metadata_save_post",
+              "text": "$t:raonslab-travel_lab.admin.catalog.metadata.save",
+              "props": {
+                "type": "button",
+                "className": "btn btn-secondary btn-sm",
+                "data-testid": "travel_metadata_save_post",
+                "disabled": "{{_global.travelMetadataSaving === true || !_global.travelMetadataEdit?.product_id}}"
+              },
+              "actions": [
+                {
+                  "type": "click",
+                  "handler": "sequence",
+                  "actions": [
+                    {
+                      "handler": "setState",
+                      "params": {
+                        "target": "global",
+                        "travelMetadataSaving": true,
+                        "travelMetadataError": ""
+                      }
+                    },
+                    {
+                      "handler": "apiCall",
+                      "auth_mode": "required",
+                      "target": "/api/modules/raonslab-travel_lab/admin/catalog",
+                      "params": {
+                        "method": "POST",
+                        "body": {
+                          "region": "{{_global.travelMetadataEdit?.region}}",
+                          "theme": "{{_global.travelMetadataEdit?.theme}}",
+                          "duration_days": "{{_global.travelMetadataEdit?.duration_days}}",
+                          "summary": {
+                            "ko": "{{_global.travelMetadataEdit?.summary_ko ?? \"\"}}",
+                            "en": "{{_global.travelMetadataEdit?.summary_en ?? \"\"}}"
+                          },
+                          "itinerary": "{{_global.travelMetadataEdit?.itinerary_json ?? \"[]\"}}",
+                          "published": "{{_global.travelMetadataEdit?.published === true}}",
+                          "product_id": "{{_global.travelMetadataEdit?.product_id}}"
+                        }
+                      },
+                      "onSuccess": [
+                        {
+                          "handler": "setState",
+                          "params": {
+                            "target": "global",
+                            "travelMetadataSaving": false
+                          }
+                        },
+                        {
+                          "handler": "closeModal"
+                        },
+                        {
+                          "handler": "refetchDataSource",
+                          "params": {
+                            "dataSourceId": "catalog"
+                          }
+                        }
+                      ],
+                      "onError": [
+                        {
+                          "handler": "setState",
+                          "params": {
+                            "target": "global",
+                            "travelMetadataSaving": false,
+                            "travelMetadataError": "{{error.message ?? \"\"}}"
+                          }
+                        },
+                        {
+                          "handler": "toast",
+                          "params": {
+                            "type": "error",
+                            "message": "{{error.message ?? \"\"}}"
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "if": "{{_global.travelMetadataExisting === false}}"
+            },
+            {
+              "type": "basic",
+              "name": "Button",
+              "id": "travel_metadata_save_patch",
+              "text": "$t:raonslab-travel_lab.admin.catalog.metadata.save",
+              "props": {
+                "type": "button",
+                "className": "btn btn-secondary btn-sm",
+                "data-testid": "travel_metadata_save_patch",
+                "disabled": "{{_global.travelMetadataSaving === true || !_global.travelMetadataEdit?.product_id}}"
+              },
+              "actions": [
+                {
+                  "type": "click",
+                  "handler": "sequence",
+                  "actions": [
+                    {
+                      "handler": "setState",
+                      "params": {
+                        "target": "global",
+                        "travelMetadataSaving": true,
+                        "travelMetadataError": ""
+                      }
+                    },
+                    {
+                      "handler": "apiCall",
+                      "auth_mode": "required",
+                      "target": "/api/modules/raonslab-travel_lab/admin/catalog/{{_global.travelMetadataEdit?.product_id}}",
+                      "params": {
+                        "method": "PATCH",
+                        "body": {
+                          "region": "{{_global.travelMetadataEdit?.region}}",
+                          "theme": "{{_global.travelMetadataEdit?.theme}}",
+                          "duration_days": "{{_global.travelMetadataEdit?.duration_days}}",
+                          "summary": {
+                            "ko": "{{_global.travelMetadataEdit?.summary_ko ?? \"\"}}",
+                            "en": "{{_global.travelMetadataEdit?.summary_en ?? \"\"}}"
+                          },
+                          "itinerary": "{{_global.travelMetadataEdit?.itinerary_json ?? \"[]\"}}",
+                          "published": "{{_global.travelMetadataEdit?.published === true}}"
+                        }
+                      },
+                      "onSuccess": [
+                        {
+                          "handler": "setState",
+                          "params": {
+                            "target": "global",
+                            "travelMetadataSaving": false
+                          }
+                        },
+                        {
+                          "handler": "closeModal"
+                        },
+                        {
+                          "handler": "refetchDataSource",
+                          "params": {
+                            "dataSourceId": "catalog"
+                          }
+                        }
+                      ],
+                      "onError": [
+                        {
+                          "handler": "setState",
+                          "params": {
+                            "target": "global",
+                            "travelMetadataSaving": false,
+                            "travelMetadataError": "{{error.message ?? \"\"}}"
+                          }
+                        },
+                        {
+                          "handler": "toast",
+                          "params": {
+                            "type": "error",
+                            "message": "{{error.message ?? \"\"}}"
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "if": "{{_global.travelMetadataExisting === true}}"
+            },
+            {
+              "type": "basic",
+              "name": "Button",
+              "id": "travel_metadata_close",
+              "text": "$t:raonslab-travel_lab.admin.catalog.metadata.close",
+              "props": {
+                "type": "button",
+                "className": "btn btn-secondary btn-sm",
+                "data-testid": "travel_metadata_close"
+              },
+              "actions": [
+                {
+                  "type": "click",
+                  "handler": "sequence",
+                  "actions": [
+                    {
+                      "handler": "closeModal"
                     }
                   ]
                 }

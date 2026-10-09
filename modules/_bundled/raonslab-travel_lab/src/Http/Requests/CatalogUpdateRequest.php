@@ -12,6 +12,26 @@ class CatalogUpdateRequest extends FormRequest
         return true;
     }
 
+    protected function prepareForValidation(): void
+    {
+        if (is_string($this->input('itinerary'))) {
+            try {
+                $this->merge(['itinerary' => json_decode($this->input('itinerary'), true, 32, JSON_THROW_ON_ERROR)]);
+            } catch (\JsonException) {
+                // Retain the invalid string so the normal array rule returns422.
+            }
+        }
+    }
+
+    public function withValidator($validator): void
+    {
+        $validator->after(function ($validator) {
+            foreach (array_diff(array_keys($this->all()), array_keys($this->rules())) as $key) {
+                $validator->errors()->add($key, __('validation.prohibited', ['attribute' => $key]));
+            }
+        });
+    }
+
     public function rules(): array
     {
         return [

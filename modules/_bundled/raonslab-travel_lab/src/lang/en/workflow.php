@@ -17,4 +17,6 @@ return [
     'capacity_inconsistent' => 'The test capacity record needs review. Please contact the administrator.',
     'unsupported_field' => 'This input field is not allowed.',
     'checkout_not_allowed' => 'Travel Lab products accept test inquiries only. Real orders and payments are unavailable.',
+    'product_delete_restricted' => 'Travel Lab products cannot be deleted while linked to travel records. Unpublish the product instead.',
+    'option_delete_restricted' => 'Retain every departure-linked option. Price and stock edits and new options are allowed.',
 ];

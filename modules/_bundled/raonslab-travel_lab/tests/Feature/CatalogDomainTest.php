@@ -127,10 +127,11 @@ class CatalogDomainTest extends ModuleTestCase
         $this->assertSame([$travel->product_id], $service->index(['date_from' => '2026-12-01', 'min_price' => 250000])->getCollection()->pluck('product_id')->all());
     }
 
-    /** @effects departures_eligible_only */
-    public function test_departure_list_excludes_full_past_inactive_and_understock_rows(): void
+    /** @effects future_sold_out_dates_visible, past_inactive_dates_excluded */
+    public function test_departure_list_shows_future_full_and_understock_rows_but_excludes_past_and_inactive(): void
     {
         [$travel, $valid] = $this->createTravel();
+        $soldOut = [];
         foreach ([['reserved' => 20], ['departure_date' => '2026-10-08'], ['is_active' => false], ['stock_quantity' => 0]] as $index => $attributes) {
             $option = $valid->option->replicate();
             $option->option_code = 'EXCLUDED-'.$index;
@@ -142,9 +143,13 @@ class CatalogDomainTest extends ModuleTestCase
             $departure = $valid->replicate();
             $departure->product_option_id = $option->id;
             $departure->forceFill($attributes)->save();
+            if (in_array($index, [0, 3], true)) {
+                $soldOut[] = $departure->id;
+            }
         }
         $result = $this->app->make(CatalogService::class)->departures($travel->product_id);
-        $this->assertSame([$valid->id], $result->pluck('id')->all());
+        $this->assertSame([$valid->id, ...$soldOut], $result->pluck('id')->all());
+        $this->assertSame([20, 0, 0], $result->map(fn ($row) => $row->available)->all());
     }
 
     /** @effects effective_stock_capacity, same_day_unavailable */

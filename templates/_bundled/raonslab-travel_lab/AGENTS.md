@@ -6,7 +6,7 @@
 
 ```text
 1. 유형: 템플릿 (raonslab-travel_lab, type=user, v0.1.0) — 여행 고객 화면(탐색·출발일/인원·장바구니·상담 요청(테스트)·고객센터). 데이터는 별도 모듈 `raonslab-travel_lab` 의 API(/api/modules/raonslab-travel_lab)에서 온다
-2. 확장 방식: 훅 없음 — 확장점은 레이아웃의 data_sources 선언 · composite 3종(ScenicArt·PriceTag·StatusBadge) · 전용 핸들러 2개(travelLab*)
+2. 확장 방식: 훅 없음 — 확장점은 레이아웃의 data_sources 선언 · composite 3종(ScenicArt·PriceTag·StatusBadge) · 전용 핸들러 3개(travelLab*)
 3. 건드리면 안 되는 것: 가격·금액을 요청 body 에 싣기, 오류 시 멱등 키 재생성, 통화 하드코딩, 레이아웃에 목업 응답, 외부 CDN·제3자 여행 사이트 자산
 4. 작업 위치: `templates/_bundled/raonslab-travel_lab` — 활성 디렉토리 직접 수정 금지
 5. 반영: `php artisan template:update raonslab-travel_lab --force`
@@ -115,7 +115,7 @@ API 를 제공하고, 이 템플릿은 그 API 를 `data_sources` · `apiCall` �
 |---|---|---|
 | 제공 컴포넌트 | 29개 | [제공 컴포넌트](docs/components.md#제공-컴포넌트) |
 | 레이아웃 | 17개 | [레이아웃 목록](docs/layouts.md#레이아웃-목록) |
-| 전용 핸들러 | 2개 | [템플릿 전용 핸들러](docs/handlers.md#템플릿-전용-핸들러) |
+| 전용 핸들러 | 3개 | [템플릿 전용 핸들러](docs/handlers.md#템플릿-전용-핸들러) |
 | 확장 오버라이드 | 0개 | [확장 오버라이드](docs/layouts.md#확장-오버라이드) |
 <!-- @generated:extension-points-summary END -->
 
@@ -171,7 +171,7 @@ API 를 제공하고, 이 템플릿은 그 API 를 `data_sources` · `apiCall` �
 | 종류 | 개수 | 위치 |
 |---|---|---|
 | PHPUnit | 0개 | — |
-| Vitest | 7개 | `vitest.config.ts` |
+| Vitest | 9개 | `vitest.config.ts` |
 | Playwright | 0개 | — |
 | 시나리오 매니페스트 | 1개 | `tests/scenarios` |
 
@@ -197,3 +197,7 @@ cd templates/_bundled/raonslab-travel_lab && powershell -Command "npm run test:r
 | [docs/editor-spec.md](docs/editor-spec.md) | 레이아웃 편집기에 선언한 팔레트·컨트롤·샘플 데이터 | ✅ |
 | [CHANGELOG.md](CHANGELOG.md) | 변경 이력 | ✅ |
 <!-- @generated:docs-index END -->
+
+## W03 복구 계약
+
+제출은 `travelLabPrepareInquiry` 반환값 → `$prev` → 명시적 `setState(local)` → `apiCall` 순서로 전달합니다. 이전 렌더의 `_global` 키를 본문에 직접 싣지 않습니다. 미확인 서버 접수로 장바구니가 소비되면 세션의 동일 본문·키로 복구하며, 회원 구분은 공개 `currentUser.uuid`를 사용합니다. 구현자 Vitest/브라우저 점검은 고정 SHA의 공식 독립 검증을 대신하지 않습니다. 생성 핸들러 표는 통합 리드가 scoped `ext:docgen`으로 갱신합니다.

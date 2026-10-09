@@ -1,5 +1,22 @@
 # Changelog
 
+## [0.1.1] - 2026-10-09
+
+### Added
+
+- Native product-to-travel registration, translated metadata editing, option-selection candidates and generated API documentation.
+- Synchronous native deletion/option guards with truthful conflicts, user-specific workflow throttles and a domestic Asia/Seoul business-day contract.
+
+### Fixed
+
+- Short Korean keyword discovery searches decoded translations; detail shows unavailable future dates and prices only available departures.
+- Optional itinerary registration stores an empty array instead of a server error.
+- Travel support defaults unrestricted private moderation to administrators; shared board hardening is verified separately.
+
+### Compatibility
+
+- Only bundled raonslab-travel_lab template consumes the new travel API; its minimum module dependency becomes >=0.1.1. Existing G7 and other extensions' public APIs/versions remain unchanged.
+
 ## [0.1.0] - 2026-10-09
 
 ### Added

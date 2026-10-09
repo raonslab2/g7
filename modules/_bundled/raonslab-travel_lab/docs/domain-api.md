@@ -9,6 +9,9 @@
 | GET /catalog/{product}/departures | catalog.departures | 공개, data에 출발 배열 |
 | GET /facets | catalog.facets | 공개, data.region/data.theme 문자열 배열 |
 | GET /admin/catalog | admin.catalog.index | catalog.read, 비공개 포함 목록 |
+| GET /admin/catalog/candidates | admin.catalog.candidates | catalog.read, unmapped native products/options and shipping readiness |
+| POST /admin/catalog | admin.catalog.store | catalog.update, register native product metadata (201; default unpublished) |
+| GET /admin/catalog/{product} | admin.catalog.show | catalog.read, editable translated metadata and native option IDs |
 | PATCH /admin/catalog/{product} | admin.catalog.update | catalog.update, 여행 메타 수정 |
 | GET /admin/catalog/{product}/departures | admin.catalog.departures.index | catalog.read, 비활성·지난 일정 포함 |
 | POST /admin/catalog/{product}/departures | admin.catalog.departures.store | catalog.update, 기존 이커머스 옵션에 출발 생성 |
@@ -80,3 +83,12 @@ product_option_id, departure_date, return_date, capacity는 필수입니다. is_
 오류는 ResponseHelper 봉투의 `success:false,message`입니다. 401은 토큰 없음, 403은 관리자/권한 부족, 404는 공개되지 않거나 없는 상품·출발, 422는 잘못된 날짜·범위·금지 필드·옵션 소속, 409는 잠금 안에서 확인된 재고·정원·옵션 중복/교체·문의 사용 날짜 충돌입니다. 422에는 errors 필드별 배열이 있습니다. 일반 서버 오류는 코어 예외 처리 경로가 처리합니다.
 
 [네이티브 생성 API 레퍼런스](api/README.md)는 격리 실제 HTTP 응답을 기반으로 만들었습니다. [생성 스크립트](../tests/generate-domain-docs.php)는 운영 DB나 외부 URL을 호출하지 않습니다. 통합 시 리드가 api.php에 catalog.php를 연결해야 일반 모듈 등록 경로에서 이 API가 열립니다.
+
+
+### W03 registration and domestic business-day contract
+
+RAON lab assumption (not customer approval): `raonslab-travel_lab.catalog.business_timezone=Asia/Seoul`; global G7 timezone remains unchanged. Discovery and transactions exclude today's departure in that timezone. Detail shows future active sold-out/understock departures with available=0 as disabled choices, while discovery requires at least one available date. `from_price` excludes unavailable dates. Korean keywords search decoded ko/en title/description through native KeywordSearch; raw translated JSON FULLTEXT is insufficient for short Korean titles.
+
+Register body: `{"product_id":101,"region":"jeju","theme":"nature","duration_days":3,"summary":{"ko":"합성 상품 요약","en":"Synthetic summary"},"itinerary":[{"day":1,"title":{"ko":"바다","en":"Sea"}}]}`. Product ID must reference a nondeleted native product. Duplicate mapping returns409. `published` is optional and defaultsfalse. Registration does not create commerce products/options, change prices or write orders/payments. Candidates use q/per_page/page and exclude mapped products; response has native options and shipping_policy_ready. Actual travel cart validation remains authoritative for supported zero-cost nonshipping policy.
+
+Metadata PATCH accepts the same metadata fields, cannot change product_id or native prices. Itinerary may be a JSON array or its valid JSON string for the native admin text editor; invalid JSON and unknown fields produce422. Admin detail adds summary_translations, itinerary_translations and options[{id,option_name,stock_quantity,is_active}]. Native commerce editor links use numeric product ID so legal hyphenated codes work through the existing native ID API.

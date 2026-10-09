@@ -6,7 +6,7 @@
  */
 import { describe, it, expect, afterEach, beforeAll, beforeEach, vi } from 'vitest';
 import { ActionDispatcher } from '@core/template-engine/ActionDispatcher';
-import { handlerMap } from '../../src/handlers';
+import { handlerMap, clearInquiryKeyHandler, prepareInquiryHandler, ensureInquiryKeyHandler } from '../../src/handlers';
 import { createLayoutTest, screen, waitFor } from '@core/template-engine/__tests__/utils/layoutTestUtils';
 import { registerTemplateComponents, loadLayout, flatten, translations, API_BASE } from '../helpers/travelTestKit';
 
@@ -34,9 +34,10 @@ beforeEach(() => {
     register.call(this, name, handler, options);
     if (name === 'toast') Object.entries(handlerMap).forEach(([key, value]) => register.call(this, key, value));
   });
-  (window as any).G7Core = { ...(window as any).G7Core, state: { set: (updates: Record<string, any>) => {
+  (window as any).G7Core = { ...(window as any).G7Core, state: { get: () => t?.getState()._global ?? {}, set: (updates: Record<string, any>) => {
     Object.entries(updates).forEach(([key, value]) => t?.setState(key, value, 'global'));
   } } };
+  clearInquiryKeyHandler();
 });
 afterEach(() => {
   t?.cleanup();
@@ -52,6 +53,8 @@ async function renderCart(state = member()) {
   t = createLayoutTest(layout, { componentRegistry: registry, translations, locale: 'ko', initialState: state });
   t.mockApi('cart', { response: cartResponse });
   await t.render();
+  // Match the real SDK shape; the core helper otherwise returns a legacy wrapper.
+  (window as any).G7Core.state.get = () => t!.getState()._global;
   return t;
 }
 
@@ -183,6 +186,41 @@ describe('travel/cart', () => {
     } finally {
       globalThis.fetch = original;
     }
+  });
+
+  it('a persisted initial key plus setItem-only quota failure still submits and retries the exact prepared body', async () => {
+    const initial = ensureInquiryKeyHandler({handler:'travelLabEnsureInquiryKey',params:{ownerId:'u-1',cartIds:[11,12],quantities:[2,1]}});
+    await renderCart(member({travelInquiryKey:initial}));
+    const write = vi.spyOn(Storage.prototype,'setItem').mockImplementation(()=>{throw new DOMException('quota','QuotaExceededError');});
+    const original = globalThis.fetch;
+    globalThis.fetch=vi.fn(async(url:any,init:any)=>{if(String(url).endsWith(`${API_BASE}/inquiries`) && init?.method==='POST')throw new TypeError('Failed to fetch');return original(url,init);}) as any;
+    try {
+      await t!.user.click(screen.getByTestId('ack-test'));
+      await t!.user.click(screen.getByTestId('submit-inquiry'));
+      await waitFor(()=>expect(inquiryCalls()).toHaveLength(1));
+      const first=JSON.parse(String(inquiryCalls()[0][1]!.body));
+      expect(first).toEqual({cart_ids:[11,12],contact:{name:'라온',phone:null},idempotency_key:expect.stringMatching(/^raon-/)});
+      expect(first.idempotency_key).not.toBe(initial);
+      await waitFor(()=>expect(screen.getByTestId('submit-inquiry')).toBeEnabled());
+      await t!.user.click(screen.getByTestId('submit-inquiry'));
+      await waitFor(()=>expect(inquiryCalls()).toHaveLength(2));
+      expect(JSON.parse(String(inquiryCalls()[1][1]!.body))).toEqual(first);
+    } finally {write.mockRestore();globalThis.fetch=original;}
+  });
+
+  it('an empty consumed-cart reload exposes recovery and sends the stored exact body', async () => {
+    const body = prepareInquiryHandler({handler:'travelLabPrepareInquiry',params:{ownerId:"u-1",cartIds:[11],quantities:[2],contact:{name:'시험 사용자',phone:null}}})!;
+    t = createLayoutTest(layout, {componentRegistry:registry,translations,locale:'ko',initialState:member({travelInquiryKey:body.idempotency_key,travelInquiryPending:body,travelInquiryContact:body.contact})});
+    t.mockApi('cart',{response:{success:true,data:{items:[],totals:{final_amount:0},currency_code:'KRW'}}});
+    await t.render();
+    (window as any).G7Core.state.get = () => t!.getState()._global;
+    expect(screen.getByTestId('inquiry-recovery-notice')).toBeInTheDocument();
+    expect(screen.queryByTestId('cart-empty')).toBeNull();
+    expect(screen.getByTestId('contact-name')).toBeDisabled();
+    await t.user.click(screen.getByTestId('ack-test'));
+    await t.user.click(screen.getByTestId('submit-inquiry'));
+    await waitFor(() => expect(inquiryCalls()).toHaveLength(1));
+    expect(JSON.parse(String(inquiryCalls()[0][1]!.body))).toEqual(body);
   });
 
   it('멱등 키가 아직 없으면 보낼 수 없다', async () => {

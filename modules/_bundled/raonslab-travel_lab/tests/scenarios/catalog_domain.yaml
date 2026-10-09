@@ -1,6 +1,7 @@
 feature: travel_lab_catalog_domain
 description: Synthetic ecommerce backed travel catalog and shared inquiry schema; no real booking or provider side effects.
 test_files:
+  - modules/_bundled/raonslab-travel_lab/tests/Feature/W03CatalogRepairTest.php
   - modules/_bundled/raonslab-travel_lab/tests/Feature/CatalogApiTest.php
   - modules/_bundled/raonslab-travel_lab/tests/Feature/CatalogDomainTest.php
   - modules/_bundled/raonslab-travel_lab/tests/Feature/CatalogValidationTest.php
@@ -17,7 +18,8 @@ effects:
   - filters_applied
   - zero_keyword_applied
   - stable_sort_and_pagination
-  - departures_eligible_only
+  - future_sold_out_detail_choices
+  - available_discovery_dates_only
   - visible_facets_only
   - invalid_filter_rejected
   - valid_filter_accepted
@@ -55,3 +57,10 @@ effects:
   - departure_http_conflict_409
   - new_departure_database_defaults_hydrated
 sub_flows: []
+
+repair_contracts:
+  registration: native product identity; unpublished default; optional itinerary defaults []; duplicate409; unknown price/product_id tamper422
+  candidates: excludes mapped native products; options carry original IDs; bounded48; permissioned manager only
+  business_day: Asia/Seoul same-day excluded across discovery/detail/cart/submit
+  keyword: decoded native ko/en JSON translations, Korean search and literal wildcard behavior
+  unavailable_dates: future full/understock detail choices available0; discovery still needs one available date

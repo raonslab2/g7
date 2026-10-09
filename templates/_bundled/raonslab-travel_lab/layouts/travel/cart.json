@@ -26,7 +26,8 @@
                     "handler": "travelLabEnsureInquiryKey",
                     "params": {
                         "cartIds": "{{(response.data?.data?.items ?? []).map(i => i.id)}}",
-                        "quantities": "{{(response.data?.data?.items ?? []).map(i => i.quantity)}}"
+                        "quantities": "{{(response.data?.data?.items ?? []).map(i => i.quantity)}}",
+                        "ownerId": "{{_global.currentUser?.uuid ?? _global.currentUser?.id}}"
                     }
                 }
             ]
@@ -123,6 +124,16 @@
                     "className": "mx-auto w-full max-w-6xl px-4 md:px-6 mt-6 space-y-6"
                 },
                 "children": [
+                    {
+                        "type": "basic",
+                        "name": "P",
+                        "if": "{{(cart?.data?.items ?? []).length === 0 && !!_global.travelInquiryPending}}",
+                        "props": {
+                            "className": "rounded-xl border border-amber-200 bg-amber-50 p-4 text-sm",
+                            "data-testid": "inquiry-recovery-notice"
+                        },
+                        "text": "$t:travel.cart.recovery_notice"
+                    },
                     {
                         "comment": "cart 로딩 스켈레톤",
                         "type": "basic",
@@ -256,7 +267,7 @@
                     {
                         "type": "basic",
                         "name": "Div",
-                        "if": "{{!!cart && (cart?.data?.items ?? []).length === 0}}",
+                        "if": "{{!!cart && (cart?.data?.items ?? []).length === 0 && !_global.travelInquiryPending}}",
                         "props": {
                             "className": "flex flex-col items-center gap-3 rounded-2xl border border-dashed border-slate-300 bg-white px-6 py-12 text-center",
                             "data-testid": "cart-empty"
@@ -332,7 +343,7 @@
                     {
                         "type": "basic",
                         "name": "Div",
-                        "if": "{{(cart?.data?.items ?? []).length > 0}}",
+                        "if": "{{(cart?.data?.items ?? []).length > 0 || !!_global.travelInquiryPending}}",
                         "props": {
                             "className": "grid gap-6 lg:grid-cols-[1fr_380px] lg:items-start"
                         },
@@ -517,6 +528,14 @@
                                                                                                 },
                                                                                                 "onSuccess": [
                                                                                                     {
+                                                                                                        "handler": "travelLabEnsureInquiryKey",
+                                                                                                        "params": {
+                                                                                                            "cartChanged": true,
+                                                                                                            "cartIds": [],
+                                                                                                            "ownerId": "{{_global.currentUser?.uuid ?? _global.currentUser?.id}}"
+                                                                                                        }
+                                                                                                    },
+                                                                                                    {
                                                                                                         "handler": "setState",
                                                                                                         "params": {
                                                                                                             "target": "local",
@@ -609,6 +628,14 @@
                                                                                                     }
                                                                                                 },
                                                                                                 "onSuccess": [
+                                                                                                    {
+                                                                                                        "handler": "travelLabEnsureInquiryKey",
+                                                                                                        "params": {
+                                                                                                            "cartChanged": true,
+                                                                                                            "cartIds": [],
+                                                                                                            "ownerId": "{{_global.currentUser?.uuid ?? _global.currentUser?.id}}"
+                                                                                                        }
+                                                                                                    },
                                                                                                     {
                                                                                                         "handler": "setState",
                                                                                                         "params": {
@@ -912,7 +939,8 @@
                                                     "maxLength": 50,
                                                     "required": true,
                                                     "autoComplete": "name",
-                                                    "data-testid": "contact-name"
+                                                    "data-testid": "contact-name",
+                                                    "disabled": "{{(cart?.data?.items ?? []).length === 0 && !!_global.travelInquiryPending}}"
                                                 },
                                                 "actions": [
                                                     {
@@ -952,7 +980,8 @@
                                                     "maxLength": 30,
                                                     "autoComplete": "tel",
                                                     "placeholder": "$t:travel.cart.contact_phone_placeholder",
-                                                    "data-testid": "contact-phone"
+                                                    "data-testid": "contact-phone",
+                                                    "disabled": "{{(cart?.data?.items ?? []).length === 0 && !!_global.travelInquiryPending}}"
                                                 },
                                                 "actions": [
                                                     {
@@ -1008,7 +1037,7 @@
                                         "props": {
                                             "type": "button",
                                             "className": "inline-flex items-center justify-center gap-2 rounded-xl bg-raon-600 px-5 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-raon-700 disabled:cursor-not-allowed disabled:opacity-50 w-full py-3.5 text-base",
-                                            "disabled": "{{!!_local.submitting || !!_local.busyId || (cart?.data?.items ?? []).length === 0 || _local.ackTest !== true || String(_local.contactName ?? _global.travelInquiryContact?.name ?? _global.currentUser?.name ?? '').trim() === '' || !_global.travelInquiryKey || (cart?.data?.items ?? []).some(i => i.available !== true)}}",
+                                            "disabled": "{{!!_local.submitting || !!_local.busyId || ((cart?.data?.items ?? []).length === 0 && !_global.travelInquiryPending) || _local.ackTest !== true || String(_local.contactName ?? _global.travelInquiryContact?.name ?? _global.currentUser?.name ?? '').trim() === '' || !_global.travelInquiryKey || (cart?.data?.items ?? []).some(i => i.available !== true)}}",
                                             "data-testid": "submit-inquiry"
                                         },
                                         "children": [
@@ -1039,37 +1068,36 @@
                                                 "handler": "sequence",
                                                 "actions": [
                                                     {
-                                                        "handler": "travelLabEnsureInquiryKey",
+                                                        "handler": "travelLabPrepareInquiry",
                                                         "params": {
                                                             "cartIds": "{{(cart?.data?.items ?? []).map(i => i.id)}}",
                                                             "quantities": "{{(cart?.data?.items ?? []).map(i => i.quantity)}}",
                                                             "contact": {
                                                                 "name": "{{String(_local.contactName ?? _global.travelInquiryContact?.name ?? _global.currentUser?.name ?? '').trim()}}",
                                                                 "phone": "{{(_local.contactPhone ?? _global.travelInquiryContact?.phone ?? '').trim() || null}}"
-                                                            }
+                                                            },
+                                                            "ownerId": "{{_global.currentUser?.uuid ?? _global.currentUser?.id}}"
                                                         }
                                                     },
                                                     {
                                                         "handler": "setState",
                                                         "params": {
                                                             "target": "local",
-                                                            "submitting": true
+                                                            "submitting": true,
+                                                            "travelInquiryPayload": "{{$prev}}"
                                                         }
                                                     },
                                                     {
-                                                        "comment": "멱등 키는 장바구니 로드 시 확보해 둔 값을 그대로 싣는다 — 네트워크 오류 후 재시도도 같은 키. 금액은 보내지 않는다",
+                                                        "comment": "Prepared body is captured in sequence-local state; uncertain retries and reload recover the stored exact body.",
                                                         "handler": "apiCall",
                                                         "auth_mode": "required",
                                                         "target": "/api/modules/raonslab-travel_lab/inquiries",
                                                         "params": {
                                                             "method": "POST",
                                                             "body": {
-                                                                "cart_ids": "{{(cart?.data?.items ?? []).map(i => i.id)}}",
-                                                                "contact": {
-                                                                    "name": "{{String(_local.contactName ?? _global.travelInquiryContact?.name ?? _global.currentUser?.name ?? '').trim()}}",
-                                                                    "phone": "{{(_local.contactPhone ?? _global.travelInquiryContact?.phone ?? '').trim() || null}}"
-                                                                },
-                                                                "idempotency_key": "{{_global.travelInquiryKey}}"
+                                                                "cart_ids": "{{_local.travelInquiryPayload?.cart_ids}}",
+                                                                "contact": "{{_local.travelInquiryPayload?.contact}}",
+                                                                "idempotency_key": "{{_local.travelInquiryPayload?.idempotency_key}}"
                                                             }
                                                         },
                                                         "onSuccess": [
