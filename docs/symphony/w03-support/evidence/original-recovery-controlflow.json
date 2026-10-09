@@ -1,0 +1,10 @@
+{
+  "original_test_exit": 2,
+  "automatic_restore": "Did not produce successful restore evidence; snapshot and BLOCKED retained",
+  "cause": "Inferred from native Tests/TestCase.php killStaleTestingConnections and first wrapper retaining PDO: native cleanup kills other same-TEST-schema connections",
+  "terminal_exception": "NOT_CAPTURED; do not infer a saved original final report",
+  "explicit_recovery_command": "php docs/symphony/w03-support/test-db.php restore (before evidence files moved under original/)",
+  "explicit_recovery": "PASS exact55tables104rows andDDLdigests; original/restore-result.json",
+  "wrapper_correction": "Release PDO before test child; reconnect before restore; preserve BLOCKED and private snapshot on failure",
+  "later_restore_results": "scope-red/scope-green/auth-isolated/support-final exact55table104rowDDL; final measurement matches initial current state"
+}
