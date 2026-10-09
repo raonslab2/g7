@@ -2,6 +2,7 @@
 
 namespace Modules\Raonslab\TravelLab\Repositories;
 
+use App\Models\Permission;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Collection;
@@ -71,12 +72,26 @@ class TravelSupportPostRepository implements TravelSupportPostRepositoryInterfac
                 ->contains(fn ($log): bool => is_array($log) && ($log['provenance_key'] ?? null) === $provenanceKey));
     }
 
-    public function updateContent(Post $post, array $data): Post
+    public function boardPermissionRoles(string $boardSlug, array $permissionKeys): array
     {
-        $post->fill(array_intersect_key($data, array_flip(['title', 'content'])));
-        $post->save();
+        $identifiers = array_map(fn (string $key): string => "sirsoft-board.{$boardSlug}.{$key}", $permissionKeys);
 
-        return $post->refresh();
+        // 게시판 모델 permissions 접근자는 권한마다 2쿼리를 내므로, 요청 경로 점검은 한 번에 읽는다.
+        $permissions = Permission::query()
+            ->whereIn('identifier', $identifiers)
+            ->with(['roles' => fn ($query) => $query->select('roles.id', 'roles.identifier')])
+            ->get(['id', 'identifier'])
+            ->keyBy('identifier');
+
+        $result = [];
+        foreach ($permissionKeys as $key) {
+            $permission = $permissions->get("sirsoft-board.{$boardSlug}.{$key}");
+            $result[$key] = $permission === null
+                ? null
+                : $permission->roles->pluck('identifier')->map(fn ($identifier): string => (string) $identifier)->values()->all();
+        }
+
+        return $result;
     }
 
     public function answersFor(int $boardId, int $postId, int $limit): Collection

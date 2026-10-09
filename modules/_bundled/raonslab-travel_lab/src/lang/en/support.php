@@ -16,6 +16,7 @@ return [
         'post_not_found' => 'Post not found.',
         'provisioning_not_allowed' => 'LAB provisioning is not allowed. Check the configuration and --lab-confirm.',
         'board_misconfigured' => 'The :slug board does not match the support safety baseline and was left unchanged.',
+        'search_engine_unsafe' => 'The search driver (:driver) can send private questions to an external index, so the questions board was not prepared. Only the mysql-fulltext configuration is allowed.',
     ],
     'attributes' => [
         'title' => 'title',

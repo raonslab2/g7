@@ -16,6 +16,7 @@ return [
         'post_not_found' => '게시글을 찾을 수 없습니다.',
         'provisioning_not_allowed' => 'LAB 프로비저닝이 허용되지 않았습니다. 설정과 --lab-confirm 을 확인하세요.',
         'board_misconfigured' => ':slug 게시판이 고객지원 보안 기준과 다르게 설정되어 있어 변경하지 않았습니다.',
+        'search_engine_unsafe' => '검색 드라이버(:driver)가 비공개 문의를 외부 색인으로 보낼 수 있어 문의 게시판을 준비하지 않았습니다. mysql-fulltext 구성에서만 허용됩니다.',
     ],
     'attributes' => [
         'title' => '제목',

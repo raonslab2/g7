@@ -6,6 +6,7 @@ test_files:
 - modules/_bundled/raonslab-travel_lab/tests/Feature/TravelSupportApiTest.php
 - modules/_bundled/raonslab-travel_lab/tests/Feature/TravelSupportNotificationTest.php
 - modules/_bundled/raonslab-travel_lab/tests/Feature/TravelSupportAdminLayoutRulesTest.php
+- modules/_bundled/raonslab-travel_lab/tests/Feature/W03SupportHardeningTest.php
 - modules/_bundled/raonslab-travel_lab/resources/js/__tests__/layouts/admin-travel-lab-layouts.test.tsx
 axes:
   actor:
@@ -15,6 +16,9 @@ axes:
   - admin_support_read
   - admin_support_read_update
   - board_admin_native
+  - legacy_role_support_only
+  - board_admin_without_support
+  - board_manager_self_scope
   channel:
   - notices
   - faqs
@@ -23,6 +27,8 @@ axes:
   - missing
   - provisioned_safe
   - existing_unsafe_same_slug
+  - tampered_permissions_or_settings
+  - external_search_driver
   provision_gate:
   - config_off_confirm_off
   - config_on_confirm_off
@@ -104,6 +110,34 @@ effects:
 - list_context_preserved
 - allowed_transition_buttons_only
 - list_query_carried_to_detail
+- foreign_list_hidden
+- foreign_detail_404
+- foreign_patch_404
+- foreign_row_unchanged
+- own_question_still_open
+- board_admin_without_support_404
+- both_permissions_read
+- read_only_cannot_patch
+- both_update_permissions_patch
+- self_scope_list_own_only
+- self_scope_foreign_404
+- self_scope_own_200
+- public_role_on_secret_read_503
+- empty_roles_503
+- use_reply_503
+- use_comment_503
+- provision_refuses_without_overwrite
+- after_update_hook_fired
+- activity_log_persisted
+- secret_preserved
+- notifications_not_sent
+- mail_not_sent
+- questions_503
+- public_channels_still_open
+- provision_409_no_writes
+- create_not_indexed
+- restore_removed_after_native_index
+- import_limit_documented
 sub_flows:
 - id: lab_gate
   effects:
@@ -198,3 +232,49 @@ sub_flows:
   effects:
   - allowed_transition_buttons_only
   - list_query_carried_to_detail
+- id: legacy_support_role_foreign_denied
+  effects:
+  - foreign_list_hidden
+  - foreign_detail_404
+  - foreign_patch_404
+  - foreign_row_unchanged
+  - own_question_still_open
+- id: support_permission_required
+  effects:
+  - board_admin_without_support_404
+- id: board_admin_foreign_allowed
+  effects:
+  - both_permissions_read
+  - read_only_cannot_patch
+  - both_update_permissions_patch
+- id: board_scope_self_owner_only
+  effects:
+  - self_scope_list_own_only
+  - self_scope_foreign_404
+  - self_scope_own_200
+- id: tampered_board_fail_closed
+  effects:
+  - public_role_on_secret_read_503
+  - empty_roles_503
+  - use_reply_503
+  - use_comment_503
+  - provision_refuses_without_overwrite
+- id: native_update_audit
+  effects:
+  - after_update_hook_fired
+  - activity_log_persisted
+  - secret_preserved
+- id: update_notifications_blocked
+  effects:
+  - notifications_not_sent
+  - mail_not_sent
+- id: external_search_driver_closed
+  effects:
+  - questions_503
+  - public_channels_still_open
+  - provision_409_no_writes
+- id: external_index_restore_removed
+  effects:
+  - create_not_indexed
+  - restore_removed_after_native_index
+  - import_limit_documented
