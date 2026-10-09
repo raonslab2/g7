@@ -1,0 +1,40 @@
+{
+  "source_sha": "fa5523175ac494cfbd13bbf89bf06b3ec91835a6",
+  "started": "2026-10-09T19:00:10.800Z",
+  "results": [],
+  "tokens": [
+    {
+      "hash": "8adfd4b4bca0d422f48fe86441d8f082bb5594be6ce0fa4f320d5d71d4ad5086",
+      "logout": 200,
+      "authAfter": 401
+    }
+  ],
+  "fixture": {
+    "productId": 86,
+    "scope": "ONE newly owned hidden synthetic product; API preparation only; no prior fixture activation",
+    "departureId": 140,
+    "reuseOwnEarlierDiagnosticOnly": true
+  },
+  "cleanup": [
+    {
+      "ownDepartureInactive": true,
+      "productId": 86
+    },
+    {
+      "productId": 86,
+      "unpublishedHttp": 200,
+      "hiddenHttp": 200,
+      "hiddenRead": true,
+      "retainedSynthetic": true
+    }
+  ],
+  "limitations": [
+    "Author diagnosis, not independent release verification",
+    "No SQL inventory or full runtime dependency measurement"
+  ],
+  "failure": {
+    "name": "Error",
+    "message": "expect(locator).toBeVisible() failed\n\nLocator: locator('#catalog_card').filter({ hasText: 'W04DIAG1791572318631 독립 상태 진단' })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n  - Expect \"to.be.visible\" with timeout 5000ms\n  - waiting for locator('#catalog_card').filter({ hasText: 'W04DIAG1791572318631 독립 상태 진단' })\n"
+  },
+  "finished": "2026-10-09T19:00:20.491Z"
+}

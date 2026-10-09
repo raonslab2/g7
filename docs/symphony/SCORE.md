@@ -168,3 +168,40 @@ Browser evidence original695341be→lead117a2b77 and security original3251043d�
 
 
 W04F-01/W04F-02 follow-up contract0.1.2: owner files InquiryService.php (native commerce worker), TravelThrottleRequests.php/routes/env/cache fixture (lead), counter/lease/fault tests (native commerce worker), design+nonauthorreview (native UI worker), evidence/failed-install intake (native recovery worker). Input1052/f18fa205; repaired working file pins evidence/W04_ATOMIC_REPAIR/source-pins.json. P3 remainsOPEN until fixed published SHA nativeMySQL/HTTP independent confirmation. No API schema/status-state redefinition, additional503retry behavior documented; dependency consumer scan finds only own travel template>=0.1.2. Native ecommerce shipping is not renamed booking; native TEST_INQUIRY persists. BrowserCREATE requires own category/policy UI baseline then product/options/native registration; previous BLOCKED preserved.
+
+
+## October9 19:10 UTC — source intake and independent recipe completion
+
+Canonical bounded status:27official attempts =21COMPLETED/4FAILED/1INTERRUPTED/
+1RUNNING/0QUEUED. RunningCLAUDE Page campaign implementation req_7fe59f839ad748fcb2db4c8ad4b488b0
+owns travel shared campaign files at input992; no account/slot changes or duplicate
+completed key. CODEX recipe req_bed1c2288b1946de95782fe1a4acff75 completed at992:
+actual published migration helper, installed kernel37HTTP, unchangedMySQL1/34,
+HTML2, exactTEST55/104rowDDL digest restored; TEST release18:42:38UTC. Whole setup/
+account provisioning/wizard/officialValidation/hostedCI NOT_RUN. Original harness
+exit2 and historical productFAIL remain preserved. Original0e634566 intaken locally.
+
+Native admin CODEX result completed atfa: own category/policy/products/options/
+travel metadata/departures/UI journeys at390/1440; 100sanitizedPNG and heterogeneous
+sorting/retry cleanup evidence intaken. Rapid-save stale is_active and initialPC
+pointermenu failure preserved as findings. Diagnostic independently shows native
+G7Core.state.get returns content while ActionDispatcher incorrectly looked for
+._global; two reads repaired locally. Actual8test fail-first6FAIL/2PASS ->8PASS;
+focused final11files546PASS after correcting one existing wrong-shape test mock.
+PC pointer failure not reproduced by standard locator/raw mouse/keyboard; cause
+UNKNOWN, no unrelated menu fix. Product86/departure140 retained hidden/inactive/
+reserved0;8own diagnosis tokens revoked by native logout401, handofftokens unchanged.
+
+CLAUDE private-attachment review at992/runtimefa inheritance: real positive bytes,
+foreign/guest unsigned denial, delegated valid signed-preview capability and native
+owner-download restriction explicit. Nonimage500P3 repaired in one nativeBoard
+line;6unit/47 assertions passed (including lead independent replay), native live
+400/image gates still pending. Boardmetadata1.1.3 synced; other existing consumers
+reviewed, unrelated RAON business files unchanged. Core fix is internal evaluator
+restoration in existing unpublished7.0.12 batch with unchanged public state APIs.
+
+Remote head992 remains latest before this evidence/repair batch. Same PR2 reused;
+originalreview heads will be ancestry-preserved on meaningful reviewed publication.
+Official core production build follows completed old-runtime diagnostic and source
+freeze; new runtime must be independently attributed and replayed. Campaign source
+and final core/board/browser integration remain IN_PROGRESS, not releasePASS.

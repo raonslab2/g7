@@ -1,0 +1,110 @@
+{
+  "schema_version": 1,
+  "scope": "author diagnosis and scoped internal evaluator repair; no deployed-repair or independent Validation PASS",
+  "input_product_sha": "fa5523175ac494cfbd13bbf89bf06b3ec91835a6",
+  "parent_head_at_freeze": "e4aaa96f0845c25b65fa83b924004f0a68331461",
+  "candidate_binding": "WORKINGTREE; not a fixed publication SHA",
+  "source_files": {
+    "resources/js/core/template-engine/ActionDispatcher.ts": "bb57838bde3849631f31c6b0e0947bbef84bb885548749f5fa7ee1008b524f68",
+    "resources/js/core/template-engine/__tests__/ActionDispatcher.liveGlobalExpressions.test.ts": "e975330094fa2878239ef752e5c9f432532068016584ce71fdb8476ac0411353",
+    "resources/js/core/template-engine/__tests__/ActionDispatcher.test.ts": "9a04112ade42c939518183c756ec90979210510cc0249c7573bb531882f47730",
+    "docs/symphony/W04_ADMIN_INTERACTION_DIAGNOSIS.md": "4635fc0fa2e880120656a6cde17aa5d0b02887907f0dad7ac6ad2102cbca882a"
+  },
+  "public_artifacts": {
+    "tests/W04_ADMIN_DIAGNOSTIC/core-fail-first.json": {
+      "sha256": "36736600ef80b095092757883697aca26de1b9d42733f4f3315cab10e7076bf2",
+      "bytes": 6795
+    },
+    "tests/W04_ADMIN_DIAGNOSTIC/core-focused-pass.json": {
+      "sha256": "db93f362e0cdcfe152c45cf6b66d802e3c0069dd68b16ce12c99ba87467fbc6b",
+      "bytes": 3768
+    },
+    "tests/W04_ADMIN_DIAGNOSTIC/core-regression-final.json": {
+      "sha256": "d25d0aedba741bd0ca9eab8a05ed92cb342c33bd66f089114fe54ac3a854e577",
+      "bytes": 211722
+    },
+    "tests/W04_ADMIN_DIAGNOSTIC/core-regression.json": {
+      "sha256": "a0b6dc1325c974ba1e466ff9ec9eaaaa8e850f4ab6ee10480eb2a5ae78c9bd8c",
+      "bytes": 196185
+    },
+    "tests/W04_ADMIN_DIAGNOSTIC/correct-native-route-evidence.json": {
+      "sha256": "a42b60997f785d43ea2cda7cc1ae7ef0473554eb8117b0e5637ae3acc844854c",
+      "bytes": 21958
+    },
+    "tests/W04_ADMIN_DIAGNOSTIC/diagnose.mjs": {
+      "sha256": "59cfd1fa58fa105619b69367f5ce743cf203e26ee1bacda97384054ec1953041",
+      "bytes": 17105
+    },
+    "tests/W04_ADMIN_DIAGNOSTIC/evidence.json": {
+      "sha256": "048b5dd0941b92b8eb13f60d02431cab697093f211d61cd9e6544444316d7817",
+      "bytes": 15932
+    },
+    "tests/W04_ADMIN_DIAGNOSTIC/followup-evidence.json": {
+      "sha256": "983f39328452262f86ad72251a651922c419d05df474ff0afc8c69b05f6e3faa",
+      "bytes": 1356
+    },
+    "tests/W04_ADMIN_DIAGNOSTIC/original-pc-inquiry-evidence.json": {
+      "sha256": "99d6d736a11ef5303cf5c4702a3b8f974a3f37a939f7ed31d2e330e8213d2ae6",
+      "bytes": 15977
+    },
+    "tests/W04_ADMIN_DIAGNOSTIC/settled-render-evidence.json": {
+      "sha256": "e4a31825c35bd0bac7b4abfd6d05da83dc39c545d2c8a0be4e7210d162fc9253",
+      "bytes": 12163
+    }
+  },
+  "tracked_scoped_diff_sha256": "b38b0a0894a4af6859c6603e9524b3ffe8c31bf906680bda79021f3a30f7fcc0",
+  "tracked_scoped_diff_paths": [
+    "resources/js/core/template-engine/ActionDispatcher.ts",
+    "resources/js/core/template-engine/__tests__/ActionDispatcher.test.ts"
+  ],
+  "new_test_binding": "source_files includes untracked new regression file; not omitted from candidate binding",
+  "tests": {
+    "fail_first": {
+      "total": 8,
+      "pass": 2,
+      "fail": 6,
+      "exit": 1
+    },
+    "focused_after_fix": {
+      "total": 8,
+      "pass": 8,
+      "fail": 0,
+      "exit": 0
+    },
+    "initial_wider": {
+      "total": 507,
+      "pass": 505,
+      "fail": 2,
+      "exit": 1,
+      "cause": "legacy fake wrapped getter fixture, plus failed-assertion cleanup cascade"
+    },
+    "final": {
+      "files": 11,
+      "total": 546,
+      "pass": 546,
+      "fail": 0,
+      "skipped": 0,
+      "exit": 0,
+      "focused_cases_included": true
+    }
+  },
+  "runtime_boundary": {
+    "old_runtime_rapid_save": {
+      "fail": 4,
+      "render_settled_control_pass": 2
+    },
+    "repaired_runtime": "NOT_RUN; lead build and nonauthor fixed-source recheck required",
+    "original_pc_pointer_cause": "UNKNOWN; bounded current and original-own-inquiry pointer checks succeed",
+    "formal_validation": "NOT_RUN"
+  },
+  "cleanup": {
+    "new_native_tokens_issued_and_revoked": 8,
+    "handoff_tokens_revoked": 0,
+    "active_browser_processes": 0,
+    "own_fixture_product_id": 86,
+    "own_fixture_departure_id": 140,
+    "fixture_final": "departure inactive/reserved zero; product hidden and unpublished, retained synthetic rows",
+    "other_actor_fixture_writes": false
+  },
+  "publication": "No stage/commit/push/deploy by native author; lead owns Git delivery"
+}

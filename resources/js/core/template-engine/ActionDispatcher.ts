@@ -7148,7 +7148,8 @@ export class ActionDispatcher {
       let effectiveContext = dataContext;
       if (expr.includes('_global')) {
         const G7Core = (window as any).G7Core;
-        const latestGlobal = G7Core?.state?.get()?._global;
+        // state.get() returns the global content directly, without an _global wrapper.
+        const latestGlobal = G7Core?.state?.get();
         if (latestGlobal) {
           effectiveContext = { ...dataContext, _global: latestGlobal };
         }
@@ -7178,7 +7179,8 @@ export class ActionDispatcher {
     let effectiveDataContext = dataContext;
     if (expression.includes('_global')) {
       const G7Core = (window as any).G7Core;
-      const latestGlobal = G7Core?.state?.get()?._global;
+      // state.get() returns the global content directly, without an _global wrapper.
+      const latestGlobal = G7Core?.state?.get();
       if (latestGlobal) {
         effectiveDataContext = {
           ...dataContext,

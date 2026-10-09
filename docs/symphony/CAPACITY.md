@@ -159,3 +159,25 @@ and TEST-only destructive verification stay separated.
 The once-only diagnostic21/2209 PASS at lower observed load and targeted worker
 2/45 PASS do not prove why the old unknown worker exit occurred. Full stderr is
 retained privately, public hashes published. No stress/repeat loop was used.
+
+
+## October9 19:10 UTC — disjoint work and measured resource snapshot
+
+Own cumulative27official attempts:21COMPLETED/4FAILED/1INTERRUPTED/1RUNNING/
+0QUEUED. Active PageCLAUDE is implementation, not a verified result. RecipeCODEX
+and private-fileCLAUDE completed; root native author/review/intake agents active
+inside this Request (4slots including lead), not3PCs or officialchildren. Earlier
+multipleCODEX/multipleCLAUDE canonical concurrent states remain historical evidence;
+no artificial2lane cap. Idle official capacity is reserved for prepared final
+fixed-source verification rather than duplicated campaigns or dependent waiting
+Requests. Final campaign/core/board source is not yet frozen; root prepares build,
+Git delivery and new verifier contracts as author finishes.
+
+19:08UTC host load1/5/15=0.66/1.07/1.36, RAM15,783MiB total/11,491MiB available;
+swap4,955MiB used. Snapshot is host-level, not additive perRequest/account CPU
+quota proof. Own preview active,4PHPworkers; no runtime slot/model/capacity tuning.
+ConfiguredCODEX8/CLAUDE3 admission limits and parentMAX_ACTIVE10/MAX_TOTAL50
+unchanged. CENTRALverifiedlogical1PC; offlinePC2/PC3 not used. Global/Spring
+accountusage/quota/headroom UNKNOWN. Native/child consumption not double counted
+as measured account usage. TEST restored/released18:42:38 by independent recipe;
+next exclusive schema owner must remeasure, not trust the old55/104 value.

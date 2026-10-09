@@ -681,11 +681,11 @@ describe('ActionDispatcher', () => {
     });
 
     it('_global이 포함된 복합 표현식을 최신 전역 상태로 해석해야 함', async () => {
-      // window.G7Core 모킹으로 최신 _global 상태 제공
+      // Native state.get() returns global content directly, without an _global wrapper.
       const mockG7Core = {
         state: {
           get: vi.fn(() => ({
-            _global: { shopBase: '/store' },
+            shopBase: '/store',
           })),
         },
       };

@@ -5,6 +5,12 @@
 >
 > 형식: [Keep a Changelog](https://keepachangelog.com/ko/1.1.0/)
 
+## [Unreleased]
+
+### Fixed
+
+- 전역 상태 변경 직후 액션을 실행하면 이전 렌더 값을 보내던 표현식 평가를 수정했습니다. 기존 G7Core.state.get()의 content 반환 계약으로 최신 상태를 읽고 local·row 컨텍스트와 API 미가용 폴백을 보존합니다. 실제 TemplateApp 기반 회귀8건과 관련11파일546건을 검증했으며, 고정 배포 자산의 실제 관리자 빠른 저장 재검증은 별도 gate입니다.
+
 ## [engine-v1.66.1] - 2026-09-09
 
 ### Fixed
