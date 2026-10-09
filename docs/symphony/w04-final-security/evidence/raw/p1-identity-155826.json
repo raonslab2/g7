@@ -1,0 +1,119 @@
+{
+ "phase": "p1-identity",
+ "review_sha": "1052e3fb4bc4cccabb51b8c538116c78655f345b",
+ "base_url": "http://127.0.0.1:18871",
+ "counts": {
+  "PASS": 2,
+  "FAIL": 1,
+  "OBSERVED": 0,
+  "BLOCKED": 0,
+  "NOT_RUN": 1
+ },
+ "results": [
+  {
+   "name": "same-IP valid member/other/admin public counters separate after member read consumption; guest IP bucket untouched",
+   "status": "PASS",
+   "detail": {
+    "guest_before": {
+     "status": 200,
+     "limit": "600",
+     "remaining": "599"
+    },
+    "member_40_statuses": [
+     200
+    ],
+    "member_remaining_first_last": [
+     599,
+     560
+    ],
+    "member_remaining_strictly_decreasing_by_1": true,
+    "guest_after_member_40": {
+     "status": 200,
+     "remaining": "598",
+     "delta_vs_before": 1
+    },
+    "other_member_first": {
+     "status": 200,
+     "limit": "600",
+     "remaining": "599"
+    },
+    "admin_first": {
+     "status": 200,
+     "limit": "600",
+     "remaining": "599"
+    },
+    "member_41st": {
+     "status": 200,
+     "remaining": "559"
+    },
+    "guest_delta_note": "exact 1 means no other loopback traffic in between"
+   },
+   "at": "15:58:33"
+  },
+  {
+   "name": "installed native cache backend: per-user signed public keys exist in FileStore with exact counts",
+   "status": "FAIL",
+   "detail": {
+    "assert": "member file counter {'key_kind': 'travel-lab-support-public', 'present': True, 'expires_unix': 1791561566, 'value': 'non-integer', 'mtime_utc': '15:58:33'}"
+   },
+   "at": "15:58:33"
+  },
+  {
+   "name": "admin exact public boundary: 600 accepted then 601st 429 inside one 60s own window",
+   "status": "NOT_RUN",
+   "detail": {
+    "lanes": 2,
+    "requests_1_to_600_statuses": [
+     200
+    ],
+    "count_1_to_600": 600,
+    "remaining_after_600th_min": 101,
+    "duplicate_remaining_values": 211,
+    "elapsed_first_to_600th_s": 71.263,
+    "request_601": {
+     "status": 200,
+     "limit": "600",
+     "remaining": "500",
+     "retry_after": null,
+     "message": "자주 묻는 질문을 불러왔습니다.",
+     "ms": 81.0
+    },
+    "elapsed_first_to_601_complete_s": 71.346,
+    "post_601_until_429": [],
+    "file_counter_after": {
+     "key_kind": "travel-lab-support-public",
+     "present": true,
+     "expires_unix": 1791561633,
+     "value": "non-integer",
+     "mtime_utc": "15:59:44"
+    },
+    "reason": "runtime could not finish 601 requests inside one 60s window; boundary not claimed"
+   },
+   "at": "15:59:44"
+  },
+  {
+   "name": "after admin public exhaustion: admin question prefix, member/other actors and guest IP remain available",
+   "status": "PASS",
+   "detail": {
+    "admin_questions_after_public_exhaustion": [
+     200,
+     "120",
+     "119"
+    ],
+    "member_public": [
+     200,
+     "599"
+    ],
+    "other_public": [
+     200,
+     "599"
+    ],
+    "guest_public": [
+     200,
+     "599"
+    ]
+   },
+   "at": "15:59:44"
+  }
+ ]
+}

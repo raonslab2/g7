@@ -1,0 +1,183 @@
+{
+ "core_files": {
+  "app/Http/Middleware/ExtensionMiddlewareGate.php": {
+   "equal": true,
+   "parent_installed": "7befe21c38a90b07d71537f63478a50f2753123496f61cda37d9c2695c62b0af",
+   "review": "7befe21c38a90b07d71537f63478a50f2753123496f61cda37d9c2695c62b0af"
+  },
+  "app/Http/Middleware/OptionalSanctumMiddleware.php": {
+   "equal": true,
+   "parent_installed": "5f43087b44425fc4ed4d08ce2a4a6c9bfa9093368c56d2adf1c5371cd8cd1e96",
+   "review": "5f43087b44425fc4ed4d08ce2a4a6c9bfa9093368c56d2adf1c5371cd8cd1e96"
+  },
+  "app/Http/Middleware/RefreshTokenExpiration.php": {
+   "equal": true,
+   "parent_installed": "54afc33bdeddcc3b75000bd89ae5954d99e8b3912cc4f0582761c896097e2501",
+   "review": "54afc33bdeddcc3b75000bd89ae5954d99e8b3912cc4f0582761c896097e2501"
+  },
+  "app/Providers/ModuleRouteServiceProvider.php": {
+   "equal": true,
+   "parent_installed": "5117a694afe7777aebd9d5e65e2331a522c17f8dc4d0e956a70f328da209f7c5",
+   "review": "5117a694afe7777aebd9d5e65e2331a522c17f8dc4d0e956a70f328da209f7c5"
+  },
+  "bootstrap/app.php": {
+   "equal": true,
+   "parent_installed": "5089e0d9f00ad17c0d4ee6e199b4ab2622349cd140b255efe73a16a7e429f62d",
+   "review": "5089e0d9f00ad17c0d4ee6e199b4ab2622349cd140b255efe73a16a7e429f62d"
+  },
+  "vendor/laravel/framework/src/Illuminate/Auth/Middleware/Authenticate.php": {
+   "equal": true,
+   "parent_installed": "8880d6b7bcfa1ff93f93c86fd514cbc4243c7218b74f1cec662e0ccfc9d71e87",
+   "review": "8880d6b7bcfa1ff93f93c86fd514cbc4243c7218b74f1cec662e0ccfc9d71e87"
+  },
+  "vendor/laravel/framework/src/Illuminate/Cache/FileStore.php": {
+   "equal": true,
+   "parent_installed": "d8bece77ea6f9f38d9c71723c1895030d34301be0f142c858b7c06261c4d1b3d",
+   "review": "d8bece77ea6f9f38d9c71723c1895030d34301be0f142c858b7c06261c4d1b3d"
+  },
+  "vendor/laravel/framework/src/Illuminate/Cache/RateLimiter.php": {
+   "equal": true,
+   "parent_installed": "18ed0bb8e3c89c6df6da74e34b9e8d1a5d8a197ee4cf39cdecae1d592fd3390a",
+   "review": "18ed0bb8e3c89c6df6da74e34b9e8d1a5d8a197ee4cf39cdecae1d592fd3390a"
+  },
+  "vendor/laravel/framework/src/Illuminate/Foundation/Http/Kernel.php": {
+   "equal": true,
+   "parent_installed": "9b5e787137463aed13372a8bbaaf0bf44307bc7e7190031325b72995df8eb383",
+   "review": "9b5e787137463aed13372a8bbaaf0bf44307bc7e7190031325b72995df8eb383"
+  },
+  "vendor/laravel/framework/src/Illuminate/Routing/Middleware/ThrottleRequests.php": {
+   "equal": true,
+   "parent_installed": "73124b8bdfee5ed080630d466d970a90a867abb368e8cbf0d948875398b5048b",
+   "review": "73124b8bdfee5ed080630d466d970a90a867abb368e8cbf0d948875398b5048b"
+  },
+  "vendor/laravel/framework/src/Illuminate/Routing/SortedMiddleware.php": {
+   "equal": true,
+   "parent_installed": "bc0beaae21b1293f37c295c8805897cad3e873d423ec64ac8246832f2775c793",
+   "review": "bc0beaae21b1293f37c295c8805897cad3e873d423ec64ac8246832f2775c793"
+  },
+  "vendor/laravel/sanctum/src/Guard.php": {
+   "equal": true,
+   "parent_installed": "70b7463156c0687bdfecd21a8c74303fc46b3d28eb260096b778c3b3911f83ca",
+   "review": "70b7463156c0687bdfecd21a8c74303fc46b3d28eb260096b778c3b3911f83ca"
+  },
+  "vendor/laravel/sanctum/src/PersonalAccessToken.php": {
+   "equal": true,
+   "parent_installed": "dd0ecd5fb64ea26a06d54af88198c87c63e8fac139a00cd174aa35ecdb5123eb",
+   "review": "dd0ecd5fb64ea26a06d54af88198c87c63e8fac139a00cd174aa35ecdb5123eb"
+  }
+ },
+ "hooks_cache": {
+  "sha256": "1bfe3b3c127eb63012597079aef24efc01a35090cb9baf6b2ec5bdc004701f9a",
+  "travel_listener_by_hook": [
+   "raonslab-travel_lab -> BlockTravelCommerceCheckout",
+   "raonslab-travel_lab -> ExcludeTravelSupportQuestionsFromSearch",
+   "raonslab-travel_lab -> ProtectTravelCommerceCatalog",
+   "raonslab-travel_lab -> SuppressTravelSupportNotifications"
+  ],
+  "travel_listener_lines": [
+   "'listener' => 'Modules\\\\Raonslab\\\\TravelLab\\\\Listeners\\\\BlockTravelCommerceCheckout',",
+   "'listener' => 'Modules\\\\Raonslab\\\\TravelLab\\\\Listeners\\\\ExcludeTravelSupportQuestionsFromSearch',",
+   "'listener' => 'Modules\\\\Raonslab\\\\TravelLab\\\\Listeners\\\\ProtectTravelCommerceCatalog',",
+   "'listener' => 'Modules\\\\Raonslab\\\\TravelLab\\\\Listeners\\\\SuppressTravelSupportNotifications',"
+  ]
+ },
+ "module_review_bundled_vs_parent_bundled": {
+  "a_files": 165,
+  "b_files": 165,
+  "common": 165,
+  "differ": [],
+  "identical": true,
+  "only_in_installed": [],
+  "only_in_review": [],
+  "review_manifest_sha256": "99e07ebc03ee82de5fc36001de236317b7cedc869138f4d01489812d602f94e3"
+ },
+ "module_review_bundled_vs_parent_installed": {
+  "a_files": 165,
+  "b_files": 165,
+  "common": 165,
+  "differ": [
+   "CHANGELOG.md",
+   "docs/support-api.md"
+  ],
+  "identical": false,
+  "only_in_installed": [],
+  "only_in_review": [],
+  "review_manifest_sha256": "99e07ebc03ee82de5fc36001de236317b7cedc869138f4d01489812d602f94e3"
+ },
+ "module_tracked_files_at_review_sha": 165,
+ "parent_head": "77ce7114efa0f79dcef011390f54d18a04df32f9",
+ "parent_status_porcelain_lines": 0,
+ "review_head": "1052e3fb4bc4cccabb51b8c538116c78655f345b",
+ "route_cache": {
+  "TravelOptionalSanctum_occurrences": 4,
+  "names": [
+   "api.modules.raonslab-travel_lab.admin.catalog.candidates",
+   "api.modules.raonslab-travel_lab.admin.catalog.departures.index",
+   "api.modules.raonslab-travel_lab.admin.catalog.departures.store",
+   "api.modules.raonslab-travel_lab.admin.catalog.departures.update",
+   "api.modules.raonslab-travel_lab.admin.catalog.index",
+   "api.modules.raonslab-travel_lab.admin.catalog.show",
+   "api.modules.raonslab-travel_lab.admin.catalog.store",
+   "api.modules.raonslab-travel_lab.admin.catalog.update",
+   "api.modules.raonslab-travel_lab.admin.inquiries.index",
+   "api.modules.raonslab-travel_lab.admin.inquiries.show",
+   "api.modules.raonslab-travel_lab.admin.inquiries.update",
+   "api.modules.raonslab-travel_lab.cart.destroy",
+   "api.modules.raonslab-travel_lab.cart.index",
+   "api.modules.raonslab-travel_lab.cart.store",
+   "api.modules.raonslab-travel_lab.cart.update",
+   "api.modules.raonslab-travel_lab.catalog.departures",
+   "api.modules.raonslab-travel_lab.catalog.facets",
+   "api.modules.raonslab-travel_lab.catalog.index",
+   "api.modules.raonslab-travel_lab.catalog.show",
+   "api.modules.raonslab-travel_lab.inquiries.cancel",
+   "api.modules.raonslab-travel_lab.inquiries.index",
+   "api.modules.raonslab-travel_lab.inquiries.show",
+   "api.modules.raonslab-travel_lab.inquiries.store",
+   "api.modules.raonslab-travel_lab.support.faqs.index",
+   "api.modules.raonslab-travel_lab.support.faqs.show",
+   "api.modules.raonslab-travel_lab.support.notices.index",
+   "api.modules.raonslab-travel_lab.support.notices.show",
+   "api.modules.raonslab-travel_lab.support.questions.index",
+   "api.modules.raonslab-travel_lab.support.questions.show",
+   "api.modules.raonslab-travel_lab.support.questions.store",
+   "api.modules.raonslab-travel_lab.support.questions.update"
+  ],
+  "sha256": "1e14543668e1e24175d5f62a1d399e07b6b630b552107afdbb803910430e4e71",
+  "source_leaf_name_calls": 34,
+  "throttle_strings": [
+   "throttle:10,1,travel-lab-submit:",
+   "throttle:10,1,travel-lab-support-create:",
+   "throttle:120,1,travel-lab-support-questions:",
+   "throttle:120,1,travel-lab-workflow:",
+   "throttle:20,1,travel-lab-cancel:",
+   "throttle:60,1,travel-lab-admin:",
+   "throttle:60,1,travel-lab-cart:",
+   "throttle:600,1,travel-lab-support-public:"
+  ],
+  "travel_named_routes": 31
+ },
+ "template_review_bundled_vs_parent_installed": {
+  "a_files": 154,
+  "b_files": 144,
+  "common": 144,
+  "differ": [
+   "__tests__/geometry/requests-native.mjs"
+  ],
+  "identical": false,
+  "only_in_installed": [],
+  "only_in_review": [
+   "__tests__/evidence/mobile-request-native-owner-after-1440.png",
+   "__tests__/evidence/mobile-request-native-owner-after-390.png",
+   "__tests__/evidence/mobile-request-native-owner-after-date-1440.png",
+   "__tests__/evidence/mobile-request-native-owner-after-date-390.png",
+   "__tests__/evidence/mobile-request-native-owner-after-date.json",
+   "__tests__/evidence/mobile-request-native-owner-after-pointer-1440.png",
+   "__tests__/evidence/mobile-request-native-owner-after-pointer-390.png",
+   "__tests__/evidence/mobile-request-native-owner-after-pointer.json",
+   "__tests__/evidence/mobile-request-native-owner-after.json",
+   "__tests__/evidence/mobile-request-repair-manifest.json"
+  ],
+  "review_manifest_sha256": "0857b864b083f52f1bfd3e83728c31a6b320201e189698ca44677893679bad6b"
+ }
+}

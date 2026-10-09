@@ -1,0 +1,61 @@
+{
+ "phase": "p1-cache_inspect-162052",
+ "review_sha": "1052e3fb4bc4cccabb51b8c538116c78655f345b",
+ "base_url": "http://127.0.0.1:18871",
+ "counts": {
+  "PASS": 1,
+  "FAIL": 0,
+  "OBSERVED": 0,
+  "BLOCKED": 0,
+  "NOT_RUN": 0
+ },
+ "results": [
+  {
+   "name": "read-only native cache backend inspection: per-user and anonymous-IP public keys in FileStore match headers; DB cache has no travel rate rows",
+   "status": "PASS",
+   "detail": {
+    "headers_remaining": {
+     "member": 599,
+     "other_member": 599,
+     "admin": 599,
+     "guest": 599
+    },
+    "file_counters": {
+     "member": {
+      "key_kind": "travel-lab-support-public",
+      "present": true,
+      "expires_unix": 1791562912,
+      "value": 1,
+      "mtime_utc": "16:20:52"
+     },
+     "other_member": {
+      "key_kind": "travel-lab-support-public",
+      "present": true,
+      "expires_unix": 1791562912,
+      "value": 1,
+      "mtime_utc": "16:20:52"
+     },
+     "admin": {
+      "key_kind": "travel-lab-support-public",
+      "present": true,
+      "expires_unix": 1791562913,
+      "value": 1,
+      "mtime_utc": "16:20:53"
+     },
+     "anonymous_ip": {
+      "key_kind": "travel-lab-support-public",
+      "present": true,
+      "expires_unix": 1791562913,
+      "value": 1,
+      "mtime_utc": "16:20:53"
+     }
+    },
+    "db_cache": {
+     "g7_cache_table_present": true,
+     "travel_lab_rate_rows_in_db_cache": 0
+    }
+   },
+   "at": "16:20:53"
+  }
+ ]
+}

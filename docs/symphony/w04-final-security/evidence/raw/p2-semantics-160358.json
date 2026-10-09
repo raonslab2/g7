@@ -1,0 +1,144 @@
+{
+ "phase": "p2-semantics-160358",
+ "review_sha": "1052e3fb4bc4cccabb51b8c538116c78655f345b",
+ "base_url": "http://127.0.0.1:18871",
+ "counts": {
+  "PASS": 6,
+  "FAIL": 0,
+  "OBSERVED": 0,
+  "BLOCKED": 0,
+  "NOT_RUN": 0
+ },
+ "results": [
+  {
+   "name": "owner native edit persists exact title/body; is_mine/is_secret",
+   "status": "PASS",
+   "detail": {
+    "patch": 200,
+    "requery": 200,
+    "title_equal": true,
+    "content_equal": true,
+    "is_mine": true,
+    "is_secret": true
+   },
+   "at": "16:03:58"
+  },
+  {
+   "name": "foreign member show/patch 404, foreign list contains 0 own questions, anonymous 401",
+   "status": "PASS",
+   "detail": {
+    "foreign_show": 404,
+    "foreign_patch": 404,
+    "foreign_list": 200,
+    "foreign_list_contains_member_questions": 0,
+    "anonymous_show": 401,
+    "anonymous_list": 401,
+    "owner_title_unchanged_by_foreign": true
+   },
+   "at": "16:03:59"
+  },
+  {
+   "name": "admin reads and answers through native board admin comment; owner sees the answer",
+   "status": "PASS",
+   "detail": {
+    "admin_show": 200,
+    "native_admin_comment": 201,
+    "owner_sees_answers_count": 1,
+    "answer_author_flag": [
+     false
+    ]
+   },
+   "at": "16:03:59"
+  },
+  {
+   "name": "native activity audit: exactly one post.update for owner edit with title metadata, body excluded; foreign attempts not audited",
+   "status": "PASS",
+   "detail": {
+    "api_status": 200,
+    "api_entries": 11,
+    "api_post_update_with_new_title": 1,
+    "api_body_marker_in_update_entries": 0,
+    "sql_rows_since_floor": 11,
+    "sql_actions": [
+     "post.create",
+     "post.update"
+    ],
+    "sql_update_rows_for_q1": [
+     {
+      "id": 1145,
+      "user_id": 48,
+      "action": "post.update",
+      "loggable_type": "Post",
+      "loggable_id": 69,
+      "changes_mentions_title": true,
+      "changes_mentions_content": false,
+      "contains_marker": true,
+      "contains_body_marker": false
+     }
+    ],
+    "sql_create_rows": 10,
+    "sql_any_row_contains_body_marker": false,
+    "other_member_rows": 0
+   },
+   "at": "16:03:59"
+  },
+  {
+   "name": "native current-APP search and board list expose no own private question title/body to guest/member/other/admin",
+   "status": "PASS",
+   "detail": {
+    "guest": {
+     "status": 200,
+     "marker_hits": 0,
+     "status_body_query": 200,
+     "body_marker_hits": 0
+    },
+    "member": {
+     "status": 200,
+     "marker_hits": 0,
+     "status_body_query": 200,
+     "body_marker_hits": 0
+    },
+    "other_member": {
+     "status": 200,
+     "marker_hits": 0,
+     "status_body_query": 200,
+     "body_marker_hits": 0
+    },
+    "admin": {
+     "status": 200,
+     "marker_hits": 0,
+     "status_body_query": 200,
+     "body_marker_hits": 0
+    },
+    "native_board_list_other": 403,
+    "native_board_list_guest": 401,
+    "native_board_list_other_contains_run": 0,
+    "scope": "current APP database search API only; external engines/scout:import NOT_RUN (W03-05(a) remains CONTAINED, not CLOSED)"
+   },
+   "at": "16:04:00"
+  },
+  {
+   "name": "isolated support board attachments disabled: native member upload denied, no attachment row",
+   "status": "PASS",
+   "detail": {
+    "board_settings": {
+     "id": 3,
+     "slug": "travel-lab-questions",
+     "is_active": 0,
+     "type": "basic",
+     "secret_mode": "always",
+     "use_file_upload": 0,
+     "max_file_size": 10,
+     "max_file_count": 5,
+     "notify_author": 0,
+     "notify_admin_on_post": 0
+    },
+    "member_native_upload": 403,
+    "upload_message": "해당 권한이 없습니다.",
+    "attachments_rows_unchanged": true,
+    "foreign_attachment_access": "NOT_RUN: native member path denies owned attachment creation, so no realistic owned file exists; nonexistent-ID 404 is not used as proof"
+   },
+   "at": "16:04:00"
+  }
+ ]
+}

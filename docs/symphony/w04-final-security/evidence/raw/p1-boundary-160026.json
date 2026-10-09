@@ -1,0 +1,23 @@
+{
+ "phase": "p1-boundary-160026",
+ "review_sha": "1052e3fb4bc4cccabb51b8c538116c78655f345b",
+ "base_url": "http://127.0.0.1:18871",
+ "counts": {
+  "PASS": 0,
+  "FAIL": 0,
+  "OBSERVED": 0,
+  "BLOCKED": 0,
+  "NOT_RUN": 1
+ },
+ "results": [
+  {
+   "name": "admin exact public boundary: 600 accepted then 601st 429 inside one 60s own window (4 lanes)",
+   "status": "NOT_RUN",
+   "detail": {
+    "reason": "own window not fresh at start; no reset performed",
+    "remaining": "499"
+   },
+   "at": "16:00:26"
+  }
+ ]
+}
