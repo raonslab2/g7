@@ -32,6 +32,7 @@ catalog/inquiries의 read/update는 native admin/manager 역할, support의 read
 | 관리자 | `travel-lab-catalog` | 여행 카탈로그 | `/admin/travel-lab/catalog` | - |
 | 관리자 | `travel-lab-inquiries` | 시험 접수 | `/admin/travel-lab/inquiries` | - |
 | 관리자 | `travel-lab-support` | 여행 고객지원 | `/admin/travel-lab/support` | - |
+| 관리자 | `travel-lab-campaigns` | 여행 캠페인 | `/admin/travel-lab/campaigns` | - |
 <!-- @generated:menus END -->
 
 <!-- @intent START -->
@@ -67,7 +68,7 @@ ModuleRouteServiceProvider가 /api/modules/raonslab-travel_lab 및 api.modules.r
 
 | 확장 | 유형 | 요구 버전 |
 |---|---|---|
-| `raonslab-travel_lab` | 템플릿 | `>=0.1.2` |
+| `raonslab-travel_lab` | 템플릿 | `>=0.1.3` |
 <!-- @generated:dependencies END -->
 
 <!-- @intent START -->

@@ -9,3 +9,4 @@
 require __DIR__.'/catalog.php';
 require __DIR__.'/workflow.php';
 require __DIR__.'/support.php';
+require __DIR__.'/campaigns.php';

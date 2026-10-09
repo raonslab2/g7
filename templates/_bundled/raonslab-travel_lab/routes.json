@@ -36,6 +36,32 @@
             }
         },
         {
+            "_comment": "=== 기획전 — native 페이지 고정 두 슬롯(발행분만, 서버가 레지스트리 밖·초안을 404) ===",
+            "path": "/travel/campaigns",
+            "layout": "travel/campaigns",
+            "auth_required": false,
+            "meta": {
+                "title": "$t:travel.meta.campaigns_title"
+            }
+        },
+        {
+            "path": "/travel/campaigns/:slug",
+            "layout": "travel/campaign_detail",
+            "auth_required": false,
+            "meta": {
+                "title": "$t:travel.meta.campaign_title"
+            }
+        },
+        {
+            "_comment": "native 사이트맵 /page/{slug} 별칭 — 같은 레지스트리 제한 소비자, 다른 Page 는 404",
+            "path": "/page/:slug",
+            "layout": "travel/campaign_detail",
+            "auth_required": false,
+            "meta": {
+                "title": "$t:travel.meta.campaign_title"
+            }
+        },
+        {
             "_comment": "=== 로그인 필요 — Sanctum 토큰 기반 ===",
             "path": "/travel/cart",
             "layout": "travel/cart",

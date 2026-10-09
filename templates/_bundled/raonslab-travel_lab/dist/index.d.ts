@@ -28,6 +28,7 @@ export { Pagination, type PaginationProps } from './components/composite/Paginat
 export { ScenicArt, type ScenicArtProps } from './components/composite/ScenicArt';
 export { PriceTag, type PriceTagProps } from './components/composite/PriceTag';
 export { StatusBadge, type StatusBadgeProps } from './components/composite/StatusBadge';
+export { PageBody, type PageBodyProps } from './components/composite/PageBody';
 export { templateMetadata };
 /**
  * 템플릿 초기화 — ActionDispatcher 가 준비될 때까지 100ms 간격 최대 50회 재시도 후 핸들러 등록.

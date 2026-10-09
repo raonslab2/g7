@@ -24,7 +24,7 @@ foreach ([
 
 $loader = require $projectRoot.'/vendor/autoload.php';
 $canonicalNamespaces = [];
-foreach (['sirsoft-ecommerce', 'raonslab-travel_lab'] as $identifier) {
+foreach (['sirsoft-ecommerce', 'sirsoft-page', 'raonslab-travel_lab'] as $identifier) {
     $path = $projectRoot.'/modules/_bundled/'.$identifier;
     $composer = json_decode(file_get_contents($path.'/composer.json'), true, flags: JSON_THROW_ON_ERROR);
     foreach ($composer['autoload']['psr-4'] ?? [] as $namespace => $relative) {

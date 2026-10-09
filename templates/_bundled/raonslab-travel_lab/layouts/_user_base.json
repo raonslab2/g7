@@ -223,6 +223,31 @@
                                             "props": {
                                                 "type": "button",
                                                 "className": "inline-flex items-center rounded-lg px-3 py-2 text-sm font-semibold text-ink-700 transition hover:bg-raon-50 hover:text-raon-700",
+                                                "data-testid": "nav-campaigns"
+                                            },
+                                            "children": [
+                                                {
+                                                    "type": "basic",
+                                                    "name": "Span",
+                                                    "text": "$t:travel.nav.campaigns"
+                                                }
+                                            ],
+                                            "actions": [
+                                                {
+                                                    "type": "click",
+                                                    "handler": "navigate",
+                                                    "params": {
+                                                        "path": "/travel/campaigns"
+                                                    }
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "type": "basic",
+                                            "name": "Button",
+                                            "props": {
+                                                "type": "button",
+                                                "className": "inline-flex items-center rounded-lg px-3 py-2 text-sm font-semibold text-ink-700 transition hover:bg-raon-50 hover:text-raon-700",
                                                 "data-testid": "nav-cart"
                                             },
                                             "children": [
@@ -715,6 +740,54 @@
                                                             "handler": "navigate",
                                                             "params": {
                                                                 "path": "/travel/search"
+                                                            }
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "type": "basic",
+                                            "name": "Button",
+                                            "props": {
+                                                "type": "button",
+                                                "className": "flex w-full items-center gap-3 rounded-xl px-4 py-3 text-base font-semibold text-ink-700 hover:bg-raon-50",
+                                                "data-testid": "mobile-nav-campaigns"
+                                            },
+                                            "children": [
+                                                {
+                                                    "type": "basic",
+                                                    "name": "Icon",
+                                                    "props": {
+                                                        "name": "flag",
+                                                        "className": "w-5 text-center text-base text-raon-600"
+                                                    }
+                                                },
+                                                {
+                                                    "type": "basic",
+                                                    "name": "Span",
+                                                    "props": {
+                                                        "className": "flex-1 text-left"
+                                                    },
+                                                    "text": "$t:travel.nav.campaigns"
+                                                }
+                                            ],
+                                            "actions": [
+                                                {
+                                                    "type": "click",
+                                                    "handler": "sequence",
+                                                    "actions": [
+                                                        {
+                                                            "handler": "setState",
+                                                            "params": {
+                                                                "target": "global",
+                                                                "travelMenuOpen": false
+                                                            }
+                                                        },
+                                                        {
+                                                            "handler": "navigate",
+                                                            "params": {
+                                                                "path": "/travel/campaigns"
                                                             }
                                                         }
                                                     ]

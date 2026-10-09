@@ -5,7 +5,7 @@
 ## 레이아웃 목록
 
 <!-- @generated:layouts START — ext:docgen 이 갱신. 이 블록 안은 직접 수정하지 않는다 -->
-레이아웃 17개 (루트: `layouts`).
+레이아웃 19개 (루트: `layouts`).
 
 | 그룹 | 개수 |
 |---|---|
@@ -13,7 +13,7 @@
 | `auth` | 1개 |
 | `errors` | 6개 |
 | `partials` | 2개 |
-| `travel` | 7개 |
+| `travel` | 9개 |
 
 | 레이아웃 | 그룹 | 종류 | extends |
 |---|---|---|---|
@@ -27,6 +27,8 @@
 | `maintenance` | `errors` | 화면 | `_user_base` |
 | `_modal_cart_remove` | `partials` | partial | - |
 | `_modal_request_cancel` | `partials` | partial | - |
+| `campaign_detail` | `travel` | 화면 | `_user_base` |
+| `campaigns` | `travel` | 화면 | `_user_base` |
 | `cart` | `travel` | 화면 | `_user_base` |
 | `help` | `travel` | 화면 | `_user_base` |
 | `home` | `travel` | 화면 | `_user_base` |
@@ -72,6 +74,9 @@ Resource 형태(`title` · `content`(`content_plain` 우선) · `created_at`)로
 | `/travel` | `travel/home` | - |
 | `/travel/search` | `travel/search` | - |
 | `/travel/products/:id` | `travel/product` | - |
+| `/travel/campaigns` | `travel/campaigns` | - |
+| `/travel/campaigns/:slug` | `travel/campaign_detail` | - |
+| `/page/:slug` | `travel/campaign_detail` | - |
 | `/travel/cart` | `travel/cart` | - |
 | `/travel/requests` | `travel/requests` | - |
 | `/travel/requests/:id` | `travel/request_detail` | - |
