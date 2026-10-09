@@ -1,0 +1,95 @@
+{
+  "nav": {
+    "catalog": "Travel catalog",
+    "inquiries": "Travel inquiries",
+    "support": "Support"
+  },
+  "common": {
+    "lab_banner": "LAB test environment. No real payments, bookings, refunds, emails or SMS are produced.",
+    "refresh": "Refresh",
+    "save": "Save",
+    "cancel": "Cancel",
+    "prev": "Previous",
+    "next": "Next",
+    "page_summary": "Page {{current}} of {{last}} · {{total}} total"
+  },
+  "catalog": {
+    "title": "Travel catalog",
+    "description": "Ecommerce products act as trips and product options act as departures.",
+    "product_code": "Product code {{code}}",
+    "open_product_admin": "Open ecommerce product admin",
+    "price_source_note": "Prices and options are edited only in ecommerce product admin. This screen manages departure status and capacity.",
+    "capacity_line": "Capacity {{capacity}} · inquired {{reserved}}",
+    "edit_departure": "Departure settings",
+    "no_departures": "No departures (product options) yet.",
+    "empty": "No travel products.",
+    "status": {
+      "OPEN": "Open",
+      "CLOSED": "Closed",
+      "HIDDEN": "Hidden"
+    },
+    "modal": {
+      "title": "Departure settings",
+      "status": "Status",
+      "capacity": "Capacity (people)",
+      "price_note": "Prices are not changed here. Manage them in the ecommerce product options.",
+      "saved": "Departure settings saved."
+    }
+  },
+  "inquiries": {
+    "title": "Travel inquiries",
+    "description": "Review LAB test inquiries and move them only to allowed states.",
+    "filter_all": "All",
+    "empty": "No inquiries.",
+    "columns": {
+      "reference": "Reference",
+      "trip": "Trip",
+      "departure": "Departure",
+      "party_size": "People",
+      "status": "Status",
+      "created_at": "Received"
+    },
+    "actions": {
+      "view": "View"
+    },
+    "status": {
+      "TEST_INQUIRY": "Test inquiry",
+      "UNDER_REVIEW": "Under review",
+      "TEST_ACCEPTED": "Test accepted",
+      "DECLINED": "Declined",
+      "CANCELLED": "Cancelled"
+    }
+  },
+  "inquiry_detail": {
+    "title": "Travel inquiry",
+    "description": "All states are for testing only; no real booking is made.",
+    "back": "List",
+    "summary": "Inquiry",
+    "requester": "Requester",
+    "message": "Message",
+    "status_title": "Status",
+    "transition_hint": "Only the next states allowed by the server can be selected.",
+    "terminal": "No further transitions are available.",
+    "admin_note": "Admin note",
+    "admin_note_placeholder": "Internal note (never sent to the requester)",
+    "saved": "Inquiry status saved."
+  },
+  "support": {
+    "title": "Support",
+    "description": "Notices, FAQs and private questions run on G7 boards.",
+    "open_board_admin": "Open board admin",
+    "notices": {
+      "title": "Notices",
+      "description": "Public Travel Lab notices."
+    },
+    "faqs": {
+      "title": "FAQs",
+      "description": "Public frequently asked questions."
+    },
+    "questions": {
+      "title": "Private questions",
+      "description": "Secret questions visible only to the author and admins. Answer with comments."
+    },
+    "provision_hint": "If the boards are missing, prepare them in LAB with raonslab-travel_lab:support-provision --lab-confirm."
+  }
+}
