@@ -1,0 +1,55 @@
+{
+    "fixture": "missing",
+    "native_command": [
+        "module:install",
+        "sirsoft-ecommerce",
+        "--vendor-mode=bundled",
+        "--no-interaction"
+    ],
+    "native_exit": 1,
+    "failed_closed": true,
+    "schema_rows_ddl_unchanged": false,
+    "full_inventory_comparison": {
+        "before_digest": "83dfc2163ef0fc489d623a6ffc4179b32ae9ecd6c25ebd87243a44d765a688c3",
+        "after_digest": "4b7ebbf05e297116fb2987385312389421a222ecd6252fc33f6d6e096a725f9f",
+        "exact_all_tables": false,
+        "table_set_equal": true,
+        "ddl_equal": true,
+        "ddl_changed_tables": [],
+        "changed_tables": {
+            "g7_cache": {
+                "before": {
+                    "rows": 7,
+                    "row_sha256": "3f5aeb9bee35e65f3f5a45482fddb362d018576595f01bd0d1972012a6d37ce9",
+                    "ddl_sha256": "24c3fe768da9518cb6394368c53e15419aef3225c2358769b17da778d3a6073b"
+                },
+                "after": {
+                    "rows": 8,
+                    "row_sha256": "6a84c10b83c940f6dc3949f357ca38c608487ddc7b6d99f6bed0b12c4fc1ecc4",
+                    "ddl_sha256": "24c3fe768da9518cb6394368c53e15419aef3225c2358769b17da778d3a6073b"
+                },
+                "allowed_native_delta": true
+            }
+        },
+        "all_nonallowed_tables_equal": true,
+        "allowed_tables": [
+            "g7_cache"
+        ]
+    },
+    "noncache_rows_ddl_unchanged": true,
+    "table_count": 58,
+    "row_count": 463,
+    "module_registration_row": false,
+    "active_directory_absent": true,
+    "pending_directory_absent": true,
+    "safe_output_markers": {
+        "vendor-bundle.zip \ud30c\uc77c\uc744 \ucc3e\uc744 \uc218 \uc5c6\uc2b5\ub2c8\ub2e4": true,
+        "\ubb34\uacb0\uc131 \uac80\uc99d\uc5d0 \uc2e4\ud328\ud588\uc2b5\ub2c8\ub2e4": false,
+        ":expected": false,
+        ":actual": false
+    },
+    "output_sha256": "ea880e58688f77b87ec6d1d524232604ac96c9982e3e29e62f239d904a6504f8",
+    "source_restored_sha256": "713f98578a866fada6782d11f8c80ff13037f1faf0edaaa55f004ddc4e80d1b9",
+    "source_restored_exact": true,
+    "bundled_source_git_clean": true
+}
