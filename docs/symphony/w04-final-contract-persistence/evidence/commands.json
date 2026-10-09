@@ -1,0 +1,1052 @@
+{
+  "recorded_native_commands": [
+    {
+      "metadata_path": "storage/framework/testing/w04p-mysql-live/restore-sql-check.log.result.json",
+      "result": {
+        "command": [
+          "python3",
+          "docs/symphony/w04-final-contract-persistence/recovery-dump-check.py",
+          "storage/framework/testing/w04p-mysql-live/snapshot.sql",
+          "storage/framework/testing/w04p-mysql-live/before.json"
+        ],
+        "pid": 1044609,
+        "exit": 0,
+        "process_gone": true,
+        "seconds": 7.107,
+        "utc": "2026-10-09T21:38:34+00:00"
+      }
+    },
+    {
+      "metadata_path": "storage/framework/testing/w04p-mysql-live/restore-wipe.log.result.json",
+      "result": {
+        "command": [
+          "/usr/bin/php8.3",
+          "docs/symphony/w04-final-contract-persistence/guarded-artisan.php",
+          "db:wipe",
+          "--database=mysql",
+          "--drop-views",
+          "--force",
+          "--no-interaction"
+        ],
+        "pid": 1045318,
+        "exit": 0,
+        "process_gone": true,
+        "seconds": 1.908,
+        "utc": "2026-10-09T21:38:42+00:00"
+      }
+    },
+    {
+      "metadata_path": "storage/framework/testing/w04p-mysql-live/safety-7725bc58-dump.log.result.json",
+      "result": {
+        "command": [
+          "/usr/bin/php8.3",
+          "docs/symphony/w04-final-contract-persistence/dump.php",
+          "storage/framework/testing/w04p-mysql-live/safety-7725bc58.sql"
+        ],
+        "pid": 1044976,
+        "exit": 0,
+        "process_gone": true,
+        "seconds": 2.581,
+        "utc": "2026-10-09T21:38:38+00:00"
+      }
+    },
+    {
+      "metadata_path": "storage/framework/testing/w04p-mysql-live/native.log.result.json",
+      "result": {
+        "command": [
+          "/usr/bin/php8.3",
+          "vendor/bin/phpunit",
+          "--bootstrap",
+          "docs/symphony/w04-final-contract-persistence/test-bootstrap.php",
+          "scripts/travel-lab/LiveMysqlTest.php"
+        ],
+        "pid": 1044464,
+        "exit": 2,
+        "process_gone": true,
+        "seconds": 1.383,
+        "utc": "2026-10-09T21:38:27+00:00"
+      }
+    },
+    {
+      "metadata_path": "storage/framework/testing/w04p-mysql-live/dump-check.log.result.json",
+      "result": {
+        "command": [
+          "python3",
+          "docs/symphony/w04-final-contract-persistence/recovery-dump-check.py",
+          "storage/framework/testing/w04p-mysql-live/snapshot.sql",
+          "storage/framework/testing/w04p-mysql-live/before.json"
+        ],
+        "pid": 1044073,
+        "exit": 0,
+        "process_gone": true,
+        "seconds": 6.453,
+        "utc": "2026-10-09T21:38:25+00:00"
+      }
+    },
+    {
+      "metadata_path": "storage/framework/testing/w04p-support-private/restore-sql-check.log.result.json",
+      "result": {
+        "command": [
+          "python3",
+          "docs/symphony/w04-final-contract-persistence/recovery-dump-check.py",
+          "storage/framework/testing/w04p-support-private/snapshot.sql",
+          "storage/framework/testing/w04p-support-private/before.json"
+        ],
+        "pid": 1054594,
+        "exit": 0,
+        "process_gone": true,
+        "seconds": 6.533,
+        "utc": "2026-10-09T21:41:43+00:00"
+      }
+    },
+    {
+      "metadata_path": "storage/framework/testing/w04p-support-private/restore-wipe.log.result.json",
+      "result": {
+        "command": [
+          "/usr/bin/php8.3",
+          "docs/symphony/w04-final-contract-persistence/guarded-artisan.php",
+          "db:wipe",
+          "--database=mysql",
+          "--drop-views",
+          "--force",
+          "--no-interaction"
+        ],
+        "pid": 1054931,
+        "exit": 0,
+        "process_gone": true,
+        "seconds": 1.341,
+        "utc": "2026-10-09T21:41:45+00:00"
+      }
+    },
+    {
+      "metadata_path": "storage/framework/testing/w04p-support-private/safety-7f026a8b-dump.log.result.json",
+      "result": {
+        "command": [
+          "/usr/bin/php8.3",
+          "docs/symphony/w04-final-contract-persistence/dump.php",
+          "storage/framework/testing/w04p-support-private/safety-7f026a8b.sql"
+        ],
+        "pid": 1054901,
+        "exit": 0,
+        "process_gone": true,
+        "seconds": 0.472,
+        "utc": "2026-10-09T21:41:44+00:00"
+      }
+    },
+    {
+      "metadata_path": "storage/framework/testing/w04p-support-private/native.log.result.json",
+      "result": {
+        "command": [
+          "/usr/bin/php8.3",
+          "vendor/bin/phpunit",
+          "--bootstrap",
+          "docs/symphony/w04-final-contract-persistence/test-bootstrap.php",
+          "modules/_bundled/raonslab-travel_lab/tests/Feature/TravelSupportApiTest.php",
+          "modules/_bundled/raonslab-travel_lab/tests/Feature/W03SupportHardeningTest.php",
+          "--filter",
+          "questions_require_sanctum_authentication|members_only_see_and_update_their_own_private_questions|support_admin_reads_all_but_needs_update_permission_to_edit_others|admin_answer_through_native_board_admin_is_visible_to_author_only|legacy_support_role_without_native_board_admin_cannot_reach_foreign_questions|foreign_access_requires_both_support_permission_and_native_board_admin|self_scoped_native_board_manager_sees_only_own_questions|question_edit_goes_through_native_post_service_audit_without_notifications|restricted_grants_without_owner_metadata_cannot_bypass_foreign_scope"
+        ],
+        "pid": 1053728,
+        "exit": 0,
+        "process_gone": true,
+        "seconds": 20.322,
+        "utc": "2026-10-09T21:41:36+00:00"
+      }
+    },
+    {
+      "metadata_path": "storage/framework/testing/w04p-support-private/dump-check.log.result.json",
+      "result": {
+        "command": [
+          "python3",
+          "docs/symphony/w04-final-contract-persistence/recovery-dump-check.py",
+          "storage/framework/testing/w04p-support-private/snapshot.sql",
+          "storage/framework/testing/w04p-support-private/before.json"
+        ],
+        "pid": 1053550,
+        "exit": 0,
+        "process_gone": true,
+        "seconds": 4.162,
+        "utc": "2026-10-09T21:41:15+00:00"
+      }
+    },
+    {
+      "metadata_path": "storage/framework/testing/w04p-original/restore-sql-check.log.result.json",
+      "result": {
+        "command": [
+          "python3",
+          "docs/symphony/w04-final-contract-persistence/recovery-dump-check.py",
+          "storage/framework/testing/w04p-original/snapshot.sql",
+          "storage/framework/testing/w04p-original/before.json"
+        ],
+        "pid": 1056283,
+        "exit": 0,
+        "process_gone": true,
+        "seconds": 0.089,
+        "utc": "2026-10-09T21:42:14+00:00"
+      }
+    },
+    {
+      "metadata_path": "storage/framework/testing/w04p-original/restore-wipe.log.result.json",
+      "result": {
+        "command": [
+          "/usr/bin/php8.3",
+          "docs/symphony/w04-final-contract-persistence/guarded-artisan.php",
+          "db:wipe",
+          "--database=mysql",
+          "--drop-views",
+          "--force",
+          "--no-interaction"
+        ],
+        "pid": 1056539,
+        "exit": 0,
+        "process_gone": true,
+        "seconds": 1.228,
+        "utc": "2026-10-09T21:42:19+00:00"
+      }
+    },
+    {
+      "metadata_path": "storage/framework/testing/w04p-original/dump-check.log.result.json",
+      "result": {
+        "command": [
+          "python3",
+          "docs/symphony/w04-final-contract-persistence/recovery-dump-check.py",
+          "storage/framework/testing/w04p-original/snapshot.sql",
+          "storage/framework/testing/w04p-original/before.json"
+        ],
+        "pid": 974228,
+        "exit": 0,
+        "process_gone": true,
+        "seconds": 0.339,
+        "utc": "2026-10-09T21:23:41+00:00"
+      }
+    },
+    {
+      "metadata_path": "storage/framework/testing/w04p-original/safety-f78fc1ff-dump.log.result.json",
+      "result": {
+        "command": [
+          "/usr/bin/php8.3",
+          "docs/symphony/w04-final-contract-persistence/dump.php",
+          "storage/framework/testing/w04p-original/safety-f78fc1ff.sql"
+        ],
+        "pid": 1056319,
+        "exit": 0,
+        "process_gone": true,
+        "seconds": 1.938,
+        "utc": "2026-10-09T21:42:17+00:00"
+      }
+    },
+    {
+      "metadata_path": "storage/framework/testing/w04p-populated-recovery/restore-sql-check.log.result.json",
+      "result": {
+        "command": [
+          "python3",
+          "docs/symphony/w04-final-contract-persistence/recovery-dump-check.py",
+          "storage/framework/testing/w04p-populated-recovery/snapshot.sql",
+          "storage/framework/testing/w04p-populated-recovery/before.json"
+        ],
+        "pid": 1041965,
+        "exit": 0,
+        "process_gone": true,
+        "seconds": 9.207,
+        "utc": "2026-10-09T21:37:42+00:00"
+      }
+    },
+    {
+      "metadata_path": "storage/framework/testing/w04p-populated-recovery/restore-wipe.log.result.json",
+      "result": {
+        "command": [
+          "/usr/bin/php8.3",
+          "docs/symphony/w04-final-contract-persistence/guarded-artisan.php",
+          "db:wipe",
+          "--database=mysql",
+          "--drop-views",
+          "--force",
+          "--no-interaction"
+        ],
+        "pid": 1042676,
+        "exit": 0,
+        "process_gone": true,
+        "seconds": 2.062,
+        "utc": "2026-10-09T21:37:51+00:00"
+      }
+    },
+    {
+      "metadata_path": "storage/framework/testing/w04p-populated-recovery/fallback-import.log.result.json",
+      "result": {
+        "command": [
+          "/usr/bin/php8.3",
+          "docs/symphony/w04-final-contract-persistence/import.php",
+          "storage/framework/testing/w04p-populated-recovery/snapshot.sql",
+          "storage/framework/testing/w04p-populated-recovery/before.json"
+        ],
+        "pid": 1043055,
+        "exit": 0,
+        "process_gone": true,
+        "seconds": 7.472,
+        "utc": "2026-10-09T21:38:04+00:00"
+      }
+    },
+    {
+      "metadata_path": "storage/framework/testing/w04p-populated-recovery/fallback-dump-check.log.result.json",
+      "result": {
+        "command": [
+          "python3",
+          "docs/symphony/w04-final-contract-persistence/recovery-dump-check.py",
+          "storage/framework/testing/w04p-populated-recovery/snapshot.sql",
+          "storage/framework/testing/w04p-populated-recovery/before.json"
+        ],
+        "pid": 1042835,
+        "exit": 0,
+        "process_gone": true,
+        "seconds": 5.074,
+        "utc": "2026-10-09T21:37:57+00:00"
+      }
+    },
+    {
+      "metadata_path": "storage/framework/testing/w04p-populated-recovery/safety-b5607a62-dump.log.result.json",
+      "result": {
+        "command": [
+          "/usr/bin/php8.3",
+          "docs/symphony/w04-final-contract-persistence/dump.php",
+          "storage/framework/testing/w04p-populated-recovery/safety-b5607a62.sql"
+        ],
+        "pid": 1042437,
+        "exit": 0,
+        "process_gone": true,
+        "seconds": 3.627,
+        "utc": "2026-10-09T21:37:47+00:00"
+      }
+    },
+    {
+      "metadata_path": "storage/framework/testing/w04p-populated-recovery/dump-check.log.result.json",
+      "result": {
+        "command": [
+          "python3",
+          "docs/symphony/w04-final-contract-persistence/recovery-dump-check.py",
+          "storage/framework/testing/w04p-populated-recovery/snapshot.sql",
+          "storage/framework/testing/w04p-populated-recovery/before.json"
+        ],
+        "pid": 1039814,
+        "exit": 0,
+        "process_gone": true,
+        "seconds": 12.942,
+        "utc": "2026-10-09T21:37:05+00:00"
+      }
+    },
+    {
+      "metadata_path": "storage/framework/testing/w04p-populated-recovery/dump-check.log.history-6c2cf483.result.json",
+      "result": {
+        "command": [
+          "python3",
+          "docs/symphony/w04-final-contract-persistence/recovery-dump-check.py",
+          "storage/framework/testing/w04p-populated-recovery/snapshot.sql",
+          "storage/framework/testing/w04p-populated-recovery/before.json"
+        ],
+        "pid": 1027449,
+        "exit": 15,
+        "process_gone": true,
+        "seconds": 163.191,
+        "utc": "2026-10-09T21:36:22+00:00"
+      }
+    },
+    {
+      "metadata_path": "storage/framework/testing/w04p-mysql-live-fresh-baseline34/restore-sql-check.log.result.json",
+      "result": {
+        "command": [
+          "python3",
+          "docs/symphony/w04-final-contract-persistence/recovery-dump-check.py",
+          "storage/framework/testing/w04p-mysql-live-fresh-baseline34/snapshot.sql",
+          "storage/framework/testing/w04p-mysql-live-fresh-baseline34/before.json"
+        ],
+        "pid": 1059103,
+        "exit": 0,
+        "process_gone": true,
+        "seconds": 0.081,
+        "utc": "2026-10-09T21:43:09+00:00"
+      }
+    },
+    {
+      "metadata_path": "storage/framework/testing/w04p-mysql-live-fresh-baseline34/restore-wipe.log.result.json",
+      "result": {
+        "command": [
+          "/usr/bin/php8.3",
+          "docs/symphony/w04-final-contract-persistence/guarded-artisan.php",
+          "db:wipe",
+          "--database=mysql",
+          "--drop-views",
+          "--force",
+          "--no-interaction"
+        ],
+        "pid": 1059170,
+        "exit": 0,
+        "process_gone": true,
+        "seconds": 1.411,
+        "utc": "2026-10-09T21:43:11+00:00"
+      }
+    },
+    {
+      "metadata_path": "storage/framework/testing/w04p-mysql-live-fresh-baseline34/safety-77c9c859-dump.log.result.json",
+      "result": {
+        "command": [
+          "/usr/bin/php8.3",
+          "docs/symphony/w04-final-contract-persistence/dump.php",
+          "storage/framework/testing/w04p-mysql-live-fresh-baseline34/safety-77c9c859.sql"
+        ],
+        "pid": 1059131,
+        "exit": 0,
+        "process_gone": true,
+        "seconds": 0.525,
+        "utc": "2026-10-09T21:43:10+00:00"
+      }
+    },
+    {
+      "metadata_path": "storage/framework/testing/w04p-mysql-live-fresh-baseline34/native.log.result.json",
+      "result": {
+        "command": [
+          "/usr/bin/php8.3",
+          "vendor/bin/phpunit",
+          "--bootstrap",
+          "docs/symphony/w04-final-contract-persistence/test-bootstrap.php",
+          "scripts/travel-lab/LiveMysqlTest.php"
+        ],
+        "pid": 1058301,
+        "exit": 0,
+        "process_gone": true,
+        "seconds": 15.579,
+        "utc": "2026-10-09T21:43:09+00:00"
+      }
+    },
+    {
+      "metadata_path": "storage/framework/testing/w04p-mysql-live-fresh-baseline34/dump-check.log.result.json",
+      "result": {
+        "command": [
+          "python3",
+          "docs/symphony/w04-final-contract-persistence/recovery-dump-check.py",
+          "storage/framework/testing/w04p-mysql-live-fresh-baseline34/snapshot.sql",
+          "storage/framework/testing/w04p-mysql-live-fresh-baseline34/before.json"
+        ],
+        "pid": 1058259,
+        "exit": 0,
+        "process_gone": true,
+        "seconds": 0.094,
+        "utc": "2026-10-09T21:42:53+00:00"
+      }
+    },
+    {
+      "metadata_path": "storage/framework/testing/w04p-private/populated-up.log.result.json",
+      "result": {
+        "command": [
+          "/usr/bin/php8.3",
+          "docs/symphony/w04-final-contract-persistence/guarded-artisan.php",
+          "migrate",
+          "--database=mysql",
+          "--path=modules/_bundled/raonslab-travel_lab/database/migrations",
+          "--force",
+          "--no-interaction"
+        ],
+        "pid": 1041741,
+        "exit": 0,
+        "process_gone": true,
+        "seconds": 2.022,
+        "utc": "2026-10-09T21:37:30+00:00"
+      }
+    },
+    {
+      "metadata_path": "storage/framework/testing/w04p-private/operation-25128937.log.result.json",
+      "result": {
+        "command": [
+          "/usr/bin/php8.3",
+          "docs/symphony/w04-final-contract-persistence/populated-roundtrip.php"
+        ],
+        "pid": 1041328,
+        "exit": 0,
+        "process_gone": true,
+        "seconds": 10.957,
+        "utc": "2026-10-09T21:37:32+00:00"
+      }
+    },
+    {
+      "metadata_path": "storage/framework/testing/w04p-private/populated-down.log.result.json",
+      "result": {
+        "command": [
+          "/usr/bin/php8.3",
+          "docs/symphony/w04-final-contract-persistence/guarded-artisan.php",
+          "migrate:rollback",
+          "--database=mysql",
+          "--step=1",
+          "--path=modules/_bundled/raonslab-travel_lab/database/migrations",
+          "--force",
+          "--no-interaction"
+        ],
+        "pid": 1041396,
+        "exit": 0,
+        "process_gone": true,
+        "seconds": 4.295,
+        "utc": "2026-10-09T21:37:27+00:00"
+      }
+    },
+    {
+      "metadata_path": "storage/framework/testing/w04p-private/operation-eb14db9d.log.result.json",
+      "result": {
+        "command": [
+          "/usr/bin/php8.3",
+          "docs/symphony/w04-final-contract-persistence/fresh-install.php",
+          "original"
+        ],
+        "pid": 975215,
+        "exit": 255,
+        "process_gone": true,
+        "seconds": 0.653,
+        "utc": "2026-10-09T21:23:57+00:00"
+      }
+    },
+    {
+      "metadata_path": "storage/framework/testing/w04p-private/operation-2f9acbee.log.result.json",
+      "result": {
+        "command": [
+          "/usr/bin/php8.3",
+          "docs/symphony/w04-final-contract-persistence/fresh-install.php",
+          "original"
+        ],
+        "pid": 974445,
+        "exit": 255,
+        "process_gone": true,
+        "seconds": 0.253,
+        "utc": "2026-10-09T21:23:46+00:00"
+      }
+    },
+    {
+      "metadata_path": "storage/framework/testing/w04p-private/operation-2990ea46.log.result.json",
+      "result": {
+        "command": [
+          "/usr/bin/php8.3",
+          "docs/symphony/w04-final-contract-persistence/fresh-install.php",
+          "original"
+        ],
+        "pid": 976450,
+        "exit": 0,
+        "process_gone": true,
+        "seconds": 103.344,
+        "utc": "2026-10-09T21:25:54+00:00"
+      }
+    },
+    {
+      "metadata_path": "storage/framework/testing/w04p-mysql-live-guard-corrected/restore-sql-check.log.result.json",
+      "result": {
+        "command": [
+          "python3",
+          "docs/symphony/w04-final-contract-persistence/recovery-dump-check.py",
+          "storage/framework/testing/w04p-mysql-live-guard-corrected/snapshot.sql",
+          "storage/framework/testing/w04p-mysql-live-guard-corrected/before.json"
+        ],
+        "pid": 1049667,
+        "exit": 0,
+        "process_gone": true,
+        "seconds": 4.678,
+        "utc": "2026-10-09T21:40:19+00:00"
+      }
+    },
+    {
+      "metadata_path": "storage/framework/testing/w04p-mysql-live-guard-corrected/restore-wipe.log.result.json",
+      "result": {
+        "command": [
+          "/usr/bin/php8.3",
+          "docs/symphony/w04-final-contract-persistence/guarded-artisan.php",
+          "db:wipe",
+          "--database=mysql",
+          "--drop-views",
+          "--force",
+          "--no-interaction"
+        ],
+        "pid": 1050008,
+        "exit": 0,
+        "process_gone": true,
+        "seconds": 1.505,
+        "utc": "2026-10-09T21:40:24+00:00"
+      }
+    },
+    {
+      "metadata_path": "storage/framework/testing/w04p-mysql-live-guard-corrected/safety-712d1950-dump.log.result.json",
+      "result": {
+        "command": [
+          "/usr/bin/php8.3",
+          "docs/symphony/w04-final-contract-persistence/dump.php",
+          "storage/framework/testing/w04p-mysql-live-guard-corrected/safety-712d1950.sql"
+        ],
+        "pid": 1049900,
+        "exit": 0,
+        "process_gone": true,
+        "seconds": 1.938,
+        "utc": "2026-10-09T21:40:22+00:00"
+      }
+    },
+    {
+      "metadata_path": "storage/framework/testing/w04p-mysql-live-guard-corrected/native.log.result.json",
+      "result": {
+        "command": [
+          "/usr/bin/php8.3",
+          "vendor/bin/phpunit",
+          "--bootstrap",
+          "docs/symphony/w04-final-contract-persistence/test-bootstrap.php",
+          "scripts/travel-lab/LiveMysqlTest.php"
+        ],
+        "pid": 1049548,
+        "exit": 0,
+        "process_gone": true,
+        "seconds": 2.227,
+        "utc": "2026-10-09T21:40:14+00:00"
+      }
+    },
+    {
+      "metadata_path": "storage/framework/testing/w04p-mysql-live-guard-corrected/dump-check.log.result.json",
+      "result": {
+        "command": [
+          "python3",
+          "docs/symphony/w04-final-contract-persistence/recovery-dump-check.py",
+          "storage/framework/testing/w04p-mysql-live-guard-corrected/snapshot.sql",
+          "storage/framework/testing/w04p-mysql-live-guard-corrected/before.json"
+        ],
+        "pid": 1049338,
+        "exit": 0,
+        "process_gone": true,
+        "seconds": 4.967,
+        "utc": "2026-10-09T21:40:12+00:00"
+      }
+    },
+    {
+      "metadata_path": "storage/framework/testing/w04p-install-logs/10-module-install-raonslab-travel_lab.txt.result.json",
+      "result": {
+        "command": [
+          "/usr/bin/php8.3",
+          "docs/symphony/w04-final-contract-persistence/guarded-artisan.php",
+          "module:install",
+          "raonslab-travel_lab",
+          "--vendor-mode=bundled",
+          "--no-interaction"
+        ],
+        "pid": 983580,
+        "exit": 0,
+        "process_gone": true,
+        "seconds": 4.862,
+        "utc": "2026-10-09T21:25:21+00:00"
+      }
+    },
+    {
+      "metadata_path": "storage/framework/testing/w04p-install-logs/09-module-activate-sirsoft-ecommerce.txt.result.json",
+      "result": {
+        "command": [
+          "/usr/bin/php8.3",
+          "docs/symphony/w04-final-contract-persistence/guarded-artisan.php",
+          "module:activate",
+          "sirsoft-ecommerce",
+          "--no-interaction"
+        ],
+        "pid": 983374,
+        "exit": 0,
+        "process_gone": true,
+        "seconds": 1.454,
+        "utc": "2026-10-09T21:25:15+00:00"
+      }
+    },
+    {
+      "metadata_path": "storage/framework/testing/w04p-install-logs/15-template-activate-raonslab-travel_lab.txt.result.json",
+      "result": {
+        "command": [
+          "/usr/bin/php8.3",
+          "docs/symphony/w04-final-contract-persistence/guarded-artisan.php",
+          "template:activate",
+          "raonslab-travel_lab",
+          "--no-interaction"
+        ],
+        "pid": 986208,
+        "exit": 0,
+        "process_gone": true,
+        "seconds": 3.407,
+        "utc": "2026-10-09T21:25:42+00:00"
+      }
+    },
+    {
+      "metadata_path": "storage/framework/testing/w04p-install-logs/04-module-install-sirsoft-board.txt.result.json",
+      "result": {
+        "command": [
+          "/usr/bin/php8.3",
+          "docs/symphony/w04-final-contract-persistence/guarded-artisan.php",
+          "module:install",
+          "sirsoft-board",
+          "--vendor-mode=bundled",
+          "--no-interaction"
+        ],
+        "pid": 978868,
+        "exit": 0,
+        "process_gone": true,
+        "seconds": 8.49,
+        "utc": "2026-10-09T21:24:42+00:00"
+      }
+    },
+    {
+      "metadata_path": "storage/framework/testing/w04p-install-logs/06-module-install-sirsoft-page.txt.result.json",
+      "result": {
+        "command": [
+          "/usr/bin/php8.3",
+          "docs/symphony/w04-final-contract-persistence/guarded-artisan.php",
+          "module:install",
+          "sirsoft-page",
+          "--vendor-mode=bundled",
+          "--no-interaction"
+        ],
+        "pid": 980479,
+        "exit": 0,
+        "process_gone": true,
+        "seconds": 3.824,
+        "utc": "2026-10-09T21:24:50+00:00"
+      }
+    },
+    {
+      "metadata_path": "storage/framework/testing/w04p-install-logs/11-module-activate-raonslab-travel_lab.txt.result.json",
+      "result": {
+        "command": [
+          "/usr/bin/php8.3",
+          "docs/symphony/w04-final-contract-persistence/guarded-artisan.php",
+          "module:activate",
+          "raonslab-travel_lab",
+          "--no-interaction"
+        ],
+        "pid": 984306,
+        "exit": 0,
+        "process_gone": true,
+        "seconds": 1.18,
+        "utc": "2026-10-09T21:25:22+00:00"
+      }
+    },
+    {
+      "metadata_path": "storage/framework/testing/w04p-install-logs/02-settings-install.txt.result.json",
+      "result": {
+        "command": [
+          "/usr/bin/php8.3",
+          "docs/symphony/w04-final-contract-persistence/guarded-artisan.php",
+          "settings:install",
+          "--no-interaction"
+        ],
+        "pid": 978318,
+        "exit": 0,
+        "process_gone": true,
+        "seconds": 1.135,
+        "utc": "2026-10-09T21:24:29+00:00"
+      }
+    },
+    {
+      "metadata_path": "storage/framework/testing/w04p-install-logs/vendor-check-installed.txt.result.json",
+      "result": {
+        "command": [
+          "/usr/bin/php8.3",
+          "scripts/travel-lab/vendor-check.php"
+        ],
+        "pid": 983303,
+        "exit": 0,
+        "process_gone": true,
+        "seconds": 0.22,
+        "utc": "2026-10-09T21:25:13+00:00"
+      }
+    },
+    {
+      "metadata_path": "storage/framework/testing/w04p-install-logs/05-module-activate-sirsoft-board.txt.result.json",
+      "result": {
+        "command": [
+          "/usr/bin/php8.3",
+          "docs/symphony/w04-final-contract-persistence/guarded-artisan.php",
+          "module:activate",
+          "sirsoft-board",
+          "--no-interaction"
+        ],
+        "pid": 979793,
+        "exit": 0,
+        "process_gone": true,
+        "seconds": 3.134,
+        "utc": "2026-10-09T21:24:45+00:00"
+      }
+    },
+    {
+      "metadata_path": "storage/framework/testing/w04p-install-logs/18-raonslab-travel_lab-support-provision.txt.result.json",
+      "result": {
+        "command": [
+          "/usr/bin/php8.3",
+          "docs/symphony/w04-final-contract-persistence/guarded-artisan.php",
+          "raonslab-travel_lab:support-provision",
+          "--lab-confirm",
+          "--no-interaction"
+        ],
+        "pid": 987067,
+        "exit": 0,
+        "process_gone": true,
+        "seconds": 4.532,
+        "utc": "2026-10-09T21:25:52+00:00"
+      }
+    },
+    {
+      "metadata_path": "storage/framework/testing/w04p-install-logs/13-template-activate-sirsoft-admin_basic.txt.result.json",
+      "result": {
+        "command": [
+          "/usr/bin/php8.3",
+          "docs/symphony/w04-final-contract-persistence/guarded-artisan.php",
+          "template:activate",
+          "sirsoft-admin_basic",
+          "--no-interaction"
+        ],
+        "pid": 985266,
+        "exit": 0,
+        "process_gone": true,
+        "seconds": 7.515,
+        "utc": "2026-10-09T21:25:36+00:00"
+      }
+    },
+    {
+      "metadata_path": "storage/framework/testing/w04p-install-logs/02-empty-native-migrate.txt.result.json",
+      "result": {
+        "command": [
+          "/usr/bin/php8.3",
+          "docs/symphony/w04-final-contract-persistence/empty-migrate.php"
+        ],
+        "pid": 977090,
+        "exit": 0,
+        "process_gone": true,
+        "seconds": 11.834,
+        "utc": "2026-10-09T21:24:27+00:00"
+      }
+    },
+    {
+      "metadata_path": "storage/framework/testing/w04p-install-logs/03-db-seed.txt.result.json",
+      "result": {
+        "command": [
+          "/usr/bin/php8.3",
+          "docs/symphony/w04-final-contract-persistence/guarded-artisan.php",
+          "db:seed",
+          "--class=DatabaseSeeder",
+          "--force",
+          "--no-interaction"
+        ],
+        "pid": 978483,
+        "exit": 0,
+        "process_gone": true,
+        "seconds": 3.8,
+        "utc": "2026-10-09T21:24:33+00:00"
+      }
+    },
+    {
+      "metadata_path": "storage/framework/testing/w04p-install-logs/01-db-wipe.txt.result.json",
+      "result": {
+        "command": [
+          "/usr/bin/php8.3",
+          "docs/symphony/w04-final-contract-persistence/guarded-artisan.php",
+          "db:wipe",
+          "--database=mysql",
+          "--drop-views",
+          "--force",
+          "--no-interaction"
+        ],
+        "pid": 976560,
+        "exit": 0,
+        "process_gone": true,
+        "seconds": 3.069,
+        "utc": "2026-10-09T21:24:14+00:00"
+      }
+    },
+    {
+      "metadata_path": "storage/framework/testing/w04p-install-logs/empty-bootstrap-check.txt.result.json",
+      "result": {
+        "command": [
+          "/usr/bin/php8.3",
+          "docs/symphony/w04-final-contract-persistence/bootstrap-check.php",
+          "empty"
+        ],
+        "pid": 976985,
+        "exit": 0,
+        "process_gone": true,
+        "seconds": 0.584,
+        "utc": "2026-10-09T21:24:15+00:00"
+      }
+    },
+    {
+      "metadata_path": "storage/framework/testing/w04p-install-logs/08-module-install-sirsoft-ecommerce.txt.result.json",
+      "result": {
+        "command": [
+          "/usr/bin/php8.3",
+          "docs/symphony/w04-final-contract-persistence/guarded-artisan.php",
+          "module:install",
+          "sirsoft-ecommerce",
+          "--vendor-mode=bundled",
+          "--no-interaction"
+        ],
+        "pid": 981124,
+        "exit": 0,
+        "process_gone": true,
+        "seconds": 21.062,
+        "utc": "2026-10-09T21:25:13+00:00"
+      }
+    },
+    {
+      "metadata_path": "storage/framework/testing/w04p-install-logs/12-template-install-sirsoft-admin_basic.txt.result.json",
+      "result": {
+        "command": [
+          "/usr/bin/php8.3",
+          "docs/symphony/w04-final-contract-persistence/guarded-artisan.php",
+          "template:install",
+          "sirsoft-admin_basic",
+          "--no-interaction"
+        ],
+        "pid": 984513,
+        "exit": 0,
+        "process_gone": true,
+        "seconds": 5.436,
+        "utc": "2026-10-09T21:25:28+00:00"
+      }
+    },
+    {
+      "metadata_path": "storage/framework/testing/w04p-install-logs/16-db-seed.txt.result.json",
+      "result": {
+        "command": [
+          "/usr/bin/php8.3",
+          "docs/symphony/w04-final-contract-persistence/guarded-artisan.php",
+          "db:seed",
+          "--class=Modules\\Sirsoft\\Ecommerce\\Database\\Seeders\\ShippingTypeSeeder",
+          "--force",
+          "--no-interaction"
+        ],
+        "pid": 986533,
+        "exit": 0,
+        "process_gone": true,
+        "seconds": 2.036,
+        "utc": "2026-10-09T21:25:44+00:00"
+      }
+    },
+    {
+      "metadata_path": "storage/framework/testing/w04p-install-logs/07-module-activate-sirsoft-page.txt.result.json",
+      "result": {
+        "command": [
+          "/usr/bin/php8.3",
+          "docs/symphony/w04-final-contract-persistence/guarded-artisan.php",
+          "module:activate",
+          "sirsoft-page",
+          "--no-interaction"
+        ],
+        "pid": 980932,
+        "exit": 0,
+        "process_gone": true,
+        "seconds": 1.459,
+        "utc": "2026-10-09T21:24:51+00:00"
+      }
+    },
+    {
+      "metadata_path": "storage/framework/testing/w04p-install-logs/17-module-seed-raonslab-travel_lab.txt.result.json",
+      "result": {
+        "command": [
+          "/usr/bin/php8.3",
+          "docs/symphony/w04-final-contract-persistence/guarded-artisan.php",
+          "module:seed",
+          "raonslab-travel_lab",
+          "--sample",
+          "--no-interaction"
+        ],
+        "pid": 986779,
+        "exit": 0,
+        "process_gone": true,
+        "seconds": 3.032,
+        "utc": "2026-10-09T21:25:48+00:00"
+      }
+    },
+    {
+      "metadata_path": "storage/framework/testing/w04p-install-logs/14-template-install-raonslab-travel_lab.txt.result.json",
+      "result": {
+        "command": [
+          "/usr/bin/php8.3",
+          "docs/symphony/w04-final-contract-persistence/guarded-artisan.php",
+          "template:install",
+          "raonslab-travel_lab",
+          "--no-interaction"
+        ],
+        "pid": 986000,
+        "exit": 0,
+        "process_gone": true,
+        "seconds": 2.141,
+        "utc": "2026-10-09T21:25:38+00:00"
+      }
+    },
+    {
+      "metadata_path": "storage/framework/testing/w04p-install-logs/01-db-wipe.txt.history-a2cda62c.result.json",
+      "result": {
+        "command": [
+          "/usr/bin/php8.3",
+          "docs/symphony/w04-final-contract-persistence/guarded-artisan.php",
+          "db:wipe",
+          "--database=mysql",
+          "--drop-views",
+          "--force",
+          "--no-interaction"
+        ],
+        "pid": 975233,
+        "exit": 1,
+        "process_gone": true,
+        "seconds": 0.268,
+        "utc": "2026-10-09T21:23:57+00:00"
+      }
+    },
+    {
+      "metadata_path": "storage/framework/testing/w04p-install-logs/vendor-check-bundled.txt.result.json",
+      "result": {
+        "command": [
+          "/usr/bin/php8.3",
+          "scripts/travel-lab/vendor-check.php",
+          "--bundled"
+        ],
+        "pid": 983326,
+        "exit": 0,
+        "process_gone": true,
+        "seconds": 0.173,
+        "utc": "2026-10-09T21:25:14+00:00"
+      }
+    }
+  ],
+  "wrapper_observations": [
+    {
+      "command": [
+        "php",
+        "docs/symphony/w04-final-contract-persistence/snapshot.php",
+        "original",
+        "save"
+      ],
+      "exit": 255,
+      "result": "after valid dump/check, own observer self-reference prevented quiescence; no wipe",
+      "seconds": "NOT_MEASURED"
+    },
+    {
+      "command": [
+        "php",
+        "docs/symphony/w04-final-contract-persistence/snapshot.php",
+        "populated-recovery",
+        "save"
+      ],
+      "exit": 255,
+      "result": "foreign FD/locks preflight block; no wipe; fresh preflight after natural disappearance",
+      "seconds": "NOT_MEASURED"
+    },
+    {
+      "command": [
+        "php",
+        "docs/symphony/w04-final-contract-persistence/release.php"
+      ],
+      "exit": 255,
+      "result": "transient foreign FD/locks; no release claimed until successful new preflight",
+      "seconds": 0.233
+    },
+    {
+      "command": [
+        "php",
+        "docs/symphony/w04-final-contract-persistence/release.php"
+      ],
+      "exit": 0,
+      "result": "fresh release21:46:19, exact55/104, handles/connections0,18880closed",
+      "seconds": "NOT_MEASURED"
+    }
+  ],
+  "HTTP_commands": "per phase method/path/status/time in HTTP result JSON",
+  "source_tests": "per suite summary command/exit/native seconds/wrapper seconds"
+}

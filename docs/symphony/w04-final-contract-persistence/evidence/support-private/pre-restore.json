@@ -1,0 +1,42 @@
+{
+    "table_count": 55,
+    "row_count": 104,
+    "digest": "6a88dbf95ae855f8b0f69198dd66df8e5a23a514daa78d8e8cb5a1d670515451",
+    "exclusive": {
+        "pid": 1053392,
+        "cwd": "/home/ubuntu/.agentopt-v2/workspaces/req_95d0024e7b144a5bb903cc7daad1fb5f",
+        "argv": [
+            "docs/symphony/w04-final-contract-persistence/snapshot.php",
+            "support-private",
+            "run",
+            "/usr/bin/php8.3",
+            "vendor/bin/phpunit",
+            "--bootstrap",
+            "docs/symphony/w04-final-contract-persistence/test-bootstrap.php",
+            "modules/_bundled/raonslab-travel_lab/tests/Feature/TravelSupportApiTest.php",
+            "modules/_bundled/raonslab-travel_lab/tests/Feature/W03SupportHardeningTest.php",
+            "--filter",
+            "questions_require_sanctum_authentication|members_only_see_and_update_their_own_private_questions|support_admin_reads_all_but_needs_update_permission_to_edit_others|admin_answer_through_native_board_admin_is_visible_to_author_only|legacy_support_role_without_native_board_admin_cannot_reach_foreign_questions|foreign_access_requires_both_support_permission_and_native_board_admin|self_scoped_native_board_manager_sees_only_own_questions|question_edit_goes_through_native_post_service_audit_without_notifications|restricted_grants_without_owner_metadata_cannot_bypass_foreign_scope"
+        ],
+        "own_connection_id": 142119,
+        "other_test_connections": 0,
+        "own_server_processes": 0,
+        "prior_request_handles": {
+            "utc": "2026-10-09T21:41:43.648310+00:00",
+            "count": 0,
+            "handles": [],
+            "unreadable_pids": [],
+            "lock_holders": [],
+            "excluded_ancestor_pids": [
+                964752,
+                1053391,
+                1053392,
+                1054864,
+                1054865,
+                3650359
+            ],
+            "method": "proc-only bounded cwd/argv/FD; known TEST owners and own nonancestor native processes"
+        },
+        "utc": "2026-10-09T21:41:43+00:00"
+    }
+}

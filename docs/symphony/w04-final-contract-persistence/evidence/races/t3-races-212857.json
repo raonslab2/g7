@@ -1,0 +1,821 @@
+{
+ "phase": "t3-races-212857",
+ "review_sha": "5783e6ba124061bdfae639cdaf9b1c14a83cdf03",
+ "base_url": "http://127.0.0.1:18880",
+ "counts": {
+  "PASS": 4,
+  "FAIL": 0,
+  "OBSERVED": 0,
+  "BLOCKED": 0,
+  "NOT_RUN": 0
+ },
+ "results": [
+  {
+   "name": "R1 last seat: different members overlap on own departure lock -> one 201 / one 409, reserved = capacity 1",
+   "status": "PASS",
+   "detail": {
+    "label": "last seat, two members",
+    "lock": {
+     "kind": "departure",
+     "row": 28,
+     "barrier_connection_id": 138348,
+     "db": "req81_travel_lab_test",
+     "account": "req81_travel",
+     "server_version": "10.11.14-MariaDB-0ubuntu0.24.04.1",
+     "isolation": "REPEATABLE-READ",
+     "table": "g7_travel_lab_departures"
+    },
+    "observed": {
+     "held_for_s": 5.141,
+     "data_lock_waits_visible": false,
+     "innodb_trx_visible": false,
+     "same_waiters_sustained": true,
+     "sustained_s": 3.319,
+     "distinct_waiting_connection_ids": [
+      138349,
+      138350
+     ]
+    },
+    "first_detection_at_s": 1.819,
+    "first_waiting": [
+     {
+      "connection_id": 138350,
+      "command": "Execute",
+      "time_s": 0,
+      "state": "Statistics",
+      "statement_targets_locked_table_for_update": true,
+      "statement_is_locking_read": true,
+      "innodb_lock_wait": false,
+      "waits_on_barrier": false,
+      "waits_on_other": null
+     },
+     {
+      "connection_id": 138349,
+      "command": "Execute",
+      "time_s": 0,
+      "state": "Statistics",
+      "statement_targets_locked_table_for_update": true,
+      "statement_is_locking_read": true,
+      "innodb_lock_wait": false,
+      "waits_on_barrier": false,
+      "waits_on_other": null
+     }
+    ],
+    "last_waiting": [
+     {
+      "connection_id": 138350,
+      "command": "Execute",
+      "time_s": 3,
+      "state": "Statistics",
+      "statement_targets_locked_table_for_update": true,
+      "statement_is_locking_read": true,
+      "innodb_lock_wait": false,
+      "waits_on_barrier": false,
+      "waits_on_other": null
+     },
+     {
+      "connection_id": 138349,
+      "command": "Execute",
+      "time_s": 3,
+      "state": "Statistics",
+      "statement_targets_locked_table_for_update": true,
+      "statement_is_locking_read": true,
+      "innodb_lock_wait": false,
+      "waits_on_barrier": false,
+      "waits_on_other": null
+     }
+    ],
+    "samples_head": [
+     {
+      "t": 0.27,
+      "on_barrier": [],
+      "waiting": []
+     },
+     {
+      "t": 0.42,
+      "on_barrier": [],
+      "waiting": []
+     },
+     {
+      "t": 0.57,
+      "on_barrier": [],
+      "waiting": []
+     }
+    ],
+    "responses_pending_at_release": [
+     true,
+     true
+    ],
+    "responses": [
+     {
+      "status": 409,
+      "message": "현재 남은 시험 인원보다 많습니다. 인원을 다시 선택해 주세요.",
+      "id": null,
+      "data_status": null,
+      "sent_before_release_s": 6.648,
+      "completed_after_release_s": 0.437
+     },
+     {
+      "status": 201,
+      "message": "성공적으로 처리되었습니다.",
+      "id": 3,
+      "data_status": "TEST_INQUIRY",
+      "sent_before_release_s": 6.597,
+      "completed_after_release_s": 0.309
+     }
+    ],
+    "innodb_deadlocks_global": {
+     "before_lock": 6,
+     "at_lock": 6,
+     "end_of_hold": 6,
+     "at_release": 6,
+     "after_responses": 6,
+     "plus_3s": 6
+    },
+    "innodb_deadlocks_global_before_after": [
+     6,
+     6
+    ],
+    "during_hold_probe": {
+     "admission_lock_rows_inflight_actors": {
+      "travel-lab-workflow:member": 0,
+      "travel-lab-submit:member": 0,
+      "travel-lab-workflow:other_member": 0,
+      "travel-lab-submit:other_member": 0
+     },
+     "same_actor_cart_read_during_hold": {
+      "role": "member",
+      "status": 200,
+      "ms": 1205.3
+     }
+    },
+    "real_server_overlap": true,
+    "invariant": {
+     "reserved": 1,
+     "capacity": 1,
+     "loser_message": "현재 남은 시험 인원보다 많습니다. 인원을 다시 선택해 주세요."
+    }
+   },
+   "at": "21:29:20"
+  },
+  {
+   "name": "R2 same member same key: overlapping submits -> 201 then 200 same ID, reserved once; changed payload 409",
+   "status": "PASS",
+   "detail": {
+    "label": "same key, same member",
+    "lock": {
+     "kind": "departure",
+     "row": 29,
+     "barrier_connection_id": 138369,
+     "db": "req81_travel_lab_test",
+     "account": "req81_travel",
+     "server_version": "10.11.14-MariaDB-0ubuntu0.24.04.1",
+     "isolation": "REPEATABLE-READ",
+     "table": "g7_travel_lab_departures"
+    },
+    "observed": {
+     "held_for_s": 4.659,
+     "data_lock_waits_visible": false,
+     "innodb_trx_visible": false,
+     "same_waiters_sustained": true,
+     "sustained_s": 3.442,
+     "distinct_waiting_connection_ids": [
+      138370,
+      138372
+     ]
+    },
+    "first_detection_at_s": 1.214,
+    "first_waiting": [
+     {
+      "connection_id": 138372,
+      "command": "Execute",
+      "time_s": 0,
+      "state": "Statistics",
+      "statement_targets_locked_table_for_update": false,
+      "statement_is_locking_read": true,
+      "innodb_lock_wait": false,
+      "waits_on_barrier": false,
+      "waits_on_other": null
+     },
+     {
+      "connection_id": 138370,
+      "command": "Execute",
+      "time_s": 0,
+      "state": "Statistics",
+      "statement_targets_locked_table_for_update": true,
+      "statement_is_locking_read": true,
+      "innodb_lock_wait": false,
+      "waits_on_barrier": false,
+      "waits_on_other": null
+     }
+    ],
+    "last_waiting": [
+     {
+      "connection_id": 138372,
+      "command": "Execute",
+      "time_s": 3,
+      "state": "Statistics",
+      "statement_targets_locked_table_for_update": false,
+      "statement_is_locking_read": true,
+      "innodb_lock_wait": false,
+      "waits_on_barrier": false,
+      "waits_on_other": null
+     },
+     {
+      "connection_id": 138370,
+      "command": "Execute",
+      "time_s": 3,
+      "state": "Statistics",
+      "statement_targets_locked_table_for_update": true,
+      "statement_is_locking_read": true,
+      "innodb_lock_wait": false,
+      "waits_on_barrier": false,
+      "waits_on_other": null
+     }
+    ],
+    "samples_head": [
+     {
+      "t": 0.27,
+      "on_barrier": [],
+      "waiting": []
+     },
+     {
+      "t": 0.45,
+      "on_barrier": [],
+      "waiting": []
+     },
+     {
+      "t": 0.6,
+      "on_barrier": [],
+      "waiting": []
+     }
+    ],
+    "responses_pending_at_release": [
+     true,
+     true
+    ],
+    "responses": [
+     {
+      "status": 200,
+      "message": "성공적으로 처리되었습니다.",
+      "id": 4,
+      "data_status": "TEST_INQUIRY",
+      "sent_before_release_s": 5.147,
+      "completed_after_release_s": 0.756
+     },
+     {
+      "status": 201,
+      "message": "성공적으로 처리되었습니다.",
+      "id": 4,
+      "data_status": "TEST_INQUIRY",
+      "sent_before_release_s": 5.091,
+      "completed_after_release_s": 0.458
+     }
+    ],
+    "innodb_deadlocks_global": {
+     "before_lock": 6,
+     "at_lock": 6,
+     "end_of_hold": 6,
+     "at_release": 6,
+     "after_responses": 6,
+     "plus_3s": 6
+    },
+    "innodb_deadlocks_global_before_after": [
+     6,
+     6
+    ],
+    "during_hold_probe": {
+     "admission_lock_rows_inflight_actors": {
+      "travel-lab-workflow:member": 0,
+      "travel-lab-submit:member": 0
+     }
+    },
+    "real_server_overlap": true,
+    "invariant": {
+     "statuses": [
+      200,
+      201
+     ],
+     "distinct_ids": 1,
+     "reserved": 1,
+     "replay": [
+      200,
+      true
+     ],
+     "changed_payload": [
+      409,
+      "같은 요청 키를 다른 내용에 사용할 수 없습니다."
+     ],
+     "sql_rows_for_key_ids": 1,
+     "sql_rows_by_user_and_key": 1,
+     "items_events_qty": [
+      [
+       1,
+       1,
+       "1"
+      ]
+     ],
+     "reserved_after_replay_and_conflict": [
+      1,
+      1
+     ],
+     "waiter_note": "submit serialises on the native user row first; the second same-key request waits on the first request's user-row lock (transitive), not directly on the barrier row",
+     "reserved_before": 0
+    }
+   },
+   "at": "21:29:43"
+  },
+  {
+   "name": "R3 owner cancel vs admin decline on own inquiry lock -> exactly one release, never negative",
+   "status": "PASS",
+   "detail": {
+    "label": "owner cancel vs admin decline",
+    "lock": {
+     "kind": "inquiry",
+     "row": 5,
+     "barrier_connection_id": 138398,
+     "db": "req81_travel_lab_test",
+     "account": "req81_travel",
+     "server_version": "10.11.14-MariaDB-0ubuntu0.24.04.1",
+     "isolation": "REPEATABLE-READ",
+     "table": "g7_travel_lab_inquiries"
+    },
+    "observed": {
+     "held_for_s": 5.379,
+     "data_lock_waits_visible": false,
+     "innodb_trx_visible": false,
+     "same_waiters_sustained": true,
+     "sustained_s": 3.41,
+     "distinct_waiting_connection_ids": [
+      138399,
+      138401
+     ]
+    },
+    "first_detection_at_s": 1.965,
+    "first_waiting": [
+     {
+      "connection_id": 138401,
+      "command": "Execute",
+      "time_s": 0,
+      "state": "Statistics",
+      "statement_targets_locked_table_for_update": true,
+      "statement_is_locking_read": true,
+      "innodb_lock_wait": false,
+      "waits_on_barrier": false,
+      "waits_on_other": null
+     },
+     {
+      "connection_id": 138399,
+      "command": "Execute",
+      "time_s": 0,
+      "state": "Statistics",
+      "statement_targets_locked_table_for_update": true,
+      "statement_is_locking_read": true,
+      "innodb_lock_wait": false,
+      "waits_on_barrier": false,
+      "waits_on_other": null
+     }
+    ],
+    "last_waiting": [
+     {
+      "connection_id": 138401,
+      "command": "Execute",
+      "time_s": 3,
+      "state": "Statistics",
+      "statement_targets_locked_table_for_update": true,
+      "statement_is_locking_read": true,
+      "innodb_lock_wait": false,
+      "waits_on_barrier": false,
+      "waits_on_other": null
+     },
+     {
+      "connection_id": 138399,
+      "command": "Execute",
+      "time_s": 4,
+      "state": "Statistics",
+      "statement_targets_locked_table_for_update": true,
+      "statement_is_locking_read": true,
+      "innodb_lock_wait": false,
+      "waits_on_barrier": false,
+      "waits_on_other": null
+     }
+    ],
+    "samples_head": [
+     {
+      "t": 0.27,
+      "on_barrier": [],
+      "waiting": []
+     },
+     {
+      "t": 0.43,
+      "on_barrier": [],
+      "waiting": []
+     },
+     {
+      "t": 0.59,
+      "on_barrier": [],
+      "waiting": []
+     }
+    ],
+    "responses_pending_at_release": [
+     true,
+     true
+    ],
+    "responses": [
+     {
+      "status": 200,
+      "message": "성공적으로 처리되었습니다.",
+      "id": 5,
+      "data_status": "CANCELLED",
+      "sent_before_release_s": 5.882,
+      "completed_after_release_s": 0.151
+     },
+     {
+      "status": 409,
+      "message": "현재 시험 문의 상태에서 허용되지 않는 처리입니다.",
+      "id": null,
+      "data_status": null,
+      "sent_before_release_s": 5.818,
+      "completed_after_release_s": 0.155
+     }
+    ],
+    "innodb_deadlocks_global": {
+     "before_lock": 6,
+     "at_lock": 6,
+     "end_of_hold": 6,
+     "at_release": 6,
+     "after_responses": 6,
+     "plus_3s": 6
+    },
+    "innodb_deadlocks_global_before_after": [
+     6,
+     6
+    ],
+    "during_hold_probe": {
+     "admission_lock_rows_inflight_actors": {
+      "travel-lab-workflow:member": 0,
+      "travel-lab-cancel:member": 0,
+      "travel-lab-admin:member": 0,
+      "travel-lab-workflow:admin": 0,
+      "travel-lab-cancel:admin": 0,
+      "travel-lab-admin:admin": 0
+     }
+    },
+    "real_server_overlap": true,
+    "invariant": {
+     "statuses": [
+      200,
+      409
+     ],
+     "final_status": "CANCELLED",
+     "reserved_before_after_end": [
+      1,
+      0,
+      0
+     ],
+     "repeat_cancel": 200,
+     "events": 2
+    }
+   },
+   "at": "21:30:07"
+  },
+  {
+   "name": "R4 submit qty2 vs admin capacity 2->1 on own departure lock -> one wins, never below reserved",
+   "status": "PASS",
+   "detail": {
+    "label": "submit 2 vs admin capacity 2->1",
+    "lock": {
+     "kind": "departure",
+     "row": 31,
+     "barrier_connection_id": 138427,
+     "db": "req81_travel_lab_test",
+     "account": "req81_travel",
+     "server_version": "10.11.14-MariaDB-0ubuntu0.24.04.1",
+     "isolation": "REPEATABLE-READ",
+     "table": "g7_travel_lab_departures"
+    },
+    "observed": {
+     "held_for_s": 5.107,
+     "data_lock_waits_visible": false,
+     "innodb_trx_visible": false,
+     "same_waiters_sustained": true,
+     "sustained_s": 3.403,
+     "distinct_waiting_connection_ids": [
+      138428,
+      138430
+     ]
+    },
+    "first_detection_at_s": 1.701,
+    "first_waiting": [
+     {
+      "connection_id": 138430,
+      "command": "Execute",
+      "time_s": 0,
+      "state": "Statistics",
+      "statement_targets_locked_table_for_update": true,
+      "statement_is_locking_read": true,
+      "innodb_lock_wait": false,
+      "waits_on_barrier": false,
+      "waits_on_other": null
+     },
+     {
+      "connection_id": 138428,
+      "command": "Execute",
+      "time_s": 0,
+      "state": "Statistics",
+      "statement_targets_locked_table_for_update": true,
+      "statement_is_locking_read": true,
+      "innodb_lock_wait": false,
+      "waits_on_barrier": false,
+      "waits_on_other": null
+     }
+    ],
+    "last_waiting": [
+     {
+      "connection_id": 138430,
+      "command": "Execute",
+      "time_s": 3,
+      "state": "Statistics",
+      "statement_targets_locked_table_for_update": true,
+      "statement_is_locking_read": true,
+      "innodb_lock_wait": false,
+      "waits_on_barrier": false,
+      "waits_on_other": null
+     },
+     {
+      "connection_id": 138428,
+      "command": "Execute",
+      "time_s": 4,
+      "state": "Statistics",
+      "statement_targets_locked_table_for_update": true,
+      "statement_is_locking_read": true,
+      "innodb_lock_wait": false,
+      "waits_on_barrier": false,
+      "waits_on_other": null
+     }
+    ],
+    "samples_head": [
+     {
+      "t": 0.29,
+      "on_barrier": [],
+      "waiting": []
+     },
+     {
+      "t": 0.46,
+      "on_barrier": [],
+      "waiting": []
+     },
+     {
+      "t": 0.62,
+      "on_barrier": [],
+      "waiting": []
+     }
+    ],
+    "responses_pending_at_release": [
+     true,
+     true
+    ],
+    "responses": [
+     {
+      "status": 201,
+      "message": "성공적으로 처리되었습니다.",
+      "id": 6,
+      "data_status": "TEST_INQUIRY",
+      "sent_before_release_s": 5.374,
+      "completed_after_release_s": 0.349
+     },
+     {
+      "status": 409,
+      "message": "정원은 확보 인원 이상, 이커머스 옵션 재고 이하여야 합니다.",
+      "id": null,
+      "data_status": null,
+      "sent_before_release_s": 5.313,
+      "completed_after_release_s": 0.353
+     }
+    ],
+    "innodb_deadlocks_global": {
+     "before_lock": 6,
+     "at_lock": 6,
+     "end_of_hold": 6,
+     "at_release": 6,
+     "after_responses": 6,
+     "plus_3s": 6
+    },
+    "innodb_deadlocks_global_before_after": [
+     6,
+     6
+    ],
+    "during_hold_probe": {
+     "admission_lock_rows_inflight_actors": {
+      "travel-lab-workflow:member": 0,
+      "travel-lab-submit:member": 0
+     }
+    },
+    "real_server_overlap": true,
+    "prep": {
+     "stale_cart_deletes": []
+    },
+    "invariant": {
+     "submit_status": 201,
+     "put_status": 409,
+     "put_message": "정원은 확보 인원 이상, 이커머스 옵션 재고 이하여야 합니다.",
+     "reserved": 2,
+     "capacity": 2
+    }
+   },
+   "at": "21:30:26"
+  }
+ ],
+ "http_checks": [
+  {
+   "method": "POST",
+   "path": "/api/modules/raonslab-travel_lab/cart",
+   "actor": "member",
+   "status": 201,
+   "seconds": 2.544
+  },
+  {
+   "method": "GET",
+   "path": "/api/modules/raonslab-travel_lab/cart",
+   "actor": "member",
+   "status": 200,
+   "seconds": 3.428
+  },
+  {
+   "method": "POST",
+   "path": "/api/modules/raonslab-travel_lab/cart",
+   "actor": "other_member",
+   "status": 201,
+   "seconds": 1.258
+  },
+  {
+   "method": "GET",
+   "path": "/api/modules/raonslab-travel_lab/cart",
+   "actor": "other_member",
+   "status": 200,
+   "seconds": 1.433
+  },
+  {
+   "method": "GET",
+   "path": "/api/modules/raonslab-travel_lab/cart",
+   "actor": "member",
+   "status": 200,
+   "seconds": 1.205
+  },
+  {
+   "method": "POST",
+   "path": "/api/modules/raonslab-travel_lab/inquiries",
+   "actor": "other_member",
+   "status": 201,
+   "seconds": 6.905
+  },
+  {
+   "method": "POST",
+   "path": "/api/modules/raonslab-travel_lab/inquiries",
+   "actor": "member",
+   "status": 409,
+   "seconds": 7.085
+  },
+  {
+   "method": "DELETE",
+   "path": "/api/modules/raonslab-travel_lab/cart/7",
+   "actor": "member",
+   "status": 200,
+   "seconds": 1.6
+  },
+  {
+   "method": "GET",
+   "path": "/api/modules/raonslab-travel_lab/cart",
+   "actor": "member",
+   "status": 200,
+   "seconds": 0.725
+  },
+  {
+   "method": "POST",
+   "path": "/api/modules/raonslab-travel_lab/cart",
+   "actor": "member",
+   "status": 201,
+   "seconds": 1.904
+  },
+  {
+   "method": "GET",
+   "path": "/api/modules/raonslab-travel_lab/cart",
+   "actor": "member",
+   "status": 200,
+   "seconds": 1.325
+  },
+  {
+   "method": "POST",
+   "path": "/api/modules/raonslab-travel_lab/inquiries",
+   "actor": "member",
+   "status": 201,
+   "seconds": 5.55
+  },
+  {
+   "method": "POST",
+   "path": "/api/modules/raonslab-travel_lab/inquiries",
+   "actor": "member",
+   "status": 200,
+   "seconds": 5.903
+  },
+  {
+   "method": "POST",
+   "path": "/api/modules/raonslab-travel_lab/inquiries",
+   "actor": "member",
+   "status": 200,
+   "seconds": 1.34
+  },
+  {
+   "method": "POST",
+   "path": "/api/modules/raonslab-travel_lab/inquiries",
+   "actor": "member",
+   "status": 409,
+   "seconds": 0.74
+  },
+  {
+   "method": "GET",
+   "path": "/api/modules/raonslab-travel_lab/cart",
+   "actor": "member",
+   "status": 200,
+   "seconds": 1.66
+  },
+  {
+   "method": "POST",
+   "path": "/api/modules/raonslab-travel_lab/cart",
+   "actor": "member",
+   "status": 201,
+   "seconds": 1.486
+  },
+  {
+   "method": "GET",
+   "path": "/api/modules/raonslab-travel_lab/cart",
+   "actor": "member",
+   "status": 200,
+   "seconds": 1.537
+  },
+  {
+   "method": "POST",
+   "path": "/api/modules/raonslab-travel_lab/inquiries",
+   "actor": "member",
+   "status": 201,
+   "seconds": 1.45
+  },
+  {
+   "method": "POST",
+   "path": "/api/modules/raonslab-travel_lab/inquiries/5/cancel",
+   "actor": "member",
+   "status": 200,
+   "seconds": 6.034
+  },
+  {
+   "method": "PATCH",
+   "path": "/api/modules/raonslab-travel_lab/admin/inquiries/5",
+   "actor": "admin",
+   "status": 409,
+   "seconds": 5.973
+  },
+  {
+   "method": "POST",
+   "path": "/api/modules/raonslab-travel_lab/inquiries/5/cancel",
+   "actor": "member",
+   "status": 200,
+   "seconds": 2.935
+  },
+  {
+   "method": "GET",
+   "path": "/api/modules/raonslab-travel_lab/cart",
+   "actor": "member",
+   "status": 200,
+   "seconds": 1.427
+  },
+  {
+   "method": "POST",
+   "path": "/api/modules/raonslab-travel_lab/cart",
+   "actor": "member",
+   "status": 201,
+   "seconds": 2.413
+  },
+  {
+   "method": "GET",
+   "path": "/api/modules/raonslab-travel_lab/cart",
+   "actor": "member",
+   "status": 200,
+   "seconds": 1.406
+  },
+  {
+   "method": "POST",
+   "path": "/api/modules/raonslab-travel_lab/inquiries",
+   "actor": "member",
+   "status": 201,
+   "seconds": 5.723
+  },
+  {
+   "method": "PUT",
+   "path": "/api/modules/raonslab-travel_lab/admin/catalog/9/departures/31",
+   "actor": "admin",
+   "status": 409,
+   "seconds": 5.666
+  }
+ ],
+ "actual_http_count": 27
+}
