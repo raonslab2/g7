@@ -1,0 +1,2291 @@
+{
+ "kind": "nonauthor_live_http_recheck",
+ "request": "req_82f0e86c05094c4eb83b85cc6c98f9e0",
+ "reviewed_sha": "7de0c4441b68b1c012dbf4a75114200e322051c9",
+ "preview": {
+  "base_url": "http://127.0.0.1:18871",
+  "db": "req81_travel_lab",
+  "source_sha": "7de0c4441b68b1c012dbf4a75114200e322051c9",
+  "server": "php -S via artisan serve, PHP_CLI_SERVER_WORKERS=4 (main + 4 forks observed)"
+ },
+ "final_run": {
+  "source_sha_expected": "7de0c4441b68b1c012dbf4a75114200e322051c9",
+  "run": "W03R-123332",
+  "base_url": "http://127.0.0.1:18871",
+  "fixture": {
+   "shipping_policy_id": 1,
+   "category_id": 20,
+   "product_T": {
+    "id": 36,
+    "options": [
+     85,
+     86,
+     87,
+     88,
+     90,
+     91,
+     95
+    ],
+    "payload": {
+     "name": {
+      "ko": "W03R-123332-T 합성 상품",
+      "en": "W03R-123332-T synthetic"
+     },
+     "product_code": "W03R123332T",
+     "sku": "W03R-123332-T",
+     "category_ids": [
+      20
+     ],
+     "list_price": 20000,
+     "selling_price": 12000,
+     "stock_quantity": 35,
+     "sales_status": "on_sale",
+     "display_status": "visible",
+     "tax_status": "tax_free",
+     "shipping_policy_id": 1,
+     "has_options": true,
+     "options": [
+      {
+       "price_adjustment": 0,
+       "option_code": "W03R-123332-T-1",
+       "option_name": {
+        "ko": "W03R-123332-T-1",
+        "en": "W03R-123332-T-1"
+       },
+       "option_values": [
+        {
+         "key": {
+          "ko": "출발",
+          "en": "Departure"
+         },
+         "value": {
+          "ko": "W03R-123332-T-1",
+          "en": "W03R-123332-T-1"
+         }
+        }
+       ],
+       "list_price": 20000,
+       "selling_price": 12000,
+       "stock_quantity": 5,
+       "is_active": true,
+       "is_default": true
+      },
+      {
+       "price_adjustment": 0,
+       "option_code": "W03R-123332-T-2",
+       "option_name": {
+        "ko": "W03R-123332-T-2",
+        "en": "W03R-123332-T-2"
+       },
+       "option_values": [
+        {
+         "key": {
+          "ko": "출발",
+          "en": "Departure"
+         },
+         "value": {
+          "ko": "W03R-123332-T-2",
+          "en": "W03R-123332-T-2"
+         }
+        }
+       ],
+       "list_price": 20000,
+       "selling_price": 12000,
+       "stock_quantity": 5,
+       "is_active": true,
+       "is_default": false
+      },
+      {
+       "price_adjustment": 0,
+       "option_code": "W03R-123332-T-3",
+       "option_name": {
+        "ko": "W03R-123332-T-3",
+        "en": "W03R-123332-T-3"
+       },
+       "option_values": [
+        {
+         "key": {
+          "ko": "출발",
+          "en": "Departure"
+         },
+         "value": {
+          "ko": "W03R-123332-T-3",
+          "en": "W03R-123332-T-3"
+         }
+        }
+       ],
+       "list_price": 20000,
+       "selling_price": 12000,
+       "stock_quantity": 5,
+       "is_active": true,
+       "is_default": false
+      },
+      {
+       "price_adjustment": 0,
+       "option_code": "W03R-123332-T-4",
+       "option_name": {
+        "ko": "W03R-123332-T-4",
+        "en": "W03R-123332-T-4"
+       },
+       "option_values": [
+        {
+         "key": {
+          "ko": "출발",
+          "en": "Departure"
+         },
+         "value": {
+          "ko": "W03R-123332-T-4",
+          "en": "W03R-123332-T-4"
+         }
+        }
+       ],
+       "list_price": 20000,
+       "selling_price": 12000,
+       "stock_quantity": 5,
+       "is_active": true,
+       "is_default": false
+      },
+      {
+       "price_adjustment": 0,
+       "option_code": "W03R-123332-T-5",
+       "option_name": {
+        "ko": "W03R-123332-T-5",
+        "en": "W03R-123332-T-5"
+       },
+       "option_values": [
+        {
+         "key": {
+          "ko": "출발",
+          "en": "Departure"
+         },
+         "value": {
+          "ko": "W03R-123332-T-5",
+          "en": "W03R-123332-T-5"
+         }
+        }
+       ],
+       "list_price": 20000,
+       "selling_price": 12000,
+       "stock_quantity": 5,
+       "is_active": true,
+       "is_default": false
+      },
+      {
+       "price_adjustment": 0,
+       "option_code": "W03R-123332-T-6",
+       "option_name": {
+        "ko": "W03R-123332-T-6",
+        "en": "W03R-123332-T-6"
+       },
+       "option_values": [
+        {
+         "key": {
+          "ko": "출발",
+          "en": "Departure"
+         },
+         "value": {
+          "ko": "W03R-123332-T-6",
+          "en": "W03R-123332-T-6"
+         }
+        }
+       ],
+       "list_price": 20000,
+       "selling_price": 12000,
+       "stock_quantity": 5,
+       "is_active": true,
+       "is_default": false
+      },
+      {
+       "price_adjustment": 0,
+       "option_code": "W03R-123332-T-7",
+       "option_name": {
+        "ko": "W03R-123332-T-7",
+        "en": "W03R-123332-T-7"
+       },
+       "option_values": [
+        {
+         "key": {
+          "ko": "출발",
+          "en": "Departure"
+         },
+         "value": {
+          "ko": "W03R-123332-T-7",
+          "en": "W03R-123332-T-7"
+         }
+        }
+       ],
+       "list_price": 20000,
+       "selling_price": 12000,
+       "stock_quantity": 5,
+       "is_active": true,
+       "is_default": false
+      }
+     ]
+    }
+   },
+   "product_O": {
+    "id": 37,
+    "options": [
+     92,
+     93
+    ],
+    "payload": {
+     "name": {
+      "ko": "W03R-123332-O 합성 상품",
+      "en": "W03R-123332-O synthetic"
+     },
+     "product_code": "W03R123332O",
+     "sku": "W03R-123332-O",
+     "category_ids": [
+      20
+     ],
+     "list_price": 20000,
+     "selling_price": 12000,
+     "stock_quantity": 10,
+     "sales_status": "on_sale",
+     "display_status": "hidden",
+     "tax_status": "tax_free",
+     "shipping_policy_id": 1,
+     "has_options": true,
+     "options": [
+      {
+       "price_adjustment": 0,
+       "option_code": "W03R-123332-O-1",
+       "option_name": {
+        "ko": "W03R-123332-O-1",
+        "en": "W03R-123332-O-1"
+       },
+       "option_values": [
+        {
+         "key": {
+          "ko": "출발",
+          "en": "Departure"
+         },
+         "value": {
+          "ko": "W03R-123332-O-1",
+          "en": "W03R-123332-O-1"
+         }
+        }
+       ],
+       "list_price": 20000,
+       "selling_price": 12000,
+       "stock_quantity": 5,
+       "is_active": true,
+       "is_default": true
+      },
+      {
+       "price_adjustment": 0,
+       "option_code": "W03R-123332-O-2",
+       "option_name": {
+        "ko": "W03R-123332-O-2",
+        "en": "W03R-123332-O-2"
+       },
+       "option_values": [
+        {
+         "key": {
+          "ko": "출발",
+          "en": "Departure"
+         },
+         "value": {
+          "ko": "W03R-123332-O-2",
+          "en": "W03R-123332-O-2"
+         }
+        }
+       ],
+       "list_price": 20000,
+       "selling_price": 12000,
+       "stock_quantity": 5,
+       "is_active": true,
+       "is_default": false
+      }
+     ]
+    }
+   },
+   "product_D": {
+    "id": 38,
+    "options": [
+     94
+    ],
+    "payload": {
+     "name": {
+      "ko": "W03R-123332-D 합성 상품",
+      "en": "W03R-123332-D synthetic"
+     },
+     "product_code": "W03R123332D",
+     "sku": "W03R-123332-D",
+     "category_ids": [
+      20
+     ],
+     "list_price": 20000,
+     "selling_price": 12000,
+     "stock_quantity": 5,
+     "sales_status": "on_sale",
+     "display_status": "hidden",
+     "tax_status": "tax_free",
+     "shipping_policy_id": 1,
+     "has_options": true,
+     "options": [
+      {
+       "price_adjustment": 0,
+       "option_code": "W03R-123332-D-1",
+       "option_name": {
+        "ko": "W03R-123332-D-1",
+        "en": "W03R-123332-D-1"
+       },
+       "option_values": [
+        {
+         "key": {
+          "ko": "출발",
+          "en": "Departure"
+         },
+         "value": {
+          "ko": "W03R-123332-D-1",
+          "en": "W03R-123332-D-1"
+         }
+        }
+       ],
+       "list_price": 20000,
+       "selling_price": 12000,
+       "stock_quantity": 5,
+       "is_active": true,
+       "is_default": true
+      }
+     ]
+    }
+   },
+   "travel_product_id": 36,
+   "departures": {
+    "last": 52,
+    "key": 53,
+    "race": 54,
+    "cd": 55,
+    "last2": 56,
+    "last3": 57
+   },
+   "unlinked_option": 89,
+   "image": {
+    "count": 1,
+    "url_path": "/api/modules/sirsoft-ecommerce/product-image/c0b157db5d99",
+    "get": [
+     200,
+     "image/png",
+     "b1ff9c8ea3a780bad09b346c423d2d0e46815926879b18e841d928376a946640"
+    ]
+   },
+   "qna": {
+    "store_http": 422,
+    "message": "문의 게시판이 설정되지 않았습니다.",
+    "id": null,
+    "list_http": 200,
+    "list_total": null
+   },
+   "last_winner": {
+    "role": "member",
+    "id": 69
+   },
+   "same_key": {
+    "key": "W03R-123332-same1",
+    "cart_id": 89,
+    "inquiry_id": 70,
+    "reserved_before": 1
+   },
+   "support_question_id": 28
+  },
+  "races": [
+   {
+    "label": "last seat, two members (attempt 1)",
+    "lock_kind": "departure",
+    "lock_row": 52,
+    "barrier": {
+     "barrier_connection_id": 64545,
+     "db": "req81_travel_lab",
+     "account": "req81_travel",
+     "server_version": "10.11.14-MariaDB-0ubuntu0.24.04.1",
+     "table": "g7_travel_lab_departures"
+    },
+    "observed": {
+     "event": "OBSERVED",
+     "held_for_s": 3.213,
+     "innodb_trx_visible": false,
+     "first_detection": {
+      "at_s": 0.155,
+      "blocked": [
+       {
+        "connection_id": 64549,
+        "command": "Execute",
+        "time_s": 0,
+        "state": "Statistics",
+        "innodb_lock_wait": false,
+        "statement_targets_locked_table_for_update": true
+       },
+       {
+        "connection_id": 64548,
+        "command": "Execute",
+        "time_s": 0,
+        "state": "Statistics",
+        "innodb_lock_wait": false,
+        "statement_targets_locked_table_for_update": true
+       }
+      ]
+     },
+     "still_blocked_after_hold": true,
+     "blocked_distinct_connection_ids": [
+      64549,
+      64548
+     ],
+     "blocked": [
+      {
+       "connection_id": 64549,
+       "command": "Execute",
+       "time_s": 3,
+       "state": "Statistics",
+       "innodb_lock_wait": false,
+       "statement_targets_locked_table_for_update": true
+      },
+      {
+       "connection_id": 64548,
+       "command": "Execute",
+       "time_s": 3,
+       "state": "Statistics",
+       "innodb_lock_wait": false,
+       "statement_targets_locked_table_for_update": true
+      }
+     ],
+     "other_lab_connections": 6,
+     "lab_connection_facts": [
+      {
+       "connection_id": 64571,
+       "command": "Sleep",
+       "time_s": 0,
+       "state": "",
+       "innodb_lock_wait": false,
+       "statement_targets_locked_table_for_update": false
+      },
+      {
+       "connection_id": 64549,
+       "command": "Execute",
+       "time_s": 3,
+       "state": "Statistics",
+       "innodb_lock_wait": false,
+       "statement_targets_locked_table_for_update": true
+      },
+      {
+       "connection_id": 64548,
+       "command": "Execute",
+       "time_s": 3,
+       "state": "Statistics",
+       "innodb_lock_wait": false,
+       "statement_targets_locked_table_for_update": true
+      },
+      {
+       "connection_id": 64547,
+       "command": "Sleep",
+       "time_s": 3,
+       "state": "",
+       "innodb_lock_wait": false,
+       "statement_targets_locked_table_for_update": false
+      },
+      {
+       "connection_id": 64546,
+       "command": "Sleep",
+       "time_s": 3,
+       "state": "",
+       "innodb_lock_wait": false,
+       "statement_targets_locked_table_for_update": false
+      },
+      {
+       "connection_id": 55026,
+       "command": "Sleep",
+       "time_s": 3744,
+       "state": "",
+       "innodb_lock_wait": false,
+       "statement_targets_locked_table_for_update": false
+      }
+     ]
+    },
+    "released_at": 1791549223.164241,
+    "responses": [
+     {
+      "status": 201,
+      "message": "성공적으로 처리되었습니다.",
+      "data_id": 69,
+      "data_status": "TEST_INQUIRY",
+      "sent_before_release_s": 3.216,
+      "completed_after_release_s": 0.092
+     },
+     {
+      "status": 409,
+      "message": "현재 남은 시험 인원보다 많습니다. 인원을 다시 선택해 주세요.",
+      "data_id": null,
+      "data_status": null,
+      "sent_before_release_s": 3.214,
+      "completed_after_release_s": 0.097
+     }
+    ],
+    "real_server_overlap": true
+   },
+   {
+    "label": "same idempotency key, same member (attempt 1)",
+    "lock_kind": "user",
+    "lock_row": 30,
+    "barrier": {
+     "barrier_connection_id": 64696,
+     "db": "req81_travel_lab",
+     "account": "req81_travel",
+     "server_version": "10.11.14-MariaDB-0ubuntu0.24.04.1",
+     "table": "g7_users"
+    },
+    "observed": {
+     "event": "OBSERVED",
+     "held_for_s": 3.182,
+     "innodb_trx_visible": false,
+     "first_detection": {
+      "at_s": 0.155,
+      "blocked": [
+       {
+        "connection_id": 64700,
+        "command": "Execute",
+        "time_s": 0,
+        "state": "Statistics",
+        "innodb_lock_wait": false,
+        "statement_targets_locked_table_for_update": true
+       },
+       {
+        "connection_id": 64699,
+        "command": "Execute",
+        "time_s": 0,
+        "state": "Statistics",
+        "innodb_lock_wait": false,
+        "statement_targets_locked_table_for_update": true
+       }
+      ]
+     },
+     "still_blocked_after_hold": true,
+     "blocked_distinct_connection_ids": [
+      64700,
+      64699
+     ],
+     "blocked": [
+      {
+       "connection_id": 64700,
+       "command": "Execute",
+       "time_s": 3,
+       "state": "Statistics",
+       "innodb_lock_wait": false,
+       "statement_targets_locked_table_for_update": true
+      },
+      {
+       "connection_id": 64699,
+       "command": "Execute",
+       "time_s": 3,
+       "state": "Statistics",
+       "innodb_lock_wait": false,
+       "statement_targets_locked_table_for_update": true
+      }
+     ],
+     "other_lab_connections": 5,
+     "lab_connection_facts": [
+      {
+       "connection_id": 64700,
+       "command": "Execute",
+       "time_s": 3,
+       "state": "Statistics",
+       "innodb_lock_wait": false,
+       "statement_targets_locked_table_for_update": true
+      },
+      {
+       "connection_id": 64699,
+       "command": "Execute",
+       "time_s": 3,
+       "state": "Statistics",
+       "innodb_lock_wait": false,
+       "statement_targets_locked_table_for_update": true
+      },
+      {
+       "connection_id": 64698,
+       "command": "Sleep",
+       "time_s": 3,
+       "state": "",
+       "innodb_lock_wait": false,
+       "statement_targets_locked_table_for_update": false
+      },
+      {
+       "connection_id": 64697,
+       "command": "Sleep",
+       "time_s": 3,
+       "state": "",
+       "innodb_lock_wait": false,
+       "statement_targets_locked_table_for_update": false
+      },
+      {
+       "connection_id": 55026,
+       "command": "Sleep",
+       "time_s": 3809,
+       "state": "",
+       "innodb_lock_wait": false,
+       "statement_targets_locked_table_for_update": false
+      }
+     ]
+    },
+    "released_at": 1791549287.880093,
+    "responses": [
+     {
+      "status": 201,
+      "message": "성공적으로 처리되었습니다.",
+      "data_id": 70,
+      "data_status": "TEST_INQUIRY",
+      "sent_before_release_s": 3.182,
+      "completed_after_release_s": 0.07
+     },
+     {
+      "status": 200,
+      "message": "성공적으로 처리되었습니다.",
+      "data_id": 70,
+      "data_status": "TEST_INQUIRY",
+      "sent_before_release_s": 3.182,
+      "completed_after_release_s": 0.077
+     }
+    ],
+    "real_server_overlap": true
+   },
+   {
+    "label": "member cancel vs admin decline (attempt 1)",
+    "lock_kind": "inquiry",
+    "lock_row": 70,
+    "barrier": {
+     "barrier_connection_id": 64888,
+     "db": "req81_travel_lab",
+     "account": "req81_travel",
+     "server_version": "10.11.14-MariaDB-0ubuntu0.24.04.1",
+     "table": "g7_travel_lab_inquiries"
+    },
+    "observed": {
+     "event": "OBSERVED",
+     "held_for_s": 3.372,
+     "innodb_trx_visible": false,
+     "first_detection": {
+      "at_s": 0.306,
+      "blocked": [
+       {
+        "connection_id": 64893,
+        "command": "Execute",
+        "time_s": 0,
+        "state": "Statistics",
+        "innodb_lock_wait": false,
+        "statement_targets_locked_table_for_update": true
+       },
+       {
+        "connection_id": 64891,
+        "command": "Execute",
+        "time_s": 0,
+        "state": "Statistics",
+        "innodb_lock_wait": false,
+        "statement_targets_locked_table_for_update": true
+       }
+      ]
+     },
+     "still_blocked_after_hold": true,
+     "blocked_distinct_connection_ids": [
+      64893,
+      64891
+     ],
+     "blocked": [
+      {
+       "connection_id": 64893,
+       "command": "Execute",
+       "time_s": 3,
+       "state": "Statistics",
+       "innodb_lock_wait": false,
+       "statement_targets_locked_table_for_update": true
+      },
+      {
+       "connection_id": 64891,
+       "command": "Execute",
+       "time_s": 3,
+       "state": "Statistics",
+       "innodb_lock_wait": false,
+       "statement_targets_locked_table_for_update": true
+      }
+     ],
+     "other_lab_connections": 5,
+     "lab_connection_facts": [
+      {
+       "connection_id": 64893,
+       "command": "Execute",
+       "time_s": 3,
+       "state": "Statistics",
+       "innodb_lock_wait": false,
+       "statement_targets_locked_table_for_update": true
+      },
+      {
+       "connection_id": 64891,
+       "command": "Execute",
+       "time_s": 3,
+       "state": "Statistics",
+       "innodb_lock_wait": false,
+       "statement_targets_locked_table_for_update": true
+      },
+      {
+       "connection_id": 64890,
+       "command": "Sleep",
+       "time_s": 3,
+       "state": "",
+       "innodb_lock_wait": false,
+       "statement_targets_locked_table_for_update": false
+      },
+      {
+       "connection_id": 64889,
+       "command": "Sleep",
+       "time_s": 3,
+       "state": "",
+       "innodb_lock_wait": false,
+       "statement_targets_locked_table_for_update": false
+      },
+      {
+       "connection_id": 55026,
+       "command": "Sleep",
+       "time_s": 3874,
+       "state": "",
+       "innodb_lock_wait": false,
+       "statement_targets_locked_table_for_update": false
+      }
+     ]
+    },
+    "released_at": 1791549352.886914,
+    "responses": [
+     {
+      "status": 200,
+      "message": "성공적으로 처리되었습니다.",
+      "data_id": 70,
+      "data_status": "CANCELLED",
+      "sent_before_release_s": 3.372,
+      "completed_after_release_s": 0.021
+     },
+     {
+      "status": 409,
+      "message": "현재 시험 문의 상태에서 허용되지 않는 처리입니다.",
+      "data_id": null,
+      "data_status": null,
+      "sent_before_release_s": 3.37,
+      "completed_after_release_s": 0.025
+     }
+    ],
+    "real_server_overlap": true
+   },
+   {
+    "label": "submit qty2 vs admin capacity 2->1 (attempt 1)",
+    "lock_kind": "departure",
+    "lock_row": 54,
+    "barrier": {
+     "barrier_connection_id": 64939,
+     "db": "req81_travel_lab",
+     "account": "req81_travel",
+     "server_version": "10.11.14-MariaDB-0ubuntu0.24.04.1",
+     "table": "g7_travel_lab_departures"
+    },
+    "observed": {
+     "event": "OBSERVED",
+     "held_for_s": 3.217,
+     "innodb_trx_visible": false,
+     "first_detection": {
+      "at_s": 0.154,
+      "blocked": [
+       {
+        "connection_id": 64943,
+        "command": "Execute",
+        "time_s": 0,
+        "state": "Statistics",
+        "innodb_lock_wait": false,
+        "statement_targets_locked_table_for_update": true
+       },
+       {
+        "connection_id": 64942,
+        "command": "Execute",
+        "time_s": 0,
+        "state": "Statistics",
+        "innodb_lock_wait": false,
+        "statement_targets_locked_table_for_update": true
+       }
+      ]
+     },
+     "still_blocked_after_hold": true,
+     "blocked_distinct_connection_ids": [
+      64943,
+      64942
+     ],
+     "blocked": [
+      {
+       "connection_id": 64943,
+       "command": "Execute",
+       "time_s": 3,
+       "state": "Statistics",
+       "innodb_lock_wait": false,
+       "statement_targets_locked_table_for_update": true
+      },
+      {
+       "connection_id": 64942,
+       "command": "Execute",
+       "time_s": 3,
+       "state": "Statistics",
+       "innodb_lock_wait": false,
+       "statement_targets_locked_table_for_update": true
+      }
+     ],
+     "other_lab_connections": 6,
+     "lab_connection_facts": [
+      {
+       "connection_id": 64963,
+       "command": "Sleep",
+       "time_s": 0,
+       "state": "",
+       "innodb_lock_wait": false,
+       "statement_targets_locked_table_for_update": false
+      },
+      {
+       "connection_id": 64943,
+       "command": "Execute",
+       "time_s": 3,
+       "state": "Statistics",
+       "innodb_lock_wait": false,
+       "statement_targets_locked_table_for_update": true
+      },
+      {
+       "connection_id": 64942,
+       "command": "Execute",
+       "time_s": 3,
+       "state": "Statistics",
+       "innodb_lock_wait": false,
+       "statement_targets_locked_table_for_update": true
+      },
+      {
+       "connection_id": 64941,
+       "command": "Sleep",
+       "time_s": 3,
+       "state": "",
+       "innodb_lock_wait": false,
+       "statement_targets_locked_table_for_update": false
+      },
+      {
+       "connection_id": 64940,
+       "command": "Sleep",
+       "time_s": 3,
+       "state": "",
+       "innodb_lock_wait": false,
+       "statement_targets_locked_table_for_update": false
+      },
+      {
+       "connection_id": 55026,
+       "command": "Sleep",
+       "time_s": 3878,
+       "state": "",
+       "innodb_lock_wait": false,
+       "statement_targets_locked_table_for_update": false
+      }
+     ]
+    },
+    "released_at": 1791549357.016328,
+    "responses": [
+     {
+      "status": 201,
+      "message": "성공적으로 처리되었습니다.",
+      "data_id": 71,
+      "data_status": "TEST_INQUIRY",
+      "sent_before_release_s": 3.217,
+      "completed_after_release_s": 0.087
+     },
+     {
+      "status": 409,
+      "message": "정원은 확보 인원 이상, 이커머스 옵션 재고 이하여야 합니다.",
+      "data_id": null,
+      "data_status": null,
+      "sent_before_release_s": 3.217,
+      "completed_after_release_s": 0.142
+     }
+    ],
+    "real_server_overlap": true
+   }
+  ],
+  "results": [
+   {
+    "name": "fixture: own free-KR shipping policy + category via native admin API",
+    "status": "OBSERVED",
+    "detail": {
+     "policy": 1,
+     "category": 20,
+     "policy_note": {
+      "own_policy_create_http": 422,
+      "errors": {
+       "country_settings.0.shipping_method": [
+        "선택한 country_settings.0.shipping_method이(가) 올바르지 않습니다."
+       ]
+      },
+      "blocked_reason": "shipping_types reference table empty on preview; existing free-KR policy reused read-only",
+      "reused_policy_id": 1
+     }
+    }
+   },
+   {
+    "name": "fixture: own travel/ordinary products via native admin API + POST /admin/catalog registration",
+    "status": "PASS",
+    "detail": {
+     "product_T": 36,
+     "product_O": 37,
+     "product_D": 38,
+     "catalog_register_http": 201
+    }
+   },
+   {
+    "name": "fixture: own NEW departures via POST /admin/catalog/{product}/departures",
+    "status": "PASS",
+    "detail": {
+     "last": 52,
+     "key": 53,
+     "race": 54,
+     "cd": 55,
+     "last2": 56,
+     "last3": 57
+    }
+   },
+   {
+    "name": "tamper: departure form KST-today/reserved/unit_price/member rejected",
+    "status": "PASS",
+    "detail": {
+     "kst_today_422": 422,
+     "reserved_422": 422,
+     "unit_price_422": 422,
+     "member_403": 403,
+     "kst_today": "2026-10-09"
+    }
+   },
+   {
+    "name": "tamper: cart price/person/owner/unknown-field rejected (422), over-capacity 409",
+    "status": "PASS",
+    "detail": {
+     "tamper_statuses": [
+      422,
+      422,
+      422,
+      422,
+      422,
+      422,
+      422
+     ],
+     "unknown_departure": 404,
+     "over_capacity": 409,
+     "over_capacity_message": "현재 남은 시험 인원보다 많습니다. 인원을 다시 선택해 주세요.",
+     "cart_get": 200
+    }
+   },
+   {
+    "name": "guard setup: own product image + native product Q&A",
+    "status": "PASS",
+    "detail": {
+     "image": {
+      "count": 1,
+      "url_path": "/api/modules/sirsoft-ecommerce/product-image/c0b157db5d99",
+      "get": [
+       200,
+       "image/png",
+       "b1ff9c8ea3a780bad09b346c423d2d0e46815926879b18e841d928376a946640"
+      ]
+     },
+     "qna": {
+      "store_http": 422,
+      "message": "문의 게시판이 설정되지 않았습니다.",
+      "id": null,
+      "list_http": 200,
+      "list_total": null
+     }
+    }
+   },
+   {
+    "name": "guard: native admin DELETE travel product -> 409 travel reason before image/Q&A cleanup",
+    "status": "PASS",
+    "detail": {
+     "can_delete_probe": {
+      "http": 200,
+      "data": {
+       "canDelete": true,
+       "reason": null,
+       "relatedData": {
+        "orders": 0,
+        "images": 1,
+        "options": 7,
+        "additionalOptions": 0,
+        "labelAssignments": 0
+       }
+      }
+     },
+     "delete_http": 409,
+     "delete_message": "여행 기록에 연결된 상품은 삭제할 수 없습니다. 여행 게시를 해제해 주세요.",
+     "product_after": 200,
+     "image_after": [
+      200,
+      "image/png",
+      "b1ff9c8ea3a780bad09b346c423d2d0e46815926879b18e841d928376a946640"
+     ],
+     "qna_kept": null,
+     "departures_kept": true
+    }
+   },
+   {
+    "name": "guard: native admin PUT removing departure-linked option -> 422 reason, no write",
+    "status": "PASS",
+    "detail": {
+     "http": 422,
+     "errors_options": [
+      "출발일에 연결된 옵션을 유지해 주세요. 가격·재고 수정과 새 옵션 추가는 가능합니다."
+     ],
+     "name_unchanged": true,
+     "option_ids_unchanged": true
+    }
+   },
+   {
+    "name": "guard: legitimate native price/new-option/unlinked-removal + ordinary product edit/delete allowed",
+    "status": "PASS",
+    "detail": {
+     "travel_price_edit_new_option_unlinked_removal": 200,
+     "linked_option_price_after": {
+      "selling_price": 12500,
+      "price_adjustment": 500
+     },
+     "ordinary_option_removal_price_edit": 200,
+     "ordinary_delete": 200,
+     "ordinary_delete_message": "상품이 삭제되었습니다.",
+     "ordinary_after_delete": 404
+    }
+   },
+   {
+    "name": "overlap: last seat two members (departure row lock)",
+    "status": "PASS",
+    "detail": {
+     "attempts": [
+      {
+       "departure": 52,
+       "overlap": true,
+       "statuses": [
+        201,
+        409
+       ],
+       "reserved": 1,
+       "capacity": 1,
+       "blocked_connection_ids": [
+        64549,
+        64548
+       ]
+      }
+     ],
+     "loser_message": "현재 남은 시험 인원보다 많습니다. 인원을 다시 선택해 주세요.",
+     "full_capacity_followup": 409
+    }
+   },
+   {
+    "name": "overlap: same key same member (user row lock) + replay/409",
+    "status": "PASS",
+    "detail": {
+     "attempts": [
+      {
+       "overlap": true,
+       "statuses": [
+        201,
+        200
+       ],
+       "inquiry_ids": [
+        70
+       ],
+       "reserved": 1,
+       "blocked_connection_ids": [
+        64700,
+        64699
+       ]
+      }
+     ],
+     "exact_replay": 200,
+     "changed_payload_retry": 409,
+     "changed_payload_message": "같은 요청 키를 다른 내용에 사용할 수 없습니다.",
+     "amount": "12500.00",
+     "reserved_after_replays": 1
+    }
+   },
+   {
+    "name": "overlap: member cancel vs admin decline release once (inquiry row lock)",
+    "status": "PASS",
+    "detail": {
+     "attempts": [
+      {
+       "inquiry": 70,
+       "overlap": true,
+       "statuses": [
+        200,
+        409
+       ],
+       "reserved_before": 1,
+       "reserved_after": 0,
+       "repeat_cancel": 200,
+       "replay_after_terminal": 200,
+       "replay_status": "CANCELLED",
+       "reserved_after_replay": 0,
+       "winner": "cancel",
+       "loser_message": "현재 시험 문의 상태에서 허용되지 않는 처리입니다.",
+       "blocked_connection_ids": [
+        64893,
+        64891
+       ]
+      }
+     ]
+    }
+   },
+   {
+    "name": "overlap: admin capacity hold vs submit cannot go below reserved (departure row lock)",
+    "status": "PASS",
+    "detail": {
+     "attempts": [
+      {
+       "overlap": true,
+       "submit": 201,
+       "admin_put": 409,
+       "messages": [
+        "성공적으로 처리되었습니다.",
+        "정원은 확보 인원 이상, 이커머스 옵션 재고 이하여야 합니다."
+       ],
+       "capacity": 2,
+       "reserved": 2,
+       "blocked_connection_ids": [
+        64943,
+        64942
+       ]
+      }
+     ]
+    }
+   },
+   {
+    "name": "scope: foreign 404, member admin 403, anonymous 401, admin money field 422",
+    "status": "PASS",
+    "detail": {
+     "owner": "member",
+     "foreign_read": 404,
+     "foreign_cancel": 404,
+     "member_admin_list": 403,
+     "member_admin_patch": 403,
+     "anonymous_cart": 401,
+     "admin_money_patch": 422,
+     "owner_read": 200,
+     "foreign_list_contains": false
+    }
+   },
+   {
+    "name": "support: private question owner/admin only, foreign 404 and not listed",
+    "status": "PASS",
+    "detail": {
+     "store": 201,
+     "foreign_show": 404,
+     "foreign_patch": 404,
+     "owner_show": 200,
+     "admin_show": 200,
+     "foreign_list_contains": false,
+     "owner_list_contains": true,
+     "anonymous": 401
+    }
+   },
+   {
+    "name": "throttle: per-actor submit10/cart60/cancel20/admin60/workflow120 (validation-failing probes only)",
+    "status": "PASS",
+    "detail": {
+     "submit_10": {
+      "first_10": [
+       422
+      ],
+      "11th": 429
+     },
+     "member_submit_isolated": 422,
+     "other_cart_get_after_submit_limit": 200,
+     "cart_60": {
+      "first_60": [
+       422
+      ],
+      "61st": 429
+     },
+     "cancel_20": {
+      "first_20": [
+       404
+      ],
+      "21st": 429
+     },
+     "admin_patch_60": {
+      "first_60": [
+       404
+      ],
+      "61st": 429
+     },
+     "admin_list_after_patch_limit": 200,
+     "workflow_120": {
+      "extra_gets_until_429": 27,
+      "prior_other_member_requests_in_window": 94,
+      "limit_header": "120"
+     },
+     "member_cart_still_ok": 200
+    }
+   },
+   {
+    "name": "cleanup: cancel own inquiries, delete own carts, deactivate own departures, unpublish/hide (no guarded delete)",
+    "status": "PASS",
+    "detail": {
+     "cancel_71": 200,
+     "cancel_69": 200,
+     "cart_other_member_88": 200,
+     "deactivate_52": 200,
+     "deactivate_53": 200,
+     "deactivate_54": 200,
+     "deactivate_55": 200,
+     "deactivate_56": 200,
+     "deactivate_57": 200,
+     "unpublish": 200,
+     "hide_travel_product": 200,
+     "ordinary_kept_hidden": 200,
+     "category_inactive": 200,
+     "reserved_after": {
+      "52": 0,
+      "53": 0,
+      "54": 0,
+      "55": 0,
+      "56": 0,
+      "57": 0
+     },
+     "active_after": {
+      "52": false,
+      "53": false,
+      "54": false,
+      "55": false,
+      "56": false,
+      "57": false
+     },
+     "public_catalog_contains_fixture": false,
+     "public_detail_after": 404
+    }
+   }
+  ],
+  "counts": {
+   "PASS": 16,
+   "FAIL": 0,
+   "OBSERVED": 1,
+   "BLOCKED": 0,
+   "NOT_RUN": 0
+  }
+ },
+ "prior_runs_kept_for_honesty": [
+  {
+   "run": "W03R-121518",
+   "counts": {
+    "PASS": 1,
+    "FAIL": 1,
+    "OBSERVED": 1,
+    "BLOCKED": 0,
+    "NOT_RUN": 0
+   },
+   "non_pass": [
+    {
+     "name": "fixture: own free-KR shipping policy + category via native admin API",
+     "status": "OBSERVED",
+     "detail": {
+      "policy": 1,
+      "category": 5,
+      "policy_note": {
+       "own_policy_create_http": 422,
+       "errors": {
+        "country_settings.0.shipping_method": [
+         "선택한 country_settings.0.shipping_method이(가) 올바르지 않습니다."
+        ]
+       },
+       "blocked_reason": "shipping_types reference table empty on preview; existing free-KR policy reused read-only",
+       "reused_policy_id": 1
+      }
+     }
+    },
+    {
+     "name": "fixture: own NEW departures via POST /admin/catalog/{product}/departures",
+     "status": "FAIL",
+     "detail": {
+      "assert": "departure last 200 여행 카탈로그를 저장했습니다. None"
+     }
+    }
+   ],
+   "races": []
+  },
+  {
+   "run": "W03R-121728",
+   "counts": {
+    "PASS": 11,
+    "FAIL": 4,
+    "OBSERVED": 1,
+    "BLOCKED": 0,
+    "NOT_RUN": 1
+   },
+   "non_pass": [
+    {
+     "name": "fixture: own free-KR shipping policy + category via native admin API",
+     "status": "OBSERVED",
+     "detail": {
+      "policy": 1,
+      "category": 6,
+      "policy_note": {
+       "own_policy_create_http": 422,
+       "errors": {
+        "country_settings.0.shipping_method": [
+         "선택한 country_settings.0.shipping_method이(가) 올바르지 않습니다."
+        ]
+       },
+       "blocked_reason": "shipping_types reference table empty on preview; existing free-KR policy reused read-only",
+       "reused_policy_id": 1
+      }
+     }
+    },
+    {
+     "name": "guard: native admin DELETE travel product -> 409 travel reason before image/Q&A cleanup",
+     "status": "FAIL",
+     "detail": {
+      "assert": "delete 409 여행 기록에 연결된 상품은 삭제할 수 없습니다. 여행 게시를 해제해 주세요."
+     }
+    },
+    {
+     "name": "overlap: last seat two members (departure row lock)",
+     "status": "FAIL",
+     "detail": {
+      "assert": "no overlap observed"
+     }
+    },
+    {
+     "name": "overlap: same key same member (user row lock) + replay/409",
+     "status": "FAIL",
+     "detail": {
+      "assert": "no overlap observed"
+     }
+    },
+    {
+     "name": "overlap: member cancel vs admin decline release once (inquiry row lock)",
+     "status": "NOT_RUN",
+     "detail": "depends on same-key inquiry"
+    },
+    {
+     "name": "overlap: admin capacity hold vs submit cannot go below reserved (departure row lock)",
+     "status": "FAIL",
+     "detail": {
+      "assert": "no overlap observed"
+     }
+    }
+   ],
+   "races": [
+    {
+     "label": "last seat, two members",
+     "real_server_overlap": false,
+     "blocked_distinct_connection_ids": [],
+     "lab_connection_facts": null,
+     "held_for_s": 20.052,
+     "responses": [
+      {
+       "status": 201,
+       "message": "성공적으로 처리되었습니다.",
+       "sent_before_release_s": 20.051,
+       "completed_after_release_s": 0.062
+      },
+      {
+       "status": 409,
+       "message": "현재 남은 시험 인원보다 많습니다. 인원을 다시 선택해 주세요.",
+       "sent_before_release_s": 20.05,
+       "completed_after_release_s": 0.073
+      }
+     ]
+    },
+    {
+     "label": "same idempotency key, same member",
+     "real_server_overlap": false,
+     "blocked_distinct_connection_ids": [],
+     "lab_connection_facts": null,
+     "held_for_s": 20.035,
+     "responses": [
+      {
+       "status": 201,
+       "message": "성공적으로 처리되었습니다.",
+       "sent_before_release_s": 20.035,
+       "completed_after_release_s": 0.064
+      },
+      {
+       "status": 200,
+       "message": "성공적으로 처리되었습니다.",
+       "sent_before_release_s": 20.034,
+       "completed_after_release_s": 0.067
+      }
+     ]
+    },
+    {
+     "label": "submit qty2 vs admin capacity 2->1",
+     "real_server_overlap": false,
+     "blocked_distinct_connection_ids": [],
+     "lab_connection_facts": null,
+     "held_for_s": 20.039,
+     "responses": [
+      {
+       "status": 201,
+       "message": "성공적으로 처리되었습니다.",
+       "sent_before_release_s": 20.04,
+       "completed_after_release_s": 0.065
+      },
+      {
+       "status": 409,
+       "message": "정원은 확보 인원 이상, 이커머스 옵션 재고 이하여야 합니다.",
+       "sent_before_release_s": 20.04,
+       "completed_after_release_s": 0.072
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "run": "W03R-122142",
+   "counts": {
+    "PASS": 15,
+    "FAIL": 1,
+    "OBSERVED": 1,
+    "BLOCKED": 0,
+    "NOT_RUN": 0
+   },
+   "non_pass": [
+    {
+     "name": "fixture: own free-KR shipping policy + category via native admin API",
+     "status": "OBSERVED",
+     "detail": {
+      "policy": 1,
+      "category": 12,
+      "policy_note": {
+       "own_policy_create_http": 422,
+       "errors": {
+        "country_settings.0.shipping_method": [
+         "선택한 country_settings.0.shipping_method이(가) 올바르지 않습니다."
+        ]
+       },
+       "blocked_reason": "shipping_types reference table empty on preview; existing free-KR policy reused read-only",
+       "reused_policy_id": 1
+      }
+     }
+    },
+    {
+     "name": "overlap: same key same member (user row lock) + replay/409",
+     "status": "FAIL",
+     "detail": {
+      "assert": "server amount 12000.00 != edited native price 12500"
+     }
+    }
+   ],
+   "races": [
+    {
+     "label": "last seat, two members",
+     "real_server_overlap": true,
+     "blocked_distinct_connection_ids": [
+      61389,
+      61388
+     ],
+     "lab_connection_facts": [
+      {
+       "connection_id": 61389,
+       "command": "Execute",
+       "time_s": 0,
+       "state": "Statistics",
+       "innodb_lock_wait": false,
+       "statement_targets_locked_table_for_update": true
+      },
+      {
+       "connection_id": 61388,
+       "command": "Execute",
+       "time_s": 0,
+       "state": "Statistics",
+       "innodb_lock_wait": false,
+       "statement_targets_locked_table_for_update": true
+      },
+      {
+       "connection_id": 61387,
+       "command": "Sleep",
+       "time_s": 0,
+       "state": "",
+       "innodb_lock_wait": false,
+       "statement_targets_locked_table_for_update": false
+      },
+      {
+       "connection_id": 61386,
+       "command": "Sleep",
+       "time_s": 0,
+       "state": "",
+       "innodb_lock_wait": false,
+       "statement_targets_locked_table_for_update": false
+      },
+      {
+       "connection_id": 55026,
+       "command": "Sleep",
+       "time_s": 3033,
+       "state": "",
+       "innodb_lock_wait": false,
+       "statement_targets_locked_table_for_update": false
+      }
+     ],
+     "held_for_s": 0.16,
+     "responses": [
+      {
+       "status": 201,
+       "message": "성공적으로 처리되었습니다.",
+       "sent_before_release_s": 0.161,
+       "completed_after_release_s": 0.084
+      },
+      {
+       "status": 409,
+       "message": "현재 남은 시험 인원보다 많습니다. 인원을 다시 선택해 주세요.",
+       "sent_before_release_s": 0.155,
+       "completed_after_release_s": 0.107
+      }
+     ]
+    },
+    {
+     "label": "same idempotency key, same member",
+     "real_server_overlap": true,
+     "blocked_distinct_connection_ids": [
+      61402,
+      61401
+     ],
+     "lab_connection_facts": [
+      {
+       "connection_id": 61402,
+       "command": "Execute",
+       "time_s": 0,
+       "state": "Statistics",
+       "innodb_lock_wait": false,
+       "statement_targets_locked_table_for_update": true
+      },
+      {
+       "connection_id": 61401,
+       "command": "Execute",
+       "time_s": 0,
+       "state": "Statistics",
+       "innodb_lock_wait": false,
+       "statement_targets_locked_table_for_update": true
+      },
+      {
+       "connection_id": 61400,
+       "command": "Sleep",
+       "time_s": 0,
+       "state": "",
+       "innodb_lock_wait": false,
+       "statement_targets_locked_table_for_update": false
+      },
+      {
+       "connection_id": 61399,
+       "command": "Sleep",
+       "time_s": 0,
+       "state": "",
+       "innodb_lock_wait": false,
+       "statement_targets_locked_table_for_update": false
+      },
+      {
+       "connection_id": 55026,
+       "command": "Sleep",
+       "time_s": 3034,
+       "state": "",
+       "innodb_lock_wait": false,
+       "statement_targets_locked_table_for_update": false
+      }
+     ],
+     "held_for_s": 0.156,
+     "responses": [
+      {
+       "status": 201,
+       "message": "성공적으로 처리되었습니다.",
+       "sent_before_release_s": 0.154,
+       "completed_after_release_s": 0.108
+      },
+      {
+       "status": 200,
+       "message": "성공적으로 처리되었습니다.",
+       "sent_before_release_s": 0.152,
+       "completed_after_release_s": 0.116
+      }
+     ]
+    },
+    {
+     "label": "member cancel vs admin decline",
+     "real_server_overlap": true,
+     "blocked_distinct_connection_ids": [
+      61415,
+      61414
+     ],
+     "lab_connection_facts": [
+      {
+       "connection_id": 61415,
+       "command": "Execute",
+       "time_s": 0,
+       "state": "Statistics",
+       "innodb_lock_wait": false,
+       "statement_targets_locked_table_for_update": true
+      },
+      {
+       "connection_id": 61414,
+       "command": "Execute",
+       "time_s": 0,
+       "state": "Statistics",
+       "innodb_lock_wait": false,
+       "statement_targets_locked_table_for_update": true
+      },
+      {
+       "connection_id": 61413,
+       "command": "Sleep",
+       "time_s": 0,
+       "state": "",
+       "innodb_lock_wait": false,
+       "statement_targets_locked_table_for_update": false
+      },
+      {
+       "connection_id": 61412,
+       "command": "Sleep",
+       "time_s": 0,
+       "state": "",
+       "innodb_lock_wait": false,
+       "statement_targets_locked_table_for_update": false
+      },
+      {
+       "connection_id": 55026,
+       "command": "Sleep",
+       "time_s": 3036,
+       "state": "",
+       "innodb_lock_wait": false,
+       "statement_targets_locked_table_for_update": false
+      }
+     ],
+     "held_for_s": 0.311,
+     "responses": [
+      {
+       "status": 200,
+       "message": "성공적으로 처리되었습니다.",
+       "sent_before_release_s": 0.314,
+       "completed_after_release_s": 0.034
+      },
+      {
+       "status": 409,
+       "message": "현재 시험 문의 상태에서 허용되지 않는 처리입니다.",
+       "sent_before_release_s": 0.313,
+       "completed_after_release_s": 0.043
+      }
+     ]
+    },
+    {
+     "label": "submit qty2 vs admin capacity 2->1",
+     "real_server_overlap": true,
+     "blocked_distinct_connection_ids": [
+      61433,
+      61432
+     ],
+     "lab_connection_facts": [
+      {
+       "connection_id": 61433,
+       "command": "Execute",
+       "time_s": 0,
+       "state": "Statistics",
+       "innodb_lock_wait": false,
+       "statement_targets_locked_table_for_update": true
+      },
+      {
+       "connection_id": 61432,
+       "command": "Execute",
+       "time_s": 0,
+       "state": "Statistics",
+       "innodb_lock_wait": false,
+       "statement_targets_locked_table_for_update": true
+      },
+      {
+       "connection_id": 61429,
+       "command": "Sleep",
+       "time_s": 0,
+       "state": "",
+       "innodb_lock_wait": false,
+       "statement_targets_locked_table_for_update": false
+      },
+      {
+       "connection_id": 61428,
+       "command": "Sleep",
+       "time_s": 0,
+       "state": "",
+       "innodb_lock_wait": false,
+       "statement_targets_locked_table_for_update": false
+      },
+      {
+       "connection_id": 55026,
+       "command": "Sleep",
+       "time_s": 3037,
+       "state": "",
+       "innodb_lock_wait": false,
+       "statement_targets_locked_table_for_update": false
+      }
+     ],
+     "held_for_s": 0.316,
+     "responses": [
+      {
+       "status": 201,
+       "message": "성공적으로 처리되었습니다.",
+       "sent_before_release_s": 0.326,
+       "completed_after_release_s": 0.066
+      },
+      {
+       "status": 409,
+       "message": "정원은 확보 인원 이상, 이커머스 옵션 재고 이하여야 합니다.",
+       "sent_before_release_s": 0.324,
+       "completed_after_release_s": 0.068
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "run": "W03R-122519",
+   "counts": {
+    "PASS": 15,
+    "FAIL": 1,
+    "OBSERVED": 1,
+    "BLOCKED": 0,
+    "NOT_RUN": 0
+   },
+   "non_pass": [
+    {
+     "name": "fixture: own free-KR shipping policy + category via native admin API",
+     "status": "OBSERVED",
+     "detail": {
+      "policy": 1,
+      "category": 18,
+      "policy_note": {
+       "own_policy_create_http": 422,
+       "errors": {
+        "country_settings.0.shipping_method": [
+         "선택한 country_settings.0.shipping_method이(가) 올바르지 않습니다."
+        ]
+       },
+       "blocked_reason": "shipping_types reference table empty on preview; existing free-KR policy reused read-only",
+       "reused_policy_id": 1
+      }
+     }
+    },
+    {
+     "name": "overlap: last seat two members (departure row lock)",
+     "status": "FAIL",
+     "detail": {
+      "assert": "no overlap observed"
+     }
+    }
+   ],
+   "races": [
+    {
+     "label": "last seat, two members",
+     "real_server_overlap": false,
+     "blocked_distinct_connection_ids": [
+      62290
+     ],
+     "lab_connection_facts": [
+      {
+       "connection_id": 62290,
+       "command": "Execute",
+       "time_s": 20,
+       "state": "Statistics",
+       "innodb_lock_wait": false,
+       "statement_targets_locked_table_for_update": true
+      },
+      {
+       "connection_id": 62289,
+       "command": "Sleep",
+       "time_s": 20,
+       "state": "",
+       "innodb_lock_wait": false,
+       "statement_targets_locked_table_for_update": false
+      },
+      {
+       "connection_id": 55026,
+       "command": "Sleep",
+       "time_s": 3265,
+       "state": "",
+       "innodb_lock_wait": false,
+       "statement_targets_locked_table_for_update": false
+      }
+     ],
+     "held_for_s": 20.096,
+     "responses": [
+      {
+       "status": 409,
+       "message": "현재 남은 시험 인원보다 많습니다. 인원을 다시 선택해 주세요.",
+       "sent_before_release_s": 20.096,
+       "completed_after_release_s": 0.098
+      },
+      {
+       "status": 201,
+       "message": "성공적으로 처리되었습니다.",
+       "sent_before_release_s": 20.096,
+       "completed_after_release_s": 0.037
+      }
+     ]
+    },
+    {
+     "label": "same idempotency key, same member",
+     "real_server_overlap": true,
+     "blocked_distinct_connection_ids": [
+      62305,
+      62304
+     ],
+     "lab_connection_facts": [
+      {
+       "connection_id": 62305,
+       "command": "Execute",
+       "time_s": 3,
+       "state": "Statistics",
+       "innodb_lock_wait": false,
+       "statement_targets_locked_table_for_update": true
+      },
+      {
+       "connection_id": 62304,
+       "command": "Execute",
+       "time_s": 3,
+       "state": "Statistics",
+       "innodb_lock_wait": false,
+       "statement_targets_locked_table_for_update": true
+      },
+      {
+       "connection_id": 62303,
+       "command": "Sleep",
+       "time_s": 3,
+       "state": "",
+       "innodb_lock_wait": false,
+       "statement_targets_locked_table_for_update": false
+      },
+      {
+       "connection_id": 62302,
+       "command": "Sleep",
+       "time_s": 3,
+       "state": "",
+       "innodb_lock_wait": false,
+       "statement_targets_locked_table_for_update": false
+      },
+      {
+       "connection_id": 55026,
+       "command": "Sleep",
+       "time_s": 3268,
+       "state": "",
+       "innodb_lock_wait": false,
+       "statement_targets_locked_table_for_update": false
+      }
+     ],
+     "held_for_s": 3.184,
+     "responses": [
+      {
+       "status": 200,
+       "message": "성공적으로 처리되었습니다.",
+       "sent_before_release_s": 3.185,
+       "completed_after_release_s": 0.089
+      },
+      {
+       "status": 201,
+       "message": "성공적으로 처리되었습니다.",
+       "sent_before_release_s": 3.184,
+       "completed_after_release_s": 0.084
+      }
+     ]
+    },
+    {
+     "label": "member cancel vs admin decline",
+     "real_server_overlap": true,
+     "blocked_distinct_connection_ids": [
+      62317,
+      62316
+     ],
+     "lab_connection_facts": [
+      {
+       "connection_id": 62317,
+       "command": "Execute",
+       "time_s": 3,
+       "state": "Statistics",
+       "innodb_lock_wait": false,
+       "statement_targets_locked_table_for_update": true
+      },
+      {
+       "connection_id": 62316,
+       "command": "Execute",
+       "time_s": 3,
+       "state": "Statistics",
+       "innodb_lock_wait": false,
+       "statement_targets_locked_table_for_update": true
+      },
+      {
+       "connection_id": 62315,
+       "command": "Sleep",
+       "time_s": 3,
+       "state": "",
+       "innodb_lock_wait": false,
+       "statement_targets_locked_table_for_update": false
+      },
+      {
+       "connection_id": 62314,
+       "command": "Sleep",
+       "time_s": 3,
+       "state": "",
+       "innodb_lock_wait": false,
+       "statement_targets_locked_table_for_update": false
+      },
+      {
+       "connection_id": 55026,
+       "command": "Sleep",
+       "time_s": 3272,
+       "state": "",
+       "innodb_lock_wait": false,
+       "statement_targets_locked_table_for_update": false
+      }
+     ],
+     "held_for_s": 3.218,
+     "responses": [
+      {
+       "status": 200,
+       "message": "성공적으로 처리되었습니다.",
+       "sent_before_release_s": 3.219,
+       "completed_after_release_s": 0.022
+      },
+      {
+       "status": 409,
+       "message": "현재 시험 문의 상태에서 허용되지 않는 처리입니다.",
+       "sent_before_release_s": 3.216,
+       "completed_after_release_s": 0.022
+      }
+     ]
+    },
+    {
+     "label": "submit qty2 vs admin capacity 2->1",
+     "real_server_overlap": true,
+     "blocked_distinct_connection_ids": [
+      62334,
+      62333
+     ],
+     "lab_connection_facts": [
+      {
+       "connection_id": 62334,
+       "command": "Execute",
+       "time_s": 3,
+       "state": "Statistics",
+       "innodb_lock_wait": false,
+       "statement_targets_locked_table_for_update": true
+      },
+      {
+       "connection_id": 62333,
+       "command": "Execute",
+       "time_s": 3,
+       "state": "Statistics",
+       "innodb_lock_wait": false,
+       "statement_targets_locked_table_for_update": true
+      },
+      {
+       "connection_id": 62332,
+       "command": "Sleep",
+       "time_s": 3,
+       "state": "",
+       "innodb_lock_wait": false,
+       "statement_targets_locked_table_for_update": false
+      },
+      {
+       "connection_id": 62331,
+       "command": "Sleep",
+       "time_s": 3,
+       "state": "",
+       "innodb_lock_wait": false,
+       "statement_targets_locked_table_for_update": false
+      },
+      {
+       "connection_id": 55026,
+       "command": "Sleep",
+       "time_s": 3276,
+       "state": "",
+       "innodb_lock_wait": false,
+       "statement_targets_locked_table_for_update": false
+      }
+     ],
+     "held_for_s": 3.205,
+     "responses": [
+      {
+       "status": 201,
+       "message": "성공적으로 처리되었습니다.",
+       "sent_before_release_s": 3.205,
+       "completed_after_release_s": 0.042
+      },
+      {
+       "status": 409,
+       "message": "정원은 확보 인원 이상, 이커머스 옵션 재고 이하여야 합니다.",
+       "sent_before_release_s": 3.204,
+       "completed_after_release_s": 0.043
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "run": "W03R-122933",
+   "counts": {
+    "PASS": 13,
+    "FAIL": 2,
+    "OBSERVED": 1,
+    "BLOCKED": 0,
+    "NOT_RUN": 1
+   },
+   "non_pass": [
+    {
+     "name": "fixture: own free-KR shipping policy + category via native admin API",
+     "status": "OBSERVED",
+     "detail": {
+      "policy": 1,
+      "category": 19,
+      "policy_note": {
+       "own_policy_create_http": 422,
+       "errors": {
+        "country_settings.0.shipping_method": [
+         "선택한 country_settings.0.shipping_method이(가) 올바르지 않습니다."
+        ]
+       },
+       "blocked_reason": "shipping_types reference table empty on preview; existing free-KR policy reused read-only",
+       "reused_policy_id": 1
+      }
+     }
+    },
+    {
+     "name": "overlap: same key same member (user row lock) + replay/409",
+     "status": "FAIL",
+     "detail": {
+      "assert": "no overlap observed"
+     }
+    },
+    {
+     "name": "overlap: member cancel vs admin decline release once (inquiry row lock)",
+     "status": "NOT_RUN",
+     "detail": "depends on same-key inquiry"
+    },
+    {
+     "name": "scope: foreign 404, member admin 403, anonymous 401, admin money field 422",
+     "status": "FAIL",
+     "detail": {
+      "assert": "{'foreign_read': 200, 'foreign_cancel': 200, 'member_admin_list': 403, 'member_admin_patch': 403, 'anonymous_cart': 401, 'admin_money_patch': 422, 'owner_read': 404, 'foreign_list_contains': True}"
+     }
+    }
+   ],
+   "races": [
+    {
+     "label": "last seat, two members (attempt 1)",
+     "real_server_overlap": true,
+     "blocked_distinct_connection_ids": [
+      63515,
+      63510
+     ],
+     "lab_connection_facts": [
+      {
+       "connection_id": 63515,
+       "command": "Execute",
+       "time_s": 3,
+       "state": "Statistics",
+       "innodb_lock_wait": false,
+       "statement_targets_locked_table_for_update": true
+      },
+      {
+       "connection_id": 63512,
+       "command": "Sleep",
+       "time_s": 3,
+       "state": "",
+       "innodb_lock_wait": false,
+       "statement_targets_locked_table_for_update": false
+      },
+      {
+       "connection_id": 63510,
+       "command": "Execute",
+       "time_s": 3,
+       "state": "Statistics",
+       "innodb_lock_wait": false,
+       "statement_targets_locked_table_for_update": true
+      },
+      {
+       "connection_id": 63508,
+       "command": "Sleep",
+       "time_s": 3,
+       "state": "",
+       "innodb_lock_wait": false,
+       "statement_targets_locked_table_for_update": false
+      },
+      {
+       "connection_id": 55026,
+       "command": "Sleep",
+       "time_s": 3508,
+       "state": "",
+       "innodb_lock_wait": false,
+       "statement_targets_locked_table_for_update": false
+      }
+     ],
+     "held_for_s": 3.749,
+     "responses": [
+      {
+       "status": 409,
+       "message": "현재 남은 시험 인원보다 많습니다. 인원을 다시 선택해 주세요.",
+       "sent_before_release_s": 3.75,
+       "completed_after_release_s": 0.087
+      },
+      {
+       "status": 201,
+       "message": "성공적으로 처리되었습니다.",
+       "sent_before_release_s": 3.75,
+       "completed_after_release_s": 0.086
+      }
+     ]
+    },
+    {
+     "label": "same idempotency key, same member",
+     "real_server_overlap": false,
+     "blocked_distinct_connection_ids": [
+      63563
+     ],
+     "lab_connection_facts": [
+      {
+       "connection_id": 63563,
+       "command": "Execute",
+       "time_s": 19,
+       "state": "Statistics",
+       "innodb_lock_wait": false,
+       "statement_targets_locked_table_for_update": true
+      },
+      {
+       "connection_id": 63562,
+       "command": "Sleep",
+       "time_s": 19,
+       "state": "",
+       "innodb_lock_wait": false,
+       "statement_targets_locked_table_for_update": false
+      },
+      {
+       "connection_id": 55026,
+       "command": "Sleep",
+       "time_s": 3529,
+       "state": "",
+       "innodb_lock_wait": false,
+       "statement_targets_locked_table_for_update": false
+      }
+     ],
+     "held_for_s": 20.037,
+     "responses": [
+      {
+       "status": 200,
+       "message": "성공적으로 처리되었습니다.",
+       "sent_before_release_s": 20.037,
+       "completed_after_release_s": 0.129
+      },
+      {
+       "status": 201,
+       "message": "성공적으로 처리되었습니다.",
+       "sent_before_release_s": 20.036,
+       "completed_after_release_s": 0.049
+      }
+     ]
+    },
+    {
+     "label": "submit qty2 vs admin capacity 2->1",
+     "real_server_overlap": true,
+     "blocked_distinct_connection_ids": [
+      63586,
+      63585
+     ],
+     "lab_connection_facts": [
+      {
+       "connection_id": 63586,
+       "command": "Execute",
+       "time_s": 3,
+       "state": "Statistics",
+       "innodb_lock_wait": false,
+       "statement_targets_locked_table_for_update": true
+      },
+      {
+       "connection_id": 63585,
+       "command": "Execute",
+       "time_s": 3,
+       "state": "Statistics",
+       "innodb_lock_wait": false,
+       "statement_targets_locked_table_for_update": true
+      },
+      {
+       "connection_id": 63584,
+       "command": "Sleep",
+       "time_s": 3,
+       "state": "",
+       "innodb_lock_wait": false,
+       "statement_targets_locked_table_for_update": false
+      },
+      {
+       "connection_id": 63583,
+       "command": "Sleep",
+       "time_s": 3,
+       "state": "",
+       "innodb_lock_wait": false,
+       "statement_targets_locked_table_for_update": false
+      },
+      {
+       "connection_id": 55026,
+       "command": "Sleep",
+       "time_s": 3533,
+       "state": "",
+       "innodb_lock_wait": false,
+       "statement_targets_locked_table_for_update": false
+      }
+     ],
+     "held_for_s": 3.182,
+     "responses": [
+      {
+       "status": 201,
+       "message": "성공적으로 처리되었습니다.",
+       "sent_before_release_s": 3.181,
+       "completed_after_release_s": 0.037
+      },
+      {
+       "status": 409,
+       "message": "정원은 확보 인원 이상, 이커머스 옵션 재고 이하여야 합니다.",
+       "sent_before_release_s": 3.18,
+       "completed_after_release_s": 0.038
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "aborted_run_cleanup": {
+  "run": "W03R-121518",
+  "results": [
+   {
+    "name": "delete own ordinary product_O",
+    "status": "PASS",
+    "detail": 200
+   },
+   {
+    "name": "delete own ordinary product_D",
+    "status": "PASS",
+    "detail": 200
+   },
+   {
+    "name": "overlap: member cancel vs admin decline release once (inquiry row lock)",
+    "status": "NOT_RUN",
+    "detail": "depends on same-key inquiry"
+   },
+   {
+    "name": "cleanup: cancel own inquiries, delete own carts, deactivate own departures, unpublish/hide (no guarded delete)",
+    "status": "FAIL",
+    "detail": {
+     "deactivate_33": 200,
+     "unpublish": 200,
+     "hide_travel_product": 200,
+     "ordinary_kept_hidden": 404,
+     "category_inactive": 200,
+     "reserved_after": {
+      "33": 0
+     },
+     "active_after": {
+      "33": false
+     },
+     "public_catalog_contains_fixture": true
+    }
+   }
+  ]
+ }
+}
