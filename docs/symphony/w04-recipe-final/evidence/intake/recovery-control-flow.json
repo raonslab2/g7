@@ -1,0 +1,22 @@
+{
+  "status": "PASS_CONTROL_FLOW_ONLY",
+  "native_mysql_recovery": "NOT_RUN",
+  "command": [
+    "php",
+    "scripts/travel-lab/recovery-failure-test.php"
+  ],
+  "result": {
+    "command": [
+      "/usr/bin/php8.3",
+      "scripts/travel-lab/recovery-failure-test.php"
+    ],
+    "pid": 480684,
+    "exit": 0,
+    "process_gone": true,
+    "seconds": 0.037,
+    "utc": "2026-10-09T18:41:50+00:00"
+  },
+  "stdout_sha256": "af1513c5c2d69ff7aac89deaadbe300ce62a7297077f3a007ae43e52ff8bdd9e",
+  "stderr_sha256": "cc16392ff44d6fedd57ca69e91e219802643f0ab03efa55b580091271e169af4",
+  "safe_output": "{\n    \"status\": \"PASS_CONTROL_FLOW_ONLY\",\n    \"source_sha256\": \"9e65fd5f1440fc827aef3eb4c4e2fa2dc51608d15d9d7b34d0258fae493fe62e\",\n    \"cases\": [\n        {\n            \"scenario\": \"verified\",\n            \"status\": \"PASS\",\n            \"imports\": 1,\n            \"purges\": 1,\n            \"digest_checks\": 1,\n            \"private_snapshot_retained\": false\n        },\n        {\n            \"scenario\": \"mismatch\",\n            \"status\": \"PASS\",\n            \"imports\": 1,\n            \"purges\": 1,\n            \"digest_checks\": 1,\n            \"private_snapshot_retained\": true\n        },\n        {\n            \"scenario\": \"import_failure\",\n            \"status\": \"PASS\",\n            \"imports\": 1,\n            \"purges\": 0,\n            \"digest_checks\": 0,\n            \"private_snapshot_retained\": true\n        },\n        {\n            \"scenario\": \"digest_exception\",\n            \"status\": \"PASS\",\n            \"imports\": 1,\n            \"purges\": 1,\n            \"digest_checks\": 1,\n            \"private_snapshot_retained\": true\n        }\n    ],\n    \"actual_mysql_restore\": \"NOT_RUN\"\n}\n"
+}

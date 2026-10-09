@@ -1,0 +1,26 @@
+{
+  "status": "PASS",
+  "exit": 0,
+  "command": [
+    "/usr/bin/php8.3",
+    "vendor/bin/phpunit",
+    "--bootstrap",
+    "docs/symphony/w04-recipe-final/test-bootstrap.php",
+    "scripts/travel-lab/LiveMysqlTest.php"
+  ],
+  "wall_seconds": 15.241,
+  "stdout_sha256": "995e3fce9459f1ce694897c649976de1b8d172574c36e5ff5636e57350affa87",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "raw_logs_private_retained": true,
+  "tests": 1,
+  "assertions": 34,
+  "phpunit_time": "00:15.100",
+  "native_cache_assertions_executed": 3,
+  "ordinary_fixture_cache": "array",
+  "trait_native_quota_cache": "database",
+  "counter_database": "req81_travel_lab_test",
+  "lock_database": "req81_travel_lab_test",
+  "published_fixture_sha256": "6a9f3b6a273489b292fb3eebbe4986300e78a2e5065c2acc2c3e2a648bee6f7d",
+  "product_assertions_unchanged": true,
+  "full_safe_stdout": "W04Q native TEST bootstrap: own local env restored; ordinary array fixture; original guards retained.\nPHPUnit 11.5.56 by Sebastian Bergmann and contributors.\n\nRuntime:       PHP 8.3.6\nConfiguration: <OWN_REQUEST>/phpunit.xml\n\n.                                                                   1 / 1 (100%)\n\nTime: 00:15.100, Memory: 79.00 MB\n\nOK (1 test, 34 assertions)\n"
+}
