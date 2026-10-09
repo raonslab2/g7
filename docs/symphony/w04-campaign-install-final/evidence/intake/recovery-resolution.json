@@ -1,0 +1,14 @@
+{
+  "scope": "board-regression",
+  "original_blocked_evidence": "competing-process-b425e694.json",
+  "detected_pid": 3650359,
+  "fd": 12,
+  "native_tests_exit": 0,
+  "restore_wipe_exit": 0,
+  "native_import_paused": true,
+  "observed_state_change": "/proc/3650359/fd/12 no longer exists (FileNotFoundError)",
+  "action": "fresh full exclusivity guard then restore only",
+  "exact_original_restoration": true,
+  "foreign_process_terminated": false,
+  "blind_polling_loop": false
+}

@@ -1,0 +1,77 @@
+{
+    "utc": "2026-10-09T19:57:23.044339+00:00",
+    "count": 1,
+    "handles": [
+        {
+            "pid": 3650359,
+            "foreign_test_owner_metadata": true,
+            "own_competing_native": false,
+            "explicit_test_argv": false,
+            "fd_numbers": [
+                12
+            ]
+        }
+    ],
+    "unreadable_pids": [],
+    "lock_holders": [
+        {
+            "pid": 3650359,
+            "type": "FLOCK",
+            "access": "WRITE"
+        },
+        {
+            "pid": 3650359,
+            "type": "FLOCK",
+            "access": "WRITE"
+        },
+        {
+            "pid": 3650359,
+            "type": "FLOCK",
+            "access": "WRITE"
+        },
+        {
+            "pid": 3650359,
+            "type": "FLOCK",
+            "access": "WRITE"
+        },
+        {
+            "pid": 3650359,
+            "type": "FLOCK",
+            "access": "READ"
+        },
+        {
+            "pid": 3650359,
+            "type": "FLOCK",
+            "access": "READ"
+        },
+        {
+            "pid": 3650359,
+            "type": "FLOCK",
+            "access": "READ"
+        },
+        {
+            "pid": 3650359,
+            "type": "FLOCK",
+            "access": "READ"
+        },
+        {
+            "pid": 3650359,
+            "type": "FLOCK",
+            "access": "READ"
+        },
+        {
+            "pid": 3650359,
+            "type": "FLOCK",
+            "access": "READ"
+        }
+    ],
+    "excluded_ancestor_pids": [
+        603659,
+        644602,
+        651247,
+        653853,
+        653862,
+        3650359
+    ],
+    "method": "proc-only bounded cwd/argv/FD; known TEST owners and own nonancestor native processes"
+}

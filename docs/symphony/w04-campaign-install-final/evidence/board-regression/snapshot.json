@@ -1,0 +1,69 @@
+{
+    "label": "board-regression",
+    "source_sha": "d059d735cd17ed3c88dd27cca5a9f83f00042011",
+    "source_tree": "6dc9381b1d50196c81867ef3f9e31ca86611f410",
+    "dump_sha256": "7ac47adcfdb298b60d6f882a6a4fb582d597240b13487b9c1e8dec07ad78ff5e",
+    "dump_bytes": 125166,
+    "dump_exit": 0,
+    "dump_pid": 651301,
+    "dump_process_gone": true,
+    "dump_handles": {
+        "utc": "2026-10-09T19:56:46.422346+00:00",
+        "count": 0,
+        "handles": [],
+        "unreadable_pids": [],
+        "lock_holders": [],
+        "excluded_ancestor_pids": [
+            603659,
+            644602,
+            651247,
+            651302,
+            651303,
+            3650359
+        ],
+        "method": "proc-only bounded cwd/argv/FD; known TEST owners and own nonancestor native processes"
+    },
+    "dump_seconds": 0.368,
+    "stable": true,
+    "before_digest": "ded72a53ad82a159b88e50a6560625488bb569a55f5f5ffa109cd45ae52d056e",
+    "table_count": 55,
+    "row_count": 104,
+    "equals_original_baseline": true,
+    "directory_mode": "700",
+    "file_mode": "600",
+    "exclusive": {
+        "pid": 651247,
+        "cwd": "/home/ubuntu/.agentopt-v2/workspaces/req_812d0334c2064f5d88339114e7954235",
+        "argv": [
+            "docs/symphony/w04-campaign-install-final/snapshot.php",
+            "board-regression",
+            "run",
+            "/usr/bin/php8.3",
+            "vendor/bin/phpunit",
+            "--bootstrap",
+            "docs/symphony/w04-campaign-install-final/test-bootstrap.php",
+            "modules/_bundled/sirsoft-board/tests/Feature/User/SecretPostCommentAccessTest.php"
+        ],
+        "own_connection_id": 123202,
+        "other_test_connections": 0,
+        "own_server_processes": 0,
+        "prior_request_handles": {
+            "utc": "2026-10-09T19:56:46.028286+00:00",
+            "count": 0,
+            "handles": [],
+            "unreadable_pids": [],
+            "lock_holders": [],
+            "excluded_ancestor_pids": [
+                603659,
+                644602,
+                651247,
+                651272,
+                651273,
+                3650359
+            ],
+            "method": "proc-only bounded cwd/argv/FD; known TEST owners and own nonancestor native processes"
+        },
+        "utc": "2026-10-09T19:56:46+00:00"
+    },
+    "utc": "2026-10-09T19:56:46+00:00"
+}

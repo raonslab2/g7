@@ -1,0 +1,1909 @@
+{
+  "source_sha": "d059d735cd17ed3c88dd27cca5a9f83f00042011",
+  "commands": [
+    {
+      "command": [
+        "python3",
+        "docs/symphony/w04-campaign-install-final/recovery-dump-check.py",
+        "storage/framework/testing/w04c-migration-roundtrip/snapshot.sql",
+        "storage/framework/testing/w04c-migration-roundtrip/before.json"
+      ],
+      "pid": 669320,
+      "exit": 0,
+      "process_gone": true,
+      "seconds": 0.224,
+      "utc": "2026-10-09T20:01:39+00:00",
+      "private_log_label": "storage/framework/testing/w04c-migration-roundtrip/restore-sql-check.log.result.json",
+      "stdout_sha256": "8af9554e4c5d9e3ff1dd2da94b5bbcf6b0562c9d2fd76806b495ddd7f2dd4918"
+    },
+    {
+      "command": [
+        "/usr/bin/php8.3",
+        "docs/symphony/w04-campaign-install-final/guarded-artisan.php",
+        "db:wipe",
+        "--database=mysql",
+        "--drop-views",
+        "--force",
+        "--no-interaction"
+      ],
+      "pid": 669398,
+      "exit": 0,
+      "process_gone": true,
+      "seconds": 1.573,
+      "utc": "2026-10-09T20:01:42+00:00",
+      "private_log_label": "storage/framework/testing/w04c-migration-roundtrip/restore-wipe.log.result.json",
+      "stdout_sha256": "b404bd034dcc8c3805818114cf14b64521bf5fa2a730929f2acee5a2fc30ef30"
+    },
+    {
+      "command": [
+        "mysqldump",
+        "--defaults-file=storage/framework/testing/w04c-migration-roundtrip/mysql.cnf",
+        "--protocol=tcp",
+        "--host=127.0.0.1",
+        "--port=3306",
+        "--user=req81_travel",
+        "--single-transaction",
+        "--hex-blob",
+        "--no-tablespaces",
+        "--skip-lock-tables",
+        "req81_travel_lab_test"
+      ],
+      "pid": 669375,
+      "exit": 0,
+      "process_gone": true,
+      "seconds": 0.155,
+      "utc": "2026-10-09T20:01:40+00:00",
+      "private_log_label": "storage/framework/testing/w04c-migration-roundtrip/safety-7a9ba382.sql.result.json",
+      "stdout_sha256": "a993ee123ecfe9622ce2259f9657b582e62d9b373ff7d6fc1c35c768e4147132"
+    },
+    {
+      "command": [
+        "/usr/bin/php8.3",
+        "docs/symphony/w04-campaign-install-final/guarded-artisan.php",
+        "db:wipe",
+        "--database=mysql",
+        "--drop-views",
+        "--force",
+        "--no-interaction"
+      ],
+      "pid": 664140,
+      "exit": 0,
+      "process_gone": true,
+      "seconds": 2.086,
+      "utc": "2026-10-09T20:00:42+00:00",
+      "private_log_label": "storage/framework/testing/w04c-migration-roundtrip/restore-wipe.log.history-95d53aaa.result.json",
+      "stdout_sha256": "b404bd034dcc8c3805818114cf14b64521bf5fa2a730929f2acee5a2fc30ef30"
+    },
+    {
+      "command": [
+        "mysqldump",
+        "--defaults-file=storage/framework/testing/w04c-migration-roundtrip/mysql.cnf",
+        "--protocol=tcp",
+        "--host=127.0.0.1",
+        "--port=3306",
+        "--user=req81_travel",
+        "--single-transaction",
+        "--hex-blob",
+        "--no-tablespaces",
+        "--skip-lock-tables",
+        "req81_travel_lab_test"
+      ],
+      "pid": 664112,
+      "exit": 0,
+      "process_gone": true,
+      "seconds": 0.333,
+      "utc": "2026-10-09T20:00:39+00:00",
+      "private_log_label": "storage/framework/testing/w04c-migration-roundtrip/safety-5e21e7c8.sql.result.json",
+      "stdout_sha256": "c61abfc83f24426f1b1b5b6e36693d80e7184afd2857db24b613c50c7d0c58b9"
+    },
+    {
+      "command": [
+        "/usr/bin/php8.3",
+        "docs/symphony/w04-campaign-install-final/migration-roundtrip.php",
+        "migration-roundtrip"
+      ],
+      "pid": 661867,
+      "exit": 0,
+      "process_gone": true,
+      "seconds": 26.427,
+      "utc": "2026-10-09T20:00:37+00:00",
+      "private_log_label": "storage/framework/testing/w04c-migration-roundtrip/native.log.result.json",
+      "stdout_sha256": "033974a4e2da70589a1826509ea78c5ac307d638fa65a3ed3c83b2c2f924d4b1"
+    },
+    {
+      "command": [
+        "python3",
+        "docs/symphony/w04-campaign-install-final/recovery-dump-check.py",
+        "storage/framework/testing/w04c-migration-roundtrip/snapshot.sql",
+        "storage/framework/testing/w04c-migration-roundtrip/before.json"
+      ],
+      "pid": 664015,
+      "exit": 0,
+      "process_gone": true,
+      "seconds": 0.481,
+      "utc": "2026-10-09T20:00:38+00:00",
+      "private_log_label": "storage/framework/testing/w04c-migration-roundtrip/restore-sql-check.log.history-fe1ef041.result.json",
+      "stdout_sha256": "8af9554e4c5d9e3ff1dd2da94b5bbcf6b0562c9d2fd76806b495ddd7f2dd4918"
+    },
+    {
+      "command": [
+        "python3",
+        "docs/symphony/w04-campaign-install-final/recovery-dump-check.py",
+        "storage/framework/testing/w04c-migration-roundtrip/snapshot.sql",
+        "storage/framework/testing/w04c-migration-roundtrip/before.json"
+      ],
+      "pid": 661503,
+      "exit": 0,
+      "process_gone": true,
+      "seconds": 1.588,
+      "utc": "2026-10-09T20:00:10+00:00",
+      "private_log_label": "storage/framework/testing/w04c-migration-roundtrip/dump-check.log.result.json",
+      "stdout_sha256": "8af9554e4c5d9e3ff1dd2da94b5bbcf6b0562c9d2fd76806b495ddd7f2dd4918"
+    },
+    {
+      "command": [
+        "/usr/bin/php8.3",
+        "docs/symphony/w04-campaign-install-final/guarded-artisan.php",
+        "module:seed",
+        "raonslab-travel_lab",
+        "--sample",
+        "--no-interaction"
+      ],
+      "pid": 614240,
+      "exit": 0,
+      "process_gone": true,
+      "seconds": 1.245,
+      "utc": "2026-10-09T19:49:35+00:00",
+      "private_log_label": "storage/framework/testing/w04c-install-logs/17-module-seed-raonslab-travel_lab.txt.history-2965c969.result.json",
+      "stdout_sha256": "a22d5203694905ba3b479a21ce7141c154b94585ec3e98ee13e48763970b98ca"
+    },
+    {
+      "command": [
+        "/usr/bin/php8.3",
+        "docs/symphony/w04-campaign-install-final/guarded-artisan.php",
+        "module:install",
+        "sirsoft-board",
+        "--vendor-mode=bundled",
+        "--no-interaction"
+      ],
+      "pid": 612859,
+      "exit": 0,
+      "process_gone": true,
+      "seconds": 5.823,
+      "utc": "2026-10-09T19:49:04+00:00",
+      "private_log_label": "storage/framework/testing/w04c-install-logs/04-module-install-sirsoft-board.txt.history-7ed7a44b.result.json",
+      "stdout_sha256": "6ed5de2c9d7b3f544168b69d2f725accea36bcbe89b9ca0adff013db27fff351"
+    },
+    {
+      "command": [
+        "/usr/bin/php8.3",
+        "docs/symphony/w04-campaign-install-final/guarded-artisan.php",
+        "module:activate",
+        "raonslab-travel_lab",
+        "--no-interaction"
+      ],
+      "pid": 611401,
+      "exit": 0,
+      "process_gone": true,
+      "seconds": 0.709,
+      "utc": "2026-10-09T19:48:11+00:00",
+      "private_log_label": "storage/framework/testing/w04c-install-logs/11-module-activate-raonslab-travel_lab.txt.history-a68fee3a.result.json",
+      "stdout_sha256": "c3e241ded4cd624e697e56a0c84194c34f8a12707d05d8531fcbd5238bf11a97"
+    },
+    {
+      "command": [
+        "/usr/bin/php8.3",
+        "docs/symphony/w04-campaign-install-final/guarded-artisan.php",
+        "module:install",
+        "raonslab-travel_lab",
+        "--vendor-mode=bundled",
+        "--no-interaction"
+      ],
+      "pid": 629066,
+      "exit": 0,
+      "process_gone": true,
+      "seconds": 1.795,
+      "utc": "2026-10-09T19:52:39+00:00",
+      "private_log_label": "storage/framework/testing/w04c-install-logs/10-module-install-raonslab-travel_lab.txt.result.json",
+      "stdout_sha256": "c3053da1d66a3ac6312a0d9ab9523dc13293ba2772c9c0d69d0a3ef2b9c3031d"
+    },
+    {
+      "command": [
+        "/usr/bin/php8.3",
+        "docs/symphony/w04-campaign-install-final/guarded-artisan.php",
+        "module:activate",
+        "sirsoft-ecommerce",
+        "--no-interaction"
+      ],
+      "pid": 629020,
+      "exit": 0,
+      "process_gone": true,
+      "seconds": 0.73,
+      "utc": "2026-10-09T19:52:37+00:00",
+      "private_log_label": "storage/framework/testing/w04c-install-logs/09-module-activate-sirsoft-ecommerce.txt.result.json",
+      "stdout_sha256": "969bcfcdf977c7248daf149f326f5d9d2725499a30da2cbb74d6418e44532add"
+    },
+    {
+      "command": [
+        "/usr/bin/php8.3",
+        "scripts/travel-lab/vendor-check.php",
+        "--bundled"
+      ],
+      "pid": 613925,
+      "exit": 0,
+      "process_gone": true,
+      "seconds": 0.077,
+      "utc": "2026-10-09T19:49:22+00:00",
+      "private_log_label": "storage/framework/testing/w04c-install-logs/vendor-check-bundled.txt.history-cc00a1f1.result.json",
+      "stdout_sha256": "9ff77d690c6b9987381ce133c2f0eb72930b8cbfa57e27a9eafff14c71d868c8"
+    },
+    {
+      "command": [
+        "/usr/bin/php8.3",
+        "docs/symphony/w04-campaign-install-final/guarded-artisan.php",
+        "template:activate",
+        "raonslab-travel_lab",
+        "--no-interaction"
+      ],
+      "pid": 629320,
+      "exit": 0,
+      "process_gone": true,
+      "seconds": 1.476,
+      "utc": "2026-10-09T19:52:48+00:00",
+      "private_log_label": "storage/framework/testing/w04c-install-logs/15-template-activate-raonslab-travel_lab.txt.result.json",
+      "stdout_sha256": "90ecad0ceb1b392047764344bbe953960d6309560ac33d2f79f50bf7ad490a80"
+    },
+    {
+      "command": [
+        "/usr/bin/php8.3",
+        "scripts/travel-lab/vendor-check.php",
+        "--bundled"
+      ],
+      "pid": 611277,
+      "exit": 0,
+      "process_gone": true,
+      "seconds": 0.067,
+      "utc": "2026-10-09T19:48:08+00:00",
+      "private_log_label": "storage/framework/testing/w04c-install-logs/vendor-check-bundled.txt.history-81437dd6.result.json",
+      "stdout_sha256": "9ff77d690c6b9987381ce133c2f0eb72930b8cbfa57e27a9eafff14c71d868c8"
+    },
+    {
+      "command": [
+        "/usr/bin/php8.3",
+        "docs/symphony/w04-campaign-install-final/guarded-artisan.php",
+        "module:install",
+        "sirsoft-board",
+        "--vendor-mode=bundled",
+        "--no-interaction"
+      ],
+      "pid": 624061,
+      "exit": 0,
+      "process_gone": true,
+      "seconds": 9.174,
+      "utc": "2026-10-09T19:52:08+00:00",
+      "private_log_label": "storage/framework/testing/w04c-install-logs/04-module-install-sirsoft-board.txt.result.json",
+      "stdout_sha256": "6ed5de2c9d7b3f544168b69d2f725accea36bcbe89b9ca0adff013db27fff351"
+    },
+    {
+      "command": [
+        "/usr/bin/php8.3",
+        "docs/symphony/w04-campaign-install-final/guarded-artisan.php",
+        "module:install",
+        "sirsoft-page",
+        "--vendor-mode=bundled",
+        "--no-interaction"
+      ],
+      "pid": 613496,
+      "exit": 0,
+      "process_gone": true,
+      "seconds": 1.749,
+      "utc": "2026-10-09T19:49:07+00:00",
+      "private_log_label": "storage/framework/testing/w04c-install-logs/06-module-install-sirsoft-page.txt.history-d9d47c80.result.json",
+      "stdout_sha256": "1bc6dd0d87ddf16a5c2b135bdbc63bff7333aaf9184f41fa03af8658a675a1ab"
+    },
+    {
+      "command": [
+        "/usr/bin/php8.3",
+        "docs/symphony/w04-campaign-install-final/guarded-artisan.php",
+        "db:wipe",
+        "--database=mysql",
+        "--drop-views",
+        "--force",
+        "--no-interaction"
+      ],
+      "pid": 609193,
+      "exit": 0,
+      "process_gone": true,
+      "seconds": 1.011,
+      "utc": "2026-10-09T19:47:34+00:00",
+      "private_log_label": "storage/framework/testing/w04c-install-logs/01-db-wipe.txt.history-5bab11f4.result.json",
+      "stdout_sha256": "b404bd034dcc8c3805818114cf14b64521bf5fa2a730929f2acee5a2fc30ef30"
+    },
+    {
+      "command": [
+        "/usr/bin/php8.3",
+        "docs/symphony/w04-campaign-install-final/guarded-artisan.php",
+        "module:install",
+        "sirsoft-page",
+        "--vendor-mode=bundled",
+        "--no-interaction"
+      ],
+      "pid": 625796,
+      "exit": 0,
+      "process_gone": true,
+      "seconds": 3.562,
+      "utc": "2026-10-09T19:52:14+00:00",
+      "private_log_label": "storage/framework/testing/w04c-install-logs/06-module-install-sirsoft-page.txt.result.json",
+      "stdout_sha256": "1bc6dd0d87ddf16a5c2b135bdbc63bff7333aaf9184f41fa03af8658a675a1ab"
+    },
+    {
+      "command": [
+        "/usr/bin/php8.3",
+        "docs/symphony/w04-campaign-install-final/guarded-artisan.php",
+        "module:activate",
+        "raonslab-travel_lab",
+        "--no-interaction"
+      ],
+      "pid": 629099,
+      "exit": 0,
+      "process_gone": true,
+      "seconds": 0.677,
+      "utc": "2026-10-09T19:52:39+00:00",
+      "private_log_label": "storage/framework/testing/w04c-install-logs/11-module-activate-raonslab-travel_lab.txt.result.json",
+      "stdout_sha256": "c3e241ded4cd624e697e56a0c84194c34f8a12707d05d8531fcbd5238bf11a97"
+    },
+    {
+      "command": [
+        "/usr/bin/php8.3",
+        "docs/symphony/w04-campaign-install-final/guarded-artisan.php",
+        "template:install",
+        "raonslab-travel_lab",
+        "--no-interaction"
+      ],
+      "pid": 614125,
+      "exit": 0,
+      "process_gone": true,
+      "seconds": 0.995,
+      "utc": "2026-10-09T19:49:31+00:00",
+      "private_log_label": "storage/framework/testing/w04c-install-logs/14-template-install-raonslab-travel_lab.txt.history-938c42c9.result.json",
+      "stdout_sha256": "adf5d8ec11f665f1fcc156fff96f4a4a661a452cf6d630b9febbd1efb8577423"
+    },
+    {
+      "command": [
+        "/usr/bin/php8.3",
+        "docs/symphony/w04-campaign-install-final/guarded-artisan.php",
+        "settings:install",
+        "--no-interaction"
+      ],
+      "pid": 623887,
+      "exit": 0,
+      "process_gone": true,
+      "seconds": 0.624,
+      "utc": "2026-10-09T19:51:57+00:00",
+      "private_log_label": "storage/framework/testing/w04c-install-logs/02-settings-install.txt.result.json",
+      "stdout_sha256": "0f67b54d247dac45a68aebbd6a8ec57ef761e7e78e0b14d27cfb78ad4007ce06"
+    },
+    {
+      "command": [
+        "/usr/bin/php8.3",
+        "docs/symphony/w04-campaign-install-final/guarded-artisan.php",
+        "module:install",
+        "sirsoft-page",
+        "--vendor-mode=bundled",
+        "--no-interaction"
+      ],
+      "pid": 610426,
+      "exit": 0,
+      "process_gone": true,
+      "seconds": 1.677,
+      "utc": "2026-10-09T19:47:52+00:00",
+      "private_log_label": "storage/framework/testing/w04c-install-logs/06-module-install-sirsoft-page.txt.history-96627bd5.result.json",
+      "stdout_sha256": "1bc6dd0d87ddf16a5c2b135bdbc63bff7333aaf9184f41fa03af8658a675a1ab"
+    },
+    {
+      "command": [
+        "/usr/bin/php8.3",
+        "docs/symphony/w04-campaign-install-final/guarded-artisan.php",
+        "settings:install",
+        "--no-interaction"
+      ],
+      "pid": 612769,
+      "exit": 0,
+      "process_gone": true,
+      "seconds": 0.591,
+      "utc": "2026-10-09T19:48:57+00:00",
+      "private_log_label": "storage/framework/testing/w04c-install-logs/02-settings-install.txt.history-d0043f53.result.json",
+      "stdout_sha256": "0f67b54d247dac45a68aebbd6a8ec57ef761e7e78e0b14d27cfb78ad4007ce06"
+    },
+    {
+      "command": [
+        "/usr/bin/php8.3",
+        "scripts/travel-lab/vendor-check.php"
+      ],
+      "pid": 629013,
+      "exit": 0,
+      "process_gone": true,
+      "seconds": 0.087,
+      "utc": "2026-10-09T19:52:36+00:00",
+      "private_log_label": "storage/framework/testing/w04c-install-logs/vendor-check-installed.txt.result.json",
+      "stdout_sha256": "9b3309867f8662ef2db35f33a9d42d81bce5753635aac6bbccac89344d98ea54"
+    },
+    {
+      "command": [
+        "/usr/bin/php8.3",
+        "docs/symphony/w04-campaign-install-final/guarded-artisan.php",
+        "module:activate",
+        "sirsoft-board",
+        "--no-interaction"
+      ],
+      "pid": 625348,
+      "exit": 0,
+      "process_gone": true,
+      "seconds": 2.026,
+      "utc": "2026-10-09T19:52:10+00:00",
+      "private_log_label": "storage/framework/testing/w04c-install-logs/05-module-activate-sirsoft-board.txt.result.json",
+      "stdout_sha256": "ba8b15afd96bf5ee662c69ffe93e1529fc5a9f773751ec6b479161414818371d"
+    },
+    {
+      "command": [
+        "/usr/bin/php8.3",
+        "docs/symphony/w04-campaign-install-final/guarded-artisan.php",
+        "module:install",
+        "sirsoft-ecommerce",
+        "--vendor-mode=bundled",
+        "--no-interaction"
+      ],
+      "pid": 613621,
+      "exit": 0,
+      "process_gone": true,
+      "seconds": 13.379,
+      "utc": "2026-10-09T19:49:21+00:00",
+      "private_log_label": "storage/framework/testing/w04c-install-logs/08-module-install-sirsoft-ecommerce.txt.history-15a25449.result.json",
+      "stdout_sha256": "db65b7722428da8e7f878b4310b56d4da3cd036ce0fc1f0531b7ca1e691ffb5e"
+    },
+    {
+      "command": [
+        "/usr/bin/php8.3",
+        "docs/symphony/w04-campaign-install-final/guarded-artisan.php",
+        "raonslab-travel_lab:support-provision",
+        "--lab-confirm",
+        "--no-interaction"
+      ],
+      "pid": 629362,
+      "exit": 0,
+      "process_gone": true,
+      "seconds": 1.74,
+      "utc": "2026-10-09T19:52:52+00:00",
+      "private_log_label": "storage/framework/testing/w04c-install-logs/18-raonslab-travel_lab-support-provision.txt.result.json",
+      "stdout_sha256": "0fbadeee7890b98564371abab59adbdb11ed8a36fb3969f2f4da3a404fdda887"
+    },
+    {
+      "command": [
+        "/usr/bin/php8.3",
+        "docs/symphony/w04-campaign-install-final/guarded-artisan.php",
+        "module:activate",
+        "raonslab-travel_lab",
+        "--no-interaction"
+      ],
+      "pid": 614003,
+      "exit": 0,
+      "process_gone": true,
+      "seconds": 0.696,
+      "utc": "2026-10-09T19:49:25+00:00",
+      "private_log_label": "storage/framework/testing/w04c-install-logs/11-module-activate-raonslab-travel_lab.txt.history-a2c98f43.result.json",
+      "stdout_sha256": "c3e241ded4cd624e697e56a0c84194c34f8a12707d05d8531fcbd5238bf11a97"
+    },
+    {
+      "command": [
+        "/usr/bin/php8.3",
+        "docs/symphony/w04-campaign-install-final/guarded-artisan.php",
+        "template:activate",
+        "sirsoft-admin_basic",
+        "--no-interaction"
+      ],
+      "pid": 629175,
+      "exit": 0,
+      "process_gone": true,
+      "seconds": 3.222,
+      "utc": "2026-10-09T19:52:46+00:00",
+      "private_log_label": "storage/framework/testing/w04c-install-logs/13-template-activate-sirsoft-admin_basic.txt.result.json",
+      "stdout_sha256": "36b9fdcb88ac534e73c91a120a8e3aaceda0bb9276ba2102df418964e299a73b"
+    },
+    {
+      "command": [
+        "/usr/bin/php8.3",
+        "docs/symphony/w04-campaign-install-final/empty-migrate.php"
+      ],
+      "pid": 609367,
+      "exit": 0,
+      "process_gone": true,
+      "seconds": 8.296,
+      "utc": "2026-10-09T19:47:42+00:00",
+      "private_log_label": "storage/framework/testing/w04c-install-logs/02-empty-native-migrate.txt.history-1baa4474.result.json",
+      "stdout_sha256": "9852967ec0c61848311a7f39916c5390d671a3a2070716c95277eb6f0721773b"
+    },
+    {
+      "command": [
+        "/usr/bin/php8.3",
+        "docs/symphony/w04-campaign-install-final/empty-migrate.php"
+      ],
+      "pid": 622779,
+      "exit": 0,
+      "process_gone": true,
+      "seconds": 8.508,
+      "utc": "2026-10-09T19:51:56+00:00",
+      "private_log_label": "storage/framework/testing/w04c-install-logs/02-empty-native-migrate.txt.result.json",
+      "stdout_sha256": "f5df86056c4715cc2e1ede6be046c09cf287df6ee81c6572e074071e2b44b165"
+    },
+    {
+      "command": [
+        "/usr/bin/php8.3",
+        "docs/symphony/w04-campaign-install-final/guarded-artisan.php",
+        "db:seed",
+        "--class=DatabaseSeeder",
+        "--force",
+        "--no-interaction"
+      ],
+      "pid": 623931,
+      "exit": 0,
+      "process_gone": true,
+      "seconds": 1.496,
+      "utc": "2026-10-09T19:51:59+00:00",
+      "private_log_label": "storage/framework/testing/w04c-install-logs/03-db-seed.txt.result.json",
+      "stdout_sha256": "82b907359a805791c1e01891cbdf94c56e1951bd436088e13d9d7b8ab41ca530"
+    },
+    {
+      "command": [
+        "/usr/bin/php8.3",
+        "docs/symphony/w04-campaign-install-final/guarded-artisan.php",
+        "db:wipe",
+        "--database=mysql",
+        "--drop-views",
+        "--force",
+        "--no-interaction"
+      ],
+      "pid": 622388,
+      "exit": 0,
+      "process_gone": true,
+      "seconds": 1.664,
+      "utc": "2026-10-09T19:51:47+00:00",
+      "private_log_label": "storage/framework/testing/w04c-install-logs/01-db-wipe.txt.result.json",
+      "stdout_sha256": "b404bd034dcc8c3805818114cf14b64521bf5fa2a730929f2acee5a2fc30ef30"
+    },
+    {
+      "command": [
+        "/usr/bin/php8.3",
+        "docs/symphony/w04-campaign-install-final/bootstrap-check.php",
+        "empty"
+      ],
+      "pid": 622694,
+      "exit": 0,
+      "process_gone": true,
+      "seconds": 0.56,
+      "utc": "2026-10-09T19:51:48+00:00",
+      "private_log_label": "storage/framework/testing/w04c-install-logs/empty-bootstrap-check.txt.result.json",
+      "stdout_sha256": "1f8efaa4e5a27e2e7888b22d43a51be10e4b4b8bc31159c917d1f4ad0ce28d46"
+    },
+    {
+      "command": [
+        "/usr/bin/php8.3",
+        "scripts/travel-lab/vendor-check.php"
+      ],
+      "pid": 611273,
+      "exit": 0,
+      "process_gone": true,
+      "seconds": 0.085,
+      "utc": "2026-10-09T19:48:07+00:00",
+      "private_log_label": "storage/framework/testing/w04c-install-logs/vendor-check-installed.txt.history-5fdf47ee.result.json",
+      "stdout_sha256": "9b3309867f8662ef2db35f33a9d42d81bce5753635aac6bbccac89344d98ea54"
+    },
+    {
+      "command": [
+        "/usr/bin/php8.3",
+        "docs/symphony/w04-campaign-install-final/guarded-artisan.php",
+        "module:install",
+        "sirsoft-ecommerce",
+        "--vendor-mode=bundled",
+        "--no-interaction"
+      ],
+      "pid": 626578,
+      "exit": 0,
+      "process_gone": true,
+      "seconds": 19.304,
+      "utc": "2026-10-09T19:52:35+00:00",
+      "private_log_label": "storage/framework/testing/w04c-install-logs/08-module-install-sirsoft-ecommerce.txt.result.json",
+      "stdout_sha256": "db65b7722428da8e7f878b4310b56d4da3cd036ce0fc1f0531b7ca1e691ffb5e"
+    },
+    {
+      "command": [
+        "/usr/bin/php8.3",
+        "docs/symphony/w04-campaign-install-final/guarded-artisan.php",
+        "module:install",
+        "sirsoft-board",
+        "--vendor-mode=bundled",
+        "--no-interaction"
+      ],
+      "pid": 610158,
+      "exit": 0,
+      "process_gone": true,
+      "seconds": 4.982,
+      "utc": "2026-10-09T19:47:50+00:00",
+      "private_log_label": "storage/framework/testing/w04c-install-logs/04-module-install-sirsoft-board.txt.history-3b88b45e.result.json",
+      "stdout_sha256": "6ed5de2c9d7b3f544168b69d2f725accea36bcbe89b9ca0adff013db27fff351"
+    },
+    {
+      "command": [
+        "/usr/bin/php8.3",
+        "docs/symphony/w04-campaign-install-final/guarded-artisan.php",
+        "template:install",
+        "sirsoft-admin_basic",
+        "--no-interaction"
+      ],
+      "pid": 629107,
+      "exit": 0,
+      "process_gone": true,
+      "seconds": 2.78,
+      "utc": "2026-10-09T19:52:42+00:00",
+      "private_log_label": "storage/framework/testing/w04c-install-logs/12-template-install-sirsoft-admin_basic.txt.result.json",
+      "stdout_sha256": "0f619ef422ae66e9416441db7a67d0d8cae25e1263d3a21bba7ea61db5b42bf9"
+    },
+    {
+      "command": [
+        "/usr/bin/php8.3",
+        "docs/symphony/w04-campaign-install-final/guarded-artisan.php",
+        "db:seed",
+        "--class=Modules\\Sirsoft\\Ecommerce\\Database\\Seeders\\ShippingTypeSeeder",
+        "--force",
+        "--no-interaction"
+      ],
+      "pid": 629327,
+      "exit": 0,
+      "process_gone": true,
+      "seconds": 0.667,
+      "utc": "2026-10-09T19:52:49+00:00",
+      "private_log_label": "storage/framework/testing/w04c-install-logs/16-db-seed.txt.result.json",
+      "stdout_sha256": "27d618df43193280d9ae58731016afb36d7581b3df485499ef83c7e9fd4af1d3"
+    },
+    {
+      "command": [
+        "/usr/bin/php8.3",
+        "docs/symphony/w04-campaign-install-final/guarded-artisan.php",
+        "module:activate",
+        "sirsoft-page",
+        "--no-interaction"
+      ],
+      "pid": 626359,
+      "exit": 0,
+      "process_gone": true,
+      "seconds": 1.095,
+      "utc": "2026-10-09T19:52:16+00:00",
+      "private_log_label": "storage/framework/testing/w04c-install-logs/07-module-activate-sirsoft-page.txt.result.json",
+      "stdout_sha256": "665b7aef0cfce9a01daccd53e5f1e7a785b88c4a5b2703e41006536dce37ca10"
+    },
+    {
+      "command": [
+        "/usr/bin/php8.3",
+        "docs/symphony/w04-campaign-install-final/guarded-artisan.php",
+        "db:seed",
+        "--class=DatabaseSeeder",
+        "--force",
+        "--no-interaction"
+      ],
+      "pid": 610041,
+      "exit": 0,
+      "process_gone": true,
+      "seconds": 1.23,
+      "utc": "2026-10-09T19:47:45+00:00",
+      "private_log_label": "storage/framework/testing/w04c-install-logs/03-db-seed.txt.history-9960c591.result.json",
+      "stdout_sha256": "8bb47c5d0d7319d25eefc0fc1a6988e1de0e114242ea080433468bf00332e90a"
+    },
+    {
+      "command": [
+        "/usr/bin/php8.3",
+        "docs/symphony/w04-campaign-install-final/guarded-artisan.php",
+        "db:seed",
+        "--class=Modules\\Sirsoft\\Ecommerce\\Database\\Seeders\\ShippingTypeSeeder",
+        "--force",
+        "--no-interaction"
+      ],
+      "pid": 614232,
+      "exit": 0,
+      "process_gone": true,
+      "seconds": 0.683,
+      "utc": "2026-10-09T19:49:34+00:00",
+      "private_log_label": "storage/framework/testing/w04c-install-logs/16-db-seed.txt.history-0ad88810.result.json",
+      "stdout_sha256": "27d618df43193280d9ae58731016afb36d7581b3df485499ef83c7e9fd4af1d3"
+    },
+    {
+      "command": [
+        "/usr/bin/php8.3",
+        "docs/symphony/w04-campaign-install-final/guarded-artisan.php",
+        "template:activate",
+        "sirsoft-admin_basic",
+        "--no-interaction"
+      ],
+      "pid": 614062,
+      "exit": 0,
+      "process_gone": true,
+      "seconds": 3.123,
+      "utc": "2026-10-09T19:49:30+00:00",
+      "private_log_label": "storage/framework/testing/w04c-install-logs/13-template-activate-sirsoft-admin_basic.txt.history-053a62f4.result.json",
+      "stdout_sha256": "36b9fdcb88ac534e73c91a120a8e3aaceda0bb9276ba2102df418964e299a73b"
+    },
+    {
+      "command": [
+        "/usr/bin/php8.3",
+        "scripts/travel-lab/vendor-check.php"
+      ],
+      "pid": 613908,
+      "exit": 0,
+      "process_gone": true,
+      "seconds": 0.101,
+      "utc": "2026-10-09T19:49:22+00:00",
+      "private_log_label": "storage/framework/testing/w04c-install-logs/vendor-check-installed.txt.history-dde5bb55.result.json",
+      "stdout_sha256": "9b3309867f8662ef2db35f33a9d42d81bce5753635aac6bbccac89344d98ea54"
+    },
+    {
+      "command": [
+        "/usr/bin/php8.3",
+        "docs/symphony/w04-campaign-install-final/guarded-artisan.php",
+        "module:seed",
+        "raonslab-travel_lab",
+        "--sample",
+        "--no-interaction"
+      ],
+      "pid": 629335,
+      "exit": 0,
+      "process_gone": true,
+      "seconds": 1.181,
+      "utc": "2026-10-09T19:52:50+00:00",
+      "private_log_label": "storage/framework/testing/w04c-install-logs/17-module-seed-raonslab-travel_lab.txt.result.json",
+      "stdout_sha256": "72c13dc1b97ceef1aa689b60ab176f3e1bfe99da07c9214a7d5b2b4195af7228"
+    },
+    {
+      "command": [
+        "/usr/bin/php8.3",
+        "docs/symphony/w04-campaign-install-final/guarded-artisan.php",
+        "template:install",
+        "sirsoft-admin_basic",
+        "--no-interaction"
+      ],
+      "pid": 614030,
+      "exit": 0,
+      "process_gone": true,
+      "seconds": 1.545,
+      "utc": "2026-10-09T19:49:27+00:00",
+      "private_log_label": "storage/framework/testing/w04c-install-logs/12-template-install-sirsoft-admin_basic.txt.history-2099c731.result.json",
+      "stdout_sha256": "0f619ef422ae66e9416441db7a67d0d8cae25e1263d3a21bba7ea61db5b42bf9"
+    },
+    {
+      "command": [
+        "/usr/bin/php8.3",
+        "docs/symphony/w04-campaign-install-final/bootstrap-check.php",
+        "empty"
+      ],
+      "pid": 612272,
+      "exit": 0,
+      "process_gone": true,
+      "seconds": 0.22,
+      "utc": "2026-10-09T19:48:48+00:00",
+      "private_log_label": "storage/framework/testing/w04c-install-logs/empty-bootstrap-check.txt.history-d1204754.result.json",
+      "stdout_sha256": "1f8efaa4e5a27e2e7888b22d43a51be10e4b4b8bc31159c917d1f4ad0ce28d46"
+    },
+    {
+      "command": [
+        "/usr/bin/php8.3",
+        "docs/symphony/w04-campaign-install-final/guarded-artisan.php",
+        "module:activate",
+        "sirsoft-board",
+        "--no-interaction"
+      ],
+      "pid": 610419,
+      "exit": 0,
+      "process_gone": true,
+      "seconds": 0.611,
+      "utc": "2026-10-09T19:47:50+00:00",
+      "private_log_label": "storage/framework/testing/w04c-install-logs/05-module-activate-sirsoft-board.txt.history-01a5a21b.result.json",
+      "stdout_sha256": "ba8b15afd96bf5ee662c69ffe93e1529fc5a9f773751ec6b479161414818371d"
+    },
+    {
+      "command": [
+        "/usr/bin/php8.3",
+        "docs/symphony/w04-campaign-install-final/guarded-artisan.php",
+        "settings:install",
+        "--no-interaction"
+      ],
+      "pid": 609978,
+      "exit": 0,
+      "process_gone": true,
+      "seconds": 0.665,
+      "utc": "2026-10-09T19:47:43+00:00",
+      "private_log_label": "storage/framework/testing/w04c-install-logs/02-settings-install.txt.history-dc281a2a.result.json",
+      "stdout_sha256": "16cf0ad241a8b8744b756b285757c39a2dd66c7d22c4a0ec729bd9d6b08cb267"
+    },
+    {
+      "command": [
+        "/usr/bin/php8.3",
+        "docs/symphony/w04-campaign-install-final/guarded-artisan.php",
+        "module:install",
+        "raonslab-travel_lab",
+        "--vendor-mode=bundled",
+        "--no-interaction"
+      ],
+      "pid": 613964,
+      "exit": 0,
+      "process_gone": true,
+      "seconds": 1.64,
+      "utc": "2026-10-09T19:49:24+00:00",
+      "private_log_label": "storage/framework/testing/w04c-install-logs/10-module-install-raonslab-travel_lab.txt.history-5234a6ae.result.json",
+      "stdout_sha256": "c3053da1d66a3ac6312a0d9ab9523dc13293ba2772c9c0d69d0a3ef2b9c3031d"
+    },
+    {
+      "command": [
+        "/usr/bin/php8.3",
+        "docs/symphony/w04-campaign-install-final/guarded-artisan.php",
+        "template:install",
+        "raonslab-travel_lab",
+        "--no-interaction"
+      ],
+      "pid": 629252,
+      "exit": 0,
+      "process_gone": true,
+      "seconds": 0.929,
+      "utc": "2026-10-09T19:52:47+00:00",
+      "private_log_label": "storage/framework/testing/w04c-install-logs/14-template-install-raonslab-travel_lab.txt.result.json",
+      "stdout_sha256": "adf5d8ec11f665f1fcc156fff96f4a4a661a452cf6d630b9febbd1efb8577423"
+    },
+    {
+      "command": [
+        "/usr/bin/php8.3",
+        "docs/symphony/w04-campaign-install-final/guarded-artisan.php",
+        "raonslab-travel_lab:support-provision",
+        "--lab-confirm",
+        "--no-interaction"
+      ],
+      "pid": 614273,
+      "exit": 0,
+      "process_gone": true,
+      "seconds": 1.69,
+      "utc": "2026-10-09T19:49:37+00:00",
+      "private_log_label": "storage/framework/testing/w04c-install-logs/18-raonslab-travel_lab-support-provision.txt.history-3ccc77cf.result.json",
+      "stdout_sha256": "0fbadeee7890b98564371abab59adbdb11ed8a36fb3969f2f4da3a404fdda887"
+    },
+    {
+      "command": [
+        "/usr/bin/php8.3",
+        "docs/symphony/w04-campaign-install-final/guarded-artisan.php",
+        "module:activate",
+        "sirsoft-page",
+        "--no-interaction"
+      ],
+      "pid": 613595,
+      "exit": 0,
+      "process_gone": true,
+      "seconds": 0.779,
+      "utc": "2026-10-09T19:49:08+00:00",
+      "private_log_label": "storage/framework/testing/w04c-install-logs/07-module-activate-sirsoft-page.txt.history-6f058c5a.result.json",
+      "stdout_sha256": "665b7aef0cfce9a01daccd53e5f1e7a785b88c4a5b2703e41006536dce37ca10"
+    },
+    {
+      "command": [
+        "/usr/bin/php8.3",
+        "docs/symphony/w04-campaign-install-final/empty-migrate.php"
+      ],
+      "pid": 612297,
+      "exit": 0,
+      "process_gone": true,
+      "seconds": 7.522,
+      "utc": "2026-10-09T19:48:56+00:00",
+      "private_log_label": "storage/framework/testing/w04c-install-logs/02-empty-native-migrate.txt.history-d99c5d7b.result.json",
+      "stdout_sha256": "26debd13013dfee9706b15a685af7cc7f5834024b3699e8b5b9e14deff386103"
+    },
+    {
+      "command": [
+        "/usr/bin/php8.3",
+        "docs/symphony/w04-campaign-install-final/guarded-artisan.php",
+        "module:activate",
+        "sirsoft-page",
+        "--no-interaction"
+      ],
+      "pid": 610484,
+      "exit": 0,
+      "process_gone": true,
+      "seconds": 0.614,
+      "utc": "2026-10-09T19:47:53+00:00",
+      "private_log_label": "storage/framework/testing/w04c-install-logs/07-module-activate-sirsoft-page.txt.history-4d4c91d7.result.json",
+      "stdout_sha256": "665b7aef0cfce9a01daccd53e5f1e7a785b88c4a5b2703e41006536dce37ca10"
+    },
+    {
+      "command": [
+        "/usr/bin/php8.3",
+        "docs/symphony/w04-campaign-install-final/guarded-artisan.php",
+        "module:install",
+        "raonslab-travel_lab",
+        "--vendor-mode=bundled",
+        "--no-interaction"
+      ],
+      "pid": 611310,
+      "exit": 0,
+      "process_gone": true,
+      "seconds": 1.598,
+      "utc": "2026-10-09T19:48:10+00:00",
+      "private_log_label": "storage/framework/testing/w04c-install-logs/10-module-install-raonslab-travel_lab.txt.history-cd90eac3.result.json",
+      "stdout_sha256": "c3053da1d66a3ac6312a0d9ab9523dc13293ba2772c9c0d69d0a3ef2b9c3031d"
+    },
+    {
+      "command": [
+        "/usr/bin/php8.3",
+        "docs/symphony/w04-campaign-install-final/bootstrap-check.php",
+        "empty"
+      ],
+      "pid": 609328,
+      "exit": 0,
+      "process_gone": true,
+      "seconds": 0.269,
+      "utc": "2026-10-09T19:47:34+00:00",
+      "private_log_label": "storage/framework/testing/w04c-install-logs/empty-bootstrap-check.txt.history-cf05f14c.result.json",
+      "stdout_sha256": "1f8efaa4e5a27e2e7888b22d43a51be10e4b4b8bc31159c917d1f4ad0ce28d46"
+    },
+    {
+      "command": [
+        "/usr/bin/php8.3",
+        "docs/symphony/w04-campaign-install-final/guarded-artisan.php",
+        "module:activate",
+        "sirsoft-ecommerce",
+        "--no-interaction"
+      ],
+      "pid": 611286,
+      "exit": 0,
+      "process_gone": true,
+      "seconds": 0.684,
+      "utc": "2026-10-09T19:48:08+00:00",
+      "private_log_label": "storage/framework/testing/w04c-install-logs/09-module-activate-sirsoft-ecommerce.txt.history-35502668.result.json",
+      "stdout_sha256": "969bcfcdf977c7248daf149f326f5d9d2725499a30da2cbb74d6418e44532add"
+    },
+    {
+      "command": [
+        "/usr/bin/php8.3",
+        "docs/symphony/w04-campaign-install-final/guarded-artisan.php",
+        "module:activate",
+        "sirsoft-ecommerce",
+        "--no-interaction"
+      ],
+      "pid": 613928,
+      "exit": 0,
+      "process_gone": true,
+      "seconds": 0.737,
+      "utc": "2026-10-09T19:49:23+00:00",
+      "private_log_label": "storage/framework/testing/w04c-install-logs/09-module-activate-sirsoft-ecommerce.txt.history-adddd37e.result.json",
+      "stdout_sha256": "969bcfcdf977c7248daf149f326f5d9d2725499a30da2cbb74d6418e44532add"
+    },
+    {
+      "command": [
+        "/usr/bin/php8.3",
+        "docs/symphony/w04-campaign-install-final/guarded-artisan.php",
+        "template:activate",
+        "raonslab-travel_lab",
+        "--no-interaction"
+      ],
+      "pid": 614167,
+      "exit": 0,
+      "process_gone": true,
+      "seconds": 1.58,
+      "utc": "2026-10-09T19:49:33+00:00",
+      "private_log_label": "storage/framework/testing/w04c-install-logs/15-template-activate-raonslab-travel_lab.txt.history-9f1d4973.result.json",
+      "stdout_sha256": "90ecad0ceb1b392047764344bbe953960d6309560ac33d2f79f50bf7ad490a80"
+    },
+    {
+      "command": [
+        "/usr/bin/php8.3",
+        "scripts/travel-lab/vendor-check.php",
+        "--bundled"
+      ],
+      "pid": 629016,
+      "exit": 0,
+      "process_gone": true,
+      "seconds": 0.074,
+      "utc": "2026-10-09T19:52:36+00:00",
+      "private_log_label": "storage/framework/testing/w04c-install-logs/vendor-check-bundled.txt.result.json",
+      "stdout_sha256": "9ff77d690c6b9987381ce133c2f0eb72930b8cbfa57e27a9eafff14c71d868c8"
+    },
+    {
+      "command": [
+        "/usr/bin/php8.3",
+        "docs/symphony/w04-campaign-install-final/guarded-artisan.php",
+        "module:activate",
+        "sirsoft-board",
+        "--no-interaction"
+      ],
+      "pid": 613393,
+      "exit": 0,
+      "process_gone": true,
+      "seconds": 0.741,
+      "utc": "2026-10-09T19:49:05+00:00",
+      "private_log_label": "storage/framework/testing/w04c-install-logs/05-module-activate-sirsoft-board.txt.history-725b3bc7.result.json",
+      "stdout_sha256": "ba8b15afd96bf5ee662c69ffe93e1529fc5a9f773751ec6b479161414818371d"
+    },
+    {
+      "command": [
+        "/usr/bin/php8.3",
+        "docs/symphony/w04-campaign-install-final/guarded-artisan.php",
+        "module:install",
+        "sirsoft-ecommerce",
+        "--vendor-mode=bundled",
+        "--no-interaction"
+      ],
+      "pid": 610493,
+      "exit": 0,
+      "process_gone": true,
+      "seconds": 14.111,
+      "utc": "2026-10-09T19:48:07+00:00",
+      "private_log_label": "storage/framework/testing/w04c-install-logs/08-module-install-sirsoft-ecommerce.txt.history-d55828f2.result.json",
+      "stdout_sha256": "db65b7722428da8e7f878b4310b56d4da3cd036ce0fc1f0531b7ca1e691ffb5e"
+    },
+    {
+      "command": [
+        "/usr/bin/php8.3",
+        "docs/symphony/w04-campaign-install-final/guarded-artisan.php",
+        "db:wipe",
+        "--database=mysql",
+        "--drop-views",
+        "--force",
+        "--no-interaction"
+      ],
+      "pid": 612265,
+      "exit": 0,
+      "process_gone": true,
+      "seconds": 0.842,
+      "utc": "2026-10-09T19:48:48+00:00",
+      "private_log_label": "storage/framework/testing/w04c-install-logs/01-db-wipe.txt.history-d4b8fa5c.result.json",
+      "stdout_sha256": "b404bd034dcc8c3805818114cf14b64521bf5fa2a730929f2acee5a2fc30ef30"
+    },
+    {
+      "command": [
+        "/usr/bin/php8.3",
+        "docs/symphony/w04-campaign-install-final/guarded-artisan.php",
+        "db:seed",
+        "--class=DatabaseSeeder",
+        "--force",
+        "--no-interaction"
+      ],
+      "pid": 612778,
+      "exit": 0,
+      "process_gone": true,
+      "seconds": 1.261,
+      "utc": "2026-10-09T19:48:58+00:00",
+      "private_log_label": "storage/framework/testing/w04c-install-logs/03-db-seed.txt.history-f5bbd7ed.result.json",
+      "stdout_sha256": "33b8cb3cd16666fe889009bc87f3884eb9b6a64d4be4a62845174268bb75e651"
+    },
+    {
+      "command": [
+        "python3",
+        "docs/symphony/w04-campaign-install-final/recovery-dump-check.py",
+        "storage/framework/testing/w04c-install2/snapshot.sql",
+        "storage/framework/testing/w04c-install2/before.json"
+      ],
+      "pid": 619604,
+      "exit": 0,
+      "process_gone": true,
+      "seconds": 0.41,
+      "utc": "2026-10-09T19:51:31+00:00",
+      "private_log_label": "storage/framework/testing/w04c-install2/restore-sql-check.log.result.json",
+      "stdout_sha256": "8af9554e4c5d9e3ff1dd2da94b5bbcf6b0562c9d2fd76806b495ddd7f2dd4918"
+    },
+    {
+      "command": [
+        "/usr/bin/php8.3",
+        "docs/symphony/w04-campaign-install-final/guarded-artisan.php",
+        "db:wipe",
+        "--database=mysql",
+        "--drop-views",
+        "--force",
+        "--no-interaction"
+      ],
+      "pid": 620309,
+      "exit": 0,
+      "process_gone": true,
+      "seconds": 3.551,
+      "utc": "2026-10-09T19:51:38+00:00",
+      "private_log_label": "storage/framework/testing/w04c-install2/restore-wipe.log.result.json",
+      "stdout_sha256": "b404bd034dcc8c3805818114cf14b64521bf5fa2a730929f2acee5a2fc30ef30"
+    },
+    {
+      "command": [
+        "mysqldump",
+        "--defaults-file=storage/framework/testing/w04c-install2/mysql.cnf",
+        "--protocol=tcp",
+        "--host=127.0.0.1",
+        "--port=3306",
+        "--user=req81_travel",
+        "--single-transaction",
+        "--hex-blob",
+        "--no-tablespaces",
+        "--skip-lock-tables",
+        "req81_travel_lab_test"
+      ],
+      "pid": 619933,
+      "exit": 0,
+      "process_gone": true,
+      "seconds": 1.093,
+      "utc": "2026-10-09T19:51:33+00:00",
+      "private_log_label": "storage/framework/testing/w04c-install2/safety-20e60dd5.sql.result.json",
+      "stdout_sha256": "3a8f9cd784aea5200c456297d96c6810605453b28bd41676c732bc6ccce37713"
+    },
+    {
+      "command": [
+        "python3",
+        "docs/symphony/w04-campaign-install-final/recovery-dump-check.py",
+        "storage/framework/testing/w04c-install2/snapshot.sql",
+        "storage/framework/testing/w04c-install2/before.json"
+      ],
+      "pid": 612235,
+      "exit": 0,
+      "process_gone": true,
+      "seconds": 0.238,
+      "utc": "2026-10-09T19:48:47+00:00",
+      "private_log_label": "storage/framework/testing/w04c-install2/dump-check.log.result.json",
+      "stdout_sha256": "8af9554e4c5d9e3ff1dd2da94b5bbcf6b0562c9d2fd76806b495ddd7f2dd4918"
+    },
+    {
+      "command": [
+        "/usr/bin/php8.3",
+        "docs/symphony/w04-campaign-install-final/fresh-install.php",
+        "install3"
+      ],
+      "pid": 622307,
+      "exit": 0,
+      "process_gone": true,
+      "seconds": 68.136,
+      "utc": "2026-10-09T19:52:53+00:00",
+      "private_log_label": "storage/framework/testing/w04c-private/operation-55f1bf19.log.result.json",
+      "stdout_sha256": "95a691859e119bf1cefafd61c5073d60d00488c4907cde1dd2495ee3494f5f65"
+    },
+    {
+      "command": [
+        "/usr/bin/php8.3",
+        "docs/symphony/w04-campaign-install-final/guarded-artisan.php",
+        "migrate",
+        "--database=mysql",
+        "--path=modules/_bundled/raonslab-travel_lab/database/migrations",
+        "--force",
+        "--no-interaction"
+      ],
+      "pid": 632502,
+      "exit": 0,
+      "process_gone": true,
+      "seconds": 0.982,
+      "utc": "2026-10-09T19:53:48+00:00",
+      "private_log_label": "storage/framework/testing/w04c-private/rollback-up.log.result.json",
+      "stdout_sha256": "9a70d0169290097b056d5809116789fbeaa194c1a5ae0a6e9af8f0a2648a7536"
+    },
+    {
+      "command": [
+        "/usr/bin/php8.3",
+        "docs/symphony/w04-campaign-install-final/service-restart.php",
+        "install3"
+      ],
+      "pid": 631916,
+      "exit": 0,
+      "process_gone": true,
+      "seconds": 3.696,
+      "utc": "2026-10-09T19:53:43+00:00",
+      "private_log_label": "storage/framework/testing/w04c-private/operation-f402d699.log.result.json",
+      "stdout_sha256": "3ba92dc353a14d0e394a7d28d815ae3ea4d66d7a9963e0aff2dbdc6f8dc3470d"
+    },
+    {
+      "command": [
+        "/usr/bin/php8.3",
+        "docs/symphony/w04-campaign-install-final/installed-http.php",
+        "install2"
+      ],
+      "pid": 616225,
+      "exit": 0,
+      "process_gone": true,
+      "seconds": 4.438,
+      "utc": "2026-10-09T19:50:33+00:00",
+      "private_log_label": "storage/framework/testing/w04c-private/operation-07c8f24a.log.result.json",
+      "stdout_sha256": "aba1e788d4f898496bab7e42624a17578c3dfe305c5f2c6480e46dfb649b1726"
+    },
+    {
+      "command": [
+        "/usr/bin/php8.3",
+        "docs/symphony/w04-campaign-install-final/guarded-artisan.php",
+        "migrate",
+        "--database=mysql",
+        "--path=modules/_bundled/raonslab-travel_lab/database/migrations",
+        "--force",
+        "--no-interaction"
+      ],
+      "pid": 663787,
+      "exit": 0,
+      "process_gone": true,
+      "seconds": 2.539,
+      "utc": "2026-10-09T20:00:36+00:00",
+      "private_log_label": "storage/framework/testing/w04c-private/roundtrip-replay.log.result.json",
+      "stdout_sha256": "a6058f4b1fbfa5b1e8953bfa3330fb2b1405af1a1cecafbfbc1ac51b3256fedb"
+    },
+    {
+      "command": [
+        "/usr/bin/php8.3",
+        "docs/symphony/w04-campaign-install-final/campaign-http.php",
+        "install3"
+      ],
+      "pid": 630608,
+      "exit": 0,
+      "process_gone": true,
+      "seconds": 9.51,
+      "utc": "2026-10-09T19:53:28+00:00",
+      "private_log_label": "storage/framework/testing/w04c-private/operation-8a19b89e.log.result.json",
+      "stdout_sha256": "5085ff857ed776643fd769fe08b6147e710e2029fa8b09be3defeafddf32be25"
+    },
+    {
+      "command": [
+        "/usr/bin/php8.3",
+        "docs/symphony/w04-campaign-install-final/installed-http.php",
+        "install3"
+      ],
+      "pid": 630500,
+      "exit": 0,
+      "process_gone": true,
+      "seconds": 4.526,
+      "utc": "2026-10-09T19:53:19+00:00",
+      "private_log_label": "storage/framework/testing/w04c-private/operation-6a4b3b80.log.result.json",
+      "stdout_sha256": "aba1e788d4f898496bab7e42624a17578c3dfe305c5f2c6480e46dfb649b1726"
+    },
+    {
+      "command": [
+        "/usr/bin/php8.3",
+        "docs/symphony/w04-campaign-install-final/rollback-probe.php",
+        "install3"
+      ],
+      "pid": 632202,
+      "exit": 0,
+      "process_gone": true,
+      "seconds": 4.808,
+      "utc": "2026-10-09T19:53:49+00:00",
+      "private_log_label": "storage/framework/testing/w04c-private/operation-dece4114.log.result.json",
+      "stdout_sha256": "70418d040026701b19251fc09779a8d7ba494f48c44bbbe6ca9e63c213c8f40d"
+    },
+    {
+      "command": [
+        "/usr/bin/php8.3",
+        "docs/symphony/w04-campaign-install-final/guarded-artisan.php",
+        "migrate",
+        "--database=mysql",
+        "--path=database/migrations",
+        "--path=modules/_bundled/sirsoft-board/database/migrations",
+        "--path=modules/_bundled/sirsoft-page/database/migrations",
+        "--path=modules/_bundled/sirsoft-ecommerce/database/migrations",
+        "--path=modules/_bundled/raonslab-travel_lab/database/migrations",
+        "--force",
+        "--no-interaction"
+      ],
+      "pid": 661970,
+      "exit": 0,
+      "process_gone": true,
+      "seconds": 18.619,
+      "utc": "2026-10-09T20:00:30+00:00",
+      "private_log_label": "storage/framework/testing/w04c-private/roundtrip-initial.log.result.json",
+      "stdout_sha256": "58ca734b2dccc2da08f1459b03cd735629ca913070df0675359479440fbc58a1"
+    },
+    {
+      "command": [
+        "/usr/bin/php8.3",
+        "docs/symphony/w04-campaign-install-final/campaign-http.php",
+        "install2"
+      ],
+      "pid": 616414,
+      "exit": 1,
+      "process_gone": true,
+      "seconds": 9.788,
+      "utc": "2026-10-09T19:50:50+00:00",
+      "private_log_label": "storage/framework/testing/w04c-private/operation-dfb18598.log.result.json",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "/usr/bin/php8.3",
+        "docs/symphony/w04-campaign-install-final/fresh-install.php",
+        "original"
+      ],
+      "pid": 609172,
+      "exit": 255,
+      "process_gone": true,
+      "seconds": 38.712,
+      "utc": "2026-10-09T19:48:11+00:00",
+      "private_log_label": "storage/framework/testing/w04c-private/operation-edec0613.log.result.json",
+      "stdout_sha256": "44a2c5b6da074c83836b2ec78c5db6a87d231927374537c49e14b777c2f46fc9"
+    },
+    {
+      "command": [
+        "/usr/bin/php8.3",
+        "docs/symphony/w04-campaign-install-final/guarded-artisan.php",
+        "migrate:rollback",
+        "--database=mysql",
+        "--step=1",
+        "--path=modules/_bundled/raonslab-travel_lab/database/migrations",
+        "--force",
+        "--no-interaction"
+      ],
+      "pid": 663532,
+      "exit": 0,
+      "process_gone": true,
+      "seconds": 2.665,
+      "utc": "2026-10-09T20:00:33+00:00",
+      "private_log_label": "storage/framework/testing/w04c-private/roundtrip-down.log.result.json",
+      "stdout_sha256": "3518ec33117d049d8acf96eee92efb3417c0bbd82038adfcc226aae2fc7a0022"
+    },
+    {
+      "command": [
+        "/usr/bin/php8.3",
+        "docs/symphony/w04-campaign-install-final/html-product.php",
+        "install2"
+      ],
+      "pid": 616221,
+      "exit": 0,
+      "process_gone": true,
+      "seconds": 0.709,
+      "utc": "2026-10-09T19:50:28+00:00",
+      "private_log_label": "storage/framework/testing/w04c-private/operation-2829f47a.log.result.json",
+      "stdout_sha256": "d500d1cd8eb0b0d3a24e502f33f808772c2ae18922d6ed66fece58fb0b8149cb"
+    },
+    {
+      "command": [
+        "/usr/bin/php8.3",
+        "docs/symphony/w04-campaign-install-final/guarded-artisan.php",
+        "migrate:rollback",
+        "--database=mysql",
+        "--step=1",
+        "--force",
+        "--no-interaction"
+      ],
+      "pid": 632349,
+      "exit": 0,
+      "process_gone": true,
+      "seconds": 1.055,
+      "utc": "2026-10-09T19:53:46+00:00",
+      "private_log_label": "storage/framework/testing/w04c-private/rollback-down.log.result.json",
+      "stdout_sha256": "952750d220771013f2fad40812e47f2558906b448c7466561117c6200407e25b"
+    },
+    {
+      "command": [
+        "/usr/bin/php8.3",
+        "docs/symphony/w04-campaign-install-final/fresh-install.php",
+        "install2"
+      ],
+      "pid": 612262,
+      "exit": 0,
+      "process_gone": true,
+      "seconds": 50.639,
+      "utc": "2026-10-09T19:49:38+00:00",
+      "private_log_label": "storage/framework/testing/w04c-private/operation-4379b0f0.log.result.json",
+      "stdout_sha256": "95a691859e119bf1cefafd61c5073d60d00488c4907cde1dd2495ee3494f5f65"
+    },
+    {
+      "command": [
+        "mysqldump",
+        "--defaults-file=storage/framework/testing/w04c-core-regression/mysql.cnf",
+        "--protocol=tcp",
+        "--host=127.0.0.1",
+        "--port=3306",
+        "--user=req81_travel",
+        "--single-transaction",
+        "--hex-blob",
+        "--no-tablespaces",
+        "--skip-lock-tables",
+        "req81_travel_lab_test"
+      ],
+      "pid": 658193,
+      "exit": 0,
+      "process_gone": true,
+      "seconds": 0.298,
+      "utc": "2026-10-09T19:59:20+00:00",
+      "private_log_label": "storage/framework/testing/w04c-core-regression/safety-607edc41.sql.result.json",
+      "stdout_sha256": "8b8619c8c582bfc760fa980ad9ccca1cad7af1b968f8fe7cc3b7e06cc30b5003"
+    },
+    {
+      "command": [
+        "python3",
+        "docs/symphony/w04-campaign-install-final/recovery-dump-check.py",
+        "storage/framework/testing/w04c-core-regression/snapshot.sql",
+        "storage/framework/testing/w04c-core-regression/before.json"
+      ],
+      "pid": 658185,
+      "exit": 0,
+      "process_gone": true,
+      "seconds": 0.318,
+      "utc": "2026-10-09T19:59:19+00:00",
+      "private_log_label": "storage/framework/testing/w04c-core-regression/restore-sql-check.log.result.json",
+      "stdout_sha256": "8af9554e4c5d9e3ff1dd2da94b5bbcf6b0562c9d2fd76806b495ddd7f2dd4918"
+    },
+    {
+      "command": [
+        "/usr/bin/php8.3",
+        "docs/symphony/w04-campaign-install-final/guarded-artisan.php",
+        "db:wipe",
+        "--database=mysql",
+        "--drop-views",
+        "--force",
+        "--no-interaction"
+      ],
+      "pid": 658223,
+      "exit": 0,
+      "process_gone": true,
+      "seconds": 1.583,
+      "utc": "2026-10-09T19:59:21+00:00",
+      "private_log_label": "storage/framework/testing/w04c-core-regression/restore-wipe.log.result.json",
+      "stdout_sha256": "b404bd034dcc8c3805818114cf14b64521bf5fa2a730929f2acee5a2fc30ef30"
+    },
+    {
+      "command": [
+        "/usr/bin/php8.3",
+        "vendor/bin/phpunit",
+        "--bootstrap",
+        "docs/symphony/w04-campaign-install-final/test-bootstrap.php",
+        "tests/Unit/Helpers/PermissionHelperScopeTest.php"
+      ],
+      "pid": 657574,
+      "exit": 0,
+      "process_gone": true,
+      "seconds": 27.877,
+      "utc": "2026-10-09T19:59:18+00:00",
+      "private_log_label": "storage/framework/testing/w04c-core-regression/native.log.result.json",
+      "stdout_sha256": "47bec9ad208377cdff9d4fa30d7a7a608e884192aa02f91cdbc5188aa349a2c8"
+    },
+    {
+      "command": [
+        "python3",
+        "docs/symphony/w04-campaign-install-final/recovery-dump-check.py",
+        "storage/framework/testing/w04c-core-regression/snapshot.sql",
+        "storage/framework/testing/w04c-core-regression/before.json"
+      ],
+      "pid": 657571,
+      "exit": 0,
+      "process_gone": true,
+      "seconds": 0.23,
+      "utc": "2026-10-09T19:58:50+00:00",
+      "private_log_label": "storage/framework/testing/w04c-core-regression/dump-check.log.result.json",
+      "stdout_sha256": "8af9554e4c5d9e3ff1dd2da94b5bbcf6b0562c9d2fd76806b495ddd7f2dd4918"
+    },
+    {
+      "command": [
+        "python3",
+        "docs/symphony/w04-campaign-install-final/recovery-dump-check.py",
+        "storage/framework/testing/w04c-mysql-live/snapshot.sql",
+        "storage/framework/testing/w04c-mysql-live/before.json"
+      ],
+      "pid": 636758,
+      "exit": 0,
+      "process_gone": true,
+      "seconds": 0.332,
+      "utc": "2026-10-09T19:54:38+00:00",
+      "private_log_label": "storage/framework/testing/w04c-mysql-live/restore-sql-check.log.result.json",
+      "stdout_sha256": "8af9554e4c5d9e3ff1dd2da94b5bbcf6b0562c9d2fd76806b495ddd7f2dd4918"
+    },
+    {
+      "command": [
+        "/usr/bin/php8.3",
+        "docs/symphony/w04-campaign-install-final/guarded-artisan.php",
+        "db:wipe",
+        "--database=mysql",
+        "--drop-views",
+        "--force",
+        "--no-interaction"
+      ],
+      "pid": 637114,
+      "exit": 0,
+      "process_gone": true,
+      "seconds": 2.822,
+      "utc": "2026-10-09T19:54:42+00:00",
+      "private_log_label": "storage/framework/testing/w04c-mysql-live/restore-wipe.log.result.json",
+      "stdout_sha256": "b404bd034dcc8c3805818114cf14b64521bf5fa2a730929f2acee5a2fc30ef30"
+    },
+    {
+      "command": [
+        "/usr/bin/php8.3",
+        "vendor/bin/phpunit",
+        "--bootstrap",
+        "docs/symphony/w04-campaign-install-final/test-bootstrap.php",
+        "scripts/travel-lab/LiveMysqlTest.php"
+      ],
+      "pid": 634414,
+      "exit": 0,
+      "process_gone": true,
+      "seconds": 19.464,
+      "utc": "2026-10-09T19:54:37+00:00",
+      "private_log_label": "storage/framework/testing/w04c-mysql-live/native.log.result.json",
+      "stdout_sha256": "d5633f11667bd5661b2975e9c090ac4471551d1f92edf54d98819638e115c11f"
+    },
+    {
+      "command": [
+        "python3",
+        "docs/symphony/w04-campaign-install-final/recovery-dump-check.py",
+        "storage/framework/testing/w04c-mysql-live/snapshot.sql",
+        "storage/framework/testing/w04c-mysql-live/before.json"
+      ],
+      "pid": 634411,
+      "exit": 0,
+      "process_gone": true,
+      "seconds": 0.164,
+      "utc": "2026-10-09T19:54:18+00:00",
+      "private_log_label": "storage/framework/testing/w04c-mysql-live/dump-check.log.result.json",
+      "stdout_sha256": "8af9554e4c5d9e3ff1dd2da94b5bbcf6b0562c9d2fd76806b495ddd7f2dd4918"
+    },
+    {
+      "command": [
+        "mysqldump",
+        "--defaults-file=storage/framework/testing/w04c-mysql-live/mysql.cnf",
+        "--protocol=tcp",
+        "--host=127.0.0.1",
+        "--port=3306",
+        "--user=req81_travel",
+        "--single-transaction",
+        "--hex-blob",
+        "--no-tablespaces",
+        "--skip-lock-tables",
+        "req81_travel_lab_test"
+      ],
+      "pid": 636908,
+      "exit": 0,
+      "process_gone": true,
+      "seconds": 0.495,
+      "utc": "2026-10-09T19:54:39+00:00",
+      "private_log_label": "storage/framework/testing/w04c-mysql-live/safety-bf994862.sql.result.json",
+      "stdout_sha256": "fe34a11ee414c492ba614d82ed162050663a58c845feb1b731657a329fcc6acb"
+    },
+    {
+      "command": [
+        "python3",
+        "docs/symphony/w04-campaign-install-final/recovery-dump-check.py",
+        "storage/framework/testing/w04c-board-regression/snapshot.sql",
+        "storage/framework/testing/w04c-board-regression/before.json"
+      ],
+      "pid": 656582,
+      "exit": 0,
+      "process_gone": true,
+      "seconds": 0.231,
+      "utc": "2026-10-09T19:58:23+00:00",
+      "private_log_label": "storage/framework/testing/w04c-board-regression/restore-sql-check.log.result.json",
+      "stdout_sha256": "8af9554e4c5d9e3ff1dd2da94b5bbcf6b0562c9d2fd76806b495ddd7f2dd4918"
+    },
+    {
+      "command": [
+        "mysqldump",
+        "--defaults-file=storage/framework/testing/w04c-board-regression/mysql.cnf",
+        "--protocol=tcp",
+        "--host=127.0.0.1",
+        "--port=3306",
+        "--user=req81_travel",
+        "--single-transaction",
+        "--hex-blob",
+        "--no-tablespaces",
+        "--skip-lock-tables",
+        "req81_travel_lab_test"
+      ],
+      "pid": 653719,
+      "exit": 0,
+      "process_gone": true,
+      "seconds": 0.267,
+      "utc": "2026-10-09T19:57:20+00:00",
+      "private_log_label": "storage/framework/testing/w04c-board-regression/safety-4c0f6872.sql.result.json",
+      "stdout_sha256": "ded19f180e515162a5211d2d7fe86233f1efacefa88f0e0c22fac3fc438bdd07"
+    },
+    {
+      "command": [
+        "/usr/bin/php8.3",
+        "docs/symphony/w04-campaign-install-final/guarded-artisan.php",
+        "db:wipe",
+        "--database=mysql",
+        "--drop-views",
+        "--force",
+        "--no-interaction"
+      ],
+      "pid": 653736,
+      "exit": 0,
+      "process_gone": true,
+      "seconds": 1.619,
+      "utc": "2026-10-09T19:57:22+00:00",
+      "private_log_label": "storage/framework/testing/w04c-board-regression/restore-wipe.log.result.json",
+      "stdout_sha256": "b404bd034dcc8c3805818114cf14b64521bf5fa2a730929f2acee5a2fc30ef30"
+    },
+    {
+      "command": [
+        "/usr/bin/php8.3",
+        "vendor/bin/phpunit",
+        "--bootstrap",
+        "docs/symphony/w04-campaign-install-final/test-bootstrap.php",
+        "modules/_bundled/sirsoft-board/tests/Feature/User/SecretPostCommentAccessTest.php"
+      ],
+      "pid": 651486,
+      "exit": 0,
+      "process_gone": true,
+      "seconds": 32.379,
+      "utc": "2026-10-09T19:57:19+00:00",
+      "private_log_label": "storage/framework/testing/w04c-board-regression/native.log.result.json",
+      "stdout_sha256": "a9f0c50c82cc0d55e23d848339d1f02cc44305687aa8fec69f4628ba7cb02cc2"
+    },
+    {
+      "command": [
+        "python3",
+        "docs/symphony/w04-campaign-install-final/recovery-dump-check.py",
+        "storage/framework/testing/w04c-board-regression/snapshot.sql",
+        "storage/framework/testing/w04c-board-regression/before.json"
+      ],
+      "pid": 653687,
+      "exit": 0,
+      "process_gone": true,
+      "seconds": 0.355,
+      "utc": "2026-10-09T19:57:20+00:00",
+      "private_log_label": "storage/framework/testing/w04c-board-regression/restore-sql-check.log.history-8bca6ce5.result.json",
+      "stdout_sha256": "8af9554e4c5d9e3ff1dd2da94b5bbcf6b0562c9d2fd76806b495ddd7f2dd4918"
+    },
+    {
+      "command": [
+        "python3",
+        "docs/symphony/w04-campaign-install-final/recovery-dump-check.py",
+        "storage/framework/testing/w04c-board-regression/snapshot.sql",
+        "storage/framework/testing/w04c-board-regression/before.json"
+      ],
+      "pid": 651327,
+      "exit": 0,
+      "process_gone": true,
+      "seconds": 0.459,
+      "utc": "2026-10-09T19:56:46+00:00",
+      "private_log_label": "storage/framework/testing/w04c-board-regression/dump-check.log.result.json",
+      "stdout_sha256": "8af9554e4c5d9e3ff1dd2da94b5bbcf6b0562c9d2fd76806b495ddd7f2dd4918"
+    },
+    {
+      "command": [
+        "mysqldump",
+        "--defaults-file=storage/framework/testing/w04c-board-regression/mysql.cnf",
+        "--protocol=tcp",
+        "--host=127.0.0.1",
+        "--port=3306",
+        "--user=req81_travel",
+        "--single-transaction",
+        "--hex-blob",
+        "--no-tablespaces",
+        "--skip-lock-tables",
+        "req81_travel_lab_test"
+      ],
+      "pid": 656587,
+      "exit": 0,
+      "process_gone": true,
+      "seconds": 0.01,
+      "utc": "2026-10-09T19:58:23+00:00",
+      "private_log_label": "storage/framework/testing/w04c-board-regression/safety-cb4bbdc6.sql.result.json",
+      "stdout_sha256": "6b83127a20525bbe3aa8874e1e1a0a3d526ec68e676ea4cc4896c5d579d26ca4"
+    },
+    {
+      "command": [
+        "python3",
+        "docs/symphony/w04-campaign-install-final/recovery-dump-check.py",
+        "storage/framework/testing/w04c-install3/snapshot.sql",
+        "storage/framework/testing/w04c-install3/before.json"
+      ],
+      "pid": 634250,
+      "exit": 0,
+      "process_gone": true,
+      "seconds": 0.166,
+      "utc": "2026-10-09T19:54:12+00:00",
+      "private_log_label": "storage/framework/testing/w04c-install3/restore-sql-check.log.result.json",
+      "stdout_sha256": "8af9554e4c5d9e3ff1dd2da94b5bbcf6b0562c9d2fd76806b495ddd7f2dd4918"
+    },
+    {
+      "command": [
+        "/usr/bin/php8.3",
+        "docs/symphony/w04-campaign-install-final/guarded-artisan.php",
+        "db:wipe",
+        "--database=mysql",
+        "--drop-views",
+        "--force",
+        "--no-interaction"
+      ],
+      "pid": 634299,
+      "exit": 0,
+      "process_gone": true,
+      "seconds": 1.237,
+      "utc": "2026-10-09T19:54:15+00:00",
+      "private_log_label": "storage/framework/testing/w04c-install3/restore-wipe.log.result.json",
+      "stdout_sha256": "b404bd034dcc8c3805818114cf14b64521bf5fa2a730929f2acee5a2fc30ef30"
+    },
+    {
+      "command": [
+        "mysqldump",
+        "--defaults-file=storage/framework/testing/w04c-install3/mysql.cnf",
+        "--protocol=tcp",
+        "--host=127.0.0.1",
+        "--port=3306",
+        "--user=req81_travel",
+        "--single-transaction",
+        "--hex-blob",
+        "--no-tablespaces",
+        "--skip-lock-tables",
+        "req81_travel_lab_test"
+      ],
+      "pid": 634267,
+      "exit": 0,
+      "process_gone": true,
+      "seconds": 0.466,
+      "utc": "2026-10-09T19:54:13+00:00",
+      "private_log_label": "storage/framework/testing/w04c-install3/safety-4736bb08.sql.result.json",
+      "stdout_sha256": "14f8f5bbf20d16fdc95e68a0332a5244fcdaf6b8adfd358bb7942f7070f072d4"
+    },
+    {
+      "command": [
+        "python3",
+        "docs/symphony/w04-campaign-install-final/recovery-dump-check.py",
+        "storage/framework/testing/w04c-install3/snapshot.sql",
+        "storage/framework/testing/w04c-install3/before.json"
+      ],
+      "pid": 622225,
+      "exit": 0,
+      "process_gone": true,
+      "seconds": 0.433,
+      "utc": "2026-10-09T19:51:44+00:00",
+      "private_log_label": "storage/framework/testing/w04c-install3/dump-check.log.result.json",
+      "stdout_sha256": "8af9554e4c5d9e3ff1dd2da94b5bbcf6b0562c9d2fd76806b495ddd7f2dd4918"
+    },
+    {
+      "command": [
+        "python3",
+        "docs/symphony/w04-campaign-install-final/recovery-dump-check.py",
+        "storage/framework/testing/w04c-original/snapshot.sql",
+        "storage/framework/testing/w04c-original/before.json"
+      ],
+      "pid": 611607,
+      "exit": 0,
+      "process_gone": true,
+      "seconds": 0.172,
+      "utc": "2026-10-09T19:48:20+00:00",
+      "private_log_label": "storage/framework/testing/w04c-original/restore-sql-check.log.result.json",
+      "stdout_sha256": "8af9554e4c5d9e3ff1dd2da94b5bbcf6b0562c9d2fd76806b495ddd7f2dd4918"
+    },
+    {
+      "command": [
+        "/usr/bin/php8.3",
+        "docs/symphony/w04-campaign-install-final/guarded-artisan.php",
+        "db:wipe",
+        "--database=mysql",
+        "--drop-views",
+        "--force",
+        "--no-interaction"
+      ],
+      "pid": 611616,
+      "exit": 0,
+      "process_gone": true,
+      "seconds": 1.382,
+      "utc": "2026-10-09T19:48:23+00:00",
+      "private_log_label": "storage/framework/testing/w04c-original/restore-wipe.log.result.json",
+      "stdout_sha256": "b404bd034dcc8c3805818114cf14b64521bf5fa2a730929f2acee5a2fc30ef30"
+    },
+    {
+      "command": [
+        "mysqldump",
+        "--defaults-file=storage/framework/testing/w04c-original/mysql.cnf",
+        "--protocol=tcp",
+        "--host=127.0.0.1",
+        "--port=3306",
+        "--user=req81_travel",
+        "--single-transaction",
+        "--hex-blob",
+        "--no-tablespaces",
+        "--skip-lock-tables",
+        "req81_travel_lab_test"
+      ],
+      "pid": 611612,
+      "exit": 0,
+      "process_gone": true,
+      "seconds": 0.236,
+      "utc": "2026-10-09T19:48:21+00:00",
+      "private_log_label": "storage/framework/testing/w04c-original/safety-bbf40915.sql.result.json",
+      "stdout_sha256": "d5370071a5635738ccb4a2ec9758a455e232981b357dea484c77ac61c41ae3b3"
+    },
+    {
+      "command": [
+        "python3",
+        "docs/symphony/w04-campaign-install-final/recovery-dump-check.py",
+        "storage/framework/testing/w04c-original/snapshot.sql",
+        "storage/framework/testing/w04c-original/before.json"
+      ],
+      "pid": 608159,
+      "exit": 0,
+      "process_gone": true,
+      "seconds": 0.235,
+      "utc": "2026-10-09T19:47:14+00:00",
+      "private_log_label": "storage/framework/testing/w04c-original/dump-check.log.result.json",
+      "stdout_sha256": "8af9554e4c5d9e3ff1dd2da94b5bbcf6b0562c9d2fd76806b495ddd7f2dd4918"
+    },
+    {
+      "command": [
+        "python3",
+        "docs/symphony/w04-campaign-install-final/recovery-dump-check.py",
+        "storage/framework/testing/w04c-page-regression/snapshot.sql",
+        "storage/framework/testing/w04c-page-regression/before.json"
+      ],
+      "pid": 650808,
+      "exit": 0,
+      "process_gone": true,
+      "seconds": 0.226,
+      "utc": "2026-10-09T19:56:41+00:00",
+      "private_log_label": "storage/framework/testing/w04c-page-regression/restore-sql-check.log.result.json",
+      "stdout_sha256": "8af9554e4c5d9e3ff1dd2da94b5bbcf6b0562c9d2fd76806b495ddd7f2dd4918"
+    },
+    {
+      "command": [
+        "/usr/bin/php8.3",
+        "docs/symphony/w04-campaign-install-final/guarded-artisan.php",
+        "db:wipe",
+        "--database=mysql",
+        "--drop-views",
+        "--force",
+        "--no-interaction"
+      ],
+      "pid": 650922,
+      "exit": 0,
+      "process_gone": true,
+      "seconds": 1.302,
+      "utc": "2026-10-09T19:56:43+00:00",
+      "private_log_label": "storage/framework/testing/w04c-page-regression/restore-wipe.log.result.json",
+      "stdout_sha256": "b404bd034dcc8c3805818114cf14b64521bf5fa2a730929f2acee5a2fc30ef30"
+    },
+    {
+      "command": [
+        "mysqldump",
+        "--defaults-file=storage/framework/testing/w04c-page-regression/mysql.cnf",
+        "--protocol=tcp",
+        "--host=127.0.0.1",
+        "--port=3306",
+        "--user=req81_travel",
+        "--single-transaction",
+        "--hex-blob",
+        "--no-tablespaces",
+        "--skip-lock-tables",
+        "req81_travel_lab_test"
+      ],
+      "pid": 650870,
+      "exit": 0,
+      "process_gone": true,
+      "seconds": 0.266,
+      "utc": "2026-10-09T19:56:41+00:00",
+      "private_log_label": "storage/framework/testing/w04c-page-regression/safety-13239040.sql.result.json",
+      "stdout_sha256": "697ee0d00b5029fecba962b788480f5666948937e09e926a99793764ba921166"
+    },
+    {
+      "command": [
+        "/usr/bin/php8.3",
+        "vendor/bin/phpunit",
+        "--bootstrap",
+        "docs/symphony/w04-campaign-install-final/test-bootstrap.php",
+        "modules/_bundled/sirsoft-page/tests",
+        "--filter",
+        "^(.*\\\\)?(PageServiceTest|PageControllerTest|PageVersionScopeTest|PublicPageControllerTest|PageSitemapIndexTest)::"
+      ],
+      "pid": 644679,
+      "exit": 0,
+      "process_gone": true,
+      "seconds": 66.357,
+      "utc": "2026-10-09T19:56:41+00:00",
+      "private_log_label": "storage/framework/testing/w04c-page-regression/native.log.result.json",
+      "stdout_sha256": "29da388131012e0c4b32a31ae2662be7c8ed7f9f772ba85f0c276e9b1f116d19"
+    },
+    {
+      "command": [
+        "python3",
+        "docs/symphony/w04-campaign-install-final/recovery-dump-check.py",
+        "storage/framework/testing/w04c-page-regression/snapshot.sql",
+        "storage/framework/testing/w04c-page-regression/before.json"
+      ],
+      "pid": 644652,
+      "exit": 0,
+      "process_gone": true,
+      "seconds": 0.208,
+      "utc": "2026-10-09T19:55:34+00:00",
+      "private_log_label": "storage/framework/testing/w04c-page-regression/dump-check.log.result.json",
+      "stdout_sha256": "8af9554e4c5d9e3ff1dd2da94b5bbcf6b0562c9d2fd76806b495ddd7f2dd4918"
+    }
+  ],
+  "note": "Original native exits retained; standalone direct setup/frontend commands separately listed in README and dependency evidence."
+}

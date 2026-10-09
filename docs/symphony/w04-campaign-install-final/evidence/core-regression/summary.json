@@ -1,0 +1,23 @@
+{
+  "command": [
+    "/usr/bin/php8.3",
+    "docs/symphony/w04-campaign-install-final/snapshot.php",
+    "core-regression",
+    "run",
+    "/usr/bin/php8.3",
+    "vendor/bin/phpunit",
+    "--bootstrap",
+    "docs/symphony/w04-campaign-install-final/test-bootstrap.php",
+    "tests/Unit/Helpers/PermissionHelperScopeTest.php"
+  ],
+  "exit": 0,
+  "seconds": 34.629,
+  "native_log_sha256": "47bec9ad208377cdff9d4fa30d7a7a608e884192aa02f91cdbc5188aa349a2c8",
+  "summary": [
+    "PHPUnit 11.5.56 by Sebastian Bergmann and contributors.",
+    "Runtime:       PHP 8.3.6",
+    "Time: 00:27.743, Memory: 70.50 MB",
+    "OK (11 tests, 14 assertions)"
+  ],
+  "restored_exactly": true
+}
