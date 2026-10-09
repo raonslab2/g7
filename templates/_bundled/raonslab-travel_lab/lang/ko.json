@@ -11,7 +11,8 @@
             "open_menu": "메뉴 열기",
             "close_menu": "메뉴 닫기",
             "menu": "메뉴",
-            "tabbar": "하단 바로가기"
+            "tabbar": "하단 바로가기",
+            "campaigns": "기획전"
         },
         "search": {
             "sort_recommended": "추천순",
@@ -87,7 +88,9 @@
             "requests_title": "내 상담 요청 — RAON 트래블랩",
             "request_detail_title": "상담 요청 상세 — RAON 트래블랩",
             "help_title": "고객센터 — RAON 트래블랩",
-            "login_title": "로그인 — RAON 트래블랩"
+            "login_title": "로그인 — RAON 트래블랩",
+            "campaigns_title": "기획전 — RAON 트래블랩",
+            "campaign_title": "기획전 상세 — RAON 트래블랩"
         },
         "notice": {
             "bar": "체험용 서비스 — 상담 요청은 테스트로만 처리되며 실제 예약·결제는 없어요.",
@@ -107,11 +110,6 @@
             "view_all": "전체 보기",
             "facets_retry": "지역 목록 다시 불러오기",
             "themes_title": "취향대로 고르는 테마",
-            "campaign_eyebrow": "계절 기획전",
-            "campaign_title": "선선한 바람이 부는 계절, 느린 여행을 권해요",
-            "campaign_desc": "출발이 가까운 여행부터 살펴보고, 마음에 드는 일정을 상담으로 다듬어 보세요.",
-            "campaign_cta": "출발 임박 여행 보기",
-            "campaign_cta_price": "가벼운 예산부터",
             "how_title": "이렇게 진행돼요",
             "step1_title": "1. 여행 고르기",
             "step1_desc": "지역·테마·예산으로 마음에 드는 여행을 찾아요.",
@@ -128,7 +126,11 @@
             "trips_empty_title": "곧 새로운 여행이 준비돼요",
             "trips_empty_desc": "지금은 보여드릴 여행이 없어요. 조금 뒤에 다시 들러 주세요.",
             "departing_title": "곧 떠나는 여행",
-            "departing_desc": "출발일이 가까운 순서로 보여드려요"
+            "departing_desc": "출발일이 가까운 순서로 보여드려요",
+            "campaigns_title": "진행 중인 기획전",
+            "campaigns_desc": "운영자가 발행한 기획전만 보여드려요",
+            "campaigns_all": "기획전 모두 보기",
+            "campaigns_error": "기획전을 불러오지 못했어요."
         },
         "card": {
             "duration": "{days}일 일정",
@@ -317,6 +319,29 @@
                 "city": "도시",
                 "wellness": "쉼·힐링"
             }
+        },
+        "campaigns": {
+            "eyebrow": "기획전",
+            "title": "진행 중인 기획전",
+            "desc": "테마별로 모은 여행을 둘러보세요. 상품과 금액은 여행 목록과 같은 기준으로 보여드려요.",
+            "view": "기획전 보기",
+            "error": "기획전을 불러오지 못했어요.",
+            "empty_title": "지금 진행 중인 기획전이 없어요",
+            "empty_desc": "새 기획전이 발행되면 이곳에 보여드릴게요. 그동안 전체 여행을 둘러보세요.",
+            "browse_all": "전체 여행 보기",
+            "back_to_list": "기획전 목록",
+            "version": "버전 {version}",
+            "published_at": "발행 {date}",
+            "not_found_title": "찾을 수 없는 기획전이에요",
+            "not_found_desc": "종료되었거나 아직 발행되지 않은 기획전일 수 있어요.",
+            "detail_error": "기획전 내용을 불러오지 못했어요.",
+            "trips_title": "이 기획전의 여행",
+            "trips_desc": "여행 목록과 같은 조건으로 실시간 조회해요. 금액은 상품 상세에서 확인하세요.",
+            "trips_error": "기획전 여행을 불러오지 못했어요.",
+            "trips_empty_title": "지금 이 테마로 준비된 여행이 없어요",
+            "trips_empty_desc": "다른 여행도 둘러보세요.",
+            "see_all_in_search": "이 테마 여행 모두 보기",
+            "loading": "기획전을 불러오는 중…"
         }
     },
     "common": {
@@ -344,7 +369,10 @@
             "notices": "공지사항",
             "faqs": "자주 묻는 질문",
             "questions": "내 1:1 문의",
-            "question_detail": "1:1 문의 상세"
+            "question_detail": "1:1 문의 상세",
+            "campaigns": "발행된 기획전 목록",
+            "campaign": "기획전 상세",
+            "campaign_trips": "기획전 테마 여행"
         }
     }
 }

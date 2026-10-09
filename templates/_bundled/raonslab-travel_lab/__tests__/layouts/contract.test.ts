@@ -43,11 +43,11 @@ function strings(node: any): string[] {
 describe('매니페스트 · 버전', () => {
   it('식별자·버전·의존 제약이 요청 계약과 같다', () => {
     expect(templateJson.identifier).toBe('raonslab-travel_lab');
-    expect(templateJson.version).toBe('0.1.1');
+    expect(templateJson.version).toBe('0.1.3');
     expect(pkg.version).toBe(templateJson.version);
     expect(templateJson.g7_version).toBe('>=7.0.12');
     expect(templateJson.dependencies.modules).toMatchObject({
-      'raonslab-travel_lab': '>=0.1.1',
+      'raonslab-travel_lab': '>=0.1.3',
       'sirsoft-ecommerce': '>=1.2.1',
       'sirsoft-board': '>=1.1.2',
       'sirsoft-page': '>=1.1.2',

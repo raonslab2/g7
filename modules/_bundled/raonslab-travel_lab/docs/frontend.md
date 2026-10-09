@@ -3,14 +3,15 @@
 ## 레이아웃
 
 <!-- @generated:layouts START — ext:docgen 이 갱신. 이 블록 안은 직접 수정하지 않는다 -->
-레이아웃 4개 (루트: `resources/layouts`).
+레이아웃 5개 (루트: `resources/layouts`).
 
 | 그룹 | 개수 |
 |---|---|
-| `admin` | 4개 |
+| `admin` | 5개 |
 
 | 레이아웃 | 그룹 | 종류 | extends |
 |---|---|---|---|
+| `admin_travel_lab_campaigns` | `admin` | 화면 | `_admin_base` |
 | `admin_travel_lab_catalog` | `admin` | 화면 | `_admin_base` |
 | `admin_travel_lab_inquiry_detail` | `admin` | 화면 | `_admin_base` |
 | `admin_travel_lab_inquiry_list` | `admin` | 화면 | `_admin_base` |

@@ -68,6 +68,8 @@ InquiryStatus의 허용 전이가 단일 출처입니다. TEST_INQUIRY→UNDER_R
 <!-- @generated:repositories START — ext:docgen 이 갱신. 이 블록 안은 직접 수정하지 않는다 -->
 | 클래스 | 종류 | 설명 |
 |---|---|---|
+| `CampaignPageRepository` | 구현 | native PageService 를 감싸는 캠페인 Page 조회 어댑터. |
+| `CampaignPageRepositoryInterface` | 인터페이스 | 캠페인 고객 화면이 native sirsoft-page 를 읽는 단일 어댑터. |
 | `CatalogRepository` | 구현 | - |
 | `CatalogRepositoryInterface` | 인터페이스 | - |
 | `TravelSupportPostRepository` | 구현 | 여행 고객지원 게시판 조회 구현. |

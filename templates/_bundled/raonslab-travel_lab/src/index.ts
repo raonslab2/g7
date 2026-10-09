@@ -46,6 +46,7 @@ export { Pagination, type PaginationProps } from './components/composite/Paginat
 export { ScenicArt, type ScenicArtProps } from './components/composite/ScenicArt';
 export { PriceTag, type PriceTagProps } from './components/composite/PriceTag';
 export { StatusBadge, type StatusBadgeProps } from './components/composite/StatusBadge';
+export { PageBody, type PageBodyProps } from './components/composite/PageBody';
 
 import templateMetadata from '../template.json';
 import { handlerMap } from './handlers';

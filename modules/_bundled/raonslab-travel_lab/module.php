@@ -6,6 +6,7 @@ use App\Extension\AbstractModule;
 use Modules\Raonslab\TravelLab\Database\Seeders\DatabaseSeeder;
 use Modules\Raonslab\TravelLab\Listeners\BlockTravelCommerceCheckout;
 use Modules\Raonslab\TravelLab\Listeners\ExcludeTravelSupportQuestionsFromSearch;
+use Modules\Raonslab\TravelLab\Listeners\InvalidateTravelCampaignSeoCache;
 use Modules\Raonslab\TravelLab\Listeners\ProtectTravelCommerceCatalog;
 use Modules\Raonslab\TravelLab\Listeners\SuppressTravelSupportNotifications;
 
@@ -24,12 +25,13 @@ class Module extends AbstractModule
             ProtectTravelCommerceCatalog::class,
             SuppressTravelSupportNotifications::class,
             ExcludeTravelSupportQuestionsFromSearch::class,
+            InvalidateTravelCampaignSeoCache::class,
         ];
     }
 
     public function getAdminMenus(): array
     {
-        return array_map(fn ($key, $label) => [
+        $menus = array_map(fn ($key, $label) => [
             'name' => ['ko' => $label[0], 'en' => $label[1]],
             'slug' => 'travel-lab-'.$key, 'url' => '/admin/travel-lab/'.$key,
             'icon' => 'fas fa-plane', 'order' => 90,
@@ -37,6 +39,16 @@ class Module extends AbstractModule
         ], ['catalog', 'inquiries', 'support'], [
             ['여행 카탈로그', 'Travel catalog'], ['시험 접수', 'Test inquiries'], ['여행 고객지원', 'Travel support'],
         ]);
+
+        // 캠페인 문서는 native sirsoft-page 가 소유한다 — 메뉴 노출도 native Page 읽기 권한을 따른다.
+        $menus[] = [
+            'name' => ['ko' => '여행 캠페인', 'en' => 'Travel campaigns'],
+            'slug' => 'travel-lab-campaigns', 'url' => '/admin/travel-lab/campaigns',
+            'icon' => 'fas fa-plane', 'order' => 90,
+            'permission' => 'sirsoft-page.pages.read',
+        ];
+
+        return $menus;
     }
 
     public function getPermissions(): array

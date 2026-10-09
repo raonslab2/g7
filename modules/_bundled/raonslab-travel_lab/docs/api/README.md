@@ -12,10 +12,11 @@
 가격은 서버의 네이티브 커머스 계산 결과이며 시험 수락은 실제 예약 확정이 아닙니다. 기록·이미지·예시가 모두 합성임을 전제로 하며 실제 결제/예약/환불/메일/SMS를 연결하지 않습니다. [업무 상세 계약](workflow.md), [지원 계약](../support-api.md), [카탈로그 계약](../domain-api.md)을 함께 읽으십시오.
 
 <!-- @generated:start:api-readme-index -->
-- **문서 수**: 4 · **엔드포인트 수**: 31
+- **문서 수**: 5 · **엔드포인트 수**: 33
 
 | 문서 | 도메인 | 엔드포인트 |
 | --- | --- | --- |
+| [campaigns.md](campaigns.md) | `campaigns` | 2 |
 | [cart.md](cart.md) | `cart` | 4 |
 | [catalog.md](catalog.md) | `catalog` | 12 |
 | [inquiries.md](inquiries.md) | `inquiries` | 7 |

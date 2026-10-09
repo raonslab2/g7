@@ -6,7 +6,7 @@
 
 ```text
 1. 유형: 템플릿 (raonslab-travel_lab, type=user, v0.1.0) — 여행 고객 화면(탐색·출발일/인원·장바구니·상담 요청(테스트)·고객센터). 데이터는 별도 모듈 `raonslab-travel_lab` 의 API(/api/modules/raonslab-travel_lab)에서 온다
-2. 확장 방식: 훅 없음 — 확장점은 레이아웃의 data_sources 선언 · composite 3종(ScenicArt·PriceTag·StatusBadge) · 전용 핸들러 3개(travelLab*)
+2. 확장 방식: 훅 없음 — 확장점은 레이아웃의 data_sources 선언 · composite 4종(ScenicArt·PriceTag·StatusBadge·PageBody) · 전용 핸들러 3개(travelLab*)
 3. 건드리면 안 되는 것: 가격·금액을 요청 body 에 싣기, 오류 시 멱등 키 재생성, 통화 하드코딩, 레이아웃에 목업 응답, 외부 CDN·제3자 여행 사이트 자산
 4. 작업 위치: `templates/_bundled/raonslab-travel_lab` — 활성 디렉토리 직접 수정 금지
 5. 반영: `php artisan template:update raonslab-travel_lab --force`
@@ -24,8 +24,10 @@ API 를 제공하고, 이 템플릿은 그 API 를 `data_sources` · `apiCall` �
 그래서 manifest 가 여행 모듈과 함께 `sirsoft-ecommerce`(>=1.2.1) · `sirsoft-board`(>=1.1.2) ·
 `sirsoft-page`(>=1.1.2) 를 의존으로 선언합니다.
 
-화면은 홈(`/`·`/travel`) · 검색(`/travel/search`) · 상품 상세 · 여행 장바구니 · 상담 요청 목록/상세 ·
-고객센터(공지·FAQ·1:1 문의) · 로그인과 오류 6종입니다. 장바구니·상담 요청은 로그인 전용
+화면은 홈(`/`·`/travel`) · 검색(`/travel/search`) · 상품 상세 · 기획전 목록/상세(`/travel/campaigns`,
+`/travel/campaigns/:slug`, 사이트맵 별칭 `/page/:slug`) · 여행 장바구니 · 상담 요청 목록/상세 ·
+고객센터(공지·FAQ·1:1 문의) · 로그인과 오류 6종입니다. 기획전은 여행 모듈 `GET /campaigns` 가 native
+페이지 모듈의 고정 두 슬롯 중 **발행된 것만** 내주는 투영이며, 본문은 `PageBody` 가 서식 전용으로 그립니다. 장바구니·상담 요청은 로그인 전용
 (`auth_required: true`)이고, 고객센터는 공개이되 1:1 문의만 화면 안에서 로그인을 요구합니다.
 
 **설계 원칙**
@@ -113,8 +115,8 @@ API 를 제공하고, 이 템플릿은 그 API 를 `data_sources` · `apiCall` �
 <!-- @generated:extension-points-summary START — ext:docgen 이 갱신. 이 블록 안은 직접 수정하지 않는다 -->
 | 확장점 | 수 | 상세 |
 |---|---|---|
-| 제공 컴포넌트 | 29개 | [제공 컴포넌트](docs/components.md#제공-컴포넌트) |
-| 레이아웃 | 17개 | [레이아웃 목록](docs/layouts.md#레이아웃-목록) |
+| 제공 컴포넌트 | 30개 | [제공 컴포넌트](docs/components.md#제공-컴포넌트) |
+| 레이아웃 | 19개 | [레이아웃 목록](docs/layouts.md#레이아웃-목록) |
 | 전용 핸들러 | 3개 | [템플릿 전용 핸들러](docs/handlers.md#템플릿-전용-핸들러) |
 | 확장 오버라이드 | 0개 | [확장 오버라이드](docs/layouts.md#확장-오버라이드) |
 <!-- @generated:extension-points-summary END -->
@@ -129,7 +131,7 @@ API 를 제공하고, 이 템플릿은 그 API 를 `data_sources` · `apiCall` �
 - **지역·테마 목록**은 `GET /facets` 가 정합니다 — 레이아웃에 지역명을 하드코딩하지 않습니다.
 - **상태 문구**는 `lang/{ko,en}.json` 의 `travel.status.*` 가 정하고, 모르는 상태값은
   `travel.status.unknown` 으로 내려갑니다.
-- 다른 확장이 이 템플릿 화면에 조각을 끼워 넣을 때는 `components.json` 에 있는 29개 컴포넌트만
+- 다른 확장이 이 템플릿 화면에 조각을 끼워 넣을 때는 `components.json` 에 있는 30개 컴포넌트만
   쓸 수 있습니다.
 <!-- @intent END -->
 
@@ -171,9 +173,9 @@ API 를 제공하고, 이 템플릿은 그 API 를 `data_sources` · `apiCall` �
 | 종류 | 개수 | 위치 |
 |---|---|---|
 | PHPUnit | 0개 | — |
-| Vitest | 10개 | `vitest.config.ts` |
+| Vitest | 12개 | `vitest.config.ts` |
 | Playwright | 0개 | — |
-| 시나리오 매니페스트 | 1개 | `tests/scenarios` |
+| 시나리오 매니페스트 | 2개 | `tests/scenarios` |
 
 ```bash
 # Vitest (확장 디렉토리에서) (PowerShell)

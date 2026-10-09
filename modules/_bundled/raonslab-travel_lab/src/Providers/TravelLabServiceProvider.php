@@ -4,9 +4,12 @@ namespace Modules\Raonslab\TravelLab\Providers;
 
 use App\Extension\BaseModuleServiceProvider;
 use Illuminate\Routing\Router;
+use Modules\Raonslab\TravelLab\Console\Commands\ProvisionTravelCampaignsCommand;
 use Modules\Raonslab\TravelLab\Console\Commands\ProvisionTravelSupportCommand;
 use Modules\Raonslab\TravelLab\Http\Middleware\TravelCatalogConflictResponse;
+use Modules\Raonslab\TravelLab\Repositories\CampaignPageRepository;
 use Modules\Raonslab\TravelLab\Repositories\CatalogRepository;
+use Modules\Raonslab\TravelLab\Repositories\Contracts\CampaignPageRepositoryInterface;
 use Modules\Raonslab\TravelLab\Repositories\Contracts\CatalogRepositoryInterface;
 use Modules\Raonslab\TravelLab\Repositories\Contracts\TravelSupportPostRepositoryInterface;
 use Modules\Raonslab\TravelLab\Repositories\Contracts\WorkflowCartRepositoryInterface;
@@ -14,6 +17,7 @@ use Modules\Raonslab\TravelLab\Repositories\Contracts\WorkflowInquiryRepositoryI
 use Modules\Raonslab\TravelLab\Repositories\TravelSupportPostRepository;
 use Modules\Raonslab\TravelLab\Repositories\WorkflowCartRepository;
 use Modules\Raonslab\TravelLab\Repositories\WorkflowInquiryRepository;
+use Modules\Raonslab\TravelLab\Support\CampaignRegistry;
 
 class TravelLabServiceProvider extends BaseModuleServiceProvider
 {
@@ -24,6 +28,7 @@ class TravelLabServiceProvider extends BaseModuleServiceProvider
         WorkflowCartRepositoryInterface::class => WorkflowCartRepository::class,
         WorkflowInquiryRepositoryInterface::class => WorkflowInquiryRepository::class,
         TravelSupportPostRepositoryInterface::class => TravelSupportPostRepository::class,
+        CampaignPageRepositoryInterface::class => CampaignPageRepository::class,
     ];
 
     public function register(): void
@@ -31,6 +36,8 @@ class TravelLabServiceProvider extends BaseModuleServiceProvider
         parent::register();
         $this->mergeConfigFrom(__DIR__.'/../../config/catalog.php', 'raonslab-travel_lab.catalog');
         $this->mergeConfigFrom(__DIR__.'/../../config/support.php', 'raonslab-travel_lab.support');
+        $this->mergeConfigFrom(__DIR__.'/../../config/campaigns.php', 'raonslab-travel_lab.campaigns');
+        $this->app->singleton(CampaignRegistry::class);
     }
 
     public function boot(): void
@@ -38,7 +45,7 @@ class TravelLabServiceProvider extends BaseModuleServiceProvider
         parent::boot();
         $this->app->make(Router::class)->pushMiddlewareToGroup('api', TravelCatalogConflictResponse::class);
         if ($this->app->runningInConsole()) {
-            $this->commands([ProvisionTravelSupportCommand::class]);
+            $this->commands([ProvisionTravelSupportCommand::class, ProvisionTravelCampaignsCommand::class]);
         }
     }
 }

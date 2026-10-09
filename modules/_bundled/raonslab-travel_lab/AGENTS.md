@@ -7,7 +7,7 @@
 ## 1. 이 확장은 무엇인가
 
 <!-- @intent START -->
-여행 메타데이터와 출발일, 서버 계산 스냅샷을 가진 시험 문의를 영속 저장합니다. 상품명·상품 ID·옵션 ID·현재 가격·카트는 native ecommerce가 소유합니다. 공지·FAQ·비공개 문의는 native board 데이터입니다. 실예약·주문·결제·환불·외부 메일/SMS·공급자 연계는 만들지 않습니다. `TEST_ACCEPTED`도 시험 수락입니다. RAON 실증 가정과 고객 승인 자료를 혼동하지 않습니다.
+여행 메타데이터와 출발일, 서버 계산 스냅샷을 가진 시험 문의를 영속 저장합니다. 상품명·상품 ID·옵션 ID·현재 가격·카트는 native ecommerce가 소유합니다. 공지·FAQ·비공개 문의는 native board 데이터입니다. 실예약·주문·결제·환불·외부 메일/SMS·공급자 연계는 만들지 않습니다. `TEST_ACCEPTED`도 시험 수락입니다. RAON 실증 가정과 고객 승인 자료를 혼동하지 않습니다. 기획전 문서는 native sirsoft-page Page 이며, 이 모듈은 고정 두 슬롯 레지스트리·발행분 공개 투영·관리자 어댑터·명시 프로비저닝·SEO 무효화만 소유합니다([기획전](docs/campaigns.md)).
 <!-- @intent END -->
 
 ## 2. 디렉토리 지도
@@ -42,7 +42,7 @@
 ## 3. 핵심 흐름
 
 <!-- @intent START -->
-검색/상세 → `CatalogService`/`CatalogRepositoryInterface` → native Product/Option과 TravelProduct/Departure입니다. 인원 선택 → `TravelCartService` → native CartService/공식 계산 → `InquiryService` → 사용자·카트·출발·상품·옵션 잠금 → 문의/항목/이벤트/모의 확보 인원 저장 → 관리자 허용 상태 처리 → 소유자 재조회/취소입니다. 날짜 판정은 `TravelDate::today()`의 `Asia/Seoul` 사업일을 공유하고 당일 출발을 제외합니다. HTTP 입력은 FormRequest, API 응답은 ResponseHelper와 BaseApiResource/BaseApiCollection 계약을 따릅니다.
+검색/상세 → `CatalogService`/`CatalogRepositoryInterface` → native Product/Option과 TravelProduct/Departure입니다. 인원 선택 → `TravelCartService` → native CartService/공식 계산 → `InquiryService` → 사용자·카트·출발·상품·옵션 잠금 → 문의/항목/이벤트/모의 확보 인원 저장 → 관리자 허용 상태 처리 → 소유자 재조회/취소입니다. 날짜 판정은 `TravelDate::today()`의 `Asia/Seoul` 사업일을 공유하고 당일 출발을 제외합니다. HTTP 입력은 FormRequest, API 응답은 ResponseHelper와 BaseApiResource/BaseApiCollection 계약을 따릅니다. 기획전은 `CampaignController` → `CampaignService`(`CampaignRegistry` 두 슬롯) → `CampaignPageRepositoryInterface` → native `PageService::getPublishedPageBySlug($slug, false)` → `CampaignResource` 입니다.
 <!-- @intent END -->
 
 ## 4. 확장점
@@ -52,7 +52,7 @@
 |---|---|---|
 | 발행 훅 | 0개 | [발행 훅](docs/extension-points.md#발행-훅) |
 | 구독 훅 | 11개 | [구독 훅](docs/extension-points.md#구독-훅) |
-| 훅 리스너 | 4개 | [훅 리스너](docs/extension-points.md#훅-리스너) |
+| 훅 리스너 | 5개 | [훅 리스너](docs/extension-points.md#훅-리스너) |
 | 레이아웃 확장 | 0개 | [레이아웃 확장](docs/extension-points.md#레이아웃-확장) |
 | 미들웨어 | 0개 | [미들웨어](docs/extension-points.md#미들웨어) |
 | 브로드캐스트 채널 | 0개 | [브로드캐스트 채널](docs/extension-points.md#브로드캐스트-채널) |
@@ -77,7 +77,7 @@
 ## 6. 금지 패턴
 
 <!-- @intent START -->
-API 상품 식별자에 TravelProduct 메타 ID를 쓰지 않습니다. Departure는 같은 상품의 ProductOption과 일대일이고 Cart.quantity가 인원입니다. 현재 단가는 `ProductOption::getSellingPrice()`, 문의 금액은 native 계산 결과가 출처입니다. 여행 가격 컬럼·가격 우회·주문/결제 테이블 직접 조작은 금지합니다. 공개 목록/상세/출발/facets에 동일 가시성 규칙을 적용합니다. reserved는 관리자 입력이 아니며 출발 저장과 재검증은 Repository 인터페이스 및 잠금 경로를 거칩니다. 옵션 교체와 문의 이력이 있는 날짜 변경은 불가합니다. `Module::getSeeders()`를 빈 배열로 바꾸면 루트 시더로 폴백하므로 금지합니다. 기본 설치는 합성 상품을 만들지 않고 명시 `--sample`만 만듭니다. 활성 디렉토리·운영 DB·다른 Request의 worktree를 직접 수정하지 않습니다. 서비스에 구체 Repository를 주입하거나 공개 API 응답에 비밀정보를 넣지 않습니다.
+API 상품 식별자에 TravelProduct 메타 ID를 쓰지 않습니다. Departure는 같은 상품의 ProductOption과 일대일이고 Cart.quantity가 인원입니다. 현재 단가는 `ProductOption::getSellingPrice()`, 문의 금액은 native 계산 결과가 출처입니다. 여행 가격 컬럼·가격 우회·주문/결제 테이블 직접 조작은 금지합니다. 공개 목록/상세/출발/facets에 동일 가시성 규칙을 적용합니다. reserved는 관리자 입력이 아니며 출발 저장과 재검증은 Repository 인터페이스 및 잠금 경로를 거칩니다. 옵션 교체와 문의 이력이 있는 날짜 변경은 불가합니다. `Module::getSeeders()`를 빈 배열로 바꾸면 루트 시더로 폴백하므로 금지합니다. 기본 설치는 합성 상품을 만들지 않고 명시 `--sample`만 만듭니다. 활성 디렉토리·운영 DB·다른 Request의 worktree를 직접 수정하지 않습니다. 서비스에 구체 Repository를 주입하거나 공개 API 응답에 비밀정보를 넣지 않습니다. 기획전 고객 경로에서 `allowUnpublished=true`·미리보기·임의 slug/검색/접두사 조회·Page 모델/저장소 직접 쓰기·레지스트리 밖 slot 추가·기존 Page 덮어쓰기를 하지 않습니다.
 <!-- @intent END -->
 
 ## 7. 테스트 실행
@@ -85,10 +85,10 @@ API 상품 식별자에 TravelProduct 메타 ID를 쓰지 않습니다. Departur
 <!-- @generated:test-commands START — ext:docgen 이 갱신. 이 블록 안은 직접 수정하지 않는다 -->
 | 종류 | 개수 | 위치 |
 |---|---|---|
-| PHPUnit | 17개 | `modules/_bundled/raonslab-travel_lab/tests` |
-| Vitest | 1개 | `vitest.config.ts` |
+| PHPUnit | 22개 | `modules/_bundled/raonslab-travel_lab/tests` |
+| Vitest | 2개 | `vitest.config.ts` |
 | Playwright | 0개 | — |
-| 시나리오 매니페스트 | 3개 | `tests/scenarios` |
+| 시나리오 매니페스트 | 4개 | `tests/scenarios` |
 
 기저 TestCase: `tests/ModuleTestCase.php` — 확장 테스트는 이 클래스를 상속합니다 (`Tests\TestCase` 직접 상속 금지).
 

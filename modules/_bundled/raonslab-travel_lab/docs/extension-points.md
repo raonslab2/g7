@@ -39,6 +39,7 @@ BlockTravelCommerceCheckout은 native temp_order/order/payment 선행 훅을 동
 |---|---|---|---|---|
 | `BlockTravelCommerceCheckout` | 4개 | 명시 등록 | ✅ | `src/Listeners/BlockTravelCommerceCheckout.php` |
 | `ExcludeTravelSupportQuestionsFromSearch` | 3개 | 명시 등록 | ✅ | `src/Listeners/ExcludeTravelSupportQuestionsFromSearch.php` |
+| `InvalidateTravelCampaignSeoCache` | 0개 | 명시 등록 | ✅ | `src/Listeners/InvalidateTravelCampaignSeoCache.php` |
 | `ProtectTravelCommerceCatalog` | 3개 | 명시 등록 | ✅ | `src/Listeners/ProtectTravelCommerceCatalog.php` |
 | `SuppressTravelSupportNotifications` | 1개 | 명시 등록 | ✅ | `src/Listeners/SuppressTravelSupportNotifications.php` |
 <!-- @generated:listeners END -->

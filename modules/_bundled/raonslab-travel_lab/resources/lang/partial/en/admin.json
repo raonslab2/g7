@@ -2,7 +2,8 @@
   "nav": {
     "catalog": "Travel catalog",
     "inquiries": "Travel inquiries",
-    "support": "Support"
+    "support": "Support",
+    "campaigns": "Travel campaigns"
   },
   "common": {
     "lab_banner": "LAB test environment. No real payments, bookings, refunds, emails or SMS are produced.",
@@ -125,5 +126,33 @@
       "description": "Secret questions visible only to the author and admins. Answer with comments."
     },
     "provision_hint": "If the boards are missing, prepare them in LAB with raonslab-travel_lab:support-provision --lab-confirm."
+  },
+  "campaigns": {
+    "title": "Travel campaigns",
+    "description": "Campaign body, publication and versions are managed by the Page module. This screen shows the current state of the two fixed campaign pages and links to the Page editor and detail (versions, restore).",
+    "loading": "Loading campaign page status…",
+    "error": "Couldn't load the page list.",
+    "retry": "Reload",
+    "published": "Published",
+    "draft": "Unpublished (draft)",
+    "version": "Current version {version}",
+    "slug": "Address (slug)",
+    "missing_title": "No page is visible in this account scope",
+    "missing_desc": "It may not exist yet, or it may belong to another administrator outside this scope. If the address already exists, the Page module rejects the save.",
+    "create": "Create page at this address",
+    "create_hint": "For the first body, turn off the HTML editor and save as text. The customer screen shows formatting tags only; link addresses and images are not shown.",
+    "edit": "Edit page",
+    "detail": "Detail · versions · restore",
+    "publish": "Publish",
+    "unpublish": "Unpublish",
+    "publish_changed": "Publication updated.",
+    "publish_failed": "Couldn't change publication.",
+    "no_update": "This account cannot update this page.",
+    "more_results": "Next results page",
+    "more_results_hint": "More page search results exist. This campaign may appear on the next results page.",
+    "slots": {
+      "autumn-escape": "Autumn woods campaign (nature theme)",
+      "weekend-reset": "Weekend reset campaign (wellness theme)"
+    }
   }
 }
