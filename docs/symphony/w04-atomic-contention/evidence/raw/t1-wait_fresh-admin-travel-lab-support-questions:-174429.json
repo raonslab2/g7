@@ -1,0 +1,35 @@
+{
+ "phase": "t1-wait_fresh-admin-travel-lab-support-questions:-174429",
+ "review_sha": "fa5523175ac494cfbd13bbf89bf06b3ec91835a6",
+ "base_url": "http://127.0.0.1:18871",
+ "counts": {
+  "PASS": 1,
+  "FAIL": 0,
+  "OBSERVED": 0,
+  "BLOCKED": 0,
+  "NOT_RUN": 0
+ },
+ "results": [
+  {
+   "name": "wait for natural expiry of own admin travel-lab-support-questions: window (no reset)",
+   "status": "PASS",
+   "detail": {
+    "waited_s": 0.3,
+    "row": {
+     "user_id": 53,
+     "prefix": "travel-lab-support-questions:",
+     "counter_rows": 1,
+     "counter": 120,
+     "counter_expires_in_s": -23,
+     "counter_expired": true,
+     "cache_prefix_length": 17,
+     "timer_rows": 1,
+     "timer_expires_in_s": -23,
+     "admission_lock_rows": 0,
+     "admission_lock_expires_in_s": null
+    }
+   },
+   "at": "17:44:30"
+  }
+ ]
+}

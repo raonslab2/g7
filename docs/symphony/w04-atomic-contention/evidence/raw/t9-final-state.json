@@ -1,0 +1,41 @@
+{
+ "phase": "t9-final-state",
+ "review_sha": "fa5523175ac494cfbd13bbf89bf06b3ec91835a6",
+ "base_url": "http://127.0.0.1:18871",
+ "counts": {
+  "PASS": 1,
+  "FAIL": 0,
+  "OBSERVED": 0,
+  "BLOCKED": 0,
+  "NOT_RUN": 0
+ },
+ "results": [
+  {
+   "name": "final state: own tokens (handoff only), no surviving own admission locks, deadlock counter",
+   "status": "PASS",
+   "detail": {
+    "innodb_deadlocks_global": 6,
+    "own_tokens": [
+     {
+      "id": 398,
+      "owner_role": "member",
+      "name": "isolated-review-38789ea501e5"
+     },
+     {
+      "id": 399,
+      "owner_role": "other_member",
+      "name": "isolated-review-38789ea501e5"
+     },
+     {
+      "id": 400,
+      "owner_role": "admin",
+      "name": "isolated-review-38789ea501e5"
+     }
+    ],
+    "surviving_own_admission_lock_rows": 0,
+    "own_counter_rows_present": 19
+   },
+   "at": "17:51:26"
+  }
+ ]
+}

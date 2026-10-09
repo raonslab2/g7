@@ -1,0 +1,67 @@
+{
+ "phase": "t1-burst-other_member-8-900-174723",
+ "review_sha": "fa5523175ac494cfbd13bbf89bf06b3ec91835a6",
+ "base_url": "http://127.0.0.1:18871",
+ "counts": {
+  "PASS": 1,
+  "FAIL": 0,
+  "OBSERVED": 0,
+  "BLOCKED": 0,
+  "NOT_RUN": 0
+ },
+ "results": [
+  {
+   "name": "other_member concurrent 8-lane burst of 900 real HTTP calls in one fresh own window: admitted <= 600 (exact), correct 429, no reset; DB counter == admitted",
+   "status": "PASS",
+   "detail": {
+    "role": "other_member",
+    "lanes": 8,
+    "http_calls": 900,
+    "status_counts_incl_first": {
+     "200": 600,
+     "429": 300
+    },
+    "admitted_200_total": 600,
+    "busy_503": 0,
+    "errors_or_other": {},
+    "elapsed_first_to_last_response_s": 48.436,
+    "first_429_at_s": 30.354,
+    "admitted_sent_after_a_429_completed": 0,
+    "min_remaining_header_200": 0,
+    "distinct_remaining_values_200": 419,
+    "malformed_429": 0,
+    "retry_after_values": [
+     "11",
+     "12",
+     "13",
+     "14",
+     "15"
+    ],
+    "latency_ms_p50_p95_max": [
+     339.9,
+     1004.4,
+     1588.3
+    ],
+    "db_counter_after": {
+     "counter": 600,
+     "counter_expires_in_s": 11,
+     "timer_rows": 1,
+     "admission_lock_rows": 0
+    },
+    "innodb_deadlocks_global_before_after": [
+     6,
+     6
+    ],
+    "issued_calls": 900,
+    "cross_actor_unthrottled_catalog_ms": {
+     "role": "member",
+     "samples": 33,
+     "p50": 383.8,
+     "max": 1267.3,
+     "non_200": 0
+    }
+   },
+   "at": "17:48:12"
+  }
+ ]
+}

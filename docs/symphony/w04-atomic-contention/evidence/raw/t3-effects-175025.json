@@ -1,0 +1,103 @@
+{
+ "phase": "t3-effects-175025",
+ "review_sha": "fa5523175ac494cfbd13bbf89bf06b3ec91835a6",
+ "base_url": "http://127.0.0.1:18871",
+ "counts": {
+  "PASS": 1,
+  "FAIL": 0,
+  "OBSERVED": 0,
+  "BLOCKED": 0,
+  "NOT_RUN": 0
+ },
+ "results": [
+  {
+   "name": "M11-M13 native orders/payments/temp-orders/order-options and jobs/failed-jobs/notifications/mail/notification logs unchanged (own and global SQL)",
+   "status": "PASS",
+   "detail": {
+    "unchanged_native_effect_tables": {
+     "g7_ecommerce_orders": {
+      "before": {
+       "all": 0,
+       "own": 0
+      },
+      "after": {
+       "all": 0,
+       "own": 0
+      }
+     },
+     "g7_ecommerce_order_payments": {
+      "before": {
+       "all": 0
+      },
+      "after": {
+       "all": 0
+      }
+     },
+     "g7_ecommerce_order_options": {
+      "before": {
+       "all": 0
+      },
+      "after": {
+       "all": 0
+      }
+     },
+     "g7_ecommerce_temp_orders": {
+      "before": {
+       "all": 0,
+       "own": 0
+      },
+      "after": {
+       "all": 0,
+       "own": 0
+      }
+     },
+     "g7_jobs": {
+      "before": {
+       "all": 0
+      },
+      "after": {
+       "all": 0
+      }
+     },
+     "g7_failed_jobs": {
+      "before": {
+       "all": 0
+      },
+      "after": {
+       "all": 0
+      }
+     },
+     "g7_notifications": {
+      "before": {
+       "all": 2,
+       "own": 0
+      },
+      "after": {
+       "all": 2,
+       "own": 0
+      }
+     },
+     "g7_mail_send_logs": {
+      "before": {
+       "all": 0
+      },
+      "after": {
+       "all": 0
+      }
+     },
+     "g7_notification_logs": {
+      "before": {
+       "all": 4
+      },
+      "after": {
+       "all": 4
+      }
+     }
+    },
+    "own_travel_inquiries_created": 16,
+    "mail_queue_settings_evidence": "lab environment guard scripts/travel-lab/environment.php refuses to run unless MAIL_MAILER=array and QUEUE_CONNECTION=sync; .env.travel-lab.example sets G7_ENV_PRIORITY=true; parent .env not read"
+   },
+   "at": "17:50:25"
+  }
+ ]
+}

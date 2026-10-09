@@ -1,0 +1,1151 @@
+{
+ "phase": "t3-gaps-173111",
+ "review_sha": "fa5523175ac494cfbd13bbf89bf06b3ec91835a6",
+ "base_url": "http://127.0.0.1:18871",
+ "counts": {
+  "PASS": 11,
+  "FAIL": 0,
+  "OBSERVED": 0,
+  "BLOCKED": 0,
+  "NOT_RUN": 0
+ },
+ "results": [
+  {
+   "name": "deadlock control A: server-wide Innodb_deadlocks over 45 s idle (no own traffic) before the gap series",
+   "status": "PASS",
+   "detail": {
+    "label": "before",
+    "samples": [
+     [
+      0.0,
+      6
+     ],
+     [
+      5.1,
+      6
+     ],
+     [
+      10.5,
+      6
+     ],
+     [
+      15.7,
+      6
+     ],
+     [
+      20.8,
+      6
+     ],
+     [
+      25.9,
+      6
+     ],
+     [
+      30.9,
+      6
+     ],
+     [
+      36.0,
+      6
+     ],
+     [
+      41.0,
+      6
+     ]
+    ],
+    "note": "server-wide counter; any client/database on this MariaDB server, no own traffic in this interval"
+   },
+   "at": "17:31:57"
+  },
+  {
+   "name": "G1 same-gap last-seat race (different members, absent keys, capacity 1): 201/409, reserved 1; server deadlock counter flat",
+   "status": "PASS",
+   "detail": {
+    "round": 1,
+    "variant": "same",
+    "departure": 127,
+    "gap_layout_before": [
+     {
+      "user_id": 51,
+      "key_sha256_12": "556395bf08fc",
+      "exists": 0,
+      "predecessor": {
+       "inquiry_id": 137,
+       "owner": "same_user",
+       "user_id_if_own": 51
+      },
+      "successor": {
+       "edge": true
+      },
+      "gap_id": "e11fdda42656"
+     },
+     {
+      "user_id": 52,
+      "key_sha256_12": "72cdb5787a4e",
+      "exists": 0,
+      "predecessor": {
+       "inquiry_id": 137,
+       "owner": "other_own_actor",
+       "user_id_if_own": 51
+      },
+      "successor": {
+       "edge": true
+      },
+      "gap_id": "e11fdda42656"
+     }
+    ],
+    "same_gap_sql": true,
+    "gap_layout_after": [
+     {
+      "user_id": 51,
+      "key_sha256_12": "556395bf08fc",
+      "exists": 1,
+      "predecessor": {
+       "inquiry_id": 137,
+       "owner": "same_user",
+       "user_id_if_own": 51
+      },
+      "successor": {
+       "edge": true
+      },
+      "gap_id": "e11fdda42656"
+     },
+     {
+      "user_id": 52,
+      "key_sha256_12": "72cdb5787a4e",
+      "exists": 0,
+      "predecessor": {
+       "inquiry_id": 138,
+       "owner": "other_own_actor",
+       "user_id_if_own": 51
+      },
+      "successor": {
+       "edge": true
+      },
+      "gap_id": "a88f6fa76a38"
+     }
+    ],
+    "barrier_connection": 101700,
+    "waiting_ids": [
+     101703,
+     101704
+    ],
+    "sustained_s": 3.265,
+    "responses_pending_at_release": [
+     true,
+     true
+    ],
+    "real_server_overlap": true,
+    "responses": [
+     {
+      "role": "member",
+      "status": 201,
+      "id": 138,
+      "message": "성공적으로 처리되었습니다.",
+      "sent_before_release_s": 3.537,
+      "completed_after_release_s": 0.685
+     },
+     {
+      "role": "other_member",
+      "status": 409,
+      "id": null,
+      "message": "현재 남은 시험 인원보다 많습니다. 인원을 다시 선택해 주세요.",
+      "sent_before_release_s": 3.487,
+      "completed_after_release_s": 0.766
+     }
+    ],
+    "reserved": 1,
+    "capacity": 1,
+    "innodb_deadlocks_global": {
+     "before_lock": 6,
+     "at_lock": 6,
+     "end_of_hold": 6,
+     "at_release": 6,
+     "after_responses": 6,
+     "plus_3s": 6
+    },
+    "deadlock_delta_round": 0
+   },
+   "at": "17:32:07"
+  },
+  {
+   "name": "G2 same-gap last-seat race (different members, absent keys, capacity 1): 201/409, reserved 1; server deadlock counter flat",
+   "status": "PASS",
+   "detail": {
+    "round": 2,
+    "variant": "same",
+    "departure": 128,
+    "gap_layout_before": [
+     {
+      "user_id": 51,
+      "key_sha256_12": "03e545470823",
+      "exists": 0,
+      "predecessor": {
+       "inquiry_id": 138,
+       "owner": "same_user",
+       "user_id_if_own": 51
+      },
+      "successor": {
+       "edge": true
+      },
+      "gap_id": "a88f6fa76a38"
+     },
+     {
+      "user_id": 52,
+      "key_sha256_12": "ab185a827e47",
+      "exists": 0,
+      "predecessor": {
+       "inquiry_id": 138,
+       "owner": "other_own_actor",
+       "user_id_if_own": 51
+      },
+      "successor": {
+       "edge": true
+      },
+      "gap_id": "a88f6fa76a38"
+     }
+    ],
+    "same_gap_sql": true,
+    "gap_layout_after": [
+     {
+      "user_id": 51,
+      "key_sha256_12": "03e545470823",
+      "exists": 1,
+      "predecessor": {
+       "inquiry_id": 138,
+       "owner": "same_user",
+       "user_id_if_own": 51
+      },
+      "successor": {
+       "edge": true
+      },
+      "gap_id": "a88f6fa76a38"
+     },
+     {
+      "user_id": 52,
+      "key_sha256_12": "ab185a827e47",
+      "exists": 0,
+      "predecessor": {
+       "inquiry_id": 139,
+       "owner": "other_own_actor",
+       "user_id_if_own": 51
+      },
+      "successor": {
+       "edge": true
+      },
+      "gap_id": "70637ebadc0b"
+     }
+    ],
+    "barrier_connection": 101776,
+    "waiting_ids": [
+     101779,
+     101781
+    ],
+    "sustained_s": 3.279,
+    "responses_pending_at_release": [
+     true,
+     true
+    ],
+    "real_server_overlap": true,
+    "responses": [
+     {
+      "role": "member",
+      "status": 201,
+      "id": 139,
+      "message": "성공적으로 처리되었습니다.",
+      "sent_before_release_s": 3.688,
+      "completed_after_release_s": 0.076
+     },
+     {
+      "role": "other_member",
+      "status": 409,
+      "id": null,
+      "message": "현재 남은 시험 인원보다 많습니다. 인원을 다시 선택해 주세요.",
+      "sent_before_release_s": 3.533,
+      "completed_after_release_s": 0.128
+     }
+    ],
+    "reserved": 1,
+    "capacity": 1,
+    "innodb_deadlocks_global": {
+     "before_lock": 6,
+     "at_lock": 6,
+     "end_of_hold": 6,
+     "at_release": 6,
+     "after_responses": 6,
+     "plus_3s": 6
+    },
+    "deadlock_delta_round": 0
+   },
+   "at": "17:32:15"
+  },
+  {
+   "name": "G3 diff-gap last-seat race (different members, absent keys, capacity 1): 201/409, reserved 1; server deadlock counter flat",
+   "status": "PASS",
+   "detail": {
+    "round": 3,
+    "variant": "diff",
+    "departure": 129,
+    "gap_layout_before": [
+     {
+      "user_id": 51,
+      "key_sha256_12": "f9ce81ff97d6",
+      "exists": 0,
+      "predecessor": {
+       "inquiry_id": 127,
+       "owner": "foreign",
+       "user_id_if_own": null
+      },
+      "successor": {
+       "inquiry_id": 131,
+       "owner": "same_user",
+       "user_id_if_own": 51
+      },
+      "gap_id": "7803048bf6fc"
+     },
+     {
+      "user_id": 52,
+      "key_sha256_12": "69c9b02964d7",
+      "exists": 0,
+      "predecessor": {
+       "inquiry_id": 139,
+       "owner": "other_own_actor",
+       "user_id_if_own": 51
+      },
+      "successor": {
+       "edge": true
+      },
+      "gap_id": "70637ebadc0b"
+     }
+    ],
+    "same_gap_sql": false,
+    "gap_layout_after": [
+     {
+      "user_id": 51,
+      "key_sha256_12": "f9ce81ff97d6",
+      "exists": 0,
+      "predecessor": {
+       "inquiry_id": 127,
+       "owner": "foreign",
+       "user_id_if_own": null
+      },
+      "successor": {
+       "inquiry_id": 131,
+       "owner": "same_user",
+       "user_id_if_own": 51
+      },
+      "gap_id": "7803048bf6fc"
+     },
+     {
+      "user_id": 52,
+      "key_sha256_12": "69c9b02964d7",
+      "exists": 1,
+      "predecessor": {
+       "inquiry_id": 139,
+       "owner": "other_own_actor",
+       "user_id_if_own": 51
+      },
+      "successor": {
+       "edge": true
+      },
+      "gap_id": "70637ebadc0b"
+     }
+    ],
+    "barrier_connection": 101844,
+    "waiting_ids": [
+     101847,
+     101848
+    ],
+    "sustained_s": 3.271,
+    "responses_pending_at_release": [
+     true,
+     true
+    ],
+    "real_server_overlap": true,
+    "responses": [
+     {
+      "role": "member",
+      "status": 409,
+      "id": null,
+      "message": "현재 남은 시험 인원보다 많습니다. 인원을 다시 선택해 주세요.",
+      "sent_before_release_s": 3.545,
+      "completed_after_release_s": 0.152
+     },
+     {
+      "role": "other_member",
+      "status": 201,
+      "id": 140,
+      "message": "성공적으로 처리되었습니다.",
+      "sent_before_release_s": 3.493,
+      "completed_after_release_s": 0.11
+     }
+    ],
+    "reserved": 1,
+    "capacity": 1,
+    "innodb_deadlocks_global": {
+     "before_lock": 6,
+     "at_lock": 6,
+     "end_of_hold": 6,
+     "at_release": 6,
+     "after_responses": 6,
+     "plus_3s": 6
+    },
+    "deadlock_delta_round": 0
+   },
+   "at": "17:32:23"
+  },
+  {
+   "name": "G4 same-gap last-seat race (different members, absent keys, capacity 1): 201/409, reserved 1; server deadlock counter flat",
+   "status": "PASS",
+   "detail": {
+    "round": 4,
+    "variant": "same",
+    "departure": 130,
+    "gap_layout_before": [
+     {
+      "user_id": 51,
+      "key_sha256_12": "34efacafddd6",
+      "exists": 0,
+      "predecessor": {
+       "inquiry_id": 139,
+       "owner": "same_user",
+       "user_id_if_own": 51
+      },
+      "successor": {
+       "inquiry_id": 140,
+       "owner": "other_own_actor",
+       "user_id_if_own": 52
+      },
+      "gap_id": "647a89b1485c"
+     },
+     {
+      "user_id": 52,
+      "key_sha256_12": "b601b64387f6",
+      "exists": 0,
+      "predecessor": {
+       "inquiry_id": 139,
+       "owner": "other_own_actor",
+       "user_id_if_own": 51
+      },
+      "successor": {
+       "inquiry_id": 140,
+       "owner": "same_user",
+       "user_id_if_own": 52
+      },
+      "gap_id": "647a89b1485c"
+     }
+    ],
+    "same_gap_sql": true,
+    "gap_layout_after": [
+     {
+      "user_id": 51,
+      "key_sha256_12": "34efacafddd6",
+      "exists": 1,
+      "predecessor": {
+       "inquiry_id": 139,
+       "owner": "same_user",
+       "user_id_if_own": 51
+      },
+      "successor": {
+       "inquiry_id": 140,
+       "owner": "other_own_actor",
+       "user_id_if_own": 52
+      },
+      "gap_id": "647a89b1485c"
+     },
+     {
+      "user_id": 52,
+      "key_sha256_12": "b601b64387f6",
+      "exists": 0,
+      "predecessor": {
+       "inquiry_id": 141,
+       "owner": "other_own_actor",
+       "user_id_if_own": 51
+      },
+      "successor": {
+       "inquiry_id": 140,
+       "owner": "same_user",
+       "user_id_if_own": 52
+      },
+      "gap_id": "9d62bdeb3e50"
+     }
+    ],
+    "barrier_connection": 101934,
+    "waiting_ids": [
+     101936,
+     101938
+    ],
+    "sustained_s": 3.226,
+    "responses_pending_at_release": [
+     true,
+     true
+    ],
+    "real_server_overlap": true,
+    "responses": [
+     {
+      "role": "member",
+      "status": 201,
+      "id": 141,
+      "message": "성공적으로 처리되었습니다.",
+      "sent_before_release_s": 3.575,
+      "completed_after_release_s": 0.056
+     },
+     {
+      "role": "other_member",
+      "status": 409,
+      "id": null,
+      "message": "현재 남은 시험 인원보다 많습니다. 인원을 다시 선택해 주세요.",
+      "sent_before_release_s": 3.494,
+      "completed_after_release_s": 0.06
+     }
+    ],
+    "reserved": 1,
+    "capacity": 1,
+    "innodb_deadlocks_global": {
+     "before_lock": 6,
+     "at_lock": 6,
+     "end_of_hold": 6,
+     "at_release": 6,
+     "after_responses": 6,
+     "plus_3s": 6
+    },
+    "deadlock_delta_round": 0
+   },
+   "at": "17:32:32"
+  },
+  {
+   "name": "G5 same-gap last-seat race (different members, absent keys, capacity 1): 201/409, reserved 1; server deadlock counter flat",
+   "status": "PASS",
+   "detail": {
+    "round": 5,
+    "variant": "same",
+    "departure": 131,
+    "gap_layout_before": [
+     {
+      "user_id": 51,
+      "key_sha256_12": "4cbae0a636ec",
+      "exists": 0,
+      "predecessor": {
+       "inquiry_id": 141,
+       "owner": "same_user",
+       "user_id_if_own": 51
+      },
+      "successor": {
+       "inquiry_id": 140,
+       "owner": "other_own_actor",
+       "user_id_if_own": 52
+      },
+      "gap_id": "9d62bdeb3e50"
+     },
+     {
+      "user_id": 52,
+      "key_sha256_12": "216173fef077",
+      "exists": 0,
+      "predecessor": {
+       "inquiry_id": 141,
+       "owner": "other_own_actor",
+       "user_id_if_own": 51
+      },
+      "successor": {
+       "inquiry_id": 140,
+       "owner": "same_user",
+       "user_id_if_own": 52
+      },
+      "gap_id": "9d62bdeb3e50"
+     }
+    ],
+    "same_gap_sql": true,
+    "gap_layout_after": [
+     {
+      "user_id": 51,
+      "key_sha256_12": "4cbae0a636ec",
+      "exists": 1,
+      "predecessor": {
+       "inquiry_id": 141,
+       "owner": "same_user",
+       "user_id_if_own": 51
+      },
+      "successor": {
+       "inquiry_id": 140,
+       "owner": "other_own_actor",
+       "user_id_if_own": 52
+      },
+      "gap_id": "9d62bdeb3e50"
+     },
+     {
+      "user_id": 52,
+      "key_sha256_12": "216173fef077",
+      "exists": 0,
+      "predecessor": {
+       "inquiry_id": 142,
+       "owner": "other_own_actor",
+       "user_id_if_own": 51
+      },
+      "successor": {
+       "inquiry_id": 140,
+       "owner": "same_user",
+       "user_id_if_own": 52
+      },
+      "gap_id": "aeeb325bed9a"
+     }
+    ],
+    "barrier_connection": 102004,
+    "waiting_ids": [
+     102007,
+     102008
+    ],
+    "sustained_s": 3.236,
+    "responses_pending_at_release": [
+     true,
+     true
+    ],
+    "real_server_overlap": true,
+    "responses": [
+     {
+      "role": "member",
+      "status": 201,
+      "id": 142,
+      "message": "성공적으로 처리되었습니다.",
+      "sent_before_release_s": 3.489,
+      "completed_after_release_s": 0.046
+     },
+     {
+      "role": "other_member",
+      "status": 409,
+      "id": null,
+      "message": "현재 남은 시험 인원보다 많습니다. 인원을 다시 선택해 주세요.",
+      "sent_before_release_s": 3.439,
+      "completed_after_release_s": 0.05
+     }
+    ],
+    "reserved": 1,
+    "capacity": 1,
+    "innodb_deadlocks_global": {
+     "before_lock": 6,
+     "at_lock": 6,
+     "end_of_hold": 6,
+     "at_release": 6,
+     "after_responses": 6,
+     "plus_3s": 6
+    },
+    "deadlock_delta_round": 0
+   },
+   "at": "17:32:42"
+  },
+  {
+   "name": "G6 diff-gap last-seat race (different members, absent keys, capacity 1): 201/409, reserved 1; server deadlock counter flat",
+   "status": "PASS",
+   "detail": {
+    "round": 6,
+    "variant": "diff",
+    "departure": 132,
+    "gap_layout_before": [
+     {
+      "user_id": 51,
+      "key_sha256_12": "7f66c835fc6e",
+      "exists": 0,
+      "predecessor": {
+       "inquiry_id": 127,
+       "owner": "foreign",
+       "user_id_if_own": null
+      },
+      "successor": {
+       "inquiry_id": 131,
+       "owner": "same_user",
+       "user_id_if_own": 51
+      },
+      "gap_id": "7803048bf6fc"
+     },
+     {
+      "user_id": 52,
+      "key_sha256_12": "8a23680ae79b",
+      "exists": 0,
+      "predecessor": {
+       "inquiry_id": 140,
+       "owner": "same_user",
+       "user_id_if_own": 52
+      },
+      "successor": {
+       "edge": true
+      },
+      "gap_id": "5fb577e15921"
+     }
+    ],
+    "same_gap_sql": false,
+    "gap_layout_after": [
+     {
+      "user_id": 51,
+      "key_sha256_12": "7f66c835fc6e",
+      "exists": 1,
+      "predecessor": {
+       "inquiry_id": 127,
+       "owner": "foreign",
+       "user_id_if_own": null
+      },
+      "successor": {
+       "inquiry_id": 131,
+       "owner": "same_user",
+       "user_id_if_own": 51
+      },
+      "gap_id": "7803048bf6fc"
+     },
+     {
+      "user_id": 52,
+      "key_sha256_12": "8a23680ae79b",
+      "exists": 0,
+      "predecessor": {
+       "inquiry_id": 140,
+       "owner": "same_user",
+       "user_id_if_own": 52
+      },
+      "successor": {
+       "edge": true
+      },
+      "gap_id": "5fb577e15921"
+     }
+    ],
+    "barrier_connection": 102061,
+    "waiting_ids": [
+     102064,
+     102068
+    ],
+    "sustained_s": 3.202,
+    "responses_pending_at_release": [
+     true,
+     true
+    ],
+    "real_server_overlap": true,
+    "responses": [
+     {
+      "role": "member",
+      "status": 201,
+      "id": 143,
+      "message": "성공적으로 처리되었습니다.",
+      "sent_before_release_s": 3.62,
+      "completed_after_release_s": 0.072
+     },
+     {
+      "role": "other_member",
+      "status": 409,
+      "id": null,
+      "message": "현재 남은 시험 인원보다 많습니다. 인원을 다시 선택해 주세요.",
+      "sent_before_release_s": 3.567,
+      "completed_after_release_s": 0.084
+     }
+    ],
+    "reserved": 1,
+    "capacity": 1,
+    "innodb_deadlocks_global": {
+     "before_lock": 6,
+     "at_lock": 6,
+     "end_of_hold": 6,
+     "at_release": 6,
+     "after_responses": 6,
+     "plus_3s": 6
+    },
+    "deadlock_delta_round": 0
+   },
+   "at": "17:32:51"
+  },
+  {
+   "name": "G7 same-gap last-seat race (different members, absent keys, capacity 1): 201/409, reserved 1; server deadlock counter flat",
+   "status": "PASS",
+   "detail": {
+    "round": 7,
+    "variant": "same",
+    "departure": 133,
+    "gap_layout_before": [
+     {
+      "user_id": 51,
+      "key_sha256_12": "083b83c93df8",
+      "exists": 0,
+      "predecessor": {
+       "inquiry_id": 142,
+       "owner": "same_user",
+       "user_id_if_own": 51
+      },
+      "successor": {
+       "inquiry_id": 140,
+       "owner": "other_own_actor",
+       "user_id_if_own": 52
+      },
+      "gap_id": "aeeb325bed9a"
+     },
+     {
+      "user_id": 52,
+      "key_sha256_12": "cef1c4d5114f",
+      "exists": 0,
+      "predecessor": {
+       "inquiry_id": 142,
+       "owner": "other_own_actor",
+       "user_id_if_own": 51
+      },
+      "successor": {
+       "inquiry_id": 140,
+       "owner": "same_user",
+       "user_id_if_own": 52
+      },
+      "gap_id": "aeeb325bed9a"
+     }
+    ],
+    "same_gap_sql": true,
+    "gap_layout_after": [
+     {
+      "user_id": 51,
+      "key_sha256_12": "083b83c93df8",
+      "exists": 1,
+      "predecessor": {
+       "inquiry_id": 142,
+       "owner": "same_user",
+       "user_id_if_own": 51
+      },
+      "successor": {
+       "inquiry_id": 140,
+       "owner": "other_own_actor",
+       "user_id_if_own": 52
+      },
+      "gap_id": "aeeb325bed9a"
+     },
+     {
+      "user_id": 52,
+      "key_sha256_12": "cef1c4d5114f",
+      "exists": 0,
+      "predecessor": {
+       "inquiry_id": 144,
+       "owner": "other_own_actor",
+       "user_id_if_own": 51
+      },
+      "successor": {
+       "inquiry_id": 140,
+       "owner": "same_user",
+       "user_id_if_own": 52
+      },
+      "gap_id": "ba5786feafcd"
+     }
+    ],
+    "barrier_connection": 102102,
+    "waiting_ids": [
+     102105,
+     102106
+    ],
+    "sustained_s": 3.331,
+    "responses_pending_at_release": [
+     true,
+     true
+    ],
+    "real_server_overlap": true,
+    "responses": [
+     {
+      "role": "member",
+      "status": 201,
+      "id": 144,
+      "message": "성공적으로 처리되었습니다.",
+      "sent_before_release_s": 3.738,
+      "completed_after_release_s": 0.065
+     },
+     {
+      "role": "other_member",
+      "status": 409,
+      "id": null,
+      "message": "현재 남은 시험 인원보다 많습니다. 인원을 다시 선택해 주세요.",
+      "sent_before_release_s": 3.688,
+      "completed_after_release_s": 0.074
+     }
+    ],
+    "reserved": 1,
+    "capacity": 1,
+    "innodb_deadlocks_global": {
+     "before_lock": 6,
+     "at_lock": 6,
+     "end_of_hold": 6,
+     "at_release": 6,
+     "after_responses": 6,
+     "plus_3s": 6
+    },
+    "deadlock_delta_round": 0
+   },
+   "at": "17:33:00"
+  },
+  {
+   "name": "G8 same-gap last-seat race (different members, absent keys, capacity 1): 201/409, reserved 1; server deadlock counter flat",
+   "status": "PASS",
+   "detail": {
+    "round": 8,
+    "variant": "same",
+    "departure": 134,
+    "gap_layout_before": [
+     {
+      "user_id": 51,
+      "key_sha256_12": "2440cafa0eb9",
+      "exists": 0,
+      "predecessor": {
+       "inquiry_id": 144,
+       "owner": "same_user",
+       "user_id_if_own": 51
+      },
+      "successor": {
+       "inquiry_id": 140,
+       "owner": "other_own_actor",
+       "user_id_if_own": 52
+      },
+      "gap_id": "ba5786feafcd"
+     },
+     {
+      "user_id": 52,
+      "key_sha256_12": "7ab6a8075901",
+      "exists": 0,
+      "predecessor": {
+       "inquiry_id": 144,
+       "owner": "other_own_actor",
+       "user_id_if_own": 51
+      },
+      "successor": {
+       "inquiry_id": 140,
+       "owner": "same_user",
+       "user_id_if_own": 52
+      },
+      "gap_id": "ba5786feafcd"
+     }
+    ],
+    "same_gap_sql": true,
+    "gap_layout_after": [
+     {
+      "user_id": 51,
+      "key_sha256_12": "2440cafa0eb9",
+      "exists": 1,
+      "predecessor": {
+       "inquiry_id": 144,
+       "owner": "same_user",
+       "user_id_if_own": 51
+      },
+      "successor": {
+       "inquiry_id": 140,
+       "owner": "other_own_actor",
+       "user_id_if_own": 52
+      },
+      "gap_id": "ba5786feafcd"
+     },
+     {
+      "user_id": 52,
+      "key_sha256_12": "7ab6a8075901",
+      "exists": 0,
+      "predecessor": {
+       "inquiry_id": 145,
+       "owner": "other_own_actor",
+       "user_id_if_own": 51
+      },
+      "successor": {
+       "inquiry_id": 140,
+       "owner": "same_user",
+       "user_id_if_own": 52
+      },
+      "gap_id": "9615beb82e02"
+     }
+    ],
+    "barrier_connection": 102165,
+    "waiting_ids": [
+     102168,
+     102169
+    ],
+    "sustained_s": 3.204,
+    "responses_pending_at_release": [
+     true,
+     true
+    ],
+    "real_server_overlap": true,
+    "responses": [
+     {
+      "role": "member",
+      "status": 201,
+      "id": 145,
+      "message": "성공적으로 처리되었습니다.",
+      "sent_before_release_s": 3.467,
+      "completed_after_release_s": 0.096
+     },
+     {
+      "role": "other_member",
+      "status": 409,
+      "id": null,
+      "message": "현재 남은 시험 인원보다 많습니다. 인원을 다시 선택해 주세요.",
+      "sent_before_release_s": 3.414,
+      "completed_after_release_s": 0.11
+     }
+    ],
+    "reserved": 1,
+    "capacity": 1,
+    "innodb_deadlocks_global": {
+     "before_lock": 6,
+     "at_lock": 6,
+     "end_of_hold": 6,
+     "at_release": 6,
+     "after_responses": 6,
+     "plus_3s": 6
+    },
+    "deadlock_delta_round": 0
+   },
+   "at": "17:33:08"
+  },
+  {
+   "name": "G9 diff-gap last-seat race (different members, absent keys, capacity 1): 201/409, reserved 1; server deadlock counter flat",
+   "status": "PASS",
+   "detail": {
+    "round": 9,
+    "variant": "diff",
+    "departure": 135,
+    "gap_layout_before": [
+     {
+      "user_id": 51,
+      "key_sha256_12": "bc12b23a70ac",
+      "exists": 0,
+      "predecessor": {
+       "inquiry_id": 143,
+       "owner": "same_user",
+       "user_id_if_own": 51
+      },
+      "successor": {
+       "inquiry_id": 131,
+       "owner": "same_user",
+       "user_id_if_own": 51
+      },
+      "gap_id": "aabaee92064f"
+     },
+     {
+      "user_id": 52,
+      "key_sha256_12": "46400c4a3f1b",
+      "exists": 0,
+      "predecessor": {
+       "inquiry_id": 140,
+       "owner": "same_user",
+       "user_id_if_own": 52
+      },
+      "successor": {
+       "edge": true
+      },
+      "gap_id": "5fb577e15921"
+     }
+    ],
+    "same_gap_sql": false,
+    "gap_layout_after": [
+     {
+      "user_id": 51,
+      "key_sha256_12": "bc12b23a70ac",
+      "exists": 1,
+      "predecessor": {
+       "inquiry_id": 143,
+       "owner": "same_user",
+       "user_id_if_own": 51
+      },
+      "successor": {
+       "inquiry_id": 131,
+       "owner": "same_user",
+       "user_id_if_own": 51
+      },
+      "gap_id": "aabaee92064f"
+     },
+     {
+      "user_id": 52,
+      "key_sha256_12": "46400c4a3f1b",
+      "exists": 0,
+      "predecessor": {
+       "inquiry_id": 140,
+       "owner": "same_user",
+       "user_id_if_own": 52
+      },
+      "successor": {
+       "edge": true
+      },
+      "gap_id": "5fb577e15921"
+     }
+    ],
+    "barrier_connection": 102220,
+    "waiting_ids": [
+     102222,
+     102224
+    ],
+    "sustained_s": 3.349,
+    "responses_pending_at_release": [
+     true,
+     true
+    ],
+    "real_server_overlap": true,
+    "responses": [
+     {
+      "role": "member",
+      "status": 201,
+      "id": 146,
+      "message": "성공적으로 처리되었습니다.",
+      "sent_before_release_s": 3.602,
+      "completed_after_release_s": 0.034
+     },
+     {
+      "role": "other_member",
+      "status": 409,
+      "id": null,
+      "message": "현재 남은 시험 인원보다 많습니다. 인원을 다시 선택해 주세요.",
+      "sent_before_release_s": 3.552,
+      "completed_after_release_s": 0.038
+     }
+    ],
+    "reserved": 1,
+    "capacity": 1,
+    "innodb_deadlocks_global": {
+     "before_lock": 6,
+     "at_lock": 6,
+     "end_of_hold": 6,
+     "at_release": 6,
+     "after_responses": 6,
+     "plus_3s": 6
+    },
+    "deadlock_delta_round": 0
+   },
+   "at": "17:33:16"
+  },
+  {
+   "name": "deadlock control B: server-wide Innodb_deadlocks over 45 s idle (no own traffic) after the gap series",
+   "status": "PASS",
+   "detail": {
+    "label": "after",
+    "samples": [
+     [
+      0.0,
+      6
+     ],
+     [
+      5.5,
+      6
+     ],
+     [
+      10.7,
+      6
+     ],
+     [
+      15.8,
+      6
+     ],
+     [
+      20.9,
+      6
+     ],
+     [
+      26.0,
+      6
+     ],
+     [
+      31.0,
+      6
+     ],
+     [
+      36.1,
+      6
+     ],
+     [
+      41.2,
+      6
+     ]
+    ],
+    "note": "server-wide counter; any client/database on this MariaDB server, no own traffic in this interval"
+   },
+   "at": "17:34:03"
+  }
+ ]
+}

@@ -1,0 +1,110 @@
+{
+ "phase": "t1-identity_sequential-174924",
+ "review_sha": "fa5523175ac494cfbd13bbf89bf06b3ec91835a6",
+ "base_url": "http://127.0.0.1:18871",
+ "counts": {
+  "PASS": 2,
+  "FAIL": 0,
+  "OBSERVED": 0,
+  "BLOCKED": 0,
+  "NOT_RUN": 0
+ },
+ "results": [
+  {
+   "name": "same-IP member/other/admin separate per-user DatabaseStore counters; guest IP bucket not consumed by member reads",
+   "status": "PASS",
+   "detail": {
+    "pre_db_rows_fresh": true,
+    "guest_before": [
+     200,
+     "600",
+     "599"
+    ],
+    "member_40": [
+     [
+      200
+     ],
+     599,
+     560
+    ],
+    "member_strictly_by_1": true,
+    "guest_after": [
+     200,
+     "598",
+     1
+    ],
+    "other_first": [
+     200,
+     "600",
+     "599"
+    ],
+    "admin_first": [
+     200,
+     "600",
+     "599"
+    ],
+    "db_counters": {
+     "member": {
+      "counter": 40,
+      "counter_expires_in_s": 55,
+      "timer_rows": 1,
+      "admission_lock_rows": 0,
+      "cache_prefix_length": 17
+     },
+     "other_member": {
+      "counter": 1,
+      "counter_expires_in_s": 60,
+      "timer_rows": 1,
+      "admission_lock_rows": 0,
+      "cache_prefix_length": 17
+     },
+     "admin": {
+      "counter": 1,
+      "counter_expires_in_s": 60,
+      "timer_rows": 1,
+      "admission_lock_rows": 0,
+      "cache_prefix_length": 17
+     }
+    },
+    "guest_delta_note": "exact 1: no other loopback traffic between the two guest reads"
+   },
+   "at": "17:49:29"
+  },
+  {
+   "name": "member sequential 600 x 200 then 601st 429 inside one fresh own 60 s window; DatabaseStore counter exactly 600; no surviving lock",
+   "status": "PASS",
+   "detail": {
+    "requests_1_600": 600,
+    "statuses_1_600": [
+     200
+    ],
+    "remaining_first_last": [
+     599,
+     0
+    ],
+    "strictly_decreasing_by_1": true,
+    "elapsed_first_to_600th_s": 53.737,
+    "latency_ms_p50_p95_max": [
+     79.8,
+     139.5,
+     303.4
+    ],
+    "request_601": {
+     "status": 429,
+     "limit": "600",
+     "remaining": "0",
+     "retry_after": "6",
+     "message": "Too Many Attempts."
+    },
+    "elapsed_first_to_601_s": 53.813,
+    "db_counter_after": {
+     "counter": 600,
+     "counter_expires_in_s": 6,
+     "timer_rows": 1,
+     "admission_lock_rows": 0
+    }
+   },
+   "at": "17:50:18"
+  }
+ ]
+}

@@ -1,0 +1,102 @@
+{
+ "phase": "t1-admission-admin-174623",
+ "review_sha": "fa5523175ac494cfbd13bbf89bf06b3ec91835a6",
+ "base_url": "http://127.0.0.1:18871",
+ "counts": {
+  "PASS": 2,
+  "FAIL": 0,
+  "OBSERVED": 0,
+  "BLOCKED": 0,
+  "NOT_RUN": 0
+ },
+ "results": [
+  {
+   "name": "admin admission lock wait: own counter row held 5 s -> holder A waits then 200; same-actor B/C get native block(3) 503 Retry-After 1 without counting; no surviving lock",
+   "status": "PASS",
+   "detail": {
+    "barrier_connection": 105963,
+    "held_for_s": 6.103,
+    "waiting_ids": [
+     105965
+    ],
+    "first_detection": 1.011,
+    "lock_rows_while_A_blocked": 1,
+    "B_done_before_release": [
+     true,
+     true
+    ],
+    "A_pending_at_release": true,
+    "responses": [
+     {
+      "status": 200,
+      "message": "자주 묻는 질문을 불러왔습니다.",
+      "retry_after": null,
+      "limit": "600",
+      "sent_before_release_s": 6.104,
+      "completed_after_release_s": 0.21,
+      "duration_s": 6.314
+     },
+     {
+      "status": 503,
+      "message": "요청이 일시적으로 혼잡합니다. 잠시 후 다시 시도해 주세요.",
+      "retry_after": "1",
+      "limit": null,
+      "sent_before_release_s": 5.346,
+      "completed_after_release_s": -2.251,
+      "duration_s": 3.095
+     },
+     {
+      "status": 503,
+      "message": "요청이 일시적으로 혼잡합니다. 잠시 후 다시 시도해 주세요.",
+      "retry_after": "1",
+      "limit": null,
+      "sent_before_release_s": 5.295,
+      "completed_after_release_s": -2.233,
+      "duration_s": 3.062
+     }
+    ],
+    "after": {
+     "counter": 2,
+     "counter_expires_in_s": 53,
+     "admission_lock_rows": 0
+    },
+    "counter_before": 1
+   },
+   "at": "17:46:30"
+  },
+  {
+   "name": "admin admission headroom: native increment blocked 26.5 s -> request rejected 503 (>=25 s), lock released, controller not run",
+   "status": "PASS",
+   "detail": {
+    "barrier_connection": 105998,
+    "held_for_s": 27.499,
+    "waiting_ids": [
+     106000
+    ],
+    "first_detection": 0.87,
+    "lock_rows_while_A_blocked": 1,
+    "B_done_before_release": [],
+    "A_pending_at_release": true,
+    "responses": [
+     {
+      "status": 503,
+      "message": "요청이 일시적으로 혼잡합니다. 잠시 후 다시 시도해 주세요.",
+      "retry_after": "1",
+      "limit": null,
+      "sent_before_release_s": 27.501,
+      "completed_after_release_s": 0.016,
+      "duration_s": 27.517
+     }
+    ],
+    "after": {
+     "counter": 3,
+     "counter_expires_in_s": 25,
+     "admission_lock_rows": 0
+    },
+    "counter_before": 2,
+    "counter_note": "the native hit was recorded before the headroom check, so the rejected request consumed one unit (bounded, author-documented)"
+   },
+   "at": "17:46:58"
+  }
+ ]
+}

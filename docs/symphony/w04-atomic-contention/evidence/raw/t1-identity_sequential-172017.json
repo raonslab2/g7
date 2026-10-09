@@ -1,0 +1,111 @@
+{
+ "phase": "t1-identity_sequential-172017",
+ "review_sha": "fa5523175ac494cfbd13bbf89bf06b3ec91835a6",
+ "base_url": "http://127.0.0.1:18871",
+ "counts": {
+  "PASS": 1,
+  "FAIL": 0,
+  "OBSERVED": 0,
+  "BLOCKED": 0,
+  "NOT_RUN": 1
+ },
+ "results": [
+  {
+   "name": "same-IP member/other/admin separate per-user DatabaseStore counters; guest IP bucket not consumed by member reads",
+   "status": "PASS",
+   "detail": {
+    "pre_db_rows_fresh": true,
+    "guest_before": [
+     200,
+     "600",
+     "599"
+    ],
+    "member_40": [
+     [
+      200
+     ],
+     599,
+     560
+    ],
+    "member_strictly_by_1": true,
+    "guest_after": [
+     200,
+     "598",
+     1
+    ],
+    "other_first": [
+     200,
+     "600",
+     "599"
+    ],
+    "admin_first": [
+     200,
+     "600",
+     "599"
+    ],
+    "db_counters": {
+     "member": {
+      "counter": 40,
+      "counter_expires_in_s": 51,
+      "timer_rows": 1,
+      "admission_lock_rows": 0,
+      "cache_prefix_length": 17
+     },
+     "other_member": {
+      "counter": 1,
+      "counter_expires_in_s": 59,
+      "timer_rows": 1,
+      "admission_lock_rows": 0,
+      "cache_prefix_length": 17
+     },
+     "admin": {
+      "counter": 1,
+      "counter_expires_in_s": 60,
+      "timer_rows": 1,
+      "admission_lock_rows": 0,
+      "cache_prefix_length": 17
+     }
+    },
+    "guest_delta_note": "exact 1: no other loopback traffic between the two guest reads"
+   },
+   "at": "17:20:27"
+  },
+  {
+   "name": "member sequential 600 x 200 then 601st 429 inside one fresh own 60 s window; DatabaseStore counter exactly 600; no surviving lock",
+   "status": "NOT_RUN",
+   "detail": {
+    "requests_1_600": 600,
+    "statuses_1_600": [
+     200
+    ],
+    "remaining_first_last": [
+     599,
+     581
+    ],
+    "strictly_decreasing_by_1": false,
+    "elapsed_first_to_600th_s": 122.897,
+    "latency_ms_p50_p95_max": [
+     165.9,
+     420.9,
+     1324.6
+    ],
+    "request_601": {
+     "status": 200,
+     "limit": "600",
+     "remaining": "580",
+     "retry_after": null,
+     "message": "자주 묻는 질문을 불러왔습니다."
+    },
+    "elapsed_first_to_601_s": 123.077,
+    "db_counter_after": {
+     "counter": 20,
+     "counter_expires_in_s": 57,
+     "timer_rows": 1,
+     "admission_lock_rows": 0
+    },
+    "reason": "sequential 601 requests did not finish inside one own 60 s window on this runtime; boundary not claimed, no reset/retry forcing"
+   },
+   "at": "17:22:21"
+  }
+ ]
+}

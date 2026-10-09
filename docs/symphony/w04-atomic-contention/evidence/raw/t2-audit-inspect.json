@@ -1,0 +1,29 @@
+{
+ "phase": "t2-audit-inspect",
+ "review_sha": "fa5523175ac494cfbd13bbf89bf06b3ec91835a6",
+ "base_url": "http://127.0.0.1:18871",
+ "counts": {
+  "PASS": 1,
+  "FAIL": 0,
+  "OBSERVED": 0,
+  "BLOCKED": 0,
+  "NOT_RUN": 0
+ },
+ "results": [
+  {
+   "name": "audit re-inspection (same SQL, own rows only): other_member rows since floor are its own create_race post creations; none touch member q1",
+   "status": "PASS",
+   "detail": {
+    "other_member_activity_since_floor": {
+     "post.create|Post": 10,
+     "auth.login|User": 1
+    },
+    "other_rows_on_member_q1": 0,
+    "other_post_rows_outside_own_create_race": 0,
+    "any_contains_body_marker": false,
+    "any_contains_edited_title": false
+   },
+   "at": "17:46:15"
+  }
+ ]
+}

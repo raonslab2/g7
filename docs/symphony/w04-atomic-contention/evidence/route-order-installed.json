@@ -1,0 +1,978 @@
+{
+    "probe": "w04-atomic-contention route_order (installed route cache text -> native Kernel/Router sort)",
+    "route_cache_sha256": "2610ee79e3e45bf73fc27b77b0e1534d820399e1ec377bd7e2f16782f2df7752",
+    "route_cache_mtime_utc": "2026-10-09T16:55:49+00:00",
+    "support_routes_found": 31,
+    "wrapper_implements_AuthenticatesRequests": true,
+    "wrapper_parent": "App\\Http\\Middleware\\OptionalSanctumMiddleware",
+    "wrapper_declares_methods": [],
+    "native_priority_head": [
+        "Illuminate\\Foundation\\Http\\Middleware\\HandlePrecognitiveRequests",
+        "Illuminate\\Cookie\\Middleware\\EncryptCookies",
+        "Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse",
+        "Illuminate\\Session\\Middleware\\StartSession",
+        "Illuminate\\View\\Middleware\\ShareErrorsFromSession",
+        "Illuminate\\Contracts\\Auth\\Middleware\\AuthenticatesRequests",
+        "Illuminate\\Routing\\Middleware\\ThrottleRequests",
+        "Illuminate\\Routing\\Middleware\\ThrottleRequestsWithRedis",
+        "Illuminate\\Contracts\\Session\\Middleware\\AuthenticatesSessions",
+        "Illuminate\\Routing\\Middleware\\SubstituteBindings",
+        "Illuminate\\Auth\\Middleware\\Authorize"
+    ],
+    "travel_throttle_parent": "Illuminate\\Routing\\Middleware\\ThrottleRequests",
+    "travel_throttle_sha256": "aab02c6b01254dd62b7973ee5b0fbc68bb0afd052d49171ac19f3bd21e97e92d",
+    "throttled_routes": 19,
+    "throttled_routes_auth_before_every_throttle": 19,
+    "routes_with_legacy_native_throttle": 0,
+    "routes": {
+        "api.modules.raonslab-travel_lab.catalog.index": {
+            "installed_route_cache_middleware": [
+                "api"
+            ],
+            "controller": "Modules\\Raonslab\\TravelLab\\Http\\Controllers\\CatalogController@index",
+            "native_sorted": [
+                "App\\Http\\Middleware\\ExtensionMiddlewareGate:api,before_core",
+                "Illuminate\\Routing\\Middleware\\SubstituteBindings",
+                "App\\Http\\Middleware\\SetLocale",
+                "App\\Http\\Middleware\\SetTimezone",
+                "App\\Http\\Middleware\\RefreshTokenExpiration",
+                "App\\Http\\Middleware\\EnforceIdentityPolicy",
+                "App\\Http\\Middleware\\ExtensionMiddlewareGate:api,after_core"
+            ],
+            "auth_index": null,
+            "throttle_indexes": [],
+            "substitute_bindings_index": 1,
+            "auth_before_every_throttle": false,
+            "throttle_before_bindings": false,
+            "throttle_args": [],
+            "legacy_native_throttle": [],
+            "permission_index": null
+        },
+        "api.modules.raonslab-travel_lab.catalog.show": {
+            "installed_route_cache_middleware": [
+                "api"
+            ],
+            "controller": "Modules\\Raonslab\\TravelLab\\Http\\Controllers\\CatalogController@show",
+            "native_sorted": [
+                "App\\Http\\Middleware\\ExtensionMiddlewareGate:api,before_core",
+                "Illuminate\\Routing\\Middleware\\SubstituteBindings",
+                "App\\Http\\Middleware\\SetLocale",
+                "App\\Http\\Middleware\\SetTimezone",
+                "App\\Http\\Middleware\\RefreshTokenExpiration",
+                "App\\Http\\Middleware\\EnforceIdentityPolicy",
+                "App\\Http\\Middleware\\ExtensionMiddlewareGate:api,after_core"
+            ],
+            "auth_index": null,
+            "throttle_indexes": [],
+            "substitute_bindings_index": 1,
+            "auth_before_every_throttle": false,
+            "throttle_before_bindings": false,
+            "throttle_args": [],
+            "legacy_native_throttle": [],
+            "permission_index": null
+        },
+        "api.modules.raonslab-travel_lab.catalog.departures": {
+            "installed_route_cache_middleware": [
+                "api"
+            ],
+            "controller": "Modules\\Raonslab\\TravelLab\\Http\\Controllers\\CatalogController@departures",
+            "native_sorted": [
+                "App\\Http\\Middleware\\ExtensionMiddlewareGate:api,before_core",
+                "Illuminate\\Routing\\Middleware\\SubstituteBindings",
+                "App\\Http\\Middleware\\SetLocale",
+                "App\\Http\\Middleware\\SetTimezone",
+                "App\\Http\\Middleware\\RefreshTokenExpiration",
+                "App\\Http\\Middleware\\EnforceIdentityPolicy",
+                "App\\Http\\Middleware\\ExtensionMiddlewareGate:api,after_core"
+            ],
+            "auth_index": null,
+            "throttle_indexes": [],
+            "substitute_bindings_index": 1,
+            "auth_before_every_throttle": false,
+            "throttle_before_bindings": false,
+            "throttle_args": [],
+            "legacy_native_throttle": [],
+            "permission_index": null
+        },
+        "api.modules.raonslab-travel_lab.catalog.facets": {
+            "installed_route_cache_middleware": [
+                "api"
+            ],
+            "controller": "Modules\\Raonslab\\TravelLab\\Http\\Controllers\\CatalogController@facets",
+            "native_sorted": [
+                "App\\Http\\Middleware\\ExtensionMiddlewareGate:api,before_core",
+                "Illuminate\\Routing\\Middleware\\SubstituteBindings",
+                "App\\Http\\Middleware\\SetLocale",
+                "App\\Http\\Middleware\\SetTimezone",
+                "App\\Http\\Middleware\\RefreshTokenExpiration",
+                "App\\Http\\Middleware\\EnforceIdentityPolicy",
+                "App\\Http\\Middleware\\ExtensionMiddlewareGate:api,after_core"
+            ],
+            "auth_index": null,
+            "throttle_indexes": [],
+            "substitute_bindings_index": 1,
+            "auth_before_every_throttle": false,
+            "throttle_before_bindings": false,
+            "throttle_args": [],
+            "legacy_native_throttle": [],
+            "permission_index": null
+        },
+        "api.modules.raonslab-travel_lab.admin.catalog.index": {
+            "installed_route_cache_middleware": [
+                "api",
+                "auth:sanctum",
+                "admin",
+                "permission:admin,raonslab-travel_lab.catalog.read"
+            ],
+            "controller": "Modules\\Raonslab\\TravelLab\\Http\\Controllers\\AdminCatalogController@index",
+            "native_sorted": [
+                "App\\Http\\Middleware\\ExtensionMiddlewareGate:api,before_core",
+                "Illuminate\\Auth\\Middleware\\Authenticate:sanctum",
+                "Illuminate\\Routing\\Middleware\\SubstituteBindings",
+                "App\\Http\\Middleware\\SetLocale",
+                "App\\Http\\Middleware\\SetTimezone",
+                "App\\Http\\Middleware\\RefreshTokenExpiration",
+                "App\\Http\\Middleware\\EnforceIdentityPolicy",
+                "App\\Http\\Middleware\\ExtensionMiddlewareGate:api,after_core",
+                "App\\Http\\Middleware\\AdminMiddleware",
+                "App\\Http\\Middleware\\PermissionMiddleware:admin,raonslab-travel_lab.catalog.read"
+            ],
+            "auth_index": 1,
+            "throttle_indexes": [],
+            "substitute_bindings_index": 2,
+            "auth_before_every_throttle": false,
+            "throttle_before_bindings": false,
+            "throttle_args": [],
+            "legacy_native_throttle": [],
+            "permission_index": 9
+        },
+        "api.modules.raonslab-travel_lab.admin.catalog.candidates": {
+            "installed_route_cache_middleware": [
+                "api",
+                "auth:sanctum",
+                "admin",
+                "permission:admin,raonslab-travel_lab.catalog.read"
+            ],
+            "controller": "Modules\\Raonslab\\TravelLab\\Http\\Controllers\\AdminCatalogController@candidates",
+            "native_sorted": [
+                "App\\Http\\Middleware\\ExtensionMiddlewareGate:api,before_core",
+                "Illuminate\\Auth\\Middleware\\Authenticate:sanctum",
+                "Illuminate\\Routing\\Middleware\\SubstituteBindings",
+                "App\\Http\\Middleware\\SetLocale",
+                "App\\Http\\Middleware\\SetTimezone",
+                "App\\Http\\Middleware\\RefreshTokenExpiration",
+                "App\\Http\\Middleware\\EnforceIdentityPolicy",
+                "App\\Http\\Middleware\\ExtensionMiddlewareGate:api,after_core",
+                "App\\Http\\Middleware\\AdminMiddleware",
+                "App\\Http\\Middleware\\PermissionMiddleware:admin,raonslab-travel_lab.catalog.read"
+            ],
+            "auth_index": 1,
+            "throttle_indexes": [],
+            "substitute_bindings_index": 2,
+            "auth_before_every_throttle": false,
+            "throttle_before_bindings": false,
+            "throttle_args": [],
+            "legacy_native_throttle": [],
+            "permission_index": 9
+        },
+        "api.modules.raonslab-travel_lab.admin.catalog.store": {
+            "installed_route_cache_middleware": [
+                "api",
+                "auth:sanctum",
+                "admin",
+                "permission:admin,raonslab-travel_lab.catalog.update"
+            ],
+            "controller": "Modules\\Raonslab\\TravelLab\\Http\\Controllers\\AdminCatalogController@store",
+            "native_sorted": [
+                "App\\Http\\Middleware\\ExtensionMiddlewareGate:api,before_core",
+                "Illuminate\\Auth\\Middleware\\Authenticate:sanctum",
+                "Illuminate\\Routing\\Middleware\\SubstituteBindings",
+                "App\\Http\\Middleware\\SetLocale",
+                "App\\Http\\Middleware\\SetTimezone",
+                "App\\Http\\Middleware\\RefreshTokenExpiration",
+                "App\\Http\\Middleware\\EnforceIdentityPolicy",
+                "App\\Http\\Middleware\\ExtensionMiddlewareGate:api,after_core",
+                "App\\Http\\Middleware\\AdminMiddleware",
+                "App\\Http\\Middleware\\PermissionMiddleware:admin,raonslab-travel_lab.catalog.update"
+            ],
+            "auth_index": 1,
+            "throttle_indexes": [],
+            "substitute_bindings_index": 2,
+            "auth_before_every_throttle": false,
+            "throttle_before_bindings": false,
+            "throttle_args": [],
+            "legacy_native_throttle": [],
+            "permission_index": 9
+        },
+        "api.modules.raonslab-travel_lab.admin.catalog.show": {
+            "installed_route_cache_middleware": [
+                "api",
+                "auth:sanctum",
+                "admin",
+                "permission:admin,raonslab-travel_lab.catalog.read"
+            ],
+            "controller": "Modules\\Raonslab\\TravelLab\\Http\\Controllers\\AdminCatalogController@show",
+            "native_sorted": [
+                "App\\Http\\Middleware\\ExtensionMiddlewareGate:api,before_core",
+                "Illuminate\\Auth\\Middleware\\Authenticate:sanctum",
+                "Illuminate\\Routing\\Middleware\\SubstituteBindings",
+                "App\\Http\\Middleware\\SetLocale",
+                "App\\Http\\Middleware\\SetTimezone",
+                "App\\Http\\Middleware\\RefreshTokenExpiration",
+                "App\\Http\\Middleware\\EnforceIdentityPolicy",
+                "App\\Http\\Middleware\\ExtensionMiddlewareGate:api,after_core",
+                "App\\Http\\Middleware\\AdminMiddleware",
+                "App\\Http\\Middleware\\PermissionMiddleware:admin,raonslab-travel_lab.catalog.read"
+            ],
+            "auth_index": 1,
+            "throttle_indexes": [],
+            "substitute_bindings_index": 2,
+            "auth_before_every_throttle": false,
+            "throttle_before_bindings": false,
+            "throttle_args": [],
+            "legacy_native_throttle": [],
+            "permission_index": 9
+        },
+        "api.modules.raonslab-travel_lab.admin.catalog.update": {
+            "installed_route_cache_middleware": [
+                "api",
+                "auth:sanctum",
+                "admin",
+                "permission:admin,raonslab-travel_lab.catalog.update"
+            ],
+            "controller": "Modules\\Raonslab\\TravelLab\\Http\\Controllers\\AdminCatalogController@update",
+            "native_sorted": [
+                "App\\Http\\Middleware\\ExtensionMiddlewareGate:api,before_core",
+                "Illuminate\\Auth\\Middleware\\Authenticate:sanctum",
+                "Illuminate\\Routing\\Middleware\\SubstituteBindings",
+                "App\\Http\\Middleware\\SetLocale",
+                "App\\Http\\Middleware\\SetTimezone",
+                "App\\Http\\Middleware\\RefreshTokenExpiration",
+                "App\\Http\\Middleware\\EnforceIdentityPolicy",
+                "App\\Http\\Middleware\\ExtensionMiddlewareGate:api,after_core",
+                "App\\Http\\Middleware\\AdminMiddleware",
+                "App\\Http\\Middleware\\PermissionMiddleware:admin,raonslab-travel_lab.catalog.update"
+            ],
+            "auth_index": 1,
+            "throttle_indexes": [],
+            "substitute_bindings_index": 2,
+            "auth_before_every_throttle": false,
+            "throttle_before_bindings": false,
+            "throttle_args": [],
+            "legacy_native_throttle": [],
+            "permission_index": 9
+        },
+        "api.modules.raonslab-travel_lab.admin.catalog.departures.index": {
+            "installed_route_cache_middleware": [
+                "api",
+                "auth:sanctum",
+                "admin",
+                "permission:admin,raonslab-travel_lab.catalog.read"
+            ],
+            "controller": "Modules\\Raonslab\\TravelLab\\Http\\Controllers\\AdminCatalogController@departures",
+            "native_sorted": [
+                "App\\Http\\Middleware\\ExtensionMiddlewareGate:api,before_core",
+                "Illuminate\\Auth\\Middleware\\Authenticate:sanctum",
+                "Illuminate\\Routing\\Middleware\\SubstituteBindings",
+                "App\\Http\\Middleware\\SetLocale",
+                "App\\Http\\Middleware\\SetTimezone",
+                "App\\Http\\Middleware\\RefreshTokenExpiration",
+                "App\\Http\\Middleware\\EnforceIdentityPolicy",
+                "App\\Http\\Middleware\\ExtensionMiddlewareGate:api,after_core",
+                "App\\Http\\Middleware\\AdminMiddleware",
+                "App\\Http\\Middleware\\PermissionMiddleware:admin,raonslab-travel_lab.catalog.read"
+            ],
+            "auth_index": 1,
+            "throttle_indexes": [],
+            "substitute_bindings_index": 2,
+            "auth_before_every_throttle": false,
+            "throttle_before_bindings": false,
+            "throttle_args": [],
+            "legacy_native_throttle": [],
+            "permission_index": 9
+        },
+        "api.modules.raonslab-travel_lab.admin.catalog.departures.store": {
+            "installed_route_cache_middleware": [
+                "api",
+                "auth:sanctum",
+                "admin",
+                "permission:admin,raonslab-travel_lab.catalog.update"
+            ],
+            "controller": "Modules\\Raonslab\\TravelLab\\Http\\Controllers\\AdminCatalogController@storeDeparture",
+            "native_sorted": [
+                "App\\Http\\Middleware\\ExtensionMiddlewareGate:api,before_core",
+                "Illuminate\\Auth\\Middleware\\Authenticate:sanctum",
+                "Illuminate\\Routing\\Middleware\\SubstituteBindings",
+                "App\\Http\\Middleware\\SetLocale",
+                "App\\Http\\Middleware\\SetTimezone",
+                "App\\Http\\Middleware\\RefreshTokenExpiration",
+                "App\\Http\\Middleware\\EnforceIdentityPolicy",
+                "App\\Http\\Middleware\\ExtensionMiddlewareGate:api,after_core",
+                "App\\Http\\Middleware\\AdminMiddleware",
+                "App\\Http\\Middleware\\PermissionMiddleware:admin,raonslab-travel_lab.catalog.update"
+            ],
+            "auth_index": 1,
+            "throttle_indexes": [],
+            "substitute_bindings_index": 2,
+            "auth_before_every_throttle": false,
+            "throttle_before_bindings": false,
+            "throttle_args": [],
+            "legacy_native_throttle": [],
+            "permission_index": 9
+        },
+        "api.modules.raonslab-travel_lab.admin.catalog.departures.update": {
+            "installed_route_cache_middleware": [
+                "api",
+                "auth:sanctum",
+                "admin",
+                "permission:admin,raonslab-travel_lab.catalog.update"
+            ],
+            "controller": "Modules\\Raonslab\\TravelLab\\Http\\Controllers\\AdminCatalogController@updateDeparture",
+            "native_sorted": [
+                "App\\Http\\Middleware\\ExtensionMiddlewareGate:api,before_core",
+                "Illuminate\\Auth\\Middleware\\Authenticate:sanctum",
+                "Illuminate\\Routing\\Middleware\\SubstituteBindings",
+                "App\\Http\\Middleware\\SetLocale",
+                "App\\Http\\Middleware\\SetTimezone",
+                "App\\Http\\Middleware\\RefreshTokenExpiration",
+                "App\\Http\\Middleware\\EnforceIdentityPolicy",
+                "App\\Http\\Middleware\\ExtensionMiddlewareGate:api,after_core",
+                "App\\Http\\Middleware\\AdminMiddleware",
+                "App\\Http\\Middleware\\PermissionMiddleware:admin,raonslab-travel_lab.catalog.update"
+            ],
+            "auth_index": 1,
+            "throttle_indexes": [],
+            "substitute_bindings_index": 2,
+            "auth_before_every_throttle": false,
+            "throttle_before_bindings": false,
+            "throttle_args": [],
+            "legacy_native_throttle": [],
+            "permission_index": 9
+        },
+        "api.modules.raonslab-travel_lab.cart.index": {
+            "installed_route_cache_middleware": [
+                "api",
+                "auth:sanctum",
+                "Modules\\Raonslab\\TravelLab\\Http\\Middleware\\TravelThrottleRequests:120,1,travel-lab-workflow:"
+            ],
+            "controller": "Modules\\Raonslab\\TravelLab\\Http\\Controllers\\Api\\CartController@index",
+            "native_sorted": [
+                "App\\Http\\Middleware\\ExtensionMiddlewareGate:api,before_core",
+                "Illuminate\\Auth\\Middleware\\Authenticate:sanctum",
+                "Modules\\Raonslab\\TravelLab\\Http\\Middleware\\TravelThrottleRequests:120,1,travel-lab-workflow:",
+                "Illuminate\\Routing\\Middleware\\SubstituteBindings",
+                "App\\Http\\Middleware\\SetLocale",
+                "App\\Http\\Middleware\\SetTimezone",
+                "App\\Http\\Middleware\\RefreshTokenExpiration",
+                "App\\Http\\Middleware\\EnforceIdentityPolicy",
+                "App\\Http\\Middleware\\ExtensionMiddlewareGate:api,after_core"
+            ],
+            "auth_index": 1,
+            "throttle_indexes": [
+                2
+            ],
+            "substitute_bindings_index": 3,
+            "auth_before_every_throttle": true,
+            "throttle_before_bindings": true,
+            "throttle_args": [
+                "120,1,travel-lab-workflow:"
+            ],
+            "legacy_native_throttle": [],
+            "permission_index": null
+        },
+        "api.modules.raonslab-travel_lab.cart.store": {
+            "installed_route_cache_middleware": [
+                "api",
+                "auth:sanctum",
+                "Modules\\Raonslab\\TravelLab\\Http\\Middleware\\TravelThrottleRequests:120,1,travel-lab-workflow:",
+                "Modules\\Raonslab\\TravelLab\\Http\\Middleware\\TravelThrottleRequests:60,1,travel-lab-cart:"
+            ],
+            "controller": "Modules\\Raonslab\\TravelLab\\Http\\Controllers\\Api\\CartController@store",
+            "native_sorted": [
+                "App\\Http\\Middleware\\ExtensionMiddlewareGate:api,before_core",
+                "Illuminate\\Auth\\Middleware\\Authenticate:sanctum",
+                "Modules\\Raonslab\\TravelLab\\Http\\Middleware\\TravelThrottleRequests:120,1,travel-lab-workflow:",
+                "Modules\\Raonslab\\TravelLab\\Http\\Middleware\\TravelThrottleRequests:60,1,travel-lab-cart:",
+                "Illuminate\\Routing\\Middleware\\SubstituteBindings",
+                "App\\Http\\Middleware\\SetLocale",
+                "App\\Http\\Middleware\\SetTimezone",
+                "App\\Http\\Middleware\\RefreshTokenExpiration",
+                "App\\Http\\Middleware\\EnforceIdentityPolicy",
+                "App\\Http\\Middleware\\ExtensionMiddlewareGate:api,after_core"
+            ],
+            "auth_index": 1,
+            "throttle_indexes": [
+                2,
+                3
+            ],
+            "substitute_bindings_index": 4,
+            "auth_before_every_throttle": true,
+            "throttle_before_bindings": true,
+            "throttle_args": [
+                "120,1,travel-lab-workflow:",
+                "60,1,travel-lab-cart:"
+            ],
+            "legacy_native_throttle": [],
+            "permission_index": null
+        },
+        "api.modules.raonslab-travel_lab.cart.update": {
+            "installed_route_cache_middleware": [
+                "api",
+                "auth:sanctum",
+                "Modules\\Raonslab\\TravelLab\\Http\\Middleware\\TravelThrottleRequests:120,1,travel-lab-workflow:",
+                "Modules\\Raonslab\\TravelLab\\Http\\Middleware\\TravelThrottleRequests:60,1,travel-lab-cart:"
+            ],
+            "controller": "Modules\\Raonslab\\TravelLab\\Http\\Controllers\\Api\\CartController@update",
+            "native_sorted": [
+                "App\\Http\\Middleware\\ExtensionMiddlewareGate:api,before_core",
+                "Illuminate\\Auth\\Middleware\\Authenticate:sanctum",
+                "Modules\\Raonslab\\TravelLab\\Http\\Middleware\\TravelThrottleRequests:120,1,travel-lab-workflow:",
+                "Modules\\Raonslab\\TravelLab\\Http\\Middleware\\TravelThrottleRequests:60,1,travel-lab-cart:",
+                "Illuminate\\Routing\\Middleware\\SubstituteBindings",
+                "App\\Http\\Middleware\\SetLocale",
+                "App\\Http\\Middleware\\SetTimezone",
+                "App\\Http\\Middleware\\RefreshTokenExpiration",
+                "App\\Http\\Middleware\\EnforceIdentityPolicy",
+                "App\\Http\\Middleware\\ExtensionMiddlewareGate:api,after_core"
+            ],
+            "auth_index": 1,
+            "throttle_indexes": [
+                2,
+                3
+            ],
+            "substitute_bindings_index": 4,
+            "auth_before_every_throttle": true,
+            "throttle_before_bindings": true,
+            "throttle_args": [
+                "120,1,travel-lab-workflow:",
+                "60,1,travel-lab-cart:"
+            ],
+            "legacy_native_throttle": [],
+            "permission_index": null
+        },
+        "api.modules.raonslab-travel_lab.cart.destroy": {
+            "installed_route_cache_middleware": [
+                "api",
+                "auth:sanctum",
+                "Modules\\Raonslab\\TravelLab\\Http\\Middleware\\TravelThrottleRequests:120,1,travel-lab-workflow:",
+                "Modules\\Raonslab\\TravelLab\\Http\\Middleware\\TravelThrottleRequests:60,1,travel-lab-cart:"
+            ],
+            "controller": "Modules\\Raonslab\\TravelLab\\Http\\Controllers\\Api\\CartController@destroy",
+            "native_sorted": [
+                "App\\Http\\Middleware\\ExtensionMiddlewareGate:api,before_core",
+                "Illuminate\\Auth\\Middleware\\Authenticate:sanctum",
+                "Modules\\Raonslab\\TravelLab\\Http\\Middleware\\TravelThrottleRequests:120,1,travel-lab-workflow:",
+                "Modules\\Raonslab\\TravelLab\\Http\\Middleware\\TravelThrottleRequests:60,1,travel-lab-cart:",
+                "Illuminate\\Routing\\Middleware\\SubstituteBindings",
+                "App\\Http\\Middleware\\SetLocale",
+                "App\\Http\\Middleware\\SetTimezone",
+                "App\\Http\\Middleware\\RefreshTokenExpiration",
+                "App\\Http\\Middleware\\EnforceIdentityPolicy",
+                "App\\Http\\Middleware\\ExtensionMiddlewareGate:api,after_core"
+            ],
+            "auth_index": 1,
+            "throttle_indexes": [
+                2,
+                3
+            ],
+            "substitute_bindings_index": 4,
+            "auth_before_every_throttle": true,
+            "throttle_before_bindings": true,
+            "throttle_args": [
+                "120,1,travel-lab-workflow:",
+                "60,1,travel-lab-cart:"
+            ],
+            "legacy_native_throttle": [],
+            "permission_index": null
+        },
+        "api.modules.raonslab-travel_lab.inquiries.index": {
+            "installed_route_cache_middleware": [
+                "api",
+                "auth:sanctum",
+                "Modules\\Raonslab\\TravelLab\\Http\\Middleware\\TravelThrottleRequests:120,1,travel-lab-workflow:"
+            ],
+            "controller": "Modules\\Raonslab\\TravelLab\\Http\\Controllers\\Api\\InquiryController@index",
+            "native_sorted": [
+                "App\\Http\\Middleware\\ExtensionMiddlewareGate:api,before_core",
+                "Illuminate\\Auth\\Middleware\\Authenticate:sanctum",
+                "Modules\\Raonslab\\TravelLab\\Http\\Middleware\\TravelThrottleRequests:120,1,travel-lab-workflow:",
+                "Illuminate\\Routing\\Middleware\\SubstituteBindings",
+                "App\\Http\\Middleware\\SetLocale",
+                "App\\Http\\Middleware\\SetTimezone",
+                "App\\Http\\Middleware\\RefreshTokenExpiration",
+                "App\\Http\\Middleware\\EnforceIdentityPolicy",
+                "App\\Http\\Middleware\\ExtensionMiddlewareGate:api,after_core"
+            ],
+            "auth_index": 1,
+            "throttle_indexes": [
+                2
+            ],
+            "substitute_bindings_index": 3,
+            "auth_before_every_throttle": true,
+            "throttle_before_bindings": true,
+            "throttle_args": [
+                "120,1,travel-lab-workflow:"
+            ],
+            "legacy_native_throttle": [],
+            "permission_index": null
+        },
+        "api.modules.raonslab-travel_lab.inquiries.store": {
+            "installed_route_cache_middleware": [
+                "api",
+                "auth:sanctum",
+                "Modules\\Raonslab\\TravelLab\\Http\\Middleware\\TravelThrottleRequests:120,1,travel-lab-workflow:",
+                "Modules\\Raonslab\\TravelLab\\Http\\Middleware\\TravelThrottleRequests:10,1,travel-lab-submit:"
+            ],
+            "controller": "Modules\\Raonslab\\TravelLab\\Http\\Controllers\\Api\\InquiryController@store",
+            "native_sorted": [
+                "App\\Http\\Middleware\\ExtensionMiddlewareGate:api,before_core",
+                "Illuminate\\Auth\\Middleware\\Authenticate:sanctum",
+                "Modules\\Raonslab\\TravelLab\\Http\\Middleware\\TravelThrottleRequests:120,1,travel-lab-workflow:",
+                "Modules\\Raonslab\\TravelLab\\Http\\Middleware\\TravelThrottleRequests:10,1,travel-lab-submit:",
+                "Illuminate\\Routing\\Middleware\\SubstituteBindings",
+                "App\\Http\\Middleware\\SetLocale",
+                "App\\Http\\Middleware\\SetTimezone",
+                "App\\Http\\Middleware\\RefreshTokenExpiration",
+                "App\\Http\\Middleware\\EnforceIdentityPolicy",
+                "App\\Http\\Middleware\\ExtensionMiddlewareGate:api,after_core"
+            ],
+            "auth_index": 1,
+            "throttle_indexes": [
+                2,
+                3
+            ],
+            "substitute_bindings_index": 4,
+            "auth_before_every_throttle": true,
+            "throttle_before_bindings": true,
+            "throttle_args": [
+                "120,1,travel-lab-workflow:",
+                "10,1,travel-lab-submit:"
+            ],
+            "legacy_native_throttle": [],
+            "permission_index": null
+        },
+        "api.modules.raonslab-travel_lab.inquiries.show": {
+            "installed_route_cache_middleware": [
+                "api",
+                "auth:sanctum",
+                "Modules\\Raonslab\\TravelLab\\Http\\Middleware\\TravelThrottleRequests:120,1,travel-lab-workflow:"
+            ],
+            "controller": "Modules\\Raonslab\\TravelLab\\Http\\Controllers\\Api\\InquiryController@show",
+            "native_sorted": [
+                "App\\Http\\Middleware\\ExtensionMiddlewareGate:api,before_core",
+                "Illuminate\\Auth\\Middleware\\Authenticate:sanctum",
+                "Modules\\Raonslab\\TravelLab\\Http\\Middleware\\TravelThrottleRequests:120,1,travel-lab-workflow:",
+                "Illuminate\\Routing\\Middleware\\SubstituteBindings",
+                "App\\Http\\Middleware\\SetLocale",
+                "App\\Http\\Middleware\\SetTimezone",
+                "App\\Http\\Middleware\\RefreshTokenExpiration",
+                "App\\Http\\Middleware\\EnforceIdentityPolicy",
+                "App\\Http\\Middleware\\ExtensionMiddlewareGate:api,after_core"
+            ],
+            "auth_index": 1,
+            "throttle_indexes": [
+                2
+            ],
+            "substitute_bindings_index": 3,
+            "auth_before_every_throttle": true,
+            "throttle_before_bindings": true,
+            "throttle_args": [
+                "120,1,travel-lab-workflow:"
+            ],
+            "legacy_native_throttle": [],
+            "permission_index": null
+        },
+        "api.modules.raonslab-travel_lab.inquiries.cancel": {
+            "installed_route_cache_middleware": [
+                "api",
+                "auth:sanctum",
+                "Modules\\Raonslab\\TravelLab\\Http\\Middleware\\TravelThrottleRequests:120,1,travel-lab-workflow:",
+                "Modules\\Raonslab\\TravelLab\\Http\\Middleware\\TravelThrottleRequests:20,1,travel-lab-cancel:"
+            ],
+            "controller": "Modules\\Raonslab\\TravelLab\\Http\\Controllers\\Api\\InquiryController@cancel",
+            "native_sorted": [
+                "App\\Http\\Middleware\\ExtensionMiddlewareGate:api,before_core",
+                "Illuminate\\Auth\\Middleware\\Authenticate:sanctum",
+                "Modules\\Raonslab\\TravelLab\\Http\\Middleware\\TravelThrottleRequests:120,1,travel-lab-workflow:",
+                "Modules\\Raonslab\\TravelLab\\Http\\Middleware\\TravelThrottleRequests:20,1,travel-lab-cancel:",
+                "Illuminate\\Routing\\Middleware\\SubstituteBindings",
+                "App\\Http\\Middleware\\SetLocale",
+                "App\\Http\\Middleware\\SetTimezone",
+                "App\\Http\\Middleware\\RefreshTokenExpiration",
+                "App\\Http\\Middleware\\EnforceIdentityPolicy",
+                "App\\Http\\Middleware\\ExtensionMiddlewareGate:api,after_core"
+            ],
+            "auth_index": 1,
+            "throttle_indexes": [
+                2,
+                3
+            ],
+            "substitute_bindings_index": 4,
+            "auth_before_every_throttle": true,
+            "throttle_before_bindings": true,
+            "throttle_args": [
+                "120,1,travel-lab-workflow:",
+                "20,1,travel-lab-cancel:"
+            ],
+            "legacy_native_throttle": [],
+            "permission_index": null
+        },
+        "api.modules.raonslab-travel_lab.admin.inquiries.index": {
+            "installed_route_cache_middleware": [
+                "api",
+                "auth:sanctum",
+                "Modules\\Raonslab\\TravelLab\\Http\\Middleware\\TravelThrottleRequests:120,1,travel-lab-workflow:",
+                "permission:admin,raonslab-travel_lab.inquiries.read"
+            ],
+            "controller": "Modules\\Raonslab\\TravelLab\\Http\\Controllers\\Admin\\InquiryController@index",
+            "native_sorted": [
+                "App\\Http\\Middleware\\ExtensionMiddlewareGate:api,before_core",
+                "Illuminate\\Auth\\Middleware\\Authenticate:sanctum",
+                "Modules\\Raonslab\\TravelLab\\Http\\Middleware\\TravelThrottleRequests:120,1,travel-lab-workflow:",
+                "Illuminate\\Routing\\Middleware\\SubstituteBindings",
+                "App\\Http\\Middleware\\SetLocale",
+                "App\\Http\\Middleware\\SetTimezone",
+                "App\\Http\\Middleware\\RefreshTokenExpiration",
+                "App\\Http\\Middleware\\EnforceIdentityPolicy",
+                "App\\Http\\Middleware\\ExtensionMiddlewareGate:api,after_core",
+                "App\\Http\\Middleware\\PermissionMiddleware:admin,raonslab-travel_lab.inquiries.read"
+            ],
+            "auth_index": 1,
+            "throttle_indexes": [
+                2
+            ],
+            "substitute_bindings_index": 3,
+            "auth_before_every_throttle": true,
+            "throttle_before_bindings": true,
+            "throttle_args": [
+                "120,1,travel-lab-workflow:"
+            ],
+            "legacy_native_throttle": [],
+            "permission_index": 9
+        },
+        "api.modules.raonslab-travel_lab.admin.inquiries.show": {
+            "installed_route_cache_middleware": [
+                "api",
+                "auth:sanctum",
+                "Modules\\Raonslab\\TravelLab\\Http\\Middleware\\TravelThrottleRequests:120,1,travel-lab-workflow:",
+                "permission:admin,raonslab-travel_lab.inquiries.read"
+            ],
+            "controller": "Modules\\Raonslab\\TravelLab\\Http\\Controllers\\Admin\\InquiryController@show",
+            "native_sorted": [
+                "App\\Http\\Middleware\\ExtensionMiddlewareGate:api,before_core",
+                "Illuminate\\Auth\\Middleware\\Authenticate:sanctum",
+                "Modules\\Raonslab\\TravelLab\\Http\\Middleware\\TravelThrottleRequests:120,1,travel-lab-workflow:",
+                "Illuminate\\Routing\\Middleware\\SubstituteBindings",
+                "App\\Http\\Middleware\\SetLocale",
+                "App\\Http\\Middleware\\SetTimezone",
+                "App\\Http\\Middleware\\RefreshTokenExpiration",
+                "App\\Http\\Middleware\\EnforceIdentityPolicy",
+                "App\\Http\\Middleware\\ExtensionMiddlewareGate:api,after_core",
+                "App\\Http\\Middleware\\PermissionMiddleware:admin,raonslab-travel_lab.inquiries.read"
+            ],
+            "auth_index": 1,
+            "throttle_indexes": [
+                2
+            ],
+            "substitute_bindings_index": 3,
+            "auth_before_every_throttle": true,
+            "throttle_before_bindings": true,
+            "throttle_args": [
+                "120,1,travel-lab-workflow:"
+            ],
+            "legacy_native_throttle": [],
+            "permission_index": 9
+        },
+        "api.modules.raonslab-travel_lab.admin.inquiries.update": {
+            "installed_route_cache_middleware": [
+                "api",
+                "auth:sanctum",
+                "Modules\\Raonslab\\TravelLab\\Http\\Middleware\\TravelThrottleRequests:120,1,travel-lab-workflow:",
+                "permission:admin,raonslab-travel_lab.inquiries.update",
+                "Modules\\Raonslab\\TravelLab\\Http\\Middleware\\TravelThrottleRequests:60,1,travel-lab-admin:"
+            ],
+            "controller": "Modules\\Raonslab\\TravelLab\\Http\\Controllers\\Admin\\InquiryController@update",
+            "native_sorted": [
+                "App\\Http\\Middleware\\ExtensionMiddlewareGate:api,before_core",
+                "Illuminate\\Auth\\Middleware\\Authenticate:sanctum",
+                "Modules\\Raonslab\\TravelLab\\Http\\Middleware\\TravelThrottleRequests:120,1,travel-lab-workflow:",
+                "Modules\\Raonslab\\TravelLab\\Http\\Middleware\\TravelThrottleRequests:60,1,travel-lab-admin:",
+                "Illuminate\\Routing\\Middleware\\SubstituteBindings",
+                "App\\Http\\Middleware\\SetLocale",
+                "App\\Http\\Middleware\\SetTimezone",
+                "App\\Http\\Middleware\\RefreshTokenExpiration",
+                "App\\Http\\Middleware\\EnforceIdentityPolicy",
+                "App\\Http\\Middleware\\ExtensionMiddlewareGate:api,after_core",
+                "App\\Http\\Middleware\\PermissionMiddleware:admin,raonslab-travel_lab.inquiries.update"
+            ],
+            "auth_index": 1,
+            "throttle_indexes": [
+                2,
+                3
+            ],
+            "substitute_bindings_index": 4,
+            "auth_before_every_throttle": true,
+            "throttle_before_bindings": true,
+            "throttle_args": [
+                "120,1,travel-lab-workflow:",
+                "60,1,travel-lab-admin:"
+            ],
+            "legacy_native_throttle": [],
+            "permission_index": 10
+        },
+        "api.modules.raonslab-travel_lab.support.notices.index": {
+            "installed_route_cache_middleware": [
+                "api",
+                "Modules\\Raonslab\\TravelLab\\Http\\Middleware\\TravelOptionalSanctum",
+                "Modules\\Raonslab\\TravelLab\\Http\\Middleware\\TravelThrottleRequests:600,1,travel-lab-support-public:"
+            ],
+            "controller": "Modules\\Raonslab\\TravelLab\\Http\\Controllers\\Api\\SupportController@notices",
+            "native_sorted": [
+                "App\\Http\\Middleware\\ExtensionMiddlewareGate:api,before_core",
+                "Modules\\Raonslab\\TravelLab\\Http\\Middleware\\TravelOptionalSanctum",
+                "Modules\\Raonslab\\TravelLab\\Http\\Middleware\\TravelThrottleRequests:600,1,travel-lab-support-public:",
+                "Illuminate\\Routing\\Middleware\\SubstituteBindings",
+                "App\\Http\\Middleware\\SetLocale",
+                "App\\Http\\Middleware\\SetTimezone",
+                "App\\Http\\Middleware\\RefreshTokenExpiration",
+                "App\\Http\\Middleware\\EnforceIdentityPolicy",
+                "App\\Http\\Middleware\\ExtensionMiddlewareGate:api,after_core"
+            ],
+            "auth_index": 1,
+            "throttle_indexes": [
+                2
+            ],
+            "substitute_bindings_index": 3,
+            "auth_before_every_throttle": true,
+            "throttle_before_bindings": true,
+            "throttle_args": [
+                "600,1,travel-lab-support-public:"
+            ],
+            "legacy_native_throttle": [],
+            "permission_index": null
+        },
+        "api.modules.raonslab-travel_lab.support.notices.show": {
+            "installed_route_cache_middleware": [
+                "api",
+                "Modules\\Raonslab\\TravelLab\\Http\\Middleware\\TravelOptionalSanctum",
+                "Modules\\Raonslab\\TravelLab\\Http\\Middleware\\TravelThrottleRequests:600,1,travel-lab-support-public:"
+            ],
+            "controller": "Modules\\Raonslab\\TravelLab\\Http\\Controllers\\Api\\SupportController@notice",
+            "native_sorted": [
+                "App\\Http\\Middleware\\ExtensionMiddlewareGate:api,before_core",
+                "Modules\\Raonslab\\TravelLab\\Http\\Middleware\\TravelOptionalSanctum",
+                "Modules\\Raonslab\\TravelLab\\Http\\Middleware\\TravelThrottleRequests:600,1,travel-lab-support-public:",
+                "Illuminate\\Routing\\Middleware\\SubstituteBindings",
+                "App\\Http\\Middleware\\SetLocale",
+                "App\\Http\\Middleware\\SetTimezone",
+                "App\\Http\\Middleware\\RefreshTokenExpiration",
+                "App\\Http\\Middleware\\EnforceIdentityPolicy",
+                "App\\Http\\Middleware\\ExtensionMiddlewareGate:api,after_core"
+            ],
+            "auth_index": 1,
+            "throttle_indexes": [
+                2
+            ],
+            "substitute_bindings_index": 3,
+            "auth_before_every_throttle": true,
+            "throttle_before_bindings": true,
+            "throttle_args": [
+                "600,1,travel-lab-support-public:"
+            ],
+            "legacy_native_throttle": [],
+            "permission_index": null
+        },
+        "api.modules.raonslab-travel_lab.support.faqs.index": {
+            "installed_route_cache_middleware": [
+                "api",
+                "Modules\\Raonslab\\TravelLab\\Http\\Middleware\\TravelOptionalSanctum",
+                "Modules\\Raonslab\\TravelLab\\Http\\Middleware\\TravelThrottleRequests:600,1,travel-lab-support-public:"
+            ],
+            "controller": "Modules\\Raonslab\\TravelLab\\Http\\Controllers\\Api\\SupportController@faqs",
+            "native_sorted": [
+                "App\\Http\\Middleware\\ExtensionMiddlewareGate:api,before_core",
+                "Modules\\Raonslab\\TravelLab\\Http\\Middleware\\TravelOptionalSanctum",
+                "Modules\\Raonslab\\TravelLab\\Http\\Middleware\\TravelThrottleRequests:600,1,travel-lab-support-public:",
+                "Illuminate\\Routing\\Middleware\\SubstituteBindings",
+                "App\\Http\\Middleware\\SetLocale",
+                "App\\Http\\Middleware\\SetTimezone",
+                "App\\Http\\Middleware\\RefreshTokenExpiration",
+                "App\\Http\\Middleware\\EnforceIdentityPolicy",
+                "App\\Http\\Middleware\\ExtensionMiddlewareGate:api,after_core"
+            ],
+            "auth_index": 1,
+            "throttle_indexes": [
+                2
+            ],
+            "substitute_bindings_index": 3,
+            "auth_before_every_throttle": true,
+            "throttle_before_bindings": true,
+            "throttle_args": [
+                "600,1,travel-lab-support-public:"
+            ],
+            "legacy_native_throttle": [],
+            "permission_index": null
+        },
+        "api.modules.raonslab-travel_lab.support.faqs.show": {
+            "installed_route_cache_middleware": [
+                "api",
+                "Modules\\Raonslab\\TravelLab\\Http\\Middleware\\TravelOptionalSanctum",
+                "Modules\\Raonslab\\TravelLab\\Http\\Middleware\\TravelThrottleRequests:600,1,travel-lab-support-public:"
+            ],
+            "controller": "Modules\\Raonslab\\TravelLab\\Http\\Controllers\\Api\\SupportController@faq",
+            "native_sorted": [
+                "App\\Http\\Middleware\\ExtensionMiddlewareGate:api,before_core",
+                "Modules\\Raonslab\\TravelLab\\Http\\Middleware\\TravelOptionalSanctum",
+                "Modules\\Raonslab\\TravelLab\\Http\\Middleware\\TravelThrottleRequests:600,1,travel-lab-support-public:",
+                "Illuminate\\Routing\\Middleware\\SubstituteBindings",
+                "App\\Http\\Middleware\\SetLocale",
+                "App\\Http\\Middleware\\SetTimezone",
+                "App\\Http\\Middleware\\RefreshTokenExpiration",
+                "App\\Http\\Middleware\\EnforceIdentityPolicy",
+                "App\\Http\\Middleware\\ExtensionMiddlewareGate:api,after_core"
+            ],
+            "auth_index": 1,
+            "throttle_indexes": [
+                2
+            ],
+            "substitute_bindings_index": 3,
+            "auth_before_every_throttle": true,
+            "throttle_before_bindings": true,
+            "throttle_args": [
+                "600,1,travel-lab-support-public:"
+            ],
+            "legacy_native_throttle": [],
+            "permission_index": null
+        },
+        "api.modules.raonslab-travel_lab.support.questions.index": {
+            "installed_route_cache_middleware": [
+                "api",
+                "auth:sanctum",
+                "Modules\\Raonslab\\TravelLab\\Http\\Middleware\\TravelThrottleRequests:120,1,travel-lab-support-questions:"
+            ],
+            "controller": "Modules\\Raonslab\\TravelLab\\Http\\Controllers\\Api\\SupportController@questions",
+            "native_sorted": [
+                "App\\Http\\Middleware\\ExtensionMiddlewareGate:api,before_core",
+                "Illuminate\\Auth\\Middleware\\Authenticate:sanctum",
+                "Modules\\Raonslab\\TravelLab\\Http\\Middleware\\TravelThrottleRequests:120,1,travel-lab-support-questions:",
+                "Illuminate\\Routing\\Middleware\\SubstituteBindings",
+                "App\\Http\\Middleware\\SetLocale",
+                "App\\Http\\Middleware\\SetTimezone",
+                "App\\Http\\Middleware\\RefreshTokenExpiration",
+                "App\\Http\\Middleware\\EnforceIdentityPolicy",
+                "App\\Http\\Middleware\\ExtensionMiddlewareGate:api,after_core"
+            ],
+            "auth_index": 1,
+            "throttle_indexes": [
+                2
+            ],
+            "substitute_bindings_index": 3,
+            "auth_before_every_throttle": true,
+            "throttle_before_bindings": true,
+            "throttle_args": [
+                "120,1,travel-lab-support-questions:"
+            ],
+            "legacy_native_throttle": [],
+            "permission_index": null
+        },
+        "api.modules.raonslab-travel_lab.support.questions.store": {
+            "installed_route_cache_middleware": [
+                "api",
+                "auth:sanctum",
+                "Modules\\Raonslab\\TravelLab\\Http\\Middleware\\TravelThrottleRequests:120,1,travel-lab-support-questions:",
+                "Modules\\Raonslab\\TravelLab\\Http\\Middleware\\TravelThrottleRequests:10,1,travel-lab-support-create:"
+            ],
+            "controller": "Modules\\Raonslab\\TravelLab\\Http\\Controllers\\Api\\SupportController@storeQuestion",
+            "native_sorted": [
+                "App\\Http\\Middleware\\ExtensionMiddlewareGate:api,before_core",
+                "Illuminate\\Auth\\Middleware\\Authenticate:sanctum",
+                "Modules\\Raonslab\\TravelLab\\Http\\Middleware\\TravelThrottleRequests:120,1,travel-lab-support-questions:",
+                "Modules\\Raonslab\\TravelLab\\Http\\Middleware\\TravelThrottleRequests:10,1,travel-lab-support-create:",
+                "Illuminate\\Routing\\Middleware\\SubstituteBindings",
+                "App\\Http\\Middleware\\SetLocale",
+                "App\\Http\\Middleware\\SetTimezone",
+                "App\\Http\\Middleware\\RefreshTokenExpiration",
+                "App\\Http\\Middleware\\EnforceIdentityPolicy",
+                "App\\Http\\Middleware\\ExtensionMiddlewareGate:api,after_core"
+            ],
+            "auth_index": 1,
+            "throttle_indexes": [
+                2,
+                3
+            ],
+            "substitute_bindings_index": 4,
+            "auth_before_every_throttle": true,
+            "throttle_before_bindings": true,
+            "throttle_args": [
+                "120,1,travel-lab-support-questions:",
+                "10,1,travel-lab-support-create:"
+            ],
+            "legacy_native_throttle": [],
+            "permission_index": null
+        },
+        "api.modules.raonslab-travel_lab.support.questions.show": {
+            "installed_route_cache_middleware": [
+                "api",
+                "auth:sanctum",
+                "Modules\\Raonslab\\TravelLab\\Http\\Middleware\\TravelThrottleRequests:120,1,travel-lab-support-questions:"
+            ],
+            "controller": "Modules\\Raonslab\\TravelLab\\Http\\Controllers\\Api\\SupportController@showQuestion",
+            "native_sorted": [
+                "App\\Http\\Middleware\\ExtensionMiddlewareGate:api,before_core",
+                "Illuminate\\Auth\\Middleware\\Authenticate:sanctum",
+                "Modules\\Raonslab\\TravelLab\\Http\\Middleware\\TravelThrottleRequests:120,1,travel-lab-support-questions:",
+                "Illuminate\\Routing\\Middleware\\SubstituteBindings",
+                "App\\Http\\Middleware\\SetLocale",
+                "App\\Http\\Middleware\\SetTimezone",
+                "App\\Http\\Middleware\\RefreshTokenExpiration",
+                "App\\Http\\Middleware\\EnforceIdentityPolicy",
+                "App\\Http\\Middleware\\ExtensionMiddlewareGate:api,after_core"
+            ],
+            "auth_index": 1,
+            "throttle_indexes": [
+                2
+            ],
+            "substitute_bindings_index": 3,
+            "auth_before_every_throttle": true,
+            "throttle_before_bindings": true,
+            "throttle_args": [
+                "120,1,travel-lab-support-questions:"
+            ],
+            "legacy_native_throttle": [],
+            "permission_index": null
+        },
+        "api.modules.raonslab-travel_lab.support.questions.update": {
+            "installed_route_cache_middleware": [
+                "api",
+                "auth:sanctum",
+                "Modules\\Raonslab\\TravelLab\\Http\\Middleware\\TravelThrottleRequests:120,1,travel-lab-support-questions:"
+            ],
+            "controller": "Modules\\Raonslab\\TravelLab\\Http\\Controllers\\Api\\SupportController@updateQuestion",
+            "native_sorted": [
+                "App\\Http\\Middleware\\ExtensionMiddlewareGate:api,before_core",
+                "Illuminate\\Auth\\Middleware\\Authenticate:sanctum",
+                "Modules\\Raonslab\\TravelLab\\Http\\Middleware\\TravelThrottleRequests:120,1,travel-lab-support-questions:",
+                "Illuminate\\Routing\\Middleware\\SubstituteBindings",
+                "App\\Http\\Middleware\\SetLocale",
+                "App\\Http\\Middleware\\SetTimezone",
+                "App\\Http\\Middleware\\RefreshTokenExpiration",
+                "App\\Http\\Middleware\\EnforceIdentityPolicy",
+                "App\\Http\\Middleware\\ExtensionMiddlewareGate:api,after_core"
+            ],
+            "auth_index": 1,
+            "throttle_indexes": [
+                2
+            ],
+            "substitute_bindings_index": 3,
+            "auth_before_every_throttle": true,
+            "throttle_before_bindings": true,
+            "throttle_args": [
+                "120,1,travel-lab-support-questions:"
+            ],
+            "legacy_native_throttle": [],
+            "permission_index": null
+        }
+    },
+    "all_public_auth_before_throttle": true,
+    "all_question_auth_before_throttle": true
+}
