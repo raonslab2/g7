@@ -1,7 +1,7 @@
 # G7 Travel Lab delivery audit — IN_PROGRESS
 
 This is the accumulated delivery audit, not a completion declaration. Updated
-2026-10-09 19:40:25 UTC (October 10 KST). Deadline: October 11 23:59 KST /
+2026-10-09 19:49:08 UTC (October 10 KST). Deadline: October 11 23:59 KST /
 14:59 UTC; approximately 43 hours remain. Customer-approved design/database:
 NONE. The implementation is a RAON demonstration, not delivery of Lotte Tour's
 110 customer screens.
@@ -19,15 +19,15 @@ NONE. The implementation is a RAON demonstration, not delivery of Lotte Tour's
   `fc54b6ae091cd6cef2d0fabc48d2ec4fe4fdba8c`, tree
   `b377aeabad7f240061ae12cde8fae7ddc6f7e7d1`. Its installed board/controller
   and served core engine pins are recorded in W04_REPAIR_PUBLICATION_CHECKS.
-  Catalog/workflow/travel template runtime still inherit fa552317 unchanged.
+  Core/Board pins remain unchanged; travel module/template0.1.3 is now activated, as recorded in W04_CAMPAIGN_ACTIVATION.md.
 - Previous installer checkpoint: `992f9a65ac3f8957e5ec618f21072dc499053810`,
   tree `db85f35c5f42165802ec7ba6b02bc8a147a12c39`. It contains installer/bootstrap
   and MySQL fixture repairs, with original review commits reachable remotely.
 - Independent recipe replay at992 completed with bounded PASS. Board and common
   binding fixes plus browser/file/recipe evidence are published atfc54, original
   review commits1d2a4/abf354/0e634 remotely reachable. Official core production
-  build and board1.1.3 update completed; independent actual replay is now assigned.
-  Final campaign integration SHA: PENDING.
+  build and board1.1.3 update completed; independent actual replay completed with bounded PASS atfc54; no campaign PASS inference.
+  Campaign source checkpoint d059d735/tree6dc9381b is published; native production asset8941442d and activation/intake checkpoint follow. Independent new campaign gates remain pending.
 - Main `6853f40d58acbf53a2f29cbb9dd422cc439047a9` was not merged or deployed.
   External automatic deployment behavior remains UNKNOWN. No production service
   restart or business-site DB modification is authorized by this result.
@@ -157,7 +157,7 @@ UNKNOWN; parent/child/native consumption is not double counted as account usage.
   at992 (runtime source inheritance fromfa). Valid signed previews are delegated
   bearer capabilities; owner download remains native admin-only; soft deletion
   retains inaccessible files. New nonimage preview500 is repaired/published atfc54 and
-  awaits independent installed400/image-permission replay. General editor preview NOT_RUN.
+  independent installed400/image-permission replay passed bounded atfc54. General editor preview NOT_RUN.
 - Hosted Actions and check runs were **0**, required remote CI **NOT_RUN**.
   No canonical Validation receipt exists. Internal/native and official Request
   nonauthor verification does not waive those gates.
@@ -171,14 +171,52 @@ Spring `work-20261009-spring-symphony-max-child-91bf5a6c` /
 RAON business site/product/member/contact/Page/production databases and services
 were not modified. Only this marked lab and its explicit TEST fixtures were used.
 
-## Next execution
+## Current gates and next execution
 
-1. Publish the reviewed browser/file/recipe evidence, minimal board preview repair
-   and common global-binding fix with production assets on the same PR2 branch.
-2. Integrate actual Page-backed campaign source and explicit guarded provisioning;
-   run affected native tests/builds and version/consumer constraints.
-3. At the final fixed source, independently replay rapid Save at390/1440, native
-   campaign publish/draft/version/permissions and nonimage/image attachment gates.
-4. Preserve all negative history, exact cleanup/source bindings and TEST restore;
-   report remote CI/canonical Validation separately. No release/main/production
-   gate is waived by local or official Request nonauthor results.
+The new Page feature uses native persistent Pages7/8, real version snapshots,
+strict public projection and explicit-only provisioning. Lead activation and
+measured repeat proof are in [W04_CAMPAIGN_ACTIVATION.md](W04_CAMPAIGN_ACTIVATION.md).
+Independent fc54 live rapid-save and real attachment repair passed, preserving
+original failures and the signed-preview/soft-delete native contracts.
+
+1. CODEXreq812d independently installs fixedd059 in exclusive TEST, exercises
+   Page/provisioning/permissions and affected native regression, then exactly
+   restores its newly measured whole schema and releases processes.
+2. New fixed-source browser review must exercise390/1440 native Page editor,
+   publication/draft/version restore and customer campaign→catalog→cart→request
+   with final installed source/assets; preserve preexisting synthetic Pages.
+3. Integrate those original evidence commits, run relevant final regression and
+   canonical work-order validation, publish one reviewed checkpoint on PR2.
+   Keep hosted CI/canonical Validation NOT_RUN unless actual receipts exist.
+
+
+
+## Campaign native activation and independent gates — 2026-10-09 19:49:08 UTC
+
+Reviewed Page checkpointd059/tree6dc is published on existing draftPR2. Actions/
+checkruns exactd059 are0/0 NOT_RUN, no canonical Validation receipt. Catalog
+unchanged7f77/2ca confirms10active50total/CODEX8CLAUDE3 configured admission,
+not available-account slots. New CODEX req_812d0334c2064f5d88339114e7954235
+w04-campaign-native-install-final attempt1 QUEUED on assignment; sole TEST owner,
+minimal scopedTESTenv only, independently measure/snapshot/restore/release.
+At19:44 status28attempts22COMPLETED5FAILED1INTERRUPTED0RUNNING, followed by this
+29th creation. Global/Spring/accountremainingusage unknown; CENTRALverified1PC,
+no off-host execution or capacity changes. Host19:47:55 load3.05/2.01/1.78,
+RAMavailable10631MiB/15783MiB, swapused4776MiB; hostwide not projectload.
+
+CLAUDEreq00485 completed fc54 bounded actual runtime PASS. Originale902 report/
+14safe paths reviewed/nativeintake3732ce14, 12 rapidSave/trustedstale-label cases
+bothwidths, attachment14PASS1signedcapabilityOBSERVED, own20tokenslogout401,
+suppliedtokensunchanged. No direct cache/counter manipulation; HTTPnaturally
+updates native counters. OriginalPCpointercauseUNKNOWN. Scope0.1.2 retained.
+
+After review returned, lead official templateproductionbuild/moduleupdate/
+templateupdate exits0 at19:46:21/30/48 activated0.1.3. Native Page provision actor56
+withprocess-onlyflag1 createdPages7/8 at19:47:05 then skipped2 at19:47:21.
+Measured additional replay preservedwhole-rowhashes/IDs/version1/publication/
+snapshotcount1, defaultflagfalsebefore/after; flagoffexit1nowrites. LocalAPPonly,
+noTEST/setup/account/env/servicebusinesschanges. Source/runtimeparity156/156,
+explicitselection/exclusions in W04_CAMPAIGN_ACTIVATION. CompiledJS8941442d
+diffonly embeddedBoarddependencyfloor1.1.2→1.1.3; coreb8cf/Boardd368 unchanged.
+Native readonlyreview11assetpairs/source-map0, no duplicatedtests. Independent
+newPage390/1440fixedruntime and TESTnativegates pending; no wholeproductPASS.

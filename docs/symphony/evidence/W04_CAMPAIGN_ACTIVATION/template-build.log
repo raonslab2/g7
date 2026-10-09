@@ -1,0 +1,24 @@
+📂 빌드 소스: _bundled (<assigned-parent-worktree>/templates/_bundled/raonslab-travel_lab)
+🔨 빌드 시작: raonslab-travel_lab (프로덕션)
+   🧹 이전 산출물 정리: index.d.ts, handlers, types, js, css, components
+
+> @raonslab/travel-lab-template@0.1.3 build
+> vite build
+
+vite v7.3.7 building client environment for production...
+transforming...
+✓ 37 modules transformed.
+rendering chunks...
+
+[vite:dts] Start generate declaration files...
+computing gzip size...
+dist/css/components.css     51.04 kB │ gzip:  9.50 kB
+dist/js/components.iife.js  68.91 kB │ gzip: 24.85 kB
+[vite:dts] Declaration files built in 3889ms.
+
+✓ built in 4.88s
+✅ 빌드 완료: raonslab-travel_lab
+   빌드 결과:
+   - 캐시 버전 갱신됨
+
+💡 활성 디렉토리에 반영하려면: php artisan template:update raonslab-travel_lab

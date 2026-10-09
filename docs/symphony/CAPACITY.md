@@ -248,3 +248,34 @@ rebuild/installedbinding PENDING. Fixed TEST-native campaign installation/recove
 can run separately; actualPage390/1440 after core/board gate returns and leadupdate.
 FinalreportIN_PROGRESS; hostedCI/canonicalValidationNOT_RUN; main/business/
 production/Spring unchanged. No account/capacity increase or artificial2lane cap.
+
+
+## Campaign native activation and independent gates — 2026-10-09 19:49:08 UTC
+
+Reviewed Page checkpointd059/tree6dc is published on existing draftPR2. Actions/
+checkruns exactd059 are0/0 NOT_RUN, no canonical Validation receipt. Catalog
+unchanged7f77/2ca confirms10active50total/CODEX8CLAUDE3 configured admission,
+not available-account slots. New CODEX req_812d0334c2064f5d88339114e7954235
+w04-campaign-native-install-final attempt1 QUEUED on assignment; sole TEST owner,
+minimal scopedTESTenv only, independently measure/snapshot/restore/release.
+At19:44 status28attempts22COMPLETED5FAILED1INTERRUPTED0RUNNING, followed by this
+29th creation. Global/Spring/accountremainingusage unknown; CENTRALverified1PC,
+no off-host execution or capacity changes. Host19:47:55 load3.05/2.01/1.78,
+RAMavailable10631MiB/15783MiB, swapused4776MiB; hostwide not projectload.
+
+CLAUDEreq00485 completed fc54 bounded actual runtime PASS. Originale902 report/
+14safe paths reviewed/nativeintake3732ce14, 12 rapidSave/trustedstale-label cases
+bothwidths, attachment14PASS1signedcapabilityOBSERVED, own20tokenslogout401,
+suppliedtokensunchanged. No direct cache/counter manipulation; HTTPnaturally
+updates native counters. OriginalPCpointercauseUNKNOWN. Scope0.1.2 retained.
+
+After review returned, lead official templateproductionbuild/moduleupdate/
+templateupdate exits0 at19:46:21/30/48 activated0.1.3. Native Page provision actor56
+withprocess-onlyflag1 createdPages7/8 at19:47:05 then skipped2 at19:47:21.
+Measured additional replay preservedwhole-rowhashes/IDs/version1/publication/
+snapshotcount1, defaultflagfalsebefore/after; flagoffexit1nowrites. LocalAPPonly,
+noTEST/setup/account/env/servicebusinesschanges. Source/runtimeparity156/156,
+explicitselection/exclusions in W04_CAMPAIGN_ACTIVATION. CompiledJS8941442d
+diffonly embeddedBoarddependencyfloor1.1.2→1.1.3; coreb8cf/Boardd368 unchanged.
+Native readonlyreview11assetpairs/source-map0, no duplicatedtests. Independent
+newPage390/1440fixedruntime and TESTnativegates pending; no wholeproductPASS.

@@ -123,3 +123,34 @@ No template component/code changed, so no template160 rerun or production build 
 | `modules/_bundled/raonslab-travel_lab/resources/js/__tests__/layouts/admin-travel-lab-campaigns.test.tsx` | `456a71beabb778e875bc2163356fca3e48c3bc6d9b45a6ae51622b1d910224a9` |
 
 Scoped tracked two-file diff SHA-256: `82c65bf9bf41d1cbff2378c09069343b754c63f990b0acb928c6df48ba329718`. These pins are a workingtree repair, not a fixed Git revision. Lead is a nonauthor for this small repair and must review the exact native ability paths/source, then preserve a fixed candidate. The eventual independent Page browser should verify actual read-only/no-create and allowed creator/editor roles at390/1440 alongside native publish/version/restore/customer journeys. CF-UI-02 is resolved by this author at source/unit scope only; no canonical Validation or live permission PASS is claimed.
+
+
+## Final production artifact review — read-only
+
+**Decision: READ_ONLY_ARTIFACT_PARITY_PASS**, limited to the files and build-output markers checked below. This does not upgrade earlier author tests to independent live product PASS. Review-time parent HEAD is `e61a079209986f023397571c9569cf65fb400dc0`; the rebuilt bundle is a tracked workingtree diff pending lead publication. The complete pre-append report body has SHA-256 `29ba56921b37d11f766490dc006550aac4bdb9aed6e07ffb1aa18b072fd7376e` and is preserved unchanged as this report's prefix.
+
+Lead reports official native `template:build --production` exit0, module/template update to0.1.3, and explicit native campaign provisioning creating Page7/8 followed by skipped2. This reviewer did not execute those lifecycle/provision commands, inspect their DB state or infer customer/admin role/browser success from them. The subsequent checks read only bundled/installed public source assets and manifests; no env, DB, cache, service, request, TEST workspace or installed-file mutation occurred.
+
+Compared to parent HEAD, the only tracked dist change is `dist/js/components.iife.js`, one-character replacement at character offset64272. Both versions are68807 Unicode characters /68911 UTF-8 bytes; the corresponding byte offset is64374. The exact changed field is the embedded **sirsoft-board dependency floor>=1.1.2→>=1.1.3**. Embedded template version is already0.1.3 in both old/new bundles, so the one-character bundle change must not be described as template-version0.1.2→0.1.3. Separate native update changes the installed release to0.1.3 as reported by lead and confirmed by installed manifests here.
+
+The new bundled and installed JS both have SHA-256 `8941442d1a921c2f366063359e39f79ed3a719bce77a174b6c0aa5657b691d63`. Their PageBody export, template version0.1.3, Boardfloor>=1.1.3 and compiled DOMPurify data/ARIA-attribute false settings are present. Both bundled/installed component JS and CSS contain0 `sourceMappingURL` occurrences; both dist trees contain0 `*.map` files. CSS is unchanged from parent HEAD and matches its installed counterpart. These static findings confirm no-map output and parity, not browser execution or reproducible-build certification.
+
+All11 inspected bundled/installed pairs are byte-identical:
+
+| Public path within travel extension | Shared bundled/installed SHA-256 | Parity |
+|---|---|---|
+| template: `dist/js/components.iife.js` | `8941442d1a921c2f366063359e39f79ed3a719bce77a174b6c0aa5657b691d63` | PASS |
+| template: `dist/css/components.css` | `8b372bcc681e6b78fbac301ddb274e75703f3e50a9e76d0472243c23c571d207` | PASS |
+| template: `components.json` | `d948fdb9eb16d68feefc7fe81caa3f43a70360a5686cfa218e26763b023f46ed` | PASS |
+| template: `template.json` | `28268a1d971ddfc3080a059955bc21d101e0eca7bb750004ecbd89bdadac4991` | PASS |
+| template: `routes.json` | `6fced1f37c941ecbad8b5cfe1d0c20ee7f0c10b3dd7a494c2b5ba83c06014f28` | PASS |
+| template: `layouts/travel/campaign_detail.json` | `43cdc90cc64d1b73c515cb1359a86b618b9a5c2521a17e5a4f50ec55c99739f2` | PASS |
+| template: `layouts/travel/campaigns.json` | `58cbcbdff9e3ef838797a912c9434beebd713c8cdafc298d9f6905320490fdf2` | PASS |
+| template: `layouts/travel/home.json` | `529e63690e62cd7b56804d81ae24120e4fb193e3d473b9b583b6d3d9e4911f43` | PASS |
+| template: `src/components/composite/PageBody.tsx` | `79c839f2b28b346f0f6639c08c153bc81938d26cd937ea42c04e93f26a77fc43` | PASS |
+| module: `module.json` | `4cdd3b1baf6c8794bc029327c686249157a2f7182ef47723d463869f2f85c866` | PASS |
+| module: `resources/layouts/admin/admin_travel_lab_campaigns.json` | `32ac9d46844dcdada237a680c43f10f78c822b4e07c9abe8c2a2baac93d0861b` | PASS |
+
+Template and module bundled/installed manifests agree on version0.1.3, core>=7.0.12, ecommerce>=1.2.1, Board>=1.1.3 and Page>=1.1.2; template additionally requires travel module>=0.1.3. Template package.json, lock top-level/root package and module composer.json also version0.1.3. No manifest/dependency lock was edited in this phase.
+
+Previously reviewed source/test pins remain unchanged: PageBody `79c839f2…`, campaign detail/list/home as listed above, repaired admin layout `32ac9d46…`, scoped admin regression file `456a71be…`, template version contract `9504de7e…`. Therefore no expensive or duplicate test rerun was warranted; prior results keep their original phase/source bindings. No independent HTTP served-byte test, actual Page preview/role/version-restore/browser recheck or canonical Validation was run in this artifact-only phase. Lead owns the fixed publication checkpoint and those remaining gates.

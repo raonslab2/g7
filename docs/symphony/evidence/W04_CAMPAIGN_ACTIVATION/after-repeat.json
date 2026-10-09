@@ -1,0 +1,33 @@
+{
+    "observed_at": "2026-10-09T19:49:03+00:00",
+    "database": "req81_travel_lab",
+    "default_provisioning_enabled": false,
+    "actor_id": 56,
+    "actor_page_read": true,
+    "actor_page_create": true,
+    "rows": [
+        {
+            "id": 7,
+            "slug": "travel-lab-campaign-autumn-escape",
+            "published": true,
+            "current_version": 1,
+            "versions": 1,
+            "row_sha256": "9557f497dbe55263e7bddcca7d2275bdd1594e879c9e5a6bb69c4f52a514fa65"
+        },
+        {
+            "id": 8,
+            "slug": "travel-lab-campaign-weekend-reset",
+            "published": true,
+            "current_version": 1,
+            "versions": 1,
+            "row_sha256": "ad69c1d1de8b3514e28c3a81a57d8bce5d6c5299a77b985f0664bf2d01c22f47"
+        }
+    ],
+    "side_effect_adapters": {
+        "mail": "array",
+        "queue": "sync",
+        "storage": "local",
+        "scout": "mysql-fulltext",
+        "cache": "database"
+    }
+}
