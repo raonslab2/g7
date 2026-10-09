@@ -1,0 +1,480 @@
+{
+  "tested_sha": "28ada286c1c34606741bcfe4f9d12e06ac50af30",
+  "run": "W03-1791541771728",
+  "results": [
+    {
+      "width": 390,
+      "name": "native UI login",
+      "status": "PASS"
+    },
+    {
+      "width": 390,
+      "name": "empty cart",
+      "status": "PASS"
+    },
+    {
+      "width": 390,
+      "name": "departure/people/real cart add",
+      "status": "PASS",
+      "detail": {
+        "cartId": 20
+      }
+    },
+    {
+      "width": 390,
+      "name": "cart change/remove modal/re-add",
+      "status": "PASS"
+    },
+    {
+      "width": 390,
+      "name": "retry payload evidence",
+      "status": "OBSERVED",
+      "detail": {
+        "body1": {
+          "cart_ids": [
+            21
+          ],
+          "contact": {
+            "name": "W03-1791541771728 synthetic 390",
+            "phone": "000-0000-0000"
+          },
+          "idempotency_key": "b28986b9eb618e45d559a5e07e5ef1bb951055819fc34b2b328dd3eca65eec77"
+        },
+        "body2": {
+          "cart_ids": [
+            21
+          ],
+          "contact": {
+            "name": "W03-1791541771728 synthetic 390",
+            "phone": "000-0000-0000"
+          },
+          "idempotency_key": "6195f9e48b1c0934326750ae68fb4753b0d4efaca40e739177ae8b88cacd6398"
+        },
+        "status": 409,
+        "response": {
+          "success": false,
+          "message": "장바구니가 변경되었습니다. 다시 확인해 주세요."
+        }
+      }
+    },
+    {
+      "width": 390,
+      "name": "trial acknowledgement/contact/response-loss idempotency retry",
+      "status": "FAIL",
+      "error": "expect(received).toBe(expected) // Object.is equality\n\nExpected: 200\nReceived: 409"
+    },
+    {
+      "width": 390,
+      "name": "normal UI submit with real201 navigation",
+      "status": "PASS"
+    },
+    {
+      "width": 390,
+      "name": "my requests list/detail",
+      "status": "PASS"
+    },
+    {
+      "width": 390,
+      "name": "native admin UI login/lookup/state+note",
+      "status": "PASS"
+    },
+    {
+      "width": 390,
+      "name": "owner reload TEST_ACCEPTED/test-only notice",
+      "status": "PASS"
+    },
+    {
+      "width": 390,
+      "name": "real logout/relogin persistence",
+      "status": "PASS"
+    },
+    {
+      "width": 390,
+      "name": "notice FAQ own question create/requery",
+      "status": "PASS"
+    },
+    {
+      "width": 390,
+      "name": "native admin support route/answer",
+      "status": "FAIL",
+      "error": "locator.click: Timeout 8000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: '게시판 관리 열기', exact: true }).nth(2)\u001b[22m\n"
+    },
+    {
+      "width": 390,
+      "name": "native commerce/travel catalog routes",
+      "status": "FAIL",
+      "error": "locator.click: Timeout 8000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: '출발일 설정', exact: true }).first()\u001b[22m\n"
+    },
+    {
+      "width": 390,
+      "name": "cleanup own cancel allocation",
+      "status": "PASS",
+      "detail": {
+        "inquiryId": 14
+      }
+    },
+    {
+      "width": 1440,
+      "name": "native UI login",
+      "status": "PASS"
+    },
+    {
+      "width": 1440,
+      "name": "empty cart",
+      "status": "PASS"
+    },
+    {
+      "width": 1440,
+      "name": "departure/people/real cart add",
+      "status": "PASS",
+      "detail": {
+        "cartId": 23
+      }
+    },
+    {
+      "width": 1440,
+      "name": "cart change/remove modal/re-add",
+      "status": "PASS"
+    },
+    {
+      "width": 1440,
+      "name": "retry payload evidence",
+      "status": "OBSERVED",
+      "detail": {
+        "body1": {
+          "cart_ids": [
+            24
+          ],
+          "contact": {
+            "name": "W03-1791541771728 synthetic 1440",
+            "phone": "000-0000-0000"
+          },
+          "idempotency_key": "2541dd15404e600f21bd17c264e4f70894c92e47d2627b3733c851f0aac3cfd1"
+        },
+        "body2": {
+          "cart_ids": [
+            24
+          ],
+          "contact": {
+            "name": "W03-1791541771728 synthetic 1440",
+            "phone": "000-0000-0000"
+          },
+          "idempotency_key": "adfe569ff7cb1d445992ff28db31f91c9224a1803dad4647fea77edebe422476"
+        },
+        "status": 409,
+        "response": {
+          "success": false,
+          "message": "장바구니가 변경되었습니다. 다시 확인해 주세요."
+        }
+      }
+    },
+    {
+      "width": 1440,
+      "name": "trial acknowledgement/contact/response-loss idempotency retry",
+      "status": "FAIL",
+      "error": "expect(received).toBe(expected) // Object.is equality\n\nExpected: 200\nReceived: 409"
+    },
+    {
+      "width": 1440,
+      "name": "normal UI submit with real201 navigation",
+      "status": "PASS"
+    },
+    {
+      "width": 1440,
+      "name": "my requests list/detail",
+      "status": "PASS"
+    },
+    {
+      "width": 1440,
+      "name": "native admin UI login/lookup/state+note",
+      "status": "PASS"
+    },
+    {
+      "width": 1440,
+      "name": "owner reload TEST_ACCEPTED/test-only notice",
+      "status": "PASS"
+    },
+    {
+      "width": 1440,
+      "name": "real logout/relogin persistence",
+      "status": "PASS"
+    },
+    {
+      "width": 1440,
+      "name": "notice FAQ own question create/requery",
+      "status": "PASS"
+    },
+    {
+      "width": 1440,
+      "name": "native admin support route/answer",
+      "status": "FAIL",
+      "error": "locator.click: Timeout 8000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: '게시판 관리 열기', exact: true }).nth(2)\u001b[22m\n"
+    },
+    {
+      "width": 1440,
+      "name": "native commerce/travel catalog routes",
+      "status": "FAIL",
+      "error": "locator.click: Timeout 8000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: '출발일 설정', exact: true }).first()\u001b[22m\n"
+    },
+    {
+      "width": 1440,
+      "name": "cleanup own cancel allocation",
+      "status": "PASS",
+      "detail": {
+        "inquiryId": 16
+      }
+    }
+  ],
+  "metrics": [
+    {
+      "width": 390,
+      "role": "member",
+      "pageErrors": [],
+      "consoleErrors": [
+        "Failed to load resource: net::ERR_FAILED",
+        "Failed to load resource: the server responded with a status of 409 (Conflict)"
+      ],
+      "httpErrors": [
+        {
+          "path": "/api/modules/raonslab-travel_lab/inquiries",
+          "status": 409
+        }
+      ],
+      "overflow": [
+        {
+          "name": "cart-empty",
+          "viewport": 390,
+          "document": 390,
+          "overflow": false
+        },
+        {
+          "name": "cart-added",
+          "viewport": 390,
+          "document": 390,
+          "overflow": false
+        },
+        {
+          "name": "cart-remove-modal",
+          "viewport": 390,
+          "document": 390,
+          "overflow": false
+        },
+        {
+          "name": "cart-trial-contact",
+          "viewport": 390,
+          "document": 390,
+          "overflow": false
+        },
+        {
+          "name": "inquiry-fault-injection",
+          "viewport": 390,
+          "document": 390,
+          "overflow": false
+        },
+        {
+          "name": "normal-inquiry-detail",
+          "viewport": 390,
+          "document": 390,
+          "overflow": false
+        },
+        {
+          "name": "my-requests",
+          "viewport": 390,
+          "document": 390,
+          "overflow": false
+        },
+        {
+          "name": "owner-test-accepted",
+          "viewport": 390,
+          "document": 390,
+          "overflow": false
+        },
+        {
+          "name": "notice-open",
+          "viewport": 390,
+          "document": 390,
+          "overflow": false
+        },
+        {
+          "name": "faq-open",
+          "viewport": 390,
+          "document": 390,
+          "overflow": false
+        },
+        {
+          "name": "own-question",
+          "viewport": 390,
+          "document": 390,
+          "overflow": false
+        }
+      ]
+    },
+    {
+      "width": 390,
+      "role": "admin",
+      "pageErrors": [],
+      "consoleErrors": [],
+      "httpErrors": [],
+      "overflow": [
+        {
+          "name": "admin-inquiries-list",
+          "viewport": 390,
+          "document": 390,
+          "overflow": false
+        },
+        {
+          "name": "admin-test-accepted",
+          "viewport": 390,
+          "document": 390,
+          "overflow": false
+        },
+        {
+          "name": "native-travel-catalog",
+          "viewport": 390,
+          "document": 390,
+          "overflow": false
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "role": "member",
+      "pageErrors": [],
+      "consoleErrors": [
+        "Failed to load resource: net::ERR_FAILED",
+        "Failed to load resource: the server responded with a status of 409 (Conflict)"
+      ],
+      "httpErrors": [
+        {
+          "path": "/api/modules/raonslab-travel_lab/inquiries",
+          "status": 409
+        }
+      ],
+      "overflow": [
+        {
+          "name": "cart-empty",
+          "viewport": 1440,
+          "document": 1440,
+          "overflow": false
+        },
+        {
+          "name": "cart-added",
+          "viewport": 1440,
+          "document": 1440,
+          "overflow": false
+        },
+        {
+          "name": "cart-remove-modal",
+          "viewport": 1440,
+          "document": 1440,
+          "overflow": false
+        },
+        {
+          "name": "cart-trial-contact",
+          "viewport": 1440,
+          "document": 1440,
+          "overflow": false
+        },
+        {
+          "name": "inquiry-fault-injection",
+          "viewport": 1440,
+          "document": 1440,
+          "overflow": false
+        },
+        {
+          "name": "normal-inquiry-detail",
+          "viewport": 1440,
+          "document": 1440,
+          "overflow": false
+        },
+        {
+          "name": "my-requests",
+          "viewport": 1440,
+          "document": 1440,
+          "overflow": false
+        },
+        {
+          "name": "owner-test-accepted",
+          "viewport": 1440,
+          "document": 1440,
+          "overflow": false
+        },
+        {
+          "name": "notice-open",
+          "viewport": 1440,
+          "document": 1440,
+          "overflow": false
+        },
+        {
+          "name": "faq-open",
+          "viewport": 1440,
+          "document": 1440,
+          "overflow": false
+        },
+        {
+          "name": "own-question",
+          "viewport": 1440,
+          "document": 1440,
+          "overflow": false
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "role": "admin",
+      "pageErrors": [],
+      "consoleErrors": [],
+      "httpErrors": [],
+      "overflow": [
+        {
+          "name": "admin-inquiries-list",
+          "viewport": 1440,
+          "document": 1440,
+          "overflow": false
+        },
+        {
+          "name": "admin-test-accepted",
+          "viewport": 1440,
+          "document": 1440,
+          "overflow": false
+        },
+        {
+          "name": "native-travel-catalog",
+          "viewport": 1440,
+          "document": 1440,
+          "overflow": false
+        }
+      ]
+    }
+  ],
+  "fixtures": [
+    {
+      "width": 390,
+      "inquiryId": 13,
+      "reference": "TL-00000013"
+    },
+    {
+      "width": 390,
+      "inquiryId": 14,
+      "kind": "normal"
+    },
+    {
+      "width": 390,
+      "questionId": 8
+    },
+    {
+      "width": 1440,
+      "inquiryId": 15,
+      "reference": "TL-00000015"
+    },
+    {
+      "width": 1440,
+      "inquiryId": 16,
+      "kind": "normal"
+    },
+    {
+      "width": 1440,
+      "questionId": 9
+    }
+  ]
+}
