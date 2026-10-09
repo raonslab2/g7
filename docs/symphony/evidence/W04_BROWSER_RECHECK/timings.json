@@ -1,0 +1,129 @@
+{
+  "sourceSHA": "598a89fff702d51c1405f1a5952d95ab1d2651f4",
+  "commands": [
+    {
+      "command": "git fetch origin feat/g7-travel-lab-c7ae42d1; git checkout --detach 598a89fff702d51c1405f1a5952d95ab1d2651f4",
+      "exit_code": 0
+    },
+    {
+      "command": "npm ci --ignore-scripts --no-audit --no-fund",
+      "exit_code": 0,
+      "approx_seconds": 9
+    },
+    {
+      "command": "node tests/W04_RECHECK/<script>.mjs",
+      "results": [
+        {
+          "file": "access-decline.json",
+          "seconds": 70.779,
+          "measurement": "process elapsed_seconds",
+          "exit_code": "실행 완료0; step FAIL은 JSON에 보존. 초기 지원 검증 프로세스 종료는 별도 BLOCKED."
+        },
+        {
+          "file": "admin-pointer-departure.json",
+          "seconds": 38.846,
+          "measurement": "process elapsed_seconds",
+          "exit_code": "실행 완료0; step FAIL은 JSON에 보존. 초기 지원 검증 프로세스 종료는 별도 BLOCKED."
+        },
+        {
+          "file": "admin.json",
+          "seconds": 76.099,
+          "measurement": "마지막 원본 JSON mtime - run timestamp 근사; 정확한 process duration 아님",
+          "exit_code": "실행 완료0; step FAIL은 JSON에 보존. 초기 지원 검증 프로세스 종료는 별도 BLOCKED."
+        },
+        {
+          "file": "catalogue.json",
+          "seconds": 96.001,
+          "measurement": "마지막 원본 JSON mtime - run timestamp 근사; 정확한 process duration 아님",
+          "exit_code": "실행 완료0; step FAIL은 JSON에 보존. 초기 지원 검증 프로세스 종료는 별도 BLOCKED."
+        },
+        {
+          "file": "cleanup-repair.json",
+          "seconds": 27.759,
+          "measurement": "process elapsed_seconds",
+          "exit_code": "실행 완료0; step FAIL은 JSON에 보존. 초기 지원 검증 프로세스 종료는 별도 BLOCKED."
+        },
+        {
+          "file": "cleanup.json",
+          "seconds": 36.601,
+          "measurement": "process elapsed_seconds",
+          "exit_code": "실행 완료0; step FAIL은 JSON에 보존. 초기 지원 검증 프로세스 종료는 별도 BLOCKED."
+        },
+        {
+          "file": "decline-followup.json",
+          "seconds": 8.654,
+          "measurement": "process elapsed_seconds",
+          "exit_code": "실행 완료0; step FAIL은 JSON에 보존. 초기 지원 검증 프로세스 종료는 별도 BLOCKED."
+        },
+        {
+          "file": "editor.json",
+          "seconds": 21.856,
+          "measurement": "마지막 원본 JSON mtime - run timestamp 근사; 정확한 process duration 아님",
+          "exit_code": "실행 완료0; step FAIL은 JSON에 보존. 초기 지원 검증 프로세스 종료는 별도 BLOCKED."
+        },
+        {
+          "file": "issued-token-cleanup.json",
+          "seconds": 7.712,
+          "measurement": "process elapsed_seconds",
+          "exit_code": "실행 완료0; step FAIL은 JSON에 보존. 초기 지원 검증 프로세스 종료는 별도 BLOCKED."
+        },
+        {
+          "file": "journey.json",
+          "seconds": 42.349,
+          "measurement": "마지막 원본 JSON mtime - run timestamp 근사; 정확한 process duration 아님",
+          "exit_code": "실행 완료0; step FAIL은 JSON에 보존. 초기 지원 검증 프로세스 종료는 별도 BLOCKED."
+        },
+        {
+          "file": "overflow-reproducer.json",
+          "seconds": 7.998,
+          "measurement": "process elapsed_seconds",
+          "exit_code": "실행 완료0; step FAIL은 JSON에 보존. 초기 지원 검증 프로세스 종료는 별도 BLOCKED."
+        },
+        {
+          "file": "owner-audit.json",
+          "seconds": 10.991,
+          "measurement": "process elapsed_seconds",
+          "exit_code": "실행 완료0; step FAIL은 JSON에 보존. 초기 지원 검증 프로세스 종료는 별도 BLOCKED."
+        },
+        {
+          "file": "pagination-fixtures.json",
+          "seconds": 23.016,
+          "measurement": "마지막 원본 JSON mtime - run timestamp 근사; 정확한 process duration 아님",
+          "exit_code": "실행 완료0; step FAIL은 JSON에 보존. 초기 지원 검증 프로세스 종료는 별도 BLOCKED."
+        },
+        {
+          "file": "prior-cleanup-requery.json",
+          "seconds": 5.527,
+          "measurement": "마지막 원본 JSON mtime - run timestamp 근사; 정확한 process duration 아님",
+          "exit_code": "실행 완료0; step FAIL은 JSON에 보존. 초기 지원 검증 프로세스 종료는 별도 BLOCKED."
+        },
+        {
+          "file": "recovery.json",
+          "seconds": 106.957,
+          "measurement": "마지막 원본 JSON mtime - run timestamp 근사; 정확한 process duration 아님",
+          "exit_code": "실행 완료0; step FAIL은 JSON에 보존. 초기 지원 검증 프로세스 종료는 별도 BLOCKED."
+        },
+        {
+          "file": "support.json",
+          "seconds": 82.446,
+          "measurement": "마지막 원본 JSON mtime - run timestamp 근사; 정확한 process duration 아님",
+          "exit_code": "실행 완료0; step FAIL은 JSON에 보존. 초기 지원 검증 프로세스 종료는 별도 BLOCKED."
+        },
+        {
+          "file": "touch-persistence.json",
+          "seconds": 47.305,
+          "measurement": "process elapsed_seconds",
+          "exit_code": "실행 완료0; step FAIL은 JSON에 보존. 초기 지원 검증 프로세스 종료는 별도 BLOCKED."
+        }
+      ]
+    }
+  ],
+  "public_commands": [
+    "node tests/W04_RECHECK/public-recheck.mjs (initial exit1;79.682s)",
+    "W04_ONLY=hero-search-real-results node tests/W04_RECHECK/public-recheck.mjs (targeted exit0;4.613s)",
+    "W04_ONLY=pagination W04_RUN_LABEL=public-pagination-followup W04_PAGINATION_Q=W04PAGE1791554431128 W04_PAGINATION_IDS=41,42,43,44,45,46,47,48,49,50,51,52,53 node tests/W04_RECHECK/public-recheck.mjs (exit0;17.496s)",
+    "W04_ONLY=soldout-disabled W04_RUN_LABEL=public-soldout-followup W04_DETAIL_IDS=39,40 node tests/W04_RECHECK/public-recheck.mjs (exit0;8.577s)"
+  ],
+  "public_total_seconds": 110.368,
+  "note": "중간 실패/재시도는 별도 harness JSON; 단계 수/cleanup 행을 테스트 총수로 합산하지 않음."
+}
