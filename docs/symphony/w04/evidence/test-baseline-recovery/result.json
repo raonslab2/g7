@@ -1,0 +1,116 @@
+{
+    "status": "PASS_BASELINE_RECOVERY_ONLY",
+    "source_sha": "598a89fff702d51c1405f1a5952d95ab1d2651f4",
+    "source_tree": "9e00273bdf18d6a713343755aac54f44a9b032b4",
+    "original_table_count": 55,
+    "original_row_count": 104,
+    "current_table_count": 22,
+    "current_row_count": 21,
+    "final_table_count": 55,
+    "final_row_count": 104,
+    "original_dump_sha256": "5ef6d31adabf2ec8f4508c5e1dc6acda9dcb48f5ccd0d6ccb8b9e5493bf672ef",
+    "final_inventory_digest_sha256": "ded72a53ad82a159b88e50a6560625488bb569a55f5f5ffa109cd45ae52d056e",
+    "whole_tables_rows_ddl_objects_equal": true,
+    "other_schema_objects": 0,
+    "checks": {
+        "before": {
+            "database": "req81_travel_lab_test",
+            "account": "req81_travel@127.0.0.1",
+            "own_connection_id": 83670,
+            "other_test_handles": [],
+            "other_test_connections": 0,
+            "visibility": "scoped SHOW PROCESSLIST plus readonly local-socket global PROCESSLIST filtered to exact TEST",
+            "readonly_socket_probe_seconds": 0.04,
+            "globally_observed_test_connection_ids": [
+                83670
+            ]
+        },
+        "empty": {
+            "database": "req81_travel_lab_test",
+            "account": "req81_travel@127.0.0.1",
+            "own_connection_id": 83707,
+            "other_test_handles": [],
+            "other_test_connections": 0,
+            "visibility": "scoped SHOW PROCESSLIST plus readonly local-socket global PROCESSLIST filtered to exact TEST",
+            "readonly_socket_probe_seconds": 0.05,
+            "globally_observed_test_connection_ids": [
+                83707
+            ]
+        },
+        "final": {
+            "database": "req81_travel_lab_test",
+            "account": "req81_travel@127.0.0.1",
+            "own_connection_id": 83737,
+            "other_test_handles": [],
+            "other_test_connections": 0,
+            "visibility": "scoped SHOW PROCESSLIST plus readonly local-socket global PROCESSLIST filtered to exact TEST",
+            "readonly_socket_probe_seconds": 0.066,
+            "globally_observed_test_connection_ids": [
+                83737
+            ]
+        },
+        "wipe_effective_application": {
+            "database": "req81_travel_lab_test",
+            "account": "req81_travel@127.0.0.1",
+            "own_connection_id": 83690,
+            "other_test_handles": [],
+            "other_test_connections": 0,
+            "visibility": "scoped SHOW PROCESSLIST plus readonly local-socket global PROCESSLIST filtered to exact TEST",
+            "readonly_socket_probe_seconds": 0.039,
+            "globally_observed_test_connection_ids": [
+                83690
+            ],
+            "effective_read_write_database": "req81_travel_lab_test",
+            "effective_local_adapters": true,
+            "native_entrypoint": "artisan"
+        },
+        "final_orphans": {
+            "method": "proc_exact_cwd_or_individual_path_argv_prefix",
+            "handles": [],
+            "count": 0
+        }
+    },
+    "commands": [
+        {
+            "command": [
+                "/usr/bin/php8.3",
+                "/home/ubuntu/.agentopt-v2/workspaces/req_4be0e82d6e2e4996bf501f0aef20aa28/docs/symphony/w04/recovery-artisan.php",
+                "db:wipe",
+                "--database=mysql",
+                "--drop-views",
+                "--force",
+                "--no-interaction"
+            ],
+            "child_pid": 4102125,
+            "exit": 0,
+            "seconds": 2.479
+        },
+        {
+            "command": [
+                "mysql",
+                "--defaults-file=<private TEST-only options>",
+                "--protocol=TCP",
+                "--host=127.0.0.1",
+                "--port=3306",
+                "--user=req81_travel",
+                "--database=req81_travel_lab_test",
+                "--local-infile=0",
+                "--skip-reconnect"
+            ],
+            "child_pid": 4102301,
+            "exit": 0,
+            "seconds": 1.954
+        }
+    ],
+    "native_artisan_commands": 1,
+    "native_mysql_imports": 1,
+    "fresh_install_commands": 0,
+    "seconds": 5.215,
+    "original_failed_child_files_unchanged": true,
+    "failed_child_BLOCKED_retained": true,
+    "own_original_and_current_safety_backup_retained": true,
+    "test_ownership_released": true,
+    "installer_validation": "NOT_RUN",
+    "canonical_validation": "NOT_RUN",
+    "earlier_128_tables_639_rows": "NOT_PROVEN"
+}
