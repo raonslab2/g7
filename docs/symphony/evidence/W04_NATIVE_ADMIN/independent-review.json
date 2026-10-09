@@ -1,0 +1,158 @@
+{
+  "reviewed_commit": "0bc302d748e22ec023ef2e33ee67a7224311e682",
+  "reviewed_tree": "85631e3732663c1b249dafe9ca6e6a0c8c0fc8cf",
+  "base_source_sha": "fa5523175ac494cfbd13bbf89bf06b3ec91835a6",
+  "base_source_tree": "fa685339b030ee4efe46b63dc8d98c0e2f7d4f0c",
+  "previous_review_target": "c3a61a26bb21b68dd6ee5eb3bcd4c5412ee6434f",
+  "previous_review_record": "docs/symphony/evidence/W04_NATIVE_ADMIN/independent-review-c3a61.json",
+  "initial_finding_record": "docs/symphony/evidence/W04_NATIVE_ADMIN/independent-review-initial.json",
+  "observed_utc": "2026-10-09T18:39:28.540323+00:00",
+  "overall_status": "PASS",
+  "scope": "Final narrow independent package review of native GET-only restoration audit and its command/script/hash/privacy/prose delta. Earlier complete package and corrected sort/source/token review remain preserved and referenced.",
+  "blocking_findings": [],
+  "nonblocking_findings": [],
+  "resolved_findings": [
+    {
+      "id": "PKG-SORT-RESTORE-READBACK-001",
+      "status": "PASS",
+      "resolution": "13 exact own auxiliary IDs72\u201384 now have native product/catalog GET200 readback: product and every option selling_price12000, displayhidden, metadata publishedfalse, original departure2026-12-25/return2026-12-26, inactive/reserved0 and matching option IDs. No restore command inference is needed for these values.",
+      "evidence": "docs/symphony/evidence/W04_NATIVE_ADMIN/sort-final-audit.json"
+    }
+  ],
+  "reviewer": "Existing source_binding native helper; unique native helper count1",
+  "review_type": "Independent review of lead-authored browser/report/audit artifacts; previously helper-authored source/assets evidence remains contributor self-check explicitly",
+  "author_boundary": {
+    "independent": "Native GET audit implementation, safe archived command/artifact, corrected prose link and privacy/manifest delta were authored by lead",
+    "contributor_self_check_files": [
+      "tests/W04_NATIVE_ADMIN/source-binding.py",
+      "docs/symphony/evidence/W04_NATIVE_ADMIN/source-binding.json",
+      "docs/symphony/evidence/W04_NATIVE_ADMIN/executed-assets-review.json"
+    ],
+    "review_history": "Reviewer-authored prior records retained as history; not canonical source Validation"
+  },
+  "checks": [
+    {
+      "name": "Authorized narrow delta",
+      "status": "PASS",
+      "previous_to_target_changed_files": 13,
+      "base_to_target_changed_files": 291,
+      "outside_allowed_paths": 0,
+      "product_files_changed": 0,
+      "private_ledger_or_env_files_included": 0,
+      "allowed": [
+        "tests/W04_NATIVE_ADMIN/**",
+        "docs/symphony/evidence/W04_NATIVE_ADMIN/**",
+        "docs/symphony/W04_NATIVE_ADMIN_BROWSER_FINAL.md"
+      ]
+    },
+    {
+      "name": "Native final restored-value readback",
+      "status": "PASS",
+      "exact_product_ids": [
+        72,
+        73,
+        74,
+        75,
+        76,
+        77,
+        78,
+        79,
+        80,
+        81,
+        82,
+        83,
+        84
+      ],
+      "recorded_product_catalog_GET_result_pairs": 13,
+      "recorded_successful_GET_results": 26,
+      "unique_HTTP_request_or_retry_count": "NOT_MEASURED; these are report result pairs, not exhaustive request-attempt telemetry",
+      "all_HTTP_results": 200,
+      "product_and_every_option_price": 12000,
+      "display_status": "hidden",
+      "published": false,
+      "departure_date": "2026-12-25",
+      "return_date": "2026-12-26",
+      "departure_active": false,
+      "reserved": 0,
+      "departure_option_ID_matches": true,
+      "native_API_measurement": "Lead actual native GET responses and executable assertion evidence; independent SQL NOT_RUN"
+    },
+    {
+      "name": "Audit performs no business writes or new login",
+      "status": "PASS",
+      "native_audit_methods": "GET only in reviewed script; two API calls per exact product ID",
+      "new_native_logins": 0,
+      "product_fixture_writes": 0,
+      "source_label": "Audit actual_headc3a61 is artifact-only descendant; tested productfa552 unchanged",
+      "limits": "This is fixed-script/artifact review; helper does not execute credential-bearing audit again"
+    },
+    {
+      "name": "Exact command archive and syntax",
+      "status": "PASS",
+      "command_exit_code": 0,
+      "recorded_safe_command_file_hash_rows": 4,
+      "all_archive_hashes_match": true,
+      "changed_mjs_node_check_files": 5,
+      "native_script_calls_not_executed_by_helper": true
+    },
+    {
+      "name": "Final safe manifest and privacy",
+      "status": "PASS",
+      "manifest_files": 35,
+      "all_fixed_manifest_hashes_match": true,
+      "PNG_count": 100,
+      "PNG_bytes_unchanged_from_previous_target": true,
+      "all_PNG_fixed_hashes_match_privacy_PASS_rows": true,
+      "known_private_and_pattern_hits_recorded": 0,
+      "changed_text_generic_private_pattern_hits": 0,
+      "changed_privacy_row_hash_mismatches": 0,
+      "independent_exact_known_private_value_scan": "NOT_RUN; helper reads no credentials. Guarded lead scan record reviewed."
+    },
+    {
+      "name": "Previously reviewed functional/source evidence unchanged",
+      "status": "PASS",
+      "bit_identical_to_previous_target": [
+        "source-binding.json",
+        "executed-assets-review.json",
+        "sort-varied.json",
+        "final-token-audit.json",
+        "cleanup-counts.json",
+        "required-matrix.json"
+      ],
+      "previous_review_preserved": true,
+      "initial_finding_preserved": true,
+      "prior_prose_count_correction": "37 earlier public-issuance-absent /46 laterpublic /75per-token /8aggregate-only /83final-audited remains correct"
+    },
+    {
+      "name": "Known UI limits and canonical boundary remain honest",
+      "status": "PASS",
+      "rapid_save_stale_true": "Unresolved and preserved; bounded settledfalse journey distinct",
+      "PC_pointer_RowActionMenu": "Unresolved and preserved; Enter-open/detail click success distinct",
+      "canonicalValidation": "NOT_RUN",
+      "full14_contract_cartesian_execution": "NOT_RUN"
+    }
+  ],
+  "unchanged_contributor_self_check_summary": {
+    "initial_before_active_source_paths": 4354,
+    "during_supplement_active_paths": 92,
+    "distinct_measured_scopes": 4446,
+    "closing_phase": "after_sort_extension",
+    "closing_all_equal": true,
+    "original_after_preserved": true,
+    "broad_optional_source_all_equal": false,
+    "optional_basic_absent_paths": 463,
+    "recorded_asset_rows": 510,
+    "asset_row_unit": "Deduplicated context path/hash rows; overlapping report copies; not HTTP request count",
+    "bound_unique_asset_paths": 12,
+    "literal_paths": 8,
+    "native_CSS_rewrite_paths": 4,
+    "unique_HTTP_request_count": "NOT_MEASURED",
+    "source/assets_portions": "Contributor self-check, not independent product implementation PASS"
+  },
+  "remaining_NOT_RUN": [
+    "Canonical Validation",
+    "Reviewer runtime/browser reexecution and SQL inventory",
+    "Previously stated races/barriers/restart/envloss/migration/full native CI/attachments/editor-preview and other out-of-scope checks"
+  ],
+  "publication": "No reviewer commit/push/merge/deploy. Lead may append only this review record and privacy refresh afterward; reviewed functional/harness/report content must stay identical to this fixed target."
+}
