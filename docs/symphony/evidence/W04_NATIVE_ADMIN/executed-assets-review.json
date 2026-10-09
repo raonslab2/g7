@@ -1,0 +1,916 @@
+{
+  "source_sha": "fa5523175ac494cfbd13bbf89bf06b3ec91835a6",
+  "source_tree": "fa685339b030ee4efe46b63dc8d98c0e2f7d4f0c",
+  "observed_utc": "2026-10-09T18:14:09.143705+00:00",
+  "native_internal_helper_count": 1,
+  "official_validation": "NOT_RUN",
+  "scope": "Own browser metrics.assets public URLs/digests only; no private data/ledgers, DB, env/config or other Request files read. Existing before source hashes plus pinned public CSS rewrite bind observed assets; no product edits or runtime mutation.",
+  "input_evidence": [
+    {
+      "file": "access-decline.json",
+      "file_sha256": "c2b694081adbf50d2db5eeb9d3abe688ca92981beb8a55092414a152876f9855",
+      "tested_sha": "fa5523175ac494cfbd13bbf89bf06b3ec91835a6",
+      "recorded_metric_entries": 6,
+      "entries_with_assets": 6,
+      "recorded_asset_rows": 48,
+      "asset_trace": "MEASURED",
+      "reason": null
+    },
+    {
+      "file": "admin.json",
+      "file_sha256": "4173c990d206e528aeb08499dc65d6821952bf098be170528d45e2d90fff5f9f",
+      "tested_sha": "fa5523175ac494cfbd13bbf89bf06b3ec91835a6",
+      "recorded_metric_entries": 2,
+      "entries_with_assets": 0,
+      "recorded_asset_rows": 0,
+      "asset_trace": "NOT_RUN",
+      "reason": "assets fields absent; no per-run execution trace inferred"
+    },
+    {
+      "file": "catalogue-diagnostic-run.json",
+      "file_sha256": "aa66a9be8e2d43177cf87b092bb0c3af9be6ac2469a4fb608259809fc9a4c5e8",
+      "tested_sha": "fa5523175ac494cfbd13bbf89bf06b3ec91835a6",
+      "recorded_metric_entries": 1,
+      "entries_with_assets": 1,
+      "recorded_asset_rows": 12,
+      "asset_trace": "MEASURED",
+      "reason": null
+    },
+    {
+      "file": "catalogue-list-settle-harness.json",
+      "file_sha256": "d3fe067ad22b4b14e2cb5c04a3262a2370448f172b3d955efe81422678b685cf",
+      "tested_sha": "fa5523175ac494cfbd13bbf89bf06b3ec91835a6",
+      "recorded_metric_entries": 4,
+      "entries_with_assets": 0,
+      "recorded_asset_rows": 0,
+      "asset_trace": "NOT_RUN",
+      "reason": "assets fields absent; no per-run execution trace inferred"
+    },
+    {
+      "file": "catalogue-page1-harness.json",
+      "file_sha256": "f4e354f4549851aaa2ec498669bf9d6d5424fd04623cf6f12b9e45433b1bde6f",
+      "tested_sha": "fa5523175ac494cfbd13bbf89bf06b3ec91835a6",
+      "recorded_metric_entries": 4,
+      "entries_with_assets": 4,
+      "recorded_asset_rows": 36,
+      "asset_trace": "MEASURED",
+      "reason": null
+    },
+    {
+      "file": "catalogue.json",
+      "file_sha256": "2af7700a6f3087a5de7c9b01dcbdccb9ad76688669c2d6b1061481f769516fbb",
+      "tested_sha": "fa5523175ac494cfbd13bbf89bf06b3ec91835a6",
+      "recorded_metric_entries": 4,
+      "entries_with_assets": 4,
+      "recorded_asset_rows": 36,
+      "asset_trace": "MEASURED",
+      "reason": null
+    },
+    {
+      "file": "cleanup.json",
+      "file_sha256": "5ad5c747b4008c2fbe65c805e937d20956880c415710191c40f4e552c97fd2de",
+      "tested_sha": "fa5523175ac494cfbd13bbf89bf06b3ec91835a6",
+      "recorded_metric_entries": 0,
+      "entries_with_assets": 0,
+      "recorded_asset_rows": 0,
+      "asset_trace": "NOT_RUN",
+      "reason": "assets fields absent; no per-run execution trace inferred"
+    },
+    {
+      "file": "country-button-accessible-name-harness.json",
+      "file_sha256": "8c7ef887aa9dac50ed0cfe4bad1cf692445582b551575950d82bff7b4469ecc0",
+      "tested_sha": "fa5523175ac494cfbd13bbf89bf06b3ec91835a6",
+      "recorded_metric_entries": 2,
+      "entries_with_assets": 0,
+      "recorded_asset_rows": 0,
+      "asset_trace": "NOT_RUN",
+      "reason": "assets fields absent; no per-run execution trace inferred"
+    },
+    {
+      "file": "create-empty-country-harness.json",
+      "file_sha256": "ab3d416a739d460dde1010e88b55e49f63ec00aadaa18996d74b71fb86a25870",
+      "tested_sha": "fa5523175ac494cfbd13bbf89bf06b3ec91835a6",
+      "recorded_metric_entries": 2,
+      "entries_with_assets": 0,
+      "recorded_asset_rows": 0,
+      "asset_trace": "NOT_RUN",
+      "reason": "assets fields absent; no per-run execution trace inferred"
+    },
+    {
+      "file": "free-native-label-harness.json",
+      "file_sha256": "2404d36f28bb258de7ee029ac6b7f982a1b3574cca7824121d299eaacc2d3fad",
+      "tested_sha": "fa5523175ac494cfbd13bbf89bf06b3ec91835a6",
+      "recorded_metric_entries": 2,
+      "entries_with_assets": 0,
+      "recorded_asset_rows": 0,
+      "asset_trace": "NOT_RUN",
+      "reason": "assets fields absent; no per-run execution trace inferred"
+    },
+    {
+      "file": "inactive-exact-date-failed.json",
+      "file_sha256": "2251068bba1c061270f94c8442427a0da54b7da4bb5ce380181f58d1f46f69ef",
+      "tested_sha": "fa5523175ac494cfbd13bbf89bf06b3ec91835a6",
+      "recorded_metric_entries": 4,
+      "entries_with_assets": 4,
+      "recorded_asset_rows": 36,
+      "asset_trace": "MEASURED",
+      "reason": null
+    },
+    {
+      "file": "inactive-row-selection-harness.json",
+      "file_sha256": "413c53f6c6f79b2c87630930bda7b1b3b98c5b914ec12f51ddb126635889144e",
+      "tested_sha": "fa5523175ac494cfbd13bbf89bf06b3ec91835a6",
+      "recorded_metric_entries": 4,
+      "entries_with_assets": 4,
+      "recorded_asset_rows": 36,
+      "asset_trace": "MEASURED",
+      "reason": null
+    },
+    {
+      "file": "inactive-ui-toggle-witness.json",
+      "file_sha256": "39382f14931c963b5db571d62cc92a9cf4b75d4067ad539d8bb5f47a01dcfafb",
+      "tested_sha": "fa5523175ac494cfbd13bbf89bf06b3ec91835a6",
+      "recorded_metric_entries": 4,
+      "entries_with_assets": 4,
+      "recorded_asset_rows": 36,
+      "asset_trace": "MEASURED",
+      "reason": null
+    },
+    {
+      "file": "inactive.json",
+      "file_sha256": "b39a7c33425f94e586967325d4f29391f8471ba2faecc5b7e7749e25d803ee17",
+      "tested_sha": "fa5523175ac494cfbd13bbf89bf06b3ec91835a6",
+      "recorded_metric_entries": 4,
+      "entries_with_assets": 4,
+      "recorded_asset_rows": 36,
+      "asset_trace": "MEASURED",
+      "reason": null
+    },
+    {
+      "file": "inspect.json",
+      "file_sha256": "498032942b66ba7dabe8d55f0d933ceededf7ecd7cfe200bdc86eeb3895188a8",
+      "tested_sha": "fa5523175ac494cfbd13bbf89bf06b3ec91835a6",
+      "recorded_metric_entries": 1,
+      "entries_with_assets": 0,
+      "recorded_asset_rows": 0,
+      "asset_trace": "NOT_RUN",
+      "reason": "assets fields absent; no per-run execution trace inferred"
+    },
+    {
+      "file": "issued-token-cleanup.json",
+      "file_sha256": "70b0dce0047a54899c563b3ace232ac4a0db611d966421638bdde5985e50be88",
+      "tested_sha": "fa5523175ac494cfbd13bbf89bf06b3ec91835a6",
+      "recorded_metric_entries": 2,
+      "entries_with_assets": 2,
+      "recorded_asset_rows": 24,
+      "asset_trace": "MEASURED",
+      "reason": null
+    },
+    {
+      "file": "journey-1440-menu-harness.json",
+      "file_sha256": "d6ab0751c871e33161899de135d9f5f2ce15d8ba12f2d9fd98a878c11785a58c",
+      "tested_sha": "fa5523175ac494cfbd13bbf89bf06b3ec91835a6",
+      "recorded_metric_entries": 2,
+      "entries_with_assets": 2,
+      "recorded_asset_rows": 18,
+      "asset_trace": "MEASURED",
+      "reason": null
+    },
+    {
+      "file": "journey-1440.json",
+      "file_sha256": "6c7d0eae3e84b27f21f8e5416c911f42d2c8fa76a1d1a025b0aacd70908def5f",
+      "tested_sha": "fa5523175ac494cfbd13bbf89bf06b3ec91835a6",
+      "recorded_metric_entries": 2,
+      "entries_with_assets": 2,
+      "recorded_asset_rows": 18,
+      "asset_trace": "MEASURED",
+      "reason": null
+    },
+    {
+      "file": "journey-initial-harness.json",
+      "file_sha256": "6c4fc6495aee2a8f858660e2cff81865c6c5233eac8b88a74445eb37aeeff452",
+      "tested_sha": "fa5523175ac494cfbd13bbf89bf06b3ec91835a6",
+      "recorded_metric_entries": 4,
+      "entries_with_assets": 4,
+      "recorded_asset_rows": 36,
+      "asset_trace": "MEASURED",
+      "reason": null
+    },
+    {
+      "file": "journey.json",
+      "file_sha256": "16d6b993bcee911c6be8ca414e054349476daa0051376a799b8c44c7edd7bae2",
+      "tested_sha": "fa5523175ac494cfbd13bbf89bf06b3ec91835a6",
+      "recorded_metric_entries": 2,
+      "entries_with_assets": 2,
+      "recorded_asset_rows": 18,
+      "asset_trace": "MEASURED",
+      "reason": null
+    },
+    {
+      "file": "menu-diagnostic-run.json",
+      "file_sha256": "0d63a805bc13daa6cbe40243448804260bb5b78d6279922df25d7495efa215cc",
+      "tested_sha": "fa5523175ac494cfbd13bbf89bf06b3ec91835a6",
+      "recorded_metric_entries": 1,
+      "entries_with_assets": 1,
+      "recorded_asset_rows": 12,
+      "asset_trace": "MEASURED",
+      "reason": null
+    },
+    {
+      "file": "mobile-inspection-final.json",
+      "file_sha256": "4ddfea873c2e0a8099e409583f15678ea3975c8ce4e0830e2246fa3a9752b46d",
+      "tested_sha": "fa5523175ac494cfbd13bbf89bf06b3ec91835a6",
+      "recorded_metric_entries": 2,
+      "entries_with_assets": 2,
+      "recorded_asset_rows": 12,
+      "asset_trace": "MEASURED",
+      "reason": null
+    },
+    {
+      "file": "multiitem.json",
+      "file_sha256": "41032be36533cc103d83087536c2c86b57e11d95b2f419c7a6909be639527ed8",
+      "tested_sha": "fa5523175ac494cfbd13bbf89bf06b3ec91835a6",
+      "recorded_metric_entries": 2,
+      "entries_with_assets": 2,
+      "recorded_asset_rows": 18,
+      "asset_trace": "MEASURED",
+      "reason": null
+    },
+    {
+      "file": "owner-recovery.json",
+      "file_sha256": "10b298fba163f9844a483a2b68222e50671dfcee10224ac388426def2fdac2dd",
+      "tested_sha": "fa5523175ac494cfbd13bbf89bf06b3ec91835a6",
+      "recorded_metric_entries": 2,
+      "entries_with_assets": 2,
+      "recorded_asset_rows": 12,
+      "asset_trace": "MEASURED",
+      "reason": null
+    },
+    {
+      "file": "pagination-fixtures.json",
+      "file_sha256": "50023e0eab3e51d5f76cd30ae09d0298a5e9513eebeeb11524b638e0093d6907",
+      "tested_sha": "fa5523175ac494cfbd13bbf89bf06b3ec91835a6",
+      "recorded_metric_entries": 0,
+      "entries_with_assets": 0,
+      "recorded_asset_rows": 0,
+      "asset_trace": "NOT_RUN",
+      "reason": "assets fields absent; no per-run execution trace inferred"
+    },
+    {
+      "file": "pickup-native-label-harness.json",
+      "file_sha256": "709c8a0a174323ec19588fb3cedcc9f483b19bbdbbac627518b2c9a1dcea5d5c",
+      "tested_sha": "fa5523175ac494cfbd13bbf89bf06b3ec91835a6",
+      "recorded_metric_entries": 2,
+      "entries_with_assets": 0,
+      "recorded_asset_rows": 0,
+      "asset_trace": "NOT_RUN",
+      "reason": "assets fields absent; no per-run execution trace inferred"
+    },
+    {
+      "file": "policy-diagnostic-run.json",
+      "file_sha256": "170dd33d3142517529cec4e0a26333e5f5a730123e2f9d625f6cca1d70fb182b",
+      "tested_sha": "fa5523175ac494cfbd13bbf89bf06b3ec91835a6",
+      "recorded_metric_entries": 1,
+      "entries_with_assets": 0,
+      "recorded_asset_rows": 0,
+      "asset_trace": "NOT_RUN",
+      "reason": "assets fields absent; no per-run execution trace inferred"
+    },
+    {
+      "file": "public.json",
+      "file_sha256": "fb186c30e0b53a58f9b31d819dc67ffe60042273bc7b59d6e777b985b559c3e6",
+      "tested_sha": "fa5523175ac494cfbd13bbf89bf06b3ec91835a6",
+      "recorded_metric_entries": 2,
+      "entries_with_assets": 2,
+      "recorded_asset_rows": 12,
+      "asset_trace": "MEASURED",
+      "reason": null
+    },
+    {
+      "file": "quota.json",
+      "file_sha256": "94ddf1dfd81e6256cc4532d58826d6f9098d26b42f4e6a2494584c29513c4638",
+      "tested_sha": "fa5523175ac494cfbd13bbf89bf06b3ec91835a6",
+      "recorded_metric_entries": 1,
+      "entries_with_assets": 1,
+      "recorded_asset_rows": 6,
+      "asset_trace": "MEASURED",
+      "reason": null
+    },
+    {
+      "file": "recovery.json",
+      "file_sha256": "b9bbc53a8d1b947219266b19053892fb6624c96047bf1bbab29c939091a98ca1",
+      "tested_sha": "fa5523175ac494cfbd13bbf89bf06b3ec91835a6",
+      "recorded_metric_entries": 2,
+      "entries_with_assets": 2,
+      "recorded_asset_rows": 12,
+      "asset_trace": "MEASURED",
+      "reason": null
+    },
+    {
+      "file": "stock-cleanup.json",
+      "file_sha256": "26975ca3e9b243f357caeed82b684d1cd4e73a3810deb6bc086d12e35c89b1be",
+      "tested_sha": "fa5523175ac494cfbd13bbf89bf06b3ec91835a6",
+      "recorded_metric_entries": 2,
+      "entries_with_assets": 2,
+      "recorded_asset_rows": 24,
+      "asset_trace": "MEASURED",
+      "reason": null
+    },
+    {
+      "file": "support.json",
+      "file_sha256": "dda07a965bc9d51192f3999ed63a10d71e4cc00af6353f81e203093498f17933",
+      "tested_sha": "fa5523175ac494cfbd13bbf89bf06b3ec91835a6",
+      "recorded_metric_entries": 6,
+      "entries_with_assets": 0,
+      "recorded_asset_rows": 0,
+      "asset_trace": "NOT_RUN",
+      "reason": "assets fields absent; no per-run execution trace inferred"
+    }
+  ],
+  "module_bundle_manifest_basis": [
+    {
+      "manifest": "modules/_bundled/raonslab-travel_lab/module.json",
+      "manifest_sha256": "d29edfe589684e670d39da6603aa24948ad892a4a1779c5c5bf4e733b060ecdf",
+      "version": "0.1.2",
+      "declared_assets": null,
+      "declared_loading": null,
+      "bundle_contribution": "none: no assets declaration"
+    },
+    {
+      "manifest": "modules/_bundled/sirsoft-board/module.json",
+      "manifest_sha256": "dc7c920f20d0a4df99fea17e4f1871e3021ad5ac64a9e4844644b26ed9b3385a",
+      "version": "1.1.2",
+      "declared_assets": null,
+      "declared_loading": null,
+      "bundle_contribution": "none: no assets declaration"
+    },
+    {
+      "manifest": "modules/_bundled/sirsoft-ecommerce/module.json",
+      "manifest_sha256": "67d214120b6b87a2882e294136503761e62311060a418210dab89c227246a656",
+      "version": "1.2.1",
+      "declared_assets": {
+        "js": {
+          "entry": "resources/js/index.ts",
+          "output": "dist/js/module.iife.js"
+        },
+        "css": {
+          "entry": "resources/css/main.css",
+          "output": "dist/css/module.css"
+        },
+        "handlers": true,
+        "static": "resources/assets/"
+      },
+      "declared_loading": {
+        "strategy": "global",
+        "priority": 100
+      },
+      "bundle_contribution": "global ecommerce JS/CSS"
+    },
+    {
+      "manifest": "modules/_bundled/sirsoft-page/module.json",
+      "manifest_sha256": "275a69d4845e35eeb2aa123f3912782fe1e14fca3068e01bd45fe4af70365a1e",
+      "version": "1.1.2",
+      "declared_assets": null,
+      "declared_loading": null,
+      "bundle_contribution": "none: no assets declaration"
+    }
+  ],
+  "native_bundle_algorithm_source": "app/Services/ExtensionBundleService.php::getOrderedGlobalAssetPaths/mergeBundle/mergeJs/mergeCss",
+  "native_css_algorithm_source": "app/Support/AssetCssUrlRewriter.php plus ServesRewritableCssAssets::rewritableAssetResponse",
+  "css_version_basis": "public before shell URLs v=1791564974; browser records omit query but observed CSS SHA matches explicitly rewritten fixed source at this version. No literal source equality claimed for these 4 vendor CSS responses.",
+  "summary": {
+    "unique_asset_paths": 12,
+    "pass_paths": 12,
+    "fail_paths": 0,
+    "unbound_paths": 0,
+    "all_instrumented_executed_paths_bound": true,
+    "literal_paths": 8,
+    "native_css_rewrite_paths": 4,
+    "recorded_asset_rows": 498,
+    "recorded_rows_unit": "path/hash rows deduplicated per browser context; evidence report copies may overlap; not unique HTTP requests",
+    "unique_request_count": "NOT_MEASURED",
+    "recorded_metric_entries": 79,
+    "recorded_entries_with_assets": 57,
+    "reports_with_metric_arrays": 32,
+    "unique_browser_context_count": "NOT_MEASURED"
+  },
+  "assets": [
+    {
+      "path": "/api/modules/bundle.css",
+      "binding": "PASS",
+      "fixed_git_path": "modules/_bundled/sirsoft-ecommerce/dist/css/module.css",
+      "expected_served_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "binding_method": "Pinned ExtensionBundleService one global ecommerce CSS segment; source empty, CSS join delimiter \\n has no intersegment occurrence; legitimate empty declared CSS is literal fixed Git bytes",
+      "literal_equal": true,
+      "installed_pinned_binding": true,
+      "after_installed_pinned_binding": true,
+      "recorded_rows": 57,
+      "measured_bytes": [
+        0
+      ],
+      "measured_sha256": [
+        "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      ],
+      "measured_status": [
+        200
+      ],
+      "observed_in": [
+        "access-decline.json",
+        "catalogue-diagnostic-run.json",
+        "catalogue-page1-harness.json",
+        "catalogue.json",
+        "inactive-exact-date-failed.json",
+        "inactive-row-selection-harness.json",
+        "inactive-ui-toggle-witness.json",
+        "inactive.json",
+        "issued-token-cleanup.json",
+        "journey-1440-menu-harness.json",
+        "journey-1440.json",
+        "journey-initial-harness.json",
+        "journey.json",
+        "menu-diagnostic-run.json",
+        "mobile-inspection-final.json",
+        "multiitem.json",
+        "owner-recovery.json",
+        "public.json",
+        "quota.json",
+        "recovery.json",
+        "stock-cleanup.json"
+      ]
+    },
+    {
+      "path": "/api/modules/bundle.js",
+      "binding": "PASS",
+      "fixed_git_path": "modules/_bundled/sirsoft-ecommerce/dist/js/module.iife.js",
+      "expected_served_sha256": "a69dc60260eef16feb33b5433426d974164fcc5a9b15d3577a710a9212b9f2ce",
+      "binding_method": "Pinned ExtensionBundleService priority100 single global ecommerce segment; JS join delimiter \\n;\\n applied between segments only, so this one-segment bundle is literal fixed Git bytes",
+      "literal_equal": true,
+      "installed_pinned_binding": true,
+      "after_installed_pinned_binding": true,
+      "recorded_rows": 57,
+      "measured_bytes": [
+        153543
+      ],
+      "measured_sha256": [
+        "a69dc60260eef16feb33b5433426d974164fcc5a9b15d3577a710a9212b9f2ce"
+      ],
+      "measured_status": [
+        200
+      ],
+      "observed_in": [
+        "access-decline.json",
+        "catalogue-diagnostic-run.json",
+        "catalogue-page1-harness.json",
+        "catalogue.json",
+        "inactive-exact-date-failed.json",
+        "inactive-row-selection-harness.json",
+        "inactive-ui-toggle-witness.json",
+        "inactive.json",
+        "issued-token-cleanup.json",
+        "journey-1440-menu-harness.json",
+        "journey-1440.json",
+        "journey-initial-harness.json",
+        "journey.json",
+        "menu-diagnostic-run.json",
+        "mobile-inspection-final.json",
+        "multiitem.json",
+        "owner-recovery.json",
+        "public.json",
+        "quota.json",
+        "recovery.json",
+        "stock-cleanup.json"
+      ]
+    },
+    {
+      "path": "/api/templates/assets/raonslab-travel_lab/css/components.css",
+      "binding": "PASS",
+      "fixed_git_path": "templates/_bundled/raonslab-travel_lab/dist/css/components.css",
+      "expected_served_sha256": "e340b3bfcf22be2ef56f7d11a8f9bf2fc3563439f908628ab044931b463dce66",
+      "binding_method": "Pinned AssetCssUrlRewriter relative url()/@import rewrite; public extension URL mode observed",
+      "literal_equal": true,
+      "installed_pinned_binding": true,
+      "after_installed_pinned_binding": true,
+      "recorded_rows": 57,
+      "measured_bytes": [
+        47750
+      ],
+      "measured_sha256": [
+        "e340b3bfcf22be2ef56f7d11a8f9bf2fc3563439f908628ab044931b463dce66"
+      ],
+      "measured_status": [
+        200
+      ],
+      "observed_in": [
+        "access-decline.json",
+        "catalogue-diagnostic-run.json",
+        "catalogue-page1-harness.json",
+        "catalogue.json",
+        "inactive-exact-date-failed.json",
+        "inactive-row-selection-harness.json",
+        "inactive-ui-toggle-witness.json",
+        "inactive.json",
+        "issued-token-cleanup.json",
+        "journey-1440-menu-harness.json",
+        "journey-1440.json",
+        "journey-initial-harness.json",
+        "journey.json",
+        "menu-diagnostic-run.json",
+        "mobile-inspection-final.json",
+        "multiitem.json",
+        "owner-recovery.json",
+        "public.json",
+        "quota.json",
+        "recovery.json",
+        "stock-cleanup.json"
+      ]
+    },
+    {
+      "path": "/api/templates/assets/raonslab-travel_lab/js/components.iife.js",
+      "binding": "PASS",
+      "fixed_git_path": "templates/_bundled/raonslab-travel_lab/dist/js/components.iife.js",
+      "expected_served_sha256": "9cc99d8d8db0161cfc5f537531eb16f00d1a7ca272fd0b31824823185f46b390",
+      "binding_method": "literal fixed Git bytes",
+      "literal_equal": true,
+      "installed_pinned_binding": true,
+      "after_installed_pinned_binding": true,
+      "recorded_rows": 57,
+      "measured_bytes": [
+        38218
+      ],
+      "measured_sha256": [
+        "9cc99d8d8db0161cfc5f537531eb16f00d1a7ca272fd0b31824823185f46b390"
+      ],
+      "measured_status": [
+        200
+      ],
+      "observed_in": [
+        "access-decline.json",
+        "catalogue-diagnostic-run.json",
+        "catalogue-page1-harness.json",
+        "catalogue.json",
+        "inactive-exact-date-failed.json",
+        "inactive-row-selection-harness.json",
+        "inactive-ui-toggle-witness.json",
+        "inactive.json",
+        "issued-token-cleanup.json",
+        "journey-1440-menu-harness.json",
+        "journey-1440.json",
+        "journey-initial-harness.json",
+        "journey.json",
+        "menu-diagnostic-run.json",
+        "mobile-inspection-final.json",
+        "multiitem.json",
+        "owner-recovery.json",
+        "public.json",
+        "quota.json",
+        "recovery.json",
+        "stock-cleanup.json"
+      ]
+    },
+    {
+      "path": "/api/templates/assets/raonslab-travel_lab/vendor/font-awesome/6.4.0/css/all.inlined.css",
+      "binding": "PASS",
+      "fixed_git_path": "templates/_bundled/raonslab-travel_lab/dist/vendor/font-awesome/6.4.0/css/all.inlined.css",
+      "expected_served_sha256": "27fe189610ca6f0192845c2813ecb90349f67d3eb61cbbc21791f1d09fd7992e",
+      "binding_method": "Pinned AssetCssUrlRewriter relative url()/@import rewrite; public extension URL mode observed",
+      "literal_equal": false,
+      "installed_pinned_binding": true,
+      "after_installed_pinned_binding": true,
+      "recorded_rows": 57,
+      "measured_bytes": [
+        480419
+      ],
+      "measured_sha256": [
+        "27fe189610ca6f0192845c2813ecb90349f67d3eb61cbbc21791f1d09fd7992e"
+      ],
+      "measured_status": [
+        200
+      ],
+      "observed_in": [
+        "access-decline.json",
+        "catalogue-diagnostic-run.json",
+        "catalogue-page1-harness.json",
+        "catalogue.json",
+        "inactive-exact-date-failed.json",
+        "inactive-row-selection-harness.json",
+        "inactive-ui-toggle-witness.json",
+        "inactive.json",
+        "issued-token-cleanup.json",
+        "journey-1440-menu-harness.json",
+        "journey-1440.json",
+        "journey-initial-harness.json",
+        "journey.json",
+        "menu-diagnostic-run.json",
+        "mobile-inspection-final.json",
+        "multiitem.json",
+        "owner-recovery.json",
+        "public.json",
+        "quota.json",
+        "recovery.json",
+        "stock-cleanup.json"
+      ]
+    },
+    {
+      "path": "/api/templates/assets/sirsoft-admin_basic/css/components.css",
+      "binding": "PASS",
+      "fixed_git_path": "templates/_bundled/sirsoft-admin_basic/dist/css/components.css",
+      "expected_served_sha256": "3aafccf49bb7fc4521c2bb95ab2dcb550fc04b89848618aca6232fecfe10692c",
+      "binding_method": "Pinned AssetCssUrlRewriter relative url()/@import rewrite; public extension URL mode observed",
+      "literal_equal": true,
+      "installed_pinned_binding": true,
+      "after_installed_pinned_binding": true,
+      "recorded_rows": 26,
+      "measured_bytes": [
+        592888
+      ],
+      "measured_sha256": [
+        "3aafccf49bb7fc4521c2bb95ab2dcb550fc04b89848618aca6232fecfe10692c"
+      ],
+      "measured_status": [
+        200
+      ],
+      "observed_in": [
+        "access-decline.json",
+        "catalogue-diagnostic-run.json",
+        "catalogue-page1-harness.json",
+        "catalogue.json",
+        "inactive-exact-date-failed.json",
+        "inactive-row-selection-harness.json",
+        "inactive-ui-toggle-witness.json",
+        "inactive.json",
+        "issued-token-cleanup.json",
+        "journey-1440-menu-harness.json",
+        "journey-1440.json",
+        "journey-initial-harness.json",
+        "journey.json",
+        "menu-diagnostic-run.json",
+        "multiitem.json",
+        "stock-cleanup.json"
+      ]
+    },
+    {
+      "path": "/api/templates/assets/sirsoft-admin_basic/js/components.iife.js",
+      "binding": "PASS",
+      "fixed_git_path": "templates/_bundled/sirsoft-admin_basic/dist/js/components.iife.js",
+      "expected_served_sha256": "d25eb47e1308a83a456b17fe86953fec8fefc46a38769c0c225be72b0028e6c9",
+      "binding_method": "literal fixed Git bytes",
+      "literal_equal": true,
+      "installed_pinned_binding": true,
+      "after_installed_pinned_binding": true,
+      "recorded_rows": 26,
+      "measured_bytes": [
+        728609
+      ],
+      "measured_sha256": [
+        "d25eb47e1308a83a456b17fe86953fec8fefc46a38769c0c225be72b0028e6c9"
+      ],
+      "measured_status": [
+        200
+      ],
+      "observed_in": [
+        "access-decline.json",
+        "catalogue-diagnostic-run.json",
+        "catalogue-page1-harness.json",
+        "catalogue.json",
+        "inactive-exact-date-failed.json",
+        "inactive-row-selection-harness.json",
+        "inactive-ui-toggle-witness.json",
+        "inactive.json",
+        "issued-token-cleanup.json",
+        "journey-1440-menu-harness.json",
+        "journey-1440.json",
+        "journey-initial-harness.json",
+        "journey.json",
+        "menu-diagnostic-run.json",
+        "multiitem.json",
+        "stock-cleanup.json"
+      ]
+    },
+    {
+      "path": "/api/templates/assets/sirsoft-admin_basic/vendor/flag-icons/7.2.3/css/flag-icons.min.css",
+      "binding": "PASS",
+      "fixed_git_path": "templates/_bundled/sirsoft-admin_basic/dist/vendor/flag-icons/7.2.3/css/flag-icons.min.css",
+      "expected_served_sha256": "50e3ec2964af74364cb0ed6dfe779f24a45881f3af926eaa0f1686e925746b4e",
+      "binding_method": "Pinned AssetCssUrlRewriter relative url()/@import rewrite; public extension URL mode observed",
+      "literal_equal": false,
+      "installed_pinned_binding": true,
+      "after_installed_pinned_binding": true,
+      "recorded_rows": 26,
+      "measured_bytes": [
+        70024
+      ],
+      "measured_sha256": [
+        "50e3ec2964af74364cb0ed6dfe779f24a45881f3af926eaa0f1686e925746b4e"
+      ],
+      "measured_status": [
+        200
+      ],
+      "observed_in": [
+        "access-decline.json",
+        "catalogue-diagnostic-run.json",
+        "catalogue-page1-harness.json",
+        "catalogue.json",
+        "inactive-exact-date-failed.json",
+        "inactive-row-selection-harness.json",
+        "inactive-ui-toggle-witness.json",
+        "inactive.json",
+        "issued-token-cleanup.json",
+        "journey-1440-menu-harness.json",
+        "journey-1440.json",
+        "journey-initial-harness.json",
+        "journey.json",
+        "menu-diagnostic-run.json",
+        "multiitem.json",
+        "stock-cleanup.json"
+      ]
+    },
+    {
+      "path": "/api/templates/assets/sirsoft-admin_basic/vendor/font-awesome/6.4.0/css/all.inlined.css",
+      "binding": "PASS",
+      "fixed_git_path": "templates/_bundled/sirsoft-admin_basic/dist/vendor/font-awesome/6.4.0/css/all.inlined.css",
+      "expected_served_sha256": "63938ac8c5f4dcf3c58dca78ab949f05455449fffbd979abc4a758e2a326aab8",
+      "binding_method": "Pinned AssetCssUrlRewriter relative url()/@import rewrite; public extension URL mode observed",
+      "literal_equal": false,
+      "installed_pinned_binding": true,
+      "after_installed_pinned_binding": true,
+      "recorded_rows": 26,
+      "measured_bytes": [
+        480419
+      ],
+      "measured_sha256": [
+        "63938ac8c5f4dcf3c58dca78ab949f05455449fffbd979abc4a758e2a326aab8"
+      ],
+      "measured_status": [
+        200
+      ],
+      "observed_in": [
+        "access-decline.json",
+        "catalogue-diagnostic-run.json",
+        "catalogue-page1-harness.json",
+        "catalogue.json",
+        "inactive-exact-date-failed.json",
+        "inactive-row-selection-harness.json",
+        "inactive-ui-toggle-witness.json",
+        "inactive.json",
+        "issued-token-cleanup.json",
+        "journey-1440-menu-harness.json",
+        "journey-1440.json",
+        "journey-initial-harness.json",
+        "journey.json",
+        "menu-diagnostic-run.json",
+        "multiitem.json",
+        "stock-cleanup.json"
+      ]
+    },
+    {
+      "path": "/api/templates/assets/sirsoft-admin_basic/vendor/pretendard/1.3.9/pretendard-variable.css",
+      "binding": "PASS",
+      "fixed_git_path": "templates/_bundled/sirsoft-admin_basic/dist/vendor/pretendard/1.3.9/pretendard-variable.css",
+      "expected_served_sha256": "f6c4f516434c1d94a76f0fd6fae907f66a618da84b2eb5f12dc83fe1a42f58d6",
+      "binding_method": "Pinned AssetCssUrlRewriter relative url()/@import rewrite; public extension URL mode observed",
+      "literal_equal": false,
+      "installed_pinned_binding": true,
+      "after_installed_pinned_binding": true,
+      "recorded_rows": 26,
+      "measured_bytes": [
+        558
+      ],
+      "measured_sha256": [
+        "f6c4f516434c1d94a76f0fd6fae907f66a618da84b2eb5f12dc83fe1a42f58d6"
+      ],
+      "measured_status": [
+        200
+      ],
+      "observed_in": [
+        "access-decline.json",
+        "catalogue-diagnostic-run.json",
+        "catalogue-page1-harness.json",
+        "catalogue.json",
+        "inactive-exact-date-failed.json",
+        "inactive-row-selection-harness.json",
+        "inactive-ui-toggle-witness.json",
+        "inactive.json",
+        "issued-token-cleanup.json",
+        "journey-1440-menu-harness.json",
+        "journey-1440.json",
+        "journey-initial-harness.json",
+        "journey.json",
+        "menu-diagnostic-run.json",
+        "multiitem.json",
+        "stock-cleanup.json"
+      ]
+    },
+    {
+      "path": "/api/templates/assets/sirsoft-admin_basic/vendor/pretendard/1.3.9/woff2/PretendardVariable.woff2",
+      "binding": "PASS",
+      "fixed_git_path": "templates/_bundled/sirsoft-admin_basic/dist/vendor/pretendard/1.3.9/woff2/PretendardVariable.woff2",
+      "expected_served_sha256": "9599f12fd42fc0bce1cd50b47a0c022e108d7aa64dd0d1bb0ed44f3282d900b4",
+      "binding_method": "literal fixed Git font bytes",
+      "literal_equal": true,
+      "installed_pinned_binding": true,
+      "after_installed_pinned_binding": true,
+      "recorded_rows": 26,
+      "measured_bytes": [
+        2057688
+      ],
+      "measured_sha256": [
+        "9599f12fd42fc0bce1cd50b47a0c022e108d7aa64dd0d1bb0ed44f3282d900b4"
+      ],
+      "measured_status": [
+        200
+      ],
+      "observed_in": [
+        "access-decline.json",
+        "catalogue-diagnostic-run.json",
+        "catalogue-page1-harness.json",
+        "catalogue.json",
+        "inactive-exact-date-failed.json",
+        "inactive-row-selection-harness.json",
+        "inactive-ui-toggle-witness.json",
+        "inactive.json",
+        "issued-token-cleanup.json",
+        "journey-1440-menu-harness.json",
+        "journey-1440.json",
+        "journey-initial-harness.json",
+        "journey.json",
+        "menu-diagnostic-run.json",
+        "multiitem.json",
+        "stock-cleanup.json"
+      ]
+    },
+    {
+      "path": "/build/core/template-engine.min.js",
+      "binding": "PASS",
+      "fixed_git_path": "public/build/core/template-engine.min.js",
+      "expected_served_sha256": "be2d01f3be637afd127f9c62c2fed35cc3de2cabd5da14a7734635ae1798a414",
+      "binding_method": "literal fixed Git bytes",
+      "literal_equal": true,
+      "installed_pinned_binding": true,
+      "after_installed_pinned_binding": true,
+      "recorded_rows": 57,
+      "measured_bytes": [
+        819067
+      ],
+      "measured_sha256": [
+        "be2d01f3be637afd127f9c62c2fed35cc3de2cabd5da14a7734635ae1798a414"
+      ],
+      "measured_status": [
+        200
+      ],
+      "observed_in": [
+        "access-decline.json",
+        "catalogue-diagnostic-run.json",
+        "catalogue-page1-harness.json",
+        "catalogue.json",
+        "inactive-exact-date-failed.json",
+        "inactive-row-selection-harness.json",
+        "inactive-ui-toggle-witness.json",
+        "inactive.json",
+        "issued-token-cleanup.json",
+        "journey-1440-menu-harness.json",
+        "journey-1440.json",
+        "journey-initial-harness.json",
+        "journey.json",
+        "menu-diagnostic-run.json",
+        "mobile-inspection-final.json",
+        "multiitem.json",
+        "owner-recovery.json",
+        "public.json",
+        "quota.json",
+        "recovery.json",
+        "stock-cleanup.json"
+      ]
+    }
+  ],
+  "limits": [
+    "498 recorded asset rows are context-level deduplicated path/hash observations, not unique requests; report files can overlap. Recorded metric entries also may represent copied contexts.",
+    "support.json asset capture absent: per-run executed asset trace NOT_RUN",
+    "Some earlier browser setup/admin runs predate asset metrics instrumentation; do not claim those independently traced",
+    "Browser fetched font/assets observed here are measured network responses; inline Font Awesome data resources have no separate GET",
+    "Source cache/environment/vendor semantics, hosted/native CI and canonical Validation remain NOT_RUN",
+    "Lead owns after-cleanup source hash collection; this review does not substitute after source check",
+    "Final refresh includes failed-harness/diagnostic and successful-run metric reports; recording an asset does not upgrade its containing functional test result."
+  ],
+  "initial_sample_note": {
+    "observed_utc": "2026-10-09T17:44:28.353781+00:00",
+    "recorded_asset_rows": 102,
+    "unique_asset_paths": 12,
+    "sample_files": [
+      "public.json",
+      "journey.json",
+      "journey-initial-harness.json",
+      "support.json",
+      "catalogue.json"
+    ],
+    "unit_note": "path/hash rows deduplicated per browser context; evidence report copies may overlap; not unique HTTP requests"
+  },
+  "source_after_verification": {
+    "before_after_identical": true,
+    "during_after_entrypoints_identical": true,
+    "during_after_languages_identical": true,
+    "required_runtime_binding": {
+      "before": true,
+      "after": true
+    }
+  }
+}
