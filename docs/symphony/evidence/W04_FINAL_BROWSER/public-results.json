@@ -1,0 +1,744 @@
+{
+  "target": "1052e3fb4bc4cccabb51b8c538116c78655f345b",
+  "actualHead": "1052e3fb4bc4cccabb51b8c538116c78655f345b",
+  "tree": "f18fa2056a031353c889785d768f87824e3083f5",
+  "base": "http://127.0.0.1:18871",
+  "started": "2026-10-09T15:57:16.856Z",
+  "browser": "Chromium",
+  "authentication": "guest",
+  "mutations": 0,
+  "scenarios": [
+    {
+      "width": 390,
+      "name": "home-real-facets-ko-layout",
+      "status": "PASS",
+      "detail": {
+        "regions": [
+          "부산",
+          "강원",
+          "제주",
+          "서울"
+        ],
+        "themes": [
+          "도시",
+          "문화",
+          "자연",
+          "쉼·힐링"
+        ]
+      }
+    },
+    {
+      "width": 390,
+      "name": "category-click-real-results",
+      "status": "PASS",
+      "detail": {
+        "count": 12
+      }
+    },
+    {
+      "width": 390,
+      "name": "theme-click-real-results",
+      "status": "PASS",
+      "detail": {
+        "count": 12
+      }
+    },
+    {
+      "width": 390,
+      "name": "hero-search-real-results",
+      "status": "PASS",
+      "detail": {
+        "count": 12
+      }
+    },
+    {
+      "width": 390,
+      "name": "combined-region-theme-date-price-filter",
+      "status": "PASS",
+      "detail": {
+        "query": "?region=jeju&theme=nature&date_from=2026-11-01&date_to=2026-11-08&min_price=180000&max_price=210000",
+        "count": 1
+      }
+    },
+    {
+      "width": 390,
+      "name": "filter-reset",
+      "status": "PASS",
+      "detail": {
+        "count": 12
+      }
+    },
+    {
+      "width": 390,
+      "name": "sort-price_asc",
+      "status": "PASS",
+      "detail": {
+        "order": [
+          56,
+          57,
+          58,
+          59,
+          60,
+          61,
+          62,
+          63,
+          64,
+          65,
+          66,
+          67
+        ]
+      }
+    },
+    {
+      "width": 390,
+      "name": "sort-price_desc",
+      "status": "PASS",
+      "detail": {
+        "order": [
+          2,
+          4,
+          6,
+          1,
+          5,
+          3,
+          7,
+          8,
+          54,
+          56,
+          57,
+          58
+        ]
+      }
+    },
+    {
+      "width": 390,
+      "name": "sort-departure_asc",
+      "status": "PASS",
+      "detail": {
+        "order": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          54,
+          56,
+          57,
+          58
+        ]
+      }
+    },
+    {
+      "width": 390,
+      "name": "sort-recommended",
+      "status": "PASS",
+      "detail": {
+        "order": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          54,
+          56,
+          57,
+          58
+        ]
+      }
+    },
+    {
+      "width": 390,
+      "name": "pagination",
+      "status": "PASS",
+      "detail": {
+        "fixtureRole": "Native admin API created OWN synthetic pagination support only; not adminUIcreate verification",
+        "firstIds": [
+          56,
+          57,
+          58,
+          59,
+          60,
+          61,
+          62,
+          63,
+          64,
+          65,
+          66,
+          67
+        ],
+        "secondIds": [
+          68
+        ],
+        "total": 13,
+        "pointer": "touch tap",
+        "reloadPage2": true
+      }
+    },
+    {
+      "width": 390,
+      "name": "detail-itinerary-departure-people-estimate",
+      "status": "FAIL",
+      "error": "expect(locator).toContainText(expected) failed\n\nLocator: getByTestId('itinerary')\nExpected substring: \"1일차\"\nReceived string:    \"일정 한눈에 보기1합성 첫날독립 일정\"\nTimeout: 5000ms\n\nCall log:\n  - Expect \"to.have.text\" with timeout 5000ms\n  - waiting for getByTestId('itinerary')\n    14 × locator resolved to <section data-testid=\"itinerary\" class=\"rounded-2xl border border-slate-200 bg-white shadow-sm p-5 md:p-6\">…</section>\n       - unexpected value \"일정 한눈에 보기1합성 첫날독립 일정\"\n"
+    },
+    {
+      "width": 390,
+      "name": "soldout-disabled",
+      "status": "FAIL",
+      "error": "expect(received).toBeGreaterThan(expected)\n\nExpected: > 0\nReceived:   0"
+    },
+    {
+      "width": 390,
+      "name": "empty-and-reset-action",
+      "status": "PASS"
+    },
+    {
+      "width": 390,
+      "name": "product-not-found-real-404",
+      "status": "PASS"
+    },
+    {
+      "width": 390,
+      "name": "fault-injection-loading-error-retry-real-success",
+      "status": "PASS",
+      "detail": {
+        "faultInjection": "aborted GET catalog after holding response for visible loading; retry then actual HTTP200",
+        "blockedRequests": 1,
+        "recoveredCount": 12
+      }
+    },
+    {
+      "width": 390,
+      "name": "native-navigation-mobile-drawer",
+      "status": "PASS"
+    },
+    {
+      "width": 1440,
+      "name": "home-real-facets-ko-layout",
+      "status": "PASS",
+      "detail": {
+        "regions": [
+          "부산",
+          "강원",
+          "제주",
+          "서울"
+        ],
+        "themes": [
+          "도시",
+          "문화",
+          "자연",
+          "쉼·힐링"
+        ]
+      }
+    },
+    {
+      "width": 1440,
+      "name": "category-click-real-results",
+      "status": "PASS",
+      "detail": {
+        "count": 12
+      }
+    },
+    {
+      "width": 1440,
+      "name": "theme-click-real-results",
+      "status": "PASS",
+      "detail": {
+        "count": 12
+      }
+    },
+    {
+      "width": 1440,
+      "name": "hero-search-real-results",
+      "status": "PASS",
+      "detail": {
+        "count": 12
+      }
+    },
+    {
+      "width": 1440,
+      "name": "combined-region-theme-date-price-filter",
+      "status": "PASS",
+      "detail": {
+        "query": "?region=jeju&theme=nature&date_from=2026-11-01&date_to=2026-11-08&min_price=180000&max_price=210000",
+        "count": 1
+      }
+    },
+    {
+      "width": 1440,
+      "name": "filter-reset",
+      "status": "PASS",
+      "detail": {
+        "count": 12
+      }
+    },
+    {
+      "width": 1440,
+      "name": "sort-price_asc",
+      "status": "PASS",
+      "detail": {
+        "order": [
+          56,
+          57,
+          58,
+          59,
+          60,
+          61,
+          62,
+          63,
+          64,
+          65,
+          66,
+          67
+        ]
+      }
+    },
+    {
+      "width": 1440,
+      "name": "sort-price_desc",
+      "status": "PASS",
+      "detail": {
+        "order": [
+          2,
+          4,
+          6,
+          1,
+          5,
+          3,
+          7,
+          8,
+          54,
+          56,
+          57,
+          58
+        ]
+      }
+    },
+    {
+      "width": 1440,
+      "name": "sort-departure_asc",
+      "status": "PASS",
+      "detail": {
+        "order": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          54,
+          56,
+          57,
+          58
+        ]
+      }
+    },
+    {
+      "width": 1440,
+      "name": "sort-recommended",
+      "status": "PASS",
+      "detail": {
+        "order": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          54,
+          56,
+          57,
+          58
+        ]
+      }
+    },
+    {
+      "width": 1440,
+      "name": "pagination",
+      "status": "PASS",
+      "detail": {
+        "fixtureRole": "Native admin API created OWN synthetic pagination support only; not adminUIcreate verification",
+        "firstIds": [
+          56,
+          57,
+          58,
+          59,
+          60,
+          61,
+          62,
+          63,
+          64,
+          65,
+          66,
+          67
+        ],
+        "secondIds": [
+          68
+        ],
+        "total": 13,
+        "pointer": "mouse click",
+        "reloadPage2": true
+      }
+    },
+    {
+      "width": 1440,
+      "name": "detail-itinerary-departure-people-estimate",
+      "status": "FAIL",
+      "error": "expect(locator).toContainText(expected) failed\n\nLocator: getByTestId('itinerary')\nExpected substring: \"1일차\"\nReceived string:    \"일정 한눈에 보기1합성 첫날독립 일정\"\nTimeout: 5000ms\n\nCall log:\n  - Expect \"to.have.text\" with timeout 5000ms\n  - waiting for getByTestId('itinerary')\n    14 × locator resolved to <section data-testid=\"itinerary\" class=\"rounded-2xl border border-slate-200 bg-white shadow-sm p-5 md:p-6\">…</section>\n       - unexpected value \"일정 한눈에 보기1합성 첫날독립 일정\"\n"
+    },
+    {
+      "width": 1440,
+      "name": "soldout-disabled",
+      "status": "FAIL",
+      "error": "expect(received).toBe(expected) // Object.is equality\n\nExpected: 200\nReceived: 404"
+    },
+    {
+      "width": 1440,
+      "name": "empty-and-reset-action",
+      "status": "PASS"
+    },
+    {
+      "width": 1440,
+      "name": "product-not-found-real-404",
+      "status": "PASS"
+    },
+    {
+      "width": 1440,
+      "name": "fault-injection-loading-error-retry-real-success",
+      "status": "PASS",
+      "detail": {
+        "faultInjection": "aborted GET catalog after holding response for visible loading; retry then actual HTTP200",
+        "blockedRequests": 1,
+        "recoveredCount": 12
+      }
+    },
+    {
+      "width": 1440,
+      "name": "native-navigation-mobile-drawer",
+      "status": "PASS"
+    }
+  ],
+  "viewports": [
+    {
+      "width": 390,
+      "pageErrors": [],
+      "consoleErrors": [
+        "Failed to load resource: the server responded with a status of 404 (Not Found)",
+        "Failed to load resource: the server responded with a status of 404 (Not Found)",
+        "Failed to load resource: net::ERR_FAILED"
+      ],
+      "consoleWarnings": [],
+      "failedRequests": [
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog",
+          "error": "net::ERR_FAILED"
+        }
+      ],
+      "httpErrors": [
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog/999999999/departures",
+          "status": 404
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog/999999999",
+          "status": 404
+        }
+      ],
+      "overflows": [
+        {
+          "name": "home",
+          "viewport": 390,
+          "document": 390,
+          "body": 390
+        },
+        {
+          "name": "category",
+          "viewport": 390,
+          "document": 390,
+          "body": 390
+        },
+        {
+          "name": "filters",
+          "viewport": 390,
+          "document": 390,
+          "body": 390
+        },
+        {
+          "name": "sort",
+          "viewport": 390,
+          "document": 390,
+          "body": 390
+        },
+        {
+          "name": "sort",
+          "viewport": 390,
+          "document": 390,
+          "body": 390
+        },
+        {
+          "name": "sort",
+          "viewport": 390,
+          "document": 390,
+          "body": 390
+        },
+        {
+          "name": "sort",
+          "viewport": 390,
+          "document": 390,
+          "body": 390
+        },
+        {
+          "name": "pagination",
+          "viewport": 390,
+          "document": 390,
+          "body": 390
+        },
+        {
+          "name": "empty-reset",
+          "viewport": 390,
+          "document": 390,
+          "body": 390
+        },
+        {
+          "name": "not-found",
+          "viewport": 390,
+          "document": 390,
+          "body": 390
+        },
+        {
+          "name": "retry-recovered",
+          "viewport": 390,
+          "document": 390,
+          "body": 390
+        },
+        {
+          "name": "navigation",
+          "viewport": 390,
+          "document": 390,
+          "body": 390
+        }
+      ],
+      "consoleErrorCount": 3,
+      "pageErrorCount": 0,
+      "assets": [
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/vendor/font-awesome/6.4.0/css/all.inlined.css",
+          "status": 200,
+          "sha256": "f942d9c98f747b66ddab55a97644354a1903aa30341439472f015812cafcb56b",
+          "bytes": 480419
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/css/components.css",
+          "status": 200,
+          "sha256": "e340b3bfcf22be2ef56f7d11a8f9bf2fc3563439f908628ab044931b463dce66",
+          "bytes": 47750
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/js/components.iife.js",
+          "status": 200,
+          "sha256": "9cc99d8d8db0161cfc5f537531eb16f00d1a7ca272fd0b31824823185f46b390",
+          "bytes": 38218
+        },
+        {
+          "path": "/build/core/template-engine.min.js",
+          "status": 200,
+          "sha256": "be2d01f3be637afd127f9c62c2fed35cc3de2cabd5da14a7734635ae1798a414",
+          "bytes": 819067
+        },
+        {
+          "path": "/api/modules/bundle.css",
+          "status": 200,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0
+        },
+        {
+          "path": "/api/modules/bundle.js",
+          "status": 200,
+          "sha256": "a69dc60260eef16feb33b5433426d974164fcc5a9b15d3577a710a9212b9f2ce",
+          "bytes": 153543
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "pageErrors": [],
+      "consoleErrors": [
+        "Failed to load resource: the server responded with a status of 404 (Not Found)",
+        "Failed to load resource: the server responded with a status of 404 (Not Found)",
+        "Failed to load resource: the server responded with a status of 404 (Not Found)",
+        "Failed to load resource: the server responded with a status of 404 (Not Found)",
+        "Failed to load resource: net::ERR_FAILED"
+      ],
+      "consoleWarnings": [],
+      "failedRequests": [
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog",
+          "error": "net::ERR_FAILED"
+        }
+      ],
+      "httpErrors": [
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog/55",
+          "status": 404
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog/55/departures",
+          "status": 404
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog/999999999/departures",
+          "status": 404
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog/999999999",
+          "status": 404
+        }
+      ],
+      "overflows": [
+        {
+          "name": "home",
+          "viewport": 1440,
+          "document": 1440,
+          "body": 1440
+        },
+        {
+          "name": "category",
+          "viewport": 1440,
+          "document": 1440,
+          "body": 1440
+        },
+        {
+          "name": "filters",
+          "viewport": 1440,
+          "document": 1440,
+          "body": 1440
+        },
+        {
+          "name": "sort",
+          "viewport": 1440,
+          "document": 1440,
+          "body": 1440
+        },
+        {
+          "name": "sort",
+          "viewport": 1440,
+          "document": 1440,
+          "body": 1440
+        },
+        {
+          "name": "sort",
+          "viewport": 1440,
+          "document": 1440,
+          "body": 1440
+        },
+        {
+          "name": "sort",
+          "viewport": 1440,
+          "document": 1440,
+          "body": 1440
+        },
+        {
+          "name": "pagination",
+          "viewport": 1440,
+          "document": 1440,
+          "body": 1440
+        },
+        {
+          "name": "soldout-detail",
+          "viewport": 1440,
+          "document": 1440,
+          "body": 1440
+        },
+        {
+          "name": "empty-reset",
+          "viewport": 1440,
+          "document": 1440,
+          "body": 1440
+        },
+        {
+          "name": "not-found",
+          "viewport": 1440,
+          "document": 1440,
+          "body": 1440
+        },
+        {
+          "name": "retry-recovered",
+          "viewport": 1440,
+          "document": 1440,
+          "body": 1440
+        },
+        {
+          "name": "navigation",
+          "viewport": 1440,
+          "document": 1440,
+          "body": 1440
+        }
+      ],
+      "consoleErrorCount": 5,
+      "pageErrorCount": 0,
+      "assets": [
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/js/components.iife.js",
+          "status": 200,
+          "sha256": "9cc99d8d8db0161cfc5f537531eb16f00d1a7ca272fd0b31824823185f46b390",
+          "bytes": 38218
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/vendor/font-awesome/6.4.0/css/all.inlined.css",
+          "status": 200,
+          "sha256": "f942d9c98f747b66ddab55a97644354a1903aa30341439472f015812cafcb56b",
+          "bytes": 480419
+        },
+        {
+          "path": "/build/core/template-engine.min.js",
+          "status": 200,
+          "sha256": "be2d01f3be637afd127f9c62c2fed35cc3de2cabd5da14a7734635ae1798a414",
+          "bytes": 819067
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/css/components.css",
+          "status": 200,
+          "sha256": "e340b3bfcf22be2ef56f7d11a8f9bf2fc3563439f908628ab044931b463dce66",
+          "bytes": 47750
+        },
+        {
+          "path": "/api/modules/bundle.css",
+          "status": 200,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0
+        },
+        {
+          "path": "/api/modules/bundle.js",
+          "status": 200,
+          "sha256": "a69dc60260eef16feb33b5433426d974164fcc5a9b15d3577a710a9212b9f2ce",
+          "bytes": 153543
+        }
+      ]
+    }
+  ],
+  "limitations": [],
+  "finished": "2026-10-09T15:59:13.825Z",
+  "durationSeconds": 116.969,
+  "reuse": {
+    "source": "attempt1 public-recheck.mjs read-only source reuse; no historical PNG copied",
+    "priorOriginalMarkers": {
+      "pagination390": "NOT_RUN",
+      "pagination1440": "NOT_RUN"
+    }
+  },
+  "counts": {
+    "PASS": 30,
+    "FAIL": 4,
+    "NOT_RUN": 0,
+    "BLOCKED": 0
+  }
+}

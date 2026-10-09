@@ -1,0 +1,18 @@
+{
+  "source": "1052e3fb4bc4cccabb51b8c538116c78655f345b",
+  "command": "node tests/W04_FINAL/recovery-recheck.mjs",
+  "exit": 1,
+  "status": "FAIL",
+  "harness_errors": [
+    "390 logout screen G7Core loading ReferenceError before other login",
+    "1440 reload upstream429 at authenticated10/minute workflow budget, callback assert stopped process before final cleanup"
+  ],
+  "known_passes": [
+    "390 immediate",
+    "390 reload",
+    "390 edited-contact",
+    "390 sessionStorage-quota",
+    "1440 immediate"
+  ],
+  "followup": "exact-owned API cleanup, native loading wait, request-specific budget window, remaining modes only"
+}
