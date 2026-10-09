@@ -51,6 +51,9 @@ interface TravelSupportPostRepositoryInterface
      */
     public function boardPermissionRoles(string $boardSlug, array $permissionKeys): array;
 
+    /** Whether a question owner shares any native role with the viewer. */
+    public function ownerSharesRole(int $ownerId, int $viewerId): bool;
+
     /**
      * 문의에 달린 게시 상태 답변(댓글)을 작성 순으로 최대 $limit 건 반환합니다.
      *

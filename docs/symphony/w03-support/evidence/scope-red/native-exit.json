@@ -1,0 +1,12 @@
+{
+    "command": [
+        "php",
+        "vendor/bin/phpunit",
+        "-c",
+        "docs/symphony/w03-support/evidence/native.xml",
+        "--filter",
+        "restricted_grants_without_owner_metadata",
+        "--do-not-cache-result"
+    ],
+    "exit": 1
+}

@@ -197,7 +197,7 @@ Authorization: Bearer {YOUR_TOKEN}
 ### PATCH /api/modules/raonslab-travel_lab/support/questions/{id}
 
 - **라우트명**: `api.modules.raonslab-travel_lab.support.questions.update`
-- **인증/권한**: `auth:sanctum`. 작성자 또는 `support.read`·`support.update` + 문의 게시판 네이티브 `admin.posts.read`·`admin.posts.read-secret`·`admin.posts.write` 를 모두 가진 관리자. 그 외는 404, 원문 불변. 수정은 게시판 `PostService::updatePost()` 경유(활동 로그 `post.update` 기록, 알림 없음)
+- **인증/권한**: `auth:sanctum`. 작성자 또는 `support.read`·`support.update` + 문의 게시판 네이티브 `admin.posts.read`·`admin.posts.read-secret`·`admin.posts.write` 를 모두 가지고 각 권한의 문의 소유자 스코프를 통과한 관리자. 그 외는 404, 원문 불변. 수정은 게시판 `PostService::updatePost()` 경유(활동 로그 `post.update` 기록, 알림 없음)
 - 본문: `title`(2–200) 과 `content`(2–5000) 중 하나 이상. 응답 형태는 POST 와 같고 상태 200, 메시지 `Your question was updated.`
 
 ## 상태 코드 요약

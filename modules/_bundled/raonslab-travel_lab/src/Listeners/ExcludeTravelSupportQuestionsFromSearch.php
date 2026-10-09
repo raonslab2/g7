@@ -76,7 +76,8 @@ class ExcludeTravelSupportQuestionsFromSearch implements HookListenerInterface
 
         try {
             if ($this->isQuestion($post)) {
-                // 큐 사용 시 관찰자의 MakeSearchable 작업과 순서가 뒤바뀌지 않도록 동기 제거한다.
+                // 현재 요청에서 동기 제거한다. 이미 큐에 들어간 MakeSearchable 작업은
+                // 이후 재색인할 수 있으므로 외부 엔진/지연 큐 구성은 지원 계약이 아니다.
                 $post->unsearchableSync();
             }
         } catch (Throwable $e) {

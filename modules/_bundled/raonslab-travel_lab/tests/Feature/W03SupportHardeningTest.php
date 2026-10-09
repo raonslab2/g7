@@ -130,7 +130,7 @@ class W03SupportHardeningTest extends SupportTestCase
             $managerRole->permissions()->updateExistingPivot($permissionId, ['scope_type' => 'self']);
         }
 
-        $scoped = $this->userWithRole('travel-support-scoped', ['admin.access', 'raonslab-travel_lab.support.read']);
+        $scoped = $this->userWithRole('travel-support-scoped', ['admin.access', 'raonslab-travel_lab.support.read', 'raonslab-travel_lab.support.update']);
         $scoped->roles()->attach($managerRole);
         $scoped = $scoped->fresh();
         $ownId = $this->ask($scoped, '[합성] 스코프 본인 문의');
@@ -139,6 +139,8 @@ class W03SupportHardeningTest extends SupportTestCase
         $this->assertSame([$ownId], array_column($list->json('data.data'), 'id'));
         $this->actingAs($scoped)->getJson(self::API."/support/questions/{$aliceId}")->assertNotFound();
         $this->actingAs($scoped)->getJson(self::API."/support/questions/{$ownId}")->assertOk();
+        $this->actingAs($scoped)->patchJson(self::API."/support/questions/{$aliceId}", ['title' => '[합성] 거부'])->assertNotFound();
+        $this->actingAs($scoped)->patchJson(self::API."/support/questions/{$ownId}", ['title' => '[합성] 본인 수정'])->assertOk();
     }
 
     /**
@@ -306,6 +308,87 @@ class W03SupportHardeningTest extends SupportTestCase
         Post::makeAllSearchable();
         $imported = array_merge(...array_map(fn ($call) => $call[0] === 'update' ? $call[1] : [], $spy->calls ?: [['noop', []]]));
         $this->assertContains($id, $imported, 'documented limit: import path is not protected by this module');
+    }
+
+    /** @scenario case=board_scope_self_owner_only|board_admin_foreign_allowed */
+    #[Test]
+    public function restricted_grants_without_owner_metadata_cannot_bypass_foreign_scope(): void
+    {
+        $alice = $this->createMember();
+        $id = $this->ask($alice, '[합성] 제한 권한 문의');
+        foreach (['raonslab-travel_lab.support.read', 'raonslab-travel_lab.support.update',
+            'sirsoft-board.'.self::QUESTIONS.'.admin.posts.write'] as $identifier) {
+            foreach (['self', 'role'] as $scope) {
+                $admin = $this->createSupportAdmin(['raonslab-travel_lab.support.read', 'raonslab-travel_lab.support.update']);
+                $permission = Permission::where('identifier', $identifier)->sole();
+                // Restrict every grant of this permission held by the actor, including admin's board grant.
+                $roles = $admin->roles()->pluck('roles.id')->all();
+                foreach ($roles as $roleId) {
+                    $permission->roles()->updateExistingPivot($roleId, ['scope_type' => $scope]);
+                }
+                $admin = $admin->fresh();
+                $verb = $identifier === 'raonslab-travel_lab.support.read' ? 'getJson' : 'patchJson';
+                $this->actingAs($admin)->{$verb}(self::API."/support/questions/{$id}", ['title' => '[합성] 거부 수정'])
+                    ->assertNotFound();
+                $this->assertSame('[합성] 제한 권한 문의', Post::findOrFail($id)->title);
+                foreach ($roles as $roleId) {
+                    $permission->roles()->updateExistingPivot($roleId, ['scope_type' => null]);
+                }
+            }
+        }
+    }
+
+    /** @scenario case=board_scope_self_owner_only|board_admin_foreign_allowed */
+    #[Test]
+    public function native_board_role_scope_allows_peer_detail_and_patch_but_denies_foreign_owner(): void
+    {
+        $outside = $this->createMember();
+        $id = $this->ask($outside, '[합성] 역할 외부 문의');
+        $role = Role::where('identifier', 'sirsoft-board.'.self::QUESTIONS.'.manager')->sole();
+        foreach (['admin.posts.read', 'admin.posts.read-secret'] as $key) {
+            $permission = Permission::where('identifier', 'sirsoft-board.'.self::QUESTIONS.'.'.$key)->sole();
+            $role->permissions()->updateExistingPivot($permission->id, ['scope_type' => 'role']);
+        }
+        $manager = $this->userWithRole('travel-role-scoped', ['admin.access', 'raonslab-travel_lab.support.read', 'raonslab-travel_lab.support.update']);
+        $manager->roles()->attach($role);
+        $manager = $manager->fresh();
+        $this->actingAs($manager)->getJson(self::API."/support/questions/{$id}")->assertNotFound();
+        $this->actingAs($manager)->patchJson(self::API."/support/questions/{$id}", ['title' => '[합성] 거부'])->assertNotFound();
+        $outside->roles()->attach($role);
+        $this->actingAs($manager)->getJson(self::API."/support/questions/{$id}")->assertOk();
+        $this->actingAs($manager)->patchJson(self::API."/support/questions/{$id}", ['title' => '[합성] 같은 역할 수정'])->assertOk();
+        // Restricted lists remain owner-only even when role peers are individually accessible.
+        $this->actingAs($manager)->getJson(self::API.'/support/questions')->assertOk()->assertJsonPath('data.meta.total', 0);
+    }
+
+    /** @scenario case=tampered_board_fail_closed */
+    #[Test]
+    public function all_sixteen_permission_keys_reject_foreign_empty_and_missing_grants_without_repair(): void
+    {
+        $this->assertCount(16, TravelSupportProvisioner::BOARD_PERMISSION_KEYS);
+        $member = $this->createMember();
+        $userRole = Role::where('identifier', 'user')->sole();
+        foreach (TravelSupportProvisioner::BOARD_PERMISSION_KEYS as $key) {
+            $permission = Permission::where('identifier', 'sirsoft-board.'.self::QUESTIONS.'.'.$key)->sole();
+            $permission->roles()->attach($userRole->id, ['granted_at' => now()]);
+            $this->actingAs($member)->getJson(self::API.'/support/questions')->assertStatus(503);
+            $this->assertProvisionRefused(self::QUESTIONS);
+            $this->assertTrue($permission->roles()->where('roles.id', $userRole->id)->exists());
+            $permission->roles()->detach($userRole->id);
+            $roles = $permission->roles()->pluck('roles.id')->all();
+            $permission->roles()->detach();
+            $this->actingAs($member)->getJson(self::API.'/support/questions')->assertStatus(503);
+            $this->assertProvisionRefused(self::QUESTIONS);
+            $this->assertSame(0, $permission->roles()->count());
+            $permission->roles()->attach($roles, ['granted_at' => now()]);
+            $identifier = $permission->identifier;
+            $permission->update(['identifier' => $identifier.'-missing']);
+            $this->actingAs($member)->getJson(self::API.'/support/questions')->assertStatus(503);
+            $this->assertProvisionRefused(self::QUESTIONS);
+            $this->assertSame($identifier.'-missing', $permission->fresh()->identifier);
+            $permission->update(['identifier' => $identifier]);
+            $this->actingAs($member)->getJson(self::API.'/support/questions')->assertOk();
+        }
     }
 
     private function ask(User $author, string $title): int

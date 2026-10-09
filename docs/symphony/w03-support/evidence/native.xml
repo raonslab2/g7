@@ -1,0 +1,22 @@
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="vendor/phpunit/phpunit/phpunit.xsd" bootstrap="../test-bootstrap.php" colors="true">
+    <testsuites><testsuite name="W03SupportRecoveryNative"><file>../../../../modules/_bundled/raonslab-travel_lab/tests/Feature/W03SupportHardeningTest.php</file><file>../../../../modules/_bundled/raonslab-travel_lab/tests/Feature/TravelSupportApiTest.php</file><file>../../../../modules/_bundled/raonslab-travel_lab/tests/Feature/TravelSupportNotificationTest.php</file><file>../../../../modules/_bundled/raonslab-travel_lab/tests/Feature/TravelSupportProvisionerTest.php</file><file>../../../../modules/_bundled/sirsoft-board/tests/Unit/Listeners/BoardActivityLogListenerTest.php</file><file>../../../../modules/_bundled/sirsoft-board/tests/Feature/PermissionScopeTest.php</file><file>../../../../tests/Feature/Auth/GatePermissionTest.php</file><file>../../../../tests/Unit/Helpers/PermissionHelperScopeTest.php</file></testsuite></testsuites><source /><php>
+        <ini name="memory_limit" value="1G" />
+        <env name="APP_ENV" value="testing" />
+        <env name="APP_MAINTENANCE_DRIVER" value="file" />
+        <env name="BCRYPT_ROUNDS" value="4" />
+        <env name="CACHE_STORE" value="array" />
+        <env name="DB_CONNECTION" value="mysql" />
+
+        <env name="MAIL_MAILER" value="array" />
+        <env name="QUEUE_CONNECTION" value="sync" />
+        <env name="SESSION_DRIVER" value="array" />
+        <env name="PULSE_ENABLED" value="false" />
+        <env name="NIGHTWATCH_ENABLED" value="false" />
+        <env name="INSTALLER_ADMIN_NAME" value="관리자" />
+        <env name="INSTALLER_ADMIN_EMAIL" value="admin@example.com" />
+        <env name="INSTALLER_ADMIN_PASSWORD" value="password" />
+        <env name="INSTALLER_ADMIN_LANGUAGE" value="ko" />
+
+        <env name="INSTALLER_COMPLETED" value="false" />
+    </php>
+</phpunit>

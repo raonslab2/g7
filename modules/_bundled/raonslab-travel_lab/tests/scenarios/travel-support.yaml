@@ -19,6 +19,10 @@ axes:
   - legacy_role_support_only
   - board_admin_without_support
   - board_manager_self_scope
+  - board_manager_role_scope
+  - support_read_self_or_role_scope
+  - support_update_self_or_role_scope
+  - board_write_self_or_role_scope
   channel:
   - notices
   - faqs
@@ -28,6 +32,7 @@ axes:
   - provisioned_safe
   - existing_unsafe_same_slug
   - tampered_permissions_or_settings
+  - all_16_missing_empty_or_foreign_permission_grants
   - external_search_driver
   provision_gate:
   - config_off_confirm_off
