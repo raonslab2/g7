@@ -81,3 +81,15 @@ Independent preflight reviewer `w01-contract-preflight` / `req_e35bb0ef069a4e15b
 All inquiry status values are uppercase enum backing values. `InquiryStatus.allowedNext()` and `canCancel()` define transitions for service and resources. Inquiries support validated `status` filter; result pagination is `data.pagination`, admin collection `abilities` is computed from real permissions. Admin catalog links use actual product_code; departure ID is distinct from commerce option ID. Cart/inquiry contacts are normalized before idempotency hash. Shipping country is pinned KR; active explicit nondefault FREE policy with KR FREE row is mandatory, zero shipping/discount/points expected. No caller price is accepted. Synchronous travel checkout guard must reject native temp-order/create/update/order/payment hooks even outside the Travel API.
 
 Current parent-native ownership: commerce_contract→workflow/services/resources/controllers/tests/guard; reference_runtime→visitor template/admin layouts/frontend tests; inheritance_capacity→runtime/recovery/live harness. Lead→module/provider/contracts/models/enums/migrations/catalog/free-policy seeding/publication/evidence. Four active native slots include lead, not four extra Requests or PCs. Tests against generated fixtures remain author-level only; real merged models and MySQL are required next.
+
+
+## W03 verification score binding
+
+Implementation input/test target 28ada286c1c34606741bcfe4f9d12e06ac50af30, PR2, contractv2. Three independent
+Requests and disjoint ownership are listed in WAVE_STATUS.md. Browser/security operate
+different synthetic users/fixtures in the marked APPschema; runtime owns TESTschema.
+Only lead may update shared module/template/runtime/service/Git Delivery. Nonauthor
+reviewer returns committed findings/tests/evidence for lead comparison, never its own
+implementation finalapproval. Publication of source is established; validation/integration
+completion remains pending. Documentation-only handoff updates do not change this tested
+source target or grant main/production approval.

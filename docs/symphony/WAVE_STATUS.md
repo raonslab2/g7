@@ -146,3 +146,53 @@ The publication preserves original four implementation commits and the preflight
 review commit as reachable parents using an explicit provenance merge after reviewed
 cherry-picks/repairs. Its strategy retains the already integrated tree; it does not
 reapply stale child content or treat original hashes as the final review target.
+
+
+## W03 fixed-source verification handoff — 2026-10-09 10:22 UTC
+
+Published implementation/review target **28ada286c1c34606741bcfe4f9d12e06ac50af30**, reusable draft
+PR https://github.com/raonslab2/g7/pull/2. GitHub remote branch and PR head matched;
+Git ancestor checks prove all four original implementation SHAs and preflight751b
+reachable in the published history. Canonical old-child status still retains its
+Git-evidence blocker and no Validation receipt; local/remote reachability proof does
+not alter those platform facts. Last provenance merge tree equals a07dc393 exactly.
+Installed module/template runtime source/assets were byte-compared:160paths,0mismatch.
+
+Three NEW official child Requests, attempt1 each, canonically **RUNNING** at10:21:45UTC:
+
+| Task | Provider | Request | Own scope |
+| --- | --- | --- | --- |
+| w03-security | CLAUDE | req_e66ad2372e844e5683a7619a727b2682 | Nonauthor price/quantity/date/permissions/privacy/checkout/idempotency/capacity contracts; app API new fixtures |
+| w03-browser | CODEX | req_76c856ee21a445ffa3dbe55838cd9e77 | Real390/1440 customer + nativeadmin/support journeys, new distinct synthetic users |
+| w03-runtime | CODEX | req_b3b4d5373a384cfd8e0b7b8f55fb011f | Own-worktree package/guards/native testDB/rollback-restore/G7 regressions |
+
+No prior task key regenerated or existing Request terminated. One rejected delegation
+call created no child: expected_source_revision requires explicit placement, and deployed
+source_binding checks the project's configured current upstream. That upstream is main,
+while this quarantined integration branch is deliberately separate. Supported canonical
+review_target pins 28ada286c1c34606741bcfe4f9d12e06ac50af30; each child must fetch/check out that exact
+remote commit in its own worktree before review. Assigned default source and actual tested
+review SHA are recorded separately; no global project/upstream/capacity change or source
+acceptance bypass. Default source-binding equality is **not claimed**.
+
+Security/browser use distinct ignored synthetic test auth files; only paths are supplied,
+never secret values. Runtime child owns ONLY req81_travel_lab_test and may privately copy
+the generated test env into its own ignored worktree files; never platform credentials.
+It must not run account-rotating setup/env-loss or stop APPpreview during parallel journeys.
+Independent fresh-empty install/env-loss/APPrestart need later safe coordination and are
+NOT_RUN until executed. The three requests are ready scopes, no dependency-wait filler.
+
+The loopback preview was transferred from the lead's foreground process to transient
+request-owned **req81-travel-lab-preview.service**, User=ubuntu, same assigned worktree,
+no public listener or production unit. /up200 and ActiveState=active confirmed. Its
+private0600 log is ignored. This preserves testing across parent slot release; it is
+neither an operational deployment nor a guaranteed permanent hosted preview. On resume,
+check this exact unit and source first; never restart another service. Published package
+and screenshots are the durable user-accessible result if the disposable checkout ends.
+
+Parent source is frozen for reviews. Release parent slot using official wait, then resume
+with selected child results, compare exact source/commits/findings, perform scoped repairs
+and new attempts as needed, integrate and rerun postintegration gates. Rehydrate from the
+published task branch, never assume ignored credentials/service/path survive. Native
+conversation/canonical Request records retain the private auth paths. No whole-goal PASS,
+main merge or production deployment at this handoff.

@@ -51,3 +51,21 @@ Host10:07UTC load6.98/6.51/6.88, memoryavailable10Gi/15Gi, swap4.4Gi/8Gi; no quo
 load/admission failure observed. Test DB mutations are sequenced to avoid suite collisions;
 read-only guest browser and source review run concurrently. Actual configuredcatalog at
 10:04 unchanged; PC2/PC3 unavailable, central-node-only, no separate PC count inferred.
+
+
+## W03 observed validation concurrency —10:21:45UTC
+
+Cumulative8 official creations/attempts:5COMPLETED +3RUNNING/0QUEUED at boundedstatus
+observation. New verifier split CODEX2/CLAUDE1, allCENTRAL verified logical1PC. Parent1,
+parent native followups allcompleted (0currentlyexecuting); next-child nativecounts UNKNOWN.
+No artificial2Lane cap, no addedaccounts/model/slotsettings. Review readyfixedsource uses
+existingadmission; oldGit-evidenceblockers stillreported despite demonstratedremoteancestry.
+
+Host exposes4CPUs (nproc); cgroup cpu.max absent so additionalCPUquota UNKNOWN. Hostwide
+load20.07/12.89/9.37, availablememory9.4Gi/15Gi, swap4.6Gi/8Gi. This is substantialCPU
+queue pressure, not attributable solely toG7/Spring or proof3simultaneousmodelstreams.
+No OOM/quota/admissionfailure observed. Lead starts noadditionalheavybuild/testbatch and
+releasesits Provider slot after durablehandoff. Existing readyreviews continue; destructive
+TESTDB gates haveoneowner. Reexpandheavybatches when hostCPUqueuefalls and an additional
+nonduplicate scope is ready; do not reserve idleRequestslots to reach a numericmaximum.
+Exactaccountremainingusage/Springlivecounts/sharedglobalrequests remainUNKNOWN; notzero.
