@@ -1,0 +1,51 @@
+{
+  "identity": "owned diff before fixed checkpoint, not HEAD alone",
+  "tests": {
+    "domain": {
+      "result": "PASS",
+      "tests": 152,
+      "assertions": 2469,
+      "seconds": 82.397
+    },
+    "template": {
+      "result": "PASS",
+      "tests": 140,
+      "files": 10,
+      "seconds": 39.54
+    },
+    "core_fixtures": {
+      "result": "PASS",
+      "tests": 35,
+      "assertions": 2233,
+      "seconds": 3.732,
+      "before_harness_result": "5 controller-DI errors; retained private first log; corrected test isolation only",
+      "final_comment_only_delta": "controller metadata instantiation documented accurately; no behavior change after35/2233 run"
+    },
+    "template_types": "PASS",
+    "production_template_build": "PASS native UI author35modules/source maps disabled; JS unchanged",
+    "pint": "PASS",
+    "canonical_work_order": {
+      "result": "PASS",
+      "source": "AI_GCS canonical10bc5eff",
+      "documents": 89,
+      "errors": []
+    },
+    "hosted_CI": "NOT_RUN",
+    "canonical_Validation_receipt": "NOT_RUN"
+  },
+  "files": {
+    "app/Models/Module.php": "3c853703e6098be6aa11f01ca14b533ffddca1ab5fa882ac5ae291adb6c63f9b",
+    "modules/_bundled/raonslab-travel_lab/src/Http/Middleware/TravelOptionalSanctum.php": "268e1a45c37eb266676a8bf580b26f3c09bf8f15eb92a76517a872d6814198d2",
+    "modules/_bundled/raonslab-travel_lab/src/routes/support.php": "e04270e3628c1a59e6d8585b855f8eeaee3126e8ad1b40be7bca822e16d77195",
+    "templates/_bundled/raonslab-travel_lab/layouts/travel/requests.json": "ad03a73eec4e82d0663dadeb9468579ae5a324a450716e24cededeb0312d663c",
+    "templates/_bundled/raonslab-travel_lab/dist/css/components.css": "e340b3bfcf22be2ef56f7d11a8f9bf2fc3563439f908628ab044931b463dce66",
+    "templates/_bundled/raonslab-travel_lab/dist/js/components.iife.js": "9cc99d8d8db0161cfc5f537531eb16f00d1a7ca272fd0b31824823185f46b390",
+    "tests/Unit/Extension/ModuleVendorModePersistenceTest.php": "e018ffb131c1d71b45b10ad1cd8c9878124e15ae0c5455ad220d4a9c63933d72",
+    "tests/Unit/Extension/TravelSupportAuthThrottleOrderingTest.php": "a0b870889de8b28a7f0cff8db14f58c2e183b92d06a4c06ce3031a2832e1dfa2",
+    "tests/Unit/Extension/TravelSupportThrottleIsolationTest.php": "939081b79ca0c609ac8ed955b5b961ab200292bd84c4d6405bf62aa019a6d013"
+  },
+  "original_source": "598a89fff702d51c1405f1a5952d95ab1d2651f4",
+  "negative_original_browser": "FAIL; original report untouched",
+  "negative_original_security": "CHANGES_REQUIRED; original report untouched",
+  "failed_original_installer": "FAILED; TEST separately restored55/104"
+}

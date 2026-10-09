@@ -10,10 +10,11 @@
 
 use Illuminate\Support\Facades\Route;
 use Modules\Raonslab\TravelLab\Http\Controllers\Api\SupportController;
+use Modules\Raonslab\TravelLab\Http\Middleware\TravelOptionalSanctum;
 
 Route::prefix('support')->name('support.')->group(function () {
     // 공개 채널: 비로그인 열람 허용 (토큰이 있으면 사용자 해석만 수행)
-    Route::middleware(['optional.sanctum', 'throttle:600,1,travel-lab-support-public:'])->group(function () {
+    Route::middleware([TravelOptionalSanctum::class, 'throttle:600,1,travel-lab-support-public:'])->group(function () {
         Route::get('/notices', [SupportController::class, 'notices'])->name('notices.index');
         Route::get('/notices/{id}', [SupportController::class, 'notice'])->whereNumber('id')->name('notices.show');
         Route::get('/faqs', [SupportController::class, 'faqs'])->name('faqs.index');

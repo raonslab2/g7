@@ -40,6 +40,7 @@ class Module extends Model
         'version',
         'latest_version',
         'status',
+        'vendor_mode',
         'deactivated_reason',
         'deactivated_at',
         'incompatible_required_version',
@@ -90,7 +91,7 @@ class Module extends Model
     public function isInstalled(): bool
     {
         return in_array($this->status, [
-            ExtensionStatus::Active->value, ExtensionStatus::Inactive->value
+            ExtensionStatus::Active->value, ExtensionStatus::Inactive->value,
         ]);
     }
 

@@ -43,6 +43,25 @@ describe('travel/requests', () => {
     expect(t.getNavigationHistory().some((p) => p.includes('/travel/requests/3'))).toBe(true);
   });
 
+  it('긴 상품명과 요청 ID를 보존하고 키보드로 상세를 연다', async () => {
+    const title = 'SyntheticUnbrokenProductTitleForWidthRegression0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    t = createLayoutTest(layout, { componentRegistry: registry, translations, locale: 'ko', initialState: member });
+    t.mockApi('inquiries', { response: { success: true, data: {
+      data: [{ ...inquiry(100, 'TEST_ACCEPTED'), first_product_name: title }],
+      pagination: { current_page: 1, last_page: 1, total: 1 },
+    } } });
+    await t.render();
+    const card = screen.getByTestId('request-card');
+    expect(card).toHaveAttribute('type', 'button');
+    expect(card).toHaveTextContent('요청 #100');
+    expect(screen.getByTestId('request-status')).toHaveAttribute('data-status', 'TEST_ACCEPTED');
+    const productTitle = screen.getByText(title);
+    expect(productTitle.className).not.toMatch(/line-clamp|truncate/);
+    card.focus();
+    await t.user.keyboard('{Enter}');
+    expect(t.getNavigationHistory().some((p) => p.includes('/travel/requests/100'))).toBe(true);
+  });
+
   it('요청이 없으면 장바구니로 안내', async () => {
     t = createLayoutTest(layout, { componentRegistry: registry, translations, locale: 'ko', initialState: member });
     t.mockApi('inquiries', { response: { success: true, data: { data: [], pagination: { current_page: 1, last_page: 1, total: 0 } } } });

@@ -2,6 +2,7 @@
 
 namespace Tests\Unit\Extension;
 
+use Composer\Autoload\ClassLoader;
 use Illuminate\Auth\GenericUser;
 use Illuminate\Cache\ArrayStore;
 use Illuminate\Cache\RateLimiter;
@@ -15,14 +16,24 @@ use Illuminate\Routing\Middleware\ThrottleRequests;
 use Illuminate\Routing\Route;
 use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Facade;
+use Mockery;
+use Modules\Raonslab\TravelLab\Http\Controllers\Api\SupportController;
+use Modules\Raonslab\TravelLab\Http\Middleware\TravelOptionalSanctum;
+use Modules\Raonslab\TravelLab\Services\TravelSupportService;
+use PHPUnit\Framework\Attributes\PreserveGlobalState;
+use PHPUnit\Framework\Attributes\RunTestsInSeparateProcesses;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Actual support RouteCollection + native throttle pipeline/RateLimiter/ArrayStore. No application
- * boot, auth provider, controller, environment file, SQL or service process is involved. Actors are
- * injected authenticated identifiers so only rate-budget isolation is exercised, not authorization.
+ * boot, auth provider or environment file is involved; no controller action, SQL or service process
+ * executes. Actual controller metadata is resolved with an unused service fixture. Actors are
+ * injected authenticated identifiers so only rate-budget isolation is exercised, not authorization
+ * or native auth ordering. TravelSupportAuthThrottleOrderingTest exercises the latter separately.
  */
+#[RunTestsInSeparateProcesses]
+#[PreserveGlobalState(false)]
 class TravelSupportThrottleIsolationTest extends TestCase
 {
     private Container $app;
@@ -32,6 +43,8 @@ class TravelSupportThrottleIsolationTest extends TestCase
     private $previousFacadeApplication;
 
     private Router $router;
+
+    private ClassLoader $moduleLoader;
 
     protected function setUp(): void
     {
@@ -43,6 +56,12 @@ class TravelSupportThrottleIsolationTest extends TestCase
         $this->router = new Router(new Dispatcher($this->app), $this->app);
         $this->app->instance('router', $this->router);
         $this->app->instance(ThrottleRequests::class, new ThrottleRequests(new RateLimiter(new Repository(new ArrayStore))));
+        $this->moduleLoader = new ClassLoader;
+        $this->moduleLoader->addPsr4('Modules\\Raonslab\\TravelLab\\', dirname(__DIR__, 3).'/modules/_bundled/raonslab-travel_lab/src');
+        $this->moduleLoader->register(true);
+        // Native route metadata may resolve this controller after another test registered its class.
+        // Preserve its real constructor/metadata; isolate only the unused no-SQL service boundary.
+        $this->app->instance(SupportController::class, new SupportController(Mockery::mock(TravelSupportService::class)));
         Facade::clearResolvedInstances();
         Facade::setFacadeApplication($this->app);
         $this->router->group([
@@ -55,10 +74,15 @@ class TravelSupportThrottleIsolationTest extends TestCase
 
     protected function tearDown(): void
     {
-        Facade::clearResolvedInstances();
-        Facade::setFacadeApplication($this->previousFacadeApplication);
-        Container::setInstance($this->previousContainer);
-        parent::tearDown();
+        try {
+            Mockery::close();
+        } finally {
+            $this->moduleLoader->unregister();
+            Facade::clearResolvedInstances();
+            Facade::setFacadeApplication($this->previousFacadeApplication);
+            Container::setInstance($this->previousContainer);
+            parent::tearDown();
+        }
     }
 
     private function route(string $suffix): Route
@@ -152,7 +176,7 @@ class TravelSupportThrottleIsolationTest extends TestCase
         $questions = $this->route('questions.index');
         $create = $this->route('questions.store');
         $this->assertContains('api', $public->gatherMiddleware());
-        $this->assertContains('optional.sanctum', $public->gatherMiddleware());
+        $this->assertContains(TravelOptionalSanctum::class, $public->gatherMiddleware());
         $this->assertNotContains('auth:sanctum', $public->gatherMiddleware());
         foreach (['questions.index', 'questions.show', 'questions.store', 'questions.update'] as $suffix) {
             $route = $this->route($suffix);

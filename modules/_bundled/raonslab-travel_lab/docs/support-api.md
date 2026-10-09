@@ -7,7 +7,7 @@
 
 ```text
 1. prefix: /api/modules/raonslab-travel_lab/support · 라우트명 prefix: api.modules.raonslab-travel_lab.support.
-2. 공지/FAQ: 비로그인 열람 (optional.sanctum). 1:1 문의: Authorization: Bearer {sanctum token} 필수
+2. 공지/FAQ: 비로그인 열람 (모듈 전용 `TravelOptionalSanctum`, 코어 선택적 Sanctum 동작 상속). 유효 토큰은 공개 제한 계산 전에 인증되어 사용자별 카운터를 쓰며 익명·만료 토큰은 IP 카운터를 씁니다. 잘못된 토큰은 기존 코어 인증 오류를 유지합니다. 1:1 문의: Authorization: Bearer {sanctum token} 필수
 3. 성공 봉투: {"success": true, "message": "...", "data": ...}  · 도메인 오류: {"success": false, "message": "..."}
 4. 401(미인증)·422(검증) 은 코어 예외 처리기의 봉투를 그대로 쓴다 (success 키 없음, 아래 참조)
 5. 타인 문의는 403 이 아니라 404 — 존재 여부를 숨긴다
@@ -46,7 +46,7 @@
 ### GET /api/modules/raonslab-travel_lab/support/notices
 
 - **라우트명**: `api.modules.raonslab-travel_lab.support.notices.index`
-- **컨트롤러**: `SupportController@notices` · **미들웨어**: `api`, `optional.sanctum`, `throttle:600,1`
+- **컨트롤러**: `SupportController@notices` · **미들웨어**: `api`, `Modules\Raonslab\TravelLab\Http\Middleware\TravelOptionalSanctum`, `throttle:600,1,travel-lab-support-public:` (선택적 인증 → 공개 제한 순서)
 
 | 이름 | 위치 | 타입 | 필수 | 허용값 | 용도 |
 | --- | --- | --- | --- | --- | --- |
