@@ -106,3 +106,8 @@ Run G7's applicable tests/build and independent fixed-SHA verification before
 the reviewed travel checkpoint is integrated. Store this receipt with that
 checkpoint; do not report 89 source documents as executed agents, lanes or
 product test cases.
+
+
+October9 18:35 UTC publication precheck: unchanged canonical source
+`10bc5eff5f777aa49760387778303063b0222129`, same official validator command
+`--revision ... --json work/orders/work-20261009-g7-symphony-max-child-c7ae42d1.md`: exit0, valid=true, documents89, errors[]. No work-order/source validator changes.

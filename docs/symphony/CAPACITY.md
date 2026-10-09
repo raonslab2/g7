@@ -133,3 +133,29 @@ Catalog release7f77ed00-2ca94dd1 remains same-project/depth-one MAX_ACTIVE10(non
 Fixedfa552 handoff observed24 totalofficialattempts:17COMPLETED/3FAILED/1INTERRUPTED/3RUNNING/0QUEUED. Newready CODEXfresh+CODEXbrowser+CLAUDEsecurity are all canonicalRUNNING/CENTRAL logical1PC; oldCOMPLETED counts include FAIL/CHANGES_REQUIRED and are not17productPASS. Parentnative3scopedagents nowfinished0running, earliermaxroot+3slots4. Actualchildnativeactivity/model-stream concurrency/account/global/Spring usage UNKNOWN untilresults. Same2Provideraccounts/admission, no twoLane cap, no additional accounts/settings.
 
 17:16UTC sharedhost load25.38/15.33/9.83, availableRAM9611MiB/15783MiB, swap5226MiB/8191MiB. HostCPUpressure increased duringnewreview admission, attribution UNKNOWN. Parent launches no heavytests/builds and preserves application/lifecycle freeze; ready3disjointgates retain existing admission rather than fillingextra roles. TESTexclusive vsAPPownactors boundaries, no customallocator/scheduler. Parent returnsProvider slot viaofficialwait; readiness/resource observation governs furtherexpansion, not numeric MAX_ACTIVE target.
+
+
+## October9 18:29 UTC intake / prepared work
+
+Official catalog remains release7f77ed00-2ca94dd1, AgentTools2.1.3+g7071d2c2ed91,
+same-project depth1, MAX_ACTIVE10 (nonterminal including queued), MAX_TOTAL50
+(cumulative attempts). Configured provider capacities CODEX8/CLAUDE3 were read,
+not changed and not interpreted as account guarantees. Canonical status24:
+18COMPLETED/4FAILED/1INTERRUPTED/1RUNNING/0QUEUED. Atomic child FAILED despite a
+committed bounded report; fresh attempt3 COMPLETED with product changes required;
+browser creation RUNNING. Distinct official Requests are not actual PC counts.
+Verified origin is CENTRAL logical1PC; offline pc2/pc3 remain unused.
+
+Parent root's three native agents were reused for disjoint fixture diagnosis,
+independent source/intake review and completion audit; root is the fourth native
+slot. 18:24 host observation:4CPU, load3.02/3.19/5.69, available10,867MiB,
+swapused5,184MiB. These are shared host observations, not per-project attribution
+or actual Provider account consumption. Account quota/global/Spring active usage
+remain UNKNOWN. No Provider/account/model capacity setting, new scheduler or
+worker infrastructure was created. Preparation of the next TEST recipe gate
+and Page campaign implementation uses existing admission; browser APP ownership
+and TEST-only destructive verification stay separated.
+
+The once-only diagnostic21/2209 PASS at lower observed load and targeted worker
+2/45 PASS do not prove why the old unknown worker exit occurred. Full stderr is
+retained privately, public hashes published. No stress/repeat loop was used.

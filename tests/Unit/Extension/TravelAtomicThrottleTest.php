@@ -446,7 +446,9 @@ class TravelAtomicThrottleTest extends TestCase
                 proc_close($worker['process']);
                 $this->assertSame(0, $worker['exit'], $stderr);
                 $worker['process'] = null;
-                $records[] = json_decode($stdout, true, flags: JSON_THROW_ON_ERROR);
+                $record = json_decode($stdout, true, flags: JSON_THROW_ON_ERROR);
+                $this->assertNull($record['busy'], 'Worker returned an unavailable admission: '.json_encode($record['busy']));
+                $records[] = $record;
             }
             unset($worker);
             $codes = array_merge(...array_column($records, 'codes'));
@@ -475,6 +477,72 @@ class TravelAtomicThrottleTest extends TestCase
             $connection->disconnect();
             foreach (glob($directory.'/*') as $file) {
                 unlink($file); // Only this test's private random directory; no external schema/files.
+            }
+            rmdir($directory);
+        }
+    }
+
+    public function test_worker_records_real_lock_timeout_without_losing_native_busy_response_dependencies(): void
+    {
+        Carbon::setTestNow(); // The actual subprocess and native lease must use the same real clock.
+        $directory = sys_get_temp_dir().'/g7-travel-throttle-'.bin2hex(random_bytes(8));
+        $this->assertTrue(mkdir($directory, 0700));
+        $database = $directory.'/cache.sqlite';
+        $this->assertNotFalse(file_put_contents($database, ''));
+        chmod($database, 0600);
+        $capsule = new Capsule;
+        $capsule->addConnection(['driver' => 'sqlite', 'database' => $database, 'prefix' => '', 'busy_timeout' => 5000, 'journal_mode' => 'WAL']);
+        $connection = $capsule->getConnection();
+        $this->createTables($connection);
+        $store = new DatabaseStore($connection, 'cache', '', 'cache_locks', [0, 100]);
+        $key = $this->key($this->request(), 'multi-process:');
+        $holder = $store->lock('travel-admission:'.hash('sha256', $key), 30, 'synthetic-worker-diagnostic-holder');
+        $process = null;
+        $pipes = [];
+        try {
+            $this->assertTrue($holder->get());
+            file_put_contents($directory.'/start', 'own-fixture-barrier');
+            $process = proc_open([PHP_BINARY, dirname(__DIR__, 2).'/Fixtures/TravelAtomicThrottleWorker.php', $database, '0'], [0 => ['pipe', 'r'], 1 => ['pipe', 'w'], 2 => ['pipe', 'w']], $pipes);
+            $this->assertIsResource($process);
+            fclose($pipes[0]);
+            $deadline = microtime(true) + 10;
+            do {
+                $status = proc_get_status($process);
+                if (! $status['running']) {
+                    break;
+                }
+                usleep(10000);
+            } while (microtime(true) < $deadline);
+            $this->assertFalse($status['running'], 'The single unavailable admission must finish within its bounded timeout.');
+            $stdout = stream_get_contents($pipes[1]);
+            $stderr = stream_get_contents($pipes[2]);
+            fclose($pipes[1]);
+            fclose($pipes[2]);
+            proc_close($process);
+            $process = null;
+            $this->assertSame(0, $status['exitcode'], $stderr);
+            $this->assertSame('', $stderr);
+            $record = json_decode($stdout, true, flags: JSON_THROW_ON_ERROR);
+            $this->assertSame([503], $record['codes']);
+            $this->assertSame(503, $record['busy']['status']);
+            $this->assertSame('1', $record['busy']['retry_after']);
+            $this->assertSame(__('raonslab-travel_lab::messages.throttle_busy'), $record['busy']['message']);
+            $this->assertTrue($holder->isOwnedByCurrentProcess(), 'The worker must not release another holder.');
+            $this->assertSame(0, (new RateLimiter(new Repository($store)))->attempts($key));
+        } finally {
+            if (is_resource($process)) {
+                proc_terminate($process);
+                foreach ($pipes as $pipe) {
+                    if (is_resource($pipe)) {
+                        fclose($pipe);
+                    }
+                }
+                proc_close($process);
+            }
+            $holder->release();
+            $connection->disconnect();
+            foreach (glob($directory.'/*') as $file) {
+                unlink($file);
             }
             rmdir($directory);
         }

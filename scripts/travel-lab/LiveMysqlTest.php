@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use App\Models\User;
+use Illuminate\Cache\DatabaseStore;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -10,6 +11,7 @@ use Illuminate\Support\Facades\Route;
 use Modules\Raonslab\TravelLab\Models\Departure;
 use Modules\Raonslab\TravelLab\Models\Inquiry;
 use Modules\Raonslab\TravelLab\Providers\TravelLabServiceProvider;
+use Modules\Raonslab\TravelLab\Tests\UsesDatabaseThrottleCache;
 use Modules\Sirsoft\Board\Providers\BoardServiceProvider;
 use Modules\Sirsoft\Ecommerce\Database\Seeders\DatabaseSeeder;
 use Modules\Sirsoft\Ecommerce\Providers\EcommerceServiceProvider;
@@ -19,10 +21,14 @@ use Tests\TestCase;
 require_once __DIR__.'/environment.php';
 require_once __DIR__.'/live-bootstrap.php';
 require_once __DIR__.'/live-fixtures.php';
+// This root PHPUnit fixture has no module Tests namespace autoloader; pin the shared test trait.
+require_once dirname(__DIR__, 2).'/modules/_bundled/raonslab-travel_lab/tests/UsesDatabaseThrottleCache.php';
 
 /** Actual root Tests\TestCase + Sanctum + native services; MySQL only, no SQLite/mocks. */
 final class LiveMysqlTest extends TestCase
 {
+    use UsesDatabaseThrottleCache;
+
     protected array $requiredExtensions = ['modules/sirsoft-board', 'modules/sirsoft-page', 'modules/sirsoft-ecommerce', 'modules/raonslab-travel_lab'];
 
     protected function setUp(): void
@@ -40,6 +46,12 @@ final class LiveMysqlTest extends TestCase
             $paths[] = base_path('modules/_bundled/'.$identifier.'/database/migrations');
         }
         $this->assertSame(0, Artisan::call('migrate', ['--path' => $paths, '--realpath' => true, '--force' => true]));
+        // Ordinary test boot stays array; actual travel admission requires native DB counters/locks.
+        $this->useDatabaseThrottleCache();
+        $cache = app('cache')->store(config('cache.limiter'))->getStore();
+        $this->assertInstanceOf(DatabaseStore::class, $cache);
+        $this->assertSame(DB::connection()->getDatabaseName(), $cache->getConnection()->getDatabaseName());
+        $this->assertSame(DB::connection()->getDatabaseName(), $cache->getLockConnection()->getDatabaseName());
         if (User::count() === 0) {
             $this->assertSame(0, Artisan::call('db:seed', ['--class' => 'DatabaseSeeder', '--force' => true]));
         }

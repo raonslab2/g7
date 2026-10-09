@@ -1,5 +1,32 @@
 # G7 Travel Lab score — contract v2 (integration)
 
+## Current execution overlay — 2026-10-09 18:35 UTC
+
+Earlier tables are historical contracts and wave observations; their original
+RETURNED/pending statuses do not override this overlay. Runtime product target
+`fa5523175ac494cfbd13bbf89bf06b3ec91835a6`, PR2. Current product delivery is
+IN_PROGRESS, with initial installer/cache and standalone MySQL fixture repairs
+awaiting a separately published independent execution. Native Page-backed
+campaign/publication consumption is a newly identified implementation gap;
+installation alone was not counted as reuse. Its concrete contract is being
+prepared while native creation/browser verification continues.
+
+- Canonical attempts24:18 COMPLETED,4 FAILED,1 INTERRUPTED,1 RUNNING.
+- Native admin creation/browser: `w04-native-admin-create-final` attempt1,
+  `req_c2e43e4188284ec78b8702e7e3e0d45a`, RUNNING; no duplicate Request.
+- Atomic `w04-atomic-contention-final` attempt1 is canonically FAILED.
+  Evidence commit `c38ee592` was accepted only within independently compared
+  bounds; terminal state/cause remain distinct. [Intake](W04_ATOMIC_FINAL_INTAKE.md).
+- Fresh installer attempt3 COMPLETED, product CHANGES_REQUIRED. Original
+  `94c3f75b`/`0eb9e68f` and [intake](W04_INSTALL_FINAL_INTAKE.md) preserve failures.
+- [Installer source review](W04_INSTALL_BOOTSTRAP_REVIEW.md) and
+  [worker diagnostic](W04_ATOMIC_WORKER_DIAGNOSTIC.md) bind repair source/tests;
+  source review alone is not live MySQL PASS.
+- [Delivery audit](FINAL_REPORT.md) accumulates exact SHA, requirements,
+  commands, limits, package, capacity and next execution. Formal Validation and
+  hosted CI remain NOT_RUN. Customer-approved design/database remains NONE.
+
+
 Work: `work-20261009-g7-symphony-max-child-c7ae42d1`; parent Request: `req_81ac33cac94046b9a2249cd14c0d00ba`.
 Input G7 SHA: `6853f40d58acbf53a2f29cbb9dd422cc439047a9`; repository: https://github.com/raonslab2/g7 (public).
 Integration branch: `feat/g7-travel-lab-c7ae42d1`. Current implementation contracts are RAON lab assumptions, **not customer-approved designs or 110-screen delivery**.

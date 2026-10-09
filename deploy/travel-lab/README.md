@@ -58,6 +58,15 @@ Git ignored. The synthetic administrator address is
 `admin@travel-lab.example.invalid`; its random local password is stored only in
 the generated `.env` as `INSTALLER_ADMIN_PASSWORD`. Do not publish that file.
 
+A brand-new installation has no native cache tables yet. `setup.php` validates a
+marked empty schema, an incomplete installer, no SQL objects and no installed
+extensions, then gives only the first native migration process an array cache.
+The environment file keeps `CACHE_STORE=database`; subsequent settings, seed and
+HTTP processes use native database cache and admission locks. An existing or
+partial schema keeps its normal database configuration. Run one installer at a
+time. The MySQL smoke fixture explicitly uses the same native cache tables and
+checks that both counter and lock connections stay on the TEST schema.
+
 The databases are `req81_travel_lab` and `req81_travel_lab_test`. User
 `req81_travel` has privileges only on those databases.
 

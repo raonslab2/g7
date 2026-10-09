@@ -340,3 +340,43 @@ These are observed canonical states, not guaranteed concurrent model streams or 
 Onresume compare source/cache/probes/commits, preserve negative old results and failedfresh attempts, review/publish trueevidence, fixactualnewfindings, recheck finalintegration and complete FINAL_REPORT/repropackage/screens. UI nativecategory/policy/product/options CREATE and retry amount/item comparisons explicitlyincluded; fresh true nativevendor/HTML/cache/restart/envloss/restore; security repaired samegap/strict concurrentquota/nativeprivateeffects. Completed keys neverregenerated. Originalmaskingnegative remainshistorical; prior late-emailPNG excluded106retainedframes.
 
 This docs-only handoff preserves newly created IDs and resume truth in disposableworktrees; it does not change the fixed product review target. Parent waits selected security result for an automatic continuation while otherready work continues, then ends native turn on yielding. No shell/status polling to occupy Provider slot. DeadlineOct11 23:59KST about45h43m, no Spring cancellation or shared operatingdata changes.
+
+
+## October9 18:35 UTC — compared independent results and remaining implementation
+
+Runtime/API/UI remain fixed fa552317 while the existing independent browser
+creation Request runs; no APP restart or schema change by lead. Fresh installer
+attempt3 original94c3f75b/0eb9e68f compared and intaken locallybe1c0d92/1a2d61f4.
+Atomic originalc38ee592 compared and intaken76cdfb19; canonical Request FAILED
+remains FAILED with cause UNKNOWN. Both reports and their negative history are
+preserved. Latest TEST release17:53:26 UTC recorded55tables104rows exact whole
+row/DDL digest, not proof of historical128tables639rows.
+
+Reviewed public recipe repair adds strict empty-schema-only migration cache
+bootstrap; array is passed only to the first migrate process, without rewriting
+normal database-cache env. Nonempty/partial schema never receives this override.
+Standalone MySQL fixture now binds actual database counters/locks on its guarded
+TEST connection. Neither repair has yet passed the new independent real-MySQL
+execution. Source review and Pint are separate evidence.
+
+Worker diagnostic confirmed missing translator/response dependencies in a
+separate held-lock fixture, repaired only the worker harness; original intermittent
+failure remains UNKNOWN. Ordinary acceptance quota assertions were preserved;
+busy503 is still a test failure, now with structural diagnostics.
+
+Completion audit identified Page installation without actual travel Page
+consumption and a static campaign banner. Existing DB-backed themes/board help
+remain implemented; Page-backed publication/query/UI contract is being prepared
+as additional work. It is not a documentation-only completion.
+
+FINAL_REPORT.md is an IN_PROGRESS requirement audit. New source/checkpoint and
+independent recipe execution next; PR2 reused, no main/production/Spring changes.
+
+Lead publication checks for the reviewed repair batch: expanded atomic/auth
+fixtures22tests2230assertions PASS14.870s, Pint5changedPHPfiles PASS, isolation27
+PASS (no liveenv/DB), git diff --check PASS. `git diff fa552317` for
+app/bootstrap/config/database/modules/plugins/templates/public/resources is
+empty: installed runtime source inheritance remains exact; new recipe/test source
+still needs its separately fixed MySQL gate. Lead did not author worker change
+and reviewed full diff/diagnostic: quota/overlap assertions retained, failed503
+never treated as admission.

@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 require __DIR__.'/environment.php';
+require __DIR__.'/migration-bootstrap.php';
 $root = dirname(__DIR__, 2);
 
 try {
@@ -75,7 +76,9 @@ try {
     $pdo = new PDO('mysql:host=127.0.0.1;port=3306;dbname=req81_travel_lab', 'req81_travel', $password, [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
     echo 'PASS: isolated development/test DBs provisioned; secrets remain in ignored environment files.'.PHP_EOL;
     foreach ([['migrate', '--no-interaction'], ['settings:install', '--no-interaction']] as $command) {
-        if (travelLabLifecycleProcess([PHP_BINARY, 'artisan', ...$command], $environment) !== 0) {
+        $migrationEnvironment = $command[0] === 'migrate'
+            ? travelLabInitialMigrationEnvironment($pdo, $environment, $root) : $environment;
+        if (travelLabLifecycleProcess([PHP_BINARY, 'artisan', ...$command], $migrationEnvironment) !== 0) {
             throw new RuntimeException('Installation step failed: '.$command[0]);
         }
     }
