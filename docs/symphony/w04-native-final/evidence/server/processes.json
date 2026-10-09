@@ -1,0 +1,70 @@
+{
+    "processes": [
+        {
+            "event": "start",
+            "why": "initial",
+            "launcher_pid": 308335,
+            "pgid": 308335,
+            "group_pids": [
+                308335
+            ],
+            "utc": "2026-10-09T17:37:05+00:00"
+        },
+        {
+            "event": "stop",
+            "why": "process restart",
+            "pgid": 308335,
+            "signalled_pids": [
+                308335
+            ],
+            "remaining_pids": [],
+            "port_closed": true,
+            "launcher_exit": 15,
+            "utc": "2026-10-09T17:37:09+00:00"
+        },
+        {
+            "event": "start",
+            "why": "restart",
+            "launcher_pid": 308532,
+            "pgid": 308532,
+            "group_pids": [
+                308532
+            ],
+            "utc": "2026-10-09T17:37:09+00:00"
+        },
+        {
+            "event": "stop",
+            "why": "own env-loss recovery exercise",
+            "pgid": 308532,
+            "signalled_pids": [
+                308532
+            ],
+            "remaining_pids": [],
+            "port_closed": true,
+            "launcher_exit": 15,
+            "utc": "2026-10-09T17:37:12+00:00"
+        },
+        {
+            "event": "start",
+            "why": "after own env recovery",
+            "launcher_pid": 308713,
+            "pgid": 308713,
+            "group_pids": [
+                308713
+            ],
+            "utc": "2026-10-09T17:37:14+00:00"
+        },
+        {
+            "event": "stop",
+            "why": "final",
+            "pgid": 308713,
+            "signalled_pids": [
+                308713
+            ],
+            "remaining_pids": [],
+            "port_closed": true,
+            "launcher_exit": 15,
+            "utc": "2026-10-09T17:37:16+00:00"
+        }
+    ]
+}

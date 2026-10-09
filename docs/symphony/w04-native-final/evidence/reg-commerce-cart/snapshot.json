@@ -1,0 +1,64 @@
+{
+    "label": "reg-commerce-cart",
+    "source_sha": "94c3f75b41ef44ca9456c742216382fc089a2f45",
+    "source_tree": "ae02b64be9c24c6ba182182f0a715abaaf732c9c",
+    "dump_sha256": "d254491c1cfe48cf90b8423923ed677c7742d1d1c1e281ef98ee1e2dcf4ee972",
+    "dump_bytes": 125166,
+    "dump_exit": 0,
+    "dump_seconds": 0.147,
+    "stable": true,
+    "before_digest": "ded72a53ad82a159b88e50a6560625488bb569a55f5f5ffa109cd45ae52d056e",
+    "table_count": 55,
+    "row_count": 104,
+    "equals_original_baseline": true,
+    "directory_mode": "700",
+    "file_mode": "600",
+    "exclusive": {
+        "pid": 334998,
+        "cwd": "/home/ubuntu/.agentopt-v2/workspaces/req_caef46f3473043048b5b4bc2ec41eaea",
+        "argv": [
+            "docs/symphony/w04-native-final/snapshot.php",
+            "reg-commerce-cart",
+            "run",
+            "/usr/bin/php8.3",
+            "vendor/bin/phpunit",
+            "--bootstrap",
+            "docs/symphony/w04-native-final/test-bootstrap.php",
+            "modules/_bundled/sirsoft-ecommerce/tests/Feature/Cart/CartQuantityAndPurchaseLimitTest.php"
+        ],
+        "own_connection_id": 111211,
+        "other_test_connections": 0,
+        "own_server_processes": 0,
+        "prior_request_handles": {
+            "req_3e70e7ceddd34beea51a17da727584bc": {
+                "utc": "2026-10-09T17:50:01.052519+00:00",
+                "method": "privileged readonly proc exact cwd/individual bounded argv/fd; proc locks inode",
+                "count": 0,
+                "handles": [],
+                "unreadable_pids": [],
+                "failed_lock_present": true,
+                "lock_holders": []
+            },
+            "req_337b3638df9b4b958b0627e0b262a54a": {
+                "utc": "2026-10-09T17:50:01.211611+00:00",
+                "method": "privileged readonly proc exact cwd/individual bounded argv/fd; proc locks inode",
+                "count": 0,
+                "handles": [],
+                "unreadable_pids": [],
+                "failed_lock_present": false,
+                "lock_holders": []
+            },
+            "req_dd6208f86a0b487796de37b9c4365cd4": {
+                "utc": "2026-10-09T17:50:01.397405+00:00",
+                "method": "privileged readonly proc exact cwd/individual bounded argv/fd; proc locks inode",
+                "count": 0,
+                "handles": [],
+                "unreadable_pids": [],
+                "failed_lock_present": false,
+                "lock_holders": []
+            }
+        },
+        "utc": "2026-10-09T17:50:01+00:00"
+    },
+    "utc": "2026-10-09T17:50:01+00:00"
+}

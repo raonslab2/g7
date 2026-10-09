@@ -1,0 +1,52 @@
+{
+    "table_count": 128,
+    "row_count": 236,
+    "digest": "0701b24f44c1d1f6bc990623e507817fef0567eed9d239fd2eb5c4db78fa6599",
+    "exclusive": {
+        "pid": 336775,
+        "cwd": "/home/ubuntu/.agentopt-v2/workspaces/req_caef46f3473043048b5b4bc2ec41eaea",
+        "argv": [
+            "docs/symphony/w04-native-final/snapshot.php",
+            "reg-native-auth",
+            "run",
+            "/usr/bin/php8.3",
+            "vendor/bin/phpunit",
+            "--bootstrap",
+            "docs/symphony/w04-native-final/test-bootstrap.php",
+            "tests/Feature/Api/Auth/UserAuthControllerTest.php"
+        ],
+        "own_connection_id": 112391,
+        "other_test_connections": 0,
+        "own_server_processes": 0,
+        "prior_request_handles": {
+            "req_3e70e7ceddd34beea51a17da727584bc": {
+                "utc": "2026-10-09T17:51:39.034957+00:00",
+                "method": "privileged readonly proc exact cwd/individual bounded argv/fd; proc locks inode",
+                "count": 0,
+                "handles": [],
+                "unreadable_pids": [],
+                "failed_lock_present": true,
+                "lock_holders": []
+            },
+            "req_337b3638df9b4b958b0627e0b262a54a": {
+                "utc": "2026-10-09T17:51:39.225185+00:00",
+                "method": "privileged readonly proc exact cwd/individual bounded argv/fd; proc locks inode",
+                "count": 0,
+                "handles": [],
+                "unreadable_pids": [],
+                "failed_lock_present": false,
+                "lock_holders": []
+            },
+            "req_dd6208f86a0b487796de37b9c4365cd4": {
+                "utc": "2026-10-09T17:51:39.375942+00:00",
+                "method": "privileged readonly proc exact cwd/individual bounded argv/fd; proc locks inode",
+                "count": 0,
+                "handles": [],
+                "unreadable_pids": [],
+                "failed_lock_present": false,
+                "lock_holders": []
+            }
+        },
+        "utc": "2026-10-09T17:51:39+00:00"
+    }
+}

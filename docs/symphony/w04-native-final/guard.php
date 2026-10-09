@@ -41,7 +41,7 @@ function w04Env(bool $cleanup = false, bool $testing = false): array {
         $guarded = preg_match('/^(DB_|CACHE_|REDIS_|SCOUT_|MEILISEARCH_|INSTALLER_|MYSQL_|MAIL_|QUEUE_|FILESYSTEM_|HTTP_PROXY|HTTPS_PROXY|ALL_PROXY|NO_PROXY|http_proxy|https_proxy|all_proxy|no_proxy)/',$k)
             || ($k==='MYSQL_ATTR_SSL_CA') || (str_starts_with($k,'APP_') && str_ends_with($k,'_CACHE'));
         if ($guarded && (!array_key_exists($k,$v) || $v[$k]!==$value)) {
-            // 内部 ordinary PHPUnit runner 的明确覆盖，不接受外部任意覆盖。
+            // 내부 ordinary PHPUnit의 명시 array만 허용하며 외부 임의 override는 거부한다.
             if (!$testing || !in_array($k,['CACHE_STORE'],true) || $value!=='array') { throw new RuntimeException('Inherited override rejected: '.$k); }
         }
     }
@@ -77,7 +77,7 @@ function w04fForeignHandles(): array {
         $out=stream_get_contents($pipes[1]); stream_get_contents($pipes[2]); fclose($pipes[1]); fclose($pipes[2]);
         $exit=proc_close($p); $r=json_decode($out,true,flags:JSON_THROW_ON_ERROR);
         $all[$req]=$r;
-        if($exit!==0 || $r['count']!==0 || $r['unreadable_pids']!==[] || $r['lock_holders']!==[]) { throw new RuntimeException('Prior Request live/unreadable handles.'); }
+        if($exit!==0 || $r['count']!==0 || $r['unreadable_pids']!==[] || $r['lock_holders']!==[]) { w04Save(w04fEvidence('intake').'/foreign-scan-failure-'.bin2hex(random_bytes(4)).'.json',['request'=>$req,'scan'=>$r]); throw new RuntimeException('Prior Request live/unreadable handles.'); }
     }
     return $all;
 }
@@ -113,6 +113,10 @@ function w04fRequireSnapshot(string $label): string {
 }
 function w04fChild(array $command,string $log,?array $env=null): int {
     $env??=w04Env(); $start=microtime(true);
+    if(is_file($log)) {
+        $suffix='.history-'.bin2hex(random_bytes(4));
+        foreach(['','.stderr','.result.json','.ownership.json'] as $ext) { if(is_file($log.$ext)) { rename($log.$ext,$log.$suffix.$ext); } }
+    }
     $p=proc_open($command,[0=>['file','/dev/null','r'],1=>['file',$log,'w'],2=>['file',$log.'.stderr','w']],$pipes,w04fRoot(),$env);
     if(!is_resource($p)) { throw new RuntimeException('Native child unavailable.'); }
     $pid=proc_get_status($p)['pid'];
@@ -139,7 +143,7 @@ function w04fCompleted(bool $completed): void {
     }
     putenv('INSTALLER_COMPLETED='.$value);$_ENV['INSTALLER_COMPLETED']=$value;$_SERVER['INSTALLER_COMPLETED']=$value;
 }
-/** 全表保留比较；仅明确声明的 native cache/audit/token delta 可不同。 */
+/** 전체 테이블을 비교하며 명시된 native cache/audit/token delta만 허용한다. */
 function w04fCompare(array $before,array $after,array $allowed=[]): array {
     $diff=[];$ddl=[];
     foreach(array_unique([...array_keys($before['tables']),...array_keys($after['tables'])]) as $table) {
@@ -151,4 +155,10 @@ function w04fCompare(array $before,array $after,array $allowed=[]): array {
         'table_set_equal'=>array_keys($before['tables'])===array_keys($after['tables']),
         'ddl_equal'=>$ddl===[], 'ddl_changed_tables'=>$ddl,'changed_tables'=>$diff,
         'all_nonallowed_tables_equal'=>array_diff(array_keys($diff),$allowed)===[], 'allowed_tables'=>$allowed];
+}
+function w04fMysqlOptions(string $path): void {
+    $env=w04Env();
+    $escape=static fn($v)=>'"'.str_replace(['\\','"',"\n","\r"],['\\\\','\\"','\\n','\\r'],$v).'"';
+    $bytes="[client]\nprotocol=tcp\nhost=127.0.0.1\nport=3306\nuser=".$escape($env['DB_WRITE_USERNAME'])."\npassword=".$escape($env['DB_WRITE_PASSWORD'])."\n";
+    if(file_put_contents($path,$bytes)!==strlen($bytes)||!chmod($path,0600)) { throw new RuntimeException('Private mysql options failed.'); }
 }

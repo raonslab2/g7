@@ -38,6 +38,14 @@ foreach ($batches as $label => $args) {
         'wall_seconds' => round(microtime(true) - $start, 3), 'native_output_sha256' => hash('sha256', $output), 'summary' => $lines,
         'restored_exact' => ($restore['exact_tables_rows_ddl'] ?? false) === true && ($restore['import_exit'] ?? 1) === 0,
         'restored_baseline' => $restore['equals_original_baseline'] ?? false, 'restored_tables' => $restore['table_count'] ?? null, 'restored_rows' => $restore['row_count'] ?? null];
+    if(($restore['exact_tables_rows_ddl']??false)===true) {
+        w04fQuiesce();
+        $independent=w04fChild([PHP_BINARY,__DIR__.'/measure.php','reg-'.$label],w04fPrivate('private').'/remeasure-'.$label.'.log');
+        $record=json_decode(file_get_contents(__DIR__.'/evidence/measure/reg-'.$label.'.json'),true,flags:JSON_THROW_ON_ERROR);
+        $results[$label]['independent_remeasure_exit']=$independent;
+        $results[$label]['independent_remeasure_digest']=$record['digest'];
+        if($independent!==0 || $record['digest']!==W04F_BASELINE_DIGEST) { throw new RuntimeException('Independent suite recovery remeasure failed.'); }
+    }
     w04Save($progress, $results);
     echo $label.' runner_exit='.$status.' tests='.$results[$label]['tests'].' assertions='.$results[$label]['assertions'].' restored='.json_encode($results[$label]['restored_baseline'])."\n";
     if (is_file(w04fPrivate($snap).'/BLOCKED') || !$results[$label]['restored_baseline']) { fwrite(STDERR, "BLOCKED: restore not verified; stopping before next batch.\n"); exit(1); }

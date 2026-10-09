@@ -3,8 +3,8 @@
 // Adapted from audited docs/symphony/w04/snapshot.php. Corrections in this copy:
 //  - stricter exclusivity (global PROCESSLIST, foreign /proc handles, own server) before dump, wipe, import;
 //  - pending/BLOCKED phase.json at every step; digest/baseline recorded in manifest;
-//  - 'restore-to <label>' restores a retained snapshot without deleting it (original kept);
-//  - backups are deleted only after exact rows+DDL equality AND only for disposable run labels.
+//  - restore/restore-keep은 보존된 원본을 복원하고 삭제하지 않는다;
+//  - 모든 원본/safety 백업은 검증 이후에도 보존한다.
 // Usage: snapshot.php <label> save | run <cmd...> | restore | restore-keep
 require __DIR__.'/guard.php';
 $root = w04fRoot();

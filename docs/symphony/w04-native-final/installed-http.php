@@ -64,7 +64,7 @@ try {
         $origins[$template]=['path'=>'templates/'.$template.'/template.json','sha256'=>hash_file('sha256',$file)];
     }
     w04Save($evidence.'/installed-source.json',['module_origin'=>str_replace(base_path().'/','',$origin),'module_sha256'=>hash_file('sha256',$origin),'api_count'=>count($routes),'routes'=>$routes,'hooks'=>$hooks,'role_permissions'=>$permissions,'admin_menus'=>$menus,'origins'=>$origins]);
-    $request = function ($method,$path,$body=[],$token=null,$expected=200) use ($kernel,&$records,$app) {
+    $request = function ($method,$path,$body=[],$token=null,$expected=200) use ($kernel,&$records,$app,$evidence) {
         // Each simulated request is a separate cookie-free HTTP client. Only Bearer authenticates it.
         $app['session']->driver()->flush();
         Auth::forgetGuards();

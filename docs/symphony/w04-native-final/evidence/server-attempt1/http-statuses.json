@@ -1,0 +1,144 @@
+{
+    "requests": [
+        {
+            "phase": "A",
+            "method": "POST",
+            "path": "/api/auth/login",
+            "status": 200,
+            "expected": 200
+        },
+        {
+            "phase": "A",
+            "method": "POST",
+            "path": "/api/auth/admin/login",
+            "status": 200,
+            "expected": 200
+        },
+        {
+            "phase": "A",
+            "method": "GET",
+            "path": "/api/modules/raonslab-travel_lab/cart",
+            "status": 401,
+            "expected": 401
+        },
+        {
+            "phase": "A",
+            "method": "POST",
+            "path": "/api/modules/raonslab-travel_lab/cart",
+            "status": 201,
+            "expected": 201
+        },
+        {
+            "phase": "A",
+            "method": "POST",
+            "path": "/api/modules/raonslab-travel_lab/inquiries",
+            "status": 201,
+            "expected": 201
+        },
+        {
+            "phase": "A",
+            "method": "POST",
+            "path": "/api/modules/raonslab-travel_lab/inquiries",
+            "status": 200,
+            "expected": 200
+        },
+        {
+            "phase": "A",
+            "method": "PATCH",
+            "path": "/api/modules/raonslab-travel_lab/admin/inquiries/2",
+            "status": 200,
+            "expected": 200
+        },
+        {
+            "phase": "A",
+            "method": "PATCH",
+            "path": "/api/modules/raonslab-travel_lab/admin/inquiries/2",
+            "status": 200,
+            "expected": 200
+        },
+        {
+            "phase": "A",
+            "method": "POST",
+            "path": "/api/auth/logout",
+            "status": 200,
+            "expected": 200
+        },
+        {
+            "phase": "A",
+            "method": "GET",
+            "path": "/api/modules/raonslab-travel_lab/inquiries/2",
+            "status": 401,
+            "expected": 401
+        },
+        {
+            "phase": "B",
+            "method": "GET",
+            "path": "/api/modules/raonslab-travel_lab/inquiries/2",
+            "status": 401,
+            "expected": 401
+        },
+        {
+            "phase": "B",
+            "method": "GET",
+            "path": "/api/admin/auth/user",
+            "status": 200,
+            "expected": 200
+        },
+        {
+            "phase": "B",
+            "method": "POST",
+            "path": "/api/auth/login",
+            "status": 200,
+            "expected": 200
+        },
+        {
+            "phase": "B",
+            "method": "GET",
+            "path": "/api/modules/raonslab-travel_lab/inquiries/2",
+            "status": 200,
+            "expected": 200
+        },
+        {
+            "phase": "C",
+            "method": "POST",
+            "path": "/api/auth/login",
+            "status": 200,
+            "expected": 200
+        },
+        {
+            "phase": "C",
+            "method": "GET",
+            "path": "/api/modules/raonslab-travel_lab/inquiries/2",
+            "status": 200,
+            "expected": 200
+        },
+        {
+            "phase": "C",
+            "method": "POST",
+            "path": "/api/modules/raonslab-travel_lab/inquiries/2/cancel",
+            "status": 200,
+            "expected": 200
+        },
+        {
+            "phase": "C",
+            "method": "POST",
+            "path": "/api/auth/logout",
+            "status": 200,
+            "expected": 200
+        },
+        {
+            "phase": "C",
+            "method": "POST",
+            "path": "/api/admin/auth/logout",
+            "status": 200,
+            "expected": 200
+        },
+        {
+            "phase": "C",
+            "method": "GET",
+            "path": "/api/admin/auth/user",
+            "status": 401,
+            "expected": 401
+        }
+    ]
+}
