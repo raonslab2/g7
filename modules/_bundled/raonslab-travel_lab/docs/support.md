@@ -14,7 +14,7 @@
 | --- | --- | --- | --- | --- | --- |
 | 공지사항 | `travel-lab-notices` | 누구나 읽기 | 사용 안 함 | 끔 | 끔 |
 | FAQ | `travel-lab-faqs` | 누구나 읽기 | 사용 안 함 | 끔 | 끔 |
-| 1:1 문의 | `travel-lab-questions` | 작성자 본인 + `support.read` 관리자 | **항상** | 켬 (관리자 답변) | 끔 |
+| 1:1 문의 | `travel-lab-questions` | 작성자 본인 + 문의 게시판 네이티브 관리자이면서 `support.read` 보유자 | **항상** | 켬 (관리자 답변) | 끔 |
 
 세 게시판은 모두 `is_active=false` 로 만든다. 그래서 게시판 모듈의 공개 라우트(`/api/modules/sirsoft-board/boards/{slug}/**`), 사용자 메뉴, 게시판 목록, 검색에 노출되지 않는다. 방문자 경로는 이 모듈의 고객지원 API 뿐이고, 관리자는 게시판 모듈의 기존 관리자 화면(`/admin/board/{slug}`)에서 그대로 관리한다. 기존 `raonslab-product` 게시판·페이지는 읽지도 고치지도 않는다.
 
@@ -27,7 +27,7 @@ flowchart LR
     C --> S[TravelSupportService]
     S -->|requireReady 읽기 전용| P[TravelSupportProvisioner]
     S -->|board_id·user_id 스코프 조회| R[TravelSupportPostRepositoryInterface]
-    S -->|createPost skip_notification| PS[sirsoft-board PostService]
+    S -->|createPost skip_notification / updatePost| PS[sirsoft-board PostService]
     A[관리자] -->|/admin/board/travel-lab-*| NB[게시판 모듈 관리자 화면]
     NB -->|댓글 답변| PS
     PS -.->|notification.extract_data| L[SuppressTravelSupportNotifications]
@@ -35,12 +35,13 @@ flowchart LR
 
 ## 3. 격리 규칙 (fail-closed)
 
-- **문의 목록**: `raonslab-travel_lab.support.read`(admin 타입) 권한이 없으면 항상 `user_id = 본인` 조건이 걸린다. 게시판 모듈의 `paginate` 는 1페이지에 공지를 필터 무시로 섞으므로 쓰지 않고, `TravelSupportPostRepository` 가 `board_id`·`status=published`·`parent_id IS NULL`·`user_id` 를 where 절로 고정한다.
-- **문의 상세/수정**: 작성자도 아니고 관리자 권한도 없으면 **404** (403 이 아니다 — 존재 여부를 숨긴다). 수정은 작성자 또는 `support.update` 관리자만 가능하다.
+- **남의 문의 접근 (W03 보강)**: 여행 권한만으로는 열리지 않는다. 열람은 `raonslab-travel_lab.support.read` **와** 문의 게시판 네이티브 권한 `sirsoft-board.travel-lab-questions.admin.posts.read`·`admin.posts.read-secret` 을 모두 admin 타입으로 가져야 하고, 수정은 여기에 `raonslab-travel_lab.support.update` 와 `...admin.posts.write` 가 더해진다. 게시판 권한은 프로비저너가 `admin`(+게시판 전용 manager/step 역할)에만 두도록 고정·검증하므로, 전역 `manager` 같은 역할에 여행 `support.*` 권한이 남아 있어도 남의 비밀 문의는 404 다. 상세는 권한마다 `PermissionHelper::checkScopeAccess()`(소유자 `user_id`)를 적용하고, 목록 전체 열람은 모든 권한의 유효 스코프가 전체(null)일 때만 허용한다 — `self`·`role` 스코프는 목록에서 본인 글로 좁힌다.
+- **문의 목록**: 위 조건을 만족하지 않으면 항상 `user_id = 본인` 조건이 걸린다. 게시판 모듈의 `paginate` 는 1페이지에 공지를 필터 무시로 섞으므로 쓰지 않고, `TravelSupportPostRepository` 가 `board_id`·`status=published`·`parent_id IS NULL`·`user_id` 를 where 절로 고정한다.
+- **문의 상세/수정**: 작성자도 아니고 관리자 권한도 없으면 **404** (403 이 아니다 — 존재 여부를 숨긴다). 수정은 작성자 또는 위 수정 조건을 만족하는 관리자만 가능하며, 게시판 `PostService::updatePost()` 로 수행해 네이티브 `before/after_update` 훅(활동 로그 `post.update`, SEO 캐시)과 캐시 무효화를 그대로 거친다.
 - **문의 저장**: 입력에서는 `title`·`content` 만 받는다. `is_secret=true`·`user_id=인증 사용자`·첨부 없음은 서비스가 강제하며, 요청 본문의 `is_secret`·`user_id`·`attachment_ids` 는 무시된다.
 - **응답 직렬화**: `user_id`·`ip_address`·`password`·`action_logs` 는 내보내지 않는다. 답변(댓글)은 답변자 계정 정보 없이 `is_author` 만 싣는다.
 - **채널 스코프**: 공지 ID 로 FAQ 상세를, 공지 ID 로 문의 상세를 조회하면 404 다.
-- **미준비 상태**: 게시판이 없거나 안전 기준과 다르면 모든 고객지원 엔드포인트가 **503** 으로 닫힌다. 요청 경로는 게시판을 만들거나 고치지 않는다.
+- **미준비 상태**: 게시판이 없거나 안전 기준과 다르면 모든 고객지원 엔드포인트가 **503** 으로 닫힌다. 요청 경로는 게시판을 만들거나 고치지 않는다. 안전 기준은 비활성·비밀글 모드·첨부/신고/알림 끔에 더해 `use_comment`(문의만 켬)·`use_reply`(끔)와 **게시판 권한 16종**이다. 각 권한은 `admin` 을 반드시 포함하고 `admin`·`sirsoft-board.{slug}.manager`·`sirsoft-board.{slug}.step`(admin.manage/manager 제외) 외의 역할이 없어야 한다. 권한 행이 없거나 역할이 0개면 게시판 모듈은 전체 허용으로 해석하므로 역시 불일치다. 운영자가 바꾼 값은 덮어쓰지 않고 실패만 한다.
 
 ## 4. 알림 억제
 
@@ -50,7 +51,22 @@ flowchart LR
 2. 이 모듈의 쓰기: `PostService::createPost(..., options: ['skip_notification' => true])`
 3. `SuppressTravelSupportNotifications` 필터(`sirsoft-board.notification.extract_data`, priority 95): 관리자가 게시판 관리자 화면에서 답변·블라인드·삭제를 해도 **travel-lab-\* 게시판에서 나온 알림만** `context.skip=true` 로 바꾼다. 다른 게시판(`raonslab-product` 상담 게시판 포함)은 그대로 통과시킨다.
 
-`ExcludeTravelSupportQuestionsFromSearch` 는 문의 게시판 글을 검색 색인에서 뺀다.
+## 4-1. 검색 색인
+
+`ExcludeTravelSupportQuestionsFromSearch` 는 문의 게시판 글을 검색 색인에서 뺀다. 게시판 `Post::shouldBeSearchable()` 은 드라이버만 보고(게시판 활성·비밀글 무관) 이 모듈은 게시판·코어 공개 API 를 바꾸지 않으므로, Scout 경로별 보호 범위는 다음과 같다.
+
+| 경로 | 보호 |
+| --- | --- |
+| 게시판 사이트 검색(DB) | 게시판 모듈이 활성 게시판만 검색 대상으로 삼는다 — 비활성인 문의 게시판은 제외 |
+| 생성·수정 저장 | `sirsoft-board.search.post.index_should_update` 필터가 false — Scout 관찰자가 색인을 건너뜀 |
+| 복원·소프트 삭제 (Scout 강제 저장, 필터 우회) | `post.after_restore`/`after_delete` sync 훅에서 외부 드라이버일 때 `unsearchable()` 로 즉시 제거 (복원 시 짧은 색인 후 제거) |
+| `scout:import`·`makeAllSearchable`·수동 `searchable()` | **보호 불가** — 게시판 훅이 없다. 대신 `scout.driver` 가 `mysql-fulltext` 가 아니면 문의 채널을 503 으로 닫고 프로비저닝도 409(`search_engine_unsafe`)로 거부한다 |
+
+안전 구성: `SCOUT_DRIVER=mysql-fulltext`(출하 기본값). 이 구성에서는 `shouldBeSearchable()=false` 라 외부 색인 자체가 생기지 않는다. 외부 엔진으로 바꾸려면 게시판 모듈에 게시판 단위 비색인 계약이 먼저 필요하다.
+
+> **운영자 경고**: 문의가 이미 쌓인 사이트에서 드라이버를 외부 엔진으로 바꾸고 `scout:import` 를 실행하면 기존 비밀 문의 제목·본문이 외부 색인으로 나간다. 채널 503 은 새 문의를 막을 뿐 기존 행을 지키지 못한다. 드라이버를 바꾸기 전에 문의 게시판을 비우거나 위 계약을 먼저 마련한다.
+
+`admin.posts.write`·여행 `support.*` 권한에는 소유자 스코프 메타(`owner_key`)가 없어 스코프 판정이 항상 통과한다. 따라서 남의 문의 수정의 소유자 범위는 함께 요구하는 열람 권한(`admin.posts.read`·`read-secret`, 소유자 `user_id`)의 스코프가 정한다.
 
 ## 5. LAB 프로비저닝
 

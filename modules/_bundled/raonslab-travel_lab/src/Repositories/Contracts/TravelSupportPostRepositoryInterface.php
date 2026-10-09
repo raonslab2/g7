@@ -39,11 +39,17 @@ interface TravelSupportPostRepositoryInterface
     public function findByProvenanceKey(int $boardId, string $provenanceKey): ?Post;
 
     /**
-     * 게시글의 제목·본문을 갱신합니다.
+     * 게시판 권한 키별로 부여된 역할 identifier 목록을 반환합니다.
      *
-     * @param  array{title?: string, content?: string}  $data
+     * 권한 행이 없으면 null 이다 — 게시판 모듈은 권한 행 부재와 역할 0개를 모두
+     * "전체 허용" 으로 해석하므로, 호출자는 null 과 빈 배열을 모두 개방 상태로 다뤄야 한다.
+     * 문의 수정 쓰기는 이 계약에 두지 않는다 — 게시판 PostService::updatePost() 만 사용한다
+     * (훅·활동 로그·캐시 무효화를 우회하는 직접 save 경로 금지).
+     *
+     * @param  array<int, string>  $permissionKeys  `admin.posts.read` 형태의 게시판 권한 키
+     * @return array<string, array<int, string>|null>
      */
-    public function updateContent(Post $post, array $data): Post;
+    public function boardPermissionRoles(string $boardSlug, array $permissionKeys): array;
 
     /**
      * 문의에 달린 게시 상태 답변(댓글)을 작성 순으로 최대 $limit 건 반환합니다.

@@ -104,7 +104,7 @@ Accept: application/json
 ### GET /api/modules/raonslab-travel_lab/support/questions
 
 - **라우트명**: `api.modules.raonslab-travel_lab.support.questions.index`
-- **인증/권한**: `auth:sanctum` (Bearer). `raonslab-travel_lab.support.read`(admin) 보유자는 전체, 그 외는 본인 글만
+- **인증/권한**: `auth:sanctum` (Bearer). `raonslab-travel_lab.support.read` 와 문의 게시판 네이티브 `admin.posts.read`·`admin.posts.read-secret` 을 모두 스코프 제한 없이 가진 관리자만 전체, 그 외(여행 권한만 있는 전역 역할 포함)는 본인 글만
 - 파라미터: `page`, `per_page` (공지와 동일)
 
 ```http
@@ -171,7 +171,7 @@ Authorization: Bearer {YOUR_TOKEN}
 ### GET /api/modules/raonslab-travel_lab/support/questions/{id}
 
 - **라우트명**: `api.modules.raonslab-travel_lab.support.questions.show`
-- **인증/권한**: `auth:sanctum`. 작성자 또는 `support.read` 관리자. 그 외·존재하지 않음·다른 채널 글은 `404 {"success": false, "message": "Question not found."}`
+- **인증/권한**: `auth:sanctum`. 작성자 또는 `support.read` + 문의 게시판 네이티브 열람 권한(소유자 스코프 판정 포함)을 모두 가진 관리자. 그 외·존재하지 않음·다른 채널 글은 `404 {"success": false, "message": "Question not found."}`
 - `answers[]`: 게시판 관리자 화면에서 단 댓글(게시 상태, 작성순, 최대 50건). 답변자 계정 정보는 싣지 않는다.
 
 | 필드 | 타입 | 설명 |
@@ -197,7 +197,7 @@ Authorization: Bearer {YOUR_TOKEN}
 ### PATCH /api/modules/raonslab-travel_lab/support/questions/{id}
 
 - **라우트명**: `api.modules.raonslab-travel_lab.support.questions.update`
-- **인증/권한**: `auth:sanctum`. 작성자 또는 `raonslab-travel_lab.support.update`(admin). 그 외는 404, 원문 불변
+- **인증/권한**: `auth:sanctum`. 작성자 또는 `support.read`·`support.update` + 문의 게시판 네이티브 `admin.posts.read`·`admin.posts.read-secret`·`admin.posts.write` 를 모두 가진 관리자. 그 외는 404, 원문 불변. 수정은 게시판 `PostService::updatePost()` 경유(활동 로그 `post.update` 기록, 알림 없음)
 - 본문: `title`(2–200) 과 `content`(2–5000) 중 하나 이상. 응답 형태는 POST 와 같고 상태 200, 메시지 `Your question was updated.`
 
 ## 상태 코드 요약
@@ -209,4 +209,4 @@ Authorization: Bearer {YOUR_TOKEN}
 | 404 | 채널 밖·존재하지 않음·타인 문의 |
 | 422 | 입력 검증 실패 (`per_page>50` 포함) |
 | 429 | throttle 초과 |
-| 503 | 고객지원 게시판 미준비 또는 안전 기준 불일치 |
+| 503 | 고객지원 게시판 미준비 또는 안전 기준 불일치(게시판 권한·댓글·답글 설정 포함), 문의 채널은 외부 검색 드라이버 구성에서도 503 |
