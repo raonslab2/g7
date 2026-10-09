@@ -1,0 +1,5 @@
+// native read audit용 bounded429 대기. quota/cache/config는 수정하지 않는다.
+import fs from 'node:fs';import {a,base,out,expect} from './common.mjs';
+export async function auditApi(p,path,method='GET',data,role='member'){
+for(let attempt=0;attempt<3;attempt++){const r=await p.request.fetch(base+path,{method,headers:{Accept:'application/json',Authorization:'Bearer '+a[role].bearer_token},...(data===undefined?{}:{data})});if(r.status()!==429)return {status:r.status(),body:await r.json()};const retry=Number(r.headers()['retry-after']);expect(retry).toBeGreaterThan(0);expect(retry).toBeLessThanOrEqual(64);const file=out+'/audit-rate-waits.json',rows=fs.existsSync(file)?JSON.parse(fs.readFileSync(file)):[];rows.push({path,method,role,nativeHTTP:429,limit:r.headers()['x-ratelimit-limit'],retryAfterSeconds:retry,waitMs:(retry+1)*1000});fs.writeFileSync(file,JSON.stringify(rows,null,2)+'\n');let wait=(retry+1)*1000;while(wait>0){const chunk=Math.min(wait,30000);await p.waitForTimeout(chunk);wait-=chunk;}}
+throw Error('Bounded native audit retry exhausted');}
