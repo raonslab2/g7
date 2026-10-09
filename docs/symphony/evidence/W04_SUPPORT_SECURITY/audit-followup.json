@@ -1,0 +1,112 @@
+{
+  "source_sha": "598a89fff702d51c1405f1a5952d95ab1d2651f4",
+  "tree": "9e00273bdf18d6a713343755aac54f44a9b032b4",
+  "run": "W04S-140631",
+  "scope": "actual loopback HTTP; fresh distinct actors; API only",
+  "elapsed_seconds": 0.862,
+  "checks": [
+    {
+      "name": "native_login_admin",
+      "result": "PASS",
+      "http": 200,
+      "token_issued": true
+    },
+    {
+      "name": "native_update_audit_exact_persistence",
+      "result": "PASS",
+      "http": 200,
+      "matching_update_rows": 1,
+      "title_change_rows": 1,
+      "old_title_matches": true,
+      "new_title_matches": true,
+      "source_contract": "Native Post.activityLogFields omits content; initial content-field assertion was overbroad and remains in original evidence"
+    },
+    {
+      "name": "own_native_notification_inbox_member",
+      "result": "PASS",
+      "http": 200,
+      "returned_notifications": 0,
+      "limitation": "Inbox observation only; external delivery/queue and whole DB row counts not attested"
+    },
+    {
+      "name": "own_native_notification_inbox_other_member",
+      "result": "PASS",
+      "http": 200,
+      "returned_notifications": 0,
+      "limitation": "Inbox observation only; external delivery/queue and whole DB row counts not attested"
+    },
+    {
+      "name": "cleanup_audit_followup_token",
+      "result": "PASS",
+      "http": 200
+    }
+  ],
+  "requests": [
+    {
+      "n": 1,
+      "method": "POST",
+      "endpoint": "native_login/admin",
+      "actor": "anonymous",
+      "status": 200,
+      "start_s": 0.0688,
+      "end_s": 0.5012,
+      "headers": {
+        "x-ratelimit-limit": "30",
+        "x-ratelimit-remaining": "27"
+      }
+    },
+    {
+      "n": 2,
+      "method": "GET",
+      "endpoint": "own_native_update_audit_query",
+      "actor": "admin",
+      "status": 200,
+      "start_s": 0.5018,
+      "end_s": 0.6158,
+      "headers": {
+        "x-ratelimit-limit": "600",
+        "x-ratelimit-remaining": "599"
+      }
+    },
+    {
+      "n": 3,
+      "method": "GET",
+      "endpoint": "own_notification_inbox/member",
+      "actor": "member",
+      "status": 200,
+      "start_s": 0.6162,
+      "end_s": 0.6971,
+      "headers": {
+        "x-ratelimit-limit": "600",
+        "x-ratelimit-remaining": "599"
+      }
+    },
+    {
+      "n": 4,
+      "method": "GET",
+      "endpoint": "own_notification_inbox/other_member",
+      "actor": "other_member",
+      "status": 200,
+      "start_s": 0.6977,
+      "end_s": 0.796,
+      "headers": {
+        "x-ratelimit-limit": "600",
+        "x-ratelimit-remaining": "599"
+      }
+    },
+    {
+      "n": 5,
+      "method": "POST",
+      "endpoint": "cleanup_audit_followup_token",
+      "actor": "admin",
+      "status": 200,
+      "start_s": 0.7967,
+      "end_s": 0.8617,
+      "headers": {}
+    }
+  ],
+  "created_private_questions": 0,
+  "counts": {
+    "PASS": 5
+  }
+}

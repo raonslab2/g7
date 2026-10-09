@@ -1,0 +1,198 @@
+{
+  "timestamp_utc": "2026-10-09T14:09:06.086860+00:00",
+  "review_request": "req_1c49be4c4f164489b069557bb1db4d06",
+  "source_sha": "598a89fff702d51c1405f1a5952d95ab1d2651f4",
+  "tree": "9e00273bdf18d6a713343755aac54f44a9b032b4",
+  "head_before_evidence_commit": "598a89fff702d51c1405f1a5952d95ab1d2651f4",
+  "native_subagents": {
+    "unique": 1,
+    "source_review_turns": 2,
+    "official_children_created": 0,
+    "extra_PC_claimed": 0,
+    "evidence_review_turns": 1
+  },
+  "test_commands": [
+    {
+      "command": "composer install --no-interaction --prefer-dist --no-scripts",
+      "scope": "own nonsymlinked vendor; no other Request mutable dependencies",
+      "result": "PASS"
+    },
+    {
+      "command": "php vendor/bin/phpunit -c modules/_bundled/raonslab-travel_lab/tests/phpunit.xml --colors=never",
+      "result": "PASS",
+      "tests": 152,
+      "assertions": 2469,
+      "seconds": 142.559
+    },
+    {
+      "command": "php vendor/bin/phpunit --no-configuration --bootstrap vendor/autoload.php tests/Unit/Extension/ModuleVendorInstallGateTest.php --colors=never",
+      "result": "PASS",
+      "tests": 15,
+      "assertions": 109,
+      "seconds": 2.242
+    },
+    {
+      "command": "php vendor/bin/phpunit --no-configuration --bootstrap vendor/autoload.php tests/Unit/Extension/TravelSupportThrottleIsolationTest.php --colors=never",
+      "result": "PASS",
+      "tests": 5,
+      "assertions": 53,
+      "seconds": 0.244
+    },
+    {
+      "command": "python3 -I docs/symphony/evidence/W04_SUPPORT_SECURITY/http_review.py <authorized-private-access> docs/symphony/evidence/W04_SUPPORT_SECURITY/http-results.json",
+      "result": "MIXED; original failures preserved"
+    },
+    {
+      "command": "python3 -I docs/symphony/evidence/W04_SUPPORT_SECURITY/http_followup.py <same-authorized-private-access> docs/symphony/evidence/W04_SUPPORT_SECURITY/http-followup.json",
+      "result": "MIXED; public isolation FAIL, contracts PASS"
+    },
+    {
+      "command": "python3 -I docs/symphony/evidence/W04_SUPPORT_SECURITY/audit_followup.py <same-authorized-private-access> docs/symphony/evidence/W04_SUPPORT_SECURITY/audit-followup.json",
+      "result": "PASS; corrected native title-only audit contract"
+    },
+    {
+      "command": "php docs/symphony/evidence/W04_SUPPORT_SECURITY/middleware_order.php",
+      "result": "PASS source reproducer / open product finding"
+    },
+    {
+      "command": "php docs/symphony/evidence/W04_SUPPORT_SECURITY/hooks.php",
+      "result": "PASS source enumeration"
+    },
+    {
+      "command": "python3 -I docs/symphony/evidence/W04_SUPPORT_SECURITY/source_probe.py",
+      "result": "PASS Git-source comparison"
+    }
+  ],
+  "blocked": [
+    {
+      "check": "four new fixed-SHA sustained HTTP races",
+      "reason": "Own .env.testing absent; committed barrier requires prohibited parent APP .env. No scoped PDO credential supplied in authorized access. Narrow parent .env.testing clarification unanswered; no other Request environment read."
+    },
+    {
+      "check": "full actual installed source/route/hook caches and DB-wide notification/order counts",
+      "reason": "No authorized live introspection interface or scoped PDO credential; parent files/env/services excluded. HTTP assets and tested route behavior verified separately."
+    },
+    {
+      "check": "exact fresh public actor 600/601",
+      "reason": "Actual public limiter runs before optional auth and shares IP bucket. No cache reset, spoofed IP or sleep used; first run crossed window; followup started nonfresh and concurrent increments not atomic."
+    }
+  ],
+  "not_run": [
+    "MySQL TEST suite / fresh TEST installation (exclusive other owner)",
+    "390/1440 browser/admin UI (exclusive browser owner)",
+    "independent restart/before-after whole DB",
+    "hosted CI (0; not waived)",
+    "canonical formal Validation receipt (unavailable)"
+  ],
+  "evidence": [
+    {
+      "path": "docs/symphony/evidence/W04_SUPPORT_SECURITY/audit-followup-execution.txt",
+      "sha256": "dfd6c34c92dbc293cfcb0b160f682a122e79986ac6935002f4e9e797fa4441e5"
+    },
+    {
+      "path": "docs/symphony/evidence/W04_SUPPORT_SECURITY/audit-followup.json",
+      "sha256": "8b430513ebbf8709d4d195ef2a7d5923f0fdccadc72126269df05ee5fda81db6"
+    },
+    {
+      "path": "docs/symphony/evidence/W04_SUPPORT_SECURITY/audit_followup.py",
+      "sha256": "a66a4abb6ed5e74b2560754710c0214136b1d38fc13be8e9b498b858445fc87b"
+    },
+    {
+      "path": "docs/symphony/evidence/W04_SUPPORT_SECURITY/domain-tests.txt",
+      "sha256": "f71c4fa025ba08411f6d24e4053101205c3af2d6535e462e3994593ec4765e14"
+    },
+    {
+      "path": "docs/symphony/evidence/W04_SUPPORT_SECURITY/hooks.json",
+      "sha256": "743d400f0400f2449431716fe56ca07d754d1c6f86f6cc4cb8d554b1beb5ca5d"
+    },
+    {
+      "path": "docs/symphony/evidence/W04_SUPPORT_SECURITY/hooks.php",
+      "sha256": "cda7b77ecb64691237669321bc6d827e41116fc8ab94dc433f1dc88912139e39"
+    },
+    {
+      "path": "docs/symphony/evidence/W04_SUPPORT_SECURITY/http-assets.json",
+      "sha256": "23c15bce766d3d9ad0f9244473384e5952d399f64660b900d98a092533afefc7"
+    },
+    {
+      "path": "docs/symphony/evidence/W04_SUPPORT_SECURITY/http-execution.txt",
+      "sha256": "f639aa28f0f418813fadca1d3722f7732a51949ba280b1380ed905b4199c2819"
+    },
+    {
+      "path": "docs/symphony/evidence/W04_SUPPORT_SECURITY/http-followup-execution.txt",
+      "sha256": "f84f0fa8cbd390a80f094abc95d376c96b1a6722316727f4212de9a6d72b3488"
+    },
+    {
+      "path": "docs/symphony/evidence/W04_SUPPORT_SECURITY/http-followup.json",
+      "sha256": "1de653e3feda269370d35e25428d23d1e4fab2c16463e8a55421d9756f879196"
+    },
+    {
+      "path": "docs/symphony/evidence/W04_SUPPORT_SECURITY/http-results.json",
+      "sha256": "c1b991c8721d75a1c19b295a238658c56b8e728bb772b97d55e714d33c9f2125"
+    },
+    {
+      "path": "docs/symphony/evidence/W04_SUPPORT_SECURITY/http_followup.py",
+      "sha256": "a3967dadd88a8832e736183c332c2be2c27ccbe8fff865f2fe4e217513177b84"
+    },
+    {
+      "path": "docs/symphony/evidence/W04_SUPPORT_SECURITY/http_review.py",
+      "sha256": "bb1c0c090f03eb496ad6901a14790fedb276c7f1f91c7316cda591c55d322bb9"
+    },
+    {
+      "path": "docs/symphony/evidence/W04_SUPPORT_SECURITY/installer-tests.txt",
+      "sha256": "5c46d4505dc48d4ad9eff7ad9a71f758c93df5f3cc8f0afe08327a03c1770ace"
+    },
+    {
+      "path": "docs/symphony/evidence/W04_SUPPORT_SECURITY/middleware-order.json",
+      "sha256": "1d0a484d13b3db7a73a3a06265fe3aa5460b94d347f1bf496f09f319aa17903c"
+    },
+    {
+      "path": "docs/symphony/evidence/W04_SUPPORT_SECURITY/middleware_order.php",
+      "sha256": "127bbbe05b7e5130b1a6e39209d4d7617496f9068f41acbe07e06b1e42f713ab"
+    },
+    {
+      "path": "docs/symphony/evidence/W04_SUPPORT_SECURITY/source-execution.txt",
+      "sha256": "8d710309092a84cfde3ac08ffdc3ed4c76a7e2c1fbb67b081a7ebba1dab64f16"
+    },
+    {
+      "path": "docs/symphony/evidence/W04_SUPPORT_SECURITY/source-hashes.json",
+      "sha256": "1d4b66a1586a8c66032a0b264dd15bb77b1278c5e8fe8250febbb964dd4e0aaa"
+    },
+    {
+      "path": "docs/symphony/evidence/W04_SUPPORT_SECURITY/source_probe.py",
+      "sha256": "2bc74ef1c4034925d20c166373bf28b5f7ebc5ece2245faf4bc601848637fb52"
+    },
+    {
+      "path": "docs/symphony/evidence/W04_SUPPORT_SECURITY/throttle-tests.txt",
+      "sha256": "44cc530d9027bfc721aa0f3ac149a08beab7dec24be26858ca002644bc7e2b2b"
+    }
+  ],
+  "report": {
+    "path": "docs/symphony/W04_SUPPORT_SECURITY_REVIEW.md",
+    "sha256": "b70cd894101f39ba1eb6181e8d89d75f8793958616aec3d7d937d26aa506c7f8"
+  },
+  "hygiene": {
+    "secret_value_scan": "PASS no authorized credential values or UUID values",
+    "own_vendor_symlinks": 0,
+    "python_syntax": "PASS; generated pycache removed",
+    "php_syntax": "PASS two pure helpers",
+    "whitespace": "PASS"
+  },
+  "internal_evidence_review": {
+    "fixed_local_commit": "ce1d4ec3",
+    "reviewer": "same unique readonly native source reviewer, nonauthor of probes/report",
+    "finding": "Report price corrected to raw189000; delivered probe removes actual synthetic contact literals, strengthens cleanup predicate; raw results unchanged",
+    "formal_validation": false
+  },
+  "post_execution_script_edit": {
+    "path": "docs/symphony/evidence/W04_SUPPORT_SECURITY/http_followup.py",
+    "execution_version_sha256": "44ea4b80bf785301eeaf390ef03ac60e87227993d6d0500c63fb9563bf34cf3c",
+    "delivered_sha256": "a3967dadd88a8832e736183c332c2be2c27ccbe8fff865f2fe4e217513177b84",
+    "changes": [
+      "Generate contact values privately in process; literal values omitted from delivery",
+      "Require both own-list HTTP200 statuses",
+      "Requery following fallback own-cart delete"
+    ],
+    "rerun": false,
+    "raw_evidence_rewritten": false
+  }
+}
