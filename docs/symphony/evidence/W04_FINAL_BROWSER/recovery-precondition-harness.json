@@ -1,0 +1,9 @@
+{
+  "source": "1052e3fb4bc4cccabb51b8c538116c78655f345b",
+  "exit": 1,
+  "status": "FAIL",
+  "name": "390 owner followup empty-cart precondition",
+  "ownCart": 148,
+  "ownProduct": 55,
+  "reason": "Fatal prior callback left a cart before its ledger flush. Original cleanup used only flushed IDs, so this new attempt refused to clear it blindly. Fresh native owner GET and exact self-created product55 bind the row; bounded reconciliation and immediate cart-ledger flush added."
+}

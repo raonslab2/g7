@@ -1,0 +1,63 @@
+{
+  "tested_sha": "1052e3fb4bc4cccabb51b8c538116c78655f345b",
+  "actual_head": "1052e3fb4bc4cccabb51b8c538116c78655f345b",
+  "run": "W04F1791563534486",
+  "elapsed_seconds": 0.943,
+  "results": [
+    {
+      "width": 390,
+      "name": "readonly native persisted inquiry audit actor identity and transitions",
+      "status": "PASS",
+      "detail": {
+        "id": 103,
+        "eventStates": [
+          "TEST_INQUIRY",
+          "UNDER_REVIEW",
+          "TEST_ACCEPTED",
+          "CANCELLED"
+        ],
+        "actorRoles": [
+          "owner",
+          "admin",
+          "admin",
+          "owner"
+        ],
+        "ownerAndAdminActorSequencesConsistent": true,
+        "exactAdminNativeUserIDMapping": "NOT_RUN; native auth resource exposes UUID only, no user-management or SQL joins attempted",
+        "fromStatusSequenceMatches": true
+      }
+    },
+    {
+      "width": 1440,
+      "name": "readonly native persisted inquiry audit actor identity and transitions",
+      "status": "PASS",
+      "detail": {
+        "id": 104,
+        "eventStates": [
+          "TEST_INQUIRY",
+          "UNDER_REVIEW",
+          "TEST_ACCEPTED",
+          "CANCELLED"
+        ],
+        "actorRoles": [
+          "owner",
+          "admin",
+          "admin",
+          "owner"
+        ],
+        "ownerAndAdminActorSequencesConsistent": true,
+        "exactAdminNativeUserIDMapping": "NOT_RUN; native auth resource exposes UUID only, no user-management or SQL joins attempted",
+        "fromStatusSequenceMatches": true
+      }
+    }
+  ],
+  "metrics": [],
+  "owned": {
+    "inquiries": [],
+    "carts": [],
+    "products": [],
+    "posts": [],
+    "policies": [],
+    "categories": []
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "sourceSHA": "1052e3fb4bc4cccabb51b8c538116c78655f345b",
+  "status": "FAIL",
+  "command": "node tests/W04_FINAL/actor-audit.mjs [initial]",
+  "exit": 1,
+  "reason": "Harness incorrectly assumed native auth UserResource exposes numeric id. Fixed1052 exposes uuid; no new fixture or login writes. Exact admin userID identity mapping remains NOT_RUN; narrowed check verifies actor sequence metadata only."
+}

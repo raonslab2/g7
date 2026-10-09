@@ -1,0 +1,120 @@
+{
+  "sourceSHA": "1052e3fb4bc4cccabb51b8c538116c78655f345b",
+  "browserResult": "PASS within stated scope",
+  "fullContract": "NOT_RUN",
+  "uniqueBoundedChecks": {
+    "public": 34,
+    "ordinaryJourneySteps": 6,
+    "support": 12,
+    "recoveryModesIncludingOwnerIsolation": 10,
+    "mobileGeometryAndNavigation": 4,
+    "accessDecline": 8
+  },
+  "fixtureAndCleanupRowsExcludedFromUniqueCounts": true,
+  "cleanup": {
+    "sourceSHA": "1052e3fb4bc4cccabb51b8c538116c78655f345b",
+    "counts": {
+      "inquiries": 20,
+      "carts": 29,
+      "products": 15,
+      "posts": 6,
+      "policies": 0,
+      "categories": 0
+    },
+    "inquiryStatuses": [
+      {
+        "id": 129,
+        "status": "DECLINED"
+      },
+      {
+        "id": 130,
+        "status": "DECLINED"
+      },
+      {
+        "id": 105,
+        "status": "CANCELLED"
+      },
+      {
+        "id": 106,
+        "status": "CANCELLED"
+      },
+      {
+        "id": 107,
+        "status": "CANCELLED"
+      },
+      {
+        "id": 108,
+        "status": "CANCELLED"
+      },
+      {
+        "id": 109,
+        "status": "CANCELLED"
+      },
+      {
+        "id": 110,
+        "status": "CANCELLED"
+      },
+      {
+        "id": 103,
+        "status": "CANCELLED"
+      },
+      {
+        "id": 104,
+        "status": "CANCELLED"
+      },
+      {
+        "id": 118,
+        "status": "CANCELLED"
+      },
+      {
+        "id": 119,
+        "status": "DECLINED"
+      },
+      {
+        "id": 124,
+        "status": "CANCELLED"
+      },
+      {
+        "id": 125,
+        "status": "CANCELLED"
+      },
+      {
+        "id": 126,
+        "status": "CANCELLED"
+      },
+      {
+        "id": 113,
+        "status": "CANCELLED"
+      },
+      {
+        "id": 115,
+        "status": "CANCELLED"
+      },
+      {
+        "id": 116,
+        "status": "CANCELLED"
+      },
+      {
+        "id": 117,
+        "status": "CANCELLED"
+      },
+      {
+        "id": 111,
+        "status": "CANCELLED"
+      }
+    ],
+    "recordedIssuedTokensRequeried": 55,
+    "earlyUnrecordedIssuedTokens": 0,
+    "suppliedHandoffTokensRetained": true,
+    "allRequestsClosed": true,
+    "nativeDeclinedTerminalLimitation": "DECLINED cannot become CANCELLED; intentional decline fixtures are closed, reserved0 independently queried, cancel returns409."
+  },
+  "historical598": "FAIL immutable original;1052 observation does not rewrite prior negatives",
+  "nativeHelpers": 1,
+  "peakNativeAgents": 2,
+  "officialChildRequests": 0,
+  "publication": 0,
+  "ownSQL": "NOT_RUN",
+  "canonicalValidation": "NOT_RUN",
+  "CI": "NOT_RUN"
+}
