@@ -1,0 +1,84 @@
+{
+  "request_id": "req_42c3e3430d144efc847e7988bc8dee01",
+  "source_baseline": "6853f40d58acbf53a2f29cbb9dd422cc439047a9",
+  "recorded_at_utc": "2026-10-09T08:57:48.655271+00:00",
+  "command": "vendor/bin/phpunit -c modules/_bundled/raonslab-travel_lab/tests/phpunit.xml --stop-on-error --stop-on-failure",
+  "result": "PASS",
+  "exit_code": 0,
+  "tests": 44,
+  "assertions": 462,
+  "elapsed_seconds": 34.988,
+  "runtime": "PHP 8.3.6 / PHPUnit 11.5.56 / real SQLite :memory: per test",
+  "stdout": "tests/evidence/domain-phpunit.txt",
+  "authentication": "Real Laravel Sanctum bearer tokens and persisted role/permission rows; no actingAs, fake authentication, or disabled middleware.",
+  "dependencies": "Native G7 user/token/role/permission/identity-policy migrations and native ecommerce migrations; actual ProductService/ShippingPolicyService/SequenceSeeder.",
+  "excluded_unrelated_ecommerce_migrations": [
+    {
+      "name": "2026_04_01_000033_create_ecommerce_promotion_coupon_categories_table.php",
+      "reason": "MySQL table-local idx_type name conflicts across tables under SQLite global index namespace."
+    },
+    {
+      "name": "2026_04_13_000001_drop_ecommerce_mail_templates_table.php",
+      "reason": "Requires unrelated core notification_templates schema."
+    },
+    {
+      "name": "2026_08_21_000001_add_unique_purchase_earn_lot_to_ecommerce_mileage_transactions_table.php",
+      "reason": "Unrelated MySQL-specific generated-column mileage SQL unsupported by SQLite."
+    }
+  ],
+  "not_run": [
+    "Full ecommerce migration suite",
+    "Native MySQL compatibility",
+    "Hosted CI",
+    "Deployment/runtime integration"
+  ],
+  "scope": "Only module catalogue/departure/schema/synthetic seeder. No real order/payment/reservation/refund/mail/SMS/provider writes.",
+  "tested_php_sha256": {
+    "config/catalog.php": "ead5df9c176d3f9b5573e20c072921f7e545636b52cad568218b117c4e483301",
+    "database/migrations/2026_10_09_000001_create_travel_lab_tables.php": "ed7f9f38d64fb82339f01c805ef562117d77a2069b33dfa63183e126fc10b851",
+    "database/seeders/DatabaseSeeder.php": "0887b96bac6ea13824c9843fc9486d955cb23478204c26b70cd290ff7f739097",
+    "database/seeders/SyntheticCatalogHelper.php": "238143d0e233f19e74999751b9ec0c4d434d33a2be56dc993c1bbffaff9e53b9",
+    "database/seeders/SyntheticCatalogSeeder.php": "2559019cc67a808de7614dc0f587914b0daf4b2dc15d6e93f72853c57beaebe5",
+    "module.php": "b7bfb05fe393cf37c2f45e6f799177601d86bebccd2c678442989629edf09183",
+    "src/Enums/CatalogSort.php": "587c67335450f803ba251692b46388d9536c84c9306ed1e3a012c11edcdb6812",
+    "src/Enums/InquiryStatus.php": "890bdfb2e099fcf5df50fe4c67b4874714ef08dbabc4eff3ea9d60d1b1e8f5c7",
+    "src/Enums/Region.php": "f83b046dde680a237b8d94bba36134fea5e452dc7022618640f5ec4e8923a78e",
+    "src/Enums/Theme.php": "cf03e05d155867e623d76881e2eddf147037a6d3809f4860739fa82803615127",
+    "src/Exceptions/CatalogConflictException.php": "7e5e0a4a98fdfdcaf3b2756ff2cb6d853fb12a09106e1d1d270d38d429e93f3c",
+    "src/Http/Controllers/AdminCatalogController.php": "f3543b6b6e6fd42fd59a44f790146fa78cac2795bc69c23ebb07694642ae7c50",
+    "src/Http/Controllers/CatalogController.php": "71d550d953d2f4f45b594b30d10c3aedb25426bb2a54256704e84545d9502085",
+    "src/Http/Requests/CatalogListRequest.php": "adeb4e0eead19700333bda4534a2c4ae80725d91f4e83429c8a0296782fdc5a3",
+    "src/Http/Requests/CatalogUpdateRequest.php": "2ab23c94f272d73e27468009448bb08e5b682df4414b40c3c569bc603761bc0f",
+    "src/Http/Requests/DepartureRequest.php": "efa3b900242b977d3440a7b38db47624c912343a88058c9ae1f1701581f91a35",
+    "src/Http/Resources/AdminCatalogCollection.php": "6240cd3ad59a73747168cd7683ec2d8e5fa18728b9d6cc90ee14054690e3a989",
+    "src/Http/Resources/AdminCatalogResource.php": "ab3ed377e2151ed8c10dfb9d9b4ba0d94a52f34aaae4fadd199802d4e3044902",
+    "src/Http/Resources/AdminDepartureResource.php": "fd3285a739ccd485cdffca03441e33aecac4b8127812f07a2b4c5bdb710d5499",
+    "src/Http/Resources/CatalogCollection.php": "3ba304378daf5b95329dbadc8c502c37e37d1940c8049e846622a160ab9c7891",
+    "src/Http/Resources/CatalogResource.php": "2260ef18a3fdcd46761a45b97c0639a1fdb96935f669b52bf3a398df22f10dcc",
+    "src/Http/Resources/DepartureResource.php": "016f82f9b3ffe3e9bd87f246d06800f587be9d0f8480570a924dbc59af1c9dcb",
+    "src/Models/Departure.php": "89c9ef9e5f025fdb25b6c4581c9c29c98f22130660f98c024f6a5a36bb765d79",
+    "src/Models/Inquiry.php": "d1a991e2f32ee99718a94c72fbd7368d7d495a5e949aca8f29beabe0d1217c0a",
+    "src/Models/InquiryItem.php": "610c4794ae6d75e6064c5d012026d86bf80ccbd009bc84187d7515871812c0b3",
+    "src/Models/TravelProduct.php": "3f32a2645d008d9f696d5638c2f7833274f86c1fde508bc8fcce4ffad0d4f2cf",
+    "src/Providers/TravelLabServiceProvider.php": "eca8f35ac4d2f0098bb26a73087616eb971a376bab8c4b37b32113dec20681aa",
+    "src/Repositories/CatalogRepository.php": "724ee21d776208fadeabc2ff0b03cda45e457bb562488a43a2da16c6847e0c28",
+    "src/Repositories/Contracts/CatalogRepositoryInterface.php": "b691188894a17e4e068f0153ec4cb7d3eab3aaaaef8dbecf7359f01c52cc1f74",
+    "src/Services/CatalogService.php": "9521060a424bdd577b1905ea7547a59eb00072d0aa137669e4e2cea52f05973e",
+    "src/lang/en/enums.php": "dcca0f762334d1d49ec9115bff1ae4bdfd4dcfea8db02588826ce492a478949c",
+    "src/lang/en/messages.php": "53767b32a00ba0a35ecc77f72916f673841efca0c267ed55f1a095dc04e30ca0",
+    "src/lang/ko/enums.php": "b7b0d629e75546f9081aa19651ecd2c73b40527d5836d5d6d0a8291404a6612c",
+    "src/lang/ko/messages.php": "f5dc39dde5b486b3e9d997851c73abc57bbc4e4562b0820bf96af8575e39a517",
+    "src/routes/catalog.php": "b9a74997b8c35ca013a61804883a80b4febf71fb53921274a7c75eca8b335c96",
+    "tests/Feature/CatalogApiTest.php": "4cc1ab257df5bec319ff328cf3f6abba6cb4b466b8cadc5e3377adae38d4ade5",
+    "tests/Feature/CatalogDomainTest.php": "9602d5ed165365e26b4216a20b6224952d33dc3965c97aeffae726ccee411db3",
+    "tests/Feature/CatalogValidationTest.php": "ca1666af33adec34616f4a026df8730b1d5f9b0602e8605d0437db1c6343d128",
+    "tests/Feature/DepartureManagementTest.php": "80325ac06e5db4f1bfda8ef156c356ce3b88c32f4c5c3e2c509d2697bd33b977",
+    "tests/Feature/SchemaAndSeederTest.php": "bed31859e7c5e5b58f3836528d20c4fa2966354f15ed2c7f9200d3e6399ea6c3",
+    "tests/ModuleTestCase.php": "b264ac64e7282e87fef1bcb08f779d27bba4ea6186bccc93ded7bbbe0e7d92a8",
+    "tests/bootstrap.php": "362980912b66e6ac24dd1d863e82996192a22b0e5dcf1c7094dbaadbe8d3c280"
+  },
+  "additional_checks": {
+    "pint_tests": "PASS",
+    "scenario_marks": "PASS: supplemental local YAML/file/annotation inspection found5 files,45 effects,10 visibility axis values; repository-owned scenario validation command not found."
+  }
+}

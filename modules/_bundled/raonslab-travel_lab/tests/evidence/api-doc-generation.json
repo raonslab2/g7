@@ -1,0 +1,20 @@
+{
+  "request_id": "req_42c3e3430d144efc847e7988bc8dee01",
+  "source_baseline": "6853f40d58acbf53a2f29cbb9dd422cc439047a9",
+  "command": "php modules/_bundled/raonslab-travel_lab/tests/generate-domain-docs.php",
+  "result": "PASS",
+  "endpoints": 9,
+  "runtime": "real isolated SQLite :memory: plus native HTTP middleware and Sanctum tokens",
+  "tools": [
+    "ApiRouteInventory",
+    "FormRequestIntrospector",
+    "ApiDocScaffolder",
+    "ResponseSchemaInferrer"
+  ],
+  "script_sha256": "7287633b17989d20f6e909807d03c6a9bcd6d4c556517a553b3a35779003d657",
+  "note": "Generated scaffold enriched with field descriptions and contract references; no live HTTP endpoint or operational DB.",
+  "review_corrections": [
+    "GET examples now match successful probed URI without rejected placeholder sort",
+    "sort enum values documented, unsupported field-name/-prefix description removed"
+  ]
+}

@@ -1,0 +1,15 @@
+{
+    "name": "modules/raonslab-travel_lab",
+    "description": "Travel Lab for Gnuboard7",
+    "type": "library",
+    "version": "0.1.0",
+    "license": "MIT",
+    "require": {"php": "^8.2"},
+    "autoload": {
+        "psr-4": {
+            "Modules\\Raonslab\\TravelLab\\": "src/",
+            "Modules\\Raonslab\\TravelLab\\Database\\Seeders\\": "database/seeders/"
+        }
+    },
+    "autoload-dev": {"psr-4": {"Modules\\Raonslab\\TravelLab\\Tests\\": "tests/"}}
+}
