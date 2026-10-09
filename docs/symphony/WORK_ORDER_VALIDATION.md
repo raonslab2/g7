@@ -111,3 +111,8 @@ product test cases.
 October9 18:35 UTC publication precheck: unchanged canonical source
 `10bc5eff5f777aa49760387778303063b0222129`, same official validator command
 `--revision ... --json work/orders/work-20261009-g7-symphony-max-child-c7ae42d1.md`: exit0, valid=true, documents89, errors[]. No work-order/source validator changes.
+
+
+October9 19:20UTC publication rerun: identical canonical10bc5eff validator/source
+command, exit0,89documents/errors0 PASS before repairedfc54 checkpoint publication.
+This is source order validation only, not product/fixed-head CI/Validation receipt.

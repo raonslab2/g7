@@ -1,7 +1,7 @@
 # G7 Travel Lab delivery audit — IN_PROGRESS
 
 This is the accumulated delivery audit, not a completion declaration. Updated
-2026-10-09 19:12 UTC (October 10 KST). Deadline: October 11 23:59 KST /
+2026-10-09 19:28 UTC (October 10 KST). Deadline: October 11 23:59 KST /
 14:59 UTC; approximately 43 hours remain. Customer-approved design/database:
 NONE. The implementation is a RAON demonstration, not delivery of Lotte Tour's
 110 customer screens.
@@ -15,16 +15,19 @@ NONE. The implementation is a RAON demonstration, not delivery of Lotte Tour's
   Request was cancelled, deleted or forcibly terminated.
 - Reused integration branch `feat/g7-travel-lab-c7ae42d1`,
   [draft PR 2](https://github.com/raonslab2/g7/pull/2).
-- Published runtime/product target:
-  `fa5523175ac494cfbd13bbf89bf06b3ec91835a6`, tree
-  `fa685339b030ee4efe46b63dc8d98c0e2f7d4f0c`.
-- Latest published checkpoint: `992f9a65ac3f8957e5ec618f21072dc499053810`,
+- Published repaired core/board target:
+  `fc54b6ae091cd6cef2d0fabc48d2ec4fe4fdba8c`, tree
+  `b377aeabad7f240061ae12cde8fae7ddc6f7e7d1`. Its installed board/controller
+  and served core engine pins are recorded in W04_REPAIR_PUBLICATION_CHECKS.
+  Catalog/workflow/travel template runtime still inherit fa552317 unchanged.
+- Previous installer checkpoint: `992f9a65ac3f8957e5ec618f21072dc499053810`,
   tree `db85f35c5f42165802ec7ba6b02bc8a147a12c39`. It contains installer/bootstrap
   and MySQL fixture repairs, with original review commits reachable remotely.
-- Independent recipe replay at 992 completed with bounded PASS; new board and
-  common global-binding repairs plus browser/file evidence are local, awaiting
-  a reviewed checkpoint. Running assets still use fa552317 until the official
-  production core build and board update. Final integration SHA: PENDING.
+- Independent recipe replay at992 completed with bounded PASS. Board and common
+  binding fixes plus browser/file/recipe evidence are published atfc54, original
+  review commits1d2a4/abf354/0e634 remotely reachable. Official core production
+  build and board1.1.3 update completed; independent actual replay is now assigned.
+  Final campaign integration SHA: PENDING.
 - Main `6853f40d58acbf53a2f29cbb9dd422cc439047a9` was not merged or deployed.
   External automatic deployment behavior remains UNKNOWN. No production service
   restart or business-site DB modification is authorized by this result.
@@ -41,7 +44,7 @@ installation. No environment files, passwords, tokens or SQL dumps are published
 
 | Required scope | Implemented behavior / evidence | Current delivery status |
 | --- | --- | --- |
-| Main, search, region/date/price filters, detail, departures/person selection | Own light template and real catalog API/native products/options; Korean keyword and mobile defects repaired. [Browser final](W04_BROWSER_FINAL.md) preserves original failures and later 390/1440 checks. | Working at published runtime target; native creation/browser review completed; common binding repair pending |
+| Main, search, region/date/price filters, detail, departures/person selection | Own light template and real catalog API/native products/options; Korean keyword and mobile defects repaired. [Browser final](W04_BROWSER_FINAL.md) preserves original failures and later 390/1440 checks. | Working at published runtime target; native creation/browser review completed; common binding repair published; independent runtime replay assigned |
 | Native cart → persistent test inquiry → admin review/test acceptance → owner state/cancel | Real ecommerce calculation, native cart identity, inquiry/items/events snapshots and simulated reservation; no real orders/payments. Independent installed-kernel 37 requests and live browser journeys recorded. | PASS within those fixed-source checks; recipe smoke passed at992; new campaign/board/core integration checks pending |
 | Native product/options, travel metadata/departures, content management | Native admin plus travel extension adapters. Earlier creation blocker was not waived; new independent browser Request explicitly exercises creating its own category/policy/product/options and travel registration at both widths. | Creation gate executed; rapid-save finding needs fixed-source live rerun |
 | Notices/FAQ/private questions | Native board persistence/edit audit/admin answers, permission and search-driver fail-closed checks; no external notification. | Tested support ownership/throttles; real unsigned attachment-access denial verified; signed capability limits below |
@@ -132,8 +135,10 @@ UNKNOWN; parent/child/native consumption is not double counted as account usage.
  18:42:38UTC. Entire setup/account provisioning/wizard remains NOT_RUN.
 - Native browser completed both widths with new native category/policy/product/
   options/travel registration and transaction journeys. Rapid-save stale-state
-  failure is reproduced and repaired locally in two common evaluator reads.
+  failure is reproduced and repaired/published in two common evaluator reads.
   Original PC pointer-menu failure is unreproduced by diagnostic; cause UNKNOWN.
+  Official production core build passed; native11files546PASS and source review
+  preserve initial failures, no new actual browserPASS claimed.
 - Page-backed two-slot campaign publication/list/detail/native-admin adapter is
   being implemented, rather than treating installed Page/static banners as complete.
 - The atomic worker test failed once under load in the independent review,
@@ -151,8 +156,8 @@ UNKNOWN; parent/child/native consumption is not double counted as account usage.
 - Real private attachment-byte controls and foreign/guest unsigned denials passed
   at992 (runtime source inheritance fromfa). Valid signed previews are delegated
   bearer capabilities; owner download remains native admin-only; soft deletion
-  retains inaccessible files. New nonimage preview500 is repaired locally and
-  awaits installed400/image-permission replay. General editor preview NOT_RUN.
+  retains inaccessible files. New nonimage preview500 is repaired/published atfc54 and
+  awaits independent installed400/image-permission replay. General editor preview NOT_RUN.
 - Hosted Actions and check runs were **0**, required remote CI **NOT_RUN**.
   No canonical Validation receipt exists. Internal/native and official Request
   nonauthor verification does not waive those gates.
