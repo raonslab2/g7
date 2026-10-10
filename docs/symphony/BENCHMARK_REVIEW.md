@@ -68,6 +68,8 @@ ssh -N -L 18872:127.0.0.1:18871 DEV_HOST
 
 원본 두 독립 증거 커밋 `3f16c7d53b5fba5e56a525f3d5be7e89cb960322`와 `e4c736fff897aae3545cf32126f7da12a2a9f824`를 ancestry-preserving merge로 인수했습니다. 이전 실패·하네스 실패·절차 한계·NOT_RUN 기록은 삭제하거나 PASS로 재작성하지 않았습니다.
 
+이번 고정 인수본 `8d05c99345a954ae4ed5dffbdf5317875c995891`의 [비작성자 게시 전 검토](scope-correction-intake/NATIVE_REVIEW.md)는 P1/P2 발견 없이 범위 내 PASS입니다. 공식 Validation이나 release 승인은 아닙니다. [실제 domain 테스트 출력](scope-correction-intake/domain-tests.txt)과 [상태 구분 원장](scope-correction-intake/status.json)도 보존했습니다. 지시 원본의 [work-order CI](https://github.com/raonslab2/ai_gcs_v2/actions/runs/38017727587)는 동일 정정 Git blob에서 SUCCESS이며 G7 제품 CI와는 별개입니다.
+
 ## 조율·잔여 항목
 
 정식 `agentopt_control catalog/status`로 현재 work receipt REGISTERED 및 Provider 실행을 확인했습니다. 원 지시 `work-20261009-g7-symphony-max-child-c7ae42d1` receipt도 확인했습니다. [범위 정정 지시](https://github.com/raonslab2/ai_gcs_v2/blob/main/work/orders/work-20261010-travel-benchmark-scope-correction-4f82b7d9.md) Git blob `b2ed450c05e0a776120f02e6cbb1d4dca281833d`와 [복구 지시](https://github.com/raonslab2/ai_gcs_v2/blob/main/work/orders/work-20261010-g7-travel-final-gate-recovery-9d7c41e2.md) blob `3b8e3f596f713aac08723e55941b38456e27e294`의 원격 발행도 확인했습니다. 복구 지시 receipt는 반환된 최근 50개에 **NOT_OBSERVED**이며 미등록이라고 단정하지 않습니다. Git 발행·작업지시함 수집·Request 등록·Provider 실행은 별개 상태입니다. 상태 도구는 현재 Request child만 조회하므로 원 부모와 과거 두 Child 상태는 조회하지 못했습니다. 정식 `GET /api/v1/requests/req_81ac33cac94046b9a2249cd14c0d00ba`는 HTTP 401(trusted proxy identity required)입니다. 인증정보·플랫폼 DB·설정을 읽어 우회하지 않았습니다.
