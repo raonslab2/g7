@@ -1,0 +1,70 @@
+{
+    "label": "mysql-live",
+    "source_sha": "5783e6ba124061bdfae639cdaf9b1c14a83cdf03",
+    "source_tree": "361f9a142572f8a6c0c28326c461a233a92aec4e",
+    "dump_sha256": "d5b436d64d62e6dbba60d1ec27409677bfd55025ad87c5d9409f1c75f1450f02",
+    "dump_bytes": 26239848,
+    "dump_exit": 0,
+    "dump_pid": 1043949,
+    "dump_process_gone": true,
+    "dump_handles": {
+        "utc": "2026-10-09T21:38:18.377330+00:00",
+        "count": 0,
+        "handles": [],
+        "unreadable_pids": [],
+        "lock_holders": [],
+        "excluded_ancestor_pids": [
+            964752,
+            1043892,
+            1043895,
+            1044040,
+            1044041,
+            3650359
+        ],
+        "method": "proc-only bounded cwd/argv/FD; known TEST owners and own nonancestor native processes"
+    },
+    "dump_seconds": 1.819,
+    "per_statement_guarded_native_dump": true,
+    "stable": true,
+    "before_digest": "84e16b64c6a36cc1fa16bb3f1e8ed97de8ece748786746bf1bb965268a16de39",
+    "table_count": 112,
+    "row_count": 1768,
+    "equals_original_baseline": false,
+    "directory_mode": "700",
+    "file_mode": "600",
+    "exclusive": {
+        "pid": 1043895,
+        "cwd": "/home/ubuntu/.agentopt-v2/workspaces/req_95d0024e7b144a5bb903cc7daad1fb5f",
+        "argv": [
+            "docs/symphony/w04-final-contract-persistence/snapshot.php",
+            "mysql-live",
+            "run",
+            "/usr/bin/php8.3",
+            "vendor/bin/phpunit",
+            "--bootstrap",
+            "docs/symphony/w04-final-contract-persistence/test-bootstrap.php",
+            "scripts/travel-lab/LiveMysqlTest.php"
+        ],
+        "own_connection_id": 141619,
+        "other_test_connections": 0,
+        "own_server_processes": 0,
+        "prior_request_handles": {
+            "utc": "2026-10-09T21:38:16.080967+00:00",
+            "count": 0,
+            "handles": [],
+            "unreadable_pids": [],
+            "lock_holders": [],
+            "excluded_ancestor_pids": [
+                964752,
+                1043892,
+                1043895,
+                1043902,
+                1043903,
+                3650359
+            ],
+            "method": "proc-only bounded cwd/argv/FD; known TEST owners and own nonancestor native processes"
+        },
+        "utc": "2026-10-09T21:38:16+00:00"
+    },
+    "utc": "2026-10-09T21:38:19+00:00"
+}

@@ -1,0 +1,747 @@
+{
+    "phase": "before",
+    "utc": "2026-10-09T21:26:17+00:00",
+    "source_sha": "5783e6ba124061bdfae639cdaf9b1c14a83cdf03",
+    "app_env": "local",
+    "routes_cached": false,
+    "route_cache_sha256": null,
+    "routes": [
+        {
+            "uri": "api/modules/raonslab-travel_lab/catalog",
+            "methods": [
+                "GET",
+                "HEAD"
+            ],
+            "name": "api.modules.raonslab-travel_lab.catalog.index",
+            "middleware": [
+                "App\\Http\\Middleware\\ExtensionMiddlewareGate:api,before_core",
+                "Illuminate\\Routing\\Middleware\\SubstituteBindings",
+                "App\\Http\\Middleware\\SetLocale",
+                "App\\Http\\Middleware\\SetTimezone",
+                "App\\Http\\Middleware\\RefreshTokenExpiration",
+                "App\\Http\\Middleware\\EnforceIdentityPolicy",
+                "App\\Http\\Middleware\\ExtensionMiddlewareGate:api,after_core",
+                "Modules\\Raonslab\\TravelLab\\Http\\Middleware\\TravelCatalogConflictResponse"
+            ]
+        },
+        {
+            "uri": "api/modules/raonslab-travel_lab/catalog/{product}",
+            "methods": [
+                "GET",
+                "HEAD"
+            ],
+            "name": "api.modules.raonslab-travel_lab.catalog.show",
+            "middleware": [
+                "App\\Http\\Middleware\\ExtensionMiddlewareGate:api,before_core",
+                "Illuminate\\Routing\\Middleware\\SubstituteBindings",
+                "App\\Http\\Middleware\\SetLocale",
+                "App\\Http\\Middleware\\SetTimezone",
+                "App\\Http\\Middleware\\RefreshTokenExpiration",
+                "App\\Http\\Middleware\\EnforceIdentityPolicy",
+                "App\\Http\\Middleware\\ExtensionMiddlewareGate:api,after_core",
+                "Modules\\Raonslab\\TravelLab\\Http\\Middleware\\TravelCatalogConflictResponse"
+            ]
+        },
+        {
+            "uri": "api/modules/raonslab-travel_lab/catalog/{product}/departures",
+            "methods": [
+                "GET",
+                "HEAD"
+            ],
+            "name": "api.modules.raonslab-travel_lab.catalog.departures",
+            "middleware": [
+                "App\\Http\\Middleware\\ExtensionMiddlewareGate:api,before_core",
+                "Illuminate\\Routing\\Middleware\\SubstituteBindings",
+                "App\\Http\\Middleware\\SetLocale",
+                "App\\Http\\Middleware\\SetTimezone",
+                "App\\Http\\Middleware\\RefreshTokenExpiration",
+                "App\\Http\\Middleware\\EnforceIdentityPolicy",
+                "App\\Http\\Middleware\\ExtensionMiddlewareGate:api,after_core",
+                "Modules\\Raonslab\\TravelLab\\Http\\Middleware\\TravelCatalogConflictResponse"
+            ]
+        },
+        {
+            "uri": "api/modules/raonslab-travel_lab/facets",
+            "methods": [
+                "GET",
+                "HEAD"
+            ],
+            "name": "api.modules.raonslab-travel_lab.catalog.facets",
+            "middleware": [
+                "App\\Http\\Middleware\\ExtensionMiddlewareGate:api,before_core",
+                "Illuminate\\Routing\\Middleware\\SubstituteBindings",
+                "App\\Http\\Middleware\\SetLocale",
+                "App\\Http\\Middleware\\SetTimezone",
+                "App\\Http\\Middleware\\RefreshTokenExpiration",
+                "App\\Http\\Middleware\\EnforceIdentityPolicy",
+                "App\\Http\\Middleware\\ExtensionMiddlewareGate:api,after_core",
+                "Modules\\Raonslab\\TravelLab\\Http\\Middleware\\TravelCatalogConflictResponse"
+            ]
+        },
+        {
+            "uri": "api/modules/raonslab-travel_lab/admin/catalog",
+            "methods": [
+                "GET",
+                "HEAD"
+            ],
+            "name": "api.modules.raonslab-travel_lab.admin.catalog.index",
+            "middleware": [
+                "App\\Http\\Middleware\\ExtensionMiddlewareGate:api,before_core",
+                "Illuminate\\Auth\\Middleware\\Authenticate:sanctum",
+                "Illuminate\\Routing\\Middleware\\SubstituteBindings",
+                "App\\Http\\Middleware\\SetLocale",
+                "App\\Http\\Middleware\\SetTimezone",
+                "App\\Http\\Middleware\\RefreshTokenExpiration",
+                "App\\Http\\Middleware\\EnforceIdentityPolicy",
+                "App\\Http\\Middleware\\ExtensionMiddlewareGate:api,after_core",
+                "Modules\\Raonslab\\TravelLab\\Http\\Middleware\\TravelCatalogConflictResponse",
+                "App\\Http\\Middleware\\AdminMiddleware",
+                "App\\Http\\Middleware\\PermissionMiddleware:admin,raonslab-travel_lab.catalog.read"
+            ]
+        },
+        {
+            "uri": "api/modules/raonslab-travel_lab/admin/catalog/candidates",
+            "methods": [
+                "GET",
+                "HEAD"
+            ],
+            "name": "api.modules.raonslab-travel_lab.admin.catalog.candidates",
+            "middleware": [
+                "App\\Http\\Middleware\\ExtensionMiddlewareGate:api,before_core",
+                "Illuminate\\Auth\\Middleware\\Authenticate:sanctum",
+                "Illuminate\\Routing\\Middleware\\SubstituteBindings",
+                "App\\Http\\Middleware\\SetLocale",
+                "App\\Http\\Middleware\\SetTimezone",
+                "App\\Http\\Middleware\\RefreshTokenExpiration",
+                "App\\Http\\Middleware\\EnforceIdentityPolicy",
+                "App\\Http\\Middleware\\ExtensionMiddlewareGate:api,after_core",
+                "Modules\\Raonslab\\TravelLab\\Http\\Middleware\\TravelCatalogConflictResponse",
+                "App\\Http\\Middleware\\AdminMiddleware",
+                "App\\Http\\Middleware\\PermissionMiddleware:admin,raonslab-travel_lab.catalog.read"
+            ]
+        },
+        {
+            "uri": "api/modules/raonslab-travel_lab/admin/catalog",
+            "methods": [
+                "POST"
+            ],
+            "name": "api.modules.raonslab-travel_lab.admin.catalog.store",
+            "middleware": [
+                "App\\Http\\Middleware\\ExtensionMiddlewareGate:api,before_core",
+                "Illuminate\\Auth\\Middleware\\Authenticate:sanctum",
+                "Illuminate\\Routing\\Middleware\\SubstituteBindings",
+                "App\\Http\\Middleware\\SetLocale",
+                "App\\Http\\Middleware\\SetTimezone",
+                "App\\Http\\Middleware\\RefreshTokenExpiration",
+                "App\\Http\\Middleware\\EnforceIdentityPolicy",
+                "App\\Http\\Middleware\\ExtensionMiddlewareGate:api,after_core",
+                "Modules\\Raonslab\\TravelLab\\Http\\Middleware\\TravelCatalogConflictResponse",
+                "App\\Http\\Middleware\\AdminMiddleware",
+                "App\\Http\\Middleware\\PermissionMiddleware:admin,raonslab-travel_lab.catalog.update"
+            ]
+        },
+        {
+            "uri": "api/modules/raonslab-travel_lab/admin/catalog/{product}",
+            "methods": [
+                "GET",
+                "HEAD"
+            ],
+            "name": "api.modules.raonslab-travel_lab.admin.catalog.show",
+            "middleware": [
+                "App\\Http\\Middleware\\ExtensionMiddlewareGate:api,before_core",
+                "Illuminate\\Auth\\Middleware\\Authenticate:sanctum",
+                "Illuminate\\Routing\\Middleware\\SubstituteBindings",
+                "App\\Http\\Middleware\\SetLocale",
+                "App\\Http\\Middleware\\SetTimezone",
+                "App\\Http\\Middleware\\RefreshTokenExpiration",
+                "App\\Http\\Middleware\\EnforceIdentityPolicy",
+                "App\\Http\\Middleware\\ExtensionMiddlewareGate:api,after_core",
+                "Modules\\Raonslab\\TravelLab\\Http\\Middleware\\TravelCatalogConflictResponse",
+                "App\\Http\\Middleware\\AdminMiddleware",
+                "App\\Http\\Middleware\\PermissionMiddleware:admin,raonslab-travel_lab.catalog.read"
+            ]
+        },
+        {
+            "uri": "api/modules/raonslab-travel_lab/admin/catalog/{product}",
+            "methods": [
+                "PATCH"
+            ],
+            "name": "api.modules.raonslab-travel_lab.admin.catalog.update",
+            "middleware": [
+                "App\\Http\\Middleware\\ExtensionMiddlewareGate:api,before_core",
+                "Illuminate\\Auth\\Middleware\\Authenticate:sanctum",
+                "Illuminate\\Routing\\Middleware\\SubstituteBindings",
+                "App\\Http\\Middleware\\SetLocale",
+                "App\\Http\\Middleware\\SetTimezone",
+                "App\\Http\\Middleware\\RefreshTokenExpiration",
+                "App\\Http\\Middleware\\EnforceIdentityPolicy",
+                "App\\Http\\Middleware\\ExtensionMiddlewareGate:api,after_core",
+                "Modules\\Raonslab\\TravelLab\\Http\\Middleware\\TravelCatalogConflictResponse",
+                "App\\Http\\Middleware\\AdminMiddleware",
+                "App\\Http\\Middleware\\PermissionMiddleware:admin,raonslab-travel_lab.catalog.update"
+            ]
+        },
+        {
+            "uri": "api/modules/raonslab-travel_lab/admin/catalog/{product}/departures",
+            "methods": [
+                "GET",
+                "HEAD"
+            ],
+            "name": "api.modules.raonslab-travel_lab.admin.catalog.departures.index",
+            "middleware": [
+                "App\\Http\\Middleware\\ExtensionMiddlewareGate:api,before_core",
+                "Illuminate\\Auth\\Middleware\\Authenticate:sanctum",
+                "Illuminate\\Routing\\Middleware\\SubstituteBindings",
+                "App\\Http\\Middleware\\SetLocale",
+                "App\\Http\\Middleware\\SetTimezone",
+                "App\\Http\\Middleware\\RefreshTokenExpiration",
+                "App\\Http\\Middleware\\EnforceIdentityPolicy",
+                "App\\Http\\Middleware\\ExtensionMiddlewareGate:api,after_core",
+                "Modules\\Raonslab\\TravelLab\\Http\\Middleware\\TravelCatalogConflictResponse",
+                "App\\Http\\Middleware\\AdminMiddleware",
+                "App\\Http\\Middleware\\PermissionMiddleware:admin,raonslab-travel_lab.catalog.read"
+            ]
+        },
+        {
+            "uri": "api/modules/raonslab-travel_lab/admin/catalog/{product}/departures",
+            "methods": [
+                "POST"
+            ],
+            "name": "api.modules.raonslab-travel_lab.admin.catalog.departures.store",
+            "middleware": [
+                "App\\Http\\Middleware\\ExtensionMiddlewareGate:api,before_core",
+                "Illuminate\\Auth\\Middleware\\Authenticate:sanctum",
+                "Illuminate\\Routing\\Middleware\\SubstituteBindings",
+                "App\\Http\\Middleware\\SetLocale",
+                "App\\Http\\Middleware\\SetTimezone",
+                "App\\Http\\Middleware\\RefreshTokenExpiration",
+                "App\\Http\\Middleware\\EnforceIdentityPolicy",
+                "App\\Http\\Middleware\\ExtensionMiddlewareGate:api,after_core",
+                "Modules\\Raonslab\\TravelLab\\Http\\Middleware\\TravelCatalogConflictResponse",
+                "App\\Http\\Middleware\\AdminMiddleware",
+                "App\\Http\\Middleware\\PermissionMiddleware:admin,raonslab-travel_lab.catalog.update"
+            ]
+        },
+        {
+            "uri": "api/modules/raonslab-travel_lab/admin/catalog/{product}/departures/{departure}",
+            "methods": [
+                "PUT"
+            ],
+            "name": "api.modules.raonslab-travel_lab.admin.catalog.departures.update",
+            "middleware": [
+                "App\\Http\\Middleware\\ExtensionMiddlewareGate:api,before_core",
+                "Illuminate\\Auth\\Middleware\\Authenticate:sanctum",
+                "Illuminate\\Routing\\Middleware\\SubstituteBindings",
+                "App\\Http\\Middleware\\SetLocale",
+                "App\\Http\\Middleware\\SetTimezone",
+                "App\\Http\\Middleware\\RefreshTokenExpiration",
+                "App\\Http\\Middleware\\EnforceIdentityPolicy",
+                "App\\Http\\Middleware\\ExtensionMiddlewareGate:api,after_core",
+                "Modules\\Raonslab\\TravelLab\\Http\\Middleware\\TravelCatalogConflictResponse",
+                "App\\Http\\Middleware\\AdminMiddleware",
+                "App\\Http\\Middleware\\PermissionMiddleware:admin,raonslab-travel_lab.catalog.update"
+            ]
+        },
+        {
+            "uri": "api/modules/raonslab-travel_lab/cart",
+            "methods": [
+                "GET",
+                "HEAD"
+            ],
+            "name": "api.modules.raonslab-travel_lab.cart.index",
+            "middleware": [
+                "App\\Http\\Middleware\\ExtensionMiddlewareGate:api,before_core",
+                "Illuminate\\Auth\\Middleware\\Authenticate:sanctum",
+                "Modules\\Raonslab\\TravelLab\\Http\\Middleware\\TravelThrottleRequests:120,1,travel-lab-workflow:",
+                "Illuminate\\Routing\\Middleware\\SubstituteBindings",
+                "App\\Http\\Middleware\\SetLocale",
+                "App\\Http\\Middleware\\SetTimezone",
+                "App\\Http\\Middleware\\RefreshTokenExpiration",
+                "App\\Http\\Middleware\\EnforceIdentityPolicy",
+                "App\\Http\\Middleware\\ExtensionMiddlewareGate:api,after_core",
+                "Modules\\Raonslab\\TravelLab\\Http\\Middleware\\TravelCatalogConflictResponse"
+            ]
+        },
+        {
+            "uri": "api/modules/raonslab-travel_lab/cart",
+            "methods": [
+                "POST"
+            ],
+            "name": "api.modules.raonslab-travel_lab.cart.store",
+            "middleware": [
+                "App\\Http\\Middleware\\ExtensionMiddlewareGate:api,before_core",
+                "Illuminate\\Auth\\Middleware\\Authenticate:sanctum",
+                "Modules\\Raonslab\\TravelLab\\Http\\Middleware\\TravelThrottleRequests:120,1,travel-lab-workflow:",
+                "Modules\\Raonslab\\TravelLab\\Http\\Middleware\\TravelThrottleRequests:60,1,travel-lab-cart:",
+                "Illuminate\\Routing\\Middleware\\SubstituteBindings",
+                "App\\Http\\Middleware\\SetLocale",
+                "App\\Http\\Middleware\\SetTimezone",
+                "App\\Http\\Middleware\\RefreshTokenExpiration",
+                "App\\Http\\Middleware\\EnforceIdentityPolicy",
+                "App\\Http\\Middleware\\ExtensionMiddlewareGate:api,after_core",
+                "Modules\\Raonslab\\TravelLab\\Http\\Middleware\\TravelCatalogConflictResponse"
+            ]
+        },
+        {
+            "uri": "api/modules/raonslab-travel_lab/cart/{cart}",
+            "methods": [
+                "PATCH"
+            ],
+            "name": "api.modules.raonslab-travel_lab.cart.update",
+            "middleware": [
+                "App\\Http\\Middleware\\ExtensionMiddlewareGate:api,before_core",
+                "Illuminate\\Auth\\Middleware\\Authenticate:sanctum",
+                "Modules\\Raonslab\\TravelLab\\Http\\Middleware\\TravelThrottleRequests:120,1,travel-lab-workflow:",
+                "Modules\\Raonslab\\TravelLab\\Http\\Middleware\\TravelThrottleRequests:60,1,travel-lab-cart:",
+                "Illuminate\\Routing\\Middleware\\SubstituteBindings",
+                "App\\Http\\Middleware\\SetLocale",
+                "App\\Http\\Middleware\\SetTimezone",
+                "App\\Http\\Middleware\\RefreshTokenExpiration",
+                "App\\Http\\Middleware\\EnforceIdentityPolicy",
+                "App\\Http\\Middleware\\ExtensionMiddlewareGate:api,after_core",
+                "Modules\\Raonslab\\TravelLab\\Http\\Middleware\\TravelCatalogConflictResponse"
+            ]
+        },
+        {
+            "uri": "api/modules/raonslab-travel_lab/cart/{cart}",
+            "methods": [
+                "DELETE"
+            ],
+            "name": "api.modules.raonslab-travel_lab.cart.destroy",
+            "middleware": [
+                "App\\Http\\Middleware\\ExtensionMiddlewareGate:api,before_core",
+                "Illuminate\\Auth\\Middleware\\Authenticate:sanctum",
+                "Modules\\Raonslab\\TravelLab\\Http\\Middleware\\TravelThrottleRequests:120,1,travel-lab-workflow:",
+                "Modules\\Raonslab\\TravelLab\\Http\\Middleware\\TravelThrottleRequests:60,1,travel-lab-cart:",
+                "Illuminate\\Routing\\Middleware\\SubstituteBindings",
+                "App\\Http\\Middleware\\SetLocale",
+                "App\\Http\\Middleware\\SetTimezone",
+                "App\\Http\\Middleware\\RefreshTokenExpiration",
+                "App\\Http\\Middleware\\EnforceIdentityPolicy",
+                "App\\Http\\Middleware\\ExtensionMiddlewareGate:api,after_core",
+                "Modules\\Raonslab\\TravelLab\\Http\\Middleware\\TravelCatalogConflictResponse"
+            ]
+        },
+        {
+            "uri": "api/modules/raonslab-travel_lab/inquiries",
+            "methods": [
+                "GET",
+                "HEAD"
+            ],
+            "name": "api.modules.raonslab-travel_lab.inquiries.index",
+            "middleware": [
+                "App\\Http\\Middleware\\ExtensionMiddlewareGate:api,before_core",
+                "Illuminate\\Auth\\Middleware\\Authenticate:sanctum",
+                "Modules\\Raonslab\\TravelLab\\Http\\Middleware\\TravelThrottleRequests:120,1,travel-lab-workflow:",
+                "Illuminate\\Routing\\Middleware\\SubstituteBindings",
+                "App\\Http\\Middleware\\SetLocale",
+                "App\\Http\\Middleware\\SetTimezone",
+                "App\\Http\\Middleware\\RefreshTokenExpiration",
+                "App\\Http\\Middleware\\EnforceIdentityPolicy",
+                "App\\Http\\Middleware\\ExtensionMiddlewareGate:api,after_core",
+                "Modules\\Raonslab\\TravelLab\\Http\\Middleware\\TravelCatalogConflictResponse"
+            ]
+        },
+        {
+            "uri": "api/modules/raonslab-travel_lab/inquiries",
+            "methods": [
+                "POST"
+            ],
+            "name": "api.modules.raonslab-travel_lab.inquiries.store",
+            "middleware": [
+                "App\\Http\\Middleware\\ExtensionMiddlewareGate:api,before_core",
+                "Illuminate\\Auth\\Middleware\\Authenticate:sanctum",
+                "Modules\\Raonslab\\TravelLab\\Http\\Middleware\\TravelThrottleRequests:120,1,travel-lab-workflow:",
+                "Modules\\Raonslab\\TravelLab\\Http\\Middleware\\TravelThrottleRequests:10,1,travel-lab-submit:",
+                "Illuminate\\Routing\\Middleware\\SubstituteBindings",
+                "App\\Http\\Middleware\\SetLocale",
+                "App\\Http\\Middleware\\SetTimezone",
+                "App\\Http\\Middleware\\RefreshTokenExpiration",
+                "App\\Http\\Middleware\\EnforceIdentityPolicy",
+                "App\\Http\\Middleware\\ExtensionMiddlewareGate:api,after_core",
+                "Modules\\Raonslab\\TravelLab\\Http\\Middleware\\TravelCatalogConflictResponse"
+            ]
+        },
+        {
+            "uri": "api/modules/raonslab-travel_lab/inquiries/{inquiry}",
+            "methods": [
+                "GET",
+                "HEAD"
+            ],
+            "name": "api.modules.raonslab-travel_lab.inquiries.show",
+            "middleware": [
+                "App\\Http\\Middleware\\ExtensionMiddlewareGate:api,before_core",
+                "Illuminate\\Auth\\Middleware\\Authenticate:sanctum",
+                "Modules\\Raonslab\\TravelLab\\Http\\Middleware\\TravelThrottleRequests:120,1,travel-lab-workflow:",
+                "Illuminate\\Routing\\Middleware\\SubstituteBindings",
+                "App\\Http\\Middleware\\SetLocale",
+                "App\\Http\\Middleware\\SetTimezone",
+                "App\\Http\\Middleware\\RefreshTokenExpiration",
+                "App\\Http\\Middleware\\EnforceIdentityPolicy",
+                "App\\Http\\Middleware\\ExtensionMiddlewareGate:api,after_core",
+                "Modules\\Raonslab\\TravelLab\\Http\\Middleware\\TravelCatalogConflictResponse"
+            ]
+        },
+        {
+            "uri": "api/modules/raonslab-travel_lab/inquiries/{inquiry}/cancel",
+            "methods": [
+                "POST"
+            ],
+            "name": "api.modules.raonslab-travel_lab.inquiries.cancel",
+            "middleware": [
+                "App\\Http\\Middleware\\ExtensionMiddlewareGate:api,before_core",
+                "Illuminate\\Auth\\Middleware\\Authenticate:sanctum",
+                "Modules\\Raonslab\\TravelLab\\Http\\Middleware\\TravelThrottleRequests:120,1,travel-lab-workflow:",
+                "Modules\\Raonslab\\TravelLab\\Http\\Middleware\\TravelThrottleRequests:20,1,travel-lab-cancel:",
+                "Illuminate\\Routing\\Middleware\\SubstituteBindings",
+                "App\\Http\\Middleware\\SetLocale",
+                "App\\Http\\Middleware\\SetTimezone",
+                "App\\Http\\Middleware\\RefreshTokenExpiration",
+                "App\\Http\\Middleware\\EnforceIdentityPolicy",
+                "App\\Http\\Middleware\\ExtensionMiddlewareGate:api,after_core",
+                "Modules\\Raonslab\\TravelLab\\Http\\Middleware\\TravelCatalogConflictResponse"
+            ]
+        },
+        {
+            "uri": "api/modules/raonslab-travel_lab/admin/inquiries",
+            "methods": [
+                "GET",
+                "HEAD"
+            ],
+            "name": "api.modules.raonslab-travel_lab.admin.inquiries.index",
+            "middleware": [
+                "App\\Http\\Middleware\\ExtensionMiddlewareGate:api,before_core",
+                "Illuminate\\Auth\\Middleware\\Authenticate:sanctum",
+                "Modules\\Raonslab\\TravelLab\\Http\\Middleware\\TravelThrottleRequests:120,1,travel-lab-workflow:",
+                "Illuminate\\Routing\\Middleware\\SubstituteBindings",
+                "App\\Http\\Middleware\\SetLocale",
+                "App\\Http\\Middleware\\SetTimezone",
+                "App\\Http\\Middleware\\RefreshTokenExpiration",
+                "App\\Http\\Middleware\\EnforceIdentityPolicy",
+                "App\\Http\\Middleware\\ExtensionMiddlewareGate:api,after_core",
+                "Modules\\Raonslab\\TravelLab\\Http\\Middleware\\TravelCatalogConflictResponse",
+                "App\\Http\\Middleware\\PermissionMiddleware:admin,raonslab-travel_lab.inquiries.read",
+                "App\\Http\\Middleware\\AdminMiddleware"
+            ]
+        },
+        {
+            "uri": "api/modules/raonslab-travel_lab/admin/inquiries/{inquiry}",
+            "methods": [
+                "GET",
+                "HEAD"
+            ],
+            "name": "api.modules.raonslab-travel_lab.admin.inquiries.show",
+            "middleware": [
+                "App\\Http\\Middleware\\ExtensionMiddlewareGate:api,before_core",
+                "Illuminate\\Auth\\Middleware\\Authenticate:sanctum",
+                "Modules\\Raonslab\\TravelLab\\Http\\Middleware\\TravelThrottleRequests:120,1,travel-lab-workflow:",
+                "Illuminate\\Routing\\Middleware\\SubstituteBindings",
+                "App\\Http\\Middleware\\SetLocale",
+                "App\\Http\\Middleware\\SetTimezone",
+                "App\\Http\\Middleware\\RefreshTokenExpiration",
+                "App\\Http\\Middleware\\EnforceIdentityPolicy",
+                "App\\Http\\Middleware\\ExtensionMiddlewareGate:api,after_core",
+                "Modules\\Raonslab\\TravelLab\\Http\\Middleware\\TravelCatalogConflictResponse",
+                "App\\Http\\Middleware\\PermissionMiddleware:admin,raonslab-travel_lab.inquiries.read",
+                "App\\Http\\Middleware\\AdminMiddleware"
+            ]
+        },
+        {
+            "uri": "api/modules/raonslab-travel_lab/admin/inquiries/{inquiry}",
+            "methods": [
+                "PATCH"
+            ],
+            "name": "api.modules.raonslab-travel_lab.admin.inquiries.update",
+            "middleware": [
+                "App\\Http\\Middleware\\ExtensionMiddlewareGate:api,before_core",
+                "Illuminate\\Auth\\Middleware\\Authenticate:sanctum",
+                "Modules\\Raonslab\\TravelLab\\Http\\Middleware\\TravelThrottleRequests:120,1,travel-lab-workflow:",
+                "Modules\\Raonslab\\TravelLab\\Http\\Middleware\\TravelThrottleRequests:60,1,travel-lab-admin:",
+                "Illuminate\\Routing\\Middleware\\SubstituteBindings",
+                "App\\Http\\Middleware\\SetLocale",
+                "App\\Http\\Middleware\\SetTimezone",
+                "App\\Http\\Middleware\\RefreshTokenExpiration",
+                "App\\Http\\Middleware\\EnforceIdentityPolicy",
+                "App\\Http\\Middleware\\ExtensionMiddlewareGate:api,after_core",
+                "Modules\\Raonslab\\TravelLab\\Http\\Middleware\\TravelCatalogConflictResponse",
+                "App\\Http\\Middleware\\PermissionMiddleware:admin,raonslab-travel_lab.inquiries.update",
+                "App\\Http\\Middleware\\AdminMiddleware"
+            ]
+        },
+        {
+            "uri": "api/modules/raonslab-travel_lab/support/notices",
+            "methods": [
+                "GET",
+                "HEAD"
+            ],
+            "name": "api.modules.raonslab-travel_lab.support.notices.index",
+            "middleware": [
+                "App\\Http\\Middleware\\ExtensionMiddlewareGate:api,before_core",
+                "Modules\\Raonslab\\TravelLab\\Http\\Middleware\\TravelOptionalSanctum",
+                "Modules\\Raonslab\\TravelLab\\Http\\Middleware\\TravelThrottleRequests:600,1,travel-lab-support-public:",
+                "Illuminate\\Routing\\Middleware\\SubstituteBindings",
+                "App\\Http\\Middleware\\SetLocale",
+                "App\\Http\\Middleware\\SetTimezone",
+                "App\\Http\\Middleware\\RefreshTokenExpiration",
+                "App\\Http\\Middleware\\EnforceIdentityPolicy",
+                "App\\Http\\Middleware\\ExtensionMiddlewareGate:api,after_core",
+                "Modules\\Raonslab\\TravelLab\\Http\\Middleware\\TravelCatalogConflictResponse"
+            ]
+        },
+        {
+            "uri": "api/modules/raonslab-travel_lab/support/notices/{id}",
+            "methods": [
+                "GET",
+                "HEAD"
+            ],
+            "name": "api.modules.raonslab-travel_lab.support.notices.show",
+            "middleware": [
+                "App\\Http\\Middleware\\ExtensionMiddlewareGate:api,before_core",
+                "Modules\\Raonslab\\TravelLab\\Http\\Middleware\\TravelOptionalSanctum",
+                "Modules\\Raonslab\\TravelLab\\Http\\Middleware\\TravelThrottleRequests:600,1,travel-lab-support-public:",
+                "Illuminate\\Routing\\Middleware\\SubstituteBindings",
+                "App\\Http\\Middleware\\SetLocale",
+                "App\\Http\\Middleware\\SetTimezone",
+                "App\\Http\\Middleware\\RefreshTokenExpiration",
+                "App\\Http\\Middleware\\EnforceIdentityPolicy",
+                "App\\Http\\Middleware\\ExtensionMiddlewareGate:api,after_core",
+                "Modules\\Raonslab\\TravelLab\\Http\\Middleware\\TravelCatalogConflictResponse"
+            ]
+        },
+        {
+            "uri": "api/modules/raonslab-travel_lab/support/faqs",
+            "methods": [
+                "GET",
+                "HEAD"
+            ],
+            "name": "api.modules.raonslab-travel_lab.support.faqs.index",
+            "middleware": [
+                "App\\Http\\Middleware\\ExtensionMiddlewareGate:api,before_core",
+                "Modules\\Raonslab\\TravelLab\\Http\\Middleware\\TravelOptionalSanctum",
+                "Modules\\Raonslab\\TravelLab\\Http\\Middleware\\TravelThrottleRequests:600,1,travel-lab-support-public:",
+                "Illuminate\\Routing\\Middleware\\SubstituteBindings",
+                "App\\Http\\Middleware\\SetLocale",
+                "App\\Http\\Middleware\\SetTimezone",
+                "App\\Http\\Middleware\\RefreshTokenExpiration",
+                "App\\Http\\Middleware\\EnforceIdentityPolicy",
+                "App\\Http\\Middleware\\ExtensionMiddlewareGate:api,after_core",
+                "Modules\\Raonslab\\TravelLab\\Http\\Middleware\\TravelCatalogConflictResponse"
+            ]
+        },
+        {
+            "uri": "api/modules/raonslab-travel_lab/support/faqs/{id}",
+            "methods": [
+                "GET",
+                "HEAD"
+            ],
+            "name": "api.modules.raonslab-travel_lab.support.faqs.show",
+            "middleware": [
+                "App\\Http\\Middleware\\ExtensionMiddlewareGate:api,before_core",
+                "Modules\\Raonslab\\TravelLab\\Http\\Middleware\\TravelOptionalSanctum",
+                "Modules\\Raonslab\\TravelLab\\Http\\Middleware\\TravelThrottleRequests:600,1,travel-lab-support-public:",
+                "Illuminate\\Routing\\Middleware\\SubstituteBindings",
+                "App\\Http\\Middleware\\SetLocale",
+                "App\\Http\\Middleware\\SetTimezone",
+                "App\\Http\\Middleware\\RefreshTokenExpiration",
+                "App\\Http\\Middleware\\EnforceIdentityPolicy",
+                "App\\Http\\Middleware\\ExtensionMiddlewareGate:api,after_core",
+                "Modules\\Raonslab\\TravelLab\\Http\\Middleware\\TravelCatalogConflictResponse"
+            ]
+        },
+        {
+            "uri": "api/modules/raonslab-travel_lab/support/questions",
+            "methods": [
+                "GET",
+                "HEAD"
+            ],
+            "name": "api.modules.raonslab-travel_lab.support.questions.index",
+            "middleware": [
+                "App\\Http\\Middleware\\ExtensionMiddlewareGate:api,before_core",
+                "Illuminate\\Auth\\Middleware\\Authenticate:sanctum",
+                "Modules\\Raonslab\\TravelLab\\Http\\Middleware\\TravelThrottleRequests:120,1,travel-lab-support-questions:",
+                "Illuminate\\Routing\\Middleware\\SubstituteBindings",
+                "App\\Http\\Middleware\\SetLocale",
+                "App\\Http\\Middleware\\SetTimezone",
+                "App\\Http\\Middleware\\RefreshTokenExpiration",
+                "App\\Http\\Middleware\\EnforceIdentityPolicy",
+                "App\\Http\\Middleware\\ExtensionMiddlewareGate:api,after_core",
+                "Modules\\Raonslab\\TravelLab\\Http\\Middleware\\TravelCatalogConflictResponse"
+            ]
+        },
+        {
+            "uri": "api/modules/raonslab-travel_lab/support/questions",
+            "methods": [
+                "POST"
+            ],
+            "name": "api.modules.raonslab-travel_lab.support.questions.store",
+            "middleware": [
+                "App\\Http\\Middleware\\ExtensionMiddlewareGate:api,before_core",
+                "Illuminate\\Auth\\Middleware\\Authenticate:sanctum",
+                "Modules\\Raonslab\\TravelLab\\Http\\Middleware\\TravelThrottleRequests:120,1,travel-lab-support-questions:",
+                "Modules\\Raonslab\\TravelLab\\Http\\Middleware\\TravelThrottleRequests:10,1,travel-lab-support-create:",
+                "Illuminate\\Routing\\Middleware\\SubstituteBindings",
+                "App\\Http\\Middleware\\SetLocale",
+                "App\\Http\\Middleware\\SetTimezone",
+                "App\\Http\\Middleware\\RefreshTokenExpiration",
+                "App\\Http\\Middleware\\EnforceIdentityPolicy",
+                "App\\Http\\Middleware\\ExtensionMiddlewareGate:api,after_core",
+                "Modules\\Raonslab\\TravelLab\\Http\\Middleware\\TravelCatalogConflictResponse"
+            ]
+        },
+        {
+            "uri": "api/modules/raonslab-travel_lab/support/questions/{id}",
+            "methods": [
+                "GET",
+                "HEAD"
+            ],
+            "name": "api.modules.raonslab-travel_lab.support.questions.show",
+            "middleware": [
+                "App\\Http\\Middleware\\ExtensionMiddlewareGate:api,before_core",
+                "Illuminate\\Auth\\Middleware\\Authenticate:sanctum",
+                "Modules\\Raonslab\\TravelLab\\Http\\Middleware\\TravelThrottleRequests:120,1,travel-lab-support-questions:",
+                "Illuminate\\Routing\\Middleware\\SubstituteBindings",
+                "App\\Http\\Middleware\\SetLocale",
+                "App\\Http\\Middleware\\SetTimezone",
+                "App\\Http\\Middleware\\RefreshTokenExpiration",
+                "App\\Http\\Middleware\\EnforceIdentityPolicy",
+                "App\\Http\\Middleware\\ExtensionMiddlewareGate:api,after_core",
+                "Modules\\Raonslab\\TravelLab\\Http\\Middleware\\TravelCatalogConflictResponse"
+            ]
+        },
+        {
+            "uri": "api/modules/raonslab-travel_lab/support/questions/{id}",
+            "methods": [
+                "PATCH"
+            ],
+            "name": "api.modules.raonslab-travel_lab.support.questions.update",
+            "middleware": [
+                "App\\Http\\Middleware\\ExtensionMiddlewareGate:api,before_core",
+                "Illuminate\\Auth\\Middleware\\Authenticate:sanctum",
+                "Modules\\Raonslab\\TravelLab\\Http\\Middleware\\TravelThrottleRequests:120,1,travel-lab-support-questions:",
+                "Illuminate\\Routing\\Middleware\\SubstituteBindings",
+                "App\\Http\\Middleware\\SetLocale",
+                "App\\Http\\Middleware\\SetTimezone",
+                "App\\Http\\Middleware\\RefreshTokenExpiration",
+                "App\\Http\\Middleware\\EnforceIdentityPolicy",
+                "App\\Http\\Middleware\\ExtensionMiddlewareGate:api,after_core",
+                "Modules\\Raonslab\\TravelLab\\Http\\Middleware\\TravelCatalogConflictResponse"
+            ]
+        },
+        {
+            "uri": "api/modules/raonslab-travel_lab/campaigns",
+            "methods": [
+                "GET",
+                "HEAD"
+            ],
+            "name": "api.modules.raonslab-travel_lab.campaigns.index",
+            "middleware": [
+                "App\\Http\\Middleware\\ExtensionMiddlewareGate:api,before_core",
+                "Modules\\Raonslab\\TravelLab\\Http\\Middleware\\TravelOptionalSanctum",
+                "Modules\\Raonslab\\TravelLab\\Http\\Middleware\\TravelThrottleRequests:600,1,travel-lab-campaign-public:",
+                "Illuminate\\Routing\\Middleware\\SubstituteBindings",
+                "App\\Http\\Middleware\\SetLocale",
+                "App\\Http\\Middleware\\SetTimezone",
+                "App\\Http\\Middleware\\RefreshTokenExpiration",
+                "App\\Http\\Middleware\\EnforceIdentityPolicy",
+                "App\\Http\\Middleware\\ExtensionMiddlewareGate:api,after_core",
+                "Modules\\Raonslab\\TravelLab\\Http\\Middleware\\TravelCatalogConflictResponse"
+            ]
+        },
+        {
+            "uri": "api/modules/raonslab-travel_lab/campaigns/{slug}",
+            "methods": [
+                "GET",
+                "HEAD"
+            ],
+            "name": "api.modules.raonslab-travel_lab.campaigns.show",
+            "middleware": [
+                "App\\Http\\Middleware\\ExtensionMiddlewareGate:api,before_core",
+                "Modules\\Raonslab\\TravelLab\\Http\\Middleware\\TravelOptionalSanctum",
+                "Modules\\Raonslab\\TravelLab\\Http\\Middleware\\TravelThrottleRequests:600,1,travel-lab-campaign-public:",
+                "Illuminate\\Routing\\Middleware\\SubstituteBindings",
+                "App\\Http\\Middleware\\SetLocale",
+                "App\\Http\\Middleware\\SetTimezone",
+                "App\\Http\\Middleware\\RefreshTokenExpiration",
+                "App\\Http\\Middleware\\EnforceIdentityPolicy",
+                "App\\Http\\Middleware\\ExtensionMiddlewareGate:api,after_core",
+                "Modules\\Raonslab\\TravelLab\\Http\\Middleware\\TravelCatalogConflictResponse"
+            ]
+        }
+    ],
+    "api_count": 33,
+    "origins": {
+        "Modules\\Raonslab\\TravelLab\\Module": {
+            "path": "modules/raonslab-travel_lab/module.php",
+            "sha256": "83ce3cb92ecca87ad5e9d302bc90b96fdfd835066a3b5ab8e40f71fa7e08b393",
+            "bundled_equal": true
+        },
+        "Modules\\Raonslab\\TravelLab\\Services\\InquiryService": {
+            "path": "modules/raonslab-travel_lab/src/Services/InquiryService.php",
+            "sha256": "17c969a752820487c062b97e67c2cf88d0c03160e42346075dc5060ee2e38ad8",
+            "bundled_equal": true
+        },
+        "Modules\\Raonslab\\TravelLab\\Services\\TravelCartService": {
+            "path": "modules/raonslab-travel_lab/src/Services/TravelCartService.php",
+            "sha256": "9790d3ea235a3a996f2f452581636cf97b337080fd8cf5cb2a66dcbf17cf3148",
+            "bundled_equal": true
+        },
+        "Modules\\Raonslab\\TravelLab\\Services\\CampaignService": {
+            "path": "modules/raonslab-travel_lab/src/Services/CampaignService.php",
+            "sha256": "aace717697973c072e6a1854a5b65cd3300c54393fd14e46e6c0637a33c16a92",
+            "bundled_equal": true
+        },
+        "Modules\\Raonslab\\TravelLab\\Services\\TravelCampaignProvisioner": {
+            "path": "modules/raonslab-travel_lab/src/Services/TravelCampaignProvisioner.php",
+            "sha256": "ca1a20d6cb4c8158c9995ec01cef4b1f0b312c7002cde490857892c8aa90cdda",
+            "bundled_equal": true
+        },
+        "Modules\\Sirsoft\\Ecommerce\\Services\\ProductService": {
+            "path": "modules/sirsoft-ecommerce/src/Services/ProductService.php",
+            "sha256": "77924e4fa610f99626a19becdeee96a9194f648345aaf5904a3f02c78e91b6dc",
+            "bundled_equal": true
+        },
+        "Modules\\Sirsoft\\Board\\Services\\PostService": {
+            "path": "modules/sirsoft-board/src/Services/PostService.php",
+            "sha256": "36bbccff6005910eec8a1ef155c8b06e0791d9f908f563e460f2eab68aecacd4",
+            "bundled_equal": true
+        },
+        "Modules\\Sirsoft\\Page\\Services\\PageService": {
+            "path": "modules/sirsoft-page/src/Services/PageService.php",
+            "sha256": "6f9c57ccd7fc08aae4a8972c2c0ba545806ae4aa58dc6f0be3b8f1991803a287",
+            "bundled_equal": true
+        }
+    },
+    "permissions": {
+        "admin": [
+            "raonslab-travel_lab.catalog.read",
+            "raonslab-travel_lab.catalog.update",
+            "raonslab-travel_lab.inquiries.read",
+            "raonslab-travel_lab.inquiries.update",
+            "raonslab-travel_lab.support.read",
+            "raonslab-travel_lab.support.update"
+        ],
+        "manager": [
+            "raonslab-travel_lab.catalog.read",
+            "raonslab-travel_lab.catalog.update",
+            "raonslab-travel_lab.inquiries.read",
+            "raonslab-travel_lab.inquiries.update"
+        ],
+        "user": []
+    },
+    "adapters": {
+        "mail.default": "array",
+        "queue.default": "sync",
+        "filesystems.default": "local",
+        "scout.driver": "mysql-fulltext",
+        "cache.default": "database",
+        "session.driver": "array"
+    },
+    "cache": {
+        "class": "Illuminate\\Cache\\DatabaseStore",
+        "counter_db": "req81_travel_lab_test",
+        "lock_db": "req81_travel_lab_test",
+        "counter_table": "cache",
+        "lock_table": "cache_locks",
+        "prefix": "w04p-test-"
+    }
+}

@@ -1,0 +1,228 @@
+{
+    "commands": [
+        {
+            "step": "01-db-wipe",
+            "args": [
+                "db:wipe",
+                "--database=mysql",
+                "--drop-views",
+                "--force",
+                "--no-interaction"
+            ],
+            "quiesce_wait": 0,
+            "exit": 0,
+            "seconds": 3.069,
+            "pid": 976560
+        },
+        {
+            "step": "02-settings-install",
+            "args": [
+                "settings:install",
+                "--no-interaction"
+            ],
+            "quiesce_wait": 0,
+            "exit": 0,
+            "seconds": 1.135,
+            "pid": 978318
+        },
+        {
+            "step": "03-db-seed",
+            "args": [
+                "db:seed",
+                "--class=DatabaseSeeder",
+                "--force",
+                "--no-interaction"
+            ],
+            "quiesce_wait": 0,
+            "exit": 0,
+            "seconds": 3.8,
+            "pid": 978483
+        },
+        {
+            "step": "04-module-install-sirsoft-board",
+            "args": [
+                "module:install",
+                "sirsoft-board",
+                "--vendor-mode=bundled",
+                "--no-interaction"
+            ],
+            "quiesce_wait": 0,
+            "exit": 0,
+            "seconds": 8.49,
+            "pid": 978868
+        },
+        {
+            "step": "05-module-activate-sirsoft-board",
+            "args": [
+                "module:activate",
+                "sirsoft-board",
+                "--no-interaction"
+            ],
+            "quiesce_wait": 0,
+            "exit": 0,
+            "seconds": 3.134,
+            "pid": 979793
+        },
+        {
+            "step": "06-module-install-sirsoft-page",
+            "args": [
+                "module:install",
+                "sirsoft-page",
+                "--vendor-mode=bundled",
+                "--no-interaction"
+            ],
+            "quiesce_wait": 0,
+            "exit": 0,
+            "seconds": 3.824,
+            "pid": 980479
+        },
+        {
+            "step": "07-module-activate-sirsoft-page",
+            "args": [
+                "module:activate",
+                "sirsoft-page",
+                "--no-interaction"
+            ],
+            "quiesce_wait": 0,
+            "exit": 0,
+            "seconds": 1.459,
+            "pid": 980932
+        },
+        {
+            "step": "08-module-install-sirsoft-ecommerce",
+            "args": [
+                "module:install",
+                "sirsoft-ecommerce",
+                "--vendor-mode=bundled",
+                "--no-interaction"
+            ],
+            "quiesce_wait": 0,
+            "exit": 0,
+            "seconds": 21.062,
+            "pid": 981124
+        },
+        {
+            "step": "09-module-activate-sirsoft-ecommerce",
+            "args": [
+                "module:activate",
+                "sirsoft-ecommerce",
+                "--no-interaction"
+            ],
+            "quiesce_wait": 0,
+            "exit": 0,
+            "seconds": 1.454,
+            "pid": 983374
+        },
+        {
+            "step": "10-module-install-raonslab-travel_lab",
+            "args": [
+                "module:install",
+                "raonslab-travel_lab",
+                "--vendor-mode=bundled",
+                "--no-interaction"
+            ],
+            "quiesce_wait": 0,
+            "exit": 0,
+            "seconds": 4.862,
+            "pid": 983580
+        },
+        {
+            "step": "11-module-activate-raonslab-travel_lab",
+            "args": [
+                "module:activate",
+                "raonslab-travel_lab",
+                "--no-interaction"
+            ],
+            "quiesce_wait": 0,
+            "exit": 0,
+            "seconds": 1.18,
+            "pid": 984306
+        },
+        {
+            "step": "12-template-install-sirsoft-admin_basic",
+            "args": [
+                "template:install",
+                "sirsoft-admin_basic",
+                "--no-interaction"
+            ],
+            "quiesce_wait": 0,
+            "exit": 0,
+            "seconds": 5.436,
+            "pid": 984513
+        },
+        {
+            "step": "13-template-activate-sirsoft-admin_basic",
+            "args": [
+                "template:activate",
+                "sirsoft-admin_basic",
+                "--no-interaction"
+            ],
+            "quiesce_wait": 0,
+            "exit": 0,
+            "seconds": 7.515,
+            "pid": 985266
+        },
+        {
+            "step": "14-template-install-raonslab-travel_lab",
+            "args": [
+                "template:install",
+                "raonslab-travel_lab",
+                "--no-interaction"
+            ],
+            "quiesce_wait": 0,
+            "exit": 0,
+            "seconds": 2.141,
+            "pid": 986000
+        },
+        {
+            "step": "15-template-activate-raonslab-travel_lab",
+            "args": [
+                "template:activate",
+                "raonslab-travel_lab",
+                "--no-interaction"
+            ],
+            "quiesce_wait": 0,
+            "exit": 0,
+            "seconds": 3.407,
+            "pid": 986208
+        },
+        {
+            "step": "16-db-seed",
+            "args": [
+                "db:seed",
+                "--class=Modules\\Sirsoft\\Ecommerce\\Database\\Seeders\\ShippingTypeSeeder",
+                "--force",
+                "--no-interaction"
+            ],
+            "quiesce_wait": 0,
+            "exit": 0,
+            "seconds": 2.036,
+            "pid": 986533
+        },
+        {
+            "step": "17-module-seed-raonslab-travel_lab",
+            "args": [
+                "module:seed",
+                "raonslab-travel_lab",
+                "--sample",
+                "--no-interaction"
+            ],
+            "quiesce_wait": 0,
+            "exit": 0,
+            "seconds": 3.032,
+            "pid": 986779
+        },
+        {
+            "step": "18-raonslab-travel_lab-support-provision",
+            "args": [
+                "raonslab-travel_lab:support-provision",
+                "--lab-confirm",
+                "--no-interaction"
+            ],
+            "quiesce_wait": 0,
+            "exit": 0,
+            "seconds": 4.532,
+            "pid": 987067
+        }
+    ]
+}

@@ -1,0 +1,26 @@
+{
+  "command": [
+    "/usr/bin/php8.3",
+    "docs/symphony/w04-final-contract-persistence/snapshot.php",
+    "mysql-live-fresh-baseline34",
+    "run",
+    "/usr/bin/php8.3",
+    "vendor/bin/phpunit",
+    "--bootstrap",
+    "docs/symphony/w04-final-contract-persistence/test-bootstrap.php",
+    "scripts/travel-lab/LiveMysqlTest.php"
+  ],
+  "exit": 0,
+  "seconds": 21.958,
+  "native_log_sha256": "24e184765116e60a525c2204cd94370b555b0c3999da785488f3147f46bcc23f",
+  "summary": [
+    "PHPUnit 11.5.56 by Sebastian Bergmann and contributors.",
+    "Runtime:       PHP 8.3.6",
+    "Time: 00:15.418, Memory: 83.00 MB",
+    "OK (1 test, 34 assertions)"
+  ],
+  "restored_exactly": true,
+  "source_file_hashes": {
+    "scripts/travel-lab/LiveMysqlTest.php": "6a9f3b6a273489b292fb3eebbe4986300e78a2e5065c2acc2c3e2a648bee6f7d"
+  }
+}
