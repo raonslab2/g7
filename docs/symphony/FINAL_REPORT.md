@@ -1,5 +1,8 @@
 # G7 Travel Lab delivery audit — IN_PROGRESS
 
+2026-10-10 범위 정정과 현재 실행 검토본은 [BENCHMARK_REVIEW.md](BENCHMARK_REVIEW.md)에 있습니다.
+아래는 원 시점별 검증 기록이며 최신 인수 결과는 문서 끝의 scope correction을 참조합니다.
+
 Current audit: **2026-10-09 21:15 UTC / October 10 06:15 KST**. Deadline:
 October 11 23:59 KST /14:59 UTC, approximately **41h44m** remaining; review
 October 12 KST. This records an executable RAON demonstration and its remaining
@@ -193,3 +196,20 @@ New canonical32nd cumulative attempts: CLAUDE **req_4d7d64bbb8754974867adc0d9edb
 APP is frozen for browser source/runtime/env/cache/service parity; own private minimum handoff source5783/tree361f/expiresOctober10 01:00UTC, five synthetic actors,0600/0700. TEST verifier independently measures/backups before writes and owns only TEST/own18880 service. Parent preliminary catalog query per_page100 returned422 (caller bound exceeded48); valid48 read returned nature IDs1/3 andwellness2/4. Only parent synthetic nature published flags1/3 may be temporarily changed under explicit snapshot/restoration window for real empty-campaign testing, no transaction test during it; no foreign rows or price/stock/capacity edits. These are preflight observations, not independent browserPASS.
 
 Next: officialwait yields parent slot, automatic resume with results, compare safe Git evidence/original failures, repair only observed issues, and produce final package/source integration/revalidation. Deadline stillOctober11 14:59UTC; approximately41h37m remain. No user action required.
+## Current review entry — October 10 scope correction
+
+사용자 검토본의 현재 진입점은 [BENCHMARK_REVIEW.md](BENCHMARK_REVIEW.md)입니다.
+이번 범위는 롯데관광 공개 홈페이지 벤치마킹과 RAON 자체 여행앱입니다.
+고객 Figma·DB·소스 부재는 BLOCKED 사유가 아닙니다. 이전 진행 보고와
+실패 기록은 해당 시점의 원본으로 유지합니다.
+검토 source5783e6ba와 기존PR head888f6b2d의 제품 소스는 동일합니다.
+마지막 독립 원본3f16c7d5/e4c736ff를 변경 없이 ancestry로 인수했습니다.
+Retry/Page권한/빈기획전, native14행 계약/MySQL4barrier/재시작영속/전체복원
+PASS를 인수했으며, 현재 loopback설치4507파일/served5자산의 동일성을 확인했습니다.
+추가390/1440 public browser10/10 및 동일context관리자 history18/18 PASS;
+이전 간헐 메뉴FAIL은 유지하고 현재 재현0으로 한정합니다.
+새 checkout domain175tests/2936assertions PASS, isolation27 PASS.
+정식 과거Request 조회401·활성총괄UNKNOWN에 따라 중복 구현·DB/service변경 없이
+비충돌 인계만 연결합니다. 공식Validation/hostedCI NOT_RUN,
+main/운영HOLD, Spring merged성과 보존. 현재 화면·실행/SSH접속·남는 연결조치는
+검토본 문서에서 확인할 수 있습니다. 제품 전체 release완료는 주장하지 않습니다.

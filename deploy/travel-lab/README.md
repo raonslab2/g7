@@ -1,5 +1,12 @@
 # G7 Travel Lab isolated execution package
 
+사용자 검토의 현재 진입점과 390/1440 실제 화면은
+[RAON 여행사이트 검토본](../../docs/symphony/BENCHMARK_REVIEW.md)에 있습니다.
+본 패키지는 공개 운영 홈페이지를 참고한 RAON 자체 앱이며 고객 Figma·DB·소스가 필요하지 않습니다.
+전용 개발 DB 인스턴스에서 재현하세요. 고정 lab DB/account 이름을 사용하는
+다른 실행이 있는 서버에서 새 checkout의 `setup.php`를 실행하지 마세요.
+새 환경의 계정 비밀번호 설정이 기존 lab 실행에 영향을 줄 수 있습니다.
+
 This package is a nonoperational demonstration. Use a fresh isolated checkout of
 the published integration SHA. Do not copy a business site's `.env`, database,
 storage, settings, or customer assets into it. It does not provision public hosting.
