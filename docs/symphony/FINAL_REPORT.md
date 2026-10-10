@@ -1,7 +1,7 @@
 # G7 Travel Lab delivery audit — IN_PROGRESS
 
 2026-10-10 범위 정정과 현재 실행 검토본은 [BENCHMARK_REVIEW.md](BENCHMARK_REVIEW.md)에 있습니다.
-아래는 원 시점별 검증 기록이며 최신 인수 결과는 문서 끝의 scope correction을 참조합니다.
+아래는 원 시점별 검증 기록이며 최신 최종 게이트 판단은 문서 끝의 final gate recovery를 참조합니다.
 
 Current audit: **2026-10-09 21:15 UTC / October 10 06:15 KST**. Deadline:
 October 11 23:59 KST /14:59 UTC, approximately **41h44m** remaining; review
@@ -213,3 +213,108 @@ PASS를 인수했으며, 현재 loopback설치4507파일/served5자산의 동일
 비충돌 인계만 연결합니다. 공식Validation/hostedCI NOT_RUN,
 main/운영HOLD, Spring merged성과 보존. 현재 화면·실행/SSH접속·남는 연결조치는
 검토본 문서에서 확인할 수 있습니다. 제품 전체 release완료는 주장하지 않습니다.
+
+## Final gate recovery — 2026-10-10 / req_4f9c4e5a
+
+**최종 판단: 비운영 검토본·증거 인계 가능, 공식 이력 회수 BLOCKED,
+main 병합/운영 배포 HOLD. 전체 제품 release PASS가 아니다.**
+본 Request `req_4f9c4e5a57084b7e9821492b0f279536`는
+`work-20261010-g7-travel-final-gate-recovery-9d7c41e2`의 REGISTERED 영수증을
+native catalog에서 확인했다. 기존 승인 구현을 재작성하거나 새 구현 Child를 만들지 않았다.
+원본 제품 검사 SHA **5783e6ba124061bdfae639cdaf9b1c14a83cdf03**를 유지하며,
+새 회귀 검사 Git SHA는 **e1c765d3d06b4d0e1cdd39ea32b85549de171745**다.
+두 SHA 간 제품/runtime 변경은 0개다. 이번 게시도 보고서·검사 harness·증거만 추가한다.
+
+### 공식 이력과 Git 회수
+
+PR [#2](https://github.com/raonslab2/g7/pull/2)는 OPEN·DRAFT,
+branch `feat/g7-travel-lab-c7ae42d1`, intake head `e1c765d3…`,
+main **6853f40d58acbf53a2f29cbb9dd422cc439047a9**다.
+사용자 보고 head `888f6b2d052b3b189fb1ff322b1e117e281e8e4d`는 기존 ancestor이며
+5783→888f 차이는 실제 문서 5개였다. 이후 범위 정정 Request
+`req_7be1884541d94defa1402a8dd83f5c21`가 두 원본 증거를 이미 인수해
+e1c765d3까지 진행한 것을 확인했다. 중복 cherry-pick·force push는 하지 않는다.
+
+14:34:32 UTC에 정식 API의 원 부모, 두 마지막 Child, 범위 정정 Request
+GET을 각각 재시도했으나 모두 **401 / trusted proxy identity required**였다.
+현재-scoped `agentopt_control status`는 이 Request의 children만 반환하며 과거
+32개 Child 상태를 제공하지 않는다. 원 부모 FAILED·Child26 COMPLETED/5 FAILED/
+1 INTERRUPTED/활성0은 **사용자 보고(11:13–11:18 KST)**로만 기록한다.
+현재 공식 상태·활성 총괄·원 부모 실패 원인은 **UNKNOWN**이며 absence/PASS를 추론하지 않는다.
+원본 부정 검토/실행 실패를 그대로 보존한다.
+[실제 조회 기록](final-gate-recovery/request-observation.json)과
+[native 등록 영수증](final-gate-recovery/catalog.json)을 구분했다.
+
+catalog의 실제 backend **7f77ed00…** Git 소스에서 재개 계약을 확인했다:
+FAILED/INTERRUPTED/CANCELLED는 native session이 있어야 재개 가능하고,
+같은 승인된 idempotency key의 동일 요청은 replay이며 다른 payload는 충돌한다.
+원 부모의 state/session을 읽지 못했으므로 **개별 재개 가능성 UNKNOWN / 재개 NOT_RUN**.
+[계약 source/hash](final-gate-recovery/resume-contract.json)에 근거를 남겼다.
+원 Request/Child 취소·삭제·변조, work_id/attempt 재사용, 인증/DB 우회는 없다.
+
+### 같은 제품 소스에서 인수한 실제 독립 결과
+
+| 독립 오너·원 commit | 제품 검사 소스 | 인수 판정과 한계 |
+|---|---|---|
+| CLAUDE req_4d7d64bbb8754974867adc0d9edbe971 / `3f16c7d53b5fba5e56a525f3d5be7e89cb960322` | 5783e6ba | 390/1440 native Page Retry HTTP200 후 banner 제거/no reload, 실패 Retry 오류 유지, readonly/self Page권한, 실제 빈 기획전, 고객·관리자 동선의 bounded PASS. 원 ledger62 PASS/7 OBSERVED/2 FAIL; screenshot guard·간헐 ActionMenu FAIL, token BLOCKED/NOT_RUN 유지 |
+| CODEX req_95d0024e7b144a5bb903cc7daad1fb5f / `e4c736fff897aae3545cf32126f7da12a2a9f824` | 5783e6ba | native 가격/인원/상태/부작용14행, MySQL4개 sustained barrier,159 real HTTP checks,10 tests/137 assertions, own service 재시작·새 로그인·문의/답변/기획전 영속성, 전체 TEST 복원 bounded PASS. MariaDB10.11.14; engine lock graph NOT_RUN |
+
+둘 모두 현재 remote ancestry에 존재하고 원본 파일(61/171개)은 byte-identical이다.
+독립 감사는 contract artifact170/170 해시 일치, browser60개 non-self 해시 일치를 확인했다.
+브라우저 manifest 자기 항목은 이전 manifest를 검사하고 덮어쓴 원래 계측의 stale hash다.
+**자기 해시 NOT_VERIFIABLE**, 원본 변경·61/61 PASS로 덮어쓰지 않는다.
+원 TEST baseline55tables/104rows digest
+`ded72a53ad82a159b88e50a6560625488bb569a55f5f5ffa109cd45ae52d056e`는
+당시 독립 측정/복원 결과이며 현재 DB 측정으로 재포장하지 않는다.
+기본 native Page6개와 기본 travel campaign0개도 구분한다.
+[원본 source/hash·부정 결과 감사](final-gate-recovery/EVIDENCE_AUDIT.md)에 상세를 기록했다.
+
+### 이번 Request에서 새로 실행한 회귀
+
+| 실행 | 결과·환경·종료 코드 |
+|---|---|
+| `php vendor/bin/phpunit -c modules/_bundled/raonslab-travel_lab/tests/phpunit.xml --colors=never` | PASS175 tests/2936assertions, PHP8.3.6, private in-memory SQLite,259.674초 wall, exit0. [실행 원문](final-gate-recovery/domain-tests.txt) |
+| `node node_modules/vitest/vitest.mjs run resources/js/core/template-engine/__tests__/TemplateApp.refetchRecovery.test.tsx --maxWorkers=2` | PASS12tests/1file, exit0. source/mock unit 범위. [원문](final-gate-recovery/retry-unit.txt) |
+| travel template cwd의 `node node_modules/vitest/vitest.mjs run --maxWorkers=2` | PASS160tests/12files, exit0. jsdom scrollTo 미구현 stderr 유지; 실제 browser가 아니다. [원문](final-gate-recovery/template-tests.txt) |
+| `php scripts/travel-lab/guard-test.php` | PASS27 negative isolation checks, exit0; no DB/service mutation |
+| `php scripts/travel-lab/vendor-check.php --bundled` 및 `vendor-check-test.php` | PASS dependency-only +8개 실제 filesystem/native bundle fixture, exits0 |
+| 독립 CODEX anonymous Chromium390/1440 공개 동선 | PASS16/16,2contexts,14screens,10/10served asset bindings, exit0. 실패 Retry 오류 유지/실제200 복구/no reload; external·mutating HTTP0/pageerrors0. [실제 UI 증거와 명령](final-gate-recovery/browser/README.md) |
+
+새 공개 browser Retry는 catalog 범위다. **새 admin/Page 인증·MySQL·서비스 재시작은 NOT_RUN**:
+공식 활성 총괄을 확인하지 못해 DB/service 변경을 시작하지 않고 위 원본 독립 결과를 인수했다.
+이것을 source/mock으로 대체한 MySQL PASS 또는 새 native Page run이라고 표현하지 않는다.
+짧게 남는 이전 실패 toast는 원본/새 browser 모두 OBSERVED이며 list 오류 banner와 구분한다.
+변경 없는 compiled build는 재생성하지 않았고 served bytes의 고정 source 일치를 확인했다.
+
+Composer locked install은 --no-scripts로 완료했다. template 첫 npm ci는 필요한
+--legacy-peer-deps 누락으로 exit1, 두 번째는 shared cache EACCES exit243였다.
+공유 cache를 수정하지 않고 해당 recipe flag+본 worktree 전용 cache로 재시도해 exit0.
+실패도 [명령 원장](final-gate-recovery/checks.json)에 보존했다. package/lock/product는 변경하지 않았다.
+원 work-order와 본 work-order Git blob/hash를 읽고 공식 pinned validator를 실행해
+AI_GCS source `15f1254b2acabd8882aad5671fac7ae123b74968`에서99documents/errors0/exit0.
+[영수증](final-gate-recovery/work-order-validation.json)은 지시서 schema 검사이며 제품 CI가 아니다.
+
+### 인계 패키지·기한·남는 게이트
+
+검사한 제품의 [고정 source 다운로드](https://github.com/raonslab2/g7/archive/e1c765d3d06b4d0e1cdd39ea32b85549de171745.zip),
+[격리 설치/실행 안내](../../deploy/travel-lab/README.md),
+[비운영 검토 동선/접속 안내](BENCHMARK_REVIEW.md),
+[모바일 실제 화면](final-gate-recovery/browser/home-390.png),
+[데스크톱 Retry 복구](final-gate-recovery/browser/catalog-recovered-1440.png)를 인계한다.
+신규 재현은 독립 머신·자신이 소유한 전용 MySQL 인스턴스에서만 실행한다.
+기존 검증 호스트에서 고정 DB 이름의 setup을 재실행하지 않는다.
+기존 loopback18871은 외부 공개 URL이 아니다. 외부 검토에는 기존 승인 SSH 접근
+또는 별도 승인 비운영 호스팅 연결이 필요하며, 여기서 공개 포트/계정은 만들지 않았다.
+
+**10월11일23:59 KST 첫 비운영 검토본은 Git 패키지·화면 기준으로 기한 전 인계한다.**
+공식 이력/완전한 release 완료조건은 아직 미충족이며 다음 항목을 남긴다:
+
+1. 인증된 공식 Request detail/child/event 이력으로 원 부모·32Child의 최신 상태/실패 사유/session을 회수하고 활성 총괄이 있으면 이 SHA/증거를 그 총괄에 연결한다. 본 도구의 current-scoped status로는 불가능하다.
+2. G7 hosted workflows0/checkruns0/statuses0: **HOSTED_CI_NOT_RUN**. 공식 Validation은 verified receipt 없음/**NOT_RUN**. 위 local/Child/work-order 결과가 면제/대체 영수증이 아니다. 필요한 프로젝트 gate를 기존 정식 경로에서 최종 고정 revision에 수행한다.
+3. GitHub visible hooks/deployments0·main unprotected/rulesets[]여도 외부 자동배포 부재를 증명하지 못한다. **production autodeploy UNKNOWN → main merge HOLD**. 운영 트리거/영향을 확인하고 운영 영향·서비스 재시작·실결제·실고객 배포는 별도 승인 범위에서만 처리한다.
+
+[Git 관찰](final-gate-recovery/git-observation.json)에 판정을 분리했다.
+실제 제품 결함 재현 없이 공용 UI를 추측 수정하지 않았다. 새 공식 Child/Worker/Scheduler/DB 없음.
+RAON 사업사이트·운영DB·실회원/문의·결제/메일/SMS/공급사·Spring 소스/통합·롯데관광 고객 프로젝트는 변경하지 않았다.
+자체 합성 자산만 공개하며 고객 W00/W01과 분리한다. 고객 W01은 고객 소유 private repo/project_id,
+접근 가능한 완료 Figma 및 DB 승인본 확인 전 발행/구현하지 않는다.

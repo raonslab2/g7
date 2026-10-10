@@ -1,0 +1,61 @@
+// Independent public-only browser delta. GET/HEAD loopback only; no login, DB, service or fixture writes.
+import fs from 'node:fs';
+import crypto from 'node:crypto';
+import assert from 'node:assert/strict';
+import {execFileSync} from 'node:child_process';
+const playwrightModule=process.env.PLAYWRIGHT_MODULE??'/tmp/w04-4d7d-pw/node_modules/playwright/index.mjs';
+const chromiumExecutable=process.env.CHROMIUM_EXECUTABLE??'/home/ubuntu/.cache/ms-playwright/chromium-1248/chrome-linux64/chrome';
+const {chromium}=await import(playwrightModule);
+const pin='e1c765d3d06b4d0e1cdd39ea32b85549de171745';
+const original='5783e6ba124061bdfae639cdaf9b1c14a83cdf03';
+const baseURL=new URL(process.env.TRAVEL_LAB_BASE_URL??'http://127.0.0.1:18871');
+assert(['http:','https:'].includes(baseURL.protocol),'Only HTTP(S) loopback allowed');
+assert(['127.0.0.1','localhost','[::1]'].includes(baseURL.hostname),'Only loopback hostname allowed');
+assert(!baseURL.username&&!baseURL.password&&baseURL.pathname==='/'&&!baseURL.search&&!baseURL.hash,'Base URL must be credential-free origin');
+const base=baseURL.origin;
+const out='docs/symphony/final-gate-recovery/browser';
+const hash=b=>crypto.createHash('sha256').update(b).digest('hex');
+const git=(...args)=>execFileSync('git',args);
+const runtime=['app','routes','resources','public','modules','templates','config','lang','bootstrap'];
+assert.equal(git('diff','--name-only',original,pin,'--',...runtime).toString().trim(),'');
+assert.equal(git('diff','--name-only',pin,'--',...runtime).toString().trim(),'');
+fs.mkdirSync(out,{recursive:true});
+const result={source:pin,original_source:original,runtime_diff_files:0,started:new Date().toISOString(),command:'node docs/symphony/final-gate-recovery/browser/public-delta.mjs',boundary:'Fresh anonymous contexts; no login or credentials; loopback GET/HEAD only; no DB/service/fixture writes. Failure controls abort GET, never fulfill success.',checks:[],metrics:[],screens:[],asset_bindings:[],inherited_not_rerun:['Native admin Page Retry','Page read-only/self permissions','Real empty campaign catalog','Authenticated inquiry/admin/support','MySQL/concurrency/restart/restoration','Full 14-row contract','SEO/cache','General layout editor']};
+const flush=()=>fs.writeFileSync(out+'/public-delta.json',JSON.stringify(result,null,2)+'\n');
+const browser=await chromium.launch({executablePath:chromiumExecutable,args:['--disable-background-networking']});
+result.tool_paths={playwrightModule,chromiumExecutable,base};
+result.chromium=browser.version();
+async function check(width,name,fn){const started=new Date().toISOString();try{const data=await fn();result.checks.push({width,name,started,finished:new Date().toISOString(),status:'PASS',data});}catch(e){result.checks.push({width,name,started,finished:new Date().toISOString(),status:'FAIL',error:String(e.message).replace(/[\w.+-]+@[\w.-]+\.[\w-]+/g,'[EMAIL]').slice(0,800)});}flush();console.log(width,name,result.checks.at(-1).status);}
+const bindings=[['/build/core/template-engine.min.js','public/build/core/template-engine.min.js'],...['raonslab-travel_lab','sirsoft-admin_basic'].flatMap(id=>['js/components.iife.js','css/components.css'].map(rel=>['/api/templates/assets/'+id+'/'+rel,'templates/_bundled/'+id+'/dist/'+rel]))];
+for(const width of [390,1440]){
+ const context=await browser.newContext({viewport:{width,height:1000},locale:'ko-KR',hasTouch:width===390,isMobile:width===390,serviceWorkers:'block'});
+ const m={width,blocked_requests:[],pageerrors:[],http:[],failed_requests:[],assets:[],trusted_inputs:[]};result.metrics.push(m);
+ await context.route('**/*',async route=>{const req=route.request(),u=new URL(req.url());if(u.origin!==base||!['GET','HEAD'].includes(req.method())){m.blocked_requests.push({path:u.pathname,origin:u.origin,method:req.method()});return route.abort('blockedbyclient');}return route.continue();});
+ await context.routeWebSocket('**/*',ws=>ws.close());
+ await context.addInitScript(()=>{window.__deltaInputs=[];document.addEventListener('click',e=>{const n=e.target instanceof Element?e.target.closest('[data-testid]'):null;window.__deltaInputs.push({trusted:e.isTrusted,testid:n?.getAttribute('data-testid')??null});},true);});
+ const p=await context.newPage();p.setDefaultTimeout(18000);p.setDefaultNavigationTimeout(30000);
+ const pendingAssets=[];
+ p.on('pageerror',e=>m.pageerrors.push(e.message));
+ p.on('requestfailed',r=>m.failed_requests.push({path:new URL(r.url()).pathname,method:r.method(),reason:r.failure()?.errorText}));
+ p.on('response',r=>{const u=new URL(r.url());if(u.pathname.startsWith('/api/'))m.http.push({path:u.pathname,status:r.status(),method:r.request().method()});if(/\.(?:js|css)$/.test(u.pathname))pendingAssets.push(r.body().then(b=>m.assets.push({path:u.pathname,sha256:hash(b),status:r.status()})).catch(()=>{}));});
+ const act=locator=>width===390?locator.tap():locator.click();
+ const visible=id=>p.getByTestId(id).first().waitFor({state:'visible'});
+ const hidden=id=>p.getByTestId(id).waitFor({state:'hidden'});
+ async function screenshot(name){await p.evaluate(()=>{const w=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT);let n;while(n=w.nextNode()){if(n.parentElement?.closest('script,style'))continue;n.textContent=n.textContent.replace(/[\w.+-]+@[\w.-]+\.[\w-]+/g,'[EMAIL]').replace(/\b0\d{1,2}[- ]?\d{3,4}[- ]?\d{4}\b/g,'[PHONE]');}});const file=out+'/'+name+'-'+width+'.png';await p.screenshot({path:file,fullPage:true,mask:[p.locator('input,textarea')]});result.screens.push({width,file,sha256:hash(fs.readFileSync(file))});return p.evaluate(()=>({viewport:innerWidth,document:document.documentElement.scrollWidth}));}
+ await check(width,'served core/travel/admin assets equal fixed Git',async()=>{for(const [url,path] of bindings){const r=await context.request.get(base+url,{maxRedirects:0});const actual=hash(await r.body()),expected=hash(git('show',pin+':'+path));const b={width,url,source_path:path,status:r.status(),served_sha256:actual,source_sha256:expected,equal:actual===expected};result.asset_bindings.push(b);assert.equal(r.status(),200);assert.equal(actual,expected);}return {bindings:5,admin_asset_fetch_only:true};});
+ await check(width,'public home native GET and geometry',async()=>{await p.goto(base+'/travel');await visible('home-hero');await visible('trip-card');await p.waitForLoadState('networkidle');const geometry=await screenshot('home');assert.equal(geometry.document,geometry.viewport);return {cards:await p.getByTestId('trip-card').count(),geometry};});
+ await check(width,'trusted campaign/catalog/product/history navigation',async()=>{if(width===390){await act(p.getByTestId('menu-toggle'));await act(p.getByTestId('mobile-nav-campaigns'));}else await act(p.getByTestId('nav-campaigns'));await visible('campaign-card');await act(p.getByTestId('campaign-card').first());await visible('campaign-detail');await act(p.getByTestId('campaign-search-cta'));await visible('trip-card');const searchURL=p.url();await act(p.getByTestId('trip-card').first());await visible('product-title');await visible('booking-panel');await visible('itinerary');await visible('simulation-notice');const geometry=await screenshot('product');assert.equal(geometry.document,geometry.viewport);await p.goBack();await visible('trip-card');assert.equal(p.url(),searchURL);return {search_path:new URL(searchURL).pathname,query:new URL(searchURL).search,productThenHistory:true,geometry};});
+ await check(width,'real empty search then trusted reset',async()=>{await p.goto(base+'/travel/search?q=RAON_NO_RESULTS_FINAL_GATE_20261010');await visible('catalog-empty');assert.equal(await p.getByTestId('trip-card').count(),0);await screenshot('empty-search');if(width===390)await act(p.getByTestId('filters-toggle'));await act(p.getByTestId('filter-reset'));await visible('trip-card');return {empty:true,resetRecovered:true,note:'Real query empty; not the inherited empty-campaign mutation or six native Page documents.'};});
+ await check(width,'failed Retry retains error with no reload',async()=>{const pattern='**/api/modules/raonslab-travel_lab/catalog*';await p.route(pattern,route=>route.abort('failed'));await p.goto(base+'/travel/search');await visible('catalog-error');await screenshot('catalog-error');const origin=await p.evaluate(()=>{window.__deltaRetry=1;return performance.timeOrigin;});m.retry_origin=origin;const failure=p.waitForEvent('requestfailed',r=>new URL(r.url()).pathname==='/api/modules/raonslab-travel_lab/catalog');await act(p.getByTestId('catalog-retry'));await failure;await visible('catalog-error');await p.waitForFunction(()=>document.querySelector('[data-testid="catalog-retry"]')?.getAttribute('disabled')===null);assert.equal(await p.getByTestId('trip-card').count(),0);assert(await p.evaluate(t=>window.__deltaRetry===1&&performance.timeOrigin===t,origin));await screenshot('catalog-retry-still-error');return {request_aborted:true,errorRetained:true,cards:0,reload:false};});
+ await check(width,'native 200 Retry clears error and renders cards without reload',async()=>{await p.unroute('**/api/modules/raonslab-travel_lab/catalog*');const response=p.waitForResponse(r=>new URL(r.url()).pathname==='/api/modules/raonslab-travel_lab/catalog'&&r.request().method()==='GET');await act(p.getByTestId('catalog-retry'));const r=await response;assert.equal(r.status(),200);await visible('trip-card');await hidden('catalog-error');assert(await p.evaluate(t=>window.__deltaRetry===1&&performance.timeOrigin===t,m.retry_origin));const geometry=await screenshot('catalog-recovered');assert.equal(geometry.document,geometry.viewport);return {native:200,errorCleared:true,cards:await p.getByTestId('trip-card').count(),reload:false,geometry};});
+ await check(width,'trusted help then browser back',async()=>{await p.goto(base+'/travel');await visible('home-hero');await act(p.getByTestId(width===390?'tab-help':'nav-help'));await p.waitForURL('**/travel/help');await p.waitForLoadState('networkidle');await screenshot('help');await p.goBack();await visible('home-hero');return {help:true,historyHome:true};});
+ m.trusted_inputs=await p.evaluate(()=>window.__deltaInputs??[]).catch(()=>[]);
+ await Promise.allSettled(pendingAssets);
+ await check(width,'public-only network and runtime boundary',async()=>{assert.equal(m.blocked_requests.length,0);assert.equal(m.pageerrors.length,0);assert(m.http.every(r=>['GET','HEAD'].includes(r.method)));return {blocked_requests:0,pageerrors:0,mutating_http:0,api_responses:m.http.length};});
+ await context.close();flush();
+}
+await browser.close();
+result.final_runtime_diff_files=git('diff','--name-only',pin,'--',...runtime).toString().trim().split('\n').filter(Boolean).length;
+result.finished=new Date().toISOString();
+result.summary={pass:result.checks.filter(c=>c.status==='PASS').length,fail:result.checks.filter(c=>c.status==='FAIL').length,browser_contexts:2,viewports:[390,1440],asset_bindings:result.asset_bindings.length,screenshots:result.screens.length};
+result.exit_code=result.summary.fail||result.final_runtime_diff_files?1:0;flush();process.exitCode=result.exit_code;

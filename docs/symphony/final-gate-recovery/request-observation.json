@@ -1,0 +1,54 @@
+{
+  "observed_at": "2026-10-10T14:34:32Z",
+  "method": "GET",
+  "base": "http://127.0.0.1:8610",
+  "authentication": "no identity spoofing/credential reading",
+  "current_scoped_status": {
+    "control_available": true,
+    "is_child": false,
+    "parent_request_id": null,
+    "waiting": false,
+    "children": []
+  },
+  "historical_queries": [
+    {
+      "request_id": "req_81ac33cac94046b9a2249cd14c0d00ba",
+      "http": 401,
+      "detail": "trusted proxy identity required",
+      "state": "UNKNOWN"
+    },
+    {
+      "request_id": "req_4d7d64bbb8754974867adc0d9edbe971",
+      "http": 401,
+      "detail": "trusted proxy identity required",
+      "state": "UNKNOWN"
+    },
+    {
+      "request_id": "req_95d0024e7b144a5bb903cc7daad1fb5f",
+      "http": 401,
+      "detail": "trusted proxy identity required",
+      "state": "UNKNOWN"
+    },
+    {
+      "request_id": "req_7be1884541d94defa1402a8dd83f5c21",
+      "http": 401,
+      "detail": "trusted proxy identity required",
+      "state": "UNKNOWN"
+    }
+  ],
+  "user_reported_only": {
+    "as_of_kst": "2026-10-10 11:13–11:18",
+    "parent": "FAILED",
+    "children": 32,
+    "COMPLETED": 26,
+    "FAILED": 5,
+    "INTERRUPTED": 1,
+    "active": 0
+  },
+  "verified_historical_count": null,
+  "parent_failure_reason": "UNKNOWN",
+  "live_original_or_other_lead": "UNKNOWN",
+  "new_official_children": 0,
+  "new_implementation": false,
+  "request_mutations": 0
+}

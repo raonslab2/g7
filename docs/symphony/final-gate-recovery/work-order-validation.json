@@ -1,0 +1,32 @@
+{
+  "source_repository": "raonslab2/ai_gcs_v2",
+  "source_sha": "15f1254b2acabd8882aad5671fac7ae123b74968",
+  "command": "scripts/validate-work-orders --revision 15f1254b2acabd8882aad5671fac7ae123b74968 --json work/orders/work-20261010-g7-travel-final-gate-recovery-9d7c41e2.md",
+  "exit": 0,
+  "stdout": {
+    "valid": true,
+    "documents": 99,
+    "errors": []
+  },
+  "scope": "canonical work-order schema/full Git tree only; not G7 hosted CI or official product Validation",
+  "orders": [
+    {
+      "work_id": "work-20261009-g7-symphony-max-child-c7ae42d1",
+      "git_blob": "65c8b0a461d9c638ba7a281635203db485b278aa",
+      "sha256": "7b071415f55bc0bf8d1d3f5c0e8d557c18cd7368a3795c8035c1150d00899a33",
+      "bytes": 16103
+    },
+    {
+      "work_id": "work-20261010-g7-travel-final-gate-recovery-9d7c41e2",
+      "git_blob": "3b8e3f596f713aac08723e55941b38456e27e294",
+      "sha256": "0d07afea94c13eedce18c704a3464ff425cfc0e7b4aa3c5f8b8600167760630e",
+      "bytes": 8156
+    },
+    {
+      "work_id": "work-20261010-travel-benchmark-scope-correction-4f82b7d9",
+      "git_blob": "b2ed450c05e0a776120f02e6cbb1d4dca281833d",
+      "sha256": "88953faa1cadf86b046a8cd820073f0bd57048276de30efc6aa5c0f745fd909d",
+      "bytes": 12327
+    }
+  ]
+}
