@@ -1,0 +1,48 @@
+# 매니페스트 양식: docs/testing-guide.md "매니페스트 양식" — 테스트 docblock 의 @scenario case=<sub_flow id> 로 매핑한다.
+feature: travel_lab_campaigns
+description: |
+  native sirsoft-page 고정 두 슬롯(travel-lab-campaign-autumn-escape / -weekend-reset) 기반 여행 기획전.
+  공개 투영 API(발행분만, 열람자 무관 404), native 관리자 어댑터(페이지 권한·스코프·abilities),
+  명시 실행 LAB 프로비저닝(기존 Page 불변), native 훅 기반 여행 화면 SEO 캐시 무효화.
+  SQLite 실제 native PageService/Repository/버전/활동 로그 경로로 검증한다. MySQL·브라우저는 범위 밖(NOT_RUN).
+test_files:
+- modules/_bundled/raonslab-travel_lab/tests/Feature/Campaign/CampaignApiTest.php
+- modules/_bundled/raonslab-travel_lab/tests/Feature/Campaign/CampaignSeoInvalidationTest.php
+- modules/_bundled/raonslab-travel_lab/tests/Feature/Campaign/CampaignProvisionCommandTest.php
+- modules/_bundled/raonslab-travel_lab/tests/Feature/Campaign/CampaignAdminNativeContractTest.php
+- modules/_bundled/raonslab-travel_lab/tests/Feature/Campaign/CampaignRegistryTest.php
+- modules/_bundled/raonslab-travel_lab/resources/js/__tests__/layouts/admin-travel-lab-campaigns.test.tsx
+axes:
+  viewer: [guest, member, page_admin_read, page_admin_read_create_update, page_admin_self_scope, catalog_admin_without_page_permission]
+  slot_page_state: [missing, published, draft, renamed_away, deleted, unregistered_same_prefix, unrelated_published]
+  content_mode: [text, html]
+  locale: [ko, en_with_value, en_missing_fallback]
+  list_query: [none, slug, search, q, prefix, ids]
+  native_mutation: [create, update, publish, unpublish, restore, delete, slug_rename]
+  provision_gate: [flag_off, confirm_off, actor_missing, actor_non_numeric, actor_unknown, actor_read_only, actor_member, mail_not_array, queue_not_sync, scout_external, disk_not_local, all_on]
+  provision_existing: [none, foreign_draft, operator_edited_and_unpublished, both_existing]
+exclusions:
+- viewer: catalog_admin_without_page_permission
+  native_mutation: create
+  reason: 페이지 권한이 없으면 native 관리자 API 가 403 — 어댑터는 쓰기 API 를 새로 만들지 않는다
+- content_mode: html
+  native_mutation: restore
+  reason: 복원은 버전 스냅샷의 content_mode 를 그대로 되돌린다 — text 로 검증한 전이 경로와 같은 native 코드
+sub_flows:
+- id: public_api
+  effects: [empty_list_without_fallback, named_routes, registry_order, published_only, exact_projection_fields, draft_hidden_for_all_actors, preview_never_projected, unregistered_slug_404, no_arbitrary_selector, detail_body_and_mode, html_excerpt_plain_text, no_admin_fields, locale_and_native_fallback, unpublish_removes, republish_returns, edit_new_version, restore_new_version, optional_auth_before_campaign_bucket, separate_throttle_prefix]
+- id: seo_invalidation
+  effects: [seo_invalidated_on_create_update_publish_restore_delete, seo_ignores_unrelated_pages, seo_old_slug_on_rename]
+- id: provisioning
+  effects: [default_flag_false, flag_denied_zero_writes, confirm_required, actor_required, unsafe_environment_denied, permission_required, creates_missing_through_native_service, actor_restored, no_tokens, rerun_preserves_operator_edits, existing_draft_untouched, previous_actor_restored, default_seed_creates_zero_pages]
+- id: admin_native_contract
+  effects: [guest_401, no_permission_403, catalog_permission_not_substitute, filter_syntax_valid, substring_match_requires_exact_client_filter, abilities_present, read_only_admin_cannot_update, scoped_admin_cannot_see_or_edit_foreign]
+- id: campaign_admin_adapter
+  effects: [page_read_permission, exact_slug_mapping, native_create_prefill, native_edit_detail_links, abilities_gate_publish, scope_absent_not_missing]
+- id: registry
+  effects: [exactly_two_slots, registry_not_widened_by_config, admin_and_template_parity]
+not_run:
+- id: mysql_native_integration
+  reason: 공유 TEST MySQL 은 다른 Request 소유 — 이 SQLite 결과를 MySQL PASS 로 표시하지 않는다
+- id: installed_browser_390_1440
+  reason: 설치본 브라우저 검증(native 편집기 생성·편집·발행·복원, 원격 요청 관찰)은 후속 독립 단계

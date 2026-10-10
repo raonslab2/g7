@@ -1,0 +1,162 @@
+{
+  "review_sha": "fc54b6ae091cd6cef2d0fabc48d2ec4fe4fdba8c",
+  "handoff_source_sha": "fa5523175ac494cfbd13bbf89bf06b3ec91835a6",
+  "phase": "run4",
+  "started": "2026-10-09T19:30:50.931Z",
+  "assets": [
+    {
+      "path": "/build/core/template-engine.min.js",
+      "expected": "b8cf27fab58e108b1509c379a5f4d0860a21a90bc591bb34b48a94d6e56cb76d",
+      "observed": "b8cf27fab58e108b1509c379a5f4d0860a21a90bc591bb34b48a94d6e56cb76d",
+      "http": 200,
+      "match": true
+    },
+    {
+      "path": "/api/templates/assets/sirsoft-admin_basic/js/components.iife.js",
+      "expected": "d25eb47e1308a83a456b17fe86953fec8fefc46a38769c0c225be72b0028e6c9",
+      "observed": "d25eb47e1308a83a456b17fe86953fec8fefc46a38769c0c225be72b0028e6c9",
+      "http": 200,
+      "match": true
+    }
+  ],
+  "cases": [
+    {
+      "width": 390,
+      "name": "rapid-new-departure-option-select-status",
+      "target": {
+        "product_option_id": 178,
+        "departure_date": "2027-02-02",
+        "return_date": "2027-02-03",
+        "capacity": 3,
+        "is_active": false
+      },
+      "selected": {
+        "at": 3561,
+        "nativeGlobalActive": false,
+        "renderedStatusLabel": "접수 가능"
+      },
+      "saveFirstEvent": {
+        "t": 3662.399999976158,
+        "type": "pointerdown",
+        "trusted": true,
+        "testId": "departure_save",
+        "role": "dialog",
+        "state": {
+          "is_active": false,
+          "capacity": 3,
+          "departure_date": "2027-02-02",
+          "return_date": "2027-02-03",
+          "product_option_id": 178
+        },
+        "renderedStatusLabel": "접수 중지"
+      },
+      "allSaveEventsTrusted": true,
+      "method": "POST",
+      "http": 200,
+      "message": null,
+      "request": {
+        "product_option_id": 178,
+        "departure_date": "2027-02-02",
+        "return_date": "2027-02-03",
+        "capacity": 3,
+        "is_active": false
+      },
+      "createdId": 144,
+      "readback": {
+        "is_active": false,
+        "capacity": 3,
+        "departure_date": "2027-02-02",
+        "return_date": "2027-02-03",
+        "product_option_id": 178,
+        "reserved": 0
+      },
+      "pass": true
+    }
+  ],
+  "menu": [],
+  "smoke": [],
+  "validation": [],
+  "ownership": [
+    {
+      "actor": "member",
+      "method": "PUT",
+      "http": 403
+    },
+    {
+      "actor": "other_member",
+      "method": "PUT",
+      "http": 403
+    },
+    {
+      "actor": "guest",
+      "method": "PUT",
+      "http": 401
+    },
+    {
+      "readbackAfterForeignAttempts": {
+        "is_active": false,
+        "capacity": 4
+      }
+    }
+  ],
+  "tokens": [
+    {
+      "hash": "df1feb09e7535b42a2e7c4c13511033ee0ff79573cd79d50bb2242f7c580bce4",
+      "logout": 200,
+      "authAfter": 401
+    },
+    {
+      "supplied": "member",
+      "authUserHttp": 200
+    },
+    {
+      "supplied": "other_member",
+      "authUserHttp": 200
+    },
+    {
+      "supplied": "admin",
+      "authUserHttp": 200
+    }
+  ],
+  "fixture": {
+    "productId": 88,
+    "marker": "W04CB1791574251755",
+    "scope": "ONE newly owned hidden synthetic product with 2 options; API preparation only (not UI CREATE); category26/policy6 referenced read-only",
+    "optionIds": [
+      177,
+      178
+    ],
+    "departureId": 143,
+    "extraDepartureIds": [
+      144
+    ]
+  },
+  "cleanup": [
+    {
+      "departureInactiveHttp": 200,
+      "allOwnDeparturesInactiveReserved0": true,
+      "departures": 2
+    },
+    {
+      "productId": 88,
+      "unpublishedHttp": 200,
+      "publishedRead": false,
+      "hiddenHttp": 200,
+      "hiddenRead": true,
+      "retainedSynthetic": true
+    }
+  ],
+  "harness_errors": [],
+  "chromium": "156.0.8078.4",
+  "widths": [
+    390
+  ],
+  "screenshots": [
+    "departure-modal-390-run4.png"
+  ],
+  "failure": {
+    "name": "ScopedStop",
+    "message": "departure-only phase: menu/smoke intentionally NOT_RUN"
+  },
+  "finished": "2026-10-09T19:31:03.497Z"
+}

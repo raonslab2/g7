@@ -1,0 +1,20 @@
+{
+    "command": [
+        "mysqldump",
+        "--defaults-file=storage/framework/testing/w04f-reg-support-notifications/mysql.cnf",
+        "--protocol=tcp",
+        "--host=127.0.0.1",
+        "--port=3306",
+        "--user=req81_travel",
+        "--single-transaction",
+        "--hex-blob",
+        "--no-tablespaces",
+        "--skip-lock-tables",
+        "req81_travel_lab_test"
+    ],
+    "pid": 333487,
+    "exit": 0,
+    "process_gone": true,
+    "seconds": 0.177,
+    "utc": "2026-10-09T17:49:18+00:00"
+}

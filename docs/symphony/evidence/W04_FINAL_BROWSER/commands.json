@@ -1,0 +1,292 @@
+{
+  "sourceSHA": "1052e3fb4bc4cccabb51b8c538116c78655f345b",
+  "sourceTree": "f18fa2056a031353c889785d768f87824e3083f5",
+  "records": [
+    {
+      "command": "git fetch origin feat/g7-travel-lab-c7ae42d1",
+      "exit": 0,
+      "status": "PASS",
+      "note": "Exact source fetched; no publication"
+    },
+    {
+      "command": "git checkout --detach 1052e3fb4bc4cccabb51b8c538116c78655f345b",
+      "exit": 0,
+      "status": "PASS",
+      "note": "HEAD1052 treef18fa205"
+    },
+    {
+      "command": "npm ci --ignore-scripts --no-audit --no-fund",
+      "exit": 0,
+      "status": "PASS",
+      "note": "255 packages9s; dependency setup only, no build/CI"
+    },
+    {
+      "command": "node tests/W04_FINAL/admin-recheck.mjs [first]",
+      "exit": 1,
+      "status": "FAIL",
+      "note": "Active category assumption failed; no product writes"
+    },
+    {
+      "command": "node tests/W04_FINAL/admin-recheck.mjs [inactive selection]",
+      "exit": 1,
+      "status": "BLOCKED",
+      "note": "Native category tree empty; no product writes; source unchanged"
+    },
+    {
+      "command": "node tests/W04_FINAL/prepare-fixtures.mjs",
+      "exit": 0,
+      "status": "PASS",
+      "note": "Native API preparation only, never UI creation PASS"
+    },
+    {
+      "command": "node tests/W04_FINAL/catalogue-recheck.mjs",
+      "exit": 1,
+      "status": "FAIL",
+      "note": "Native price/registration3901440 passed; departure field timing/list settle harness errors"
+    },
+    {
+      "command": "node tests/W04_FINAL/catalogue-followup.mjs",
+      "exit": 1,
+      "status": "FAIL",
+      "note": "Corrected list response/option ID waits; 1440 reverse-return input stale"
+    },
+    {
+      "command": "node tests/W04_FINAL/departure-final.mjs",
+      "exit": 0,
+      "status": "PASS",
+      "note": "Exact global field poll; only missing departure continuation; both-width actual final public read"
+    },
+    {
+      "command": "node tests/W04_FINAL/catalogue-diagnostic.mjs [initial]",
+      "exit": 1,
+      "status": "FAIL",
+      "note": "No Next locator before DOM settled; own token recorded before interruption"
+    },
+    {
+      "command": "node tests/W04_FINAL/catalogue-diagnostic.mjs [corrected]",
+      "exit": 0,
+      "status": "PASS",
+      "note": "READONLY diagnostic, no mutation"
+    },
+    {
+      "command": "node tests/W04_FINAL/support-recheck.mjs",
+      "exit": 0,
+      "status": "PASS",
+      "note": "Native notice/FAQ/private edit422 retention/admin answer/foreign404 at both widths"
+    },
+    {
+      "command": "node tests/W04_FINAL/pagination-fixtures.mjs",
+      "exit": 0,
+      "status": "PASS",
+      "note": "13 own native API fixtures only"
+    },
+    {
+      "command": "node tests/W04_FINAL/run-public.mjs",
+      "exit": 1,
+      "status": "FAIL",
+      "note": "30PASS4FAIL; detail fixture title expected1일차 but actual합성 첫날; soldout preparation not complete"
+    },
+    {
+      "command": "W04_ONLY=detail-itinerary-departure-people-estimate,soldout-disabled W04_RUN_LABEL=public-final-detail-soldout node tests/W04_FINAL/run-public.mjs",
+      "exit": 0,
+      "status": "PASS",
+      "note": "Corrected source-only fixture assertions/setup;4PASS; no full unchanged34 rerun"
+    },
+    {
+      "command": "node tests/W04_FINAL/journey-recheck.mjs",
+      "exit": 0,
+      "status": "PASS",
+      "note": "Both widths ordinary actual native flow, six bounded steps"
+    },
+    {
+      "command": "node tests/W04_FINAL/recovery-recheck.mjs",
+      "exit": 1,
+      "status": "FAIL",
+      "note": "5boundedPASS;390 bootstrap read error;1440 actual429 at10submit/min budget; callback interruption retained"
+    },
+    {
+      "command": "node tests/W04_FINAL/clear-interrupted-owned.mjs [first]",
+      "exit": 0,
+      "status": "PASS",
+      "note": "Only known flushed owned IDs; later own row148 remained before fatal ledger flush"
+    },
+    {
+      "command": "W04_RECOVERY_WIDTHS=390 W04_RECOVERY_MODES='' W04_RECOVERY_LABEL=recovery-390-owner-final node tests/W04_FINAL/recovery-followup.mjs [precondition]",
+      "exit": 1,
+      "status": "FAIL",
+      "note": "Refused nonempty cart148; native own-product/actor requery scoped it"
+    },
+    {
+      "command": "node tests/W04_FINAL/clear-interrupted-owned.mjs [bounded reconciliation]",
+      "exit": 0,
+      "status": "PASS",
+      "note": "Only exact new Request-owned product IDs in distinct browser actor cart reconciled"
+    },
+    {
+      "command": "W04_RECOVERY_WIDTHS=390 W04_RECOVERY_MODES='' W04_RECOVERY_LABEL=recovery-390-owner-final node tests/W04_FINAL/recovery-followup.mjs",
+      "exit": 0,
+      "status": "PASS",
+      "note": "Wait live core loading after logout; pending body/contact cleared before other account and stale-body reintroduction removed"
+    },
+    {
+      "command": "W04_RECOVERY_WIDTHS=1440 W04_RECOVERY_MODES=reload,edited-contact,sessionStorage-quota W04_RECOVERY_LABEL=recovery-1440-final node tests/W04_FINAL/recovery-followup.mjs",
+      "exit": 0,
+      "status": "PASS",
+      "note": "Remaining1440 modes only; actual native10/min budget waiting, no throttle override"
+    },
+    {
+      "command": "python3 tests/W04_FINAL/source-binding.py before",
+      "exit": 1,
+      "status": "FAIL",
+      "note": "Sole initial snapshot command exit1: optional uninstalled sirsoft-basic missing; required4363/11HTTPassets exact. Nested before snapshot preserved."
+    },
+    {
+      "command": "READ_ONLY existing before snapshot interpretation; no second before execution",
+      "exit": null,
+      "status": "PASS",
+      "note": "Helper changed required predicate/optional note and in-memory compile syntax checked. No before rerun or snapshot overwrite. required groups already exact.",
+      "record_type": "evidence interpretation"
+    },
+    {
+      "command": "independent parent SQL inventory/races/order-payment-dispatch audit",
+      "exit": null,
+      "status": "NOT_RUN",
+      "note": "Explicitly other owners; parent DB env not read"
+    },
+    {
+      "command": "parent service restart/extension lifecycle/schema mutation",
+      "exit": null,
+      "status": "NOT_RUN",
+      "note": "User forbids writes/restarts; no own restart"
+    },
+    {
+      "command": "full core/commerce/board regression/build/typecheck/native Windows and hosted CI",
+      "exit": null,
+      "status": "NOT_RUN",
+      "note": "Author results and internal Request not inferred; no required gate waived"
+    },
+    {
+      "command": "canonical Validation receipt",
+      "exit": null,
+      "status": "NOT_RUN",
+      "note": "No receipt issued by this internal/native review"
+    },
+    {
+      "command": "push/merge/deploy/official grandchildren",
+      "exit": null,
+      "status": "NOT_RUN",
+      "note": "Explicitly forbidden"
+    },
+    {
+      "command": "node tests/W04_FINAL/mobile-final.mjs",
+      "exit": 1,
+      "status": "FAIL",
+      "note": "Native2-item fixtures created. DECLINED fixture lacked transition due wrong admin label; geometry precondition FAIL, Enter/tap/click PASS. Original retained."
+    },
+    {
+      "command": "node tests/W04_FINAL/mobile-decline-final.mjs",
+      "exit": 0,
+      "status": "PASS",
+      "note": "Only own119 nativeadmin button 거절; actualPATCH200, ownerDECLINED and cancel409."
+    },
+    {
+      "command": "node tests/W04_FINAL/mobile-inspect-final.mjs",
+      "exit": 0,
+      "status": "PASS",
+      "note": "Required5status fixture complete;10cards geometry/fulltitle/date/ID/status/amount and Enter/tap/click eachwidth."
+    },
+    {
+      "command": "node tests/W04_FINAL/access-decline.mjs",
+      "exit": 0,
+      "status": "PASS",
+      "note": "8bounded nativeUI/HTTP gate/price409/decline checks; intentionalDECLINED terminal retained."
+    },
+    {
+      "command": "node tests/W04_FINAL/restore-own-stock.mjs",
+      "exit": 0,
+      "status": "PASS",
+      "note": "Own54/55 secondoption stock0→6 only, actualUI focus/fill/blur/state/save; enable allowed departurecleanup."
+    },
+    {
+      "command": "node tests/W04_FINAL/final-cleanup.mjs",
+      "exit": 0,
+      "status": "PASS",
+      "note": "Own20inquiries/29cartIDs/15products/6posts cleanup+native requery,17departure reserved0 inactive;55distinct login token logout/user401;handoffs3auth200."
+    },
+    {
+      "command": "node tests/W04_FINAL/owner-audit.mjs",
+      "exit": 0,
+      "status": "PASS",
+      "note": "Saved snapshot/events/repeatedcancel/no duplicate recovery events,guest redirects and all own reserved0 API readback. No SQL."
+    },
+    {
+      "command": "python3 tests/W04_FINAL/source-binding.py after",
+      "exit": 0,
+      "status": "PASS",
+      "note": "Independent helper aftercleanup,required4363files/11HTTP200assets beforeafter identical;optional463missing broadfalse retained."
+    },
+    {
+      "command": "python3 tests/W04_FINAL/privacy-scan.py before-cleanup [whole OCR]",
+      "exit": 143,
+      "status": "NOT_RUN",
+      "note": "Incomplete process; no final artifact. Replaced by bounded durable9frame OCR chunks; no application rerun."
+    },
+    {
+      "command": "python3 tests/W04_FINAL/privacy-scan.py final [initial bounded chunks]",
+      "exit": 1,
+      "status": "FAIL",
+      "note": "Late native-answer-1440 email missed mask; rawPNG excluded; sanitized failed scan/hash preserved."
+    },
+    {
+      "command": "python3 tests/W04_FINAL/privacy-scan.py final [continued chunks]",
+      "exit": 0,
+      "status": "PASS",
+      "note": "106retained newPNG screened, final text/hash scan follows report packaging; pending chunk exit2=NOT_RUN until remaining0."
+    },
+    {
+      "command": "python3 tests/W04_FINAL/package-evidence.py",
+      "exit": 0,
+      "status": "PASS",
+      "note": "Original contract14/9 preserved verbatim;34unique public/10recovery bounded counts;cleanup and APIaudit assertions."
+    },
+    {
+      "command": "node --check each tests/W04_FINAL/*.mjs; Python ast.parse each *.py",
+      "exit": 0,
+      "status": "PASS",
+      "note": "Review harness syntax only; no product build/regression/CI."
+    },
+    {
+      "command": "node tests/W04_FINAL/actor-audit.mjs [initial]",
+      "exit": 1,
+      "status": "FAIL",
+      "note": "Readonly harness assumed auth resource numeric id; source exposesuuid. No new tokens/fixture writes. Original sanitized failure preserved."
+    },
+    {
+      "command": "node tests/W04_FINAL/actor-audit.mjs [narrowed native actor metadata]",
+      "exit": 0,
+      "status": "PASS",
+      "note": "Native API own103/104 owner actor equals inquiry owner; review/accept same positive distinct actor and correct from/to states. Exact admin UUID→numericID mapping NOT_RUN; no usermanagement/SQL scope."
+    },
+    {
+      "command": "python3 tests/W04_FINAL/manifest.py",
+      "exit": 0,
+      "status": "PASS",
+      "note": "Allowed durable files hashes; manifest self/private/generated excluded; regenerated after review metadata."
+    },
+    {
+      "command": "git diff --cached --check; scoped manifest/token/hash/private assertions; Python ast.parse",
+      "exit": 0,
+      "status": "PASS",
+      "note": "Final recorded review checkpoint, no product regression/CI inference."
+    },
+    {
+      "command": "native helper fixed staged diff review tree7c87709ca9ea1218e04a003a8161ced41ee0dee0",
+      "exit": null,
+      "status": "PASS",
+      "record_type": "independent native evidence review",
+      "note": "R1 corrected. Not canonical Validation receipt or CI. No product P1/P2/MOBILE failure."
+    }
+  ],
+  "repeat_policy": "No unchanged full-head rerun. Targeted followups only after concrete harness correction/fixture completion/loading or source-bound10/min window recovery; original outcomes preserved.",
+  "generated_dependency_files": "npm node_modules ignored; no tracked package/lock/build changes"
+}

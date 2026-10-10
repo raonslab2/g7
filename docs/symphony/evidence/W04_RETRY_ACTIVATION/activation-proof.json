@@ -1,0 +1,157 @@
+{
+  "kind": "Bounded source/build activation and synthetic actor preparation evidence; not independent browser or canonical Validation PASS",
+  "source": {
+    "commit": "0b446a608aa9d76c1e046115d8ea2805a1dd92f2",
+    "tree": "10ba36318652b96dc7dc769ec8405381cbded1f8",
+    "path": "resources/js/core/TemplateApp.ts",
+    "sha256": "62e89b9dedb93c932a92e1b01944cffb11e88cf0c5cd5a79dc41ca8835f5b76e",
+    "current_source_matches_fixed_git": true
+  },
+  "build": {
+    "actor": "parent lead",
+    "command": "php artisan core:build --production",
+    "mode": "production",
+    "finished_utc": "2026-10-09T21:01:32+00:00",
+    "exit_code": 0,
+    "time_and_exit_provenance": "Parent observed execution; transcript contains native completion but no independent exit/timestamp footer",
+    "normalized_transcript": "docs/symphony/evidence/W04_RETRY_ACTIVATION/core-build.normalized.log",
+    "original_log_sha256": "0b0a25b66ef2a3d9bc9b1c1c209b219d5e43a060f3ff115f381f82e9797df09f",
+    "stages": [
+      {
+        "stage": "engine",
+        "modules": 148,
+        "seconds": 8.35
+      },
+      {
+        "stage": "editor",
+        "modules": 205,
+        "seconds": 6.01
+      },
+      {
+        "stage": "devtools",
+        "modules": 34,
+        "seconds": 1.19
+      },
+      {
+        "stage": "dashboard_css",
+        "modules": 1,
+        "seconds": 0.418
+      }
+    ],
+    "command_provenance": "Native entrypoint inferred from transcript production label and four npm stages; exact parent shell prefix not present in retained transcript"
+  },
+  "asset": {
+    "path": "public/build/core/template-engine.min.js",
+    "bytes": 819481,
+    "sha256": "738ee97c6eebc33bc75d29f24397daabb54f124bede254689ca68a18fdb64a0b",
+    "http_url": "http://127.0.0.1:18871/build/core/template-engine.min.js",
+    "http_status": 200,
+    "http_bytes": 819481,
+    "http_sha256": "738ee97c6eebc33bc75d29f24397daabb54f124bede254689ca68a18fdb64a0b",
+    "local_equals_http": true,
+    "observed_utc": "2026-10-09T21:15:33.552170+00:00",
+    "http_probe": "Read-only unauthenticated asset GET performed by intake reviewer"
+  },
+  "tests": {
+    "nonauthor_source_scope": {
+      "pass": 12,
+      "fail": 0,
+      "skip": 0,
+      "duration_seconds": 4.68,
+      "report": "docs/symphony/W04_CAMPAIGN_RETRY_SOURCE_REVIEW.md"
+    },
+    "author_related_suite": {
+      "pass": 158,
+      "existing_skip": 1,
+      "files": 9,
+      "includes_12": true,
+      "independently_rerun_in_activation": false
+    },
+    "independent_browser_repair": "NOT_RUN by activation reviewer",
+    "ci": "NOT_RUN",
+    "canonical_validation": "NOT_RUN absent"
+  },
+  "synthetic_reader_preparation": {
+    "provenance": "Lead native API preparation, not independent UI PASS",
+    "source_proof_sha256": "c812de90fbc4f6addf86fd3693a6a54ce01a4ccf1f811434fea28a40ed81f06c",
+    "actors": [
+      {
+        "user_id": 57,
+        "role_id": 13,
+        "native_login": 200,
+        "list_status": 200,
+        "row_count": 8,
+        "abilities": {
+          "can_create": false,
+          "can_update": false,
+          "can_delete": false
+        },
+        "all_visible_rows_can_update_false": true,
+        "invalid_create": 403,
+        "valid_create": 403,
+        "historical_wrong_logout": 404,
+        "historical_auth_after_wrong_logout": 200
+      },
+      {
+        "user_id": 58,
+        "role_id": 14,
+        "native_login": 200,
+        "list_status": 200,
+        "row_count": 0,
+        "abilities": {
+          "can_create": false,
+          "can_update": false,
+          "can_delete": false
+        },
+        "all_visible_rows_can_update_false": true,
+        "invalid_create": 403,
+        "valid_create": 403,
+        "historical_wrong_logout": 404,
+        "historical_auth_after_wrong_logout": 200
+      }
+    ],
+    "existing_roles_modified": false
+  },
+  "revocation": {
+    "method": "Native AuthService.logoutFromAllDevices restricted to two new own fixture users",
+    "source_proof_sha256": "2264bdd2e5c4d0455b363e8c7ad28e495d8c60974c7110c54715ee85fbfd13a3",
+    "actors": [
+      {
+        "user_id": 57,
+        "role_id": 13,
+        "own_token_ids": [
+          569,
+          570
+        ],
+        "removed": 2,
+        "remaining": 0
+      },
+      {
+        "user_id": 58,
+        "role_id": 14,
+        "own_token_ids": [
+          571
+        ],
+        "removed": 1,
+        "remaining": 0
+      }
+    ],
+    "removed_total": 3,
+    "remaining_total": 0,
+    "other_users_touched": false,
+    "old_exact_token_http401": "NOT_RUN: original plaintext discarded; DB absence evidence is distinct"
+  },
+  "explicit_actor_lookup": {
+    "returned_user_id": 1,
+    "exit_code": 0,
+    "exit_provenance": "Parent observed execution",
+    "selection": "Explicit fixed ID lookup; not automated superuser selection",
+    "source_log_sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+  },
+  "publication": {
+    "normalized_transcript_sensitive_pattern_hits": 0,
+    "emails_passwords_bearer_values_raw_private_ledgers_copied": false,
+    "reviewer_product_runtime_db_env_service_git_mutations": 0,
+    "original_31a_retry_gate": "FAIL retained"
+  }
+}

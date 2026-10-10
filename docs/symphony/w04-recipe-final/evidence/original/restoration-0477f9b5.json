@@ -1,0 +1,89 @@
+{
+    "label": "original",
+    "child_exit": null,
+    "wipe_exit": 0,
+    "empty_tables_after_wipe": 0,
+    "import_exit": 0,
+    "import_seconds": 1.625,
+    "import_pid": 477927,
+    "import_process_gone": true,
+    "import_handles": {
+        "utc": "2026-10-09T18:40:06.398265+00:00",
+        "count": 0,
+        "handles": [],
+        "unreadable_pids": [],
+        "lock_holders": [],
+        "excluded_ancestor_pids": [
+            460013,
+            477720,
+            477950,
+            477951,
+            3650359
+        ],
+        "method": "proc-only bounded cwd/argv/FD; known TEST owners and own nonancestor native processes"
+    },
+    "exact_tables_rows_ddl": true,
+    "restored_digest": "ded72a53ad82a159b88e50a6560625488bb569a55f5f5ffa109cd45ae52d056e",
+    "expected_digest": "ded72a53ad82a159b88e50a6560625488bb569a55f5f5ffa109cd45ae52d056e",
+    "equals_original_baseline": true,
+    "table_count": 55,
+    "row_count": 104,
+    "exclusive_pre_import": {
+        "pid": 477720,
+        "cwd": "/home/ubuntu/.agentopt-v2/workspaces/req_bed1c2288b1946de95782fe1a4acff75",
+        "argv": [
+            "docs/symphony/w04-recipe-final/snapshot.php",
+            "original",
+            "restore-keep"
+        ],
+        "own_connection_id": 117556,
+        "other_test_connections": 0,
+        "own_server_processes": 0,
+        "prior_request_handles": {
+            "utc": "2026-10-09T18:40:04.773278+00:00",
+            "count": 0,
+            "handles": [],
+            "unreadable_pids": [],
+            "lock_holders": [],
+            "excluded_ancestor_pids": [
+                460013,
+                477720,
+                477925,
+                477926,
+                3650359
+            ],
+            "method": "proc-only bounded cwd/argv/FD; known TEST owners and own nonancestor native processes"
+        },
+        "utc": "2026-10-09T18:40:04+00:00"
+    },
+    "exclusive_post": {
+        "pid": 477720,
+        "cwd": "/home/ubuntu/.agentopt-v2/workspaces/req_bed1c2288b1946de95782fe1a4acff75",
+        "argv": [
+            "docs/symphony/w04-recipe-final/snapshot.php",
+            "original",
+            "restore-keep"
+        ],
+        "own_connection_id": 117558,
+        "other_test_connections": 0,
+        "own_server_processes": 0,
+        "prior_request_handles": {
+            "utc": "2026-10-09T18:40:06.509312+00:00",
+            "count": 0,
+            "handles": [],
+            "unreadable_pids": [],
+            "lock_holders": [],
+            "excluded_ancestor_pids": [
+                460013,
+                477720,
+                477952,
+                477953,
+                3650359
+            ],
+            "method": "proc-only bounded cwd/argv/FD; known TEST owners and own nonancestor native processes"
+        },
+        "utc": "2026-10-09T18:40:06+00:00"
+    },
+    "backup_retained": true,
+    "utc": "2026-10-09T18:40:06+00:00"
+}

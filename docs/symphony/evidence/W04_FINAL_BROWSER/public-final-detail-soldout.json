@@ -1,0 +1,256 @@
+{
+  "target": "1052e3fb4bc4cccabb51b8c538116c78655f345b",
+  "actualHead": "1052e3fb4bc4cccabb51b8c538116c78655f345b",
+  "tree": "f18fa2056a031353c889785d768f87824e3083f5",
+  "base": "http://127.0.0.1:18871",
+  "started": "2026-10-09T16:01:06.380Z",
+  "browser": "Chromium",
+  "authentication": "guest",
+  "mutations": 0,
+  "scenarios": [
+    {
+      "width": 390,
+      "name": "detail-itinerary-departure-people-estimate",
+      "status": "PASS",
+      "detail": {
+        "path": "/travel/products/54",
+        "departures": [
+          "2026-12-152026-12-17 도착₩13,0004석 남음",
+          "2026-12-162026-12-17 도착₩9,000마감"
+        ]
+      }
+    },
+    {
+      "width": 390,
+      "name": "soldout-disabled",
+      "status": "PASS",
+      "detail": {
+        "observed": [
+          {
+            "product": 54,
+            "fromPrice": 13000,
+            "soldoutUnitPrices": [
+              9000
+            ],
+            "soldoutDisabled": true,
+            "activeAvailability": [
+              4
+            ],
+            "noCartMutation": true
+          },
+          {
+            "product": 55,
+            "fromPrice": 13000,
+            "soldoutUnitPrices": [
+              9000
+            ],
+            "soldoutDisabled": true,
+            "activeAvailability": [
+              4
+            ],
+            "noCartMutation": true
+          }
+        ]
+      }
+    },
+    {
+      "width": 1440,
+      "name": "detail-itinerary-departure-people-estimate",
+      "status": "PASS",
+      "detail": {
+        "path": "/travel/products/54",
+        "departures": [
+          "2026-12-152026-12-17 도착₩13,0004석 남음",
+          "2026-12-162026-12-17 도착₩9,000마감"
+        ]
+      }
+    },
+    {
+      "width": 1440,
+      "name": "soldout-disabled",
+      "status": "PASS",
+      "detail": {
+        "observed": [
+          {
+            "product": 54,
+            "fromPrice": 13000,
+            "soldoutUnitPrices": [
+              9000
+            ],
+            "soldoutDisabled": true,
+            "activeAvailability": [
+              4
+            ],
+            "noCartMutation": true
+          },
+          {
+            "product": 55,
+            "fromPrice": 13000,
+            "soldoutUnitPrices": [
+              9000
+            ],
+            "soldoutDisabled": true,
+            "activeAvailability": [
+              4
+            ],
+            "noCartMutation": true
+          }
+        ]
+      }
+    }
+  ],
+  "viewports": [
+    {
+      "width": 390,
+      "pageErrors": [],
+      "consoleErrors": [],
+      "consoleWarnings": [],
+      "failedRequests": [],
+      "httpErrors": [],
+      "overflows": [
+        {
+          "name": "detail",
+          "viewport": 390,
+          "document": 390,
+          "body": 390
+        },
+        {
+          "name": "soldout-detail",
+          "viewport": 390,
+          "document": 390,
+          "body": 390
+        },
+        {
+          "name": "soldout-detail",
+          "viewport": 390,
+          "document": 390,
+          "body": 390
+        }
+      ],
+      "consoleErrorCount": 0,
+      "pageErrorCount": 0,
+      "assets": [
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/css/components.css",
+          "status": 200,
+          "sha256": "e340b3bfcf22be2ef56f7d11a8f9bf2fc3563439f908628ab044931b463dce66",
+          "bytes": 47750
+        },
+        {
+          "path": "/build/core/template-engine.min.js",
+          "status": 200,
+          "sha256": "be2d01f3be637afd127f9c62c2fed35cc3de2cabd5da14a7734635ae1798a414",
+          "bytes": 819067
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/vendor/font-awesome/6.4.0/css/all.inlined.css",
+          "status": 200,
+          "sha256": "f942d9c98f747b66ddab55a97644354a1903aa30341439472f015812cafcb56b",
+          "bytes": 480419
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/js/components.iife.js",
+          "status": 200,
+          "sha256": "9cc99d8d8db0161cfc5f537531eb16f00d1a7ca272fd0b31824823185f46b390",
+          "bytes": 38218
+        },
+        {
+          "path": "/api/modules/bundle.css",
+          "status": 200,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0
+        },
+        {
+          "path": "/api/modules/bundle.js",
+          "status": 200,
+          "sha256": "a69dc60260eef16feb33b5433426d974164fcc5a9b15d3577a710a9212b9f2ce",
+          "bytes": 153543
+        }
+      ]
+    },
+    {
+      "width": 1440,
+      "pageErrors": [],
+      "consoleErrors": [],
+      "consoleWarnings": [],
+      "failedRequests": [],
+      "httpErrors": [],
+      "overflows": [
+        {
+          "name": "detail",
+          "viewport": 1440,
+          "document": 1440,
+          "body": 1440
+        },
+        {
+          "name": "soldout-detail",
+          "viewport": 1440,
+          "document": 1440,
+          "body": 1440
+        },
+        {
+          "name": "soldout-detail",
+          "viewport": 1440,
+          "document": 1440,
+          "body": 1440
+        }
+      ],
+      "consoleErrorCount": 0,
+      "pageErrorCount": 0,
+      "assets": [
+        {
+          "path": "/build/core/template-engine.min.js",
+          "status": 200,
+          "sha256": "be2d01f3be637afd127f9c62c2fed35cc3de2cabd5da14a7734635ae1798a414",
+          "bytes": 819067
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/css/components.css",
+          "status": 200,
+          "sha256": "e340b3bfcf22be2ef56f7d11a8f9bf2fc3563439f908628ab044931b463dce66",
+          "bytes": 47750
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/vendor/font-awesome/6.4.0/css/all.inlined.css",
+          "status": 200,
+          "sha256": "f942d9c98f747b66ddab55a97644354a1903aa30341439472f015812cafcb56b",
+          "bytes": 480419
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/js/components.iife.js",
+          "status": 200,
+          "sha256": "9cc99d8d8db0161cfc5f537531eb16f00d1a7ca272fd0b31824823185f46b390",
+          "bytes": 38218
+        },
+        {
+          "path": "/api/modules/bundle.css",
+          "status": 200,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0
+        },
+        {
+          "path": "/api/modules/bundle.js",
+          "status": 200,
+          "sha256": "a69dc60260eef16feb33b5433426d974164fcc5a9b15d3577a710a9212b9f2ce",
+          "bytes": 153543
+        }
+      ]
+    }
+  ],
+  "limitations": [],
+  "finished": "2026-10-09T16:01:25.290Z",
+  "durationSeconds": 18.91,
+  "reuse": {
+    "source": "attempt1 public-recheck.mjs read-only source reuse; no historical PNG copied",
+    "priorOriginalMarkers": {
+      "pagination390": "NOT_RUN",
+      "pagination1440": "NOT_RUN"
+    }
+  },
+  "counts": {
+    "PASS": 4,
+    "FAIL": 0,
+    "NOT_RUN": 0,
+    "BLOCKED": 0
+  }
+}

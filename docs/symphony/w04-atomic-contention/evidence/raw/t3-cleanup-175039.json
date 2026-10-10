@@ -1,0 +1,67 @@
+{
+ "phase": "t3-cleanup-175039",
+ "review_sha": "fa5523175ac494cfbd13bbf89bf06b3ec91835a6",
+ "base_url": "http://127.0.0.1:18871",
+ "counts": {
+  "PASS": 1,
+  "FAIL": 0,
+  "OBSERVED": 0,
+  "BLOCKED": 0,
+  "NOT_RUN": 0
+ },
+ "results": [
+  {
+   "name": "workflow fixture terminal cleanup: own inquiries terminal, carts empty, departures inactive reserved0, product unpublished/hidden",
+   "status": "PASS",
+   "detail": {
+    "actions": {
+     "cancel_146": 200,
+     "cancel_145": 200,
+     "cancel_144": 200,
+     "cancel_143": 200,
+     "cancel_142": 200,
+     "cancel_141": 200,
+     "cancel_139": 200,
+     "cancel_138": 200,
+     "cancel_137": 200,
+     "cancel_135": 200,
+     "cancel_134": 200,
+     "cancel_133": 200,
+     "cancel_131": 200,
+     "cancel_140": 200,
+     "deactivate_price": 200,
+     "deactivate_qty": 200,
+     "deactivate_state": 200,
+     "deactivate_last": 200,
+     "deactivate_key": 200,
+     "deactivate_cd": 200,
+     "deactivate_low": 200,
+     "deactivate_spare": 200,
+     "deactivate_gap1": 200,
+     "deactivate_gap2": 200,
+     "deactivate_gap3": 200,
+     "deactivate_gap4": 200,
+     "deactivate_gap5": 200,
+     "deactivate_gap6": 200,
+     "deactivate_gap7": 200,
+     "deactivate_gap8": 200,
+     "deactivate_gap9": 200,
+     "unpublish": 200,
+     "hide_product": 200,
+     "delete_attempt_guarded": 409,
+     "category_deactivate": 200,
+     "own_policy_delete": [
+      200,
+      "배송정책이 삭제되었습니다."
+     ]
+    },
+    "public_catalog_after": 404,
+    "departures_inactive_reserved0": true,
+    "own_run_inquiries": 16,
+    "own_run_inquiries_terminal": true,
+    "carts_left_on_run_departures": 0
+   },
+   "at": "17:50:50"
+  }
+ ]
+}

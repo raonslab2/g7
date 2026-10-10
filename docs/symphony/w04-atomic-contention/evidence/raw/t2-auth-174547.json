@@ -1,0 +1,67 @@
+{
+ "phase": "t2-auth-174547",
+ "review_sha": "fa5523175ac494cfbd13bbf89bf06b3ec91835a6",
+ "base_url": "http://127.0.0.1:18871",
+ "counts": {
+  "PASS": 2,
+  "FAIL": 0,
+  "OBSERVED": 0,
+  "BLOCKED": 0,
+  "NOT_RUN": 0
+ },
+ "results": [
+  {
+   "name": "native login -> logout 401 -> relogin persists edited state -> logout 401; handoff token retained; own tokens absent",
+   "status": "PASS",
+   "detail": {
+    "login1": 200,
+    "cart_with_t1": 200,
+    "question_with_t1": 200,
+    "logout1": 200,
+    "cart_after_logout1": 401,
+    "public_with_revoked_t1": 401,
+    "relogin": 200,
+    "edited_question_persisted_after_relogin": true,
+    "logout2": 200,
+    "cart_after_logout2": 401,
+    "handoff_token_still_valid": 200,
+    "own_issued_tokens_remaining_in_db": 0
+   },
+   "at": "17:45:55"
+  },
+  {
+   "name": "optional auth semantics: guest IP bucket, invalid token 401, expired own token = guest (IP bucket) and private 401; own token removed",
+   "status": "PASS",
+   "detail": {
+    "guest": [
+     200,
+     "599"
+    ],
+    "invalid_token_public": [
+     401,
+     true,
+     false
+    ],
+    "valid_login_public": [
+     200,
+     200,
+     "599"
+    ],
+    "expire_own_token_rows": 1,
+    "expired_token_public": [
+     200,
+     "598"
+    ],
+    "guest_after_expired": [
+     200,
+     "597"
+    ],
+    "expired_token_question": 401,
+    "delete_own_token_rows": 1,
+    "deleted_token_public": 401,
+    "own_tokens_left": 0
+   },
+   "at": "17:45:59"
+  }
+ ]
+}

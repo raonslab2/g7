@@ -344,31 +344,26 @@ class ModuleManager implements ModuleManagerInterface
         $activePath = $this->modulesPath.DIRECTORY_SEPARATOR.$moduleName;
         $composerDoneInPending = false;
         $resolvedVendorMode = $vendorMode;
+        $vendorResult = null;
 
-        if (! File::isDirectory($activePath)
+        if ((! File::isDirectory($activePath) || $force)
             && ExtensionPendingHelper::isPending($this->modulesPath, $moduleName)) {
             // _pending에서 Vendor 의존성 설치 (활성 디렉토리 이관 전)
             if (! app()->environment('testing')) {
                 $pendingPath = ExtensionPendingHelper::getPendingPath($this->modulesPath, $moduleName);
                 if ($this->extensionManager->hasComposerDependenciesAt($pendingPath)) {
                     $onProgress?->__invoke('composer', '_pending에서 Vendor 의존성 설치 중...');
-                    try {
-                        $vendorResult = $this->installVendorViaResolver(
-                            $moduleName,
-                            $pendingPath,
-                            $vendorMode,
-                            'install',
-                            null,
-                            $onProgress,
-                        );
-                        $resolvedVendorMode = $vendorResult->mode;
-                        $composerDoneInPending = true;
-                    } catch (VendorInstallException $e) {
-                        Log::warning('모듈 _pending Vendor 의존성 설치 실패', [
-                            'module' => $moduleName,
-                            'error' => $e->getMessage(),
-                        ]);
-                    }
+                    // 실패하면 활성 경로를 복사/교체하기 전에 중단한다.
+                    $vendorResult = $this->installVendorViaResolver(
+                        $moduleName,
+                        $pendingPath,
+                        $vendorMode,
+                        'install',
+                        null,
+                        $onProgress,
+                    );
+                    $resolvedVendorMode = $vendorResult->mode;
+                    $composerDoneInPending = true;
                 }
             }
         }
@@ -389,9 +384,31 @@ class ModuleManager implements ModuleManagerInterface
         // 해석되지 않아 "Class not found" 로 설치가 중단된다 (업그레이드 경로는 기설치본의
         // 매핑이 이미 있어 재현되지 않는다). 시더 실행 직전이 아니라 진입 파일을 로드하기
         // 전에 그 확장의 PSR-4 매핑을 등록한다.
-        ExtensionManager::registerExtensionAutoloadPaths('modules', $moduleName);
-
         try {
+            // 일반 _bundled/활성 설치도 요청 모드로 vendor를 먼저 준비한다.
+            // 진입 파일/라이프사이클/DDL/DML은 의존성 준비 성공 후에만 실행한다.
+            if (! $composerDoneInPending && ! app()->environment('testing')
+                && $this->extensionManager->hasComposerDependenciesAt($activePath)) {
+                $onProgress?->__invoke('composer', 'Vendor 의존성 설치 중...');
+                $vendorResult = $this->installVendorViaResolver(
+                    $moduleName,
+                    $activePath,
+                    $vendorMode,
+                    'install',
+                    null,
+                    $onProgress,
+                );
+                $resolvedVendorMode = $vendorResult->mode;
+            }
+
+            ExtensionManager::registerExtensionAutoloadPaths('modules', $moduleName);
+
+            // 확장 PSR-4 등록은 외부 패키지 로더를 포함하지 않는다. 준비된 활성 vendor의
+            // 클래스·함수도 진입 파일/install 전에 로드한다 (testing/무의존성 우회 유지).
+            if ($vendorResult !== null) {
+                require_once $activePath.'/vendor/autoload.php';
+            }
+
             // 모듈이 활성 디렉토리에 있지 않으면 로드 시도
             $module = $this->getModule($moduleName);
             if (! $module) {
@@ -519,19 +536,6 @@ class ModuleManager implements ModuleManagerInterface
             // Phase 4: 기본 설정 파일 생성
             $onProgress?->__invoke('settings', '환경설정 초기화 중...');
             $this->initializeModuleSettings($module);
-
-            // Phase 4.5: Composer 의존성 설치 (외부 패키지가 있는 경우에만)
-            // _pending에서 이미 설치한 경우 스킵 (vendor/가 활성 디렉토리에 복사됨)
-            if (! $composerDoneInPending) {
-                $onProgress?->__invoke('composer', 'Composer 의존성 설치 중...');
-                if (! app()->environment('testing')
-                    && $this->extensionManager->hasComposerDependencies('modules', $moduleName)) {
-                    $composerResult = $this->extensionManager->runComposerInstall('modules', $moduleName);
-                    if (! $composerResult) {
-                        Log::warning('모듈 Composer 의존성 설치 실패', ['module' => $moduleName]);
-                    }
-                }
-            }
 
             // Phase 5: 오토로드 병합 실행 (트랜잭션 외부)
             $onProgress?->__invoke('autoload', '오토로드 갱신 중...');

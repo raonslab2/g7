@@ -1,0 +1,89 @@
+{
+    "label": "original",
+    "child_exit": null,
+    "wipe_exit": 0,
+    "empty_tables_after_wipe": 0,
+    "import_exit": 0,
+    "import_seconds": 1.95,
+    "import_pid": 1056755,
+    "import_process_gone": true,
+    "import_handles": {
+        "utc": "2026-10-09T21:42:21.807263+00:00",
+        "count": 0,
+        "handles": [],
+        "unreadable_pids": [],
+        "lock_holders": [],
+        "excluded_ancestor_pids": [
+            964752,
+            1056274,
+            1056887,
+            1056888,
+            3650359
+        ],
+        "method": "proc-only bounded cwd/argv/FD; known TEST owners and own nonancestor native processes"
+    },
+    "exact_tables_rows_ddl": true,
+    "restored_digest": "ded72a53ad82a159b88e50a6560625488bb569a55f5f5ffa109cd45ae52d056e",
+    "expected_digest": "ded72a53ad82a159b88e50a6560625488bb569a55f5f5ffa109cd45ae52d056e",
+    "equals_original_baseline": true,
+    "table_count": 55,
+    "row_count": 104,
+    "exclusive_pre_import": {
+        "pid": 1056274,
+        "cwd": "/home/ubuntu/.agentopt-v2/workspaces/req_95d0024e7b144a5bb903cc7daad1fb5f",
+        "argv": [
+            "docs/symphony/w04-final-contract-persistence/snapshot.php",
+            "original",
+            "restore"
+        ],
+        "own_connection_id": 142146,
+        "other_test_connections": 0,
+        "own_server_processes": 0,
+        "prior_request_handles": {
+            "utc": "2026-10-09T21:42:19.857231+00:00",
+            "count": 0,
+            "handles": [],
+            "unreadable_pids": [],
+            "lock_holders": [],
+            "excluded_ancestor_pids": [
+                964752,
+                1056274,
+                1056744,
+                1056746,
+                3650359
+            ],
+            "method": "proc-only bounded cwd/argv/FD; known TEST owners and own nonancestor native processes"
+        },
+        "utc": "2026-10-09T21:42:19+00:00"
+    },
+    "exclusive_post": {
+        "pid": 1056274,
+        "cwd": "/home/ubuntu/.agentopt-v2/workspaces/req_95d0024e7b144a5bb903cc7daad1fb5f",
+        "argv": [
+            "docs/symphony/w04-final-contract-persistence/snapshot.php",
+            "original",
+            "restore"
+        ],
+        "own_connection_id": 142148,
+        "other_test_connections": 0,
+        "own_server_processes": 0,
+        "prior_request_handles": {
+            "utc": "2026-10-09T21:42:21.946265+00:00",
+            "count": 0,
+            "handles": [],
+            "unreadable_pids": [],
+            "lock_holders": [],
+            "excluded_ancestor_pids": [
+                964752,
+                1056274,
+                1056893,
+                1056894,
+                3650359
+            ],
+            "method": "proc-only bounded cwd/argv/FD; known TEST owners and own nonancestor native processes"
+        },
+        "utc": "2026-10-09T21:42:21+00:00"
+    },
+    "backup_retained": true,
+    "utc": "2026-10-09T21:42:22+00:00"
+}

@@ -1,0 +1,112 @@
+{
+  "recovery-artisan.php": {
+    "php_lint_exit": 0
+  },
+  "guard.php": {
+    "php_lint_exit": 0
+  },
+  "runtime-bootstrap.php": {
+    "php_lint_exit": 0
+  },
+  "test-baseline-recovery.php": {
+    "php_lint_exit": 0
+  },
+  "recovery-common.php": {
+    "php_lint_exit": 0
+  },
+  "blocked-diagnostic.php": {
+    "php_lint_exit": 0
+  },
+  "sql_boundary": {
+    "original": "PASS",
+    "safety": "PASS",
+    "unsafe_cases_rejected": 11,
+    "test_schema_queries": 0
+  },
+  "retention": {
+    "failed_source_files_unchanged": true,
+    "own_original_and_safety_retained": true,
+    "directory_mode": "0700",
+    "private_file_modes": "0600"
+  },
+  "author_review": {
+    "status": "PASS",
+    "independent_helper_review": "NOT_RUN",
+    "official_validation": "NOT_RUN",
+    "remote_ci": "NOT_RUN",
+    "scope": "guarded recovery only; source pinned 1052e3fb; no product edit",
+    "fixed_review_target": "helper SHA-256 map in source-manifest.json",
+    "source_manifest_sha256": "5f0d0e05b15e2bf1702b9049e0b5d70a592cccc783dfc109a3fb753d98b0a7b7",
+    "findings": "Missing Composer autoload before guard fixed; guarded one-time preflight continuation retains original failure and verifies no mutation."
+  },
+  "inherited_override_rejections": {
+    "cases": 10,
+    "exit": 0,
+    "database_queries": 0
+  },
+  "pint": {
+    "exit": 0,
+    "result": {
+      "tool": "pint",
+      "result": "fixed",
+      "files": [
+        {
+          "path": "docs/symphony/w04-test-recovery-2/recovery-artisan.php",
+          "fixers": [
+            "fully_qualified_strict_types",
+            "braces_position",
+            "statement_indentation",
+            "not_operator_with_successor_space"
+          ]
+        },
+        {
+          "path": "docs/symphony/w04-test-recovery-2/guard.php",
+          "fixers": [
+            "braces_position",
+            "statement_indentation",
+            "cast_spaces",
+            "not_operator_with_successor_space",
+            "blank_line_before_statement",
+            "binary_operator_spaces"
+          ]
+        },
+        {
+          "path": "docs/symphony/w04-test-recovery-2/runtime-bootstrap.php",
+          "fixers": [
+            "method_argument_space",
+            "fully_qualified_strict_types",
+            "whitespace_after_comma_in_array",
+            "no_multiple_statements_per_line",
+            "braces_position",
+            "statement_indentation",
+            "cast_spaces",
+            "not_operator_with_successor_space",
+            "single_line_after_imports",
+            "blank_line_before_statement",
+            "binary_operator_spaces"
+          ]
+        },
+        {
+          "path": "docs/symphony/w04-test-recovery-2/test-baseline-recovery.php",
+          "fixers": [
+            "concat_space",
+            "braces_position",
+            "statement_indentation",
+            "not_operator_with_successor_space",
+            "blank_line_before_statement"
+          ]
+        },
+        {
+          "path": "docs/symphony/w04-test-recovery-2/recovery-common.php",
+          "fixers": [
+            "no_multiple_statements_per_line",
+            "braces_position",
+            "statement_indentation",
+            "not_operator_with_successor_space",
+            "blank_line_before_statement"
+          ]
+        }
+      ]
+    }
+  }
+}

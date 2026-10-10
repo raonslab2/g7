@@ -1,0 +1,325 @@
+{
+  "phase": "probe-2",
+  "tested_sha": "5783e6ba124061bdfae639cdaf9b1c14a83cdf03",
+  "tree": "361f9a142572f8a6c0c28326c461a233a92aec4e",
+  "actual_head": "5783e6ba124061bdfae639cdaf9b1c14a83cdf03",
+  "argv": [
+    "probe-2"
+  ],
+  "started": "2026-10-09T21:25:26.276Z",
+  "checks": [
+    {
+      "width": null,
+      "name": "supplied handoff bearer status (read-only GET)",
+      "status": "OBSERVED",
+      "data": {
+        "supplied": {
+          "admin": 401,
+          "member": 401,
+          "other_member": 401
+        },
+        "status": "OBSERVED"
+      }
+    },
+    {
+      "width": null,
+      "name": "admin page list abilities observe",
+      "status": "OBSERVED",
+      "data": {
+        "status_http": 200,
+        "abilities": {
+          "can_create": true,
+          "can_update": true,
+          "can_delete": true
+        },
+        "rows": [
+          {
+            "id": 8,
+            "slug": "travel-lab-campaign-weekend-reset",
+            "published": true,
+            "abilities": {
+              "can_create": true,
+              "can_update": true,
+              "can_delete": true
+            }
+          },
+          {
+            "id": 7,
+            "slug": "travel-lab-campaign-autumn-escape",
+            "published": true,
+            "abilities": {
+              "can_create": true,
+              "can_update": true,
+              "can_delete": true
+            }
+          },
+          {
+            "id": 6,
+            "slug": "contact",
+            "published": true,
+            "abilities": {
+              "can_create": true,
+              "can_update": true,
+              "can_delete": true
+            }
+          },
+          {
+            "id": 5,
+            "slug": "faq",
+            "published": true,
+            "abilities": {
+              "can_create": true,
+              "can_update": true,
+              "can_delete": true
+            }
+          },
+          {
+            "id": 4,
+            "slug": "about",
+            "published": true,
+            "abilities": {
+              "can_create": true,
+              "can_update": true,
+              "can_delete": true
+            }
+          },
+          {
+            "id": 3,
+            "slug": "refund",
+            "published": true,
+            "abilities": {
+              "can_create": true,
+              "can_update": true,
+              "can_delete": true
+            }
+          },
+          {
+            "id": 2,
+            "slug": "privacy",
+            "published": true,
+            "abilities": {
+              "can_create": true,
+              "can_update": true,
+              "can_delete": true
+            }
+          },
+          {
+            "id": 1,
+            "slug": "terms",
+            "published": true,
+            "abilities": {
+              "can_create": true,
+              "can_update": true,
+              "can_delete": true
+            }
+          }
+        ],
+        "meta": {
+          "current_page": 1,
+          "last_page": 1,
+          "per_page": 100,
+          "total": 8
+        },
+        "status": "OBSERVED"
+      }
+    },
+    {
+      "width": null,
+      "name": "readonly page list abilities observe",
+      "status": "OBSERVED",
+      "data": {
+        "status_http": 200,
+        "abilities": {
+          "can_create": false,
+          "can_update": false,
+          "can_delete": false
+        },
+        "rows": [
+          {
+            "id": 8,
+            "slug": "travel-lab-campaign-weekend-reset",
+            "published": true,
+            "abilities": {
+              "can_create": false,
+              "can_update": false,
+              "can_delete": false
+            }
+          },
+          {
+            "id": 7,
+            "slug": "travel-lab-campaign-autumn-escape",
+            "published": true,
+            "abilities": {
+              "can_create": false,
+              "can_update": false,
+              "can_delete": false
+            }
+          },
+          {
+            "id": 6,
+            "slug": "contact",
+            "published": true,
+            "abilities": {
+              "can_create": false,
+              "can_update": false,
+              "can_delete": false
+            }
+          },
+          {
+            "id": 5,
+            "slug": "faq",
+            "published": true,
+            "abilities": {
+              "can_create": false,
+              "can_update": false,
+              "can_delete": false
+            }
+          },
+          {
+            "id": 4,
+            "slug": "about",
+            "published": true,
+            "abilities": {
+              "can_create": false,
+              "can_update": false,
+              "can_delete": false
+            }
+          },
+          {
+            "id": 3,
+            "slug": "refund",
+            "published": true,
+            "abilities": {
+              "can_create": false,
+              "can_update": false,
+              "can_delete": false
+            }
+          },
+          {
+            "id": 2,
+            "slug": "privacy",
+            "published": true,
+            "abilities": {
+              "can_create": false,
+              "can_update": false,
+              "can_delete": false
+            }
+          },
+          {
+            "id": 1,
+            "slug": "terms",
+            "published": true,
+            "abilities": {
+              "can_create": false,
+              "can_update": false,
+              "can_delete": false
+            }
+          }
+        ],
+        "meta": {
+          "current_page": 1,
+          "last_page": 1,
+          "per_page": 100,
+          "total": 8
+        },
+        "status": "OBSERVED"
+      }
+    },
+    {
+      "width": null,
+      "name": "self_reader page list abilities observe",
+      "status": "OBSERVED",
+      "data": {
+        "status_http": 200,
+        "abilities": {
+          "can_create": false,
+          "can_update": false,
+          "can_delete": false
+        },
+        "rows": [],
+        "meta": {
+          "current_page": 1,
+          "last_page": 1,
+          "per_page": 100,
+          "total": 0
+        },
+        "status": "OBSERVED"
+      }
+    },
+    {
+      "width": null,
+      "name": "public campaigns and catalog observe",
+      "status": "OBSERVED",
+      "data": {
+        "campaigns": 200,
+        "campaign_body_keys": [
+          "items"
+        ],
+        "campaign_rows": "{\"items\":[{\"slug\":\"travel-lab-campaign-autumn-escape\",\"kind\":\"campaign\",\"theme\":\"nature\",\"title\":\"가을, 숲으로 떠나는 느린 여행\",\"excerpt\":\"선선한 바람이 부는 계절, 숲길과 계곡을 천천히 걷는 일정을 모았어요. 일정과 출발일은 상품마다 다르니 상세 화면에서 확인해 주세요. 이 화면의 상담 요청은 테스트로만 처리돼요.\",\"current_version\":11,\"published_at\":\"2026-10-10 05:24:19\",\"path\":\"/travel/campaigns/travel-lab-campaign-autumn-escape\",\"catalog_query\":{\"theme\":\"nature\",\"sort\":\"recommended\"},\"art_variant\":\"forest\"},{\"slug\":\"travel-lab-campaign-weekend-reset\",\"kind\":\"campaign\",\"theme\":\"wellness\",\"title\":\"주말 리셋, 쉼이 있는 짧은 여행\",\"excerpt\":\"바쁜 한 주 뒤에 몸과 마음을 쉬게 하는 웰니스 여행을 모았어요. 온천, 산책, 조용한 숙소",
+        "nature": [
+          1,
+          3
+        ],
+        "wellness": [
+          2,
+          4
+        ],
+        "status": "OBSERVED"
+      }
+    }
+  ],
+  "metrics": [],
+  "cleanup": [
+    {
+      "type": "exact-own-token",
+      "role": "admin",
+      "hash": "0a6e52864a675a8be9cd98abe8552c9750e295c574a4be88a161c89eea886a1f",
+      "via": "api",
+      "logout": 200,
+      "requery": 401,
+      "status": "PASS"
+    },
+    {
+      "type": "exact-own-token",
+      "role": "readonly",
+      "hash": "927e7b1456df52711a28232c515b8b4fd2659a07248a18771a350aba27315d5e",
+      "via": "api",
+      "logout": 200,
+      "requery": 401,
+      "status": "PASS"
+    },
+    {
+      "type": "exact-own-token",
+      "role": "self_reader",
+      "hash": "b99c7e8f382f9ee153d939f0e2758e35a46002fa5b6d98000f1ff9dde85cf46b",
+      "via": "api",
+      "logout": 200,
+      "requery": 401,
+      "status": "PASS"
+    },
+    {
+      "type": "supplied-handoff-observed",
+      "role": "admin",
+      "http": 401,
+      "status": "OBSERVED",
+      "note": "supplied bearer already 401 at first preflight probe-1 before any write; never used for logout/revocation by this verifier"
+    },
+    {
+      "type": "supplied-handoff-observed",
+      "role": "member",
+      "http": 401,
+      "status": "OBSERVED",
+      "note": "supplied bearer already 401 at first preflight probe-1 before any write; never used for logout/revocation by this verifier"
+    },
+    {
+      "type": "supplied-handoff-observed",
+      "role": "other_member",
+      "http": 401,
+      "status": "OBSERVED",
+      "note": "supplied bearer already 401 at first preflight probe-1 before any write; never used for logout/revocation by this verifier"
+    }
+  ],
+  "chromium": "156.0.8078.4",
+  "elapsed_seconds": 4.117,
+  "finished": "2026-10-09T21:25:30.393Z"
+}

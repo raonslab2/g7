@@ -1,0 +1,50 @@
+{
+  "decision": "PASS",
+  "reviewer": "/root/readonly_review",
+  "fixed_review_target": "staged diff SHA256 f34585d50ea673c91ee800368325179391bc33db23ad92d12a5bc9a58334f6f9",
+  "reviewed_paths": 96,
+  "blocking_findings": 0,
+  "product_pins_verified": {
+    "matches": 6,
+    "total": 6,
+    "fixed_git_blobs": true
+  },
+  "helper_pins_verified": {
+    "matches": 21,
+    "total": 21
+  },
+  "native_lifecycle": {
+    "commands": 18,
+    "all_exit_zero": true,
+    "additional_published_migrate_exit": 0
+  },
+  "installed_http": {
+    "matched_expected_statuses": 37,
+    "requests": 37
+  },
+  "mysql_fixed": {
+    "tests": 1,
+    "assertions": 34,
+    "exit": 0,
+    "phpunit_seconds": 15.1,
+    "child_wall_seconds": 15.241
+  },
+  "mysql_trial1": {
+    "exit": 2,
+    "tests": 0,
+    "retained": true
+  },
+  "full_restore_inventories_equal": 3,
+  "independent_measure_files_equal": 4,
+  "baseline": {
+    "tables": 55,
+    "rows": 104,
+    "whole_digest": "ded72a53ad82a159b88e50a6560625488bb569a55f5f5ffa109cd45ae52d056e"
+  },
+  "release_utc": "2026-10-09T18:42:38+00:00",
+  "report_not_run_and_unknown_boundaries": "correctly separated",
+  "privacy_check": "staged96 text patterns: no actual credential/raw SQL payload; source comment regex false positive identified",
+  "reviewer_sql_runtime_private_file_reads": "NONE",
+  "publication_scan_original_denominator": 93,
+  "review_record_added_after_review": "this receipt and changed-path manifest update only; no product/helper edits"
+}

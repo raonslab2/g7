@@ -3512,6 +3512,22 @@ export class TemplateApp {
         // DynamicRenderer에서 isTransitioning을 확인하여 blur 효과 적용
         transitionManager.setPending(true);
 
+        // A retry must keep its real error until completion, then change only
+        // this source's error. Read the latest bag so concurrent sources survive.
+        const recordRefetchError = (error: any): void => {
+            const state = getState();
+            state.bindingEngine?.invalidateCacheByKeys(['_dataSourceErrors']);
+            updateTemplateData({
+                _dataSourceErrors: {
+                    ...state.currentDataContext?._dataSourceErrors,
+                    [dataSourceId]: {
+                        message: error?.response?.data?.message || error?.message || String(error),
+                        status: error?.response?.status || error?.status,
+                    },
+                },
+            }, options?.sync ? { sync: true } : undefined);
+        };
+
         try {
             const dataSourceManager = new DataSourceManager();
 
@@ -3561,7 +3577,7 @@ export class TemplateApp {
                 // BindingEngine 캐시 무효화
                 const state = getState();
                 if (state.bindingEngine) {
-                    const keysToInvalidate = [dataSourceId];
+                    const keysToInvalidate = [dataSourceId, '_dataSourceErrors'];
                     // initGlobal이 있으면 _global 키도 무효화
                     if (dataSourceDef.initGlobal) {
                         keysToInvalidate.push('_global');
@@ -3577,6 +3593,9 @@ export class TemplateApp {
                 const updateData: Record<string, any> = {
                     [dataSourceId]: result.data,
                 };
+                const sourceErrors = { ...state.currentDataContext?._dataSourceErrors };
+                delete sourceErrors[dataSourceId];
+                updateData._dataSourceErrors = Object.keys(sourceErrors).length > 0 ? sourceErrors : undefined;
 
                 // initLocal이 있으면 추가
                 if (Object.keys(localInit).length > 0) {
@@ -3596,10 +3615,12 @@ export class TemplateApp {
                 return result.data;
             } else if (result.state === 'error') {
                 logger.error(`Failed to refetch data source: ${dataSourceId}`, result.error);
+                recordRefetchError(result.error);
                 return undefined;
             }
         } catch (error) {
             logger.error(`Error refetching data source: ${dataSourceId}`, error);
+            recordRefetchError(error);
             return undefined;
         } finally {
             // blur_until_loaded 지원: refetch 완료 후 transition 상태 해제

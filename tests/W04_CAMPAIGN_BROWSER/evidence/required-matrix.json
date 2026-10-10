@@ -1,0 +1,273 @@
+{
+  "fixed_review_sha": "31a18318f91dde34a9c75eaaac65ae1d434b7bc3",
+  "source_contract_sha256": "f87c0f98c1ea3f241f40d876d5814061ba8ce85b48c33b5a02bd95a6d973bb47",
+  "source_contract_input_sha": "6853f40d58acbf53a2f29cbb9dd422cc439047a9",
+  "note": "Historic contract input6853 is preserved as contract provenance, never the tested source. Entire 14-scenario cross-product not rerun; every original action/effect/axis retained. Incremental actual results are separate. Independent TEST permission gate not consumed as our PASS.",
+  "contract": {
+    "feature": "raonslab-travel_lab",
+    "contract_version": 1,
+    "work_id": "work-20261009-g7-symphony-max-child-c7ae42d1",
+    "input_source_sha": "6853f40d58acbf53a2f29cbb9dd422cc439047a9",
+    "purpose": "Actual ecommerce-backed discovery/cart and isolated persistent test inquiries",
+    "truth_boundary": "This matrix is a verification requirement, not an executed PASS",
+    "environment": {
+      "database": "isolated_mysql_or_mariadb",
+      "schemas": [
+        "req81_travel_lab",
+        "req81_travel_lab_test"
+      ],
+      "outbound": "no_payment_supplier_mail_sms",
+      "viewports": [
+        390,
+        1440
+      ]
+    },
+    "actors": [
+      "guest",
+      "owner",
+      "other_user",
+      "travel_admin_with_explicit_permissions",
+      "authenticated_user_without_travel_admin_permissions"
+    ],
+    "axes": {
+      "publication": [
+        "published",
+        "unpublished"
+      ],
+      "departure": [
+        "active_future",
+        "inactive",
+        "past",
+        "invalid_date"
+      ],
+      "travelers": [
+        "valid",
+        "zero",
+        "negative",
+        "above_available",
+        "non_integer"
+      ],
+      "price_input": [
+        "omitted",
+        "forged_amount",
+        "changed_option_price_since_cart"
+      ],
+      "idempotency": [
+        "new",
+        "same_key_same_payload",
+        "same_key_changed_payload",
+        "simultaneous_same_key"
+      ],
+      "inventory": [
+        "sufficient",
+        "last_seat_parallel_different_users",
+        "commerce_stock_reduced",
+        "capacity_reduced"
+      ],
+      "identity": [
+        "owner",
+        "other_user",
+        "guest"
+      ],
+      "network_state": [
+        "loading",
+        "empty",
+        "error",
+        "retry_after_unknown_submission_result"
+      ],
+      "persistence": [
+        "same_process",
+        "relogin",
+        "preview_process_restart"
+      ]
+    },
+    "cross_product_policy": [
+      "Exercise actor x ownership for every cart/inquiry/question/admin entry point",
+      "Exercise departure x travelers for cart add/update and final inquiry submit",
+      "Exercise idempotency x inventory for transactional inquiry submit",
+      "Exercise terminal transition x retry for allocation release",
+      "Exercise viewport x loading_empty_error_retry for visible customer and admin screens"
+    ],
+    "scenarios": [
+      {
+        "id": "TR-CATALOG-001",
+        "action": "Home/category/theme to filtered sorted catalog to product and departures",
+        "effects": [
+          "live_api_response",
+          "correct_published_results",
+          "valid_filter_bounds",
+          "preserved_url_query",
+          "actual_itinerary_and_server_prices"
+        ],
+        "full_required_effect_matrix_status": "NOT_RUN",
+        "current_incremental_observation": "PASS bounded nature/wellness campaign CTA/theme/search/card/detail; culture/city/full bounds NOT_RUN"
+      },
+      {
+        "id": "TR-CART-001",
+        "action": "Select real departure and traveler quantity then add/update/remove actual ecommerce cart",
+        "effects": [
+          "owner_cart_persistence",
+          "departure_option_mapping",
+          "canonical_cart_calculation",
+          "nontravel_cart_excluded",
+          "no_order_or_payment_rows"
+        ],
+        "full_required_effect_matrix_status": "NOT_RUN",
+        "current_incremental_observation": "PASS native add quantity2/update3/down2 consumed cart; nontravel/order-table queries NOT_RUN"
+      },
+      {
+        "id": "TR-INQUIRY-001",
+        "action": "Submit selected owned cart IDs with explicit test notice and stable key",
+        "effects": [
+          "server_calculation_snapshot",
+          "immutable_item_snapshot",
+          "test_inquiry_persistence",
+          "travel_capacity_reserved_once",
+          "consumed_cart_removed_transactionally",
+          "actor_audit_event",
+          "no_external_dispatch"
+        ],
+        "full_required_effect_matrix_status": "NOT_RUN",
+        "current_incremental_observation": "PASS native201 server13700x2 snapshot/API allocation/events; SQL/external adapter internals NOT_RUN"
+      },
+      {
+        "id": "TR-IDEMPOTENCY-001",
+        "action": "Retry identical key and payload after a lost response",
+        "effects": [
+          "same_inquiry_id",
+          "same_amount",
+          "unchanged_reserved_quantity",
+          "no_duplicate_item_or_audit_event"
+        ],
+        "full_required_effect_matrix_status": "NOT_RUN",
+        "current_incremental_observation": "PASS actual upstream201 aborted delivery/reload native200 sameID/key/items/events/amount/API reserved; both widths"
+      },
+      {
+        "id": "TR-IDEMPOTENCY-002",
+        "action": "Submit changed payload with already used key",
+        "effects": [
+          "conflict_409",
+          "inquiry_and_cart_and_inventory_unchanged"
+        ],
+        "full_required_effect_matrix_status": "NOT_RUN",
+        "current_incremental_observation": "NOT_RUN changed payload conflict"
+      },
+      {
+        "id": "TR-CONCURRENCY-001",
+        "action": "Independent real DB connections simultaneously request the last available seat",
+        "effects": [
+          "only_one_success",
+          "loser_validation_or_conflict",
+          "reserved_never_above_effective_capacity",
+          "rollback_leaves_no_partial_snapshot"
+        ],
+        "full_required_effect_matrix_status": "NOT_RUN",
+        "current_incremental_observation": "NOT_RUN no SQL/separate connections permitted"
+      },
+      {
+        "id": "TR-ADMIN-001",
+        "action": "Authorized admin reviews then accepts a test inquiry and owner reloads status",
+        "effects": [
+          "explicit_allowed_transition",
+          "actor_audit_event",
+          "durable_status",
+          "no_real_booking_confirmed_label"
+        ],
+        "full_required_effect_matrix_status": "NOT_RUN",
+        "current_incremental_observation": "PASS actual390 accepted and1440 declined via nativeUI/relogin; desktop stabilized menu pointer PASS after earlier failures"
+      },
+      {
+        "id": "TR-RELEASE-001",
+        "action": "Decline or cancel including accepted test request, then repeat cancellation",
+        "effects": [
+          "release_once",
+          "no_commerce_stock_mutation",
+          "terminal_transition_guard",
+          "durable_owner_result"
+        ],
+        "full_required_effect_matrix_status": "NOT_RUN",
+        "current_incremental_observation": "PASS accepted cancellation200 and declined terminal409/API reserved0; commerce-stock/repeated-cancel matrix NOT_RUN"
+      },
+      {
+        "id": "TR-ACCESS-001",
+        "action": "Other user reads or mutates owner's cart/inquiry/private question; guest and unprivileged user enter admin",
+        "effects": [
+          "owner_scope_404_or_permission_403_or_auth_401",
+          "no_state_change",
+          "no_private_attachment_exposure"
+        ],
+        "full_required_effect_matrix_status": "NOT_RUN",
+        "current_incremental_observation": "PASS bounded inquiry/privatequestion other-member404/native Page guest401/member403; scoped Page actor BLOCKED; attachment matrix NOT_RUN"
+      },
+      {
+        "id": "TR-SUPPORT-001",
+        "action": "View native notices and FAQ; create/read private native G7 question and admin response",
+        "effects": [
+          "native_board_or_page_persistence",
+          "private_owner_admin_scope",
+          "published_help_only",
+          "no_mail_sms_notifications"
+        ],
+        "full_required_effect_matrix_status": "NOT_RUN",
+        "current_incremental_observation": "PASS bounded native noticeFAQ/question/answer create/edit/read3901440; no attachments created"
+      },
+      {
+        "id": "TR-RESTART-001",
+        "action": "Logout/login and stop/start only isolated preview process",
+        "effects": [
+          "same_inquiry_snapshot_and_status",
+          "same_support_records",
+          "same_inventory",
+          "production_services_unchanged"
+        ],
+        "full_required_effect_matrix_status": "NOT_RUN",
+        "current_incremental_observation": "PASS relogin/requery only; preview restart NOT_RUN runtime immutable"
+      },
+      {
+        "id": "TR-MIGRATION-001",
+        "action": "Repeat lab seed and rehearse rollback/recovery on isolated schema",
+        "effects": [
+          "no_duplicate_catalog_options_help",
+          "existing_users_preserved",
+          "reversible_travel_migrations",
+          "no_production_db_access"
+        ],
+        "full_required_effect_matrix_status": "NOT_RUN",
+        "current_incremental_observation": "NOT_RUN APP/TEST install/seed/rollback forbidden"
+      },
+      {
+        "id": "TR-UI-001",
+        "action": "Real mobile and desktop browser completes discovery to cart to inquiry to admin to owner",
+        "effects": [
+          "actual_g7_spa",
+          "no_horizontal_overflow",
+          "working_auth_and_toasts",
+          "clear_test_only_transaction",
+          "visible_loading_empty_error_retry"
+        ],
+        "full_required_effect_matrix_status": "NOT_RUN",
+        "current_incremental_observation": "FAIL admin campaign Retry native200 retains error3901440; customer flow/state/overflow bounded PASS"
+      },
+      {
+        "id": "TR-REGRESSION-001",
+        "action": "Run relevant commerce/board/core installation and frontend build/typecheck at fixed integrated SHA",
+        "effects": [
+          "required_checks_recorded",
+          "existing_g7_contracts_preserved",
+          "independent_review_and_postintegration_results_separate"
+        ],
+        "full_required_effect_matrix_status": "NOT_RUN",
+        "current_incremental_observation": "PASS selected installed/served binding and support smoke only; builds/unit suites/full14/CI/Validation NOT_RUN"
+      }
+    ],
+    "evidence_required": [
+      "fixed_implementation_and_verification_sha",
+      "exact_commands_environment_and_exit_codes",
+      "real_db_concurrency_and_state_queries_without_secrets",
+      "nonidentifying_browser_screenshots_and_trace_or_report",
+      "independent_reviewer_request_and_scope",
+      "postintegration_retest_sha",
+      "pass_fail_not_run_blocked_per_scenario"
+    ]
+  }
+}

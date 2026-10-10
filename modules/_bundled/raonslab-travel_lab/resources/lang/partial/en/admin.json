@@ -1,0 +1,158 @@
+{
+  "nav": {
+    "catalog": "Travel catalog",
+    "inquiries": "Travel inquiries",
+    "support": "Support",
+    "campaigns": "Travel campaigns"
+  },
+  "common": {
+    "lab_banner": "LAB test environment. No real payments, bookings, refunds, emails or SMS are produced.",
+    "refresh": "Refresh",
+    "save": "Save",
+    "cancel": "Cancel",
+    "prev": "Previous",
+    "next": "Next",
+    "page_summary": "Page {{current}} of {{last}} · {{total}} total"
+  },
+  "catalog": {
+    "title": "Travel catalog",
+    "description": "Ecommerce products act as trips and product options act as departures.",
+    "product_code": "Product code {{code}}",
+    "open_product_admin": "Open ecommerce product admin",
+    "price_source_note": "Manage prices and options in native ecommerce. Manage travel summaries, itinerary, publication and departures here.",
+    "capacity_line": "Capacity {{capacity}} · inquired {{reserved}}",
+    "edit_departure": "Departure settings",
+    "no_departures": "No departures (product options) yet.",
+    "empty": "No travel products.",
+    "status": {
+      "ACTIVE": "Active",
+      "INACTIVE": "Inactive"
+    },
+    "modal": {
+      "title": "Departure settings",
+      "status": "Status",
+      "capacity": "Capacity (people)",
+      "price_note": "Prices are not changed here. Manage them in the ecommerce product options.",
+      "saved": "Departure settings saved.",
+      "product_option_id": "Ecommerce option ID",
+      "departure_date": "Departure date",
+      "return_date": "Return date"
+    },
+    "publish": "Publish",
+    "unpublish": "Unpublish",
+    "new_departure": "Add departure",
+    "metadata": {
+      "register": "Register travel product",
+      "edit": "Edit travel information",
+      "title": "Travel product information",
+      "product_id": "Ecommerce product to link",
+      "region": "Region",
+      "theme": "Theme",
+      "duration_days": "Duration in days",
+      "summary_ko": "Korean summary",
+      "summary_en": "English summary",
+      "itinerary_json": "Itinerary (JSON)",
+      "itinerary_help": "Example: [{\"day\":1,\"title\":{\"ko\":\"첫날\",\"en\":\"Day one\"},\"description\":{\"ko\":\"합성 일정\",\"en\":\"Synthetic itinerary\"}}]",
+      "published": "Publication",
+      "loading": "Loading products…",
+      "no_candidates": "No products to link. Create a native ecommerce product and options, or change the search.",
+      "search": "Search product name or code",
+      "save": "Save travel information",
+      "close": "Close",
+      "region_jeju": "Jeju",
+      "region_gangwon": "Gangwon",
+      "region_busan": "Busan",
+      "region_seoul": "Seoul",
+      "theme_nature": "Nature",
+      "theme_culture": "Culture",
+      "theme_city": "City",
+      "theme_wellness": "Wellness",
+      "option_hint": "After linking, add departures using these option IDs. Manage options, stock, prices and the KR free-shipping policy in native ecommerce.",
+      "option_line": "Option {{id}} · {{name}} · stock {{stock}}"
+    }
+  },
+  "inquiries": {
+    "title": "Travel inquiries",
+    "description": "Review LAB test inquiries and move them only to allowed states.",
+    "filter_all": "All",
+    "empty": "No inquiries.",
+    "columns": {
+      "reference": "Reference",
+      "trip": "Trip",
+      "departure": "Departure",
+      "party_size": "People",
+      "status": "Status",
+      "created_at": "Received"
+    },
+    "actions": {
+      "view": "View"
+    },
+    "status": {
+      "TEST_INQUIRY": "Test inquiry",
+      "UNDER_REVIEW": "Under review",
+      "TEST_ACCEPTED": "Test accepted",
+      "DECLINED": "Declined",
+      "CANCELLED": "Cancelled"
+    }
+  },
+  "inquiry_detail": {
+    "title": "Travel inquiry",
+    "description": "All states are for testing only; no real booking is made.",
+    "back": "List",
+    "summary": "Inquiry",
+    "requester": "Requester",
+    "message": "Message",
+    "status_title": "Status",
+    "transition_hint": "Only the next states allowed by the server can be selected.",
+    "terminal": "No further transitions are available.",
+    "admin_note": "Admin note",
+    "admin_note_placeholder": "Internal note (never sent to the requester)",
+    "saved": "Inquiry status saved."
+  },
+  "support": {
+    "title": "Support",
+    "description": "Notices, FAQs and private questions run on G7 boards.",
+    "open_board_admin": "Open board admin",
+    "notices": {
+      "title": "Notices",
+      "description": "Public Travel Lab notices."
+    },
+    "faqs": {
+      "title": "FAQs",
+      "description": "Public frequently asked questions."
+    },
+    "questions": {
+      "title": "Private questions",
+      "description": "Secret questions visible only to the author and admins. Answer with comments."
+    },
+    "provision_hint": "If the boards are missing, prepare them in LAB with raonslab-travel_lab:support-provision --lab-confirm."
+  },
+  "campaigns": {
+    "title": "Travel campaigns",
+    "description": "Campaign body, publication and versions are managed by the Page module. This screen shows the current state of the two fixed campaign pages and links to the Page editor and detail (versions, restore).",
+    "loading": "Loading campaign page status…",
+    "error": "Couldn't load the page list.",
+    "retry": "Reload",
+    "published": "Published",
+    "draft": "Unpublished (draft)",
+    "version": "Current version {version}",
+    "slug": "Address (slug)",
+    "missing_title": "No page is visible in this account scope",
+    "missing_desc": "It may not exist yet, or it may belong to another administrator outside this scope. If the address already exists, the Page module rejects the save.",
+    "create": "Create page at this address",
+    "create_hint": "For the first body, turn off the HTML editor and save as text. The customer screen shows formatting tags only; link addresses and images are not shown.",
+    "edit": "Edit page",
+    "detail": "Detail · versions · restore",
+    "publish": "Publish",
+    "unpublish": "Unpublish",
+    "publish_changed": "Publication updated.",
+    "publish_failed": "Couldn't change publication.",
+    "no_update": "This account cannot update this page.",
+    "more_results": "Next results page",
+    "more_results_hint": "More page search results exist. This campaign may appear on the next results page.",
+    "slots": {
+      "autumn-escape": "Autumn woods campaign (nature theme)",
+      "weekend-reset": "Weekend reset campaign (wellness theme)"
+    }
+  }
+}

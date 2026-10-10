@@ -1,0 +1,30 @@
+{
+  "command": [
+    "/usr/bin/php8.3",
+    "docs/symphony/w04-final-contract-persistence/snapshot.php",
+    "support-private",
+    "run",
+    "/usr/bin/php8.3",
+    "vendor/bin/phpunit",
+    "--bootstrap",
+    "docs/symphony/w04-final-contract-persistence/test-bootstrap.php",
+    "modules/_bundled/raonslab-travel_lab/tests/Feature/TravelSupportApiTest.php",
+    "modules/_bundled/raonslab-travel_lab/tests/Feature/W03SupportHardeningTest.php",
+    "--filter",
+    "questions_require_sanctum_authentication|members_only_see_and_update_their_own_private_questions|support_admin_reads_all_but_needs_update_permission_to_edit_others|admin_answer_through_native_board_admin_is_visible_to_author_only|legacy_support_role_without_native_board_admin_cannot_reach_foreign_questions|foreign_access_requires_both_support_permission_and_native_board_admin|self_scoped_native_board_manager_sees_only_own_questions|question_edit_goes_through_native_post_service_audit_without_notifications|restricted_grants_without_owner_metadata_cannot_bypass_foreign_scope"
+  ],
+  "exit": 0,
+  "seconds": 49.145,
+  "native_log_sha256": "c9cb26056990327394d6291d461e566efa2157e50d7c70aa0e010713c457fb6f",
+  "summary": [
+    "PHPUnit 11.5.56 by Sebastian Bergmann and contributors.",
+    "Runtime:       PHP 8.3.6",
+    "Time: 00:20.164, Memory: 76.50 MB",
+    "OK (9 tests, 103 assertions)"
+  ],
+  "restored_exactly": true,
+  "source_file_hashes": {
+    "modules/_bundled/raonslab-travel_lab/tests/Feature/TravelSupportApiTest.php": "05113f9cfe4d04e13465d6644acd59cd42938e1c4ff3f1885f61258f9764fc52",
+    "modules/_bundled/raonslab-travel_lab/tests/Feature/W03SupportHardeningTest.php": "2021da7a8d6569a12ca1dd6a5102033107978d7ad212e248eda96c838b7caa11"
+  }
+}

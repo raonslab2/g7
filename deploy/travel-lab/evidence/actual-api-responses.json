@@ -1,0 +1,1584 @@
+{
+    "source_sha": "2114703d208f260c5a63515b3a4c899afff1d46b",
+    "source_state": "WORKING_TREE_IMPLEMENTER_CHECK",
+    "scope": "Actual installed root HTTP kernel, synthetic marked app DB only; no headers\/credentials",
+    "responses": [
+        {
+            "method": "GET",
+            "route": "\/api\/modules\/raonslab-travel_lab\/catalog",
+            "status": 200,
+            "response": {
+                "success": true,
+                "message": "Travel catalog loaded.",
+                "data": {
+                    "data": [
+                        {
+                            "id": 1,
+                            "title": "Jeju sea and volcanic hills (test)",
+                            "region": "jeju",
+                            "theme": "nature",
+                            "duration_days": 3,
+                            "summary": "Synthetic travel discovery data; this is not a real booking.",
+                            "itinerary": [
+                                {
+                                    "day": 1,
+                                    "title": {
+                                        "ko": "제주 바다와 오름 1일차",
+                                        "en": "Jeju sea and volcanic hills day 1"
+                                    }
+                                },
+                                {
+                                    "day": 2,
+                                    "title": {
+                                        "ko": "제주 바다와 오름 2일차",
+                                        "en": "Jeju sea and volcanic hills day 2"
+                                    }
+                                },
+                                {
+                                    "day": 3,
+                                    "title": {
+                                        "ko": "제주 바다와 오름 3일차",
+                                        "en": "Jeju sea and volcanic hills day 3"
+                                    }
+                                }
+                            ],
+                            "from_price": 189000,
+                            "currency_code": "KRW",
+                            "image_url": null,
+                            "departures": [
+                                {
+                                    "id": 1,
+                                    "product_id": 1,
+                                    "product_option_id": 1,
+                                    "departure_date": "2026-11-01",
+                                    "return_date": "2026-11-03",
+                                    "available": 24,
+                                    "unit_price": 189000,
+                                    "currency_code": "KRW"
+                                },
+                                {
+                                    "id": 2,
+                                    "product_id": 1,
+                                    "product_option_id": 2,
+                                    "departure_date": "2026-11-08",
+                                    "return_date": "2026-11-10",
+                                    "available": 24,
+                                    "unit_price": 209000,
+                                    "currency_code": "KRW"
+                                },
+                                {
+                                    "id": 3,
+                                    "product_id": 1,
+                                    "product_option_id": 3,
+                                    "departure_date": "2026-11-15",
+                                    "return_date": "2026-11-17",
+                                    "available": 24,
+                                    "unit_price": 229000,
+                                    "currency_code": "KRW"
+                                }
+                            ]
+                        },
+                        {
+                            "id": 2,
+                            "title": "Rest in Jeju forests (test)",
+                            "region": "jeju",
+                            "theme": "wellness",
+                            "duration_days": 4,
+                            "summary": "Synthetic travel discovery data; this is not a real booking.",
+                            "itinerary": [
+                                {
+                                    "day": 1,
+                                    "title": {
+                                        "ko": "제주 숲 속 쉼 1일차",
+                                        "en": "Rest in Jeju forests day 1"
+                                    }
+                                },
+                                {
+                                    "day": 2,
+                                    "title": {
+                                        "ko": "제주 숲 속 쉼 2일차",
+                                        "en": "Rest in Jeju forests day 2"
+                                    }
+                                },
+                                {
+                                    "day": 3,
+                                    "title": {
+                                        "ko": "제주 숲 속 쉼 3일차",
+                                        "en": "Rest in Jeju forests day 3"
+                                    }
+                                },
+                                {
+                                    "day": 4,
+                                    "title": {
+                                        "ko": "제주 숲 속 쉼 4일차",
+                                        "en": "Rest in Jeju forests day 4"
+                                    }
+                                }
+                            ],
+                            "from_price": 329000,
+                            "currency_code": "KRW",
+                            "image_url": null,
+                            "departures": [
+                                {
+                                    "id": 4,
+                                    "product_id": 2,
+                                    "product_option_id": 4,
+                                    "departure_date": "2026-11-02",
+                                    "return_date": "2026-11-05",
+                                    "available": 24,
+                                    "unit_price": 329000,
+                                    "currency_code": "KRW"
+                                },
+                                {
+                                    "id": 5,
+                                    "product_id": 2,
+                                    "product_option_id": 5,
+                                    "departure_date": "2026-11-09",
+                                    "return_date": "2026-11-12",
+                                    "available": 24,
+                                    "unit_price": 349000,
+                                    "currency_code": "KRW"
+                                },
+                                {
+                                    "id": 6,
+                                    "product_id": 2,
+                                    "product_option_id": 6,
+                                    "departure_date": "2026-11-16",
+                                    "return_date": "2026-11-19",
+                                    "available": 24,
+                                    "unit_price": 369000,
+                                    "currency_code": "KRW"
+                                }
+                            ]
+                        },
+                        {
+                            "id": 3,
+                            "title": "Gangwon mountains and lakes (test)",
+                            "region": "gangwon",
+                            "theme": "nature",
+                            "duration_days": 2,
+                            "summary": "Synthetic travel discovery data; this is not a real booking.",
+                            "itinerary": [
+                                {
+                                    "day": 1,
+                                    "title": {
+                                        "ko": "강원 산과 호수 1일차",
+                                        "en": "Gangwon mountains and lakes day 1"
+                                    }
+                                },
+                                {
+                                    "day": 2,
+                                    "title": {
+                                        "ko": "강원 산과 호수 2일차",
+                                        "en": "Gangwon mountains and lakes day 2"
+                                    }
+                                }
+                            ],
+                            "from_price": 159000,
+                            "currency_code": "KRW",
+                            "image_url": null,
+                            "departures": [
+                                {
+                                    "id": 7,
+                                    "product_id": 3,
+                                    "product_option_id": 7,
+                                    "departure_date": "2026-11-03",
+                                    "return_date": "2026-11-04",
+                                    "available": 24,
+                                    "unit_price": 159000,
+                                    "currency_code": "KRW"
+                                },
+                                {
+                                    "id": 8,
+                                    "product_id": 3,
+                                    "product_option_id": 8,
+                                    "departure_date": "2026-11-10",
+                                    "return_date": "2026-11-11",
+                                    "available": 24,
+                                    "unit_price": 179000,
+                                    "currency_code": "KRW"
+                                },
+                                {
+                                    "id": 9,
+                                    "product_id": 3,
+                                    "product_option_id": 9,
+                                    "departure_date": "2026-11-17",
+                                    "return_date": "2026-11-18",
+                                    "available": 24,
+                                    "unit_price": 199000,
+                                    "currency_code": "KRW"
+                                }
+                            ]
+                        },
+                        {
+                            "id": 4,
+                            "title": "Gentle walks in Gangwon (test)",
+                            "region": "gangwon",
+                            "theme": "wellness",
+                            "duration_days": 3,
+                            "summary": "Synthetic travel discovery data; this is not a real booking.",
+                            "itinerary": [
+                                {
+                                    "day": 1,
+                                    "title": {
+                                        "ko": "강원 조용한 산책 1일차",
+                                        "en": "Gentle walks in Gangwon day 1"
+                                    }
+                                },
+                                {
+                                    "day": 2,
+                                    "title": {
+                                        "ko": "강원 조용한 산책 2일차",
+                                        "en": "Gentle walks in Gangwon day 2"
+                                    }
+                                },
+                                {
+                                    "day": 3,
+                                    "title": {
+                                        "ko": "강원 조용한 산책 3일차",
+                                        "en": "Gentle walks in Gangwon day 3"
+                                    }
+                                }
+                            ],
+                            "from_price": 249000,
+                            "currency_code": "KRW",
+                            "image_url": null,
+                            "departures": [
+                                {
+                                    "id": 10,
+                                    "product_id": 4,
+                                    "product_option_id": 10,
+                                    "departure_date": "2026-11-04",
+                                    "return_date": "2026-11-06",
+                                    "available": 24,
+                                    "unit_price": 249000,
+                                    "currency_code": "KRW"
+                                },
+                                {
+                                    "id": 11,
+                                    "product_id": 4,
+                                    "product_option_id": 11,
+                                    "departure_date": "2026-11-11",
+                                    "return_date": "2026-11-13",
+                                    "available": 24,
+                                    "unit_price": 269000,
+                                    "currency_code": "KRW"
+                                },
+                                {
+                                    "id": 12,
+                                    "product_id": 4,
+                                    "product_option_id": 12,
+                                    "departure_date": "2026-11-18",
+                                    "return_date": "2026-11-20",
+                                    "available": 24,
+                                    "unit_price": 289000,
+                                    "currency_code": "KRW"
+                                }
+                            ]
+                        },
+                        {
+                            "id": 5,
+                            "title": "Busan lanes and sea (test)",
+                            "region": "busan",
+                            "theme": "culture",
+                            "duration_days": 2,
+                            "summary": "Synthetic travel discovery data; this is not a real booking.",
+                            "itinerary": [
+                                {
+                                    "day": 1,
+                                    "title": {
+                                        "ko": "부산 골목과 바다 1일차",
+                                        "en": "Busan lanes and sea day 1"
+                                    }
+                                },
+                                {
+                                    "day": 2,
+                                    "title": {
+                                        "ko": "부산 골목과 바다 2일차",
+                                        "en": "Busan lanes and sea day 2"
+                                    }
+                                }
+                            ],
+                            "from_price": 179000,
+                            "currency_code": "KRW",
+                            "image_url": null,
+                            "departures": [
+                                {
+                                    "id": 13,
+                                    "product_id": 5,
+                                    "product_option_id": 13,
+                                    "departure_date": "2026-11-05",
+                                    "return_date": "2026-11-06",
+                                    "available": 24,
+                                    "unit_price": 179000,
+                                    "currency_code": "KRW"
+                                },
+                                {
+                                    "id": 14,
+                                    "product_id": 5,
+                                    "product_option_id": 14,
+                                    "departure_date": "2026-11-12",
+                                    "return_date": "2026-11-13",
+                                    "available": 24,
+                                    "unit_price": 199000,
+                                    "currency_code": "KRW"
+                                },
+                                {
+                                    "id": 15,
+                                    "product_id": 5,
+                                    "product_option_id": 15,
+                                    "departure_date": "2026-11-19",
+                                    "return_date": "2026-11-20",
+                                    "available": 24,
+                                    "unit_price": 219000,
+                                    "currency_code": "KRW"
+                                }
+                            ]
+                        },
+                        {
+                            "id": 6,
+                            "title": "Explore Busan city (test)",
+                            "region": "busan",
+                            "theme": "city",
+                            "duration_days": 3,
+                            "summary": "Synthetic travel discovery data; this is not a real booking.",
+                            "itinerary": [
+                                {
+                                    "day": 1,
+                                    "title": {
+                                        "ko": "부산 도시 탐험 1일차",
+                                        "en": "Explore Busan city day 1"
+                                    }
+                                },
+                                {
+                                    "day": 2,
+                                    "title": {
+                                        "ko": "부산 도시 탐험 2일차",
+                                        "en": "Explore Busan city day 2"
+                                    }
+                                },
+                                {
+                                    "day": 3,
+                                    "title": {
+                                        "ko": "부산 도시 탐험 3일차",
+                                        "en": "Explore Busan city day 3"
+                                    }
+                                }
+                            ],
+                            "from_price": 219000,
+                            "currency_code": "KRW",
+                            "image_url": null,
+                            "departures": [
+                                {
+                                    "id": 16,
+                                    "product_id": 6,
+                                    "product_option_id": 16,
+                                    "departure_date": "2026-11-06",
+                                    "return_date": "2026-11-08",
+                                    "available": 24,
+                                    "unit_price": 219000,
+                                    "currency_code": "KRW"
+                                },
+                                {
+                                    "id": 17,
+                                    "product_id": 6,
+                                    "product_option_id": 17,
+                                    "departure_date": "2026-11-13",
+                                    "return_date": "2026-11-15",
+                                    "available": 24,
+                                    "unit_price": 239000,
+                                    "currency_code": "KRW"
+                                },
+                                {
+                                    "id": 18,
+                                    "product_id": 6,
+                                    "product_option_id": 18,
+                                    "departure_date": "2026-11-20",
+                                    "return_date": "2026-11-22",
+                                    "available": 24,
+                                    "unit_price": 259000,
+                                    "currency_code": "KRW"
+                                }
+                            ]
+                        },
+                        {
+                            "id": 7,
+                            "title": "Seoul palace walks (test)",
+                            "region": "seoul",
+                            "theme": "culture",
+                            "duration_days": 2,
+                            "summary": "Synthetic travel discovery data; this is not a real booking.",
+                            "itinerary": [
+                                {
+                                    "day": 1,
+                                    "title": {
+                                        "ko": "서울 궁궐 산책 1일차",
+                                        "en": "Seoul palace walks day 1"
+                                    }
+                                },
+                                {
+                                    "day": 2,
+                                    "title": {
+                                        "ko": "서울 궁궐 산책 2일차",
+                                        "en": "Seoul palace walks day 2"
+                                    }
+                                }
+                            ],
+                            "from_price": 139000,
+                            "currency_code": "KRW",
+                            "image_url": null,
+                            "departures": [
+                                {
+                                    "id": 19,
+                                    "product_id": 7,
+                                    "product_option_id": 19,
+                                    "departure_date": "2026-11-07",
+                                    "return_date": "2026-11-08",
+                                    "available": 24,
+                                    "unit_price": 139000,
+                                    "currency_code": "KRW"
+                                },
+                                {
+                                    "id": 20,
+                                    "product_id": 7,
+                                    "product_option_id": 20,
+                                    "departure_date": "2026-11-14",
+                                    "return_date": "2026-11-15",
+                                    "available": 24,
+                                    "unit_price": 159000,
+                                    "currency_code": "KRW"
+                                },
+                                {
+                                    "id": 21,
+                                    "product_id": 7,
+                                    "product_option_id": 21,
+                                    "departure_date": "2026-11-21",
+                                    "return_date": "2026-11-22",
+                                    "available": 24,
+                                    "unit_price": 179000,
+                                    "currency_code": "KRW"
+                                }
+                            ]
+                        },
+                        {
+                            "id": 8,
+                            "title": "Discover Seoul in a day (test)",
+                            "region": "seoul",
+                            "theme": "city",
+                            "duration_days": 1,
+                            "summary": "Synthetic travel discovery data; this is not a real booking.",
+                            "itinerary": [
+                                {
+                                    "day": 1,
+                                    "title": {
+                                        "ko": "서울 하루 발견 1일차",
+                                        "en": "Discover Seoul in a day day 1"
+                                    }
+                                }
+                            ],
+                            "from_price": 79000,
+                            "currency_code": "KRW",
+                            "image_url": null,
+                            "departures": [
+                                {
+                                    "id": 22,
+                                    "product_id": 8,
+                                    "product_option_id": 22,
+                                    "departure_date": "2026-11-08",
+                                    "return_date": "2026-11-08",
+                                    "available": 24,
+                                    "unit_price": 79000,
+                                    "currency_code": "KRW"
+                                },
+                                {
+                                    "id": 23,
+                                    "product_id": 8,
+                                    "product_option_id": 23,
+                                    "departure_date": "2026-11-15",
+                                    "return_date": "2026-11-15",
+                                    "available": 24,
+                                    "unit_price": 99000,
+                                    "currency_code": "KRW"
+                                },
+                                {
+                                    "id": 24,
+                                    "product_id": 8,
+                                    "product_option_id": 24,
+                                    "departure_date": "2026-11-22",
+                                    "return_date": "2026-11-22",
+                                    "available": 24,
+                                    "unit_price": 119000,
+                                    "currency_code": "KRW"
+                                }
+                            ]
+                        }
+                    ],
+                    "pagination": {
+                        "current_page": 1,
+                        "per_page": 12,
+                        "from": 1,
+                        "to": 8,
+                        "has_more_pages": false,
+                        "last_page": 1,
+                        "total": 8,
+                        "total_relation": "exact",
+                        "total_is_exact": true,
+                        "result_cap": 10000
+                    }
+                }
+            }
+        },
+        {
+            "method": "GET",
+            "route": "\/api\/modules\/raonslab-travel_lab\/catalog\/16",
+            "status": 200,
+            "response": {
+                "success": true,
+                "message": "Travel catalog loaded.",
+                "data": {
+                    "id": 16,
+                    "title": "Isolated concurrency experiment (test)",
+                    "region": "jeju",
+                    "theme": "nature",
+                    "duration_days": 2,
+                    "summary": "Concurrency experiment without real bookings",
+                    "itinerary": [],
+                    "from_price": 12000,
+                    "currency_code": "KRW",
+                    "image_url": null,
+                    "departures": [
+                        {
+                            "id": 32,
+                            "product_id": 16,
+                            "product_option_id": 32,
+                            "departure_date": "2026-11-23",
+                            "return_date": "2026-11-24",
+                            "available": 2,
+                            "unit_price": 12000,
+                            "currency_code": "KRW"
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "method": "GET",
+            "route": "\/api\/modules\/raonslab-travel_lab\/catalog\/16\/departures",
+            "status": 200,
+            "response": {
+                "success": true,
+                "message": "Travel catalog loaded.",
+                "data": [
+                    {
+                        "id": 32,
+                        "product_id": 16,
+                        "product_option_id": 32,
+                        "departure_date": "2026-11-23",
+                        "return_date": "2026-11-24",
+                        "available": 2,
+                        "unit_price": 12000,
+                        "currency_code": "KRW"
+                    }
+                ]
+            }
+        },
+        {
+            "method": "POST",
+            "route": "\/api\/modules\/raonslab-travel_lab\/cart",
+            "status": 201,
+            "response": {
+                "success": true,
+                "message": "성공적으로 처리되었습니다.",
+                "data": {
+                    "items": [
+                        {
+                            "id": 13,
+                            "departure_id": 32,
+                            "product_id": 16,
+                            "product_option_id": 32,
+                            "quantity": 1,
+                            "remaining_capacity": 2,
+                            "product_name": {
+                                "ko": "격리 동시성 실험 (테스트)",
+                                "en": "Isolated concurrency experiment (test)"
+                            },
+                            "departure_date": "2026-11-23",
+                            "return_date": "2026-11-24",
+                            "unit_price": 12000,
+                            "line_total": 12000,
+                            "available": true,
+                            "unavailable_reason": null
+                        }
+                    ],
+                    "totals": {
+                        "subtotal": 12000,
+                        "subtotal_formatted": "12,000원",
+                        "product_coupon_discount": 0,
+                        "product_coupon_discount_formatted": "0원",
+                        "code_discount": 0,
+                        "code_discount_formatted": "0원",
+                        "order_coupon_discount": 0,
+                        "order_coupon_discount_formatted": "0원",
+                        "total_coupon_discount": 0,
+                        "total_coupon_discount_formatted": "0원",
+                        "total_discount": 0,
+                        "discount_formatted": "0원",
+                        "base_shipping_total": 0,
+                        "extra_shipping_total": 0,
+                        "total_shipping": 0,
+                        "total_shipping_fee": 0,
+                        "shipping_fee_formatted": "0원",
+                        "shipping_discount": 0,
+                        "shipping_discount_formatted": "0원",
+                        "taxable_amount": 0,
+                        "tax_free_amount": 12000,
+                        "vat_amount": 0,
+                        "points_earning": 0,
+                        "total_mileage": 0,
+                        "mileage_formatted": "0P",
+                        "points_used": 0,
+                        "points_used_formatted": "0원",
+                        "payment_amount": 12000,
+                        "payment_amount_formatted": "12,000원",
+                        "final_amount": 12000,
+                        "final_amount_formatted": "12,000원",
+                        "coupon_discount": 0,
+                        "coupon_discount_formatted": "0원",
+                        "order_discount": 0,
+                        "order_discount_formatted": "0원",
+                        "multi_currency": {
+                            "KRW": {
+                                "subtotal": 12000,
+                                "subtotal_formatted": "12,000원",
+                                "product_coupon_discount": 0,
+                                "product_coupon_discount_formatted": "0원",
+                                "code_discount": 0,
+                                "code_discount_formatted": "0원",
+                                "order_coupon_discount": 0,
+                                "order_coupon_discount_formatted": "0원",
+                                "total_discount": 0,
+                                "total_discount_formatted": "0원",
+                                "base_shipping_total": 0,
+                                "base_shipping_total_formatted": "0원",
+                                "extra_shipping_total": 0,
+                                "extra_shipping_total_formatted": "0원",
+                                "total_shipping": 0,
+                                "total_shipping_formatted": "0원",
+                                "shipping_discount": 0,
+                                "shipping_discount_formatted": "0원",
+                                "taxable_amount": 0,
+                                "taxable_amount_formatted": "0원",
+                                "tax_free_amount": 12000,
+                                "tax_free_amount_formatted": "12,000원",
+                                "payment_amount": 12000,
+                                "payment_amount_formatted": "12,000원",
+                                "final_amount": 12000,
+                                "final_amount_formatted": "12,000원",
+                                "_meta": {
+                                    "is_default": true,
+                                    "exchange_rate": null
+                                }
+                            },
+                            "USD": {
+                                "subtotal": 10.200000000000001,
+                                "subtotal_formatted": "$10.20",
+                                "product_coupon_discount": 0,
+                                "product_coupon_discount_formatted": "$0.00",
+                                "code_discount": 0,
+                                "code_discount_formatted": "$0.00",
+                                "order_coupon_discount": 0,
+                                "order_coupon_discount_formatted": "$0.00",
+                                "total_discount": 0,
+                                "total_discount_formatted": "$0.00",
+                                "base_shipping_total": 0,
+                                "base_shipping_total_formatted": "$0.00",
+                                "extra_shipping_total": 0,
+                                "extra_shipping_total_formatted": "$0.00",
+                                "total_shipping": 0,
+                                "total_shipping_formatted": "$0.00",
+                                "shipping_discount": 0,
+                                "shipping_discount_formatted": "$0.00",
+                                "taxable_amount": 0,
+                                "taxable_amount_formatted": "$0.00",
+                                "tax_free_amount": 10.200000000000001,
+                                "tax_free_amount_formatted": "$10.20",
+                                "payment_amount": 10.200000000000001,
+                                "payment_amount_formatted": "$10.20",
+                                "final_amount": 10.200000000000001,
+                                "final_amount_formatted": "$10.20",
+                                "_meta": {
+                                    "is_default": false,
+                                    "exchange_rate": 0.85
+                                }
+                            },
+                            "JPY": {
+                                "subtotal": 1380,
+                                "subtotal_formatted": "¥1,380",
+                                "product_coupon_discount": 0,
+                                "product_coupon_discount_formatted": "¥0",
+                                "code_discount": 0,
+                                "code_discount_formatted": "¥0",
+                                "order_coupon_discount": 0,
+                                "order_coupon_discount_formatted": "¥0",
+                                "total_discount": 0,
+                                "total_discount_formatted": "¥0",
+                                "base_shipping_total": 0,
+                                "base_shipping_total_formatted": "¥0",
+                                "extra_shipping_total": 0,
+                                "extra_shipping_total_formatted": "¥0",
+                                "total_shipping": 0,
+                                "total_shipping_formatted": "¥0",
+                                "shipping_discount": 0,
+                                "shipping_discount_formatted": "¥0",
+                                "taxable_amount": 0,
+                                "taxable_amount_formatted": "¥0",
+                                "tax_free_amount": 1380,
+                                "tax_free_amount_formatted": "¥1,380",
+                                "payment_amount": 1380,
+                                "payment_amount_formatted": "¥1,380",
+                                "final_amount": 1380,
+                                "final_amount_formatted": "¥1,380",
+                                "_meta": {
+                                    "is_default": false,
+                                    "exchange_rate": 115
+                                }
+                            },
+                            "CNY": {
+                                "subtotal": 69.60000000000001,
+                                "subtotal_formatted": "元69.60",
+                                "product_coupon_discount": 0,
+                                "product_coupon_discount_formatted": "元0.00",
+                                "code_discount": 0,
+                                "code_discount_formatted": "元0.00",
+                                "order_coupon_discount": 0,
+                                "order_coupon_discount_formatted": "元0.00",
+                                "total_discount": 0,
+                                "total_discount_formatted": "元0.00",
+                                "base_shipping_total": 0,
+                                "base_shipping_total_formatted": "元0.00",
+                                "extra_shipping_total": 0,
+                                "extra_shipping_total_formatted": "元0.00",
+                                "total_shipping": 0,
+                                "total_shipping_formatted": "元0.00",
+                                "shipping_discount": 0,
+                                "shipping_discount_formatted": "元0.00",
+                                "taxable_amount": 0,
+                                "taxable_amount_formatted": "元0.00",
+                                "tax_free_amount": 69.60000000000001,
+                                "tax_free_amount_formatted": "元69.60",
+                                "payment_amount": 69.60000000000001,
+                                "payment_amount_formatted": "元69.60",
+                                "final_amount": 69.60000000000001,
+                                "final_amount_formatted": "元69.60",
+                                "_meta": {
+                                    "is_default": false,
+                                    "exchange_rate": 5.8
+                                }
+                            },
+                            "EUR": {
+                                "subtotal": 9.36,
+                                "subtotal_formatted": "€9.36",
+                                "product_coupon_discount": 0,
+                                "product_coupon_discount_formatted": "€0.00",
+                                "code_discount": 0,
+                                "code_discount_formatted": "€0.00",
+                                "order_coupon_discount": 0,
+                                "order_coupon_discount_formatted": "€0.00",
+                                "total_discount": 0,
+                                "total_discount_formatted": "€0.00",
+                                "base_shipping_total": 0,
+                                "base_shipping_total_formatted": "€0.00",
+                                "extra_shipping_total": 0,
+                                "extra_shipping_total_formatted": "€0.00",
+                                "total_shipping": 0,
+                                "total_shipping_formatted": "€0.00",
+                                "shipping_discount": 0,
+                                "shipping_discount_formatted": "€0.00",
+                                "taxable_amount": 0,
+                                "taxable_amount_formatted": "€0.00",
+                                "tax_free_amount": 9.36,
+                                "tax_free_amount_formatted": "€9.36",
+                                "payment_amount": 9.36,
+                                "payment_amount_formatted": "€9.36",
+                                "final_amount": 9.36,
+                                "final_amount_formatted": "€9.36",
+                                "_meta": {
+                                    "is_default": false,
+                                    "exchange_rate": 0.78
+                                }
+                            }
+                        }
+                    },
+                    "currency_code": "KRW"
+                }
+            }
+        },
+        {
+            "method": "POST",
+            "route": "\/api\/modules\/raonslab-travel_lab\/inquiries",
+            "status": 201,
+            "response": {
+                "success": true,
+                "message": "성공적으로 처리되었습니다.",
+                "data": {
+                    "id": 9,
+                    "reference": "TL-00000009",
+                    "status": "TEST_INQUIRY",
+                    "allowed_transitions": [
+                        "UNDER_REVIEW",
+                        "DECLINED",
+                        "CANCELLED"
+                    ],
+                    "can_cancel": true,
+                    "first_product_name": "격리 동시성 실험 (테스트)",
+                    "total_quantity": 1,
+                    "product_name": "격리 동시성 실험 (테스트)",
+                    "departure_label": "2026-11-23",
+                    "party_size": 1,
+                    "requester_name": "Synthetic API response member",
+                    "total_amount": "12000.00",
+                    "currency_code": "KRW",
+                    "contact": {
+                        "name": "Synthetic API response member"
+                    },
+                    "items": [
+                        {
+                            "id": 9,
+                            "departure_id": 32,
+                            "product_id": 16,
+                            "product_option_id": 32,
+                            "quantity": 1,
+                            "unit_price": "12000.00",
+                            "line_total": "12000.00",
+                            "product_name": {
+                                "ko": "격리 동시성 실험 (테스트)",
+                                "en": "Isolated concurrency experiment (test)"
+                            },
+                            "departure_date": "2026-11-23"
+                        }
+                    ],
+                    "created_at": "2026-10-09 19:07:16",
+                    "updated_at": "2026-10-09 19:07:16",
+                    "is_owner": true,
+                    "abilities": {
+                        "can_cancel": true
+                    }
+                }
+            }
+        },
+        {
+            "method": "GET",
+            "route": "\/api\/modules\/raonslab-travel_lab\/inquiries\/9",
+            "status": 200,
+            "response": {
+                "success": true,
+                "message": "성공적으로 처리되었습니다.",
+                "data": {
+                    "id": 9,
+                    "reference": "TL-00000009",
+                    "status": "TEST_INQUIRY",
+                    "allowed_transitions": [
+                        "UNDER_REVIEW",
+                        "DECLINED",
+                        "CANCELLED"
+                    ],
+                    "can_cancel": true,
+                    "first_product_name": "격리 동시성 실험 (테스트)",
+                    "total_quantity": 1,
+                    "product_name": "격리 동시성 실험 (테스트)",
+                    "departure_label": "2026-11-23",
+                    "party_size": 1,
+                    "requester_name": "Synthetic API response member",
+                    "total_amount": "12000.00",
+                    "currency_code": "KRW",
+                    "contact": {
+                        "name": "Synthetic API response member"
+                    },
+                    "items": [
+                        {
+                            "id": 9,
+                            "departure_id": 32,
+                            "product_id": 16,
+                            "product_option_id": 32,
+                            "quantity": 1,
+                            "unit_price": "12000.00",
+                            "line_total": "12000.00",
+                            "product_name": {
+                                "ko": "격리 동시성 실험 (테스트)",
+                                "en": "Isolated concurrency experiment (test)"
+                            },
+                            "departure_date": "2026-11-23"
+                        }
+                    ],
+                    "created_at": "2026-10-09 19:07:16",
+                    "updated_at": "2026-10-09 19:07:16",
+                    "is_owner": true,
+                    "abilities": {
+                        "can_cancel": true
+                    }
+                }
+            }
+        },
+        {
+            "method": "GET",
+            "route": "\/api\/modules\/raonslab-travel_lab\/admin\/inquiries\/9",
+            "status": 200,
+            "response": {
+                "success": true,
+                "message": "성공적으로 처리되었습니다.",
+                "data": {
+                    "id": 9,
+                    "reference": "TL-00000009",
+                    "status": "TEST_INQUIRY",
+                    "allowed_transitions": [
+                        "UNDER_REVIEW",
+                        "DECLINED",
+                        "CANCELLED"
+                    ],
+                    "can_cancel": false,
+                    "first_product_name": "격리 동시성 실험 (테스트)",
+                    "total_quantity": 1,
+                    "product_name": "격리 동시성 실험 (테스트)",
+                    "departure_label": "2026-11-23",
+                    "party_size": 1,
+                    "requester_name": "Synthetic API response member",
+                    "total_amount": "12000.00",
+                    "currency_code": "KRW",
+                    "contact": {
+                        "name": "Synthetic API response member"
+                    },
+                    "items": [
+                        {
+                            "id": 9,
+                            "departure_id": 32,
+                            "product_id": 16,
+                            "product_option_id": 32,
+                            "quantity": 1,
+                            "unit_price": "12000.00",
+                            "line_total": "12000.00",
+                            "product_name": {
+                                "ko": "격리 동시성 실험 (테스트)",
+                                "en": "Isolated concurrency experiment (test)"
+                            },
+                            "departure_date": "2026-11-23"
+                        }
+                    ],
+                    "created_at": "2026-10-09 19:07:16",
+                    "updated_at": "2026-10-09 19:07:16",
+                    "is_owner": false,
+                    "abilities": {
+                        "can_update": true,
+                        "can_cancel": false
+                    },
+                    "user_id": 11,
+                    "admin_note": null,
+                    "calculation_snapshot": {
+                        "items": [
+                            {
+                                "product_id": 16,
+                                "product_option_id": 32,
+                                "product_name": "격리 동시성 실험 (테스트)",
+                                "option_name": "합성 출발",
+                                "quantity": 1,
+                                "unit_price": 12000,
+                                "additional_options_total": 0,
+                                "additional_options_snapshot": [],
+                                "subtotal": 12000,
+                                "product_coupon_discount_amount": 0,
+                                "code_discount_amount": 0,
+                                "order_coupon_discount_share": 0,
+                                "total_discount": 0,
+                                "points_used_share": 0,
+                                "points_earning": 0,
+                                "taxable_amount": 0,
+                                "tax_free_amount": 12000,
+                                "final_amount": 12000,
+                                "applied_shipping_policy": {
+                                    "policy_id": 1,
+                                    "policy_name": "트래블 랩 배송 없는 테스트",
+                                    "country_code": "KR",
+                                    "charge_policy": "free",
+                                    "shipping_amount": 0,
+                                    "shipping_amount_formatted": "0원",
+                                    "extra_shipping_amount": 0,
+                                    "extra_shipping_amount_formatted": "0원",
+                                    "total_shipping_amount": 0,
+                                    "total_shipping_amount_formatted": "0원",
+                                    "shipping_discount_amount": 0,
+                                    "shipping_discount_amount_formatted": "0원",
+                                    "standalone_shipping_amount": 0,
+                                    "standalone_shipping_amount_formatted": "0원",
+                                    "hook_overridden": false,
+                                    "policy_snapshot": {
+                                        "country_code": "KR",
+                                        "shipping_method": "pickup",
+                                        "custom_shipping_name": null,
+                                        "currency_code": "KRW",
+                                        "charge_policy": "free",
+                                        "base_fee": 0,
+                                        "free_threshold": null,
+                                        "ranges": null,
+                                        "extra_fee_enabled": false,
+                                        "extra_fee_multiply": false,
+                                        "extra_fee_settings": []
+                                    }
+                                },
+                                "applied_promotions": null,
+                                "coupon_discount_amount": 0,
+                                "order_discount_share": 0,
+                                "multi_currency": {
+                                    "KRW": {
+                                        "unit_price": 12000,
+                                        "unit_price_formatted": "12,000원",
+                                        "additional_options_total": 0,
+                                        "additional_options_total_formatted": "0원",
+                                        "subtotal": 12000,
+                                        "subtotal_formatted": "12,000원",
+                                        "product_coupon_discount_amount": 0,
+                                        "product_coupon_discount_amount_formatted": "0원",
+                                        "code_discount_amount": 0,
+                                        "code_discount_amount_formatted": "0원",
+                                        "order_coupon_discount_share": 0,
+                                        "order_coupon_discount_share_formatted": "0원",
+                                        "points_used_share": 0,
+                                        "points_used_share_formatted": "0원",
+                                        "taxable_amount": 0,
+                                        "taxable_amount_formatted": "0원",
+                                        "tax_free_amount": 12000,
+                                        "tax_free_amount_formatted": "12,000원",
+                                        "final_amount": 12000,
+                                        "final_amount_formatted": "12,000원",
+                                        "_meta": {
+                                            "is_default": true,
+                                            "exchange_rate": null
+                                        }
+                                    },
+                                    "USD": {
+                                        "unit_price": 10.200000000000001,
+                                        "unit_price_formatted": "$10.20",
+                                        "additional_options_total": 0,
+                                        "additional_options_total_formatted": "$0.00",
+                                        "subtotal": 10.200000000000001,
+                                        "subtotal_formatted": "$10.20",
+                                        "product_coupon_discount_amount": 0,
+                                        "product_coupon_discount_amount_formatted": "$0.00",
+                                        "code_discount_amount": 0,
+                                        "code_discount_amount_formatted": "$0.00",
+                                        "order_coupon_discount_share": 0,
+                                        "order_coupon_discount_share_formatted": "$0.00",
+                                        "points_used_share": 0,
+                                        "points_used_share_formatted": "$0.00",
+                                        "taxable_amount": 0,
+                                        "taxable_amount_formatted": "$0.00",
+                                        "tax_free_amount": 10.200000000000001,
+                                        "tax_free_amount_formatted": "$10.20",
+                                        "final_amount": 10.200000000000001,
+                                        "final_amount_formatted": "$10.20",
+                                        "_meta": {
+                                            "is_default": false,
+                                            "exchange_rate": 0.85
+                                        }
+                                    },
+                                    "JPY": {
+                                        "unit_price": 1380,
+                                        "unit_price_formatted": "¥1,380",
+                                        "additional_options_total": 0,
+                                        "additional_options_total_formatted": "¥0",
+                                        "subtotal": 1380,
+                                        "subtotal_formatted": "¥1,380",
+                                        "product_coupon_discount_amount": 0,
+                                        "product_coupon_discount_amount_formatted": "¥0",
+                                        "code_discount_amount": 0,
+                                        "code_discount_amount_formatted": "¥0",
+                                        "order_coupon_discount_share": 0,
+                                        "order_coupon_discount_share_formatted": "¥0",
+                                        "points_used_share": 0,
+                                        "points_used_share_formatted": "¥0",
+                                        "taxable_amount": 0,
+                                        "taxable_amount_formatted": "¥0",
+                                        "tax_free_amount": 1380,
+                                        "tax_free_amount_formatted": "¥1,380",
+                                        "final_amount": 1380,
+                                        "final_amount_formatted": "¥1,380",
+                                        "_meta": {
+                                            "is_default": false,
+                                            "exchange_rate": 115
+                                        }
+                                    },
+                                    "CNY": {
+                                        "unit_price": 69.60000000000001,
+                                        "unit_price_formatted": "元69.60",
+                                        "additional_options_total": 0,
+                                        "additional_options_total_formatted": "元0.00",
+                                        "subtotal": 69.60000000000001,
+                                        "subtotal_formatted": "元69.60",
+                                        "product_coupon_discount_amount": 0,
+                                        "product_coupon_discount_amount_formatted": "元0.00",
+                                        "code_discount_amount": 0,
+                                        "code_discount_amount_formatted": "元0.00",
+                                        "order_coupon_discount_share": 0,
+                                        "order_coupon_discount_share_formatted": "元0.00",
+                                        "points_used_share": 0,
+                                        "points_used_share_formatted": "元0.00",
+                                        "taxable_amount": 0,
+                                        "taxable_amount_formatted": "元0.00",
+                                        "tax_free_amount": 69.60000000000001,
+                                        "tax_free_amount_formatted": "元69.60",
+                                        "final_amount": 69.60000000000001,
+                                        "final_amount_formatted": "元69.60",
+                                        "_meta": {
+                                            "is_default": false,
+                                            "exchange_rate": 5.8
+                                        }
+                                    },
+                                    "EUR": {
+                                        "unit_price": 9.36,
+                                        "unit_price_formatted": "€9.36",
+                                        "additional_options_total": 0,
+                                        "additional_options_total_formatted": "€0.00",
+                                        "subtotal": 9.36,
+                                        "subtotal_formatted": "€9.36",
+                                        "product_coupon_discount_amount": 0,
+                                        "product_coupon_discount_amount_formatted": "€0.00",
+                                        "code_discount_amount": 0,
+                                        "code_discount_amount_formatted": "€0.00",
+                                        "order_coupon_discount_share": 0,
+                                        "order_coupon_discount_share_formatted": "€0.00",
+                                        "points_used_share": 0,
+                                        "points_used_share_formatted": "€0.00",
+                                        "taxable_amount": 0,
+                                        "taxable_amount_formatted": "€0.00",
+                                        "tax_free_amount": 9.36,
+                                        "tax_free_amount_formatted": "€9.36",
+                                        "final_amount": 9.36,
+                                        "final_amount_formatted": "€9.36",
+                                        "_meta": {
+                                            "is_default": false,
+                                            "exchange_rate": 0.78
+                                        }
+                                    }
+                                }
+                            }
+                        ],
+                        "summary": {
+                            "subtotal": 12000,
+                            "subtotal_formatted": "12,000원",
+                            "product_coupon_discount": 0,
+                            "product_coupon_discount_formatted": "0원",
+                            "code_discount": 0,
+                            "code_discount_formatted": "0원",
+                            "order_coupon_discount": 0,
+                            "order_coupon_discount_formatted": "0원",
+                            "total_coupon_discount": 0,
+                            "total_coupon_discount_formatted": "0원",
+                            "total_discount": 0,
+                            "discount_formatted": "0원",
+                            "base_shipping_total": 0,
+                            "extra_shipping_total": 0,
+                            "total_shipping": 0,
+                            "total_shipping_fee": 0,
+                            "shipping_fee_formatted": "0원",
+                            "shipping_discount": 0,
+                            "shipping_discount_formatted": "0원",
+                            "taxable_amount": 0,
+                            "tax_free_amount": 12000,
+                            "vat_amount": 0,
+                            "points_earning": 0,
+                            "total_mileage": 0,
+                            "mileage_formatted": "0P",
+                            "points_used": 0,
+                            "points_used_formatted": "0원",
+                            "payment_amount": 12000,
+                            "payment_amount_formatted": "12,000원",
+                            "final_amount": 12000,
+                            "final_amount_formatted": "12,000원",
+                            "coupon_discount": 0,
+                            "coupon_discount_formatted": "0원",
+                            "order_discount": 0,
+                            "order_discount_formatted": "0원",
+                            "multi_currency": {
+                                "KRW": {
+                                    "subtotal": 12000,
+                                    "subtotal_formatted": "12,000원",
+                                    "product_coupon_discount": 0,
+                                    "product_coupon_discount_formatted": "0원",
+                                    "code_discount": 0,
+                                    "code_discount_formatted": "0원",
+                                    "order_coupon_discount": 0,
+                                    "order_coupon_discount_formatted": "0원",
+                                    "total_discount": 0,
+                                    "total_discount_formatted": "0원",
+                                    "base_shipping_total": 0,
+                                    "base_shipping_total_formatted": "0원",
+                                    "extra_shipping_total": 0,
+                                    "extra_shipping_total_formatted": "0원",
+                                    "total_shipping": 0,
+                                    "total_shipping_formatted": "0원",
+                                    "shipping_discount": 0,
+                                    "shipping_discount_formatted": "0원",
+                                    "taxable_amount": 0,
+                                    "taxable_amount_formatted": "0원",
+                                    "tax_free_amount": 12000,
+                                    "tax_free_amount_formatted": "12,000원",
+                                    "payment_amount": 12000,
+                                    "payment_amount_formatted": "12,000원",
+                                    "final_amount": 12000,
+                                    "final_amount_formatted": "12,000원",
+                                    "_meta": {
+                                        "is_default": true,
+                                        "exchange_rate": null
+                                    }
+                                },
+                                "USD": {
+                                    "subtotal": 10.200000000000001,
+                                    "subtotal_formatted": "$10.20",
+                                    "product_coupon_discount": 0,
+                                    "product_coupon_discount_formatted": "$0.00",
+                                    "code_discount": 0,
+                                    "code_discount_formatted": "$0.00",
+                                    "order_coupon_discount": 0,
+                                    "order_coupon_discount_formatted": "$0.00",
+                                    "total_discount": 0,
+                                    "total_discount_formatted": "$0.00",
+                                    "base_shipping_total": 0,
+                                    "base_shipping_total_formatted": "$0.00",
+                                    "extra_shipping_total": 0,
+                                    "extra_shipping_total_formatted": "$0.00",
+                                    "total_shipping": 0,
+                                    "total_shipping_formatted": "$0.00",
+                                    "shipping_discount": 0,
+                                    "shipping_discount_formatted": "$0.00",
+                                    "taxable_amount": 0,
+                                    "taxable_amount_formatted": "$0.00",
+                                    "tax_free_amount": 10.200000000000001,
+                                    "tax_free_amount_formatted": "$10.20",
+                                    "payment_amount": 10.200000000000001,
+                                    "payment_amount_formatted": "$10.20",
+                                    "final_amount": 10.200000000000001,
+                                    "final_amount_formatted": "$10.20",
+                                    "_meta": {
+                                        "is_default": false,
+                                        "exchange_rate": 0.85
+                                    }
+                                },
+                                "JPY": {
+                                    "subtotal": 1380,
+                                    "subtotal_formatted": "¥1,380",
+                                    "product_coupon_discount": 0,
+                                    "product_coupon_discount_formatted": "¥0",
+                                    "code_discount": 0,
+                                    "code_discount_formatted": "¥0",
+                                    "order_coupon_discount": 0,
+                                    "order_coupon_discount_formatted": "¥0",
+                                    "total_discount": 0,
+                                    "total_discount_formatted": "¥0",
+                                    "base_shipping_total": 0,
+                                    "base_shipping_total_formatted": "¥0",
+                                    "extra_shipping_total": 0,
+                                    "extra_shipping_total_formatted": "¥0",
+                                    "total_shipping": 0,
+                                    "total_shipping_formatted": "¥0",
+                                    "shipping_discount": 0,
+                                    "shipping_discount_formatted": "¥0",
+                                    "taxable_amount": 0,
+                                    "taxable_amount_formatted": "¥0",
+                                    "tax_free_amount": 1380,
+                                    "tax_free_amount_formatted": "¥1,380",
+                                    "payment_amount": 1380,
+                                    "payment_amount_formatted": "¥1,380",
+                                    "final_amount": 1380,
+                                    "final_amount_formatted": "¥1,380",
+                                    "_meta": {
+                                        "is_default": false,
+                                        "exchange_rate": 115
+                                    }
+                                },
+                                "CNY": {
+                                    "subtotal": 69.60000000000001,
+                                    "subtotal_formatted": "元69.60",
+                                    "product_coupon_discount": 0,
+                                    "product_coupon_discount_formatted": "元0.00",
+                                    "code_discount": 0,
+                                    "code_discount_formatted": "元0.00",
+                                    "order_coupon_discount": 0,
+                                    "order_coupon_discount_formatted": "元0.00",
+                                    "total_discount": 0,
+                                    "total_discount_formatted": "元0.00",
+                                    "base_shipping_total": 0,
+                                    "base_shipping_total_formatted": "元0.00",
+                                    "extra_shipping_total": 0,
+                                    "extra_shipping_total_formatted": "元0.00",
+                                    "total_shipping": 0,
+                                    "total_shipping_formatted": "元0.00",
+                                    "shipping_discount": 0,
+                                    "shipping_discount_formatted": "元0.00",
+                                    "taxable_amount": 0,
+                                    "taxable_amount_formatted": "元0.00",
+                                    "tax_free_amount": 69.60000000000001,
+                                    "tax_free_amount_formatted": "元69.60",
+                                    "payment_amount": 69.60000000000001,
+                                    "payment_amount_formatted": "元69.60",
+                                    "final_amount": 69.60000000000001,
+                                    "final_amount_formatted": "元69.60",
+                                    "_meta": {
+                                        "is_default": false,
+                                        "exchange_rate": 5.8
+                                    }
+                                },
+                                "EUR": {
+                                    "subtotal": 9.36,
+                                    "subtotal_formatted": "€9.36",
+                                    "product_coupon_discount": 0,
+                                    "product_coupon_discount_formatted": "€0.00",
+                                    "code_discount": 0,
+                                    "code_discount_formatted": "€0.00",
+                                    "order_coupon_discount": 0,
+                                    "order_coupon_discount_formatted": "€0.00",
+                                    "total_discount": 0,
+                                    "total_discount_formatted": "€0.00",
+                                    "base_shipping_total": 0,
+                                    "base_shipping_total_formatted": "€0.00",
+                                    "extra_shipping_total": 0,
+                                    "extra_shipping_total_formatted": "€0.00",
+                                    "total_shipping": 0,
+                                    "total_shipping_formatted": "€0.00",
+                                    "shipping_discount": 0,
+                                    "shipping_discount_formatted": "€0.00",
+                                    "taxable_amount": 0,
+                                    "taxable_amount_formatted": "€0.00",
+                                    "tax_free_amount": 9.36,
+                                    "tax_free_amount_formatted": "€9.36",
+                                    "payment_amount": 9.36,
+                                    "payment_amount_formatted": "€9.36",
+                                    "final_amount": 9.36,
+                                    "final_amount_formatted": "€9.36",
+                                    "_meta": {
+                                        "is_default": false,
+                                        "exchange_rate": 0.78
+                                    }
+                                }
+                            }
+                        },
+                        "promotions": {
+                            "coupon_issue_ids": [],
+                            "item_coupons": [],
+                            "discount_code": null,
+                            "product_promotions": {
+                                "coupons": [],
+                                "discount_codes": [],
+                                "events": []
+                            },
+                            "order_promotions": {
+                                "coupons": [],
+                                "discount_codes": [],
+                                "events": []
+                            }
+                        },
+                        "validation_errors": [],
+                        "currency_code": "KRW",
+                        "shipping_country": "KR"
+                    },
+                    "events": [
+                        {
+                            "id": 16,
+                            "actor_id": 11,
+                            "from_status": null,
+                            "to_status": "TEST_INQUIRY",
+                            "note": null,
+                            "created_at": "2026-10-09T10:07:16+00:00"
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "method": "GET",
+            "route": "\/api\/modules\/raonslab-travel_lab\/support\/notices",
+            "status": 200,
+            "response": {
+                "success": true,
+                "message": "Notices loaded.",
+                "data": {
+                    "data": [
+                        {
+                            "id": 1,
+                            "channel": "notices",
+                            "title": "[LAB] 여행 연구소 테스트 운영 안내",
+                            "author_name": "Travel Lab",
+                            "is_notice": true,
+                            "is_secret": false,
+                            "is_mine": false,
+                            "answers_count": 0,
+                            "created_at": "2026-10-09 18:43:20",
+                            "updated_at": "2026-10-09 18:43:20"
+                        },
+                        {
+                            "id": 3,
+                            "channel": "notices",
+                            "title": "[LAB] 테스트 데이터 정리 일정 안내",
+                            "author_name": "Travel Lab",
+                            "is_notice": false,
+                            "is_secret": false,
+                            "is_mine": false,
+                            "answers_count": 0,
+                            "created_at": "2026-10-09 18:43:21",
+                            "updated_at": "2026-10-09 18:43:21"
+                        },
+                        {
+                            "id": 2,
+                            "channel": "notices",
+                            "title": "[LAB] 결제·환불 기능은 동작하지 않습니다",
+                            "author_name": "Travel Lab",
+                            "is_notice": false,
+                            "is_secret": false,
+                            "is_mine": false,
+                            "answers_count": 0,
+                            "created_at": "2026-10-09 18:43:20",
+                            "updated_at": "2026-10-09 18:43:20"
+                        }
+                    ],
+                    "meta": {
+                        "current_page": 1,
+                        "last_page": 1,
+                        "per_page": 15,
+                        "total": 3
+                    }
+                }
+            }
+        },
+        {
+            "method": "GET",
+            "route": "\/api\/modules\/raonslab-travel_lab\/support\/faqs",
+            "status": 200,
+            "response": {
+                "success": true,
+                "message": "FAQs loaded.",
+                "data": {
+                    "data": [
+                        {
+                            "id": 7,
+                            "channel": "faqs",
+                            "title": "문의하면 메일이나 문자로 연락이 오나요?",
+                            "author_name": "Travel Lab",
+                            "is_notice": false,
+                            "is_secret": false,
+                            "is_mine": false,
+                            "answers_count": 0,
+                            "created_at": "2026-10-09 18:43:21",
+                            "updated_at": "2026-10-09 18:43:21"
+                        },
+                        {
+                            "id": 6,
+                            "channel": "faqs",
+                            "title": "1:1 문의는 누가 볼 수 있나요?",
+                            "author_name": "Travel Lab",
+                            "is_notice": false,
+                            "is_secret": false,
+                            "is_mine": false,
+                            "answers_count": 0,
+                            "created_at": "2026-10-09 18:43:21",
+                            "updated_at": "2026-10-09 18:43:21"
+                        },
+                        {
+                            "id": 5,
+                            "channel": "faqs",
+                            "title": "표시 금액은 어디에서 오나요?",
+                            "author_name": "Travel Lab",
+                            "is_notice": false,
+                            "is_secret": false,
+                            "is_mine": false,
+                            "answers_count": 0,
+                            "created_at": "2026-10-09 18:43:21",
+                            "updated_at": "2026-10-09 18:43:21"
+                        },
+                        {
+                            "id": 4,
+                            "channel": "faqs",
+                            "title": "출발일과 인원은 어떻게 고르나요?",
+                            "author_name": "Travel Lab",
+                            "is_notice": false,
+                            "is_secret": false,
+                            "is_mine": false,
+                            "answers_count": 0,
+                            "created_at": "2026-10-09 18:43:21",
+                            "updated_at": "2026-10-09 18:43:21"
+                        }
+                    ],
+                    "meta": {
+                        "current_page": 1,
+                        "last_page": 1,
+                        "per_page": 15,
+                        "total": 4
+                    }
+                }
+            }
+        },
+        {
+            "method": "GET",
+            "route": "\/api\/modules\/raonslab-travel_lab\/support\/questions",
+            "status": 200,
+            "response": {
+                "success": true,
+                "message": "문의 목록을 불러왔습니다.",
+                "data": {
+                    "data": [],
+                    "meta": {
+                        "current_page": 1,
+                        "last_page": 1,
+                        "per_page": 15,
+                        "total": 0
+                    }
+                }
+            }
+        },
+        {
+            "method": "POST",
+            "route": "\/api\/modules\/raonslab-travel_lab\/inquiries\/9\/cancel",
+            "status": 200,
+            "response": {
+                "success": true,
+                "message": "성공적으로 처리되었습니다.",
+                "data": {
+                    "id": 9,
+                    "reference": "TL-00000009",
+                    "status": "CANCELLED",
+                    "allowed_transitions": [],
+                    "can_cancel": false,
+                    "first_product_name": "격리 동시성 실험 (테스트)",
+                    "total_quantity": 1,
+                    "product_name": "격리 동시성 실험 (테스트)",
+                    "departure_label": "2026-11-23",
+                    "party_size": 1,
+                    "requester_name": "Synthetic API response member",
+                    "total_amount": "12000.00",
+                    "currency_code": "KRW",
+                    "contact": {
+                        "name": "Synthetic API response member"
+                    },
+                    "items": [
+                        {
+                            "id": 9,
+                            "departure_id": 32,
+                            "product_id": 16,
+                            "product_option_id": 32,
+                            "quantity": 1,
+                            "unit_price": "12000.00",
+                            "line_total": "12000.00",
+                            "product_name": {
+                                "ko": "격리 동시성 실험 (테스트)",
+                                "en": "Isolated concurrency experiment (test)"
+                            },
+                            "departure_date": "2026-11-23"
+                        }
+                    ],
+                    "created_at": "2026-10-09 19:07:16",
+                    "updated_at": "2026-10-09 19:07:16",
+                    "is_owner": true,
+                    "abilities": {
+                        "can_cancel": false
+                    }
+                }
+            }
+        }
+    ]
+}

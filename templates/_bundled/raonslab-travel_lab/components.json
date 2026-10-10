@@ -1,0 +1,606 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "templateId": "raonslab-travel_lab",
+  "version": "0.1.0",
+  "components": {
+    "basic": [
+      {
+        "name": "Div",
+        "type": "basic",
+        "description": "div 래퍼",
+        "path": "src/components/basic/Div.tsx",
+        "props": {
+          "className": {
+            "type": "string",
+            "required": false,
+            "default": "",
+            "description": "사용자 정의 클래스"
+          }
+        }
+      },
+      {
+        "name": "Span",
+        "type": "basic",
+        "description": "span 래퍼",
+        "path": "src/components/basic/Span.tsx",
+        "props": {
+          "className": {
+            "type": "string",
+            "required": false,
+            "default": "",
+            "description": "사용자 정의 클래스"
+          }
+        }
+      },
+      {
+        "name": "P",
+        "type": "basic",
+        "description": "문단(p) 래퍼",
+        "path": "src/components/basic/P.tsx",
+        "props": {
+          "className": {
+            "type": "string",
+            "required": false,
+            "default": "",
+            "description": "사용자 정의 클래스"
+          }
+        }
+      },
+      {
+        "name": "H1",
+        "type": "basic",
+        "description": "제목 h1",
+        "path": "src/components/basic/H1.tsx",
+        "props": {
+          "className": {
+            "type": "string",
+            "required": false,
+            "default": "",
+            "description": "사용자 정의 클래스"
+          }
+        }
+      },
+      {
+        "name": "H2",
+        "type": "basic",
+        "description": "제목 h2",
+        "path": "src/components/basic/H2.tsx",
+        "props": {
+          "className": {
+            "type": "string",
+            "required": false,
+            "default": "",
+            "description": "사용자 정의 클래스"
+          }
+        }
+      },
+      {
+        "name": "H3",
+        "type": "basic",
+        "description": "제목 h3",
+        "path": "src/components/basic/H3.tsx",
+        "props": {
+          "className": {
+            "type": "string",
+            "required": false,
+            "default": "",
+            "description": "사용자 정의 클래스"
+          }
+        }
+      },
+      {
+        "name": "H4",
+        "type": "basic",
+        "description": "제목 h4",
+        "path": "src/components/basic/H4.tsx",
+        "props": {
+          "className": {
+            "type": "string",
+            "required": false,
+            "default": "",
+            "description": "사용자 정의 클래스"
+          }
+        }
+      },
+      {
+        "name": "A",
+        "type": "basic",
+        "description": "외부·전체 이동 링크 (앱 내 이동은 Button + navigate)",
+        "path": "src/components/basic/A.tsx",
+        "props": {
+          "href": {
+            "type": "string",
+            "required": false,
+            "description": "링크 주소"
+          },
+          "className": {
+            "type": "string",
+            "required": false,
+            "default": "",
+            "description": "사용자 정의 클래스"
+          }
+        }
+      },
+      {
+        "name": "Button",
+        "type": "basic",
+        "description": "버튼 — 레이아웃에서는 type=\"button\" 명시",
+        "path": "src/components/basic/Button.tsx",
+        "props": {
+          "type": {
+            "type": "string",
+            "required": false,
+            "default": "button",
+            "description": "button | submit"
+          },
+          "disabled": {
+            "type": "boolean",
+            "required": false,
+            "description": "비활성"
+          },
+          "className": {
+            "type": "string",
+            "required": false,
+            "default": "",
+            "description": "사용자 정의 클래스"
+          }
+        }
+      },
+      {
+        "name": "Img",
+        "type": "basic",
+        "description": "이미지 — 이미지 값 객체는 url 만 해석",
+        "path": "src/components/basic/Img.tsx",
+        "props": {
+          "src": {
+            "type": "string",
+            "required": false,
+            "description": "이미지 주소"
+          },
+          "alt": {
+            "type": "string",
+            "required": false,
+            "description": "대체 텍스트"
+          },
+          "className": {
+            "type": "string",
+            "required": false,
+            "default": "",
+            "description": "사용자 정의 클래스"
+          }
+        }
+      },
+      {
+        "name": "Input",
+        "type": "basic",
+        "description": "입력 필드 (IME 조합 안전)",
+        "path": "src/components/basic/Input.tsx",
+        "bindingType": "checkable",
+        "props": {
+          "type": {
+            "type": "string",
+            "required": false,
+            "default": "text",
+            "description": "입력 종류"
+          },
+          "name": {
+            "type": "string",
+            "required": false,
+            "description": "자동 바인딩 키"
+          },
+          "value": {
+            "type": "string",
+            "required": false,
+            "description": "제어 값"
+          },
+          "className": {
+            "type": "string",
+            "required": false,
+            "default": "",
+            "description": "사용자 정의 클래스"
+          }
+        }
+      },
+      {
+        "name": "Select",
+        "type": "basic",
+        "description": "커스텀 드롭다운 — value 제어 전용",
+        "path": "src/components/basic/Select.tsx",
+        "props": {
+          "emptyOptionLabel": {
+            "type": "string",
+            "required": false,
+            "description": "맨 앞 '전체' 선택지 라벨 (value='')"
+          },
+          "options": {
+            "type": "array",
+            "required": false,
+            "description": "{ value, label } 배열"
+          },
+          "value": {
+            "type": "string",
+            "required": false,
+            "description": "선택 값"
+          },
+          "className": {
+            "type": "string",
+            "required": false,
+            "default": "",
+            "description": "사용자 정의 클래스"
+          }
+        }
+      },
+      {
+        "name": "Option",
+        "type": "basic",
+        "description": "option 래퍼",
+        "path": "src/components/basic/Option.tsx",
+        "props": {
+          "className": {
+            "type": "string",
+            "required": false,
+            "default": "",
+            "description": "사용자 정의 클래스"
+          }
+        }
+      },
+      {
+        "name": "Textarea",
+        "type": "basic",
+        "description": "여러 줄 입력 (IME 조합 안전)",
+        "path": "src/components/basic/Textarea.tsx",
+        "props": {
+          "value": {
+            "type": "string",
+            "required": false,
+            "description": "제어 값"
+          },
+          "className": {
+            "type": "string",
+            "required": false,
+            "default": "",
+            "description": "사용자 정의 클래스"
+          }
+        }
+      },
+      {
+        "name": "Label",
+        "type": "basic",
+        "description": "label 래퍼",
+        "path": "src/components/basic/Label.tsx",
+        "props": {
+          "htmlFor": {
+            "type": "string",
+            "required": false,
+            "description": "연결할 입력 id"
+          },
+          "className": {
+            "type": "string",
+            "required": false,
+            "default": "",
+            "description": "사용자 정의 클래스"
+          }
+        }
+      },
+      {
+        "name": "Form",
+        "type": "basic",
+        "description": "form 래퍼 — dataKey 로 자동 바인딩",
+        "path": "src/components/basic/Form.tsx",
+        "props": {
+          "className": {
+            "type": "string",
+            "required": false,
+            "default": "",
+            "description": "사용자 정의 클래스"
+          }
+        }
+      },
+      {
+        "name": "Icon",
+        "type": "basic",
+        "description": "Font Awesome 아이콘 (동봉 자산)",
+        "path": "src/components/basic/Icon.tsx",
+        "props": {
+          "name": {
+            "type": "string",
+            "required": true,
+            "description": "아이콘 이름 (fa- 접두사 생략)"
+          },
+          "className": {
+            "type": "string",
+            "required": false,
+            "default": "",
+            "description": "사용자 정의 클래스"
+          }
+        }
+      },
+      {
+        "name": "Ul",
+        "type": "basic",
+        "description": "ul 래퍼",
+        "path": "src/components/basic/Ul.tsx",
+        "props": {
+          "className": {
+            "type": "string",
+            "required": false,
+            "default": "",
+            "description": "사용자 정의 클래스"
+          }
+        }
+      },
+      {
+        "name": "Li",
+        "type": "basic",
+        "description": "li 래퍼",
+        "path": "src/components/basic/Li.tsx",
+        "props": {
+          "className": {
+            "type": "string",
+            "required": false,
+            "default": "",
+            "description": "사용자 정의 클래스"
+          }
+        }
+      },
+      {
+        "name": "Nav",
+        "type": "basic",
+        "description": "nav 래퍼",
+        "path": "src/components/basic/Nav.tsx",
+        "props": {
+          "className": {
+            "type": "string",
+            "required": false,
+            "default": "",
+            "description": "사용자 정의 클래스"
+          }
+        }
+      },
+      {
+        "name": "Section",
+        "type": "basic",
+        "description": "section 래퍼",
+        "path": "src/components/basic/Section.tsx",
+        "props": {
+          "className": {
+            "type": "string",
+            "required": false,
+            "default": "",
+            "description": "사용자 정의 클래스"
+          }
+        }
+      },
+      {
+        "name": "Hr",
+        "type": "basic",
+        "description": "구분선",
+        "path": "src/components/basic/Hr.tsx",
+        "props": {
+          "className": {
+            "type": "string",
+            "required": false,
+            "default": "",
+            "description": "사용자 정의 클래스"
+          }
+        }
+      },
+      {
+        "name": "Svg",
+        "type": "basic",
+        "description": "svg 래퍼",
+        "path": "src/components/basic/Svg.tsx",
+        "props": {
+          "className": {
+            "type": "string",
+            "required": false,
+            "default": "",
+            "description": "사용자 정의 클래스"
+          }
+        }
+      }
+    ],
+    "composite": [
+      {
+        "name": "Toast",
+        "type": "composite",
+        "description": "전역 토스트 호스트 (_global.toasts)",
+        "path": "src/components/composite/Toast.tsx",
+        "props": {
+          "toasts": {
+            "type": "array",
+            "required": false,
+            "description": "토스트 목록"
+          },
+          "position": {
+            "type": "string",
+            "required": false,
+            "description": "표시 위치"
+          },
+          "duration": {
+            "type": "number",
+            "required": false,
+            "description": "자동 닫힘(ms)"
+          },
+          "className": {
+            "type": "string",
+            "required": false,
+            "default": "",
+            "description": "사용자 정의 클래스"
+          }
+        }
+      },
+      {
+        "name": "Modal",
+        "type": "composite",
+        "description": "모달 — modals 섹션 + openModal/closeModal",
+        "path": "src/components/composite/Modal.tsx",
+        "props": {
+          "title": {
+            "type": "string",
+            "required": false,
+            "description": "제목"
+          },
+          "className": {
+            "type": "string",
+            "required": false,
+            "default": "",
+            "description": "사용자 정의 클래스"
+          }
+        }
+      },
+      {
+        "name": "Pagination",
+        "type": "composite",
+        "description": "페이지 이동 — last_page 가 null 이면 이전/다음만",
+        "path": "src/components/composite/Pagination.tsx",
+        "props": {
+          "currentPage": {
+            "type": "number",
+            "required": true,
+            "description": "현재 페이지"
+          },
+          "totalPages": {
+            "type": "number",
+            "required": false,
+            "description": "전체 페이지 (null 허용)"
+          },
+          "hasMorePages": {
+            "type": "boolean",
+            "required": false,
+            "description": "다음 페이지 존재"
+          },
+          "className": {
+            "type": "string",
+            "required": false,
+            "default": "",
+            "description": "사용자 정의 클래스"
+          }
+        }
+      },
+      {
+        "name": "ScenicArt",
+        "type": "composite",
+        "description": "RAON 원작 풍경 일러스트 (인라인 SVG, 외부 이미지 없음)",
+        "path": "src/components/composite/ScenicArt.tsx",
+        "props": {
+          "variant": {
+            "type": "string",
+            "required": false,
+            "description": "coast | mountain | city | island | forest | desert | snow | lake"
+          },
+          "seed": {
+            "type": "string",
+            "required": false,
+            "description": "variant 미지정 시 결정적 선택 시드"
+          },
+          "title": {
+            "type": "string",
+            "required": false,
+            "description": "접근성 레이블 (비우면 장식)"
+          },
+          "className": {
+            "type": "string",
+            "required": false,
+            "default": "",
+            "description": "사용자 정의 클래스"
+          }
+        }
+      },
+      {
+        "name": "PriceTag",
+        "type": "composite",
+        "description": "통화 인지 금액 표기 (Intl.NumberFormat)",
+        "path": "src/components/composite/PriceTag.tsx",
+        "props": {
+          "amount": {
+            "type": "number",
+            "required": false,
+            "description": "금액"
+          },
+          "currency": {
+            "type": "string",
+            "required": false,
+            "description": "ISO 4217 통화 코드"
+          },
+          "prefix": {
+            "type": "string",
+            "required": false,
+            "description": "앞 문구"
+          },
+          "suffix": {
+            "type": "string",
+            "required": false,
+            "description": "뒤 문구"
+          },
+          "emptyText": {
+            "type": "string",
+            "required": false,
+            "description": "금액 없음 표기"
+          },
+          "amountClassName": {
+            "type": "string",
+            "required": false,
+            "description": "금액 클래스"
+          },
+          "className": {
+            "type": "string",
+            "required": false,
+            "default": "",
+            "description": "사용자 정의 클래스"
+          }
+        }
+      },
+      {
+        "name": "StatusBadge",
+        "type": "composite",
+        "description": "상담 요청(테스트) 상태 배지",
+        "path": "src/components/composite/StatusBadge.tsx",
+        "props": {
+          "status": {
+            "type": "string",
+            "required": false,
+            "description": "TEST_INQUIRY | UNDER_REVIEW | TEST_ACCEPTED | DECLINED | CANCELLED"
+          },
+          "labelPrefix": {
+            "type": "string",
+            "required": false,
+            "default": "travel.status",
+            "description": "다국어 키 접두사"
+          },
+          "className": {
+            "type": "string",
+            "required": false,
+            "default": "",
+            "description": "사용자 정의 클래스"
+          }
+        }
+      },
+      {
+        "name": "PageBody",
+        "type": "composite",
+        "description": "native 페이지 본문을 서식 전용으로 그린다 (text=이스케이프·줄바꿈 보존, html=DOMPurify 서식 태그만·속성 0개·링크/이미지/미디어 제거)",
+        "path": "src/components/composite/PageBody.tsx",
+        "props": {
+          "content": {
+            "type": "string",
+            "required": false,
+            "description": "서버 응답의 현재 로케일 본문"
+          },
+          "contentMode": {
+            "type": "string",
+            "required": false,
+            "description": "text | html (그 밖의 값은 text 로 취급). 정제 정책은 props 로 넓힐 수 없다"
+          },
+          "className": {
+            "type": "string",
+            "required": false,
+            "default": "",
+            "description": "사용자 정의 클래스"
+          }
+        }
+      }
+    ],
+    "layout": []
+  }
+}

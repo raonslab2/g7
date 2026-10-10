@@ -1,0 +1,2177 @@
+{
+    "version": "1.0.0",
+    "layout_name": "travel/home",
+    "extends": "_user_base",
+    "meta": {
+        "title": "$t:travel.meta.home_title",
+        "description": "$t:travel.meta.home_description"
+    },
+    "initLocal": {
+        "heroQ": "",
+        "heroRegion": ""
+    },
+    "data_sources": [
+        {
+            "id": "facets",
+            "label_key": "$t:editor.data_source.facets",
+            "type": "api",
+            "endpoint": "/api/modules/raonslab-travel_lab/facets",
+            "method": "GET",
+            "auto_fetch": true,
+            "loading_strategy": "progressive"
+        },
+        {
+            "id": "featured_trips",
+            "label_key": "$t:editor.data_source.featured_trips",
+            "type": "api",
+            "endpoint": "/api/modules/raonslab-travel_lab/catalog",
+            "method": "GET",
+            "auto_fetch": true,
+            "loading_strategy": "progressive",
+            "params": {
+                "sort": "recommended",
+                "per_page": 6
+            }
+        },
+        {
+            "id": "departing_trips",
+            "label_key": "$t:editor.data_source.departing_trips",
+            "type": "api",
+            "endpoint": "/api/modules/raonslab-travel_lab/catalog",
+            "method": "GET",
+            "auto_fetch": true,
+            "loading_strategy": "progressive",
+            "params": {
+                "sort": "departure_asc",
+                "per_page": 3
+            }
+        },
+        {
+            "id": "campaigns",
+            "label_key": "$t:editor.data_source.campaigns",
+            "type": "api",
+            "endpoint": "/api/modules/raonslab-travel_lab/campaigns",
+            "method": "GET",
+            "auto_fetch": true,
+            "auth_mode": "optional",
+            "loading_strategy": "progressive"
+        }
+    ],
+    "slots": {
+        "content": [
+            {
+                "comment": "히어로 — 원작 풍경 일러스트 + 검색",
+                "type": "basic",
+                "name": "Section",
+                "props": {
+                    "className": "relative overflow-hidden",
+                    "data-testid": "home-hero"
+                },
+                "children": [
+                    {
+                        "type": "composite",
+                        "name": "ScenicArt",
+                        "props": {
+                            "variant": "coast",
+                            "className": "absolute inset-0 h-full w-full"
+                        }
+                    },
+                    {
+                        "type": "basic",
+                        "name": "Div",
+                        "props": {
+                            "className": "absolute inset-0 bg-gradient-to-b from-white/10 via-white/30 to-sand-50"
+                        }
+                    },
+                    {
+                        "type": "basic",
+                        "name": "Div",
+                        "props": {
+                            "className": "relative mx-auto w-full max-w-6xl px-4 md:px-6 flex flex-col gap-6 pb-12 pt-14 md:pb-20 md:pt-24"
+                        },
+                        "children": [
+                            {
+                                "type": "basic",
+                                "name": "Span",
+                                "props": {
+                                    "className": "w-fit rounded-full bg-white/80 px-3 py-1 text-xs font-bold text-raon-700 shadow-sm"
+                                },
+                                "text": "$t:travel.home.eyebrow"
+                            },
+                            {
+                                "type": "basic",
+                                "name": "H1",
+                                "props": {
+                                    "className": "max-w-2xl text-3xl font-black leading-tight tracking-tight text-ink-900 md:text-5xl"
+                                },
+                                "text": "$t:travel.home.title"
+                            },
+                            {
+                                "type": "basic",
+                                "name": "P",
+                                "props": {
+                                    "className": "max-w-xl text-base text-ink-700 md:text-lg"
+                                },
+                                "text": "$t:travel.home.subtitle"
+                            },
+                            {
+                                "type": "basic",
+                                "name": "Div",
+                                "props": {
+                                    "className": "rounded-3xl bg-white/95 p-3 shadow-xl ring-1 ring-slate-200 backdrop-blur md:p-4"
+                                },
+                                "children": [
+                                    {
+                                        "type": "basic",
+                                        "name": "Div",
+                                        "props": {
+                                            "className": "grid gap-2 md:grid-cols-[1.6fr_1fr_auto]"
+                                        },
+                                        "children": [
+                                            {
+                                                "type": "basic",
+                                                "name": "Div",
+                                                "props": {
+                                                    "className": "relative"
+                                                },
+                                                "children": [
+                                                    {
+                                                        "type": "basic",
+                                                        "name": "Div",
+                                                        "props": {
+                                                            "className": "pointer-events-none absolute inset-y-0 left-4 flex items-center text-slate-400"
+                                                        },
+                                                        "children": [
+                                                            {
+                                                                "type": "basic",
+                                                                "name": "Icon",
+                                                                "props": {
+                                                                    "name": "search",
+                                                                    "className": "text-sm"
+                                                                }
+                                                            }
+                                                        ]
+                                                    },
+                                                    {
+                                                        "type": "basic",
+                                                        "name": "Input",
+                                                        "props": {
+                                                            "type": "search",
+                                                            "name": "heroQ",
+                                                            "value": "{{_local.heroQ ?? ''}}",
+                                                            "placeholder": "$t:travel.home.search_placeholder",
+                                                            "className": "w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm text-ink-900 placeholder:text-slate-400 focus:border-raon-500 focus:outline-none focus:ring-2 focus:ring-raon-100 pl-10",
+                                                            "aria-label": "$t:travel.home.search_label",
+                                                            "data-testid": "hero-search-input"
+                                                        },
+                                                        "actions": [
+                                                            {
+                                                                "type": "change",
+                                                                "handler": "setState",
+                                                                "params": {
+                                                                    "target": "local",
+                                                                    "heroQ": "{{$event.target.value}}"
+                                                                }
+                                                            },
+                                                            {
+                                                                "type": "keydown",
+                                                                "key": "Enter",
+                                                                "handler": "navigate",
+                                                                "comment": "audit:allow layout-list-context-navigate-merge-query 홈 → 새 검색 목록 진입 (승계할 목록 상태 없음)",
+                                                                "params": {
+                                                                    "path": "/travel/search",
+                                                                    "query": {
+                                                                        "q": "{{_local.heroQ ?? ''}}",
+                                                                        "region": "{{_local.heroRegion ?? ''}}"
+                                                                    }
+                                                                }
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "type": "basic",
+                                                "name": "Select",
+                                                "props": {
+                                                    "value": "{{_local.heroRegion ?? ''}}",
+                                                    "options": "{{(facets?.data?.region ?? []).map(r => (typeof r === 'object' ? r : { value: r, label: $t('travel.facets.region.' + r) })).map(r => ({ value: String(r.value ?? ''), label: String(r.label ?? r.value ?? '') }))}}",
+                                                    "emptyOptionLabel": "$t:travel.search.all_regions",
+                                                    "className": "w-full",
+                                                    "aria-label": "$t:travel.home.region_label",
+                                                    "data-testid": "hero-region"
+                                                },
+                                                "actions": [
+                                                    {
+                                                        "type": "change",
+                                                        "handler": "setState",
+                                                        "params": {
+                                                            "target": "local",
+                                                            "heroRegion": "{{$event.target.value}}"
+                                                        }
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "type": "basic",
+                                                "name": "Button",
+                                                "props": {
+                                                    "type": "button",
+                                                    "className": "inline-flex items-center justify-center gap-2 rounded-xl bg-raon-600 px-5 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-raon-700 disabled:cursor-not-allowed disabled:opacity-50 w-full md:w-auto",
+                                                    "data-testid": "hero-search-button"
+                                                },
+                                                "children": [
+                                                    {
+                                                        "type": "basic",
+                                                        "name": "Icon",
+                                                        "props": {
+                                                            "name": "search",
+                                                            "className": "text-sm"
+                                                        }
+                                                    },
+                                                    {
+                                                        "type": "basic",
+                                                        "name": "Span",
+                                                        "text": "$t:travel.home.search_button"
+                                                    }
+                                                ],
+                                                "actions": [
+                                                    {
+                                                        "type": "click",
+                                                        "handler": "navigate",
+                                                        "comment": "audit:allow layout-list-context-navigate-merge-query 홈 → 새 검색 목록 진입 (승계할 목록 상태 없음)",
+                                                        "params": {
+                                                            "path": "/travel/search",
+                                                            "query": {
+                                                                "q": "{{_local.heroQ ?? ''}}",
+                                                                "region": "{{_local.heroRegion ?? ''}}"
+                                                            }
+                                                        }
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "comment": "지역 바로가기 — /facets",
+                "type": "basic",
+                "name": "Section",
+                "props": {
+                    "className": "mx-auto w-full max-w-6xl px-4 md:px-6 mt-10"
+                },
+                "children": [
+                    {
+                        "type": "basic",
+                        "name": "Div",
+                        "props": {
+                            "className": "mb-4 flex items-end justify-between"
+                        },
+                        "children": [
+                            {
+                                "type": "basic",
+                                "name": "H2",
+                                "props": {
+                                    "className": "text-xl font-bold tracking-tight text-ink-900 md:text-2xl"
+                                },
+                                "text": "$t:travel.home.destinations_title"
+                            },
+                            {
+                                "type": "basic",
+                                "name": "Button",
+                                "props": {
+                                    "type": "button",
+                                    "className": "inline-flex items-center justify-center gap-1.5 rounded-lg px-3 py-2 text-sm font-medium text-ink-700 transition hover:bg-raon-50 hover:text-raon-700"
+                                },
+                                "children": [
+                                    {
+                                        "type": "basic",
+                                        "name": "Span",
+                                        "text": "$t:travel.home.view_all"
+                                    },
+                                    {
+                                        "type": "basic",
+                                        "name": "Icon",
+                                        "props": {
+                                            "name": "chevron-right",
+                                            "className": "text-xs"
+                                        }
+                                    }
+                                ],
+                                "actions": [
+                                    {
+                                        "type": "click",
+                                        "handler": "navigate",
+                                        "params": {
+                                            "path": "/travel/search"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "basic",
+                        "name": "Div",
+                        "props": {
+                            "className": "flex gap-2 overflow-x-auto pb-2 scrollbar-none"
+                        },
+                        "children": [
+                            {
+                                "type": "basic",
+                                "name": "Div",
+                                "if": "{{facets === undefined && !_dataSourceErrors?.facets}}",
+                                "props": {
+                                    "className": "h-10 w-24 shrink-0 animate-pulse rounded-full bg-slate-200"
+                                }
+                            },
+                            {
+                                "type": "basic",
+                                "name": "Div",
+                                "if": "{{facets === undefined && !_dataSourceErrors?.facets}}",
+                                "props": {
+                                    "className": "h-10 w-28 shrink-0 animate-pulse rounded-full bg-slate-200"
+                                }
+                            },
+                            {
+                                "type": "basic",
+                                "name": "Div",
+                                "if": "{{facets === undefined && !_dataSourceErrors?.facets}}",
+                                "props": {
+                                    "className": "h-10 w-20 shrink-0 animate-pulse rounded-full bg-slate-200"
+                                }
+                            },
+                            {
+                                "type": "basic",
+                                "name": "Button",
+                                "iteration": {
+                                    "source": "{{(facets?.data?.region ?? []).map(r => (typeof r === 'object' ? r : { value: r, label: $t('travel.facets.region.' + r) }))}}",
+                                    "item_var": "region"
+                                },
+                                "props": {
+                                    "type": "button",
+                                    "className": "inline-flex shrink-0 items-center gap-1.5 rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-ink-700 shadow-sm hover:border-raon-400 hover:text-raon-700",
+                                    "data-testid": "region-chip"
+                                },
+                                "children": [
+                                    {
+                                        "type": "basic",
+                                        "name": "Icon",
+                                        "props": {
+                                            "name": "map-marker-alt",
+                                            "className": "text-xs text-raon-500"
+                                        }
+                                    },
+                                    {
+                                        "type": "basic",
+                                        "name": "Span",
+                                        "text": "{{region.label ?? region.value ?? ''}}"
+                                    },
+                                    {
+                                        "type": "basic",
+                                        "name": "Span",
+                                        "if": "{{region.count !== undefined && region.count !== null}}",
+                                        "props": {
+                                            "className": "text-xs text-ink-500"
+                                        },
+                                        "text": "{{region.count ?? ''}}"
+                                    }
+                                ],
+                                "actions": [
+                                    {
+                                        "type": "click",
+                                        "handler": "navigate",
+                                        "comment": "audit:allow layout-list-context-navigate-merge-query 홈 → 지역 검색 목록 진입",
+                                        "params": {
+                                            "path": "/travel/search",
+                                            "query": {
+                                                "region": "{{region.value ?? ''}}"
+                                            }
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "basic",
+                                "name": "Button",
+                                "if": "{{!facets && !!_dataSourceErrors?.facets}}",
+                                "props": {
+                                    "type": "button",
+                                    "className": "inline-flex shrink-0 items-center gap-1.5 rounded-full border border-rose-200 bg-rose-50 px-4 py-2 text-sm font-semibold text-rose-700",
+                                    "data-testid": "facets-retry"
+                                },
+                                "children": [
+                                    {
+                                        "type": "basic",
+                                        "name": "Icon",
+                                        "props": {
+                                            "name": "rotate-left",
+                                            "className": "text-xs"
+                                        }
+                                    },
+                                    {
+                                        "type": "basic",
+                                        "name": "Span",
+                                        "text": "$t:travel.home.facets_retry"
+                                    }
+                                ],
+                                "actions": [
+                                    {
+                                        "type": "click",
+                                        "handler": "refetchDataSource",
+                                        "params": {
+                                            "dataSourceId": "facets"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "comment": "테마 카드",
+                "type": "basic",
+                "name": "Section",
+                "if": "{{(facets?.data?.theme ?? []).length > 0}}",
+                "props": {
+                    "className": "mx-auto w-full max-w-6xl px-4 md:px-6 mt-10"
+                },
+                "children": [
+                    {
+                        "type": "basic",
+                        "name": "H2",
+                        "props": {
+                            "className": "text-xl font-bold tracking-tight text-ink-900 md:text-2xl mb-4"
+                        },
+                        "text": "$t:travel.home.themes_title"
+                    },
+                    {
+                        "type": "basic",
+                        "name": "Div",
+                        "props": {
+                            "className": "grid grid-cols-2 gap-3 md:grid-cols-4"
+                        },
+                        "children": [
+                            {
+                                "type": "basic",
+                                "name": "Div",
+                                "iteration": {
+                                    "source": "{{(facets?.data?.theme ?? []).map(t => (typeof t === 'object' ? t : { value: t, label: $t('travel.facets.theme.' + t) }))}}",
+                                    "item_var": "theme",
+                                    "index_var": "idx"
+                                },
+                                "children": [
+                                    {
+                                        "type": "basic",
+                                        "name": "Button",
+                                        "props": {
+                                            "type": "button",
+                                            "className": "group relative block aspect-[4/3] w-full overflow-hidden rounded-2xl shadow-sm",
+                                            "data-testid": "theme-card"
+                                        },
+                                        "children": [
+                                            {
+                                                "type": "composite",
+                                                "name": "ScenicArt",
+                                                "props": {
+                                                    "variant": "{{theme.scenic ?? ['coast', 'mountain', 'city', 'island', 'forest', 'desert', 'snow', 'lake'][idx % 8]}}",
+                                                    "className": "absolute inset-0 h-full w-full transition duration-500 group-hover:scale-105"
+                                                }
+                                            },
+                                            {
+                                                "type": "basic",
+                                                "name": "Div",
+                                                "props": {
+                                                    "className": "absolute inset-0 bg-gradient-to-t from-ink-900/60 via-ink-900/10 to-transparent"
+                                                }
+                                            },
+                                            {
+                                                "type": "basic",
+                                                "name": "Div",
+                                                "props": {
+                                                    "className": "absolute inset-x-0 bottom-0 p-3 text-left"
+                                                },
+                                                "children": [
+                                                    {
+                                                        "type": "basic",
+                                                        "name": "Span",
+                                                        "props": {
+                                                            "className": "block text-base font-bold text-white drop-shadow"
+                                                        },
+                                                        "text": "{{theme.label ?? theme.value ?? ''}}"
+                                                    },
+                                                    {
+                                                        "type": "basic",
+                                                        "name": "Span",
+                                                        "if": "{{!!theme.description}}",
+                                                        "props": {
+                                                            "className": "block line-clamp-1 text-xs text-white/85"
+                                                        },
+                                                        "text": "{{theme.description ?? ''}}"
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "actions": [
+                                            {
+                                                "type": "click",
+                                                "handler": "navigate",
+                                                "comment": "audit:allow layout-list-context-navigate-merge-query 홈 → 테마 검색 목록 진입",
+                                                "params": {
+                                                    "path": "/travel/search",
+                                                    "query": {
+                                                        "theme": "{{theme.value ?? ''}}"
+                                                    }
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "type": "basic",
+                "name": "Section",
+                "props": {
+                    "className": "mx-auto w-full max-w-6xl px-4 md:px-6 mt-12",
+                    "data-testid": "featured-section"
+                },
+                "children": [
+                    {
+                        "type": "basic",
+                        "name": "Div",
+                        "props": {
+                            "className": "mb-4 flex items-end justify-between gap-4"
+                        },
+                        "children": [
+                            {
+                                "type": "basic",
+                                "name": "Div",
+                                "children": [
+                                    {
+                                        "type": "basic",
+                                        "name": "H2",
+                                        "props": {
+                                            "className": "text-xl font-bold tracking-tight text-ink-900 md:text-2xl"
+                                        },
+                                        "text": "$t:travel.home.featured_title"
+                                    },
+                                    {
+                                        "type": "basic",
+                                        "name": "P",
+                                        "props": {
+                                            "className": "mt-1 text-sm text-ink-500"
+                                        },
+                                        "text": "$t:travel.home.featured_desc"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "basic",
+                                "name": "Button",
+                                "props": {
+                                    "type": "button",
+                                    "className": "inline-flex items-center justify-center gap-1.5 rounded-lg px-3 py-2 text-sm font-medium text-ink-700 transition hover:bg-raon-50 hover:text-raon-700"
+                                },
+                                "children": [
+                                    {
+                                        "type": "basic",
+                                        "name": "Span",
+                                        "text": "$t:travel.home.view_all"
+                                    },
+                                    {
+                                        "type": "basic",
+                                        "name": "Icon",
+                                        "props": {
+                                            "name": "chevron-right",
+                                            "className": "text-xs"
+                                        }
+                                    }
+                                ],
+                                "actions": [
+                                    {
+                                        "type": "click",
+                                        "handler": "navigate",
+                                        "comment": "audit:allow layout-list-context-navigate-merge-query 홈 → 정렬 지정 목록 진입",
+                                        "params": {
+                                            "path": "/travel/search",
+                                            "query": {
+                                                "sort": "recommended"
+                                            }
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "comment": "featured_trips 로딩 스켈레톤",
+                        "type": "basic",
+                        "name": "Div",
+                        "if": "{{featured_trips === undefined && !_dataSourceErrors?.featured_trips}}",
+                        "props": {
+                            "className": "grid gap-4 sm:grid-cols-2 lg:grid-cols-3",
+                            "aria-busy": "true",
+                            "aria-live": "polite",
+                            "data-testid": "featured_trips-loading"
+                        },
+                        "children": [
+                            {
+                                "type": "basic",
+                                "name": "Div",
+                                "props": {
+                                    "className": "overflow-hidden rounded-2xl border border-slate-200 bg-white"
+                                },
+                                "children": [
+                                    {
+                                        "type": "basic",
+                                        "name": "Div",
+                                        "props": {
+                                            "className": "aspect-[4/3] animate-pulse bg-slate-100"
+                                        }
+                                    },
+                                    {
+                                        "type": "basic",
+                                        "name": "Div",
+                                        "props": {
+                                            "className": "space-y-2 p-4"
+                                        },
+                                        "children": [
+                                            {
+                                                "type": "basic",
+                                                "name": "Div",
+                                                "props": {
+                                                    "className": "h-4 w-2/3 animate-pulse rounded bg-slate-100"
+                                                }
+                                            },
+                                            {
+                                                "type": "basic",
+                                                "name": "Div",
+                                                "props": {
+                                                    "className": "h-3 w-full animate-pulse rounded bg-slate-100"
+                                                }
+                                            },
+                                            {
+                                                "type": "basic",
+                                                "name": "Div",
+                                                "props": {
+                                                    "className": "h-3 w-1/2 animate-pulse rounded bg-slate-100"
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "basic",
+                                "name": "Div",
+                                "props": {
+                                    "className": "overflow-hidden rounded-2xl border border-slate-200 bg-white"
+                                },
+                                "children": [
+                                    {
+                                        "type": "basic",
+                                        "name": "Div",
+                                        "props": {
+                                            "className": "aspect-[4/3] animate-pulse bg-slate-100"
+                                        }
+                                    },
+                                    {
+                                        "type": "basic",
+                                        "name": "Div",
+                                        "props": {
+                                            "className": "space-y-2 p-4"
+                                        },
+                                        "children": [
+                                            {
+                                                "type": "basic",
+                                                "name": "Div",
+                                                "props": {
+                                                    "className": "h-4 w-2/3 animate-pulse rounded bg-slate-100"
+                                                }
+                                            },
+                                            {
+                                                "type": "basic",
+                                                "name": "Div",
+                                                "props": {
+                                                    "className": "h-3 w-full animate-pulse rounded bg-slate-100"
+                                                }
+                                            },
+                                            {
+                                                "type": "basic",
+                                                "name": "Div",
+                                                "props": {
+                                                    "className": "h-3 w-1/2 animate-pulse rounded bg-slate-100"
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "basic",
+                                "name": "Div",
+                                "props": {
+                                    "className": "overflow-hidden rounded-2xl border border-slate-200 bg-white"
+                                },
+                                "children": [
+                                    {
+                                        "type": "basic",
+                                        "name": "Div",
+                                        "props": {
+                                            "className": "aspect-[4/3] animate-pulse bg-slate-100"
+                                        }
+                                    },
+                                    {
+                                        "type": "basic",
+                                        "name": "Div",
+                                        "props": {
+                                            "className": "space-y-2 p-4"
+                                        },
+                                        "children": [
+                                            {
+                                                "type": "basic",
+                                                "name": "Div",
+                                                "props": {
+                                                    "className": "h-4 w-2/3 animate-pulse rounded bg-slate-100"
+                                                }
+                                            },
+                                            {
+                                                "type": "basic",
+                                                "name": "Div",
+                                                "props": {
+                                                    "className": "h-3 w-full animate-pulse rounded bg-slate-100"
+                                                }
+                                            },
+                                            {
+                                                "type": "basic",
+                                                "name": "Div",
+                                                "props": {
+                                                    "className": "h-3 w-1/2 animate-pulse rounded bg-slate-100"
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "comment": "featured_trips 오류 + 다시 시도",
+                        "type": "basic",
+                        "name": "Div",
+                        "if": "{{!featured_trips && !!_dataSourceErrors?.featured_trips}}",
+                        "props": {
+                            "className": "flex flex-col items-center gap-3 rounded-2xl border border-rose-200 bg-rose-50 px-6 py-10 text-center",
+                            "role": "alert",
+                            "data-testid": "featured_trips-error"
+                        },
+                        "children": [
+                            {
+                                "type": "basic",
+                                "name": "Icon",
+                                "props": {
+                                    "name": "exclamation-triangle",
+                                    "className": "text-2xl text-rose-500"
+                                }
+                            },
+                            {
+                                "type": "basic",
+                                "name": "P",
+                                "props": {
+                                    "className": "text-sm font-semibold text-rose-700"
+                                },
+                                "text": "$t:travel.home.trips_error"
+                            },
+                            {
+                                "type": "basic",
+                                "name": "P",
+                                "props": {
+                                    "className": "text-xs text-rose-600"
+                                },
+                                "text": "$t:travel.common.error_hint"
+                            },
+                            {
+                                "type": "basic",
+                                "name": "Button",
+                                "props": {
+                                    "type": "button",
+                                    "className": "inline-flex items-center gap-2 rounded-xl bg-white px-4 py-2 text-sm font-semibold text-rose-700 ring-1 ring-rose-200 hover:bg-rose-100",
+                                    "data-testid": "featured_trips-retry"
+                                },
+                                "children": [
+                                    {
+                                        "type": "basic",
+                                        "name": "Icon",
+                                        "props": {
+                                            "name": "rotate-left",
+                                            "className": "text-sm"
+                                        }
+                                    },
+                                    {
+                                        "type": "basic",
+                                        "name": "Span",
+                                        "text": "$t:travel.common.retry"
+                                    }
+                                ],
+                                "actions": [
+                                    {
+                                        "type": "click",
+                                        "handler": "refetchDataSource",
+                                        "params": {
+                                            "dataSourceId": "featured_trips"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "basic",
+                        "name": "Div",
+                        "if": "{{!!featured_trips && (featured_trips?.data?.data ?? []).length === 0}}",
+                        "props": {
+                            "className": "flex flex-col items-center gap-3 rounded-2xl border border-dashed border-slate-300 bg-white px-6 py-12 text-center"
+                        },
+                        "children": [
+                            {
+                                "type": "basic",
+                                "name": "Div",
+                                "props": {
+                                    "className": "flex h-14 w-14 items-center justify-center rounded-full bg-raon-50 text-raon-600"
+                                },
+                                "children": [
+                                    {
+                                        "type": "basic",
+                                        "name": "Icon",
+                                        "props": {
+                                            "name": "map",
+                                            "className": "text-2xl"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "basic",
+                                "name": "P",
+                                "props": {
+                                    "className": "text-base font-semibold text-ink-900"
+                                },
+                                "text": "$t:travel.home.trips_empty_title"
+                            },
+                            {
+                                "type": "basic",
+                                "name": "P",
+                                "props": {
+                                    "className": "max-w-md text-sm text-ink-500"
+                                },
+                                "text": "$t:travel.home.trips_empty_desc"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "basic",
+                        "name": "Div",
+                        "if": "{{(featured_trips?.data?.data ?? []).length > 0}}",
+                        "props": {
+                            "className": "grid gap-4 sm:grid-cols-2 lg:grid-cols-3"
+                        },
+                        "children": [
+                            {
+                                "type": "basic",
+                                "name": "Div",
+                                "iteration": {
+                                    "source": "{{featured_trips?.data?.data ?? []}}",
+                                    "item_var": "trip"
+                                },
+                                "children": [
+                                    {
+                                        "type": "basic",
+                                        "name": "Button",
+                                        "props": {
+                                            "type": "button",
+                                            "className": "group flex h-full w-full flex-col overflow-hidden text-left rounded-2xl border border-slate-200 bg-white shadow-sm transition hover:-translate-y-0.5 hover:border-raon-300 hover:shadow-md",
+                                            "data-testid": "trip-card",
+                                            "aria-label": "{{trip.title ?? ''}}"
+                                        },
+                                        "children": [
+                                            {
+                                                "type": "basic",
+                                                "name": "Div",
+                                                "props": {
+                                                    "className": "relative aspect-[4/3] w-full overflow-hidden bg-raon-50"
+                                                },
+                                                "children": [
+                                                    {
+                                                        "type": "basic",
+                                                        "name": "Img",
+                                                        "if": "{{!!trip.image_url}}",
+                                                        "props": {
+                                                            "src": "{{trip.image_url}}",
+                                                            "alt": "{{trip.title ?? ''}}",
+                                                            "loading": "lazy",
+                                                            "className": "h-full w-full object-cover transition duration-500 group-hover:scale-105"
+                                                        }
+                                                    },
+                                                    {
+                                                        "type": "composite",
+                                                        "name": "ScenicArt",
+                                                        "if": "{{!trip.image_url}}",
+                                                        "props": {
+                                                            "seed": "{{trip.id}}",
+                                                            "variant": "{{trip.scenic ?? null}}",
+                                                            "className": "h-full w-full transition duration-500 group-hover:scale-105"
+                                                        }
+                                                    },
+                                                    {
+                                                        "type": "basic",
+                                                        "name": "Div",
+                                                        "props": {
+                                                            "className": "absolute left-3 top-3 flex flex-wrap gap-1.5"
+                                                        },
+                                                        "children": [
+                                                            {
+                                                                "type": "basic",
+                                                                "name": "Span",
+                                                                "if": "{{!!(trip.region_label ?? trip.region)}}",
+                                                                "props": {
+                                                                    "className": "rounded-full bg-white/90 px-2.5 py-1 text-xs font-semibold text-raon-700 shadow-sm"
+                                                                },
+                                                                "text": "{{trip.region_label ?? $t('travel.facets.region.' + (trip.region ?? ''))}}"
+                                                            },
+                                                            {
+                                                                "type": "basic",
+                                                                "name": "Span",
+                                                                "if": "{{!!(trip.theme_label ?? trip.theme)}}",
+                                                                "props": {
+                                                                    "className": "rounded-full bg-dusk-50/95 px-2.5 py-1 text-xs font-semibold text-dusk-600 shadow-sm"
+                                                                },
+                                                                "text": "{{trip.theme_label ?? $t('travel.facets.theme.' + (trip.theme ?? ''))}}"
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "type": "basic",
+                                                "name": "Div",
+                                                "props": {
+                                                    "className": "flex flex-1 flex-col gap-2 p-4"
+                                                },
+                                                "children": [
+                                                    {
+                                                        "type": "basic",
+                                                        "name": "Span",
+                                                        "if": "{{!!trip.duration_days}}",
+                                                        "props": {
+                                                            "className": "text-xs font-medium text-ink-500"
+                                                        },
+                                                        "text": "$t:travel.card.duration|days={{trip.duration_days ?? '-'}}"
+                                                    },
+                                                    {
+                                                        "type": "basic",
+                                                        "name": "H3",
+                                                        "props": {
+                                                            "className": "line-clamp-2 text-base font-bold leading-snug text-ink-900 group-hover:text-raon-700"
+                                                        },
+                                                        "text": "{{trip.title ?? ''}}"
+                                                    },
+                                                    {
+                                                        "type": "basic",
+                                                        "name": "P",
+                                                        "props": {
+                                                            "className": "line-clamp-2 text-sm text-ink-500"
+                                                        },
+                                                        "text": "{{trip.summary ?? ''}}"
+                                                    },
+                                                    {
+                                                        "type": "basic",
+                                                        "name": "Div",
+                                                        "props": {
+                                                            "className": "mt-auto flex items-end justify-between gap-2 pt-2"
+                                                        },
+                                                        "children": [
+                                                            {
+                                                                "type": "basic",
+                                                                "name": "Div",
+                                                                "props": {
+                                                                    "className": "flex flex-col"
+                                                                },
+                                                                "children": [
+                                                                    {
+                                                                        "type": "basic",
+                                                                        "name": "Span",
+                                                                        "if": "{{!!trip.departures?.[0]?.departure_date}}",
+                                                                        "props": {
+                                                                            "className": "text-xs text-ink-500"
+                                                                        },
+                                                                        "text": "$t:travel.card.next_departure|date={{trip.departures?.[0]?.departure_date ?? ''}}"
+                                                                    }
+                                                                ]
+                                                            },
+                                                            {
+                                                                "type": "composite",
+                                                                "name": "PriceTag",
+                                                                "props": {
+                                                                    "amount": "{{trip.from_price}}",
+                                                                    "currency": "{{trip.currency_code}}",
+                                                                    "suffix": "$t:travel.card.price_from",
+                                                                    "className": "text-right",
+                                                                    "amountClassName": "text-lg font-extrabold text-raon-700"
+                                                                }
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "actions": [
+                                            {
+                                                "type": "click",
+                                                "handler": "navigate",
+                                                "params": {
+                                                    "path": "/travel/products/{{trip.id}}"
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "type": "basic",
+                "name": "Section",
+                "if": "{{campaigns === undefined || !!_dataSourceErrors?.campaigns || (campaigns?.data?.items ?? []).length > 0}}",
+                "props": {
+                    "className": "mx-auto w-full max-w-6xl px-4 md:px-6 mt-12",
+                    "data-testid": "home-campaigns",
+                    "aria-labelledby": "home-campaigns-heading"
+                },
+                "children": [
+                    {
+                        "type": "basic",
+                        "name": "Div",
+                        "props": {
+                            "className": "mb-4 flex flex-wrap items-end justify-between gap-3"
+                        },
+                        "children": [
+                            {
+                                "type": "basic",
+                                "name": "Div",
+                                "children": [
+                                    {
+                                        "type": "basic",
+                                        "name": "H2",
+                                        "props": {
+                                            "id": "home-campaigns-heading",
+                                            "className": "text-xl font-bold tracking-tight text-ink-900 md:text-2xl"
+                                        },
+                                        "text": "$t:travel.home.campaigns_title"
+                                    },
+                                    {
+                                        "type": "basic",
+                                        "name": "P",
+                                        "props": {
+                                            "className": "mt-1 text-sm text-ink-500"
+                                        },
+                                        "text": "$t:travel.home.campaigns_desc"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "basic",
+                                "name": "Button",
+                                "props": {
+                                    "type": "button",
+                                    "className": "inline-flex items-center justify-center gap-1.5 rounded-lg px-3 py-2 text-sm font-medium text-ink-700 transition hover:bg-raon-50 hover:text-raon-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-raon-400",
+                                    "data-testid": "home-campaigns-all"
+                                },
+                                "children": [
+                                    {
+                                        "type": "basic",
+                                        "name": "Span",
+                                        "text": "$t:travel.home.campaigns_all"
+                                    },
+                                    {
+                                        "type": "basic",
+                                        "name": "Icon",
+                                        "props": {
+                                            "name": "chevron-right",
+                                            "className": "text-xs",
+                                            "aria-hidden": "true"
+                                        }
+                                    }
+                                ],
+                                "actions": [
+                                    {
+                                        "type": "click",
+                                        "handler": "navigate",
+                                        "params": {
+                                            "path": "/travel/campaigns"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "basic",
+                        "name": "Div",
+                        "props": {
+                            "className": "grid gap-4 md:grid-cols-2",
+                            "aria-busy": "true",
+                            "aria-live": "polite",
+                            "data-testid": "home-campaigns-loading"
+                        },
+                        "children": [
+                            {
+                                "type": "basic",
+                                "name": "Div",
+                                "props": {
+                                    "className": "overflow-hidden rounded-3xl border border-slate-200 bg-white"
+                                },
+                                "children": [
+                                    {
+                                        "type": "basic",
+                                        "name": "Div",
+                                        "props": {
+                                            "className": "h-36 animate-pulse bg-slate-100"
+                                        }
+                                    },
+                                    {
+                                        "type": "basic",
+                                        "name": "Div",
+                                        "props": {
+                                            "className": "space-y-2 p-5"
+                                        },
+                                        "children": [
+                                            {
+                                                "type": "basic",
+                                                "name": "Div",
+                                                "props": {
+                                                    "className": "h-4 w-2/3 animate-pulse rounded bg-slate-100"
+                                                }
+                                            },
+                                            {
+                                                "type": "basic",
+                                                "name": "Div",
+                                                "props": {
+                                                    "className": "h-3 w-full animate-pulse rounded bg-slate-100"
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "basic",
+                                "name": "Div",
+                                "props": {
+                                    "className": "overflow-hidden rounded-3xl border border-slate-200 bg-white"
+                                },
+                                "children": [
+                                    {
+                                        "type": "basic",
+                                        "name": "Div",
+                                        "props": {
+                                            "className": "h-36 animate-pulse bg-slate-100"
+                                        }
+                                    },
+                                    {
+                                        "type": "basic",
+                                        "name": "Div",
+                                        "props": {
+                                            "className": "space-y-2 p-5"
+                                        },
+                                        "children": [
+                                            {
+                                                "type": "basic",
+                                                "name": "Div",
+                                                "props": {
+                                                    "className": "h-4 w-2/3 animate-pulse rounded bg-slate-100"
+                                                }
+                                            },
+                                            {
+                                                "type": "basic",
+                                                "name": "Div",
+                                                "props": {
+                                                    "className": "h-3 w-full animate-pulse rounded bg-slate-100"
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ],
+                        "if": "{{campaigns === undefined && !_dataSourceErrors?.campaigns}}"
+                    },
+                    {
+                        "type": "basic",
+                        "name": "Div",
+                        "props": {
+                            "className": "flex flex-col items-center gap-3 rounded-2xl border border-rose-200 bg-rose-50 px-6 py-10 text-center",
+                            "role": "alert",
+                            "data-testid": "home-campaigns-error"
+                        },
+                        "children": [
+                            {
+                                "type": "basic",
+                                "name": "Icon",
+                                "props": {
+                                    "name": "exclamation-triangle",
+                                    "className": "text-2xl text-rose-500",
+                                    "aria-hidden": "true"
+                                }
+                            },
+                            {
+                                "type": "basic",
+                                "name": "P",
+                                "props": {
+                                    "className": "text-sm font-semibold text-rose-700"
+                                },
+                                "text": "$t:travel.home.campaigns_error"
+                            },
+                            {
+                                "type": "basic",
+                                "name": "P",
+                                "props": {
+                                    "className": "text-xs text-rose-600"
+                                },
+                                "text": "$t:travel.common.error_hint"
+                            },
+                            {
+                                "type": "basic",
+                                "name": "Button",
+                                "props": {
+                                    "type": "button",
+                                    "className": "inline-flex items-center gap-2 rounded-xl bg-white px-4 py-2 text-sm font-semibold text-rose-700 ring-1 ring-rose-200 hover:bg-rose-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-rose-400",
+                                    "data-testid": "home-campaigns-retry"
+                                },
+                                "children": [
+                                    {
+                                        "type": "basic",
+                                        "name": "Icon",
+                                        "props": {
+                                            "name": "rotate-left",
+                                            "className": "text-sm",
+                                            "aria-hidden": "true"
+                                        }
+                                    },
+                                    {
+                                        "type": "basic",
+                                        "name": "Span",
+                                        "text": "$t:travel.common.retry"
+                                    }
+                                ],
+                                "actions": [
+                                    {
+                                        "type": "click",
+                                        "handler": "refetchDataSource",
+                                        "params": {
+                                            "dataSourceId": "campaigns"
+                                        }
+                                    }
+                                ]
+                            }
+                        ],
+                        "if": "{{!campaigns && !!_dataSourceErrors?.campaigns}}"
+                    },
+                    {
+                        "type": "basic",
+                        "name": "Div",
+                        "if": "{{(campaigns?.data?.items ?? []).length > 0}}",
+                        "props": {
+                            "className": "grid gap-4 md:grid-cols-2",
+                            "data-testid": "home-campaigns-results"
+                        },
+                        "children": [
+                            {
+                                "type": "basic",
+                                "name": "Div",
+                                "props": {
+                                    "className": "h-full"
+                                },
+                                "children": [
+                                    {
+                                        "type": "basic",
+                                        "name": "Button",
+                                        "props": {
+                                            "type": "button",
+                                            "className": "group flex h-full w-full flex-col overflow-hidden rounded-3xl border border-slate-200 bg-white text-left shadow-sm transition hover:-translate-y-0.5 hover:border-raon-300 hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-raon-400 focus-visible:ring-offset-2",
+                                            "data-testid": "campaign-card",
+                                            "aria-label": "{{campaign.title ?? ''}}"
+                                        },
+                                        "children": [
+                                            {
+                                                "type": "basic",
+                                                "name": "Div",
+                                                "props": {
+                                                    "className": "relative h-36 w-full overflow-hidden bg-raon-50 md:h-44"
+                                                },
+                                                "children": [
+                                                    {
+                                                        "type": "composite",
+                                                        "name": "ScenicArt",
+                                                        "props": {
+                                                            "variant": "{{campaign.art_variant ?? null}}",
+                                                            "seed": "{{campaign.slug ?? ''}}",
+                                                            "className": "h-full w-full transition duration-500 group-hover:scale-105"
+                                                        }
+                                                    },
+                                                    {
+                                                        "type": "basic",
+                                                        "name": "Span",
+                                                        "props": {
+                                                            "className": "absolute left-3 top-3 rounded-full bg-white/90 px-2.5 py-1 text-xs font-semibold text-raon-700 shadow-sm"
+                                                        },
+                                                        "text": "{{$t('travel.facets.theme.' + (campaign.theme ?? ''))}}"
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "type": "basic",
+                                                "name": "Div",
+                                                "props": {
+                                                    "className": "flex flex-1 flex-col gap-2 p-5"
+                                                },
+                                                "children": [
+                                                    {
+                                                        "type": "basic",
+                                                        "name": "Span",
+                                                        "props": {
+                                                            "className": "text-xs font-bold uppercase tracking-wide text-dusk-600"
+                                                        },
+                                                        "text": "$t:travel.campaigns.eyebrow"
+                                                    },
+                                                    {
+                                                        "type": "basic",
+                                                        "name": "H3",
+                                                        "props": {
+                                                            "className": "text-lg font-bold leading-snug text-ink-900 break-words group-hover:text-raon-700"
+                                                        },
+                                                        "text": "{{campaign.title ?? ''}}"
+                                                    },
+                                                    {
+                                                        "type": "basic",
+                                                        "name": "P",
+                                                        "props": {
+                                                            "className": "line-clamp-3 text-sm text-ink-500 break-words"
+                                                        },
+                                                        "text": "{{campaign.excerpt ?? ''}}"
+                                                    },
+                                                    {
+                                                        "type": "basic",
+                                                        "name": "Span",
+                                                        "props": {
+                                                            "className": "mt-auto inline-flex items-center gap-1 pt-2 text-sm font-semibold text-raon-700"
+                                                        },
+                                                        "children": [
+                                                            {
+                                                                "type": "basic",
+                                                                "name": "Span",
+                                                                "text": "$t:travel.campaigns.view"
+                                                            },
+                                                            {
+                                                                "type": "basic",
+                                                                "name": "Icon",
+                                                                "props": {
+                                                                    "name": "chevron-right",
+                                                                    "className": "text-xs",
+                                                                    "aria-hidden": "true"
+                                                                }
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "actions": [
+                                            {
+                                                "type": "click",
+                                                "handler": "navigate",
+                                                "params": {
+                                                    "path": "{{campaign.path}}"
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "iteration": {
+                                    "source": "{{campaigns?.data?.items ?? []}}",
+                                    "item_var": "campaign"
+                                }
+                            }
+                        ]
+                    }
+                ],
+                "comment": "발행 기획전 — native 페이지 발행 슬롯만 (초안·미발행·빈 응답이면 섹션을 숨기고 정적 대체 문구를 두지 않는다)"
+            },
+            {
+                "type": "basic",
+                "name": "Section",
+                "props": {
+                    "className": "mx-auto w-full max-w-6xl px-4 md:px-6 mt-12",
+                    "data-testid": "departing-section"
+                },
+                "children": [
+                    {
+                        "type": "basic",
+                        "name": "Div",
+                        "props": {
+                            "className": "mb-4 flex items-end justify-between gap-4"
+                        },
+                        "children": [
+                            {
+                                "type": "basic",
+                                "name": "Div",
+                                "children": [
+                                    {
+                                        "type": "basic",
+                                        "name": "H2",
+                                        "props": {
+                                            "className": "text-xl font-bold tracking-tight text-ink-900 md:text-2xl"
+                                        },
+                                        "text": "$t:travel.home.departing_title"
+                                    },
+                                    {
+                                        "type": "basic",
+                                        "name": "P",
+                                        "props": {
+                                            "className": "mt-1 text-sm text-ink-500"
+                                        },
+                                        "text": "$t:travel.home.departing_desc"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "basic",
+                                "name": "Button",
+                                "props": {
+                                    "type": "button",
+                                    "className": "inline-flex items-center justify-center gap-1.5 rounded-lg px-3 py-2 text-sm font-medium text-ink-700 transition hover:bg-raon-50 hover:text-raon-700"
+                                },
+                                "children": [
+                                    {
+                                        "type": "basic",
+                                        "name": "Span",
+                                        "text": "$t:travel.home.view_all"
+                                    },
+                                    {
+                                        "type": "basic",
+                                        "name": "Icon",
+                                        "props": {
+                                            "name": "chevron-right",
+                                            "className": "text-xs"
+                                        }
+                                    }
+                                ],
+                                "actions": [
+                                    {
+                                        "type": "click",
+                                        "handler": "navigate",
+                                        "comment": "audit:allow layout-list-context-navigate-merge-query 홈 → 정렬 지정 목록 진입",
+                                        "params": {
+                                            "path": "/travel/search",
+                                            "query": {
+                                                "sort": "departure_asc"
+                                            }
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "comment": "departing_trips 로딩 스켈레톤",
+                        "type": "basic",
+                        "name": "Div",
+                        "if": "{{departing_trips === undefined && !_dataSourceErrors?.departing_trips}}",
+                        "props": {
+                            "className": "grid gap-4 sm:grid-cols-2 lg:grid-cols-3",
+                            "aria-busy": "true",
+                            "aria-live": "polite",
+                            "data-testid": "departing_trips-loading"
+                        },
+                        "children": [
+                            {
+                                "type": "basic",
+                                "name": "Div",
+                                "props": {
+                                    "className": "overflow-hidden rounded-2xl border border-slate-200 bg-white"
+                                },
+                                "children": [
+                                    {
+                                        "type": "basic",
+                                        "name": "Div",
+                                        "props": {
+                                            "className": "aspect-[4/3] animate-pulse bg-slate-100"
+                                        }
+                                    },
+                                    {
+                                        "type": "basic",
+                                        "name": "Div",
+                                        "props": {
+                                            "className": "space-y-2 p-4"
+                                        },
+                                        "children": [
+                                            {
+                                                "type": "basic",
+                                                "name": "Div",
+                                                "props": {
+                                                    "className": "h-4 w-2/3 animate-pulse rounded bg-slate-100"
+                                                }
+                                            },
+                                            {
+                                                "type": "basic",
+                                                "name": "Div",
+                                                "props": {
+                                                    "className": "h-3 w-full animate-pulse rounded bg-slate-100"
+                                                }
+                                            },
+                                            {
+                                                "type": "basic",
+                                                "name": "Div",
+                                                "props": {
+                                                    "className": "h-3 w-1/2 animate-pulse rounded bg-slate-100"
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "basic",
+                                "name": "Div",
+                                "props": {
+                                    "className": "overflow-hidden rounded-2xl border border-slate-200 bg-white"
+                                },
+                                "children": [
+                                    {
+                                        "type": "basic",
+                                        "name": "Div",
+                                        "props": {
+                                            "className": "aspect-[4/3] animate-pulse bg-slate-100"
+                                        }
+                                    },
+                                    {
+                                        "type": "basic",
+                                        "name": "Div",
+                                        "props": {
+                                            "className": "space-y-2 p-4"
+                                        },
+                                        "children": [
+                                            {
+                                                "type": "basic",
+                                                "name": "Div",
+                                                "props": {
+                                                    "className": "h-4 w-2/3 animate-pulse rounded bg-slate-100"
+                                                }
+                                            },
+                                            {
+                                                "type": "basic",
+                                                "name": "Div",
+                                                "props": {
+                                                    "className": "h-3 w-full animate-pulse rounded bg-slate-100"
+                                                }
+                                            },
+                                            {
+                                                "type": "basic",
+                                                "name": "Div",
+                                                "props": {
+                                                    "className": "h-3 w-1/2 animate-pulse rounded bg-slate-100"
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "basic",
+                                "name": "Div",
+                                "props": {
+                                    "className": "overflow-hidden rounded-2xl border border-slate-200 bg-white"
+                                },
+                                "children": [
+                                    {
+                                        "type": "basic",
+                                        "name": "Div",
+                                        "props": {
+                                            "className": "aspect-[4/3] animate-pulse bg-slate-100"
+                                        }
+                                    },
+                                    {
+                                        "type": "basic",
+                                        "name": "Div",
+                                        "props": {
+                                            "className": "space-y-2 p-4"
+                                        },
+                                        "children": [
+                                            {
+                                                "type": "basic",
+                                                "name": "Div",
+                                                "props": {
+                                                    "className": "h-4 w-2/3 animate-pulse rounded bg-slate-100"
+                                                }
+                                            },
+                                            {
+                                                "type": "basic",
+                                                "name": "Div",
+                                                "props": {
+                                                    "className": "h-3 w-full animate-pulse rounded bg-slate-100"
+                                                }
+                                            },
+                                            {
+                                                "type": "basic",
+                                                "name": "Div",
+                                                "props": {
+                                                    "className": "h-3 w-1/2 animate-pulse rounded bg-slate-100"
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "comment": "departing_trips 오류 + 다시 시도",
+                        "type": "basic",
+                        "name": "Div",
+                        "if": "{{!departing_trips && !!_dataSourceErrors?.departing_trips}}",
+                        "props": {
+                            "className": "flex flex-col items-center gap-3 rounded-2xl border border-rose-200 bg-rose-50 px-6 py-10 text-center",
+                            "role": "alert",
+                            "data-testid": "departing_trips-error"
+                        },
+                        "children": [
+                            {
+                                "type": "basic",
+                                "name": "Icon",
+                                "props": {
+                                    "name": "exclamation-triangle",
+                                    "className": "text-2xl text-rose-500"
+                                }
+                            },
+                            {
+                                "type": "basic",
+                                "name": "P",
+                                "props": {
+                                    "className": "text-sm font-semibold text-rose-700"
+                                },
+                                "text": "$t:travel.home.trips_error"
+                            },
+                            {
+                                "type": "basic",
+                                "name": "P",
+                                "props": {
+                                    "className": "text-xs text-rose-600"
+                                },
+                                "text": "$t:travel.common.error_hint"
+                            },
+                            {
+                                "type": "basic",
+                                "name": "Button",
+                                "props": {
+                                    "type": "button",
+                                    "className": "inline-flex items-center gap-2 rounded-xl bg-white px-4 py-2 text-sm font-semibold text-rose-700 ring-1 ring-rose-200 hover:bg-rose-100",
+                                    "data-testid": "departing_trips-retry"
+                                },
+                                "children": [
+                                    {
+                                        "type": "basic",
+                                        "name": "Icon",
+                                        "props": {
+                                            "name": "rotate-left",
+                                            "className": "text-sm"
+                                        }
+                                    },
+                                    {
+                                        "type": "basic",
+                                        "name": "Span",
+                                        "text": "$t:travel.common.retry"
+                                    }
+                                ],
+                                "actions": [
+                                    {
+                                        "type": "click",
+                                        "handler": "refetchDataSource",
+                                        "params": {
+                                            "dataSourceId": "departing_trips"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "basic",
+                        "name": "Div",
+                        "if": "{{!!departing_trips && (departing_trips?.data?.data ?? []).length === 0}}",
+                        "props": {
+                            "className": "flex flex-col items-center gap-3 rounded-2xl border border-dashed border-slate-300 bg-white px-6 py-12 text-center"
+                        },
+                        "children": [
+                            {
+                                "type": "basic",
+                                "name": "Div",
+                                "props": {
+                                    "className": "flex h-14 w-14 items-center justify-center rounded-full bg-raon-50 text-raon-600"
+                                },
+                                "children": [
+                                    {
+                                        "type": "basic",
+                                        "name": "Icon",
+                                        "props": {
+                                            "name": "map",
+                                            "className": "text-2xl"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "basic",
+                                "name": "P",
+                                "props": {
+                                    "className": "text-base font-semibold text-ink-900"
+                                },
+                                "text": "$t:travel.home.trips_empty_title"
+                            },
+                            {
+                                "type": "basic",
+                                "name": "P",
+                                "props": {
+                                    "className": "max-w-md text-sm text-ink-500"
+                                },
+                                "text": "$t:travel.home.trips_empty_desc"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "basic",
+                        "name": "Div",
+                        "if": "{{(departing_trips?.data?.data ?? []).length > 0}}",
+                        "props": {
+                            "className": "grid gap-4 sm:grid-cols-2 lg:grid-cols-3"
+                        },
+                        "children": [
+                            {
+                                "type": "basic",
+                                "name": "Div",
+                                "iteration": {
+                                    "source": "{{departing_trips?.data?.data ?? []}}",
+                                    "item_var": "trip"
+                                },
+                                "children": [
+                                    {
+                                        "type": "basic",
+                                        "name": "Button",
+                                        "props": {
+                                            "type": "button",
+                                            "className": "group flex h-full w-full flex-col overflow-hidden text-left rounded-2xl border border-slate-200 bg-white shadow-sm transition hover:-translate-y-0.5 hover:border-raon-300 hover:shadow-md",
+                                            "data-testid": "trip-card",
+                                            "aria-label": "{{trip.title ?? ''}}"
+                                        },
+                                        "children": [
+                                            {
+                                                "type": "basic",
+                                                "name": "Div",
+                                                "props": {
+                                                    "className": "relative aspect-[4/3] w-full overflow-hidden bg-raon-50"
+                                                },
+                                                "children": [
+                                                    {
+                                                        "type": "basic",
+                                                        "name": "Img",
+                                                        "if": "{{!!trip.image_url}}",
+                                                        "props": {
+                                                            "src": "{{trip.image_url}}",
+                                                            "alt": "{{trip.title ?? ''}}",
+                                                            "loading": "lazy",
+                                                            "className": "h-full w-full object-cover transition duration-500 group-hover:scale-105"
+                                                        }
+                                                    },
+                                                    {
+                                                        "type": "composite",
+                                                        "name": "ScenicArt",
+                                                        "if": "{{!trip.image_url}}",
+                                                        "props": {
+                                                            "seed": "{{trip.id}}",
+                                                            "variant": "{{trip.scenic ?? null}}",
+                                                            "className": "h-full w-full transition duration-500 group-hover:scale-105"
+                                                        }
+                                                    },
+                                                    {
+                                                        "type": "basic",
+                                                        "name": "Div",
+                                                        "props": {
+                                                            "className": "absolute left-3 top-3 flex flex-wrap gap-1.5"
+                                                        },
+                                                        "children": [
+                                                            {
+                                                                "type": "basic",
+                                                                "name": "Span",
+                                                                "if": "{{!!(trip.region_label ?? trip.region)}}",
+                                                                "props": {
+                                                                    "className": "rounded-full bg-white/90 px-2.5 py-1 text-xs font-semibold text-raon-700 shadow-sm"
+                                                                },
+                                                                "text": "{{trip.region_label ?? $t('travel.facets.region.' + (trip.region ?? ''))}}"
+                                                            },
+                                                            {
+                                                                "type": "basic",
+                                                                "name": "Span",
+                                                                "if": "{{!!(trip.theme_label ?? trip.theme)}}",
+                                                                "props": {
+                                                                    "className": "rounded-full bg-dusk-50/95 px-2.5 py-1 text-xs font-semibold text-dusk-600 shadow-sm"
+                                                                },
+                                                                "text": "{{trip.theme_label ?? $t('travel.facets.theme.' + (trip.theme ?? ''))}}"
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "type": "basic",
+                                                "name": "Div",
+                                                "props": {
+                                                    "className": "flex flex-1 flex-col gap-2 p-4"
+                                                },
+                                                "children": [
+                                                    {
+                                                        "type": "basic",
+                                                        "name": "Span",
+                                                        "if": "{{!!trip.duration_days}}",
+                                                        "props": {
+                                                            "className": "text-xs font-medium text-ink-500"
+                                                        },
+                                                        "text": "$t:travel.card.duration|days={{trip.duration_days ?? '-'}}"
+                                                    },
+                                                    {
+                                                        "type": "basic",
+                                                        "name": "H3",
+                                                        "props": {
+                                                            "className": "line-clamp-2 text-base font-bold leading-snug text-ink-900 group-hover:text-raon-700"
+                                                        },
+                                                        "text": "{{trip.title ?? ''}}"
+                                                    },
+                                                    {
+                                                        "type": "basic",
+                                                        "name": "P",
+                                                        "props": {
+                                                            "className": "line-clamp-2 text-sm text-ink-500"
+                                                        },
+                                                        "text": "{{trip.summary ?? ''}}"
+                                                    },
+                                                    {
+                                                        "type": "basic",
+                                                        "name": "Div",
+                                                        "props": {
+                                                            "className": "mt-auto flex items-end justify-between gap-2 pt-2"
+                                                        },
+                                                        "children": [
+                                                            {
+                                                                "type": "basic",
+                                                                "name": "Div",
+                                                                "props": {
+                                                                    "className": "flex flex-col"
+                                                                },
+                                                                "children": [
+                                                                    {
+                                                                        "type": "basic",
+                                                                        "name": "Span",
+                                                                        "if": "{{!!trip.departures?.[0]?.departure_date}}",
+                                                                        "props": {
+                                                                            "className": "text-xs text-ink-500"
+                                                                        },
+                                                                        "text": "$t:travel.card.next_departure|date={{trip.departures?.[0]?.departure_date ?? ''}}"
+                                                                    }
+                                                                ]
+                                                            },
+                                                            {
+                                                                "type": "composite",
+                                                                "name": "PriceTag",
+                                                                "props": {
+                                                                    "amount": "{{trip.from_price}}",
+                                                                    "currency": "{{trip.currency_code}}",
+                                                                    "suffix": "$t:travel.card.price_from",
+                                                                    "className": "text-right",
+                                                                    "amountClassName": "text-lg font-extrabold text-raon-700"
+                                                                }
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "actions": [
+                                            {
+                                                "type": "click",
+                                                "handler": "navigate",
+                                                "params": {
+                                                    "path": "/travel/products/{{trip.id}}"
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "type": "basic",
+                "name": "Section",
+                "props": {
+                    "className": "mx-auto w-full max-w-6xl px-4 md:px-6 mt-12"
+                },
+                "children": [
+                    {
+                        "type": "basic",
+                        "name": "H2",
+                        "props": {
+                            "className": "text-xl font-bold tracking-tight text-ink-900 md:text-2xl mb-4"
+                        },
+                        "text": "$t:travel.home.how_title"
+                    },
+                    {
+                        "type": "basic",
+                        "name": "Div",
+                        "props": {
+                            "className": "grid gap-3 md:grid-cols-3"
+                        },
+                        "children": [
+                            {
+                                "type": "basic",
+                                "name": "Div",
+                                "props": {
+                                    "className": "rounded-2xl border border-slate-200 bg-white shadow-sm flex gap-4 p-5"
+                                },
+                                "children": [
+                                    {
+                                        "type": "basic",
+                                        "name": "Div",
+                                        "props": {
+                                            "className": "flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-raon-50 text-raon-600"
+                                        },
+                                        "children": [
+                                            {
+                                                "type": "basic",
+                                                "name": "Icon",
+                                                "props": {
+                                                    "name": "search",
+                                                    "className": "text-lg"
+                                                }
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "type": "basic",
+                                        "name": "Div",
+                                        "children": [
+                                            {
+                                                "type": "basic",
+                                                "name": "H3",
+                                                "props": {
+                                                    "className": "text-base font-bold text-ink-900"
+                                                },
+                                                "text": "$t:travel.home.step1_title"
+                                            },
+                                            {
+                                                "type": "basic",
+                                                "name": "P",
+                                                "props": {
+                                                    "className": "mt-1 text-sm text-ink-500"
+                                                },
+                                                "text": "$t:travel.home.step1_desc"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "basic",
+                                "name": "Div",
+                                "props": {
+                                    "className": "rounded-2xl border border-slate-200 bg-white shadow-sm flex gap-4 p-5"
+                                },
+                                "children": [
+                                    {
+                                        "type": "basic",
+                                        "name": "Div",
+                                        "props": {
+                                            "className": "flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-raon-50 text-raon-600"
+                                        },
+                                        "children": [
+                                            {
+                                                "type": "basic",
+                                                "name": "Icon",
+                                                "props": {
+                                                    "name": "calendar-alt",
+                                                    "className": "text-lg"
+                                                }
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "type": "basic",
+                                        "name": "Div",
+                                        "children": [
+                                            {
+                                                "type": "basic",
+                                                "name": "H3",
+                                                "props": {
+                                                    "className": "text-base font-bold text-ink-900"
+                                                },
+                                                "text": "$t:travel.home.step2_title"
+                                            },
+                                            {
+                                                "type": "basic",
+                                                "name": "P",
+                                                "props": {
+                                                    "className": "mt-1 text-sm text-ink-500"
+                                                },
+                                                "text": "$t:travel.home.step2_desc"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "basic",
+                                "name": "Div",
+                                "props": {
+                                    "className": "rounded-2xl border border-slate-200 bg-white shadow-sm flex gap-4 p-5"
+                                },
+                                "children": [
+                                    {
+                                        "type": "basic",
+                                        "name": "Div",
+                                        "props": {
+                                            "className": "flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-raon-50 text-raon-600"
+                                        },
+                                        "children": [
+                                            {
+                                                "type": "basic",
+                                                "name": "Icon",
+                                                "props": {
+                                                    "name": "comments",
+                                                    "className": "text-lg"
+                                                }
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "type": "basic",
+                                        "name": "Div",
+                                        "children": [
+                                            {
+                                                "type": "basic",
+                                                "name": "H3",
+                                                "props": {
+                                                    "className": "text-base font-bold text-ink-900"
+                                                },
+                                                "text": "$t:travel.home.step3_title"
+                                            },
+                                            {
+                                                "type": "basic",
+                                                "name": "P",
+                                                "props": {
+                                                    "className": "mt-1 text-sm text-ink-500"
+                                                },
+                                                "text": "$t:travel.home.step3_desc"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "type": "basic",
+                "name": "Section",
+                "props": {
+                    "className": "mx-auto w-full max-w-6xl px-4 md:px-6 mt-12"
+                },
+                "children": [
+                    {
+                        "type": "basic",
+                        "name": "Div",
+                        "props": {
+                            "className": "rounded-2xl border border-slate-200 bg-white shadow-sm flex flex-col items-start gap-4 p-6 md:flex-row md:items-center md:justify-between"
+                        },
+                        "children": [
+                            {
+                                "type": "basic",
+                                "name": "Div",
+                                "children": [
+                                    {
+                                        "type": "basic",
+                                        "name": "H2",
+                                        "props": {
+                                            "className": "text-lg font-bold text-ink-900"
+                                        },
+                                        "text": "$t:travel.home.help_title"
+                                    },
+                                    {
+                                        "type": "basic",
+                                        "name": "P",
+                                        "props": {
+                                            "className": "mt-1 text-sm text-ink-500"
+                                        },
+                                        "text": "$t:travel.home.help_desc"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "basic",
+                                "name": "Button",
+                                "props": {
+                                    "type": "button",
+                                    "className": "inline-flex items-center justify-center gap-2 rounded-xl border border-slate-300 bg-white px-5 py-3 text-sm font-semibold text-ink-700 transition hover:border-raon-400 hover:text-raon-700 disabled:cursor-not-allowed disabled:opacity-50"
+                                },
+                                "children": [
+                                    {
+                                        "type": "basic",
+                                        "name": "Icon",
+                                        "props": {
+                                            "name": "question-circle",
+                                            "className": "text-sm"
+                                        }
+                                    },
+                                    {
+                                        "type": "basic",
+                                        "name": "Span",
+                                        "text": "$t:travel.home.help_cta"
+                                    }
+                                ],
+                                "actions": [
+                                    {
+                                        "type": "click",
+                                        "handler": "navigate",
+                                        "params": {
+                                            "path": "/travel/help"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+}

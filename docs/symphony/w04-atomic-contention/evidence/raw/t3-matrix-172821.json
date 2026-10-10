@@ -1,0 +1,223 @@
+{
+ "phase": "t3-matrix-172821",
+ "review_sha": "fa5523175ac494cfbd13bbf89bf06b3ec91835a6",
+ "base_url": "http://127.0.0.1:18871",
+ "counts": {
+  "PASS": 10,
+  "FAIL": 0,
+  "OBSERVED": 0,
+  "BLOCKED": 0,
+  "NOT_RUN": 0
+ },
+ "results": [
+  {
+   "name": "M01 server native price: cart/catalog unit = native product price + option adjustment (SQL)",
+   "status": "PASS",
+   "detail": {
+    "sql_product_price": "12000.00",
+    "sql_adjustment": "0.00",
+    "expected": 12000.0,
+    "cart_unit_price": 12000,
+    "public_catalog_unit_price": 12000,
+    "currency": "KRW"
+   },
+   "at": "17:28:23"
+  },
+  {
+   "name": "M02 available native option price change is followed by server cart pricing (no client price)",
+   "status": "PASS",
+   "detail": {
+    "native_put": 200,
+    "sql_adjustment_after": "700.00",
+    "cart_unit_price_after": 12700,
+    "expected": 12700.0,
+    "option_ids_preserved": true
+   },
+   "at": "17:28:24"
+  },
+  {
+   "name": "M03 quantity x server unit = line/total; M08 reservation increments by exact quantity (SQL)",
+   "status": "PASS",
+   "detail": {
+    "cart_patch": 200,
+    "cart_line_total": 25400,
+    "submit": 201,
+    "inquiry_id": 131,
+    "sql_item": {
+     "inquiry_id": 131,
+     "departure_id": 119,
+     "product_option_id": 157,
+     "quantity": 2,
+     "unit_price": "12700.00",
+     "line_total": "25400.00"
+    },
+    "sql_inquiry": {
+     "status": "TEST_INQUIRY",
+     "total_amount": "25400.00",
+     "currency_code": "KRW",
+     "qty": "2",
+     "events": 1
+    },
+    "reserved_before_after": [
+     0,
+     2
+    ]
+   },
+   "at": "17:28:26"
+  },
+  {
+   "name": "M03b repricing after submit: current cart follows native option price (12900) while the submitted inquiry snapshot stays frozen (12700/25400)",
+   "status": "PASS",
+   "detail": {
+    "option_adjustment_now": 900,
+    "current_cart_unit_price": 12900,
+    "frozen_inquiry_item_unit_price": "12700.00",
+    "frozen_inquiry_total_sql": "25400.00",
+    "owner_api_total": "25400.00",
+    "temp_cart_deleted": 200
+   },
+   "at": "17:28:30"
+  },
+  {
+   "name": "M04b cart PATCH quantity/money/owner tamper 422, over-capacity 409, foreign cart PATCH/DELETE 404; nothing changed or reserved",
+   "status": "PASS",
+   "detail": {
+    "own_cart_patch_tamper": {
+     "qty0": 422,
+     "qty_neg": 422,
+     "qty_str": 422,
+     "qty_frac": 422,
+     "unit_price": 422,
+     "user_id": 422
+    },
+    "own_over_capacity": 409,
+    "foreign_cart_patch": 404,
+    "foreign_cart_delete": 404,
+    "foreign_cart_kept_qty": 1,
+    "own_cart_qty_unchanged": 1,
+    "cleanup_deletes": [
+     200,
+     200
+    ],
+    "reserved_unchanged": {
+     "120": 0,
+     "126": 0
+    }
+   },
+   "at": "17:28:35"
+  },
+  {
+   "name": "M04 quantity/money/owner tamper rejected (422), over-capacity 409, nothing written",
+   "status": "PASS",
+   "detail": {
+    "tamper": {
+     "qty0": 422,
+     "qty_neg": 422,
+     "qty_frac": 422,
+     "qty_str": 422,
+     "qty_huge": 422,
+     "unit_price": 422,
+     "price": 422,
+     "total_amount": 422,
+     "user_id": 422
+    },
+    "over_capacity_qty5_of_cap4": [
+     409,
+     "현재 남은 시험 인원보다 많습니다. 인원을 다시 선택해 주세요."
+    ],
+    "unknown_departure": 404,
+    "no_cart_row_created": true
+   },
+   "at": "17:28:37"
+  },
+  {
+   "name": "M05 date/tamper on departure: KST-today/past/return-before/reserved/unit_price 422, member 403",
+   "status": "PASS",
+   "detail": {
+    "kst_today": "2026-10-10",
+    "past": 422,
+    "return_before": 422,
+    "reserved_field": 422,
+    "unit_price_field": 422,
+    "member_forbidden": 403,
+    "departures_still": 17
+   },
+   "at": "17:28:39"
+  },
+  {
+   "name": "M06 inquiry with foreign cart / client money / owner field rejected; nothing reserved",
+   "status": "PASS",
+   "detail": {
+    "foreign_cart_submit": [
+     409,
+     "장바구니가 변경되었습니다. 다시 확인해 주세요."
+    ],
+    "client_total_amount": 422,
+    "client_user_id": 422,
+    "foreign_cart_kept": true,
+    "reserved_unchanged": 0
+   },
+   "at": "17:28:41"
+  },
+  {
+   "name": "M07 idempotent replay/409, foreign 404, member admin 403, TEST state transitions and invalid 409 (SQL)",
+   "status": "PASS",
+   "detail": {
+    "same_key_replay": [
+     200,
+     "same_id"
+    ],
+    "changed_payload_same_key": [
+     409,
+     "같은 요청 키를 다른 내용에 사용할 수 없습니다."
+    ],
+    "foreign_show_cancel": [
+     404,
+     404
+    ],
+    "member_admin_list_patch": [
+     403,
+     403
+    ],
+    "admin_transitions": [
+     200,
+     200
+    ],
+    "invalid_back_transition": [
+     409,
+     "현재 시험 문의 상태에서 허용되지 않는 처리입니다."
+    ],
+    "admin_money_tamper": 422,
+    "sql_inquiry": {
+     "status": "TEST_ACCEPTED",
+     "total_amount": "25400.00",
+     "events": 3
+    }
+   },
+   "at": "17:28:44"
+  },
+  {
+   "name": "M09 capacity enforced at full reservation; M10 cancel releases exactly once, repeat cancel no-op, never negative (SQL)",
+   "status": "PASS",
+   "detail": {
+    "submit_full_capacity": 201,
+    "reserved_after_submit": 3,
+    "capacity": 3,
+    "other_add_when_full": [
+     409,
+     "현재 남은 시험 인원보다 많습니다. 인원을 다시 선택해 주세요."
+    ],
+    "cancel": 200,
+    "reserved_after_cancel": 0,
+    "repeat_cancel": 200,
+    "reserved_after_repeat": 0,
+    "events": 2,
+    "native_option_stock_before_submit_after_cancel": [
+     5,
+     5
+    ]
+   },
+   "at": "17:28:46"
+  }
+ ]
+}

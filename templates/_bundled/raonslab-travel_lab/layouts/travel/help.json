@@ -1,0 +1,2009 @@
+{
+    "version": "1.0.0",
+    "layout_name": "travel/help",
+    "extends": "_user_base",
+    "meta": {
+        "title": "$t:travel.meta.help_title"
+    },
+    "initLocal": {
+        "openNoticeId": null,
+        "openFaqId": null,
+        "faqQ": "",
+        "questionTitle": "",
+        "questionContent": "",
+        "questionSubmitting": false,
+        "questionErrors": null,
+        "questionEditing": false,
+        "questionEditTitle": "",
+        "questionEditContent": "",
+        "questionEditSaving": false,
+        "questionEditErrors": null,
+        "questionEditError": ""
+    },
+    "data_sources": [
+        {
+            "id": "notices",
+            "label_key": "$t:editor.data_source.notices",
+            "type": "api",
+            "endpoint": "/api/modules/raonslab-travel_lab/support/notices",
+            "method": "GET",
+            "auto_fetch": true,
+            "loading_strategy": "progressive",
+            "params": {
+                "page": "{{query.page ?? 1}}",
+                "per_page": 10
+            },
+            "if": "{{(query.tab ?? 'notices') === 'notices'}}"
+        },
+        {
+            "id": "faqs",
+            "label_key": "$t:editor.data_source.faqs",
+            "type": "api",
+            "endpoint": "/api/modules/raonslab-travel_lab/support/faqs",
+            "method": "GET",
+            "auto_fetch": true,
+            "loading_strategy": "progressive",
+            "params": {
+                "per_page": 50
+            },
+            "if": "{{(query.tab ?? 'notices') === 'faq'}}"
+        },
+        {
+            "id": "questions",
+            "label_key": "$t:editor.data_source.questions",
+            "type": "api",
+            "endpoint": "/api/modules/raonslab-travel_lab/support/questions",
+            "method": "GET",
+            "auto_fetch": true,
+            "auth_mode": "required",
+            "loading_strategy": "progressive",
+            "params": {
+                "page": "{{query.page ?? 1}}",
+                "per_page": 10
+            },
+            "if": "{{(query.tab ?? 'notices') === 'questions'}}"
+        },
+        {
+            "id": "question_detail",
+            "label_key": "$t:editor.data_source.question_detail",
+            "type": "api",
+            "endpoint": "/api/modules/raonslab-travel_lab/support/questions/{{query.question}}",
+            "method": "GET",
+            "auto_fetch": true,
+            "auth_mode": "required",
+            "loading_strategy": "progressive",
+            "if": "{{(query.tab ?? 'notices') === 'questions' && !!query.question}}"
+        }
+    ],
+    "slots": {
+        "content": [
+            {
+                "type": "basic",
+                "name": "Div",
+                "props": {
+                    "className": "border-b border-slate-200 bg-white"
+                },
+                "children": [
+                    {
+                        "type": "basic",
+                        "name": "Div",
+                        "props": {
+                            "className": "mx-auto w-full max-w-6xl px-4 md:px-6 py-6 md:py-8"
+                        },
+                        "children": [
+                            {
+                                "type": "basic",
+                                "name": "Div",
+                                "props": {
+                                    "className": "mb-2 flex flex-wrap items-center gap-1 text-xs text-ink-500"
+                                },
+                                "children": [
+                                    {
+                                        "type": "basic",
+                                        "name": "Button",
+                                        "props": {
+                                            "type": "button",
+                                            "className": "hover:text-raon-700 hover:underline"
+                                        },
+                                        "text": "$t:travel.nav.home",
+                                        "actions": [
+                                            {
+                                                "type": "click",
+                                                "handler": "navigate",
+                                                "params": {
+                                                    "path": "/travel"
+                                                }
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "type": "basic",
+                                        "name": "Icon",
+                                        "props": {
+                                            "name": "chevron-right",
+                                            "className": "text-[10px] text-slate-400"
+                                        }
+                                    },
+                                    {
+                                        "type": "basic",
+                                        "name": "Span",
+                                        "props": {
+                                            "className": "font-semibold text-ink-700"
+                                        },
+                                        "text": "$t:travel.help.title"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "basic",
+                                "name": "H1",
+                                "props": {
+                                    "className": "text-2xl font-extrabold tracking-tight text-ink-900 md:text-3xl"
+                                },
+                                "text": "$t:travel.help.title"
+                            },
+                            {
+                                "type": "basic",
+                                "name": "P",
+                                "props": {
+                                    "className": "mt-1 text-sm text-ink-500 md:text-base"
+                                },
+                                "text": "$t:travel.help.subtitle"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "type": "basic",
+                "name": "Div",
+                "props": {
+                    "className": "mx-auto w-full max-w-6xl px-4 md:px-6 mt-6 space-y-5"
+                },
+                "children": [
+                    {
+                        "type": "basic",
+                        "name": "Div",
+                        "props": {
+                            "className": "flex gap-2 overflow-x-auto pb-1 scrollbar-none",
+                            "role": "tablist",
+                            "aria-label": "$t:travel.help.title"
+                        },
+                        "children": [
+                            {
+                                "type": "basic",
+                                "name": "Button",
+                                "props": {
+                                    "type": "button",
+                                    "className": "{{(query.tab ?? 'notices') === 'notices' ? 'inline-flex shrink-0 items-center gap-2 rounded-full bg-raon-600 px-4 py-2 text-sm font-semibold text-white' : 'inline-flex shrink-0 items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-semibold text-ink-700 ring-1 ring-slate-200 hover:text-raon-700'}}",
+                                    "role": "tab",
+                                    "aria-selected": "{{(query.tab ?? 'notices') === 'notices'}}",
+                                    "data-testid": "help-tab-notices"
+                                },
+                                "children": [
+                                    {
+                                        "type": "basic",
+                                        "name": "Icon",
+                                        "props": {
+                                            "name": "bell",
+                                            "className": "text-sm"
+                                        }
+                                    },
+                                    {
+                                        "type": "basic",
+                                        "name": "Span",
+                                        "text": "$t:travel.help.tab_notices"
+                                    }
+                                ],
+                                "actions": [
+                                    {
+                                        "type": "click",
+                                        "handler": "navigate",
+                                        "comment": "audit:allow layout-list-context-navigate-merge-query 탭 전환 — 다른 목록이라 페이지·선택 상태를 승계하지 않는다",
+                                        "params": {
+                                            "path": "/travel/help",
+                                            "query": {
+                                                "tab": "notices"
+                                            }
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "basic",
+                                "name": "Button",
+                                "props": {
+                                    "type": "button",
+                                    "className": "{{(query.tab ?? 'notices') === 'faq' ? 'inline-flex shrink-0 items-center gap-2 rounded-full bg-raon-600 px-4 py-2 text-sm font-semibold text-white' : 'inline-flex shrink-0 items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-semibold text-ink-700 ring-1 ring-slate-200 hover:text-raon-700'}}",
+                                    "role": "tab",
+                                    "aria-selected": "{{(query.tab ?? 'notices') === 'faq'}}",
+                                    "data-testid": "help-tab-faq"
+                                },
+                                "children": [
+                                    {
+                                        "type": "basic",
+                                        "name": "Icon",
+                                        "props": {
+                                            "name": "question-circle",
+                                            "className": "text-sm"
+                                        }
+                                    },
+                                    {
+                                        "type": "basic",
+                                        "name": "Span",
+                                        "text": "$t:travel.help.tab_faq"
+                                    }
+                                ],
+                                "actions": [
+                                    {
+                                        "type": "click",
+                                        "handler": "navigate",
+                                        "comment": "audit:allow layout-list-context-navigate-merge-query 탭 전환 — 다른 목록이라 페이지·선택 상태를 승계하지 않는다",
+                                        "params": {
+                                            "path": "/travel/help",
+                                            "query": {
+                                                "tab": "faq"
+                                            }
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "basic",
+                                "name": "Button",
+                                "props": {
+                                    "type": "button",
+                                    "className": "{{(query.tab ?? 'notices') === 'questions' ? 'inline-flex shrink-0 items-center gap-2 rounded-full bg-raon-600 px-4 py-2 text-sm font-semibold text-white' : 'inline-flex shrink-0 items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-semibold text-ink-700 ring-1 ring-slate-200 hover:text-raon-700'}}",
+                                    "role": "tab",
+                                    "aria-selected": "{{(query.tab ?? 'notices') === 'questions'}}",
+                                    "data-testid": "help-tab-questions"
+                                },
+                                "children": [
+                                    {
+                                        "type": "basic",
+                                        "name": "Icon",
+                                        "props": {
+                                            "name": "comment-dots",
+                                            "className": "text-sm"
+                                        }
+                                    },
+                                    {
+                                        "type": "basic",
+                                        "name": "Span",
+                                        "text": "$t:travel.help.tab_questions"
+                                    }
+                                ],
+                                "actions": [
+                                    {
+                                        "type": "click",
+                                        "handler": "navigate",
+                                        "comment": "audit:allow layout-list-context-navigate-merge-query 탭 전환 — 다른 목록이라 페이지·선택 상태를 승계하지 않는다",
+                                        "params": {
+                                            "path": "/travel/help",
+                                            "query": {
+                                                "tab": "questions"
+                                            }
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "basic",
+                        "name": "Div",
+                        "if": "{{(query.tab ?? 'notices') === 'notices'}}",
+                        "props": {
+                            "className": "space-y-3",
+                            "role": "tabpanel",
+                            "data-testid": "help-panel-notices"
+                        },
+                        "children": [
+                            {
+                                "comment": "notices 로딩 스켈레톤",
+                                "type": "basic",
+                                "name": "Div",
+                                "if": "{{notices === undefined && !_dataSourceErrors?.notices}}",
+                                "props": {
+                                    "className": "space-y-3",
+                                    "aria-busy": "true",
+                                    "aria-live": "polite",
+                                    "data-testid": "notices-loading"
+                                },
+                                "children": [
+                                    {
+                                        "type": "basic",
+                                        "name": "Div",
+                                        "props": {
+                                            "className": "space-y-2 rounded-2xl border border-slate-200 bg-white p-5"
+                                        },
+                                        "children": [
+                                            {
+                                                "type": "basic",
+                                                "name": "Div",
+                                                "props": {
+                                                    "className": "h-4 w-1/2 animate-pulse rounded bg-slate-100"
+                                                }
+                                            },
+                                            {
+                                                "type": "basic",
+                                                "name": "Div",
+                                                "props": {
+                                                    "className": "h-3 w-5/6 animate-pulse rounded bg-slate-100"
+                                                }
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "type": "basic",
+                                        "name": "Div",
+                                        "props": {
+                                            "className": "space-y-2 rounded-2xl border border-slate-200 bg-white p-5"
+                                        },
+                                        "children": [
+                                            {
+                                                "type": "basic",
+                                                "name": "Div",
+                                                "props": {
+                                                    "className": "h-4 w-1/2 animate-pulse rounded bg-slate-100"
+                                                }
+                                            },
+                                            {
+                                                "type": "basic",
+                                                "name": "Div",
+                                                "props": {
+                                                    "className": "h-3 w-5/6 animate-pulse rounded bg-slate-100"
+                                                }
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "type": "basic",
+                                        "name": "Div",
+                                        "props": {
+                                            "className": "space-y-2 rounded-2xl border border-slate-200 bg-white p-5"
+                                        },
+                                        "children": [
+                                            {
+                                                "type": "basic",
+                                                "name": "Div",
+                                                "props": {
+                                                    "className": "h-4 w-1/2 animate-pulse rounded bg-slate-100"
+                                                }
+                                            },
+                                            {
+                                                "type": "basic",
+                                                "name": "Div",
+                                                "props": {
+                                                    "className": "h-3 w-5/6 animate-pulse rounded bg-slate-100"
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "comment": "notices 오류 + 다시 시도",
+                                "type": "basic",
+                                "name": "Div",
+                                "if": "{{!notices && !!_dataSourceErrors?.notices}}",
+                                "props": {
+                                    "className": "flex flex-col items-center gap-3 rounded-2xl border border-rose-200 bg-rose-50 px-6 py-10 text-center",
+                                    "role": "alert",
+                                    "data-testid": "notices-error"
+                                },
+                                "children": [
+                                    {
+                                        "type": "basic",
+                                        "name": "Icon",
+                                        "props": {
+                                            "name": "exclamation-triangle",
+                                            "className": "text-2xl text-rose-500"
+                                        }
+                                    },
+                                    {
+                                        "type": "basic",
+                                        "name": "P",
+                                        "props": {
+                                            "className": "text-sm font-semibold text-rose-700"
+                                        },
+                                        "text": "$t:travel.help.notices_error"
+                                    },
+                                    {
+                                        "type": "basic",
+                                        "name": "P",
+                                        "props": {
+                                            "className": "text-xs text-rose-600"
+                                        },
+                                        "text": "$t:travel.common.error_hint"
+                                    },
+                                    {
+                                        "type": "basic",
+                                        "name": "Button",
+                                        "props": {
+                                            "type": "button",
+                                            "className": "inline-flex items-center gap-2 rounded-xl bg-white px-4 py-2 text-sm font-semibold text-rose-700 ring-1 ring-rose-200 hover:bg-rose-100",
+                                            "data-testid": "notices-retry"
+                                        },
+                                        "children": [
+                                            {
+                                                "type": "basic",
+                                                "name": "Icon",
+                                                "props": {
+                                                    "name": "rotate-left",
+                                                    "className": "text-sm"
+                                                }
+                                            },
+                                            {
+                                                "type": "basic",
+                                                "name": "Span",
+                                                "text": "$t:travel.common.retry"
+                                            }
+                                        ],
+                                        "actions": [
+                                            {
+                                                "type": "click",
+                                                "handler": "refetchDataSource",
+                                                "params": {
+                                                    "dataSourceId": "notices"
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "basic",
+                                "name": "Div",
+                                "if": "{{!!notices && (notices?.data?.data ?? []).length === 0}}",
+                                "props": {
+                                    "className": "flex flex-col items-center gap-3 rounded-2xl border border-dashed border-slate-300 bg-white px-6 py-12 text-center"
+                                },
+                                "children": [
+                                    {
+                                        "type": "basic",
+                                        "name": "Div",
+                                        "props": {
+                                            "className": "flex h-14 w-14 items-center justify-center rounded-full bg-raon-50 text-raon-600"
+                                        },
+                                        "children": [
+                                            {
+                                                "type": "basic",
+                                                "name": "Icon",
+                                                "props": {
+                                                    "name": "bell",
+                                                    "className": "text-2xl"
+                                                }
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "type": "basic",
+                                        "name": "P",
+                                        "props": {
+                                            "className": "text-base font-semibold text-ink-900"
+                                        },
+                                        "text": "$t:travel.help.notices_empty_title"
+                                    },
+                                    {
+                                        "type": "basic",
+                                        "name": "P",
+                                        "props": {
+                                            "className": "max-w-md text-sm text-ink-500"
+                                        },
+                                        "text": "$t:travel.help.notices_empty_desc"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "basic",
+                                "name": "Div",
+                                "iteration": {
+                                    "source": "{{notices?.data?.data ?? []}}",
+                                    "item_var": "notice"
+                                },
+                                "children": [
+                                    {
+                                        "type": "basic",
+                                        "name": "Div",
+                                        "props": {
+                                            "className": "rounded-2xl border border-slate-200 bg-white shadow-sm overflow-hidden"
+                                        },
+                                        "children": [
+                                            {
+                                                "type": "basic",
+                                                "name": "Button",
+                                                "props": {
+                                                    "type": "button",
+                                                    "className": "flex w-full items-center gap-3 px-4 py-4 text-left md:px-5",
+                                                    "aria-expanded": "{{String(_local.openNoticeId ?? '') === String(notice.id)}}",
+                                                    "data-testid": "notice-item"
+                                                },
+                                                "children": [
+                                                    {
+                                                        "type": "basic",
+                                                        "name": "Div",
+                                                        "props": {
+                                                            "className": "min-w-0 flex-1"
+                                                        },
+                                                        "children": [
+                                                            {
+                                                                "type": "basic",
+                                                                "name": "P",
+                                                                "props": {
+                                                                    "className": "text-sm font-semibold text-ink-900 md:text-base"
+                                                                },
+                                                                "text": "{{notice.title ?? ''}}"
+                                                            },
+                                                            {
+                                                                "type": "basic",
+                                                                "name": "Span",
+                                                                "props": {
+                                                                    "className": "mt-0.5 block text-xs text-ink-500"
+                                                                },
+                                                                "text": "{{notice.created_at | date}}"
+                                                            }
+                                                        ]
+                                                    },
+                                                    {
+                                                        "type": "basic",
+                                                        "name": "Icon",
+                                                        "if": "{{!(String(_local.openNoticeId ?? '') === String(notice.id))}}",
+                                                        "props": {
+                                                            "name": "chevron-down",
+                                                            "className": "text-xs text-ink-500"
+                                                        }
+                                                    },
+                                                    {
+                                                        "type": "basic",
+                                                        "name": "Icon",
+                                                        "if": "{{String(_local.openNoticeId ?? '') === String(notice.id)}}",
+                                                        "props": {
+                                                            "name": "chevron-up",
+                                                            "className": "text-xs text-raon-600"
+                                                        }
+                                                    }
+                                                ],
+                                                "actions": [
+                                                    {
+                                                        "type": "click",
+                                                        "handler": "sequence",
+                                                        "actions": [
+                                                            {
+                                                                "handler": "setState",
+                                                                "params": {
+                                                                    "target": "local",
+                                                                    "openNoticeId": "{{notice.id}}",
+                                                                    "noticeDetailContent": "$t:travel.common.loading"
+                                                                }
+                                                            },
+                                                            {
+                                                                "handler": "apiCall",
+                                                                "target": "/api/modules/raonslab-travel_lab/support/notices/{{notice.id}}",
+                                                                "params": {
+                                                                    "method": "GET"
+                                                                },
+                                                                "onSuccess": [
+                                                                    {
+                                                                        "handler": "setState",
+                                                                        "params": {
+                                                                            "target": "local",
+                                                                            "noticeDetailContent": "{{String(_local.openNoticeId ?? '') === String(response.data?.id ?? '') ? (response.data?.content ?? '') : (_local.noticeDetailContent ?? '')}}"
+                                                                        }
+                                                                    }
+                                                                ],
+                                                                "onError": [
+                                                                    {
+                                                                        "handler": "setState",
+                                                                        "params": {
+                                                                            "target": "local",
+                                                                            "noticeDetailContent": "$t:travel.common.error_hint"
+                                                                        }
+                                                                    },
+                                                                    {
+                                                                        "handler": "toast",
+                                                                        "params": {
+                                                                            "type": "error",
+                                                                            "message": "{{error.message ?? ''}}"
+                                                                        }
+                                                                    }
+                                                                ],
+                                                                "auth_mode": "optional"
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "type": "basic",
+                                                "name": "Div",
+                                                "if": "{{String(_local.openNoticeId ?? '') === String(notice.id)}}",
+                                                "props": {
+                                                    "className": "border-t border-slate-100 bg-sand-50 px-4 py-4 text-sm leading-relaxed text-ink-700 md:px-5"
+                                                },
+                                                "children": [
+                                                    {
+                                                        "type": "basic",
+                                                        "name": "P",
+                                                        "props": {
+                                                            "className": "whitespace-pre-line"
+                                                        },
+                                                        "text": "{{_local.noticeDetailContent ?? ''}}"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "composite",
+                                "name": "Pagination",
+                                "if": "{{(notices?.data?.meta?.last_page ?? 0) > 1 || notices?.data?.meta?.has_more_pages === true || Number(query.page ?? 1) > 1}}",
+                                "props": {
+                                    "currentPage": "{{Number(query.page ?? notices?.data?.meta?.current_page ?? 1)}}",
+                                    "totalPages": "{{notices?.data?.meta?.last_page ?? null}}",
+                                    "hasMorePages": "{{notices?.data?.meta?.has_more_pages ?? false}}",
+                                    "className": "mt-6 flex justify-center"
+                                },
+                                "actions": [
+                                    {
+                                        "event": "onPageChange",
+                                        "handler": "navigate",
+                                        "params": {
+                                            "path": "/travel/help",
+                                            "mergeQuery": true,
+                                            "query": {
+                                                "page": "{{$args[0]}}"
+                                            }
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "basic",
+                        "name": "Div",
+                        "if": "{{(query.tab ?? 'notices') === 'faq'}}",
+                        "props": {
+                            "className": "space-y-3",
+                            "role": "tabpanel",
+                            "data-testid": "help-panel-faq"
+                        },
+                        "children": [
+                            {
+                                "type": "basic",
+                                "name": "Div",
+                                "props": {
+                                    "className": "relative"
+                                },
+                                "children": [
+                                    {
+                                        "type": "basic",
+                                        "name": "Div",
+                                        "props": {
+                                            "className": "pointer-events-none absolute inset-y-0 left-4 flex items-center text-slate-400"
+                                        },
+                                        "children": [
+                                            {
+                                                "type": "basic",
+                                                "name": "Icon",
+                                                "props": {
+                                                    "name": "search",
+                                                    "className": "text-sm"
+                                                }
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "type": "basic",
+                                        "name": "Input",
+                                        "props": {
+                                            "type": "search",
+                                            "name": "faqQ",
+                                            "value": "{{_local.faqQ ?? ''}}",
+                                            "className": "w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm text-ink-900 placeholder:text-slate-400 focus:border-raon-500 focus:outline-none focus:ring-2 focus:ring-raon-100 pl-10",
+                                            "placeholder": "$t:travel.help.faq_search",
+                                            "aria-label": "$t:travel.help.faq_search_label",
+                                            "data-testid": "faq-search"
+                                        },
+                                        "actions": [
+                                            {
+                                                "type": "change",
+                                                "handler": "setState",
+                                                "params": {
+                                                    "target": "local",
+                                                    "faqQ": "{{$event.target.value}}"
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "comment": "faqs 로딩 스켈레톤",
+                                "type": "basic",
+                                "name": "Div",
+                                "if": "{{faqs === undefined && !_dataSourceErrors?.faqs}}",
+                                "props": {
+                                    "className": "space-y-3",
+                                    "aria-busy": "true",
+                                    "aria-live": "polite",
+                                    "data-testid": "faqs-loading"
+                                },
+                                "children": [
+                                    {
+                                        "type": "basic",
+                                        "name": "Div",
+                                        "props": {
+                                            "className": "space-y-2 rounded-2xl border border-slate-200 bg-white p-5"
+                                        },
+                                        "children": [
+                                            {
+                                                "type": "basic",
+                                                "name": "Div",
+                                                "props": {
+                                                    "className": "h-4 w-1/2 animate-pulse rounded bg-slate-100"
+                                                }
+                                            },
+                                            {
+                                                "type": "basic",
+                                                "name": "Div",
+                                                "props": {
+                                                    "className": "h-3 w-5/6 animate-pulse rounded bg-slate-100"
+                                                }
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "type": "basic",
+                                        "name": "Div",
+                                        "props": {
+                                            "className": "space-y-2 rounded-2xl border border-slate-200 bg-white p-5"
+                                        },
+                                        "children": [
+                                            {
+                                                "type": "basic",
+                                                "name": "Div",
+                                                "props": {
+                                                    "className": "h-4 w-1/2 animate-pulse rounded bg-slate-100"
+                                                }
+                                            },
+                                            {
+                                                "type": "basic",
+                                                "name": "Div",
+                                                "props": {
+                                                    "className": "h-3 w-5/6 animate-pulse rounded bg-slate-100"
+                                                }
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "type": "basic",
+                                        "name": "Div",
+                                        "props": {
+                                            "className": "space-y-2 rounded-2xl border border-slate-200 bg-white p-5"
+                                        },
+                                        "children": [
+                                            {
+                                                "type": "basic",
+                                                "name": "Div",
+                                                "props": {
+                                                    "className": "h-4 w-1/2 animate-pulse rounded bg-slate-100"
+                                                }
+                                            },
+                                            {
+                                                "type": "basic",
+                                                "name": "Div",
+                                                "props": {
+                                                    "className": "h-3 w-5/6 animate-pulse rounded bg-slate-100"
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "comment": "faqs 오류 + 다시 시도",
+                                "type": "basic",
+                                "name": "Div",
+                                "if": "{{!faqs && !!_dataSourceErrors?.faqs}}",
+                                "props": {
+                                    "className": "flex flex-col items-center gap-3 rounded-2xl border border-rose-200 bg-rose-50 px-6 py-10 text-center",
+                                    "role": "alert",
+                                    "data-testid": "faqs-error"
+                                },
+                                "children": [
+                                    {
+                                        "type": "basic",
+                                        "name": "Icon",
+                                        "props": {
+                                            "name": "exclamation-triangle",
+                                            "className": "text-2xl text-rose-500"
+                                        }
+                                    },
+                                    {
+                                        "type": "basic",
+                                        "name": "P",
+                                        "props": {
+                                            "className": "text-sm font-semibold text-rose-700"
+                                        },
+                                        "text": "$t:travel.help.faq_error"
+                                    },
+                                    {
+                                        "type": "basic",
+                                        "name": "P",
+                                        "props": {
+                                            "className": "text-xs text-rose-600"
+                                        },
+                                        "text": "$t:travel.common.error_hint"
+                                    },
+                                    {
+                                        "type": "basic",
+                                        "name": "Button",
+                                        "props": {
+                                            "type": "button",
+                                            "className": "inline-flex items-center gap-2 rounded-xl bg-white px-4 py-2 text-sm font-semibold text-rose-700 ring-1 ring-rose-200 hover:bg-rose-100",
+                                            "data-testid": "faqs-retry"
+                                        },
+                                        "children": [
+                                            {
+                                                "type": "basic",
+                                                "name": "Icon",
+                                                "props": {
+                                                    "name": "rotate-left",
+                                                    "className": "text-sm"
+                                                }
+                                            },
+                                            {
+                                                "type": "basic",
+                                                "name": "Span",
+                                                "text": "$t:travel.common.retry"
+                                            }
+                                        ],
+                                        "actions": [
+                                            {
+                                                "type": "click",
+                                                "handler": "refetchDataSource",
+                                                "params": {
+                                                    "dataSourceId": "faqs"
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "basic",
+                                "name": "Div",
+                                "if": "{{!!faqs && (faqs?.data?.data ?? []).filter(f => !(_local.faqQ ?? '').trim() || String((f.title ?? '') + ' ' + (f.content_plain ?? f.content ?? '')).toLowerCase().includes(String(_local.faqQ ?? '').trim().toLowerCase())).length === 0}}",
+                                "props": {
+                                    "className": "flex flex-col items-center gap-3 rounded-2xl border border-dashed border-slate-300 bg-white px-6 py-12 text-center"
+                                },
+                                "children": [
+                                    {
+                                        "type": "basic",
+                                        "name": "Div",
+                                        "props": {
+                                            "className": "flex h-14 w-14 items-center justify-center rounded-full bg-raon-50 text-raon-600"
+                                        },
+                                        "children": [
+                                            {
+                                                "type": "basic",
+                                                "name": "Icon",
+                                                "props": {
+                                                    "name": "question-circle",
+                                                    "className": "text-2xl"
+                                                }
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "type": "basic",
+                                        "name": "P",
+                                        "props": {
+                                            "className": "text-base font-semibold text-ink-900"
+                                        },
+                                        "text": "$t:travel.help.faq_empty_title"
+                                    },
+                                    {
+                                        "type": "basic",
+                                        "name": "P",
+                                        "props": {
+                                            "className": "max-w-md text-sm text-ink-500"
+                                        },
+                                        "text": "$t:travel.help.faq_empty_desc"
+                                    },
+                                    {
+                                        "type": "basic",
+                                        "name": "Button",
+                                        "props": {
+                                            "type": "button",
+                                            "className": "inline-flex items-center justify-center gap-2 rounded-xl border border-slate-300 bg-white px-5 py-3 text-sm font-semibold text-ink-700 transition hover:border-raon-400 hover:text-raon-700 disabled:cursor-not-allowed disabled:opacity-50"
+                                        },
+                                        "text": "$t:travel.help.ask",
+                                        "actions": [
+                                            {
+                                                "type": "click",
+                                                "handler": "navigate",
+                                                "comment": "audit:allow layout-list-context-navigate-merge-query 탭 전환",
+                                                "params": {
+                                                    "path": "/travel/help",
+                                                    "query": {
+                                                        "tab": "questions"
+                                                    }
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "basic",
+                                "name": "Div",
+                                "iteration": {
+                                    "source": "{{(faqs?.data?.data ?? []).filter(f => !(_local.faqQ ?? '').trim() || String((f.title ?? '') + ' ' + (f.content_plain ?? f.content ?? '')).toLowerCase().includes(String(_local.faqQ ?? '').trim().toLowerCase()))}}",
+                                    "item_var": "faq"
+                                },
+                                "children": [
+                                    {
+                                        "type": "basic",
+                                        "name": "Div",
+                                        "props": {
+                                            "className": "rounded-2xl border border-slate-200 bg-white shadow-sm overflow-hidden"
+                                        },
+                                        "children": [
+                                            {
+                                                "type": "basic",
+                                                "name": "Button",
+                                                "props": {
+                                                    "type": "button",
+                                                    "className": "flex w-full items-center gap-3 px-4 py-4 text-left md:px-5",
+                                                    "aria-expanded": "{{String(_local.openFaqId ?? '') === String(faq.id)}}",
+                                                    "data-testid": "faq-item"
+                                                },
+                                                "children": [
+                                                    {
+                                                        "type": "basic",
+                                                        "name": "Div",
+                                                        "props": {
+                                                            "className": "min-w-0 flex-1"
+                                                        },
+                                                        "children": [
+                                                            {
+                                                                "type": "basic",
+                                                                "name": "P",
+                                                                "props": {
+                                                                    "className": "text-sm font-semibold text-ink-900 md:text-base"
+                                                                },
+                                                                "text": "{{faq.title ?? faq.question ?? ''}}"
+                                                            },
+                                                            {
+                                                                "type": "basic",
+                                                                "name": "Span",
+                                                                "props": {
+                                                                    "className": "mt-0.5 block text-xs text-ink-500"
+                                                                },
+                                                                "text": "{{faq.category_label ?? faq.category ?? ''}}"
+                                                            }
+                                                        ]
+                                                    },
+                                                    {
+                                                        "type": "basic",
+                                                        "name": "Icon",
+                                                        "if": "{{!(String(_local.openFaqId ?? '') === String(faq.id))}}",
+                                                        "props": {
+                                                            "name": "chevron-down",
+                                                            "className": "text-xs text-ink-500"
+                                                        }
+                                                    },
+                                                    {
+                                                        "type": "basic",
+                                                        "name": "Icon",
+                                                        "if": "{{String(_local.openFaqId ?? '') === String(faq.id)}}",
+                                                        "props": {
+                                                            "name": "chevron-up",
+                                                            "className": "text-xs text-raon-600"
+                                                        }
+                                                    }
+                                                ],
+                                                "actions": [
+                                                    {
+                                                        "type": "click",
+                                                        "handler": "sequence",
+                                                        "actions": [
+                                                            {
+                                                                "handler": "setState",
+                                                                "params": {
+                                                                    "target": "local",
+                                                                    "openFaqId": "{{faq.id}}",
+                                                                    "faqDetailContent": "$t:travel.common.loading"
+                                                                }
+                                                            },
+                                                            {
+                                                                "handler": "apiCall",
+                                                                "target": "/api/modules/raonslab-travel_lab/support/faqs/{{faq.id}}",
+                                                                "params": {
+                                                                    "method": "GET"
+                                                                },
+                                                                "onSuccess": [
+                                                                    {
+                                                                        "handler": "setState",
+                                                                        "params": {
+                                                                            "target": "local",
+                                                                            "faqDetailContent": "{{String(_local.openFaqId ?? '') === String(response.data?.id ?? '') ? (response.data?.content ?? '') : (_local.faqDetailContent ?? '')}}"
+                                                                        }
+                                                                    }
+                                                                ],
+                                                                "onError": [
+                                                                    {
+                                                                        "handler": "setState",
+                                                                        "params": {
+                                                                            "target": "local",
+                                                                            "faqDetailContent": "$t:travel.common.error_hint"
+                                                                        }
+                                                                    },
+                                                                    {
+                                                                        "handler": "toast",
+                                                                        "params": {
+                                                                            "type": "error",
+                                                                            "message": "{{error.message ?? ''}}"
+                                                                        }
+                                                                    }
+                                                                ],
+                                                                "auth_mode": "optional"
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "type": "basic",
+                                                "name": "Div",
+                                                "if": "{{String(_local.openFaqId ?? '') === String(faq.id)}}",
+                                                "props": {
+                                                    "className": "border-t border-slate-100 bg-sand-50 px-4 py-4 text-sm leading-relaxed text-ink-700 md:px-5"
+                                                },
+                                                "children": [
+                                                    {
+                                                        "type": "basic",
+                                                        "name": "P",
+                                                        "props": {
+                                                            "className": "whitespace-pre-line"
+                                                        },
+                                                        "text": "{{_local.faqDetailContent ?? ''}}"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "basic",
+                        "name": "Div",
+                        "if": "{{(query.tab ?? 'notices') === 'questions'}}",
+                        "props": {
+                            "className": "space-y-4",
+                            "role": "tabpanel",
+                            "data-testid": "help-panel-questions"
+                        },
+                        "children": [
+                            {
+                                "type": "basic",
+                                "name": "Div",
+                                "if": "{{!(!!(_global.currentUser?.uuid || _global.currentUser?.id))}}",
+                                "props": {
+                                    "className": "rounded-2xl border border-slate-200 bg-white shadow-sm flex flex-col items-start gap-3 p-6"
+                                },
+                                "children": [
+                                    {
+                                        "type": "basic",
+                                        "name": "H3",
+                                        "props": {
+                                            "className": "text-base font-bold text-ink-900"
+                                        },
+                                        "text": "$t:travel.help.login_needed_title"
+                                    },
+                                    {
+                                        "type": "basic",
+                                        "name": "P",
+                                        "props": {
+                                            "className": "text-sm text-ink-500"
+                                        },
+                                        "text": "$t:travel.help.login_needed_desc"
+                                    },
+                                    {
+                                        "type": "basic",
+                                        "name": "Button",
+                                        "props": {
+                                            "type": "button",
+                                            "className": "inline-flex items-center justify-center gap-2 rounded-xl bg-raon-600 px-5 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-raon-700 disabled:cursor-not-allowed disabled:opacity-50",
+                                            "data-testid": "questions-login"
+                                        },
+                                        "text": "$t:travel.auth.login",
+                                        "actions": [
+                                            {
+                                                "type": "click",
+                                                "handler": "navigate",
+                                                "params": {
+                                                    "path": "/login",
+                                                    "query": {
+                                                        "redirect": "/travel/help?tab=questions"
+                                                    }
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "basic",
+                                "name": "Div",
+                                "if": "{{!!(_global.currentUser?.uuid || _global.currentUser?.id)}}",
+                                "props": {
+                                    "className": "space-y-4"
+                                },
+                                "children": [
+                                    {
+                                        "type": "basic",
+                                        "name": "Div",
+                                        "if": "{{!!query.question && question_detail === undefined && !_dataSourceErrors?.question_detail}}",
+                                        "props": {
+                                            "className": "space-y-2"
+                                        },
+                                        "children": [
+                                            {
+                                                "type": "basic",
+                                                "name": "Div",
+                                                "props": {
+                                                    "className": "h-24 animate-pulse rounded-2xl bg-slate-100"
+                                                }
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "comment": "question_detail 오류 + 다시 시도",
+                                        "type": "basic",
+                                        "name": "Div",
+                                        "if": "{{!!query.question && !question_detail && !!_dataSourceErrors?.question_detail}}",
+                                        "props": {
+                                            "className": "flex flex-col items-center gap-3 rounded-2xl border border-rose-200 bg-rose-50 px-6 py-10 text-center",
+                                            "role": "alert",
+                                            "data-testid": "question_detail-error"
+                                        },
+                                        "children": [
+                                            {
+                                                "type": "basic",
+                                                "name": "Icon",
+                                                "props": {
+                                                    "name": "exclamation-triangle",
+                                                    "className": "text-2xl text-rose-500"
+                                                }
+                                            },
+                                            {
+                                                "type": "basic",
+                                                "name": "P",
+                                                "props": {
+                                                    "className": "text-sm font-semibold text-rose-700"
+                                                },
+                                                "text": "$t:travel.help.question_error"
+                                            },
+                                            {
+                                                "type": "basic",
+                                                "name": "P",
+                                                "props": {
+                                                    "className": "text-xs text-rose-600"
+                                                },
+                                                "text": "$t:travel.common.error_hint"
+                                            },
+                                            {
+                                                "type": "basic",
+                                                "name": "Button",
+                                                "props": {
+                                                    "type": "button",
+                                                    "className": "inline-flex items-center gap-2 rounded-xl bg-white px-4 py-2 text-sm font-semibold text-rose-700 ring-1 ring-rose-200 hover:bg-rose-100",
+                                                    "data-testid": "question_detail-retry"
+                                                },
+                                                "children": [
+                                                    {
+                                                        "type": "basic",
+                                                        "name": "Icon",
+                                                        "props": {
+                                                            "name": "rotate-left",
+                                                            "className": "text-sm"
+                                                        }
+                                                    },
+                                                    {
+                                                        "type": "basic",
+                                                        "name": "Span",
+                                                        "text": "$t:travel.common.retry"
+                                                    }
+                                                ],
+                                                "actions": [
+                                                    {
+                                                        "type": "click",
+                                                        "handler": "refetchDataSource",
+                                                        "params": {
+                                                            "dataSourceId": "question_detail"
+                                                        }
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "type": "basic",
+                                        "name": "Div",
+                                        "if": "{{!!question_detail?.data}}",
+                                        "props": {
+                                            "className": "rounded-2xl border border-slate-200 bg-white shadow-sm space-y-3 p-5",
+                                            "data-testid": "question-detail"
+                                        },
+                                        "children": [
+                                            {
+                                                "type": "basic",
+                                                "name": "Div",
+                                                "props": {
+                                                    "className": "flex items-start justify-between gap-2"
+                                                },
+                                                "children": [
+                                                    {
+                                                        "type": "basic",
+                                                        "name": "H3",
+                                                        "props": {
+                                                            "className": "text-base font-bold text-ink-900"
+                                                        },
+                                                        "text": "{{question_detail?.data?.title ?? ''}}"
+                                                    },
+                                                    {
+                                                        "type": "basic",
+                                                        "name": "Button",
+                                                        "props": {
+                                                            "type": "button",
+                                                            "className": "inline-flex h-8 w-8 items-center justify-center rounded-lg hover:bg-slate-100",
+                                                            "aria-label": "$t:travel.common.close"
+                                                        },
+                                                        "children": [
+                                                            {
+                                                                "type": "basic",
+                                                                "name": "Icon",
+                                                                "props": {
+                                                                    "name": "times",
+                                                                    "className": "text-sm"
+                                                                }
+                                                            }
+                                                        ],
+                                                        "actions": [
+                                                            {
+                                                                "type": "click",
+                                                                "handler": "navigate",
+                                                                "comment": "같은 문의 목록 안에서 상세만 닫는다",
+                                                                "params": {
+                                                                    "path": "/travel/help",
+                                                                    "mergeQuery": true,
+                                                                    "query": {
+                                                                        "question": ""
+                                                                    }
+                                                                }
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "type": "basic",
+                                                "name": "Span",
+                                                "props": {
+                                                    "className": "text-xs text-ink-500"
+                                                },
+                                                "text": "{{question_detail?.data?.created_at | datetime}}"
+                                            },
+                                            {
+                                                "type": "basic",
+                                                "name": "P",
+                                                "props": {
+                                                    "className": "whitespace-pre-line text-sm leading-relaxed text-ink-700"
+                                                },
+                                                "text": "{{question_detail?.data?.content_plain ?? question_detail?.data?.content_text ?? question_detail?.data?.excerpt ?? question_detail?.data?.content ?? ''}}"
+                                            },
+                                            {
+                                                "type": "basic",
+                                                "name": "Div",
+                                                "if": "{{!!((question_detail?.data?.answers ?? []).map(a => a.content).join('\\n\\n'))}}",
+                                                "props": {
+                                                    "className": "rounded-xl bg-raon-50 p-4"
+                                                },
+                                                "children": [
+                                                    {
+                                                        "type": "basic",
+                                                        "name": "Span",
+                                                        "props": {
+                                                            "className": "mb-1 block text-xs font-bold text-raon-700"
+                                                        },
+                                                        "text": "$t:travel.help.answer"
+                                                    },
+                                                    {
+                                                        "type": "basic",
+                                                        "name": "P",
+                                                        "props": {
+                                                            "className": "whitespace-pre-line text-sm leading-relaxed text-ink-900"
+                                                        },
+                                                        "text": "{{(question_detail?.data?.answers ?? []).map(a => a.content).join('\\n\\n') ?? ''}}"
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "type": "basic",
+                                                "name": "P",
+                                                "if": "{{!((question_detail?.data?.answers ?? []).map(a => a.content).join('\\n\\n'))}}",
+                                                "props": {
+                                                    "className": "rounded-xl bg-slate-50 p-4 text-sm text-ink-500"
+                                                },
+                                                "text": "$t:travel.help.waiting_answer"
+                                            },
+                                            {
+                                                "type": "basic",
+                                                "name": "Button",
+                                                "props": {
+                                                    "type": "button",
+                                                    "className": "rounded-xl border border-slate-300 px-4 py-2 text-sm font-semibold text-ink-700",
+                                                    "data-testid": "question-edit"
+                                                },
+                                                "text": "$t:travel.help.edit",
+                                                "if": "{{question_detail?.data?.is_mine === true && _local.questionEditing !== true}}",
+                                                "actions": [
+                                                    {
+                                                        "type": "click",
+                                                        "handler": "setState",
+                                                        "params": {
+                                                            "target": "local",
+                                                            "questionEditing": true,
+                                                            "questionEditSaving": false,
+                                                            "questionEditErrors": null,
+                                                            "questionEditError": "",
+                                                            "questionEditTitle": "{{question_detail.data.title ?? ''}}",
+                                                            "questionEditContent": "{{question_detail.data.content ?? ''}}"
+                                                        }
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "type": "basic",
+                                                "name": "Div",
+                                                "props": {
+                                                    "className": "space-y-3 rounded-xl border border-slate-200 p-4",
+                                                    "data-testid": "question-edit-form"
+                                                },
+                                                "children": [
+                                                    {
+                                                        "type": "basic",
+                                                        "name": "Input",
+                                                        "props": {
+                                                            "name": "questionEditTitle",
+                                                            "value": "{{_local.questionEditTitle ?? ''}}",
+                                                            "className": "w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm text-ink-900",
+                                                            "maxLength": 200,
+                                                            "aria-label": "$t:travel.help.ask_title_placeholder",
+                                                            "data-testid": "question-edit-title"
+                                                        },
+                                                        "actions": [
+                                                            {
+                                                                "type": "change",
+                                                                "handler": "setState",
+                                                                "params": {
+                                                                    "target": "local",
+                                                                    "questionEditTitle": "{{$event.target.value}}"
+                                                                }
+                                                            }
+                                                        ]
+                                                    },
+                                                    {
+                                                        "type": "basic",
+                                                        "name": "Textarea",
+                                                        "props": {
+                                                            "name": "questionEditContent",
+                                                            "value": "{{_local.questionEditContent ?? ''}}",
+                                                            "className": "w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm text-ink-900",
+                                                            "maxLength": 5000,
+                                                            "aria-label": "$t:travel.help.ask_content_label",
+                                                            "data-testid": "question-edit-content",
+                                                            "rows": 5
+                                                        },
+                                                        "actions": [
+                                                            {
+                                                                "type": "change",
+                                                                "handler": "setState",
+                                                                "params": {
+                                                                    "target": "local",
+                                                                    "questionEditContent": "{{$event.target.value}}"
+                                                                }
+                                                            }
+                                                        ]
+                                                    },
+                                                    {
+                                                        "type": "basic",
+                                                        "name": "P",
+                                                        "props": {
+                                                            "className": "text-sm text-red-700",
+                                                            "role": "alert",
+                                                            "data-testid": "question-edit-error"
+                                                        },
+                                                        "text": "{{_local.questionEditErrors?.title?.[0] ?? _local.questionEditErrors?.content?.[0] ?? _local.questionEditError ?? ''}}",
+                                                        "if": "{{!!_local.questionEditErrors || !!_local.questionEditError}}"
+                                                    },
+                                                    {
+                                                        "type": "basic",
+                                                        "name": "Div",
+                                                        "props": {
+                                                            "className": "flex flex-wrap gap-2"
+                                                        },
+                                                        "children": [
+                                                            {
+                                                                "type": "basic",
+                                                                "name": "Button",
+                                                                "props": {
+                                                                    "type": "button",
+                                                                    "className": "rounded-xl bg-raon-600 px-5 py-3 text-sm font-semibold text-white disabled:opacity-50",
+                                                                    "data-testid": "question-edit-save",
+                                                                    "disabled": "{{_local.questionEditSaving === true || String(_local.questionEditTitle ?? '').trim().length < 2 || String(_local.questionEditContent ?? '').trim().length < 2}}"
+                                                                },
+                                                                "text": "$t:travel.help.edit_save",
+                                                                "actions": [
+                                                                    {
+                                                                        "type": "click",
+                                                                        "handler": "sequence",
+                                                                        "actions": [
+                                                                            {
+                                                                                "handler": "setState",
+                                                                                "params": {
+                                                                                    "target": "local",
+                                                                                    "questionEditSaving": true,
+                                                                                    "questionEditErrors": null,
+                                                                                    "questionEditError": ""
+                                                                                }
+                                                                            },
+                                                                            {
+                                                                                "handler": "apiCall",
+                                                                                "auth_mode": "required",
+                                                                                "target": "/api/modules/raonslab-travel_lab/support/questions/{{question_detail.data.id}}",
+                                                                                "params": {
+                                                                                    "method": "PATCH",
+                                                                                    "body": {
+                                                                                        "title": "{{String(_local.questionEditTitle ?? '').trim()}}",
+                                                                                        "content": "{{String(_local.questionEditContent ?? '').trim()}}"
+                                                                                    }
+                                                                                },
+                                                                                "onSuccess": [
+                                                                                    {
+                                                                                        "handler": "setState",
+                                                                                        "params": {
+                                                                                            "target": "local",
+                                                                                            "questionEditing": false,
+                                                                                            "questionEditSaving": false,
+                                                                                            "questionEditErrors": null,
+                                                                                            "questionEditError": ""
+                                                                                        }
+                                                                                    },
+                                                                                    {
+                                                                                        "handler": "refetchDataSource",
+                                                                                        "params": {
+                                                                                            "dataSourceId": "question_detail"
+                                                                                        }
+                                                                                    },
+                                                                                    {
+                                                                                        "handler": "refetchDataSource",
+                                                                                        "params": {
+                                                                                            "dataSourceId": "questions"
+                                                                                        }
+                                                                                    },
+                                                                                    {
+                                                                                        "handler": "toast",
+                                                                                        "params": {
+                                                                                            "type": "success",
+                                                                                            "message": "$t:travel.help.edit_done"
+                                                                                        }
+                                                                                    }
+                                                                                ],
+                                                                                "onError": [
+                                                                                    {
+                                                                                        "handler": "setState",
+                                                                                        "params": {
+                                                                                            "target": "local",
+                                                                                            "questionEditSaving": false,
+                                                                                            "questionEditErrors": "{{error.errors ?? null}}",
+                                                                                            "questionEditError": "{{error.message ?? \"\"}}"
+                                                                                        }
+                                                                                    }
+                                                                                ]
+                                                                            }
+                                                                        ]
+                                                                    }
+                                                                ]
+                                                            },
+                                                            {
+                                                                "type": "basic",
+                                                                "name": "Button",
+                                                                "props": {
+                                                                    "type": "button",
+                                                                    "className": "rounded-xl border border-slate-300 px-5 py-3 text-sm",
+                                                                    "data-testid": "question-edit-cancel",
+                                                                    "disabled": "{{_local.questionEditSaving === true}}"
+                                                                },
+                                                                "text": "$t:travel.help.edit_cancel",
+                                                                "actions": [
+                                                                    {
+                                                                        "type": "click",
+                                                                        "handler": "setState",
+                                                                        "params": {
+                                                                            "target": "local",
+                                                                            "questionEditing": false,
+                                                                            "questionEditErrors": null,
+                                                                            "questionEditError": ""
+                                                                        }
+                                                                    }
+                                                                ]
+                                                            }
+                                                        ]
+                                                    }
+                                                ],
+                                                "if": "{{_local.questionEditing === true && question_detail?.data?.is_mine === true}}"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "type": "basic",
+                                        "name": "Div",
+                                        "props": {
+                                            "className": "rounded-2xl border border-slate-200 bg-white shadow-sm space-y-3 p-5",
+                                            "data-testid": "question-form"
+                                        },
+                                        "children": [
+                                            {
+                                                "type": "basic",
+                                                "name": "H3",
+                                                "props": {
+                                                    "className": "text-base font-bold text-ink-900"
+                                                },
+                                                "text": "$t:travel.help.ask_title"
+                                            },
+                                            {
+                                                "type": "basic",
+                                                "name": "P",
+                                                "props": {
+                                                    "className": "text-xs text-ink-500"
+                                                },
+                                                "text": "$t:travel.help.ask_desc"
+                                            },
+                                            {
+                                                "type": "basic",
+                                                "name": "Input",
+                                                "props": {
+                                                    "name": "questionTitle",
+                                                    "value": "{{_local.questionTitle ?? ''}}",
+                                                    "className": "w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm text-ink-900 placeholder:text-slate-400 focus:border-raon-500 focus:outline-none focus:ring-2 focus:ring-raon-100",
+                                                    "maxLength": 120,
+                                                    "placeholder": "$t:travel.help.ask_title_placeholder",
+                                                    "aria-label": "$t:travel.help.ask_title_placeholder",
+                                                    "data-testid": "question-title"
+                                                },
+                                                "actions": [
+                                                    {
+                                                        "type": "change",
+                                                        "handler": "setState",
+                                                        "params": {
+                                                            "target": "local",
+                                                            "questionTitle": "{{$event.target.value}}"
+                                                        }
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "type": "basic",
+                                                "name": "Textarea",
+                                                "props": {
+                                                    "name": "questionContent",
+                                                    "value": "{{_local.questionContent ?? ''}}",
+                                                    "className": "w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm text-ink-900 placeholder:text-slate-400 focus:border-raon-500 focus:outline-none focus:ring-2 focus:ring-raon-100 min-h-32",
+                                                    "maxLength": 2000,
+                                                    "rows": 5,
+                                                    "placeholder": "$t:travel.help.ask_content_placeholder",
+                                                    "aria-label": "$t:travel.help.ask_content_label",
+                                                    "data-testid": "question-content"
+                                                },
+                                                "actions": [
+                                                    {
+                                                        "type": "change",
+                                                        "handler": "setState",
+                                                        "params": {
+                                                            "target": "local",
+                                                            "questionContent": "{{$event.target.value}}"
+                                                        }
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "type": "basic",
+                                                "name": "P",
+                                                "if": "{{!!_local.questionErrors}}",
+                                                "props": {
+                                                    "className": "text-xs font-medium text-rose-600",
+                                                    "role": "alert"
+                                                },
+                                                "text": "{{_local.questionErrors?.title?.[0] ?? _local.questionErrors?.content?.[0] ?? ''}}"
+                                            },
+                                            {
+                                                "type": "basic",
+                                                "name": "Div",
+                                                "props": {
+                                                    "className": "flex justify-end"
+                                                },
+                                                "children": [
+                                                    {
+                                                        "type": "basic",
+                                                        "name": "Button",
+                                                        "props": {
+                                                            "type": "button",
+                                                            "className": "inline-flex items-center justify-center gap-2 rounded-xl bg-raon-600 px-5 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-raon-700 disabled:cursor-not-allowed disabled:opacity-50",
+                                                            "disabled": "{{!!_local.questionSubmitting || String(_local.questionTitle ?? '').trim() === '' || String(_local.questionContent ?? '').trim() === ''}}",
+                                                            "data-testid": "question-submit"
+                                                        },
+                                                        "children": [
+                                                            {
+                                                                "type": "basic",
+                                                                "name": "Icon",
+                                                                "props": {
+                                                                    "name": "paper-plane",
+                                                                    "className": "text-sm"
+                                                                }
+                                                            },
+                                                            {
+                                                                "type": "basic",
+                                                                "name": "Span",
+                                                                "text": "$t:travel.help.ask_submit"
+                                                            }
+                                                        ],
+                                                        "actions": [
+                                                            {
+                                                                "type": "click",
+                                                                "handler": "sequence",
+                                                                "actions": [
+                                                                    {
+                                                                        "handler": "setState",
+                                                                        "params": {
+                                                                            "target": "local",
+                                                                            "questionSubmitting": true,
+                                                                            "questionErrors": null
+                                                                        }
+                                                                    },
+                                                                    {
+                                                                        "handler": "apiCall",
+                                                                        "auth_mode": "required",
+                                                                        "target": "/api/modules/raonslab-travel_lab/support/questions",
+                                                                        "params": {
+                                                                            "method": "POST",
+                                                                            "body": {
+                                                                                "title": "{{String(_local.questionTitle ?? '').trim()}}",
+                                                                                "content": "{{String(_local.questionContent ?? '').trim()}}"
+                                                                            }
+                                                                        },
+                                                                        "onSuccess": [
+                                                                            {
+                                                                                "handler": "setState",
+                                                                                "params": {
+                                                                                    "target": "local",
+                                                                                    "questionSubmitting": false,
+                                                                                    "questionTitle": "",
+                                                                                    "questionContent": ""
+                                                                                }
+                                                                            },
+                                                                            {
+                                                                                "handler": "refetchDataSource",
+                                                                                "params": {
+                                                                                    "dataSourceId": "questions"
+                                                                                }
+                                                                            },
+                                                                            {
+                                                                                "handler": "toast",
+                                                                                "params": {
+                                                                                    "type": "success",
+                                                                                    "message": "$t:travel.help.ask_done"
+                                                                                }
+                                                                            }
+                                                                        ],
+                                                                        "onError": [
+                                                                            {
+                                                                                "handler": "setState",
+                                                                                "params": {
+                                                                                    "target": "local",
+                                                                                    "questionSubmitting": false,
+                                                                                    "questionErrors": "{{error.errors ?? null}}"
+                                                                                }
+                                                                            },
+                                                                            {
+                                                                                "handler": "toast",
+                                                                                "params": {
+                                                                                    "type": "error",
+                                                                                    "message": "{{error.message ?? '$t:travel.help.ask_failed'}}"
+                                                                                }
+                                                                            }
+                                                                        ]
+                                                                    }
+                                                                ]
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "type": "basic",
+                                        "name": "H3",
+                                        "props": {
+                                            "className": "pt-2 text-base font-bold text-ink-900"
+                                        },
+                                        "text": "$t:travel.help.my_questions"
+                                    },
+                                    {
+                                        "comment": "questions 로딩 스켈레톤",
+                                        "type": "basic",
+                                        "name": "Div",
+                                        "if": "{{questions === undefined && !_dataSourceErrors?.questions}}",
+                                        "props": {
+                                            "className": "space-y-3",
+                                            "aria-busy": "true",
+                                            "aria-live": "polite",
+                                            "data-testid": "questions-loading"
+                                        },
+                                        "children": [
+                                            {
+                                                "type": "basic",
+                                                "name": "Div",
+                                                "props": {
+                                                    "className": "space-y-2 rounded-2xl border border-slate-200 bg-white p-5"
+                                                },
+                                                "children": [
+                                                    {
+                                                        "type": "basic",
+                                                        "name": "Div",
+                                                        "props": {
+                                                            "className": "h-4 w-1/2 animate-pulse rounded bg-slate-100"
+                                                        }
+                                                    },
+                                                    {
+                                                        "type": "basic",
+                                                        "name": "Div",
+                                                        "props": {
+                                                            "className": "h-3 w-5/6 animate-pulse rounded bg-slate-100"
+                                                        }
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "type": "basic",
+                                                "name": "Div",
+                                                "props": {
+                                                    "className": "space-y-2 rounded-2xl border border-slate-200 bg-white p-5"
+                                                },
+                                                "children": [
+                                                    {
+                                                        "type": "basic",
+                                                        "name": "Div",
+                                                        "props": {
+                                                            "className": "h-4 w-1/2 animate-pulse rounded bg-slate-100"
+                                                        }
+                                                    },
+                                                    {
+                                                        "type": "basic",
+                                                        "name": "Div",
+                                                        "props": {
+                                                            "className": "h-3 w-5/6 animate-pulse rounded bg-slate-100"
+                                                        }
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "comment": "questions 오류 + 다시 시도",
+                                        "type": "basic",
+                                        "name": "Div",
+                                        "if": "{{!questions && !!_dataSourceErrors?.questions}}",
+                                        "props": {
+                                            "className": "flex flex-col items-center gap-3 rounded-2xl border border-rose-200 bg-rose-50 px-6 py-10 text-center",
+                                            "role": "alert",
+                                            "data-testid": "questions-error"
+                                        },
+                                        "children": [
+                                            {
+                                                "type": "basic",
+                                                "name": "Icon",
+                                                "props": {
+                                                    "name": "exclamation-triangle",
+                                                    "className": "text-2xl text-rose-500"
+                                                }
+                                            },
+                                            {
+                                                "type": "basic",
+                                                "name": "P",
+                                                "props": {
+                                                    "className": "text-sm font-semibold text-rose-700"
+                                                },
+                                                "text": "$t:travel.help.questions_error"
+                                            },
+                                            {
+                                                "type": "basic",
+                                                "name": "P",
+                                                "props": {
+                                                    "className": "text-xs text-rose-600"
+                                                },
+                                                "text": "$t:travel.common.error_hint"
+                                            },
+                                            {
+                                                "type": "basic",
+                                                "name": "Button",
+                                                "props": {
+                                                    "type": "button",
+                                                    "className": "inline-flex items-center gap-2 rounded-xl bg-white px-4 py-2 text-sm font-semibold text-rose-700 ring-1 ring-rose-200 hover:bg-rose-100",
+                                                    "data-testid": "questions-retry"
+                                                },
+                                                "children": [
+                                                    {
+                                                        "type": "basic",
+                                                        "name": "Icon",
+                                                        "props": {
+                                                            "name": "rotate-left",
+                                                            "className": "text-sm"
+                                                        }
+                                                    },
+                                                    {
+                                                        "type": "basic",
+                                                        "name": "Span",
+                                                        "text": "$t:travel.common.retry"
+                                                    }
+                                                ],
+                                                "actions": [
+                                                    {
+                                                        "type": "click",
+                                                        "handler": "refetchDataSource",
+                                                        "params": {
+                                                            "dataSourceId": "questions"
+                                                        }
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "type": "basic",
+                                        "name": "P",
+                                        "if": "{{!!questions && (questions?.data?.data ?? []).length === 0}}",
+                                        "props": {
+                                            "className": "rounded-2xl border border-dashed border-slate-300 bg-white p-6 text-center text-sm text-ink-500"
+                                        },
+                                        "text": "$t:travel.help.questions_empty"
+                                    },
+                                    {
+                                        "type": "basic",
+                                        "name": "Div",
+                                        "props": {
+                                            "className": "space-y-2"
+                                        },
+                                        "children": [
+                                            {
+                                                "type": "basic",
+                                                "name": "Div",
+                                                "iteration": {
+                                                    "source": "{{questions?.data?.data ?? []}}",
+                                                    "item_var": "question"
+                                                },
+                                                "children": [
+                                                    {
+                                                        "type": "basic",
+                                                        "name": "Button",
+                                                        "props": {
+                                                            "type": "button",
+                                                            "className": "flex w-full items-center gap-3 rounded-2xl border border-slate-200 bg-white shadow-sm px-4 py-3 text-left hover:border-raon-300",
+                                                            "data-testid": "question-item"
+                                                        },
+                                                        "children": [
+                                                            {
+                                                                "type": "basic",
+                                                                "name": "Div",
+                                                                "props": {
+                                                                    "className": "min-w-0 flex-1"
+                                                                },
+                                                                "children": [
+                                                                    {
+                                                                        "type": "basic",
+                                                                        "name": "P",
+                                                                        "props": {
+                                                                            "className": "line-clamp-1 text-sm font-semibold text-ink-900"
+                                                                        },
+                                                                        "text": "{{question.title ?? ''}}"
+                                                                    },
+                                                                    {
+                                                                        "type": "basic",
+                                                                        "name": "Span",
+                                                                        "props": {
+                                                                            "className": "text-xs text-ink-500"
+                                                                        },
+                                                                        "text": "{{question.created_at | date}}"
+                                                                    }
+                                                                ]
+                                                            },
+                                                            {
+                                                                "type": "basic",
+                                                                "name": "Span",
+                                                                "if": "{{!!(Number(question.answers_count ?? 0) > 0)}}",
+                                                                "props": {
+                                                                    "className": "shrink-0 rounded-full bg-emerald-50 px-2.5 py-1 text-xs font-semibold text-emerald-700"
+                                                                },
+                                                                "text": "$t:travel.help.answered"
+                                                            },
+                                                            {
+                                                                "type": "basic",
+                                                                "name": "Span",
+                                                                "if": "{{!(Number(question.answers_count ?? 0) > 0)}}",
+                                                                "props": {
+                                                                    "className": "shrink-0 rounded-full bg-slate-100 px-2.5 py-1 text-xs font-semibold text-ink-500"
+                                                                },
+                                                                "text": "$t:travel.help.waiting"
+                                                            }
+                                                        ],
+                                                        "actions": [
+                                                            {
+                                                                "type": "click",
+                                                                "handler": "navigate",
+                                                                "comment": "같은 문의 목록 안에서 상세 열기 — 페이지 유지",
+                                                                "params": {
+                                                                    "path": "/travel/help",
+                                                                    "mergeQuery": true,
+                                                                    "query": {
+                                                                        "question": "{{question.id}}"
+                                                                    }
+                                                                }
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "type": "composite",
+                                        "name": "Pagination",
+                                        "if": "{{(questions?.data?.meta?.last_page ?? 0) > 1 || questions?.data?.meta?.has_more_pages === true || Number(query.page ?? 1) > 1}}",
+                                        "props": {
+                                            "currentPage": "{{Number(query.page ?? questions?.data?.meta?.current_page ?? 1)}}",
+                                            "totalPages": "{{questions?.data?.meta?.last_page ?? null}}",
+                                            "hasMorePages": "{{questions?.data?.meta?.has_more_pages ?? false}}",
+                                            "className": "mt-6 flex justify-center"
+                                        },
+                                        "actions": [
+                                            {
+                                                "event": "onPageChange",
+                                                "handler": "navigate",
+                                                "params": {
+                                                    "path": "/travel/help",
+                                                    "mergeQuery": true,
+                                                    "query": {
+                                                        "page": "{{$args[0]}}"
+                                                    }
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+}

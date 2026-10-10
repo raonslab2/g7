@@ -1,0 +1,122 @@
+{
+  "original_executed_failure_metadata": [
+    {
+      "file": "storage/framework/testing/w04p-mysql-live/native.log.result.json",
+      "result": {
+        "command": [
+          "/usr/bin/php8.3",
+          "vendor/bin/phpunit",
+          "--bootstrap",
+          "docs/symphony/w04-final-contract-persistence/test-bootstrap.php",
+          "scripts/travel-lab/LiveMysqlTest.php"
+        ],
+        "pid": 1044464,
+        "exit": 2,
+        "process_gone": true,
+        "seconds": 1.383,
+        "utc": "2026-10-09T21:38:27+00:00"
+      }
+    },
+    {
+      "file": "storage/framework/testing/w04p-populated-recovery/dump-check.log.history-6c2cf483.result.json",
+      "result": {
+        "command": [
+          "python3",
+          "docs/symphony/w04-final-contract-persistence/recovery-dump-check.py",
+          "storage/framework/testing/w04p-populated-recovery/snapshot.sql",
+          "storage/framework/testing/w04p-populated-recovery/before.json"
+        ],
+        "pid": 1027449,
+        "exit": 15,
+        "process_gone": true,
+        "seconds": 163.191,
+        "utc": "2026-10-09T21:36:22+00:00"
+      }
+    },
+    {
+      "file": "storage/framework/testing/w04p-private/operation-eb14db9d.log.result.json",
+      "result": {
+        "command": [
+          "/usr/bin/php8.3",
+          "docs/symphony/w04-final-contract-persistence/fresh-install.php",
+          "original"
+        ],
+        "pid": 975215,
+        "exit": 255,
+        "process_gone": true,
+        "seconds": 0.653,
+        "utc": "2026-10-09T21:23:57+00:00"
+      }
+    },
+    {
+      "file": "storage/framework/testing/w04p-private/operation-2f9acbee.log.result.json",
+      "result": {
+        "command": [
+          "/usr/bin/php8.3",
+          "docs/symphony/w04-final-contract-persistence/fresh-install.php",
+          "original"
+        ],
+        "pid": 974445,
+        "exit": 255,
+        "process_gone": true,
+        "seconds": 0.253,
+        "utc": "2026-10-09T21:23:46+00:00"
+      }
+    },
+    {
+      "file": "storage/framework/testing/w04p-install-logs/01-db-wipe.txt.history-a2cda62c.result.json",
+      "result": {
+        "command": [
+          "/usr/bin/php8.3",
+          "docs/symphony/w04-final-contract-persistence/guarded-artisan.php",
+          "db:wipe",
+          "--database=mysql",
+          "--drop-views",
+          "--force",
+          "--no-interaction"
+        ],
+        "pid": 975233,
+        "exit": 1,
+        "process_gone": true,
+        "seconds": 0.268,
+        "utc": "2026-10-09T21:23:57+00:00"
+      }
+    }
+  ],
+  "historical_W04_negatives": "UNCHANGED; NOT RELABELED",
+  "initial_own_snapshot_native_dump": "schema-bound mysqldump; per-statement guard applies to added guarded native SHOW CREATE dumps and all own observer/import SQL",
+  "wrapper_observations": [
+    {
+      "command": [
+        "php",
+        "docs/symphony/w04-final-contract-persistence/snapshot.php",
+        "original",
+        "save"
+      ],
+      "exit": 255,
+      "result": "after valid dump/check, own observer self-reference prevented quiescence; no wipe",
+      "seconds": "NOT_MEASURED"
+    },
+    {
+      "command": [
+        "php",
+        "docs/symphony/w04-final-contract-persistence/snapshot.php",
+        "populated-recovery",
+        "save"
+      ],
+      "exit": 255,
+      "result": "foreign FD/locks preflight block; no wipe; fresh preflight after natural disappearance",
+      "seconds": "NOT_MEASURED"
+    },
+    {
+      "command": [
+        "php",
+        "docs/symphony/w04-final-contract-persistence/release.php"
+      ],
+      "exit": 255,
+      "result": "transient foreign FD/locks; no release claimed until successful new preflight",
+      "seconds": 0.233
+    }
+  ],
+  "original_parser_termination_exit": 15
+}

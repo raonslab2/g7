@@ -1,0 +1,248 @@
+{
+ "note": "exit reconstructed from recorded FAIL statuses (process exit codes observed in-session match); probe-1 used supplied bearer that was already 401 and mislabelled its first observation PASS — retained unchanged",
+ "totals": {
+  "phases": 12,
+  "browser_contexts": 22,
+  "checks": {
+   "PASS": 62,
+   "OBSERVED": 7,
+   "FAIL": 2
+  },
+  "screenshots": 34
+ },
+ "phases": [
+  {
+   "phase": "after",
+   "file": "binding-after.json",
+   "command": "python3 -I tests/W04_RETRY_BROWSER/binding.py after",
+   "ok": true,
+   "at": "2026-10-09T21:39:20.473762+00:00",
+   "selected_files": 4507,
+   "installed_mismatches": 0,
+   "exit": 0
+  },
+  {
+   "phase": "before",
+   "file": "binding-before.json",
+   "command": "python3 -I tests/W04_RETRY_BROWSER/binding.py before",
+   "ok": true,
+   "at": "2026-10-09T21:22:22.049778+00:00",
+   "selected_files": 4507,
+   "installed_mismatches": 0,
+   "exit": 0
+  },
+  {
+   "phase": "empty-1",
+   "file": "empty-1.json",
+   "command": "node tests/W04_RETRY_BROWSER/empty.mjs empty-1",
+   "started": "2026-10-09T21:34:25.381Z",
+   "finished": "2026-10-09T21:34:41.726Z",
+   "chromium": "156.0.8078.4",
+   "browser_contexts": 2,
+   "checks": {
+    "PASS": 5
+   },
+   "screenshots": 2,
+   "cleanup": {
+    "PASS": 2,
+    "OBSERVED": 3
+   },
+   "pageerrors": 0,
+   "external_attempts": 0,
+   "external_connections": 0,
+   "exit": 0
+  },
+  {
+   "phase": "final-audit-1",
+   "file": "final-audit-1.json",
+   "command": "node tests/W04_RETRY_BROWSER/final-audit.mjs final-audit-1",
+   "started": "2026-10-09T21:39:05.015Z",
+   "finished": "2026-10-09T21:39:10.593Z",
+   "chromium": "156.0.8078.4",
+   "browser_contexts": 0,
+   "checks": {
+    "PASS": 4,
+    "OBSERVED": 1
+   },
+   "screenshots": 0,
+   "cleanup": {
+    "PASS": 3,
+    "OBSERVED": 3
+   },
+   "pageerrors": 0,
+   "external_attempts": 0,
+   "external_connections": 0,
+   "exit": 0
+  },
+  {
+   "phase": "menu-diag-1",
+   "file": "menu-diag-1.json",
+   "command": "node tests/W04_RETRY_BROWSER/menu-diag.mjs menu-diag-1",
+   "started": "2026-10-09T21:38:20.332Z",
+   "finished": "2026-10-09T21:38:56.773Z",
+   "chromium": "156.0.8078.4",
+   "browser_contexts": 5,
+   "checks": {
+    "PASS": 5
+   },
+   "screenshots": 0,
+   "cleanup": {
+    "PASS": 5,
+    "OBSERVED": 3
+   },
+   "pageerrors": 0,
+   "external_attempts": 0,
+   "external_connections": 0,
+   "exit": 0
+  },
+  {
+   "phase": "probe-1",
+   "file": "probe-1.json",
+   "command": "node tests/W04_RETRY_BROWSER/probe.mjs probe-1",
+   "started": "2026-10-09T21:24:42.997Z",
+   "finished": "2026-10-09T21:24:45.159Z",
+   "chromium": "156.0.8078.4",
+   "browser_contexts": 0,
+   "checks": {
+    "PASS": 1,
+    "OBSERVED": 1
+   },
+   "screenshots": 0,
+   "cleanup": {
+    "FAIL": 3
+   },
+   "pageerrors": 0,
+   "external_attempts": 0,
+   "external_connections": 0,
+   "exit": 1
+  },
+  {
+   "phase": "probe-2",
+   "file": "probe-2.json",
+   "command": "node tests/W04_RETRY_BROWSER/probe.mjs probe-2",
+   "started": "2026-10-09T21:25:26.276Z",
+   "finished": "2026-10-09T21:25:30.393Z",
+   "chromium": "156.0.8078.4",
+   "browser_contexts": 0,
+   "checks": {
+    "OBSERVED": 5
+   },
+   "screenshots": 0,
+   "cleanup": {
+    "PASS": 3,
+    "OBSERVED": 3
+   },
+   "pageerrors": 0,
+   "external_attempts": 0,
+   "external_connections": 0,
+   "exit": 0
+  },
+  {
+   "phase": "retry-1",
+   "file": "retry-1.json",
+   "command": "node tests/W04_RETRY_BROWSER/retry.mjs retry-1",
+   "started": "2026-10-09T21:26:18.228Z",
+   "finished": "2026-10-09T21:28:22.619Z",
+   "chromium": "156.0.8078.4",
+   "browser_contexts": 2,
+   "checks": {
+    "PASS": 6,
+    "FAIL": 1
+   },
+   "screenshots": 6,
+   "cleanup": {
+    "PASS": 3,
+    "OBSERVED": 3
+   },
+   "pageerrors": 0,
+   "external_attempts": 0,
+   "external_connections": 0,
+   "exit": 1
+  },
+  {
+   "phase": "retry-2",
+   "file": "retry-2.json",
+   "command": "node tests/W04_RETRY_BROWSER/retry.mjs retry-2 1440 A",
+   "started": "2026-10-09T21:33:10.003Z",
+   "finished": "2026-10-09T21:33:34.210Z",
+   "chromium": "156.0.8078.4",
+   "browser_contexts": 1,
+   "checks": {
+    "PASS": 3
+   },
+   "screenshots": 2,
+   "cleanup": {
+    "PASS": 2,
+    "OBSERVED": 3
+   },
+   "pageerrors": 0,
+   "external_attempts": 0,
+   "external_connections": 0,
+   "exit": 0
+  },
+  {
+   "phase": "scope-1",
+   "file": "scope-1.json",
+   "command": "node tests/W04_RETRY_BROWSER/scope.mjs scope-1",
+   "started": "2026-10-09T21:31:51.963Z",
+   "finished": "2026-10-09T21:34:09.050Z",
+   "chromium": "156.0.8078.4",
+   "browser_contexts": 4,
+   "checks": {
+    "PASS": 14
+   },
+   "screenshots": 8,
+   "cleanup": {
+    "PASS": 9,
+    "OBSERVED": 3
+   },
+   "pageerrors": 0,
+   "external_attempts": 0,
+   "external_connections": 0,
+   "exit": 0
+  },
+  {
+   "phase": "support-1",
+   "file": "support-1.json",
+   "command": "node tests/W04_RETRY_BROWSER/support.mjs support-1",
+   "started": "2026-10-09T21:35:22.820Z",
+   "finished": "2026-10-09T21:37:47.948Z",
+   "chromium": "156.0.8078.4",
+   "browser_contexts": 4,
+   "checks": {
+    "PASS": 8
+   },
+   "screenshots": 8,
+   "cleanup": {
+    "PASS": 11,
+    "OBSERVED": 3
+   },
+   "pageerrors": 0,
+   "external_attempts": 0,
+   "external_connections": 0,
+   "exit": 0
+  },
+  {
+   "phase": "transaction-1",
+   "file": "transaction-1.json",
+   "command": "node tests/W04_RETRY_BROWSER/transaction.mjs transaction-1",
+   "started": "2026-10-09T21:34:48.397Z",
+   "finished": "2026-10-09T21:37:55.468Z",
+   "chromium": "156.0.8078.4",
+   "browser_contexts": 4,
+   "checks": {
+    "PASS": 16,
+    "FAIL": 1
+   },
+   "screenshots": 8,
+   "cleanup": {
+    "PASS": 17,
+    "OBSERVED": 3
+   },
+   "pageerrors": 0,
+   "external_attempts": 0,
+   "external_connections": 0,
+   "exit": 1
+  }
+ ]
+}

@@ -7,7 +7,7 @@
 <p align="center">
   <img src="https://img.shields.io/badge/version-1.2.1-0066FF?style=flat-square" alt="version 1.2.1">
   <img src="https://img.shields.io/badge/type-%EB%AA%A8%EB%93%88-555555?style=flat-square" alt="type 모듈">
-  <img src="https://img.shields.io/badge/%EA%B7%B8%EB%88%84%EB%B3%B4%EB%93%9C7-%3E%3D7.0.10-1F883D?style=flat-square" alt="그누보드7 &gt;=7.0.10">
+  <img src="https://img.shields.io/badge/%EA%B7%B8%EB%88%84%EB%B3%B4%EB%93%9C7-%3E%3D7.0.12-1F883D?style=flat-square" alt="그누보드7 &gt;=7.0.12">
   <img src="https://img.shields.io/badge/license-MIT-8250DF?style=flat-square" alt="license MIT">
 </p>
 <!-- @generated:badges END -->
@@ -96,7 +96,7 @@ flowchart LR
 <!-- @generated:requirements START — ext:docgen 이 갱신. 이 블록 안은 직접 수정하지 않는다 -->
 | 항목 | 값 |
 |---|---|
-| 그누보드7 코어 | `>=7.0.10` |
+| 그누보드7 코어 | `>=7.0.12` |
 | PHP | `^8.2` |
 <!-- @generated:requirements END -->
 
@@ -180,10 +180,12 @@ _별도의 관리자 설정 항목이 없습니다._
 
 | 확장 | 유형 | 요구 버전 |
 |---|---|---|
+| `raonslab-travel_lab` | 모듈 | `>=1.2.1` |
 | `sirsoft-pay_kginicis` | 플러그인 | `>=1.1.0` |
 | `sirsoft-pay_nhnkcp` | 플러그인 | `>=1.1.0` |
 | `sirsoft-pay_nicepayments` | 플러그인 | `>=1.1.0` |
 | `sirsoft-tosspayments` | 플러그인 | `>=1.1.0` |
+| `raonslab-travel_lab` | 템플릿 | `>=1.2.1` |
 | `sirsoft-basic` | 템플릿 | `>=1.1.0` |
 <!-- @generated:integrations END -->
 

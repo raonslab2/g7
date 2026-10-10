@@ -1,0 +1,64 @@
+{
+    "label": "populated-recovery",
+    "source_sha": "5783e6ba124061bdfae639cdaf9b1c14a83cdf03",
+    "source_tree": "361f9a142572f8a6c0c28326c461a233a92aec4e",
+    "dump_sha256": "8e193a81f74e9709d961e488f274710e0652668ef95397f7deb188fcca499806",
+    "dump_bytes": 26218874,
+    "dump_exit": 0,
+    "dump_pid": 1027191,
+    "dump_process_gone": true,
+    "dump_handles": {
+        "utc": "2026-10-09T21:33:38.360529+00:00",
+        "count": 0,
+        "handles": [],
+        "unreadable_pids": [],
+        "lock_holders": [],
+        "excluded_ancestor_pids": [
+            964752,
+            1026850,
+            1026983,
+            1027324,
+            1027328,
+            3650359
+        ],
+        "method": "proc-only bounded cwd/argv/FD; known TEST owners and own nonancestor native processes"
+    },
+    "dump_seconds": 0.986,
+    "stable": true,
+    "before_digest": "84e16b64c6a36cc1fa16bb3f1e8ed97de8ece748786746bf1bb965268a16de39",
+    "table_count": 112,
+    "row_count": 1768,
+    "equals_original_baseline": false,
+    "directory_mode": "700",
+    "file_mode": "600",
+    "exclusive": {
+        "pid": 1026983,
+        "cwd": "/home/ubuntu/.agentopt-v2/workspaces/req_95d0024e7b144a5bb903cc7daad1fb5f",
+        "argv": [
+            "docs/symphony/w04-final-contract-persistence/snapshot.php",
+            "populated-recovery",
+            "save"
+        ],
+        "own_connection_id": 139091,
+        "other_test_connections": 0,
+        "own_server_processes": 0,
+        "prior_request_handles": {
+            "utc": "2026-10-09T21:33:36.767476+00:00",
+            "count": 0,
+            "handles": [],
+            "unreadable_pids": [],
+            "lock_holders": [],
+            "excluded_ancestor_pids": [
+                964752,
+                1026850,
+                1026983,
+                1027023,
+                1027031,
+                3650359
+            ],
+            "method": "proc-only bounded cwd/argv/FD; known TEST owners and own nonancestor native processes"
+        },
+        "utc": "2026-10-09T21:33:36+00:00"
+    },
+    "utc": "2026-10-09T21:33:39+00:00"
+}

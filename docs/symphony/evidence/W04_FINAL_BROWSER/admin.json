@@ -1,0 +1,50 @@
+{
+  "tested_sha": "1052e3fb4bc4cccabb51b8c538116c78655f345b",
+  "actual_head": "1052e3fb4bc4cccabb51b8c538116c78655f345b",
+  "run": "W04F1791561161184",
+  "elapsed_seconds": 1.161,
+  "results": [
+    {
+      "width": 390,
+      "name": "native API own product/options fixture preparation (UI creation BLOCKED)",
+      "status": "PASS",
+      "detail": {
+        "id": 54,
+        "http": 201,
+        "scope": "fixture setup only; existing category/policy READONLY, no creation/update"
+      }
+    },
+    {
+      "width": 1440,
+      "name": "native API own product/options fixture preparation (UI creation BLOCKED)",
+      "status": "PASS",
+      "detail": {
+        "id": 55,
+        "http": 201,
+        "scope": "fixture setup only; existing category/policy READONLY, no creation/update"
+      }
+    }
+  ],
+  "metrics": [],
+  "owned": {
+    "inquiries": [],
+    "carts": [],
+    "products": [
+      {
+        "id": 54,
+        "policy": 1,
+        "category": 1,
+        "fixturePreparation": "API ONLY, UI admin creation BLOCKED empty active category tree"
+      },
+      {
+        "id": 55,
+        "policy": 1,
+        "category": 1,
+        "fixturePreparation": "API ONLY, UI admin creation BLOCKED empty active category tree"
+      }
+    ],
+    "posts": [],
+    "policies": [],
+    "categories": []
+  }
+}

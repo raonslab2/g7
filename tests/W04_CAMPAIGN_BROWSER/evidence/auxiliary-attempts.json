@@ -1,0 +1,24 @@
+{
+  "utc": "2026-10-09T20:36:59.296703+00:00",
+  "scope": "Evidence visualization helpers, no product/runtime calls",
+  "attempts": [
+    {
+      "command": "inline Python PIL contact-sheet composition",
+      "exit": 1,
+      "raw_error": "ModuleNotFoundError: No module named 'PIL'",
+      "product_pass_count": 0
+    },
+    {
+      "command": "command -v montage",
+      "exit": 1,
+      "raw_output": "",
+      "product_pass_count": 0
+    },
+    {
+      "command": "node tests/W04_CAMPAIGN_BROWSER/contact-sheet.mjs",
+      "exit": 1,
+      "raw_error": "Error: Unscanned PNG at contact-sheet.mjs:6:199; privacy scan still running; guard rejected before Chromium launch",
+      "product_pass_count": 0
+    }
+  ]
+}

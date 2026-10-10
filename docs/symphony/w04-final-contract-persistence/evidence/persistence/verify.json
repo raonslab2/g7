@@ -1,0 +1,188 @@
+{
+ "phase": "verify",
+ "review_sha": "5783e6ba124061bdfae639cdaf9b1c14a83cdf03",
+ "base_url": "http://127.0.0.1:18880",
+ "counts": {
+  "PASS": 1,
+  "FAIL": 0,
+  "OBSERVED": 0,
+  "BLOCKED": 0,
+  "NOT_RUN": 0
+ },
+ "results": [
+  {
+   "name": "new process native relogin retains same inquiry/items/events/reserved/private native answer/campaign version",
+   "status": "PASS",
+   "detail": {
+    "before": {
+     "persistent_native_row_inventory": {
+      "inquiry": {
+       "rows": 1,
+       "sha256": "d6b939910cd95c69726728c54126754f9251d243167482b8a86b4b004dbe31c8"
+      },
+      "items": {
+       "rows": 1,
+       "sha256": "0257a9619c8d948e08adc874e5852c8bfa237dc6fb18a727ff0bb653364829f0"
+      },
+      "events": {
+       "rows": 3,
+       "sha256": "b28c7a59871ddb2f40b1637e62a42863d885ac61861e46051f59c3811a2b3fd1"
+      },
+      "question": {
+       "rows": 1,
+       "sha256": "32e4cfd4c0ddc1fa28c063d89131cf2a91bf2e4a4d6c9b3f793e70bdbf84a94d"
+      },
+      "answers": {
+       "rows": 1,
+       "sha256": "aac218ef3f18873aef64c84ed6e7167f0ff4024195ddb47dc9ffd87626f511c1"
+      },
+      "page": {
+       "rows": 1,
+       "sha256": "d02ed1a3a00e8407959b86af9a102bd02bb9a042f4730f283ca6d78435add7f2"
+      },
+      "versions": {
+       "rows": 2,
+       "sha256": "50cf20b52651932530c1bcd7a87729b544c03e469e46f3f23d44b9b3179c83d3"
+      }
+     },
+     "inquiry_id": 7,
+     "question_id": 8,
+     "page_id": 7,
+     "inquiry_state": "TEST_ACCEPTED",
+     "inquiry_item_digest": "d8eff09d991c72c6eff1e5b744d6f122c32f8bfe3b60acf511de04be37dac0d3",
+     "inquiry_sql": {
+      "id": 7,
+      "user_id": 2,
+      "status": "TEST_ACCEPTED",
+      "total_amount": "12000.00",
+      "currency_code": "KRW",
+      "items": 1,
+      "qty": "1",
+      "events": 3
+     },
+     "reserved": 1,
+     "capacity": 2,
+     "question_body_digest": "d8dcaccb9b27183e780a9ce274faa8a5fc02f4a5c8d708df5071c6336a691ac4",
+     "answer_body_digest": "aafbd021c2496779cc80edcf95214394b924dfe25d98a5f3e8d922ed8d2b9c9c",
+     "campaign_body_digest": "101fed9a43f7916dd3dd4ba5562d264698880c09f19d809de1b31695ebf73e23",
+     "campaign_version": 2,
+     "foreign_inquiry404": true,
+     "foreign_question404": true,
+     "guest_question401": true,
+     "foreign_list_excludes": true
+    },
+    "after": {
+     "persistent_native_row_inventory": {
+      "inquiry": {
+       "rows": 1,
+       "sha256": "d6b939910cd95c69726728c54126754f9251d243167482b8a86b4b004dbe31c8"
+      },
+      "items": {
+       "rows": 1,
+       "sha256": "0257a9619c8d948e08adc874e5852c8bfa237dc6fb18a727ff0bb653364829f0"
+      },
+      "events": {
+       "rows": 3,
+       "sha256": "b28c7a59871ddb2f40b1637e62a42863d885ac61861e46051f59c3811a2b3fd1"
+      },
+      "question": {
+       "rows": 1,
+       "sha256": "32e4cfd4c0ddc1fa28c063d89131cf2a91bf2e4a4d6c9b3f793e70bdbf84a94d"
+      },
+      "answers": {
+       "rows": 1,
+       "sha256": "aac218ef3f18873aef64c84ed6e7167f0ff4024195ddb47dc9ffd87626f511c1"
+      },
+      "page": {
+       "rows": 1,
+       "sha256": "d02ed1a3a00e8407959b86af9a102bd02bb9a042f4730f283ca6d78435add7f2"
+      },
+      "versions": {
+       "rows": 2,
+       "sha256": "50cf20b52651932530c1bcd7a87729b544c03e469e46f3f23d44b9b3179c83d3"
+      }
+     },
+     "inquiry_id": 7,
+     "question_id": 8,
+     "page_id": 7,
+     "inquiry_state": "TEST_ACCEPTED",
+     "inquiry_item_digest": "d8eff09d991c72c6eff1e5b744d6f122c32f8bfe3b60acf511de04be37dac0d3",
+     "inquiry_sql": {
+      "id": 7,
+      "user_id": 2,
+      "status": "TEST_ACCEPTED",
+      "total_amount": "12000.00",
+      "currency_code": "KRW",
+      "items": 1,
+      "qty": "1",
+      "events": 3
+     },
+     "reserved": 1,
+     "capacity": 2,
+     "question_body_digest": "d8dcaccb9b27183e780a9ce274faa8a5fc02f4a5c8d708df5071c6336a691ac4",
+     "answer_body_digest": "aafbd021c2496779cc80edcf95214394b924dfe25d98a5f3e8d922ed8d2b9c9c",
+     "campaign_body_digest": "101fed9a43f7916dd3dd4ba5562d264698880c09f19d809de1b31695ebf73e23",
+     "campaign_version": 2,
+     "foreign_inquiry404": true,
+     "foreign_question404": true,
+     "guest_question401": true,
+     "foreign_list_excludes": true
+    },
+    "exact_semantic_equal": true
+   },
+   "at": "21:31:30"
+  }
+ ],
+ "http_checks": [
+  {
+   "method": "GET",
+   "path": "/api/modules/raonslab-travel_lab/inquiries/7",
+   "actor": "member",
+   "status": 200,
+   "seconds": 0.852
+  },
+  {
+   "method": "GET",
+   "path": "/api/modules/raonslab-travel_lab/support/questions/8",
+   "actor": "member",
+   "status": 200,
+   "seconds": 0.806
+  },
+  {
+   "method": "GET",
+   "path": "/api/modules/raonslab-travel_lab/campaigns/travel-lab-campaign-autumn-escape",
+   "actor": null,
+   "status": 200,
+   "seconds": 0.556
+  },
+  {
+   "method": "GET",
+   "path": "/api/modules/raonslab-travel_lab/inquiries/7",
+   "actor": "other_member",
+   "status": 404,
+   "seconds": 0.589
+  },
+  {
+   "method": "GET",
+   "path": "/api/modules/raonslab-travel_lab/support/questions/8",
+   "actor": "other_member",
+   "status": 404,
+   "seconds": 0.748
+  },
+  {
+   "method": "GET",
+   "path": "/api/modules/raonslab-travel_lab/support/questions/8",
+   "actor": null,
+   "status": 401,
+   "seconds": 0.558
+  },
+  {
+   "method": "GET",
+   "path": "/api/modules/raonslab-travel_lab/support/questions",
+   "actor": "other_member",
+   "status": 200,
+   "seconds": 0.68
+  }
+ ],
+ "actual_http_count": 7
+}

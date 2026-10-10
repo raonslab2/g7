@@ -1,0 +1,45 @@
+{
+    "status": "PASS_BOUNDED",
+    "target": {
+        "migration": "2026_10_09_900001_add_inquiry_evidence",
+        "batch": 5
+    },
+    "down_exit": 0,
+    "up_exit": 0,
+    "before_digest": "19f10d3f400064071f9c203ca59d291c50ed143a7256ca384d06f86ce55a66b7",
+    "rollback_digest": "19f10d3f400064071f9c203ca59d291c50ed143a7256ca384d06f86ce55a66b7",
+    "reapplied_digest": "19f10d3f400064071f9c203ca59d291c50ed143a7256ca384d06f86ce55a66b7",
+    "before_tables": 112,
+    "rollback_tables": 112,
+    "reapplied_tables": 112,
+    "populated_generated_fixture_data_roundtrip": false,
+    "original_full_baseline_restoration": "REQUIRED_NEXT",
+    "exclusive": {
+        "pid": 632202,
+        "cwd": "/home/ubuntu/.agentopt-v2/workspaces/req_812d0334c2064f5d88339114e7954235",
+        "argv": [
+            "docs/symphony/w04-campaign-install-final/rollback-probe.php",
+            "install3"
+        ],
+        "own_connection_id": 122656,
+        "other_test_connections": 0,
+        "own_server_processes": 0,
+        "prior_request_handles": {
+            "utc": "2026-10-09T19:53:44.549743+00:00",
+            "count": 0,
+            "handles": [],
+            "unreadable_pids": [],
+            "lock_holders": [],
+            "excluded_ancestor_pids": [
+                603659,
+                631914,
+                632202,
+                632204,
+                632205,
+                3650359
+            ],
+            "method": "proc-only bounded cwd/argv/FD; known TEST owners and own nonancestor native processes"
+        },
+        "utc": "2026-10-09T19:53:44+00:00"
+    }
+}

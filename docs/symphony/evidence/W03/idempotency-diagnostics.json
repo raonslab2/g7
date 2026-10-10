@@ -1,0 +1,69 @@
+{
+  "tested_sha": "28ada286c1c34606741bcfe4f9d12e06ac50af30",
+  "observations": [
+    {
+      "width": 390,
+      "name": "retry payload evidence",
+      "status": "OBSERVED",
+      "detail": {
+        "body1": {
+          "cart_ids": [
+            16
+          ],
+          "contact": {
+            "name": "W03-1791541554207 synthetic 390",
+            "phone": "000-0000-0000"
+          },
+          "idempotency_key": "7503a1d73108f832c68d95c7cac90d41ec53ae9a035c73d8c6c796c1ec4f50e4"
+        },
+        "body2": {
+          "cart_ids": [
+            16
+          ],
+          "contact": {
+            "name": "W03-1791541554207 synthetic 390",
+            "phone": "000-0000-0000"
+          },
+          "idempotency_key": "9ea229ad61eb6a57dcf23add77794f1b82ed69c4b7a15146314d7d9462e7eae9"
+        },
+        "status": 409,
+        "response": {
+          "success": false,
+          "message": "\uc7a5\ubc14\uad6c\ub2c8\uac00 \ubcc0\uacbd\ub418\uc5c8\uc2b5\ub2c8\ub2e4. \ub2e4\uc2dc \ud655\uc778\ud574 \uc8fc\uc138\uc694."
+        }
+      }
+    },
+    {
+      "width": 1440,
+      "name": "retry payload evidence",
+      "status": "OBSERVED",
+      "detail": {
+        "body1": {
+          "cart_ids": [
+            19
+          ],
+          "contact": {
+            "name": "W03-1791541554207 synthetic 1440",
+            "phone": "000-0000-0000"
+          },
+          "idempotency_key": "04a8dd12d912ef69e5c6c486d98b709dba8c30ee2960a42842e4657cb1c63881"
+        },
+        "body2": {
+          "cart_ids": [
+            19
+          ],
+          "contact": {
+            "name": "W03-1791541554207 synthetic 1440",
+            "phone": "000-0000-0000"
+          },
+          "idempotency_key": "e30fd3a551571d704616cd5801934883dc5305d8efa03dab0d175eaae4696643"
+        },
+        "status": 409,
+        "response": {
+          "success": false,
+          "message": "\uc7a5\ubc14\uad6c\ub2c8\uac00 \ubcc0\uacbd\ub418\uc5c8\uc2b5\ub2c8\ub2e4. \ub2e4\uc2dc \ud655\uc778\ud574 \uc8fc\uc138\uc694."
+        }
+      }
+    }
+  ]
+}

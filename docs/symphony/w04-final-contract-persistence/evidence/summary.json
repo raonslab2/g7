@@ -1,0 +1,151 @@
+{
+  "request_id": "req_95d0024e7b144a5bb903cc7daad1fb5f",
+  "task_key": "w04-final-contract-persistence",
+  "review_sha": "5783e6ba124061bdfae639cdaf9b1c14a83cdf03",
+  "review_tree": "361f9a142572f8a6c0c28326c461a233a92aec4e",
+  "scope_status": "PASS_BOUNDED_WITH_PROCEDURAL_LIMIT_RECORDED",
+  "fourteen_required_contract_rows": "PASS",
+  "four_real_MYSQL_barriers": "PASS",
+  "actual_own_process_restart_persistence": "PASS",
+  "populated_migration_backup_and_injected_fallback_recovery": "PASS_BOUNDED",
+  "unchanged_LiveMysqlTest": {
+    "unique_tests": 1,
+    "final_assertions": 34,
+    "native_seconds": 15.418,
+    "exit": 0,
+    "prior_populated_run_assertions": 33,
+    "not_double_counted": true
+  },
+  "selected_private_support_regressions": {
+    "unique_tests": 9,
+    "assertions": 103,
+    "native_seconds": 20.164,
+    "exit": 0
+  },
+  "unique_source_tests": 10,
+  "unique_source_assertions": 137,
+  "real_HTTP_checks": 159,
+  "real_HTTP_phases": [
+    {
+      "file": "docs/symphony/w04-final-contract-persistence/evidence/matrix/matrix-sideeffects.json",
+      "actual_http_count": 4,
+      "named_probes": {
+        "PASS": 3,
+        "FAIL": 0,
+        "OBSERVED": 0,
+        "BLOCKED": 0,
+        "NOT_RUN": 0
+      }
+    },
+    {
+      "file": "docs/symphony/w04-final-contract-persistence/evidence/matrix/t3-fixtures-212629.json",
+      "actual_http_count": 22,
+      "named_probes": {
+        "PASS": 1,
+        "FAIL": 0,
+        "OBSERVED": 0,
+        "BLOCKED": 0,
+        "NOT_RUN": 0
+      }
+    },
+    {
+      "file": "docs/symphony/w04-final-contract-persistence/evidence/matrix/t3-matrix-212706.json",
+      "actual_http_count": 76,
+      "named_probes": {
+        "PASS": 10,
+        "FAIL": 0,
+        "OBSERVED": 0,
+        "BLOCKED": 0,
+        "NOT_RUN": 0
+      }
+    },
+    {
+      "file": "docs/symphony/w04-final-contract-persistence/evidence/races/t3-races-212857.json",
+      "actual_http_count": 27,
+      "named_probes": {
+        "PASS": 4,
+        "FAIL": 0,
+        "OBSERVED": 0,
+        "BLOCKED": 0,
+        "NOT_RUN": 0
+      }
+    },
+    {
+      "file": "docs/symphony/w04-final-contract-persistence/evidence/persistence/create.json",
+      "actual_http_count": 17,
+      "named_probes": {
+        "PASS": 1,
+        "FAIL": 0,
+        "OBSERVED": 0,
+        "BLOCKED": 0,
+        "NOT_RUN": 0
+      }
+    },
+    {
+      "file": "docs/symphony/w04-final-contract-persistence/evidence/persistence/verify.json",
+      "actual_http_count": 7,
+      "named_probes": {
+        "PASS": 1,
+        "FAIL": 0,
+        "OBSERVED": 0,
+        "BLOCKED": 0,
+        "NOT_RUN": 0
+      }
+    },
+    {
+      "file": "docs/symphony/w04-final-contract-persistence/evidence/http/login-second.json",
+      "actual_http_count": 3,
+      "named_probes": {
+        "PASS": 3,
+        "FAIL": 0,
+        "OBSERVED": 0,
+        "BLOCKED": 0,
+        "NOT_RUN": 0
+      }
+    },
+    {
+      "file": "docs/symphony/w04-final-contract-persistence/evidence/http/login-first.json",
+      "actual_http_count": 3,
+      "named_probes": {
+        "PASS": 3,
+        "FAIL": 0,
+        "OBSERVED": 0,
+        "BLOCKED": 0,
+        "NOT_RUN": 0
+      }
+    }
+  ],
+  "real_HTTP_named_probe_counts_are_not_PHPUnit_assertions": true,
+  "race_sustained_seconds": [
+    3.319,
+    3.442,
+    3.41,
+    3.403
+  ],
+  "engine_lock_graph": "NOT_RUN_PERMISSION_DENIED",
+  "initial_native_mysqldump_internal_per_statement_instrumentation": "NOT_RUN; exact TEST client/schema bound; later SHOW CREATE/full-row dumps and imports per-statement guarded",
+  "local_guards_preserved": true,
+  "hosted_CI": {
+    "runs": 0,
+    "status": "NOT_RUN"
+  },
+  "canonical_Validation": {
+    "receipt": null,
+    "status": "NOT_RUN"
+  },
+  "product_writes": 0,
+  "parent_APP_access": 0,
+  "official_children": 0,
+  "git_delivery": "LOCAL_EVIDENCE_COMMIT_ONLY; LEAD_OWNS_PUBLICATION",
+  "TEST_RELEASE_utc": "2026-10-09T21:46:19+00:00",
+  "restored_tables": 55,
+  "restored_rows": 104,
+  "restored_digest": "ded72a53ad82a159b88e50a6560625488bb569a55f5f5ffa109cd45ae52d056e",
+  "own_port_closed": true,
+  "final_TEST_connections": 0,
+  "final_own_native_processes": 0,
+  "private_backups_retained": true,
+  "original_negative_reports": "UNCHANGED",
+  "privacy_scan": "PASS; original scan failure retained",
+  "utc": "2026-10-09T21:50:00Z"
+}

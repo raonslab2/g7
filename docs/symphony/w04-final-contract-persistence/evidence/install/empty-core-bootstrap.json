@@ -1,0 +1,47 @@
+{
+    "exit": 0,
+    "empty_tables_before": 0,
+    "installer_completed": false,
+    "bootstrap_cache": "array",
+    "normal_env_cache": "database",
+    "native_command": [
+        "migrate",
+        "--database=mysql",
+        "--force",
+        "--no-interaction"
+    ],
+    "exclusive": {
+        "pid": 977090,
+        "cwd": "/home/ubuntu/.agentopt-v2/workspaces/req_95d0024e7b144a5bb903cc7daad1fb5f",
+        "argv": [
+            "docs/symphony/w04-final-contract-persistence/empty-migrate.php"
+        ],
+        "own_connection_id": 137639,
+        "other_test_connections": 0,
+        "own_server_processes": 0,
+        "prior_request_handles": {
+            "utc": "2026-10-09T21:24:16.286282+00:00",
+            "count": 0,
+            "handles": [],
+            "unreadable_pids": [],
+            "lock_holders": [],
+            "excluded_ancestor_pids": [
+                964752,
+                976394,
+                976450,
+                977090,
+                977121,
+                977124,
+                3650359
+            ],
+            "method": "proc-only bounded cwd/argv/FD; known TEST owners and own nonancestor native processes"
+        },
+        "utc": "2026-10-09T21:24:16+00:00"
+    },
+    "source_guard_unchanged": true,
+    "published_helper_sha256": "9b0ab095834ae01f8255b083e2070571600dae44cde52c082f099b6db85c160d",
+    "only_cache_store_diff": true,
+    "persisted_cache": "database",
+    "ordinary_testing_cache": "array",
+    "normal_cache_bypass": false
+}

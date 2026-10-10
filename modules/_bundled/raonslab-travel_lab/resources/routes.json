@@ -1,0 +1,53 @@
+{
+  "version": "1.0.0",
+  "routes": [
+    {
+      "path": "*/admin/travel-lab",
+      "layout": "admin_travel_lab_catalog",
+      "auth_required": true,
+      "meta": {
+        "title": "$t:raonslab-travel_lab.admin.catalog.title"
+      }
+    },
+    {
+      "path": "*/admin/travel-lab/catalog",
+      "layout": "admin_travel_lab_catalog",
+      "auth_required": true,
+      "meta": {
+        "title": "$t:raonslab-travel_lab.admin.catalog.title"
+      }
+    },
+    {
+      "path": "*/admin/travel-lab/inquiries",
+      "layout": "admin_travel_lab_inquiry_list",
+      "auth_required": true,
+      "meta": {
+        "title": "$t:raonslab-travel_lab.admin.inquiries.title"
+      }
+    },
+    {
+      "path": "*/admin/travel-lab/inquiries/:id",
+      "layout": "admin_travel_lab_inquiry_detail",
+      "auth_required": true,
+      "meta": {
+        "title": "$t:raonslab-travel_lab.admin.inquiry_detail.title"
+      }
+    },
+    {
+      "path": "*/admin/travel-lab/support",
+      "layout": "admin_travel_lab_support",
+      "auth_required": true,
+      "meta": {
+        "title": "$t:raonslab-travel_lab.admin.support.title"
+      }
+    },
+    {
+      "path": "*/admin/travel-lab/campaigns",
+      "layout": "admin_travel_lab_campaigns",
+      "auth_required": true,
+      "meta": {
+        "title": "$t:raonslab-travel_lab.admin.campaigns.title"
+      }
+    }
+  ]
+}

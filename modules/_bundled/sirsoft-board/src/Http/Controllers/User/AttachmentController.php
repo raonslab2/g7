@@ -109,7 +109,7 @@ class AttachmentController extends PublicBaseController
 
             // 이미지가 아닌 경우
             if (! $attachment->is_image) {
-                return $this->badRequest(__('sirsoft-board::messages.attachment.not_image'));
+                return $this->error(__('sirsoft-board::messages.attachment.not_image'), 400);
             }
 
             // 파일 정보 조회 (유효 서명은 콘텐츠 상태 게이트 통과 자격의 위임)

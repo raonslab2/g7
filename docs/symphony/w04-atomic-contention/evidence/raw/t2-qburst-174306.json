@@ -1,0 +1,22 @@
+{
+ "phase": "t2-qburst-174306",
+ "review_sha": "fa5523175ac494cfbd13bbf89bf06b3ec91835a6",
+ "base_url": "http://127.0.0.1:18871",
+ "counts": {
+  "PASS": 0,
+  "FAIL": 1,
+  "OBSERVED": 0,
+  "BLOCKED": 0,
+  "NOT_RUN": 0
+ },
+ "results": [
+  {
+   "name": "admin concurrent 8-lane burst of 200 real HTTP question reads in one fresh own window: exactly 120 admitted, rest 429, DB counter 120",
+   "status": "FAIL",
+   "detail": {
+    "assert": "{\"role\": \"admin\", \"lanes\": 8, \"http_calls\": 200, \"status_counts\": {\"200\": 120, \"429\": 80}, \"elapsed_s\": 42.062, \"first_429_at_s\": 26.602, \"admitted_after_first_429\": 2, \"malformed_429\": 0, \"remaining_headers_unique_contiguous\": false, \"db_counter_after\": {\"counter\": 120, \"expires_in_s\": 18, \"admission_lock_rows\": 0}}"
+   },
+   "at": "17:43:49"
+  }
+ ]
+}

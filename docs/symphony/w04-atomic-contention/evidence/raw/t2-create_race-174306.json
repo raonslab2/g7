@@ -1,0 +1,22 @@
+{
+ "phase": "t2-create_race-174306",
+ "review_sha": "fa5523175ac494cfbd13bbf89bf06b3ec91835a6",
+ "base_url": "http://127.0.0.1:18871",
+ "counts": {
+  "PASS": 0,
+  "FAIL": 1,
+  "OBSERVED": 0,
+  "BLOCKED": 0,
+  "NOT_RUN": 0
+ },
+ "results": [
+  {
+   "name": "bounded concurrent create burst (20 POST, 8 lanes) against the 10/min create budget on native DatabaseStore + admission lock",
+   "status": "FAIL",
+   "detail": {
+    "assert": "other question window not fresh {'t0': 1791567786.302688, 't1': 1791567786.6360898, 'ms': 333.4, 'limit': '120', 'remaining': '118', 'retry_after': None, 'date': 'Fri, 09 Oct 2026 17:43:06 GMT', 'bytes': 148}"
+   },
+   "at": "17:43:06"
+  }
+ ]
+}

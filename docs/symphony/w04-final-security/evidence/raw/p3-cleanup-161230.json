@@ -1,0 +1,51 @@
+{
+ "phase": "p3-cleanup-161230",
+ "review_sha": "1052e3fb4bc4cccabb51b8c538116c78655f345b",
+ "base_url": "http://127.0.0.1:18871",
+ "counts": {
+  "PASS": 1,
+  "FAIL": 0,
+  "OBSERVED": 0,
+  "BLOCKED": 0,
+  "NOT_RUN": 0
+ },
+ "results": [
+  {
+   "name": "workflow fixture terminal cleanup: own inquiries terminal, carts empty, departures inactive reserved0, product unpublished/hidden",
+   "status": "PASS",
+   "detail": {
+    "actions": {
+     "cancel_128": 200,
+     "cancel_123": 200,
+     "cancel_121": 200,
+     "cancel_120": 200,
+     "cancel_112": 200,
+     "cancel_127": 200,
+     "cart_member_172": 200,
+     "cart_other_member_162": 200,
+     "cart_other_member_175": 200,
+     "deactivate_price": 200,
+     "deactivate_qty": 200,
+     "deactivate_state": 200,
+     "deactivate_last": 200,
+     "deactivate_key": 200,
+     "deactivate_cd": 200,
+     "deactivate_low": 200,
+     "deactivate_spare": 200,
+     "deactivate_last_b": 200,
+     "deactivate_last_c": 200,
+     "unpublish": 200,
+     "hide_product": 200,
+     "delete_attempt_guarded": 409,
+     "category_deactivate": 200
+    },
+    "public_catalog_after": 404,
+    "departures_inactive_reserved0": true,
+    "own_run_inquiries": 8,
+    "own_run_inquiries_terminal": true,
+    "carts_left_on_run_departures": 0
+   },
+   "at": "16:12:38"
+  }
+ ]
+}

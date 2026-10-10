@@ -1,0 +1,40 @@
+{
+    "requests": [
+        {
+            "method": "POST",
+            "path": "/api/auth/admin/login",
+            "status": 200,
+            "expected": 200
+        },
+        {
+            "method": "POST",
+            "path": "/api/auth/login",
+            "status": 200,
+            "expected": 200
+        },
+        {
+            "method": "POST",
+            "path": "/api/auth/login",
+            "status": 200,
+            "expected": 200
+        },
+        {
+            "method": "POST",
+            "path": "/api/auth/admin/login",
+            "status": 200,
+            "expected": 200
+        },
+        {
+            "method": "POST",
+            "path": "/api/auth/admin/login",
+            "status": 200,
+            "expected": 200
+        },
+        {
+            "method": "GET",
+            "path": "/api/modules/raonslab-travel_lab/cart",
+            "status": 200,
+            "expected": 401
+        }
+    ]
+}

@@ -1,0 +1,71 @@
+{
+  "sourceSHA": "598a89fff702d51c1405f1a5952d95ab1d2651f4",
+  "oldRequest": "req_52b83af0b2d1425094bb4b9e24edd166",
+  "oldStatus": "INTERRUPTED",
+  "oldPartialCounts": {
+    "PASS": 32,
+    "FAIL": 6,
+    "BLOCKED": 4,
+    "NOT_RUN": 4
+  },
+  "oldPartialIsFinal": false,
+  "selected_read_only_sources": [
+    {
+      "prior_source": "tests/W03_RECHECK/common.mjs",
+      "prior_sha256": "ff543256669a3b7b3f851554e90413f6cba4a7415a7b3cca9dc23e383d6c15c4",
+      "current": "tests/W04_RECHECK/common.mjs",
+      "current_sha256": "dcf43b430cd3b2036c0008a673405b3d71524b35036baa51569d9ee6d6674afe"
+    },
+    {
+      "prior_source": "tests/W03_RECHECK/admin-recheck.mjs",
+      "prior_sha256": "21388ee333a5df556b39832cd3e64a9e5ae1bb6011bd21c18aa5b8356f5285b7",
+      "current": "tests/W04_RECHECK/admin-recheck.mjs",
+      "current_sha256": "f05aa5bc8d7e72862d49dcadeabd9661a678224414ff1d63bb637ee99284a5a9"
+    },
+    {
+      "prior_source": "tests/W03_RECHECK/catalogue-recheck.mjs",
+      "prior_sha256": "4c8e6673f63739140cf206981fe3b1f11641a17a955002925371b3328d96fddf",
+      "current": "tests/W04_RECHECK/catalogue-recheck.mjs",
+      "current_sha256": "80e262010ad20bc83cfcfef45bac131e79ee5712279fe171f4f409eabce0e5c3"
+    },
+    {
+      "prior_source": "tests/W03_RECHECK/journey-recheck.mjs",
+      "prior_sha256": "7b3f9df31de0d41d36e01e06fb4154645255fee9daf9a529b70cd1acf5faf3dd",
+      "current": "tests/W04_RECHECK/journey-recheck.mjs",
+      "current_sha256": "3890462371675c12f07762d30e1ffdc7b03d930e6f5a201f7a75c88b8e6892cf"
+    },
+    {
+      "prior_source": "tests/W03_RECHECK/recovery-recheck.mjs",
+      "prior_sha256": "64ea93a9bf184d0ca81852fc2ad8f752c909c12b6497b764dfd4a7585ac71725",
+      "current": "tests/W04_RECHECK/recovery-recheck.mjs",
+      "current_sha256": "f97b7b0debe4c3f9aa501521d140f724445d03e2f2629e2a5fc20ff642979ade"
+    },
+    {
+      "prior_source": "tests/W03_RECHECK/support-recheck.mjs",
+      "prior_sha256": "9698430863e4f332ac9b6f228f7a16a69c740fe8ac3a3680ce34ac48320894a6",
+      "current": "tests/W04_RECHECK/support-recheck.mjs",
+      "current_sha256": "297aff417c4e953cca047d9ae0034e9f0225b760fe97ed1475ef581c60f4c003"
+    }
+  ],
+  "prior_PNGs_copied": 0,
+  "old_scripts_executed": false,
+  "old_workspace_writes": false,
+  "post_execution_harness_corrections": [
+    "catalogue priorBoundaryEvidence basename corrected in script only; original catalogue.json remains immutable and catalogue-input-harness.json proves prior own native201.",
+    "access-decline script now asserts native 진행 어려움; original locale assertion FAIL preserved and decline-followup closes actual owner state.",
+    "localStorage quotaHits0 original PASS marker preserved but final fallback verdict NOT_RUN; future script corrected.",
+    "Literal synthetic test phone values changed to runtime-only generator before Git publication; actual executed JSON/screens remain unchanged.",
+    "common/source guard allows evidence-only descendant commit; actual executed product HEAD fixed598.",
+    "guest redirect screenshots initially captured blank navigation frame; recaptured after native login input visible, both visually inspected."
+  ],
+  "native_subagents": 1,
+  "peak_native_agents": 2,
+  "official_children": 0,
+  "app_http_workers": 4,
+  "canonicalValidation": "BLOCKED",
+  "hostedCI": "NOT_RUN:0runs",
+  "public_readonly_review": {
+    "script_sha256": "434f4c47eaae0bd9dd0732c0bc64e582e8a32d9539c931f939b413d3e7dc0b53",
+    "result": "34uniquePASS,30manifest hashes,served primary assets match; P3 hero1440 reason wording corrected"
+  }
+}

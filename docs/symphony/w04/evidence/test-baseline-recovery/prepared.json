@@ -1,0 +1,82 @@
+{
+    "source_sha": "598a89fff702d51c1405f1a5952d95ab1d2651f4",
+    "source_tree": "9e00273bdf18d6a713343755aac54f44a9b032b4",
+    "source_branch": "feat/g7-travel-lab-c7ae42d1",
+    "request_id": "req_4be0e82d6e2e4996bf501f0aef20aa28",
+    "original": {
+        "table_count": 55,
+        "row_count": 104,
+        "inventory_digest_sha256": "ded72a53ad82a159b88e50a6560625488bb569a55f5f5ffa109cd45ae52d056e",
+        "dump_sha256": "5ef6d31adabf2ec8f4508c5e1dc6acda9dcb48f5ccd0d6ccb8b9e5493bf672ef",
+        "sql_boundary_check": {
+            "exact_create_drop_table_inventory": true,
+            "other_schema_objects": 0,
+            "statement_counts": {
+                "ALTER KEYS": 110,
+                "CREATE TABLE": 55,
+                "DROP TABLE": 55,
+                "INSERT": 1,
+                "LOCK": 55,
+                "SET": 183,
+                "UNLOCK": 55
+            },
+            "table_count": 55
+        }
+    },
+    "current": {
+        "table_count": 22,
+        "row_count": 21,
+        "inventory_digest_sha256": "da29421ef27b5e3ce8af451e8be1de42f18e2c6d8a19730f5c73d66889a07739",
+        "safety_dump_sha256": "dc0974bd4b96d809dd39ccb34b80255cb7fe2ba6a5fdb7740fc21b166397e555",
+        "sql_boundary_check": {
+            "exact_create_drop_table_inventory": true,
+            "other_schema_objects": 0,
+            "statement_counts": {
+                "ALTER KEYS": 44,
+                "CREATE TABLE": 22,
+                "DROP TABLE": 22,
+                "INSERT": 1,
+                "LOCK": 22,
+                "SET": 84,
+                "UNLOCK": 22
+            },
+            "table_count": 22
+        }
+    },
+    "source_private_file_sha256": {
+        "manifest.json": "6ced518cdfaa48bac0b3b949d29efc99cebb9a02e361913b3cfd75528a810030",
+        "before.json": "4d48b2f40cad00e234aa8bd32b0a2ead19f5bae81555d0565ce8601dfedbdc16",
+        "snapshot.sql": "5ef6d31adabf2ec8f4508c5e1dc6acda9dcb48f5ccd0d6ccb8b9e5493bf672ef",
+        "BLOCKED": "a133a309853b819dded2aeaa2d79ce428845a88f9e416e03d594dfb24f69a66b"
+    },
+    "directory_mode": "0700",
+    "snapshot_manifest_options_modes": "0600",
+    "orphans": {
+        "method": "proc_exact_cwd_or_individual_path_argv_prefix",
+        "handles": [],
+        "count": 0
+    },
+    "connection": {
+        "database": "req81_travel_lab_test",
+        "account": "req81_travel@127.0.0.1",
+        "own_connection_id": 83526,
+        "other_test_handles": [],
+        "other_test_connections": 0,
+        "visibility": "SHOW PROCESSLIST under scoped account; same-account TEST connections visible"
+    },
+    "safety_dump_command": {
+        "command": [
+            "mysqldump",
+            "--defaults-file=<private TEST-only options>",
+            "--single-transaction",
+            "--hex-blob",
+            "--no-tablespaces",
+            "--skip-lock-tables",
+            "req81_travel_lab_test"
+        ],
+        "exit": 0,
+        "seconds": 0.082
+    },
+    "seconds": 0.475,
+    "database_mutations": 0
+}

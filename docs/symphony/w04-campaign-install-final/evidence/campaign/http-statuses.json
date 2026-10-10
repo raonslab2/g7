@@ -1,0 +1,221 @@
+{
+    "requests": [
+        {
+            "method": "POST",
+            "path": "/api/auth/admin/login",
+            "status": 200,
+            "expected": 200,
+            "body_sha256": "f8440ab5e04ac889ba6768f4d895b096934ef6b0bbd7683c5132deeb97fb0298"
+        },
+        {
+            "method": "GET",
+            "path": "/api/modules/raonslab-travel_lab/campaigns",
+            "status": 200,
+            "expected": 200,
+            "body_sha256": "0c1950078659f7571215769304e9c20ed33f22a73c6f2ecfe75d47b3995ce5cd"
+        },
+        {
+            "method": "GET",
+            "path": "/api/modules/raonslab-travel_lab/campaigns/travel-lab-campaign-autumn-escape",
+            "status": 404,
+            "expected": 404,
+            "body_sha256": "0a162be3392adbfa640f4883081722f050cef8d304521999bce5a6fcff866302"
+        },
+        {
+            "method": "GET",
+            "path": "/api/modules/raonslab-travel_lab/campaigns/travel-lab-campaign-weekend-reset",
+            "status": 404,
+            "expected": 404,
+            "body_sha256": "0a162be3392adbfa640f4883081722f050cef8d304521999bce5a6fcff866302"
+        },
+        {
+            "method": "GET",
+            "path": "/api/modules/raonslab-travel_lab/campaigns",
+            "status": 200,
+            "expected": 200,
+            "body_sha256": "8ebc156e89ce1ba98070003641f7620847b4d7aa8153355cd6e3020196f052df"
+        },
+        {
+            "method": "GET",
+            "path": "/api/modules/raonslab-travel_lab/campaigns/travel-lab-campaign-autumn-escape",
+            "status": 200,
+            "expected": 200,
+            "body_sha256": "c98f9e97037798c8c0b3b32591f12aadfc57d612ce3d3d17e2372191ae85edc2"
+        },
+        {
+            "method": "GET",
+            "path": "/api/modules/raonslab-travel_lab/catalog?theme=nature&sort=recommended",
+            "status": 200,
+            "expected": 200,
+            "body_sha256": "512bbc8984751b481b7fb18b3ab67c1903baaead60e9a65c4a3d8b3ed6f0f299"
+        },
+        {
+            "method": "GET",
+            "path": "/api/modules/raonslab-travel_lab/campaigns/travel-lab-campaign-weekend-reset",
+            "status": 200,
+            "expected": 200,
+            "body_sha256": "c7d93cf6bc95c7ac8cc8e9f6f2d0099dec2530872f79e4e389536c634d369fd7"
+        },
+        {
+            "method": "GET",
+            "path": "/api/modules/raonslab-travel_lab/catalog?theme=wellness&sort=recommended",
+            "status": 200,
+            "expected": 200,
+            "body_sha256": "d0e2fb7449010afcd129278e0229e8afabbd438e657de8ba3aef1349b37e8b07"
+        },
+        {
+            "method": "GET",
+            "path": "/api/modules/raonslab-travel_lab/campaigns/about",
+            "status": 404,
+            "expected": 404,
+            "body_sha256": "c9aebfce6194665a0e584a4b41e42d948a0c8de8e2eaa40b3bebdd88c8d1a479"
+        },
+        {
+            "method": "GET",
+            "path": "/api/modules/raonslab-travel_lab/campaigns/x-travel-lab-campaign-decoy",
+            "status": 404,
+            "expected": 404,
+            "body_sha256": "928a4a3b27595cdc5beac19e91c628c7e664fb3649a0a58a4edb68a0d9b0cdce"
+        },
+        {
+            "method": "GET",
+            "path": "/api/modules/raonslab-travel_lab/campaigns/travel-lab-campaign-unknown",
+            "status": 404,
+            "expected": 404,
+            "body_sha256": "68dddf832a4f8067d13af63ed88824ddf015e6e36229de09f5f54095b32530b2"
+        },
+        {
+            "method": "GET",
+            "path": "/api/modules/raonslab-travel_lab/campaigns?preview=1",
+            "status": 422,
+            "expected": 422,
+            "body_sha256": "45a8189f9c06a9e16179c7f38ee4b3d11822d1acd3affb531cdd5ce3d7c00e05"
+        },
+        {
+            "method": "PUT",
+            "path": "/api/modules/sirsoft-page/admin/pages/7",
+            "status": 200,
+            "expected": 200,
+            "body_sha256": "c023ee3a16b461a535f37d261509d6475e5de38ae92a649fd14929e2b1ed27d0"
+        },
+        {
+            "method": "PATCH",
+            "path": "/api/modules/sirsoft-page/admin/pages/7/publish",
+            "status": 200,
+            "expected": 200,
+            "body_sha256": "31702b4a60c58fd4a14716620ba3b42c9ac511ed51b384fe1db9c6482935fcb5"
+        },
+        {
+            "method": "GET",
+            "path": "/api/modules/raonslab-travel_lab/campaigns/travel-lab-campaign-autumn-escape",
+            "status": 404,
+            "expected": 404,
+            "body_sha256": "0a162be3392adbfa640f4883081722f050cef8d304521999bce5a6fcff866302"
+        },
+        {
+            "method": "GET",
+            "path": "/api/modules/raonslab-travel_lab/campaigns",
+            "status": 200,
+            "expected": 200,
+            "body_sha256": "14cee4726ea9878b7eadf7b842f0d488ae16213aeb4825c681196409b6f45ea0"
+        },
+        {
+            "method": "GET",
+            "path": "/api/modules/raonslab-travel_lab/campaigns/travel-lab-campaign-autumn-escape",
+            "status": 404,
+            "expected": 404,
+            "body_sha256": "68dddf832a4f8067d13af63ed88824ddf015e6e36229de09f5f54095b32530b2"
+        },
+        {
+            "method": "GET",
+            "path": "/api/modules/raonslab-travel_lab/campaigns",
+            "status": 200,
+            "expected": 200,
+            "body_sha256": "8a2cabbd314b18f240c47e79ea2bdd99c5828560c5e90c3d91e6dfdf2e406026"
+        },
+        {
+            "method": "GET",
+            "path": "/api/modules/sirsoft-page/pages/travel-lab-campaign-autumn-escape",
+            "status": 200,
+            "expected": 200,
+            "body_sha256": "ccb31e1b46d22aa7f940387d0a373723e7280981fba9231c870b3ba7514c0260"
+        },
+        {
+            "method": "POST",
+            "path": "/api/modules/sirsoft-page/admin/pages/7/versions/7/restore",
+            "status": 200,
+            "expected": 200,
+            "body_sha256": "40f63ff9f78598ac5d971b0da3e027691efc2c9ceba1ded578eb339d867539ff"
+        },
+        {
+            "method": "PATCH",
+            "path": "/api/modules/sirsoft-page/admin/pages/7/publish",
+            "status": 200,
+            "expected": 200,
+            "body_sha256": "1bc1234a2465d894b5544aa7df24c4fa6cdd8ef74465387868a846c7946792cc"
+        },
+        {
+            "method": "GET",
+            "path": "/api/modules/raonslab-travel_lab/campaigns/travel-lab-campaign-autumn-escape",
+            "status": 200,
+            "expected": 200,
+            "body_sha256": "1b897e5fe84a2613e5803bac52ded72dc37fc1017e19fddf6ac751ae64de210c"
+        },
+        {
+            "method": "GET",
+            "path": "/api/modules/sirsoft-page/admin/pages",
+            "status": 401,
+            "expected": 401,
+            "body_sha256": "eb5894f6361714fbf6a471ee7bb10ac431a7ff07691e76236fd4a10b2e6acccd"
+        },
+        {
+            "method": "POST",
+            "path": "/api/auth/admin/login",
+            "status": 200,
+            "expected": 200,
+            "body_sha256": "30a0015142692a3d8266db8ddbd1284e32d03543bb399bc5e3607bf66dcd1223"
+        },
+        {
+            "method": "GET",
+            "path": "/api/modules/sirsoft-page/admin/pages",
+            "status": 200,
+            "expected": 200,
+            "body_sha256": "d6b7bc5ace12f394798667461494ad810c8766f5566f5fe1c79c59c6f60eb7c6"
+        },
+        {
+            "method": "GET",
+            "path": "/api/modules/sirsoft-page/admin/pages/7",
+            "status": 403,
+            "expected": 403,
+            "body_sha256": "e39c21d38ade8d93277bdb8e4c436359428b73df9add5a5817b4e76924c6b711"
+        },
+        {
+            "method": "PATCH",
+            "path": "/api/modules/sirsoft-page/admin/pages/7/publish",
+            "status": 403,
+            "expected": 403,
+            "body_sha256": "e39c21d38ade8d93277bdb8e4c436359428b73df9add5a5817b4e76924c6b711"
+        },
+        {
+            "method": "POST",
+            "path": "/api/modules/sirsoft-page/admin/pages",
+            "status": 403,
+            "expected": 403,
+            "body_sha256": "7de72e640844887c4f442173a6cabb08ac34b5f8a8c7e18d9870ae0c553b77d0"
+        },
+        {
+            "method": "GET",
+            "path": "/api/modules/raonslab-travel_lab/campaigns/travel-lab-campaign-autumn-escape",
+            "status": 200,
+            "expected": 200,
+            "body_sha256": "536d62b540971087d50854bcf31d24237f649032d3337d5c7c1113993013e8a3"
+        },
+        {
+            "method": "GET",
+            "path": "/api/modules/sirsoft-page/admin/pages",
+            "status": 403,
+            "expected": 403,
+            "body_sha256": "7de72e640844887c4f442173a6cabb08ac34b5f8a8c7e18d9870ae0c553b77d0"
+        }
+    ]
+}

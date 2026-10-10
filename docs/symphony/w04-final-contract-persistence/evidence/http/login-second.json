@@ -1,0 +1,65 @@
+{
+ "phase": "login-second",
+ "review_sha": "5783e6ba124061bdfae639cdaf9b1c14a83cdf03",
+ "base_url": "http://127.0.0.1:18880",
+ "counts": {
+  "PASS": 3,
+  "FAIL": 0,
+  "OBSERVED": 0,
+  "BLOCKED": 0,
+  "NOT_RUN": 0
+ },
+ "results": [
+  {
+   "name": "native login member",
+   "status": "PASS",
+   "detail": {
+    "status": 200,
+    "new_token": true
+   },
+   "at": "21:31:21"
+  },
+  {
+   "name": "native login other_member",
+   "status": "PASS",
+   "detail": {
+    "status": 200,
+    "new_token": true
+   },
+   "at": "21:31:22"
+  },
+  {
+   "name": "native login admin",
+   "status": "PASS",
+   "detail": {
+    "status": 200,
+    "new_token": true
+   },
+   "at": "21:31:24"
+  }
+ ],
+ "http_checks": [
+  {
+   "method": "POST",
+   "path": "/api/auth/login",
+   "actor": null,
+   "status": 200,
+   "seconds": 7.678
+  },
+  {
+   "method": "POST",
+   "path": "/api/auth/login",
+   "actor": null,
+   "status": 200,
+   "seconds": 1.217
+  },
+  {
+   "method": "POST",
+   "path": "/api/auth/admin/login",
+   "actor": null,
+   "status": 200,
+   "seconds": 1.782
+  }
+ ],
+ "actual_http_count": 3
+}

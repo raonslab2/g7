@@ -1,0 +1,226 @@
+{
+    "requests": [
+        {
+            "method": "POST",
+            "path": "/api/auth/admin/login",
+            "status": 200,
+            "expected": 200
+        },
+        {
+            "method": "POST",
+            "path": "/api/auth/login",
+            "status": 200,
+            "expected": 200
+        },
+        {
+            "method": "POST",
+            "path": "/api/auth/login",
+            "status": 200,
+            "expected": 200
+        },
+        {
+            "method": "POST",
+            "path": "/api/auth/admin/login",
+            "status": 200,
+            "expected": 200
+        },
+        {
+            "method": "POST",
+            "path": "/api/auth/admin/login",
+            "status": 200,
+            "expected": 200
+        },
+        {
+            "method": "GET",
+            "path": "/api/modules/raonslab-travel_lab/cart",
+            "status": 401,
+            "expected": 401
+        },
+        {
+            "method": "GET",
+            "path": "/api/modules/raonslab-travel_lab/catalog",
+            "status": 200,
+            "expected": 200
+        },
+        {
+            "method": "GET",
+            "path": "/api/modules/raonslab-travel_lab/facets",
+            "status": 200,
+            "expected": 200
+        },
+        {
+            "method": "GET",
+            "path": "/api/modules/raonslab-travel_lab/catalog?q=%EA%B2%A9%EB%A6%AC%20%EB%8F%99%EC%8B%9C%EC%84%B1",
+            "status": 200,
+            "expected": 200
+        },
+        {
+            "method": "GET",
+            "path": "/api/modules/raonslab-travel_lab/catalog/10",
+            "status": 200,
+            "expected": 200
+        },
+        {
+            "method": "GET",
+            "path": "/api/modules/raonslab-travel_lab/catalog/10/departures",
+            "status": 200,
+            "expected": 200
+        },
+        {
+            "method": "POST",
+            "path": "/api/modules/raonslab-travel_lab/cart",
+            "status": 201,
+            "expected": 201
+        },
+        {
+            "method": "POST",
+            "path": "/api/modules/raonslab-travel_lab/inquiries",
+            "status": 201,
+            "expected": 201
+        },
+        {
+            "method": "POST",
+            "path": "/api/modules/raonslab-travel_lab/inquiries",
+            "status": 200,
+            "expected": 200
+        },
+        {
+            "method": "GET",
+            "path": "/api/modules/raonslab-travel_lab/inquiries/2",
+            "status": 404,
+            "expected": 404
+        },
+        {
+            "method": "GET",
+            "path": "/api/modules/raonslab-travel_lab/admin/inquiries",
+            "status": 403,
+            "expected": 403
+        },
+        {
+            "method": "PATCH",
+            "path": "/api/modules/raonslab-travel_lab/admin/inquiries/2",
+            "status": 200,
+            "expected": 200
+        },
+        {
+            "method": "PATCH",
+            "path": "/api/modules/raonslab-travel_lab/admin/inquiries/2",
+            "status": 200,
+            "expected": 200
+        },
+        {
+            "method": "GET",
+            "path": "/api/modules/raonslab-travel_lab/inquiries/2",
+            "status": 200,
+            "expected": 200
+        },
+        {
+            "method": "POST",
+            "path": "/api/modules/raonslab-travel_lab/inquiries/2/cancel",
+            "status": 200,
+            "expected": 200
+        },
+        {
+            "method": "POST",
+            "path": "/api/modules/raonslab-travel_lab/inquiries/2/cancel",
+            "status": 200,
+            "expected": 200
+        },
+        {
+            "method": "GET",
+            "path": "/api/modules/raonslab-travel_lab/support/notices",
+            "status": 200,
+            "expected": 200
+        },
+        {
+            "method": "GET",
+            "path": "/api/modules/raonslab-travel_lab/support/faqs",
+            "status": 200,
+            "expected": 200
+        },
+        {
+            "method": "GET",
+            "path": "/api/modules/raonslab-travel_lab/support/notices/1",
+            "status": 200,
+            "expected": 200
+        },
+        {
+            "method": "GET",
+            "path": "/api/modules/raonslab-travel_lab/support/faqs/7",
+            "status": 200,
+            "expected": 200
+        },
+        {
+            "method": "GET",
+            "path": "/api/modules/raonslab-travel_lab/support/questions",
+            "status": 401,
+            "expected": 401
+        },
+        {
+            "method": "POST",
+            "path": "/api/modules/raonslab-travel_lab/support/questions",
+            "status": 201,
+            "expected": 201
+        },
+        {
+            "method": "GET",
+            "path": "/api/modules/raonslab-travel_lab/support/questions/8",
+            "status": 404,
+            "expected": 404
+        },
+        {
+            "method": "PATCH",
+            "path": "/api/modules/raonslab-travel_lab/support/questions/8",
+            "status": 404,
+            "expected": 404
+        },
+        {
+            "method": "GET",
+            "path": "/api/modules/raonslab-travel_lab/support/questions/8",
+            "status": 404,
+            "expected": 404
+        },
+        {
+            "method": "PATCH",
+            "path": "/api/modules/raonslab-travel_lab/support/questions/8",
+            "status": 200,
+            "expected": 200
+        },
+        {
+            "method": "GET",
+            "path": "/api/modules/raonslab-travel_lab/support/questions/8",
+            "status": 200,
+            "expected": 200
+        },
+        {
+            "method": "POST",
+            "path": "/api/modules/sirsoft-board/admin/board/travel-lab-questions/posts/8/comments",
+            "status": 201,
+            "expected": 201
+        },
+        {
+            "method": "GET",
+            "path": "/api/modules/raonslab-travel_lab/support/questions/8",
+            "status": 200,
+            "expected": 200
+        },
+        {
+            "method": "GET",
+            "path": "/api/modules/sirsoft-board/boards/travel-lab-notices",
+            "status": 404,
+            "expected": 404
+        },
+        {
+            "method": "GET",
+            "path": "/api/modules/sirsoft-board/boards/travel-lab-faqs",
+            "status": 404,
+            "expected": 404
+        },
+        {
+            "method": "GET",
+            "path": "/api/modules/sirsoft-board/boards/travel-lab-questions",
+            "status": 404,
+            "expected": 404
+        }
+    ]
+}

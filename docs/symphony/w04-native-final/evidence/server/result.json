@@ -1,0 +1,46 @@
+{
+    "status": "PASS",
+    "port": 18874,
+    "requests": 20,
+    "server_starts": 3,
+    "state_after_A": {
+        "inquiry_status": "TEST_ACCEPTED",
+        "inquiry_total": 24000,
+        "reserved": 2,
+        "owner_tokens": 0
+    },
+    "state_after_restart_B": {
+        "inquiry_status": "TEST_ACCEPTED",
+        "inquiry_total": 24000,
+        "reserved": 2,
+        "owner_tokens": 1
+    },
+    "state_before_env_loss": {
+        "inquiry_status": "TEST_ACCEPTED",
+        "inquiry_total": 24000,
+        "reserved": 2,
+        "owner_tokens": 1
+    },
+    "state_after_env_recovery_C": {
+        "inquiry_status": "CANCELLED",
+        "inquiry_total": 24000,
+        "reserved": 0,
+        "owner_tokens": 1
+    },
+    "env_loss": {
+        "own_files_removed": [
+            ".env",
+            ".env.testing"
+        ],
+        "guard_exit": 255,
+        "guarded_artisan_exit": 1,
+        "server_start_refused": true,
+        "restored_exact_0600": {
+            ".env": true,
+            ".env.testing": true
+        },
+        "private_copy_removed_after_verification": true
+    },
+    "server_price": 24000,
+    "parent_preview_18871_untouched": true
+}

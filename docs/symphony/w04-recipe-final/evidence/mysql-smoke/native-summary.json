@@ -1,0 +1,18 @@
+{
+  "status": "FAIL_HARNESS_BEFORE_TESTS",
+  "exit": 2,
+  "command": [
+    "/usr/bin/php8.3",
+    "vendor/bin/phpunit",
+    "--bootstrap",
+    "docs/symphony/w04-recipe-final/test-bootstrap.php",
+    "scripts/travel-lab/LiveMysqlTest.php"
+  ],
+  "wall_seconds": 0.104,
+  "stdout_sha256": "3d1fd74e69bc63c5e7acb57663d83931b6e4ef0440616578a289b2eb4ff6cfb7",
+  "stderr_sha256": "77bd24318853bcf2089ffe3fdb555543ca7ca5ab5324b7c4f528b7b0ede0eed3",
+  "raw_logs_private_retained": true,
+  "tests_executed": 0,
+  "safe_diagnostic": "Native tests/bootstrap.php overwrote generic $path in including entrypoint; final file readback received a directory. Product test not executed.",
+  "retained_stdout_and_stderr": true
+}

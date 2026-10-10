@@ -1,0 +1,69 @@
+{
+    "label": "mysql-live",
+    "source_sha": "d059d735cd17ed3c88dd27cca5a9f83f00042011",
+    "source_tree": "6dc9381b1d50196c81867ef3f9e31ca86611f410",
+    "dump_sha256": "6a7686d996d1815e97b127872883ecf84c397a6f69c19f00b41e31b1cb98c8e0",
+    "dump_bytes": 125166,
+    "dump_exit": 0,
+    "dump_pid": 634402,
+    "dump_process_gone": true,
+    "dump_handles": {
+        "utc": "2026-10-09T19:54:17.884292+00:00",
+        "count": 0,
+        "handles": [],
+        "unreadable_pids": [],
+        "lock_holders": [],
+        "excluded_ancestor_pids": [
+            603659,
+            634246,
+            634368,
+            634403,
+            634404,
+            3650359
+        ],
+        "method": "proc-only bounded cwd/argv/FD; known TEST owners and own nonancestor native processes"
+    },
+    "dump_seconds": 0.231,
+    "stable": true,
+    "before_digest": "ded72a53ad82a159b88e50a6560625488bb569a55f5f5ffa109cd45ae52d056e",
+    "table_count": 55,
+    "row_count": 104,
+    "equals_original_baseline": true,
+    "directory_mode": "700",
+    "file_mode": "600",
+    "exclusive": {
+        "pid": 634368,
+        "cwd": "/home/ubuntu/.agentopt-v2/workspaces/req_812d0334c2064f5d88339114e7954235",
+        "argv": [
+            "docs/symphony/w04-campaign-install-final/snapshot.php",
+            "mysql-live",
+            "run",
+            "/usr/bin/php8.3",
+            "vendor/bin/phpunit",
+            "--bootstrap",
+            "docs/symphony/w04-campaign-install-final/test-bootstrap.php",
+            "scripts/travel-lab/LiveMysqlTest.php"
+        ],
+        "own_connection_id": 122688,
+        "other_test_connections": 0,
+        "own_server_processes": 0,
+        "prior_request_handles": {
+            "utc": "2026-10-09T19:54:17.627322+00:00",
+            "count": 0,
+            "handles": [],
+            "unreadable_pids": [],
+            "lock_holders": [],
+            "excluded_ancestor_pids": [
+                603659,
+                634246,
+                634368,
+                634380,
+                634381,
+                3650359
+            ],
+            "method": "proc-only bounded cwd/argv/FD; known TEST owners and own nonancestor native processes"
+        },
+        "utc": "2026-10-09T19:54:17+00:00"
+    },
+    "utc": "2026-10-09T19:54:17+00:00"
+}

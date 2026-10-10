@@ -1,0 +1,315 @@
+{
+  "review_sha": "fc54b6ae091cd6cef2d0fabc48d2ec4fe4fdba8c",
+  "handoff_source_sha": "fa5523175ac494cfbd13bbf89bf06b3ec91835a6",
+  "phase": "run3",
+  "started": "2026-10-09T19:30:18.576Z",
+  "assets": [
+    {
+      "path": "/build/core/template-engine.min.js",
+      "expected": "b8cf27fab58e108b1509c379a5f4d0860a21a90bc591bb34b48a94d6e56cb76d",
+      "observed": "b8cf27fab58e108b1509c379a5f4d0860a21a90bc591bb34b48a94d6e56cb76d",
+      "http": 200,
+      "match": true
+    },
+    {
+      "path": "/api/templates/assets/sirsoft-admin_basic/js/components.iife.js",
+      "expected": "d25eb47e1308a83a456b17fe86953fec8fefc46a38769c0c225be72b0028e6c9",
+      "observed": "d25eb47e1308a83a456b17fe86953fec8fefc46a38769c0c225be72b0028e6c9",
+      "http": 200,
+      "match": true
+    }
+  ],
+  "cases": [
+    {
+      "width": 1440,
+      "name": "rapid-edit-option-number-date-capacity-status",
+      "target": {
+        "product_option_id": 175,
+        "departure_date": "2027-01-12",
+        "return_date": "2027-01-14",
+        "capacity": 7,
+        "is_active": false
+      },
+      "optionInputDisabled": true,
+      "selected": {
+        "at": 2750,
+        "nativeGlobalActive": false,
+        "renderedStatusLabel": "접수 가능"
+      },
+      "saveFirstEvent": {
+        "t": 2842.2999999523163,
+        "type": "pointerdown",
+        "trusted": true,
+        "testId": "departure_save",
+        "role": "dialog",
+        "state": {
+          "is_active": false,
+          "capacity": 7,
+          "departure_date": "2027-01-12",
+          "return_date": "2027-01-14",
+          "product_option_id": 175
+        },
+        "renderedStatusLabel": "접수 가능"
+      },
+      "allSaveEventsTrusted": true,
+      "method": "PUT",
+      "http": 200,
+      "request": {
+        "product_option_id": 175,
+        "departure_date": "2027-01-12",
+        "return_date": "2027-01-14",
+        "capacity": 7,
+        "is_active": false
+      },
+      "returned": {
+        "is_active": false,
+        "capacity": 7,
+        "departure_date": "2027-01-12",
+        "return_date": "2027-01-14",
+        "product_option_id": 175
+      },
+      "readback": {
+        "is_active": false,
+        "capacity": 7,
+        "departure_date": "2027-01-12",
+        "return_date": "2027-01-14",
+        "product_option_id": 175,
+        "reserved": 0
+      },
+      "requestMatches": {
+        "product_option_id": true,
+        "departure_date": true,
+        "return_date": true,
+        "capacity": true,
+        "is_active": true
+      },
+      "readbackMatches": {
+        "product_option_id": true,
+        "departure_date": true,
+        "return_date": true,
+        "capacity": true,
+        "is_active": true
+      },
+      "pass": true
+    },
+    {
+      "width": 1440,
+      "name": "rapid-metadata-duration-region-unpublished",
+      "target": {
+        "duration_days": 4,
+        "region": "busan",
+        "published": false
+      },
+      "regionKind": "composite",
+      "pubKind": "composite",
+      "latestGlobalBeforeSave": {
+        "duration_days": 4,
+        "region": "busan",
+        "published": false
+      },
+      "method": "PATCH",
+      "http": 200,
+      "request": {
+        "duration_days": 4,
+        "region": "busan",
+        "published": false
+      },
+      "readback": {
+        "duration_days": 4,
+        "region": "busan",
+        "published": false
+      },
+      "pass": true
+    },
+    {
+      "width": 390,
+      "name": "rapid-edit-option-number-date-capacity-status",
+      "target": {
+        "product_option_id": 175,
+        "departure_date": "2027-01-05",
+        "return_date": "2027-01-07",
+        "capacity": 6,
+        "is_active": false
+      },
+      "optionInputDisabled": true,
+      "selected": {
+        "at": 3094.2999999523163,
+        "nativeGlobalActive": false,
+        "renderedStatusLabel": "접수 가능"
+      },
+      "saveFirstEvent": {
+        "t": 3192.5999999046326,
+        "type": "pointerdown",
+        "trusted": true,
+        "testId": "departure_save",
+        "role": "dialog",
+        "state": {
+          "is_active": false,
+          "capacity": 6,
+          "departure_date": "2027-01-05",
+          "return_date": "2027-01-07",
+          "product_option_id": 175
+        },
+        "renderedStatusLabel": "접수 가능"
+      },
+      "allSaveEventsTrusted": true,
+      "method": "PUT",
+      "http": 200,
+      "request": {
+        "product_option_id": 175,
+        "departure_date": "2027-01-05",
+        "return_date": "2027-01-07",
+        "capacity": 6,
+        "is_active": false
+      },
+      "returned": {
+        "is_active": false,
+        "capacity": 6,
+        "departure_date": "2027-01-05",
+        "return_date": "2027-01-07",
+        "product_option_id": 175
+      },
+      "readback": {
+        "is_active": false,
+        "capacity": 6,
+        "departure_date": "2027-01-05",
+        "return_date": "2027-01-07",
+        "product_option_id": 175,
+        "reserved": 0
+      },
+      "requestMatches": {
+        "product_option_id": true,
+        "departure_date": true,
+        "return_date": true,
+        "capacity": true,
+        "is_active": true
+      },
+      "readbackMatches": {
+        "product_option_id": true,
+        "departure_date": true,
+        "return_date": true,
+        "capacity": true,
+        "is_active": true
+      },
+      "pass": true
+    },
+    {
+      "width": 390,
+      "name": "rapid-metadata-duration-region-unpublished",
+      "target": {
+        "duration_days": 3,
+        "region": "gangwon",
+        "published": false
+      },
+      "regionKind": "composite",
+      "pubKind": "composite",
+      "latestGlobalBeforeSave": {
+        "duration_days": 3,
+        "region": "gangwon",
+        "published": false
+      },
+      "method": "PATCH",
+      "http": 200,
+      "request": {
+        "duration_days": 3,
+        "region": "gangwon",
+        "published": false
+      },
+      "readback": {
+        "duration_days": 3,
+        "region": "gangwon",
+        "published": false
+      },
+      "pass": true
+    }
+  ],
+  "menu": [],
+  "smoke": [],
+  "validation": [],
+  "ownership": [
+    {
+      "actor": "member",
+      "method": "PUT",
+      "http": 403
+    },
+    {
+      "actor": "other_member",
+      "method": "PUT",
+      "http": 403
+    },
+    {
+      "actor": "guest",
+      "method": "PUT",
+      "http": 401
+    },
+    {
+      "readbackAfterForeignAttempts": {
+        "is_active": false,
+        "capacity": 4
+      }
+    }
+  ],
+  "tokens": [
+    {
+      "hash": "1ccf49cb181a89706bd788ffc49d4dc602866eb4128b7711d942a9ea4e5b2cf4",
+      "logout": 200,
+      "authAfter": 401
+    },
+    {
+      "hash": "56a5d39687fb847718644babac72254eb0361add5514ff13b12da70a208d6c58",
+      "logout": 200,
+      "authAfter": 401
+    },
+    {
+      "supplied": "member",
+      "authUserHttp": 200
+    },
+    {
+      "supplied": "other_member",
+      "authUserHttp": 200
+    },
+    {
+      "supplied": "admin",
+      "authUserHttp": 200
+    }
+  ],
+  "fixture": {
+    "productId": 87,
+    "departureId": 141,
+    "optionIds": [
+      175,
+      176
+    ],
+    "reuseOwnEarlierRecheckFixtureOnly": true
+  },
+  "cleanup": [
+    {
+      "departureInactiveHttp": 200,
+      "allOwnDeparturesInactiveReserved0": true,
+      "departures": 2
+    },
+    {
+      "productId": 87,
+      "unpublishedHttp": 200,
+      "publishedRead": false,
+      "hiddenHttp": 200,
+      "hiddenRead": true,
+      "retainedSynthetic": true
+    }
+  ],
+  "harness_errors": [],
+  "chromium": "156.0.8078.4",
+  "widths": [
+    1440,
+    390
+  ],
+  "screenshots": [
+    "departure-modal-1440-run3.png",
+    "departure-modal-390-run3.png"
+  ],
+  "failure": {
+    "name": "ScopedStop",
+    "message": "departure-only phase: menu/smoke intentionally NOT_RUN"
+  },
+  "finished": "2026-10-09T19:30:50.150Z"
+}

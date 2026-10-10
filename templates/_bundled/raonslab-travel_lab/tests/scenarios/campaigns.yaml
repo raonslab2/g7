@@ -1,0 +1,43 @@
+feature: RAON Travel Lab 기획전 고객 화면 (홈 카드 → 기획전 목록 → 상세 본문·버전 → 서버 고정 테마 카탈로그 → 상품·장바구니)
+
+description: |
+  여행 모듈 GET /campaigns · /campaigns/{slug} 는 native 페이지 모듈 고정 두 슬롯 중 발행분만 투영한다.
+  템플릿은 그 응답만 그리고, 상세의 테마 여행은 응답의 catalog_query 로 기존 GET /catalog 를 다시 부른다.
+  본문은 PageBody 가 서식 전용(text=이스케이프, html=DOMPurify 서식 태그·속성 0개)으로 그린다.
+  정적 계절 배너·성공 대체 문구는 없다. /page/:slug 는 native 사이트맵 별칭이며 같은 레지스트리 제한 소비자다.
+
+axes:
+  viewer: [guest, member]
+  viewport: [mobile_390, desktop_1440]
+  campaigns_state: [loading, loaded_two, loaded_empty, error_retryable]
+  campaign_state: [loading, loaded_text, loaded_html, not_found_404, error_retryable]
+  campaign_trips_state: [loading, loaded_with_items, loaded_empty, error_retryable]
+  body_input: [plain_multiline, long_text, formatting_html, script_event_attr, javascript_url, remote_image_style, svg_math, data_aria_attr, empty]
+  entry: [home_card, nav_desktop, nav_mobile_drawer, list_card, direct_url, page_alias]
+
+exclusions:
+  - campaigns_state: loaded_empty
+    entry: home_card
+    reason: 발행 기획전이 없으면 홈 섹션 자체를 숨긴다 — 진입점 없음
+  - campaign_state: not_found_404
+    campaign_trips_state: loaded_with_items
+    reason: 상세 실패 시 테마 카탈로그를 부르지 않는다(campaign onSuccess 에서만 조회)
+
+sub_flows:
+  - id: home_cards
+    effects: [published_cards_only, card_navigates_server_path, static_banner_removed, empty_hides_section, loading_skeleton, error_retry]
+  - id: campaign_list
+    effects: [list_cards, list_empty_distinct, list_error_distinct]
+  - id: campaign_detail
+    effects: [persisted_title_body_version, server_theme_cta, trip_card_to_product, trips_empty_with_browse_all, trips_loading, trips_error_retry, not_found_vs_error_distinct, catalog_query_from_response_only, no_price_in_campaign_requests, page_alias_route]
+  - id: page_body_security
+    effects: [formatting_tags_only, zero_attributes, links_text_only, no_remote_resource_elements, private_purifier_instance, text_mode_escaped_whitespace, unknown_mode_as_text, stable_hook_order, long_text, no_policy_widening_prop]
+
+test_files:
+  - templates/_bundled/raonslab-travel_lab/__tests__/layouts/campaigns.test.tsx
+  - templates/_bundled/raonslab-travel_lab/__tests__/components/pageBody.test.tsx
+  - templates/_bundled/raonslab-travel_lab/__tests__/layouts/contract.test.ts
+
+not_run:
+  - id: installed_browser_390_1440
+    reason: 설치본에서 onSuccess→refetch 연쇄 실동작, 키보드 순회, 390/1440 줄바꿈, 원격 요청 관찰은 후속 독립 브라우저 단계

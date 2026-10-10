@@ -1,0 +1,66 @@
+feature: travel_lab_catalog_domain
+description: Synthetic ecommerce backed travel catalog and shared inquiry schema; no real booking or provider side effects.
+test_files:
+  - modules/_bundled/raonslab-travel_lab/tests/Feature/W03CatalogRepairTest.php
+  - modules/_bundled/raonslab-travel_lab/tests/Feature/CatalogApiTest.php
+  - modules/_bundled/raonslab-travel_lab/tests/Feature/CatalogDomainTest.php
+  - modules/_bundled/raonslab-travel_lab/tests/Feature/CatalogValidationTest.php
+  - modules/_bundled/raonslab-travel_lab/tests/Feature/SchemaAndSeederTest.php
+  - modules/_bundled/raonslab-travel_lab/tests/Feature/DepartureManagementTest.php
+axes:
+  visibility: [visible, unpublished, commerce-hidden, commerce-suspended, commerce-deleted, departure-inactive, departure-past, departure-full, option-inactive, option-understock]
+effects:
+  - invisible_products_excluded
+  - invisible_detail_not_found
+  - ecommerce_identity_preserved
+  - ecommerce_option_price_used
+  - capacity_reserved_preserved
+  - filters_applied
+  - zero_keyword_applied
+  - stable_sort_and_pagination
+  - future_sold_out_detail_choices
+  - available_discovery_dates_only
+  - visible_facets_only
+  - invalid_filter_rejected
+  - valid_filter_accepted
+  - departure_dates_and_scope_validated
+  - schema_up_and_down
+  - foreign_keys_registered
+  - unique_product_identity
+  - unique_departure_option
+  - inquiry_contract_relations
+  - inquiry_enum_round_trip
+  - per_user_idempotency
+  - seed_reproducible
+  - ecommerce_service_products_and_options
+  - seed_preserves_operator_edits
+  - no_order_payment_inquiry_writes
+  - departure_created_with_commerce_option
+  - departure_update_preserves_reservations
+  - departure_conflict_rejected
+  - failed_update_atomic
+  - cross_product_departure_rejected
+  - duplicate_option_departure_rejected
+  - api_resource_envelope
+  - named_routes
+  - departures_resource_shape
+  - api_not_found
+  - api_validation_422
+  - admin_bearer_required
+  - admin_permission_required
+  - permissioned_admin_reads_hidden_catalog
+  - permissioned_admin_writes_departure
+  - reserved_request_rejected
+  - admin_read_permission_does_not_grant_update
+  - default_seed_no_samples
+  - explicit_sample_seed
+  - departure_http_conflict_409
+  - new_departure_database_defaults_hydrated
+sub_flows: []
+
+repair_contracts:
+  registration: native product identity; unpublished default; optional itinerary defaults []; duplicate409; unknown price/product_id tamper422
+  candidates: excludes mapped native products; options carry original IDs; bounded48; permissioned manager only
+  business_day: Asia/Seoul same-day excluded across discovery/detail/cart/submit
+  keyword: decoded native ko/en JSON translations, Korean search and literal wildcard behavior
+  unavailable_dates: future full/understock detail choices available0; discovery still needs one available date

@@ -1,0 +1,109 @@
+{
+ "phase": "p3-deadlock_attribution-161040",
+ "review_sha": "1052e3fb4bc4cccabb51b8c538116c78655f345b",
+ "base_url": "http://127.0.0.1:18871",
+ "counts": {
+  "PASS": 2,
+  "FAIL": 0,
+  "OBSERVED": 0,
+  "BLOCKED": 0,
+  "NOT_RUN": 0
+ },
+ "results": [
+  {
+   "name": "deadlock attribution control: server-wide Innodb_deadlocks during 45s without own traffic",
+   "status": "PASS",
+   "detail": {
+    "idle_45s_samples": [
+     [
+      0.0,
+      5
+     ],
+     [
+      4.1,
+      5
+     ],
+     [
+      8.5,
+      5
+     ],
+     [
+      12.8,
+      5
+     ],
+     [
+      17.2,
+      5
+     ],
+     [
+      22.0,
+      5
+     ],
+     [
+      26.1,
+      5
+     ],
+     [
+      30.2,
+      5
+     ],
+     [
+      34.3,
+      5
+     ],
+     [
+      39.0,
+      5
+     ],
+     [
+      43.3,
+      5
+     ]
+    ],
+    "note": "server-wide counter; any DB on this MariaDB server"
+   },
+   "at": "16:11:27"
+  },
+  {
+   "name": "R1b last-seat rerun on a fresh own capacity-1 departure with release-window deadlock counter sampling",
+   "status": "PASS",
+   "detail": {
+    "departure": 104,
+    "barrier_connection": 92671,
+    "waiting_ids": [
+     92677,
+     92678
+    ],
+    "sustained_s": 3.339,
+    "responses": [
+     {
+      "role": "member",
+      "status": 409,
+      "message": "현재 남은 시험 인원보다 많습니다. 인원을 다시 선택해 주세요.",
+      "id": null,
+      "sent_before_release_s": 4.158,
+      "completed_after_release_s": 0.482
+     },
+     {
+      "role": "other_member",
+      "status": 201,
+      "message": "성공적으로 처리되었습니다.",
+      "id": 127,
+      "sent_before_release_s": 4.107,
+      "completed_after_release_s": 0.432
+     }
+    ],
+    "reserved": 1,
+    "capacity": 1,
+    "innodb_deadlocks": {
+     "before_lock": 5,
+     "during_hold": 5,
+     "after_both_responses": 5,
+     "plus_3s": 5
+    },
+    "attribution": "no deadlock counted in this rerun"
+   },
+   "at": "16:11:39"
+  }
+ ]
+}

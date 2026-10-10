@@ -1,0 +1,100 @@
+{
+    "label": "original",
+    "child_exit": null,
+    "wipe_exit": 0,
+    "empty_tables_after_wipe": 0,
+    "import_exit": 0,
+    "import_seconds": 1.619,
+    "exact_tables_rows_ddl": true,
+    "restored_digest": "ded72a53ad82a159b88e50a6560625488bb569a55f5f5ffa109cd45ae52d056e",
+    "expected_digest": "ded72a53ad82a159b88e50a6560625488bb569a55f5f5ffa109cd45ae52d056e",
+    "equals_original_baseline": true,
+    "table_count": 55,
+    "row_count": 104,
+    "exclusive_pre_import": {
+        "pid": 264595,
+        "cwd": "/home/ubuntu/.agentopt-v2/workspaces/req_caef46f3473043048b5b4bc2ec41eaea",
+        "argv": [
+            "docs/symphony/w04-native-final/snapshot.php",
+            "original",
+            "restore-keep"
+        ],
+        "own_connection_id": 99772,
+        "other_test_connections": 0,
+        "own_server_processes": 0,
+        "prior_request_handles": {
+            "req_3e70e7ceddd34beea51a17da727584bc": {
+                "utc": "2026-10-09T17:25:41.700512+00:00",
+                "method": "privileged readonly proc exact cwd/individual bounded argv/fd; proc locks inode",
+                "count": 0,
+                "handles": [],
+                "unreadable_pids": [],
+                "failed_lock_present": true,
+                "lock_holders": []
+            },
+            "req_337b3638df9b4b958b0627e0b262a54a": {
+                "utc": "2026-10-09T17:25:41.843238+00:00",
+                "method": "privileged readonly proc exact cwd/individual bounded argv/fd; proc locks inode",
+                "count": 0,
+                "handles": [],
+                "unreadable_pids": [],
+                "failed_lock_present": false,
+                "lock_holders": []
+            },
+            "req_dd6208f86a0b487796de37b9c4365cd4": {
+                "utc": "2026-10-09T17:25:42.033339+00:00",
+                "method": "privileged readonly proc exact cwd/individual bounded argv/fd; proc locks inode",
+                "count": 0,
+                "handles": [],
+                "unreadable_pids": [],
+                "failed_lock_present": false,
+                "lock_holders": []
+            }
+        },
+        "utc": "2026-10-09T17:25:42+00:00"
+    },
+    "exclusive_post": {
+        "pid": 264595,
+        "cwd": "/home/ubuntu/.agentopt-v2/workspaces/req_caef46f3473043048b5b4bc2ec41eaea",
+        "argv": [
+            "docs/symphony/w04-native-final/snapshot.php",
+            "original",
+            "restore-keep"
+        ],
+        "own_connection_id": 99775,
+        "other_test_connections": 0,
+        "own_server_processes": 0,
+        "prior_request_handles": {
+            "req_3e70e7ceddd34beea51a17da727584bc": {
+                "utc": "2026-10-09T17:25:43.884653+00:00",
+                "method": "privileged readonly proc exact cwd/individual bounded argv/fd; proc locks inode",
+                "count": 0,
+                "handles": [],
+                "unreadable_pids": [],
+                "failed_lock_present": true,
+                "lock_holders": []
+            },
+            "req_337b3638df9b4b958b0627e0b262a54a": {
+                "utc": "2026-10-09T17:25:44.025297+00:00",
+                "method": "privileged readonly proc exact cwd/individual bounded argv/fd; proc locks inode",
+                "count": 0,
+                "handles": [],
+                "unreadable_pids": [],
+                "failed_lock_present": false,
+                "lock_holders": []
+            },
+            "req_dd6208f86a0b487796de37b9c4365cd4": {
+                "utc": "2026-10-09T17:25:44.138108+00:00",
+                "method": "privileged readonly proc exact cwd/individual bounded argv/fd; proc locks inode",
+                "count": 0,
+                "handles": [],
+                "unreadable_pids": [],
+                "failed_lock_present": false,
+                "lock_holders": []
+            }
+        },
+        "utc": "2026-10-09T17:25:44+00:00"
+    },
+    "backup_retained": true,
+    "utc": "2026-10-09T17:25:44+00:00"
+}

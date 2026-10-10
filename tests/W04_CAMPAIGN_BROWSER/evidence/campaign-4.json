@@ -1,0 +1,3134 @@
+{
+  "phase": "campaign-4",
+  "tested_sha": "31a18318f91dde34a9c75eaaac65ae1d434b7bc3",
+  "tree": "c0984e682a77153753edcde318a6d44b6973b1c0",
+  "actual_head": "31a18318f91dde34a9c75eaaac65ae1d434b7bc3",
+  "started": "2026-10-09T20:04:00.580Z",
+  "checks": [
+    {
+      "name": "masked screenshot baseline-campaign-4",
+      "width": 390,
+      "status": "PASS",
+      "known_private_ocr_hits": 0,
+      "path": "tests/W04_CAMPAIGN_BROWSER/evidence/baseline-campaign-4-390.png",
+      "sha256": "56ffeb99b6fed85582c027da10c1ed7ecf6f2e474800f5564a7e7385d5e402cd",
+      "geometry": {
+        "viewport": 390,
+        "document": 390
+      }
+    },
+    {
+      "width": 390,
+      "name": "baseline home list detail alias actual published",
+      "status": "PASS",
+      "data": {
+        "published": true,
+        "observations": [
+          {
+            "role": "guest",
+            "list": 200,
+            "inList": true,
+            "detail": 200,
+            "version": 5
+          },
+          {
+            "role": "member",
+            "list": 200,
+            "inList": true,
+            "detail": 200,
+            "version": 5
+          },
+          {
+            "role": "admin",
+            "list": 200,
+            "inList": true,
+            "detail": 200,
+            "version": 5
+          }
+        ],
+        "seo": [
+          {
+            "path": "/",
+            "http": 200,
+            "bytes": 64906,
+            "sha256": "dea7611c6aec8c5155a750b767a43c0e2d60b7dfc98c21521c81a1750fc2d510",
+            "syntheticTitlePresent": false,
+            "syntheticBodyPresent": false,
+            "seoBodyServed": false
+          },
+          {
+            "path": "/travel/campaigns",
+            "http": 200,
+            "bytes": 64906,
+            "sha256": "dea7611c6aec8c5155a750b767a43c0e2d60b7dfc98c21521c81a1750fc2d510",
+            "syntheticTitlePresent": false,
+            "syntheticBodyPresent": false,
+            "seoBodyServed": false
+          },
+          {
+            "path": "/travel/campaigns/travel-lab-campaign-autumn-escape",
+            "http": 200,
+            "bytes": 64906,
+            "sha256": "dea7611c6aec8c5155a750b767a43c0e2d60b7dfc98c21521c81a1750fc2d510",
+            "syntheticTitlePresent": false,
+            "syntheticBodyPresent": false,
+            "seoBodyServed": false
+          },
+          {
+            "path": "/page/travel-lab-campaign-autumn-escape",
+            "http": 200,
+            "bytes": 64906,
+            "sha256": "dea7611c6aec8c5155a750b767a43c0e2d60b7dfc98c21521c81a1750fc2d510",
+            "syntheticTitlePresent": false,
+            "syntheticBodyPresent": false,
+            "seoBodyServed": false
+          }
+        ]
+      }
+    },
+    {
+      "width": 390,
+      "name": "native editor rename only original synthetic Page",
+      "status": "PASS",
+      "data": {
+        "id": 7,
+        "version": 6,
+        "slug": "w04-fc51-original-7",
+        "title": {
+          "ko": "가을, 숲으로 떠나는 느린 여행",
+          "en": "A slow autumn escape into the woods"
+        },
+        "content": {
+          "ko": "선선한 바람이 부는 계절, 숲길과 계곡을 천천히 걷는 일정을 모았어요.\n\n일정과 출발일은 상품마다 다르니 상세 화면에서 확인해 주세요.\n이 화면의 상담 요청은 테스트로만 처리돼요.",
+          "en": "When the air turns crisp, wander forest trails and valleys at an easy pace.\n\nItineraries and departures differ by trip, so please check each detail page.\nRequests made here are test-only."
+        },
+        "mode": "text",
+        "published": true,
+        "requestKeys": [
+          "id",
+          "slug",
+          "title",
+          "content",
+          "content_mode",
+          "published",
+          "published_at",
+          "seo_meta",
+          "current_version",
+          "creator",
+          "updater",
+          "attachments",
+          "created_at",
+          "updated_at",
+          "is_owner",
+          "abilities",
+          "temp_key"
+        ]
+      }
+    },
+    {
+      "name": "masked screenshot native-create-campaign-4",
+      "width": 390,
+      "status": "PASS",
+      "known_private_ocr_hits": 0,
+      "path": "tests/W04_CAMPAIGN_BROWSER/evidence/native-create-campaign-4-390.png",
+      "sha256": "5e9eaca97df3b9b34bd0b9f9977e52e44864cdf5dd8d2a59cac6c85ffd4fb1d3",
+      "geometry": {
+        "viewport": 390,
+        "document": 390
+      }
+    },
+    {
+      "width": 390,
+      "name": "missing slot actual adapter create and slug prefill",
+      "status": "PASS",
+      "data": {
+        "id": 13,
+        "version": 1,
+        "slug": "travel-lab-campaign-autumn-escape",
+        "title": {
+          "ko": "W04 FC51 390 합성 기획전 v1"
+        },
+        "content": {
+          "ko": "W04 FC51 390 첫 본문\n<em>텍스트는 그대로 표시</em>\n실제 예약이 아닌 합성 검증입니다."
+        },
+        "mode": "text",
+        "published": false,
+        "requestKeys": [
+          "slug",
+          "title",
+          "content",
+          "published",
+          "content_mode",
+          "seo_meta",
+          "attachments",
+          "temp_key"
+        ],
+        "prefill": true,
+        "defaultHtml": true,
+        "checkboxToText": true,
+        "nativeContentEditor": "HtmlEditor textarea; not general layout editor"
+      }
+    },
+    {
+      "name": "masked screenshot draft-campaign-4",
+      "width": 390,
+      "status": "PASS",
+      "known_private_ocr_hits": 0,
+      "path": "tests/W04_CAMPAIGN_BROWSER/evidence/draft-campaign-4-390.png",
+      "sha256": "d4b2a8d51494ea8f44323d671be23af4dae3b6c61332d145dd706646c9536ad3",
+      "geometry": {
+        "viewport": 390,
+        "document": 390
+      }
+    },
+    {
+      "width": 390,
+      "name": "new draft excludes guest member admin API SPA alias",
+      "status": "PASS",
+      "data": {
+        "published": false,
+        "observations": [
+          {
+            "role": "guest",
+            "list": 200,
+            "inList": false,
+            "detail": 404
+          },
+          {
+            "role": "member",
+            "list": 200,
+            "inList": false,
+            "detail": 404
+          },
+          {
+            "role": "admin",
+            "list": 200,
+            "inList": false,
+            "detail": 404
+          }
+        ],
+        "seo": [
+          {
+            "path": "/",
+            "http": 200,
+            "bytes": 64906,
+            "sha256": "dea7611c6aec8c5155a750b767a43c0e2d60b7dfc98c21521c81a1750fc2d510",
+            "syntheticTitlePresent": false,
+            "syntheticBodyPresent": null,
+            "seoBodyServed": false
+          },
+          {
+            "path": "/travel/campaigns",
+            "http": 200,
+            "bytes": 64906,
+            "sha256": "dea7611c6aec8c5155a750b767a43c0e2d60b7dfc98c21521c81a1750fc2d510",
+            "syntheticTitlePresent": false,
+            "syntheticBodyPresent": null,
+            "seoBodyServed": false
+          },
+          {
+            "path": "/travel/campaigns/travel-lab-campaign-autumn-escape",
+            "http": 200,
+            "bytes": 64906,
+            "sha256": "dea7611c6aec8c5155a750b767a43c0e2d60b7dfc98c21521c81a1750fc2d510",
+            "syntheticTitlePresent": false,
+            "syntheticBodyPresent": null,
+            "seoBodyServed": false
+          },
+          {
+            "path": "/page/travel-lab-campaign-autumn-escape",
+            "http": 200,
+            "bytes": 64906,
+            "sha256": "dea7611c6aec8c5155a750b767a43c0e2d60b7dfc98c21521c81a1750fc2d510",
+            "syntheticTitlePresent": false,
+            "syntheticBodyPresent": null,
+            "seoBodyServed": false
+          }
+        ]
+      }
+    },
+    {
+      "name": "masked screenshot publish-campaign-4",
+      "width": 390,
+      "status": "PASS",
+      "known_private_ocr_hits": 0,
+      "path": "tests/W04_CAMPAIGN_BROWSER/evidence/publish-campaign-4-390.png",
+      "sha256": "9a22b46f442567b98864c86b3c3556cba8ebc6419e8d12d793b49ce0fb517c41",
+      "geometry": {
+        "viewport": 390,
+        "document": 390
+      }
+    },
+    {
+      "width": 390,
+      "name": "adapter real publish then persisted text public",
+      "status": "PASS",
+      "data": {
+        "publish": {
+          "id": 13,
+          "version": 1,
+          "published": true,
+          "body": {
+            "published": true
+          },
+          "http": 200
+        },
+        "public": {
+          "published": true,
+          "observations": [
+            {
+              "role": "guest",
+              "list": 200,
+              "inList": true,
+              "detail": 200,
+              "version": 1
+            },
+            {
+              "role": "member",
+              "list": 200,
+              "inList": true,
+              "detail": 200,
+              "version": 1
+            },
+            {
+              "role": "admin",
+              "list": 200,
+              "inList": true,
+              "detail": 200,
+              "version": 1
+            }
+          ],
+          "seo": [
+            {
+              "path": "/",
+              "http": 200,
+              "bytes": 64906,
+              "sha256": "dea7611c6aec8c5155a750b767a43c0e2d60b7dfc98c21521c81a1750fc2d510",
+              "syntheticTitlePresent": false,
+              "syntheticBodyPresent": false,
+              "seoBodyServed": false
+            },
+            {
+              "path": "/travel/campaigns",
+              "http": 200,
+              "bytes": 64906,
+              "sha256": "dea7611c6aec8c5155a750b767a43c0e2d60b7dfc98c21521c81a1750fc2d510",
+              "syntheticTitlePresent": false,
+              "syntheticBodyPresent": false,
+              "seoBodyServed": false
+            },
+            {
+              "path": "/travel/campaigns/travel-lab-campaign-autumn-escape",
+              "http": 200,
+              "bytes": 64906,
+              "sha256": "dea7611c6aec8c5155a750b767a43c0e2d60b7dfc98c21521c81a1750fc2d510",
+              "syntheticTitlePresent": false,
+              "syntheticBodyPresent": false,
+              "seoBodyServed": false
+            },
+            {
+              "path": "/page/travel-lab-campaign-autumn-escape",
+              "http": 200,
+              "bytes": 64906,
+              "sha256": "dea7611c6aec8c5155a750b767a43c0e2d60b7dfc98c21521c81a1750fc2d510",
+              "syntheticTitlePresent": false,
+              "syntheticBodyPresent": false,
+              "seoBodyServed": false
+            }
+          ]
+        },
+        "textEscaped": true
+      }
+    },
+    {
+      "name": "masked screenshot html-campaign-4",
+      "width": 390,
+      "status": "PASS",
+      "known_private_ocr_hits": 0,
+      "path": "tests/W04_CAMPAIGN_BROWSER/evidence/html-campaign-4-390.png",
+      "sha256": "0a3809edc1ffbca28d31c6a72bbcd973097b2ecca3c1854748a4294bceb87008",
+      "geometry": {
+        "viewport": 390,
+        "document": 390
+      }
+    },
+    {
+      "width": 390,
+      "name": "native HTML mode checkbox editor save real purifier",
+      "status": "PASS",
+      "data": {
+        "saved": {
+          "id": 13,
+          "version": 2,
+          "slug": "travel-lab-campaign-autumn-escape",
+          "title": {
+            "ko": "W04 FC51 390 합성 기획전 v2"
+          },
+          "content": {
+            "ko": "<h2>W04 FC51 안전 서식 390</h2><p style=\"background:url(https://campaign-fixture.example.invalid/style)\" data-probe=\"x\" aria-label=\"probe\">서식 <strong>굵은 글씨</strong> <a href=\"https://campaign-fixture.example.invalid/link\">링크 글자</a><img src=\"https://campaign-fixture.example.invalid/image\" /></p><script>window.fc51Probe=true</script><form><input name=\"probe\"></form><ul><li>합성 목록</li></ul>"
+          },
+          "mode": "html",
+          "published": true,
+          "requestKeys": [
+            "id",
+            "slug",
+            "title",
+            "content",
+            "content_mode",
+            "published",
+            "published_at",
+            "seo_meta",
+            "current_version",
+            "creator",
+            "updater",
+            "attachments",
+            "created_at",
+            "updated_at",
+            "is_owner",
+            "abilities",
+            "temp_key"
+          ]
+        },
+        "public": {
+          "published": true,
+          "observations": [
+            {
+              "role": "guest",
+              "list": 200,
+              "inList": true,
+              "detail": 200,
+              "version": 2
+            },
+            {
+              "role": "member",
+              "list": 200,
+              "inList": true,
+              "detail": 200,
+              "version": 2
+            },
+            {
+              "role": "admin",
+              "list": 200,
+              "inList": true,
+              "detail": 200,
+              "version": 2
+            }
+          ],
+          "seo": [
+            {
+              "path": "/",
+              "http": 200,
+              "bytes": 64906,
+              "sha256": "dea7611c6aec8c5155a750b767a43c0e2d60b7dfc98c21521c81a1750fc2d510",
+              "syntheticTitlePresent": false,
+              "syntheticBodyPresent": false,
+              "seoBodyServed": false
+            },
+            {
+              "path": "/travel/campaigns",
+              "http": 200,
+              "bytes": 64906,
+              "sha256": "dea7611c6aec8c5155a750b767a43c0e2d60b7dfc98c21521c81a1750fc2d510",
+              "syntheticTitlePresent": false,
+              "syntheticBodyPresent": false,
+              "seoBodyServed": false
+            },
+            {
+              "path": "/travel/campaigns/travel-lab-campaign-autumn-escape",
+              "http": 200,
+              "bytes": 64906,
+              "sha256": "dea7611c6aec8c5155a750b767a43c0e2d60b7dfc98c21521c81a1750fc2d510",
+              "syntheticTitlePresent": false,
+              "syntheticBodyPresent": false,
+              "seoBodyServed": false
+            },
+            {
+              "path": "/page/travel-lab-campaign-autumn-escape",
+              "http": 200,
+              "bytes": 64906,
+              "sha256": "dea7611c6aec8c5155a750b767a43c0e2d60b7dfc98c21521c81a1750fc2d510",
+              "syntheticTitlePresent": false,
+              "syntheticBodyPresent": false,
+              "seoBodyServed": false
+            }
+          ]
+        },
+        "input_sha256": "163146527bda677bd9c9e38d9c5583e1ea3a908cd049ee716a1deb5e0cd998c9",
+        "backend_htmlpurifier_changed": false,
+        "backend_link_retained": true,
+        "backend_image_retained": true,
+        "frontend_dompurify_attributes": [],
+        "frontend_html": "<h2>W04 FC51 안전 서식 390</h2><p>서식 <strong>굵은 글씨</strong> 링크 글자</p><ul><li>합성 목록</li></ul>",
+        "remote_attempts": 0
+      }
+    },
+    {
+      "name": "native version preview observed controls",
+      "width": 390,
+      "status": "OBSERVED",
+      "data": {
+        "text": "버전 v1 미리보기\n제목\n\nW04 FC51 390 합성 기획전 v1\n\n내용\nW04 FC51 390 첫 본문\n<em>텍스트는 그대로 표시</em>\n실제 예약이 아닌 합성 검증입니다.\n닫기\n복원",
+        "buttons": [
+          {
+            "text": "",
+            "disabled": false
+          },
+          {
+            "text": "닫기",
+            "disabled": false
+          },
+          {
+            "text": "복원",
+            "disabled": false
+          }
+        ]
+      }
+    },
+    {
+      "width": 390,
+      "name": "native UI version1 restore changes public content and creates version",
+      "status": "FAIL",
+      "error": "locator.tap: Error: strict mode violation: getByRole('dialog').locator('button').filter({ hasText: /^\\s*복원\\s*$/ }) resolved to 2 elements:\n    1) <button class=\"button btn btn-primary\">…</button> aka getByRole('button', { name: '복원', exact: true })\n    2) <button type=\"button\" class=\"button btn btn-primary\">…</button> aka getByRole('button', { name: 'rotate left 복원' })\n\nCall log:\n\u001b[2m  - waiting for getByRole('dialog').locator('button').filter({ hasText: /^\\s*복원\\s*$/ })\u001b[22m\n"
+    },
+    {
+      "name": "masked screenshot unpublish-campaign-4",
+      "width": 390,
+      "status": "PASS",
+      "known_private_ocr_hits": 0,
+      "path": "tests/W04_CAMPAIGN_BROWSER/evidence/unpublish-campaign-4-390.png",
+      "sha256": "d4b2a8d51494ea8f44323d671be23af4dae3b6c61332d145dd706646c9536ad3",
+      "geometry": {
+        "viewport": 390,
+        "document": 390
+      }
+    },
+    {
+      "width": 390,
+      "name": "adapter actual unpublish draft privacy then republish fresh body",
+      "status": "FAIL",
+      "error": "expect(received).toBe(expected) // Object.is equality\n\nExpected: \"W04 FC51 390 합성 기획전 v1\"\nReceived: \"W04 FC51 390 합성 기획전 v2\""
+    },
+    {
+      "width": 390,
+      "name": "exact own new cleanup and original baseline properties restored",
+      "status": "PASS"
+    }
+  ],
+  "metrics": [
+    {
+      "width": 390,
+      "role": "admin",
+      "pageerrors": [],
+      "external_attempts": [
+        {
+          "origin": "https://campaign-fixture.example.invalid",
+          "path": "/image",
+          "resource": "image"
+        },
+        {
+          "origin": "https://campaign-fixture.example.invalid",
+          "path": "/style",
+          "resource": "image"
+        },
+        {
+          "origin": "https://campaign-fixture.example.invalid",
+          "path": "/image",
+          "resource": "image"
+        },
+        {
+          "origin": "https://campaign-fixture.example.invalid",
+          "path": "/image",
+          "resource": "image"
+        },
+        {
+          "origin": "https://campaign-fixture.example.invalid",
+          "path": "/image",
+          "resource": "image"
+        },
+        {
+          "origin": "https://campaign-fixture.example.invalid",
+          "path": "/image",
+          "resource": "image"
+        },
+        {
+          "origin": "https://campaign-fixture.example.invalid",
+          "path": "/image",
+          "resource": "image"
+        },
+        {
+          "origin": "https://campaign-fixture.example.invalid",
+          "path": "/image",
+          "resource": "image"
+        },
+        {
+          "origin": "https://campaign-fixture.example.invalid",
+          "path": "/style",
+          "resource": "image"
+        },
+        {
+          "origin": "https://campaign-fixture.example.invalid",
+          "path": "/image",
+          "resource": "image"
+        },
+        {
+          "origin": "https://campaign-fixture.example.invalid",
+          "path": "/image",
+          "resource": "image"
+        },
+        {
+          "origin": "https://campaign-fixture.example.invalid",
+          "path": "/image",
+          "resource": "image"
+        },
+        {
+          "origin": "https://campaign-fixture.example.invalid",
+          "path": "/image",
+          "resource": "image"
+        }
+      ],
+      "external_connections": [],
+      "http": [
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/vendor/font-awesome/6.4.0/css/all.inlined.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/css/components.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/js/components.iife.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/components.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/en.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/config.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/ko.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/routes.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/layouts/raonslab-travel_lab/auth/login.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/auth/login",
+          "method": "POST",
+          "status": 200
+        },
+        {
+          "path": "/api/layouts/raonslab-travel_lab/travel/home.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/facets",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/auth/user",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/cart",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/campaigns",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/vendor/font-awesome/6.4.0/css/all.inlined.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/vendor/flag-icons/7.2.3/css/flag-icons.min.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/vendor/pretendard/1.3.9/pretendard-variable.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/js/components.iife.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/css/components.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/sirsoft-admin_basic/config.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/sirsoft-admin_basic/routes.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/sirsoft-admin_basic/lang/en.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/sirsoft-admin_basic/lang/ko.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/sirsoft-admin_basic/components.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/auth/user",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/layouts/sirsoft-admin_basic/sirsoft-page.admin_page_form.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/plugins/installed",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/menus/active",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/sirsoft-page/admin/pages/7",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/auth/user",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/vendor/pretendard/1.3.9/woff2/PretendardVariable.woff2",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/notifications",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/notifications/unread-count",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/modules/installed",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/sirsoft-page/admin/pages/check-slug",
+          "method": "POST",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/sirsoft-page/admin/pages/7",
+          "method": "PUT",
+          "status": 200
+        },
+        {
+          "path": "/api/layouts/sirsoft-admin_basic/sirsoft-page.admin_page_detail.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/vendor/pretendard/1.3.9/pretendard-variable.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/vendor/flag-icons/7.2.3/css/flag-icons.min.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/css/components.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/vendor/font-awesome/6.4.0/css/all.inlined.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/js/components.iife.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/sirsoft-admin_basic/lang/en.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/sirsoft-admin_basic/config.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/auth/user",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/sirsoft-admin_basic/lang/ko.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/sirsoft-admin_basic/routes.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/sirsoft-admin_basic/components.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/layouts/sirsoft-admin_basic/raonslab-travel_lab.admin_travel_lab_campaigns.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/menus/active",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/notifications/unread-count",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/auth/user",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/notifications",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/vendor/pretendard/1.3.9/woff2/PretendardVariable.woff2",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/plugins/installed",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/sirsoft-page/admin/pages",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/modules/installed",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/layouts/sirsoft-admin_basic/sirsoft-page.admin_page_form.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/notifications/unread-count",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/notifications",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/auth/user",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/menus/active",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/plugins/installed",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/modules/installed",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/sirsoft-page/admin/pages/check-slug",
+          "method": "POST",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/sirsoft-page/admin/pages",
+          "method": "POST",
+          "status": 201
+        },
+        {
+          "path": "/api/layouts/sirsoft-admin_basic/sirsoft-page.admin_page_detail.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/menus/active",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/notifications",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/notifications/unread-count",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/modules/installed",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/sirsoft-page/admin/pages/13/versions",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/sirsoft-page/admin/pages/13",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/plugins/installed",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/auth/user",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/vendor/pretendard/1.3.9/pretendard-variable.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/vendor/flag-icons/7.2.3/css/flag-icons.min.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/vendor/font-awesome/6.4.0/css/all.inlined.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/css/components.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/js/components.iife.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/sirsoft-admin_basic/config.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/sirsoft-admin_basic/lang/en.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/sirsoft-admin_basic/components.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/sirsoft-admin_basic/lang/ko.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/sirsoft-admin_basic/routes.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/auth/user",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/layouts/sirsoft-admin_basic/raonslab-travel_lab.admin_travel_lab_campaigns.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/menus/active",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/notifications",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/auth/user",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/notifications/unread-count",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/sirsoft-page/admin/pages",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/modules/installed",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/vendor/pretendard/1.3.9/woff2/PretendardVariable.woff2",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/plugins/installed",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/sirsoft-page/admin/pages/13/publish",
+          "method": "PATCH",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/sirsoft-page/admin/pages",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/vendor/flag-icons/7.2.3/css/flag-icons.min.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/vendor/pretendard/1.3.9/pretendard-variable.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/css/components.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/vendor/font-awesome/6.4.0/css/all.inlined.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/js/components.iife.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/sirsoft-admin_basic/components.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/sirsoft-admin_basic/routes.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/sirsoft-admin_basic/lang/ko.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/sirsoft-admin_basic/lang/en.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/sirsoft-admin_basic/config.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/auth/user",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/layouts/sirsoft-admin_basic/sirsoft-page.admin_page_form.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/plugins/installed",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/notifications",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/auth/user",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/menus/active",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/notifications/unread-count",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/modules/installed",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/sirsoft-page/admin/pages/13",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/vendor/pretendard/1.3.9/woff2/PretendardVariable.woff2",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/sirsoft-page/admin/pages/13",
+          "method": "PUT",
+          "status": 200
+        },
+        {
+          "path": "/api/layouts/sirsoft-admin_basic/sirsoft-page.admin_page_detail.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/menus/active",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/notifications",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/auth/user",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/sirsoft-page/admin/pages/13",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/sirsoft-page/admin/pages/13/versions",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/notifications/unread-count",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/modules/installed",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/plugins/installed",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/vendor/flag-icons/7.2.3/css/flag-icons.min.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/vendor/pretendard/1.3.9/pretendard-variable.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/vendor/font-awesome/6.4.0/css/all.inlined.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/css/components.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/js/components.iife.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/sirsoft-admin_basic/components.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/sirsoft-admin_basic/config.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/sirsoft-admin_basic/routes.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/sirsoft-admin_basic/lang/ko.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/sirsoft-admin_basic/lang/en.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/auth/user",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/layouts/sirsoft-admin_basic/sirsoft-page.admin_page_detail.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/notifications/unread-count",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/menus/active",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/sirsoft-page/admin/pages/13",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/modules/installed",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/auth/user",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/vendor/pretendard/1.3.9/woff2/PretendardVariable.woff2",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/plugins/installed",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/sirsoft-page/admin/pages/13/versions",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/notifications",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/vendor/pretendard/1.3.9/pretendard-variable.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/vendor/flag-icons/7.2.3/css/flag-icons.min.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/vendor/font-awesome/6.4.0/css/all.inlined.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/css/components.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/js/components.iife.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/sirsoft-admin_basic/components.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/sirsoft-admin_basic/config.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/sirsoft-admin_basic/routes.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/sirsoft-admin_basic/lang/ko.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/auth/user",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/sirsoft-admin_basic/lang/en.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/layouts/sirsoft-admin_basic/raonslab-travel_lab.admin_travel_lab_campaigns.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/menus/active",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/auth/user",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/vendor/pretendard/1.3.9/woff2/PretendardVariable.woff2",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/plugins/installed",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/sirsoft-page/admin/pages",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/notifications",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/notifications/unread-count",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/modules/installed",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/sirsoft-page/admin/pages/13/publish",
+          "method": "PATCH",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/sirsoft-page/admin/pages",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/vendor/flag-icons/7.2.3/css/flag-icons.min.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/vendor/font-awesome/6.4.0/css/all.inlined.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/vendor/pretendard/1.3.9/pretendard-variable.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/css/components.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/js/components.iife.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/sirsoft-admin_basic/routes.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/sirsoft-admin_basic/lang/en.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/sirsoft-admin_basic/lang/ko.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/sirsoft-admin_basic/config.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/sirsoft-admin_basic/components.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/auth/user",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/layouts/sirsoft-admin_basic/raonslab-travel_lab.admin_travel_lab_campaigns.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/notifications/unread-count",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/notifications",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/auth/user",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/menus/active",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/modules/installed",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/sirsoft-page/admin/pages",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/admin/plugins/installed",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/vendor/pretendard/1.3.9/woff2/PretendardVariable.woff2",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/sirsoft-page/admin/pages/13/publish",
+          "method": "PATCH",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/sirsoft-page/admin/pages",
+          "method": "GET",
+          "status": 200
+        }
+      ],
+      "assets": [
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/vendor/font-awesome/6.4.0/css/all.inlined.css",
+          "sha256": "6af1cb388a71cc87fe960b65c2bb06039ab37dd39630f6710f812483725b1455",
+          "status": 200,
+          "bytes": 480419
+        },
+        {
+          "path": "/build/core/template-engine.min.js",
+          "sha256": "b8cf27fab58e108b1509c379a5f4d0860a21a90bc591bb34b48a94d6e56cb76d",
+          "status": 200,
+          "bytes": 819049
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/css/components.css",
+          "sha256": "8b372bcc681e6b78fbac301ddb274e75703f3e50a9e76d0472243c23c571d207",
+          "status": 200,
+          "bytes": 51039
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/js/components.iife.js",
+          "sha256": "8941442d1a921c2f366063359e39f79ed3a719bce77a174b6c0aa5657b691d63",
+          "status": 200,
+          "bytes": 68911
+        },
+        {
+          "path": "/api/modules/bundle.css",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "status": 200,
+          "bytes": 0
+        },
+        {
+          "path": "/api/modules/bundle.js",
+          "sha256": "a69dc60260eef16feb33b5433426d974164fcc5a9b15d3577a710a9212b9f2ce",
+          "status": 200,
+          "bytes": 153543
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/vendor/font-awesome/6.4.0/css/all.inlined.css",
+          "sha256": "940d2ea3cc2846779b56ea7ea3d8cee525122bda45aa146da5b4d87cb6c97f66",
+          "status": 200,
+          "bytes": 480419
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/vendor/flag-icons/7.2.3/css/flag-icons.min.css",
+          "sha256": "1651282d9aca6c0326887221612d34edf1937adeff9eb50f8c227b5de96aab87",
+          "status": 200,
+          "bytes": 70024
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/vendor/pretendard/1.3.9/pretendard-variable.css",
+          "sha256": "3e2a4f37d9c3adc931babd0587e4af5949880b76e6a880f955a55653687a351d",
+          "status": 200,
+          "bytes": 558
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/js/components.iife.js",
+          "sha256": "d25eb47e1308a83a456b17fe86953fec8fefc46a38769c0c225be72b0028e6c9",
+          "status": 200,
+          "bytes": 728609
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/css/components.css",
+          "sha256": "3aafccf49bb7fc4521c2bb95ab2dcb550fc04b89848618aca6232fecfe10692c",
+          "status": 200,
+          "bytes": 592888
+        },
+        {
+          "path": "/api/templates/assets/sirsoft-admin_basic/vendor/pretendard/1.3.9/woff2/PretendardVariable.woff2",
+          "sha256": "9599f12fd42fc0bce1cd50b47a0c022e108d7aa64dd0d1bb0ed44f3282d900b4",
+          "status": 200,
+          "bytes": 2057688
+        }
+      ],
+      "geometry": [
+        {
+          "name": "native-create-campaign-4",
+          "viewport": 390,
+          "document": 390
+        }
+      ]
+    },
+    {
+      "width": 390,
+      "role": "guest",
+      "pageerrors": [],
+      "external_attempts": [],
+      "external_connections": [],
+      "http": [
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/js/components.iife.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/vendor/font-awesome/6.4.0/css/all.inlined.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/css/components.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/ko.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/en.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/components.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/routes.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/config.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/layouts/raonslab-travel_lab/travel/home.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/facets",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/campaigns",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/css/components.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/js/components.iife.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/vendor/font-awesome/6.4.0/css/all.inlined.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/config.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/ko.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/en.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/components.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/routes.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/layouts/raonslab-travel_lab/travel/campaigns.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/campaigns",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/css/components.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/vendor/font-awesome/6.4.0/css/all.inlined.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/js/components.iife.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/components.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/config.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/ko.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/en.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/routes.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/layouts/raonslab-travel_lab/travel/campaign_detail.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/campaigns/travel-lab-campaign-autumn-escape",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/css/components.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/vendor/font-awesome/6.4.0/css/all.inlined.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/js/components.iife.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/components.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/routes.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/ko.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/config.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/en.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/layouts/raonslab-travel_lab/travel/campaign_detail.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/campaigns/travel-lab-campaign-autumn-escape",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/vendor/font-awesome/6.4.0/css/all.inlined.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/js/components.iife.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/css/components.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/components.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/ko.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/routes.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/config.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/en.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/layouts/raonslab-travel_lab/travel/home.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/facets",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/campaigns",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/css/components.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/vendor/font-awesome/6.4.0/css/all.inlined.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/js/components.iife.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/components.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/ko.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/en.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/routes.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/config.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/layouts/raonslab-travel_lab/travel/campaigns.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/campaigns",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/css/components.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/vendor/font-awesome/6.4.0/css/all.inlined.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/js/components.iife.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/ko.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/en.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/components.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/routes.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/config.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/layouts/raonslab-travel_lab/travel/campaign_detail.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/campaigns/travel-lab-campaign-autumn-escape",
+          "method": "GET",
+          "status": 404
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/css/components.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/vendor/font-awesome/6.4.0/css/all.inlined.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/js/components.iife.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/en.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/components.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/routes.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/config.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/ko.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/layouts/raonslab-travel_lab/travel/campaign_detail.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/campaigns/travel-lab-campaign-autumn-escape",
+          "method": "GET",
+          "status": 404
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/css/components.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/js/components.iife.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/vendor/font-awesome/6.4.0/css/all.inlined.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/components.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/config.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/routes.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/ko.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/en.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/layouts/raonslab-travel_lab/travel/home.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/facets",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/campaigns",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/vendor/font-awesome/6.4.0/css/all.inlined.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/css/components.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/js/components.iife.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/config.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/ko.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/en.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/components.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/routes.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/layouts/raonslab-travel_lab/travel/campaigns.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/campaigns",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/css/components.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/vendor/font-awesome/6.4.0/css/all.inlined.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/js/components.iife.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/components.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/routes.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/ko.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/en.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/config.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/layouts/raonslab-travel_lab/travel/campaign_detail.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/campaigns/travel-lab-campaign-autumn-escape",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/css/components.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/js/components.iife.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/vendor/font-awesome/6.4.0/css/all.inlined.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/components.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/config.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/ko.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/en.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/routes.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/layouts/raonslab-travel_lab/travel/campaign_detail.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/campaigns/travel-lab-campaign-autumn-escape",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/css/components.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/vendor/font-awesome/6.4.0/css/all.inlined.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/js/components.iife.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/config.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/ko.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/components.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/en.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/routes.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/layouts/raonslab-travel_lab/travel/home.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/facets",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/campaigns",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/css/components.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/vendor/font-awesome/6.4.0/css/all.inlined.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/js/components.iife.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/routes.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/components.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/ko.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/en.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/config.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/layouts/raonslab-travel_lab/travel/campaigns.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/campaigns",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/css/components.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/vendor/font-awesome/6.4.0/css/all.inlined.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/js/components.iife.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/components.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/routes.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/ko.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/en.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/config.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/layouts/raonslab-travel_lab/travel/campaign_detail.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/campaigns/travel-lab-campaign-autumn-escape",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/vendor/font-awesome/6.4.0/css/all.inlined.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/js/components.iife.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/css/components.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/components.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/ko.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/config.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/en.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/routes.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/layouts/raonslab-travel_lab/travel/campaign_detail.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/campaigns/travel-lab-campaign-autumn-escape",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/css/components.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/vendor/font-awesome/6.4.0/css/all.inlined.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/js/components.iife.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/ko.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/en.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/components.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/routes.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/config.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/layouts/raonslab-travel_lab/travel/home.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/facets",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/catalog",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/campaigns",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/css/components.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/vendor/font-awesome/6.4.0/css/all.inlined.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/js/components.iife.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/ko.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/routes.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/en.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/components.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/config.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/layouts/raonslab-travel_lab/travel/campaigns.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/campaigns",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/vendor/font-awesome/6.4.0/css/all.inlined.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/css/components.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/js/components.iife.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/components.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/routes.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/ko.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/en.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/config.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/layouts/raonslab-travel_lab/travel/campaign_detail.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/campaigns/travel-lab-campaign-autumn-escape",
+          "method": "GET",
+          "status": 404
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/css/components.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/vendor/font-awesome/6.4.0/css/all.inlined.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/js/components.iife.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/config.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/components.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/ko.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/lang/en.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/templates/raonslab-travel_lab/routes.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.css",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/bundle.js",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/layouts/raonslab-travel_lab/travel/campaign_detail.json",
+          "method": "GET",
+          "status": 200
+        },
+        {
+          "path": "/api/modules/raonslab-travel_lab/campaigns/travel-lab-campaign-autumn-escape",
+          "method": "GET",
+          "status": 404
+        }
+      ],
+      "assets": [
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/js/components.iife.js",
+          "sha256": "8941442d1a921c2f366063359e39f79ed3a719bce77a174b6c0aa5657b691d63",
+          "status": 200,
+          "bytes": 68911
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/vendor/font-awesome/6.4.0/css/all.inlined.css",
+          "sha256": "6af1cb388a71cc87fe960b65c2bb06039ab37dd39630f6710f812483725b1455",
+          "status": 200,
+          "bytes": 480419
+        },
+        {
+          "path": "/build/core/template-engine.min.js",
+          "sha256": "b8cf27fab58e108b1509c379a5f4d0860a21a90bc591bb34b48a94d6e56cb76d",
+          "status": 200,
+          "bytes": 819049
+        },
+        {
+          "path": "/api/templates/assets/raonslab-travel_lab/css/components.css",
+          "sha256": "8b372bcc681e6b78fbac301ddb274e75703f3e50a9e76d0472243c23c571d207",
+          "status": 200,
+          "bytes": 51039
+        },
+        {
+          "path": "/api/modules/bundle.css",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "status": 200,
+          "bytes": 0
+        },
+        {
+          "path": "/api/modules/bundle.js",
+          "sha256": "a69dc60260eef16feb33b5433426d974164fcc5a9b15d3577a710a9212b9f2ce",
+          "status": 200,
+          "bytes": 153543
+        }
+      ],
+      "geometry": [
+        {
+          "name": "baseline-campaign-4",
+          "viewport": 390,
+          "document": 390
+        },
+        {
+          "name": "draft-campaign-4",
+          "viewport": 390,
+          "document": 390
+        },
+        {
+          "name": "publish-campaign-4",
+          "viewport": 390,
+          "document": 390
+        },
+        {
+          "name": "html-campaign-4",
+          "viewport": 390,
+          "document": 390
+        },
+        {
+          "name": "unpublish-campaign-4",
+          "viewport": 390,
+          "document": 390
+        }
+      ]
+    }
+  ],
+  "cleanup": [
+    {
+      "type": "own-new-page-native-delete",
+      "id": 13,
+      "http": 200
+    },
+    {
+      "type": "original-page-restored",
+      "id": 7,
+      "properties_equal": {
+        "slug": true,
+        "title": true,
+        "content": true,
+        "content_mode": true,
+        "seo_meta": true,
+        "published": true
+      },
+      "current_version": 7,
+      "version_count": 7,
+      "preserved_version1": true,
+      "history": "native legitimate versions retained; not pristine DB"
+    }
+  ],
+  "chromium": "156.0.8078.4",
+  "elapsed_seconds": 57.934
+}

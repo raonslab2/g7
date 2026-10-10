@@ -1,0 +1,57 @@
+{
+  "kind": "lead actual marked APP env-loss recovery; not independent Validation",
+  "command": "php scripts/travel-lab/live-env-recovery.php",
+  "status": "PASS",
+  "existing_user_ids_preserved": true,
+  "travel_records_preserved": true,
+  "digests_before": {
+    "db": "req81_travel_lab",
+    "digests": {
+      "travel_lab_inquiries": {
+        "count": 75,
+        "sha256": "1bd296ec9ce7d2255c43e83c36fc6b6dd2effa685e3c3632d71136a9ab3cfb9d"
+      },
+      "travel_lab_inquiry_items": {
+        "count": 75,
+        "sha256": "3ff84bbbd996c1c53a14bf6770cbddb0fc71039c4dd19522ec9556ca03223c9e"
+      },
+      "travel_lab_departures": {
+        "count": 61,
+        "sha256": "c273bcc37715348996d317aa780ad4caeb825685d4f6c680eed9f9f81a309d58"
+      },
+      "travel_lab_inquiry_events": {
+        "count": 161,
+        "sha256": "759aef7ed181ce48e93dfd7d4c5e28cac0f61a6997bb356b74d0da23632843fb"
+      }
+    }
+  },
+  "digests_after": {
+    "db": "req81_travel_lab",
+    "digests": {
+      "travel_lab_inquiries": {
+        "count": 75,
+        "sha256": "1bd296ec9ce7d2255c43e83c36fc6b6dd2effa685e3c3632d71136a9ab3cfb9d"
+      },
+      "travel_lab_inquiry_items": {
+        "count": 75,
+        "sha256": "3ff84bbbd996c1c53a14bf6770cbddb0fc71039c4dd19522ec9556ca03223c9e"
+      },
+      "travel_lab_departures": {
+        "count": 61,
+        "sha256": "c273bcc37715348996d317aa780ad4caeb825685d4f6c680eed9f9f81a309d58"
+      },
+      "travel_lab_inquiry_events": {
+        "count": 161,
+        "sha256": "759aef7ed181ce48e93dfd7d4c5e28cac0f61a6997bb356b74d0da23632843fb"
+      }
+    }
+  },
+  "new_local_credentials_verified": true,
+  "APP_KEY_rotated": true,
+  "old_sessions_invalidated": true,
+  "scope": "Only two marked schemas scoped account and synthetic lab administrator; ordinary core seed skipped",
+  "preview_unit_recreation": "Transient unit disappears after stop; recreated same User=ubuntu workdir loopback18871 workers4",
+  "private_log_sha256": "adcf77c761adaaa4bf76201109406456f89baf02485a7262a8fd8d144144b448",
+  "log_limitation": "Nested subprocess output interleaves and contains invalid UTF8; raw private log excluded from Git, successful marker and exit0 plus separate persisted digest checks retained",
+  "limitations": "No historical128/639 restoration claim, no production/Spring changes, independent fresh install and new login checks pending"
+}

@@ -1,0 +1,1799 @@
+{
+ "run": "w04pa-53a5af1f4e",
+ "review_sha": "992f9a65ac3f8957e5ec618f21072dc499053810",
+ "base_url": "http://127.0.0.1:18871",
+ "counts": {
+  "PASS": 11,
+  "FAIL": 0,
+  "OBSERVED": 1,
+  "BLOCKED": 0,
+  "NOT_RUN": 0
+ },
+ "results": [
+  {
+   "name": "preflight",
+   "status": "PASS",
+   "detail": {
+    "handoff_source_sha_matches_review": false,
+    "expires_at": "2026-10-09T21:07:52+00:00",
+    "actors": {
+     "member": 51,
+     "other_member": 52,
+     "admin": 53
+    },
+    "run": "w04pa-53a5af1f4e"
+   },
+   "at": "18:38:41"
+  },
+  {
+   "name": "native login issues own tokens for member / other_member / admin",
+   "status": "PASS",
+   "detail": {
+    "member": {
+     "login": 200,
+     "token_issued": true,
+     "me": 200,
+     "me_user_id_matches": false
+    },
+    "other_member": {
+     "login": 200,
+     "token_issued": true,
+     "me": 200,
+     "me_user_id_matches": false
+    },
+    "admin": {
+     "login": 200,
+     "token_issued": true,
+     "me": 200,
+     "me_user_id_matches": false
+    }
+   },
+   "at": "18:38:43"
+  },
+  {
+   "name": "member creates own private synthetic question via support API",
+   "status": "PASS",
+   "detail": {
+    "status": 201,
+    "question_id": 116,
+    "is_secret": true,
+    "has_attachments_key": false
+   },
+   "at": "18:38:43"
+  },
+  {
+   "name": "admin attaches inert text file to own question via native admin attachment API",
+   "status": "PASS",
+   "detail": {
+    "label": "txt",
+    "id": 1,
+    "hash": "jvcrvxdlT5Rg",
+    "mime": "text/plain",
+    "size": 208,
+    "upload_sha256": "7d5b00e25c898dd96ebd97aec3f92d31d299eeff46e9b08d0ade051e42dd5cac",
+    "original_filename_echo_matches": true,
+    "url_is_gated_route": true,
+    "disk": [
+     {
+      "rel": "storage/app/modules/sirsoft-board/attachments/travel-lab-questions/2026/10/09/<stored_uuid_name>",
+      "size": 208,
+      "sha256": "7d5b00e25c898dd96ebd97aec3f92d31d299eeff46e9b08d0ade051e42dd5cac",
+      "mode": "0o644"
+     }
+    ]
+   },
+   "at": "18:38:43"
+  },
+  {
+   "name": "admin attaches inert 8x8 PNG to own question via native admin attachment API",
+   "status": "PASS",
+   "detail": {
+    "label": "png",
+    "id": 2,
+    "hash": "PI7QTg7Srosl",
+    "mime": "image/png",
+    "size": 166,
+    "upload_sha256": "6bd3c16be01f36549522ad94dcdef1e54f5086d455d644652d534ada957d1aa7",
+    "original_filename_echo_matches": true,
+    "url_is_gated_route": true,
+    "disk": [
+     {
+      "rel": "storage/app/modules/sirsoft-board/attachments/travel-lab-questions/2026/10/09/<stored_uuid_name>",
+      "size": 166,
+      "sha256": "6bd3c16be01f36549522ad94dcdef1e54f5086d455d644652d534ada957d1aa7",
+      "mode": "0o644"
+     }
+    ]
+   },
+   "at": "18:38:43"
+  },
+  {
+   "name": "positive controls: admin native download bytes == on-disk sha; owner image preview bytes == on-disk sha; admin listing includes both",
+   "status": "PASS",
+   "detail": {
+    "txt.admin_download": {
+     "status": 200,
+     "ctype": "text/plain",
+     "len": 208,
+     "sha256": "7d5b00e25c898dd96ebd97aec3f92d31d299eeff46e9b08d0ade051e42dd5cac",
+     "message": null,
+     "disposition_has_filename": true,
+     "leaks": {},
+     "ms": 102.9,
+     "bytes_equal_disk": true,
+     "bytes_equal_upload": true
+    },
+    "txt.admin_token_user_download": {
+     "status": 200,
+     "ctype": "text/plain",
+     "len": 208,
+     "sha256": "7d5b00e25c898dd96ebd97aec3f92d31d299eeff46e9b08d0ade051e42dd5cac",
+     "message": null,
+     "disposition_has_filename": true,
+     "leaks": {},
+     "ms": 113.3,
+     "bytes_equal_disk": true
+    },
+    "txt.owner_user_download": {
+     "status": 403,
+     "ctype": "application/json",
+     "len": 60,
+     "sha256": "7de72e640844887c4f442173a6cabb08ac34b5f8a8c7e18d9870ae0c553b77d0",
+     "message": "해당 권한이 없습니다.",
+     "disposition_has_filename": false,
+     "leaks": {
+      "txt_bytes": false,
+      "png_bytes": false,
+      "txt_filename": false,
+      "png_filename": false,
+      "question_body": false
+     },
+     "ms": 69.0,
+     "bytes_equal_disk": false
+    },
+    "txt.owner_admin_download": {
+     "status": 403,
+     "ctype": "application/json",
+     "len": 66,
+     "sha256": "affa15b8d2bfa43e73796fcf53102f06993bc86413292a5b104524bd7f02355d",
+     "message": "관리자 권한이 필요합니다.",
+     "disposition_has_filename": false,
+     "leaks": {
+      "txt_bytes": false,
+      "png_bytes": false,
+      "txt_filename": false,
+      "png_filename": false,
+      "question_body": false
+     },
+     "ms": 84.0
+    },
+    "png.admin_download": {
+     "status": 200,
+     "ctype": "image/png",
+     "len": 166,
+     "sha256": "6bd3c16be01f36549522ad94dcdef1e54f5086d455d644652d534ada957d1aa7",
+     "message": null,
+     "disposition_has_filename": true,
+     "leaks": {},
+     "ms": 99.7,
+     "bytes_equal_disk": true,
+     "bytes_equal_upload": true
+    },
+    "png.admin_token_user_download": {
+     "status": 200,
+     "ctype": "image/png",
+     "len": 166,
+     "sha256": "6bd3c16be01f36549522ad94dcdef1e54f5086d455d644652d534ada957d1aa7",
+     "message": null,
+     "disposition_has_filename": true,
+     "leaks": {},
+     "ms": 114.8,
+     "bytes_equal_disk": true
+    },
+    "png.owner_user_download": {
+     "status": 403,
+     "ctype": "application/json",
+     "len": 60,
+     "sha256": "7de72e640844887c4f442173a6cabb08ac34b5f8a8c7e18d9870ae0c553b77d0",
+     "message": "해당 권한이 없습니다.",
+     "disposition_has_filename": false,
+     "leaks": {
+      "txt_bytes": false,
+      "png_bytes": false,
+      "txt_filename": false,
+      "png_filename": false,
+      "question_body": false
+     },
+     "ms": 60.7,
+     "bytes_equal_disk": false
+    },
+    "png.owner_admin_download": {
+     "status": 403,
+     "ctype": "application/json",
+     "len": 66,
+     "sha256": "affa15b8d2bfa43e73796fcf53102f06993bc86413292a5b104524bd7f02355d",
+     "message": "관리자 권한이 필요합니다.",
+     "disposition_has_filename": false,
+     "leaks": {
+      "txt_bytes": false,
+      "png_bytes": false,
+      "txt_filename": false,
+      "png_filename": false,
+      "question_body": false
+     },
+     "ms": 61.7
+    },
+    "png.admin_preview": {
+     "status": 200,
+     "ctype": "image/png",
+     "len": 166,
+     "sha256": "6bd3c16be01f36549522ad94dcdef1e54f5086d455d644652d534ada957d1aa7",
+     "message": null,
+     "disposition_has_filename": false,
+     "leaks": {},
+     "ms": 96.0,
+     "bytes_equal_disk": true
+    },
+    "png.owner_preview": {
+     "status": 200,
+     "ctype": "image/png",
+     "len": 166,
+     "sha256": "6bd3c16be01f36549522ad94dcdef1e54f5086d455d644652d534ada957d1aa7",
+     "message": null,
+     "disposition_has_filename": false,
+     "leaks": {},
+     "ms": 68.9,
+     "bytes_equal_disk": true
+    },
+    "admin_post_show": {
+     "status": 200,
+     "attachment_ids": [
+      1,
+      2
+     ],
+     "png_preview_url_signed": true
+    },
+    "owner_support_show": {
+     "status": 200,
+     "attachments_key_present": false,
+     "leaks": {
+      "txt_bytes": false,
+      "png_bytes": false,
+      "txt_filename": false,
+      "png_filename": false
+     }
+    }
+   },
+   "at": "18:38:44"
+  },
+  {
+   "name": "foreign: other_member and guest denied on every native attachment / listing route for the existing real file; no bytes, filename or body",
+   "status": "PASS",
+   "detail": {
+    "txt.other_member.user_download": {
+     "status": 403,
+     "ctype": "application/json",
+     "len": 60,
+     "sha256": "7de72e640844887c4f442173a6cabb08ac34b5f8a8c7e18d9870ae0c553b77d0",
+     "message": "해당 권한이 없습니다.",
+     "disposition_has_filename": false,
+     "leaks": {
+      "txt_bytes": false,
+      "png_bytes": false,
+      "txt_filename": false,
+      "png_filename": false,
+      "question_body": false
+     },
+     "ms": 70.9
+    },
+    "txt.other_member.preview": {
+     "status": 500,
+     "ctype": "application/json",
+     "len": 75,
+     "sha256": "dce254681af959cb5bfa5023fb3727dfefd7ae16f54e33f52dc384669ea599e1",
+     "message": "이미지 미리보기에 실패했습니다.",
+     "disposition_has_filename": false,
+     "leaks": {
+      "txt_bytes": false,
+      "png_bytes": false,
+      "txt_filename": false,
+      "png_filename": false,
+      "question_body": false
+     },
+     "ms": 55.9
+    },
+    "txt.other_member.admin_download": {
+     "status": 403,
+     "ctype": "application/json",
+     "len": 66,
+     "sha256": "affa15b8d2bfa43e73796fcf53102f06993bc86413292a5b104524bd7f02355d",
+     "message": "관리자 권한이 필요합니다.",
+     "disposition_has_filename": false,
+     "leaks": {
+      "txt_bytes": false,
+      "png_bytes": false,
+      "txt_filename": false,
+      "png_filename": false,
+      "question_body": false
+     },
+     "ms": 63.9
+    },
+    "txt.other_member.wrong_slug_preview": {
+     "status": 404,
+     "ctype": "application/json",
+     "len": 64,
+     "sha256": "ed4adeaa78450e4b642c9c43ec7920966dd349f04f3f80b7d0c5bdac9d552dfc",
+     "message": "파일을 찾을 수 없습니다.",
+     "disposition_has_filename": false,
+     "leaks": {
+      "txt_bytes": false,
+      "png_bytes": false,
+      "txt_filename": false,
+      "png_filename": false,
+      "question_body": false
+     },
+     "ms": 62.8
+    },
+    "txt.other_member.wrong_slug_download": {
+     "status": 403,
+     "ctype": "application/json",
+     "len": 60,
+     "sha256": "7de72e640844887c4f442173a6cabb08ac34b5f8a8c7e18d9870ae0c553b77d0",
+     "message": "해당 권한이 없습니다.",
+     "disposition_has_filename": false,
+     "leaks": {
+      "txt_bytes": false,
+      "png_bytes": false,
+      "txt_filename": false,
+      "png_filename": false,
+      "question_body": false
+     },
+     "ms": 66.7
+    },
+    "txt.guest.user_download": {
+     "status": 401,
+     "ctype": "application/json",
+     "len": 92,
+     "sha256": "7c9a23b37a080c703acb38453148b3bac314709e6dbe4b8e75fad363b87a96ca",
+     "message": "Guests are not allowed to perform this action. Login required.",
+     "disposition_has_filename": false,
+     "leaks": {
+      "txt_bytes": false,
+      "png_bytes": false,
+      "txt_filename": false,
+      "png_filename": false,
+      "question_body": false
+     },
+     "ms": 57.7
+    },
+    "txt.guest.preview": {
+     "status": 500,
+     "ctype": "application/json",
+     "len": 58,
+     "sha256": "5ce6e24dee9d253feec2f8b856f739014fe88b517cddce234acaef8bbc5b9a86",
+     "message": "Failed to preview the image.",
+     "disposition_has_filename": false,
+     "leaks": {
+      "txt_bytes": false,
+      "png_bytes": false,
+      "txt_filename": false,
+      "png_filename": false,
+      "question_body": false
+     },
+     "ms": 56.9
+    },
+    "txt.guest.admin_download": {
+     "status": 401,
+     "ctype": "application/json",
+     "len": 64,
+     "sha256": "b7ac4b8fedef0ced32370bd72df55fce8c400ebc362bca6d3e6079bc350ba1c8",
+     "message": "인증이 필요합니다.",
+     "disposition_has_filename": false,
+     "leaks": {
+      "txt_bytes": false,
+      "png_bytes": false,
+      "txt_filename": false,
+      "png_filename": false,
+      "question_body": false
+     },
+     "ms": 44.2
+    },
+    "txt.guest.wrong_slug_preview": {
+     "status": 404,
+     "ctype": "application/json",
+     "len": 45,
+     "sha256": "7eab26fd3c20c682e373f28e16793c60bb6b2816314c6d59e3296758f41dd498",
+     "message": "File not found.",
+     "disposition_has_filename": false,
+     "leaks": {
+      "txt_bytes": false,
+      "png_bytes": false,
+      "txt_filename": false,
+      "png_filename": false,
+      "question_body": false
+     },
+     "ms": 57.6
+    },
+    "txt.guest.wrong_slug_download": {
+     "status": 401,
+     "ctype": "application/json",
+     "len": 92,
+     "sha256": "7c9a23b37a080c703acb38453148b3bac314709e6dbe4b8e75fad363b87a96ca",
+     "message": "Guests are not allowed to perform this action. Login required.",
+     "disposition_has_filename": false,
+     "leaks": {
+      "txt_bytes": false,
+      "png_bytes": false,
+      "txt_filename": false,
+      "png_filename": false,
+      "question_body": false
+     },
+     "ms": 55.1
+    },
+    "txt.other_member.admin_delete_attachment": {
+     "status": 403,
+     "ctype": "application/json",
+     "len": 66,
+     "sha256": "affa15b8d2bfa43e73796fcf53102f06993bc86413292a5b104524bd7f02355d",
+     "message": "관리자 권한이 필요합니다.",
+     "disposition_has_filename": false,
+     "leaks": {
+      "txt_bytes": false,
+      "png_bytes": false,
+      "txt_filename": false,
+      "png_filename": false,
+      "question_body": false
+     },
+     "ms": 57.6
+    },
+    "txt.other_member.user_delete_attachment": {
+     "status": 403,
+     "ctype": "application/json",
+     "len": 60,
+     "sha256": "7de72e640844887c4f442173a6cabb08ac34b5f8a8c7e18d9870ae0c553b77d0",
+     "message": "해당 권한이 없습니다.",
+     "disposition_has_filename": false,
+     "leaks": {
+      "txt_bytes": false,
+      "png_bytes": false,
+      "txt_filename": false,
+      "png_filename": false,
+      "question_body": false
+     },
+     "ms": 60.6
+    },
+    "txt.guest.admin_delete_attachment": {
+     "status": 401,
+     "ctype": "application/json",
+     "len": 64,
+     "sha256": "b7ac4b8fedef0ced32370bd72df55fce8c400ebc362bca6d3e6079bc350ba1c8",
+     "message": "인증이 필요합니다.",
+     "disposition_has_filename": false,
+     "leaks": {
+      "txt_bytes": false,
+      "png_bytes": false,
+      "txt_filename": false,
+      "png_filename": false,
+      "question_body": false
+     },
+     "ms": 41.7
+    },
+    "txt.guest.user_delete_attachment": {
+     "status": 401,
+     "ctype": "application/json",
+     "len": 92,
+     "sha256": "7c9a23b37a080c703acb38453148b3bac314709e6dbe4b8e75fad363b87a96ca",
+     "message": "Guests are not allowed to perform this action. Login required.",
+     "disposition_has_filename": false,
+     "leaks": {
+      "txt_bytes": false,
+      "png_bytes": false,
+      "txt_filename": false,
+      "png_filename": false,
+      "question_body": false
+     },
+     "ms": 54.1
+    },
+    "png.other_member.user_download": {
+     "status": 403,
+     "ctype": "application/json",
+     "len": 60,
+     "sha256": "7de72e640844887c4f442173a6cabb08ac34b5f8a8c7e18d9870ae0c553b77d0",
+     "message": "해당 권한이 없습니다.",
+     "disposition_has_filename": false,
+     "leaks": {
+      "txt_bytes": false,
+      "png_bytes": false,
+      "txt_filename": false,
+      "png_filename": false,
+      "question_body": false
+     },
+     "ms": 57.9
+    },
+    "png.other_member.preview": {
+     "status": 403,
+     "ctype": "application/json",
+     "len": 84,
+     "sha256": "e39c21d38ade8d93277bdb8e4c436359428b73df9add5a5817b4e76924c6b711",
+     "message": "이 리소스에 대한 접근 권한이 없습니다.",
+     "disposition_has_filename": false,
+     "leaks": {
+      "txt_bytes": false,
+      "png_bytes": false,
+      "txt_filename": false,
+      "png_filename": false,
+      "question_body": false
+     },
+     "ms": 70.3
+    },
+    "png.other_member.admin_download": {
+     "status": 403,
+     "ctype": "application/json",
+     "len": 66,
+     "sha256": "affa15b8d2bfa43e73796fcf53102f06993bc86413292a5b104524bd7f02355d",
+     "message": "관리자 권한이 필요합니다.",
+     "disposition_has_filename": false,
+     "leaks": {
+      "txt_bytes": false,
+      "png_bytes": false,
+      "txt_filename": false,
+      "png_filename": false,
+      "question_body": false
+     },
+     "ms": 53.2
+    },
+    "png.other_member.wrong_slug_preview": {
+     "status": 404,
+     "ctype": "application/json",
+     "len": 64,
+     "sha256": "ed4adeaa78450e4b642c9c43ec7920966dd349f04f3f80b7d0c5bdac9d552dfc",
+     "message": "파일을 찾을 수 없습니다.",
+     "disposition_has_filename": false,
+     "leaks": {
+      "txt_bytes": false,
+      "png_bytes": false,
+      "txt_filename": false,
+      "png_filename": false,
+      "question_body": false
+     },
+     "ms": 63.7
+    },
+    "png.other_member.wrong_slug_download": {
+     "status": 403,
+     "ctype": "application/json",
+     "len": 60,
+     "sha256": "7de72e640844887c4f442173a6cabb08ac34b5f8a8c7e18d9870ae0c553b77d0",
+     "message": "해당 권한이 없습니다.",
+     "disposition_has_filename": false,
+     "leaks": {
+      "txt_bytes": false,
+      "png_bytes": false,
+      "txt_filename": false,
+      "png_filename": false,
+      "question_body": false
+     },
+     "ms": 59.4
+    },
+    "png.guest.user_download": {
+     "status": 401,
+     "ctype": "application/json",
+     "len": 92,
+     "sha256": "7c9a23b37a080c703acb38453148b3bac314709e6dbe4b8e75fad363b87a96ca",
+     "message": "Guests are not allowed to perform this action. Login required.",
+     "disposition_has_filename": false,
+     "leaks": {
+      "txt_bytes": false,
+      "png_bytes": false,
+      "txt_filename": false,
+      "png_filename": false,
+      "question_body": false
+     },
+     "ms": 51.8
+    },
+    "png.guest.preview": {
+     "status": 403,
+     "ctype": "application/json",
+     "len": 70,
+     "sha256": "f061d155655d2869402c934377e04d00d50ed24a02d13b617ea6bd45a81a63da",
+     "message": "You do not have access to this resource.",
+     "disposition_has_filename": false,
+     "leaks": {
+      "txt_bytes": false,
+      "png_bytes": false,
+      "txt_filename": false,
+      "png_filename": false,
+      "question_body": false
+     },
+     "ms": 84.3
+    },
+    "png.guest.admin_download": {
+     "status": 401,
+     "ctype": "application/json",
+     "len": 64,
+     "sha256": "b7ac4b8fedef0ced32370bd72df55fce8c400ebc362bca6d3e6079bc350ba1c8",
+     "message": "인증이 필요합니다.",
+     "disposition_has_filename": false,
+     "leaks": {
+      "txt_bytes": false,
+      "png_bytes": false,
+      "txt_filename": false,
+      "png_filename": false,
+      "question_body": false
+     },
+     "ms": 50.0
+    },
+    "png.guest.wrong_slug_preview": {
+     "status": 404,
+     "ctype": "application/json",
+     "len": 45,
+     "sha256": "7eab26fd3c20c682e373f28e16793c60bb6b2816314c6d59e3296758f41dd498",
+     "message": "File not found.",
+     "disposition_has_filename": false,
+     "leaks": {
+      "txt_bytes": false,
+      "png_bytes": false,
+      "txt_filename": false,
+      "png_filename": false,
+      "question_body": false
+     },
+     "ms": 47.8
+    },
+    "png.guest.wrong_slug_download": {
+     "status": 401,
+     "ctype": "application/json",
+     "len": 92,
+     "sha256": "7c9a23b37a080c703acb38453148b3bac314709e6dbe4b8e75fad363b87a96ca",
+     "message": "Guests are not allowed to perform this action. Login required.",
+     "disposition_has_filename": false,
+     "leaks": {
+      "txt_bytes": false,
+      "png_bytes": false,
+      "txt_filename": false,
+      "png_filename": false,
+      "question_body": false
+     },
+     "ms": 51.3
+    },
+    "png.other_member.admin_delete_attachment": {
+     "status": 403,
+     "ctype": "application/json",
+     "len": 66,
+     "sha256": "affa15b8d2bfa43e73796fcf53102f06993bc86413292a5b104524bd7f02355d",
+     "message": "관리자 권한이 필요합니다.",
+     "disposition_has_filename": false,
+     "leaks": {
+      "txt_bytes": false,
+      "png_bytes": false,
+      "txt_filename": false,
+      "png_filename": false,
+      "question_body": false
+     },
+     "ms": 60.2
+    },
+    "png.other_member.user_delete_attachment": {
+     "status": 403,
+     "ctype": "application/json",
+     "len": 60,
+     "sha256": "7de72e640844887c4f442173a6cabb08ac34b5f8a8c7e18d9870ae0c553b77d0",
+     "message": "해당 권한이 없습니다.",
+     "disposition_has_filename": false,
+     "leaks": {
+      "txt_bytes": false,
+      "png_bytes": false,
+      "txt_filename": false,
+      "png_filename": false,
+      "question_body": false
+     },
+     "ms": 63.7
+    },
+    "png.guest.admin_delete_attachment": {
+     "status": 401,
+     "ctype": "application/json",
+     "len": 64,
+     "sha256": "b7ac4b8fedef0ced32370bd72df55fce8c400ebc362bca6d3e6079bc350ba1c8",
+     "message": "인증이 필요합니다.",
+     "disposition_has_filename": false,
+     "leaks": {
+      "txt_bytes": false,
+      "png_bytes": false,
+      "txt_filename": false,
+      "png_filename": false,
+      "question_body": false
+     },
+     "ms": 41.4
+    },
+    "png.guest.user_delete_attachment": {
+     "status": 401,
+     "ctype": "application/json",
+     "len": 92,
+     "sha256": "7c9a23b37a080c703acb38453148b3bac314709e6dbe4b8e75fad363b87a96ca",
+     "message": "Guests are not allowed to perform this action. Login required.",
+     "disposition_has_filename": false,
+     "leaks": {
+      "txt_bytes": false,
+      "png_bytes": false,
+      "txt_filename": false,
+      "png_filename": false,
+      "question_body": false
+     },
+     "ms": 59.9
+    },
+    "other_member.support_show": {
+     "status": 404,
+     "ctype": "application/json",
+     "len": 64,
+     "sha256": "b3dee059f8f407868ec6a92aabe1284545954ade37ef4b458a04f9fbde307ad9",
+     "message": "문의를 찾을 수 없습니다.",
+     "disposition_has_filename": false,
+     "leaks": {
+      "txt_bytes": false,
+      "png_bytes": false,
+      "txt_filename": false,
+      "png_filename": false,
+      "question_body": false
+     },
+     "ms": 94.5
+    },
+    "other_member.support_list": {
+     "status": 200,
+     "ctype": "application/json",
+     "len": 148,
+     "sha256": "2b6318b66dd609056fd509db63d75b2ad26e2a5b6e3464db4d8c1165424b395a",
+     "message": "문의 목록을 불러왔습니다.",
+     "disposition_has_filename": false,
+     "leaks": {
+      "txt_bytes": false,
+      "png_bytes": false,
+      "txt_filename": false,
+      "png_filename": false,
+      "question_body": false
+     },
+     "ms": 74.8,
+     "contains_question": false,
+     "contains_attachment_hash": false
+    },
+    "other_member.user_post_show": {
+     "status": 403,
+     "ctype": "application/json",
+     "len": 60,
+     "sha256": "7de72e640844887c4f442173a6cabb08ac34b5f8a8c7e18d9870ae0c553b77d0",
+     "message": "해당 권한이 없습니다.",
+     "disposition_has_filename": false,
+     "leaks": {
+      "txt_bytes": false,
+      "png_bytes": false,
+      "txt_filename": false,
+      "png_filename": false,
+      "question_body": false
+     },
+     "ms": 58.8
+    },
+    "other_member.user_post_list": {
+     "status": 403,
+     "ctype": "application/json",
+     "len": 60,
+     "sha256": "7de72e640844887c4f442173a6cabb08ac34b5f8a8c7e18d9870ae0c553b77d0",
+     "message": "해당 권한이 없습니다.",
+     "disposition_has_filename": false,
+     "leaks": {
+      "txt_bytes": false,
+      "png_bytes": false,
+      "txt_filename": false,
+      "png_filename": false,
+      "question_body": false
+     },
+     "ms": 57.2
+    },
+    "other_member.admin_post_show": {
+     "status": 403,
+     "ctype": "application/json",
+     "len": 66,
+     "sha256": "affa15b8d2bfa43e73796fcf53102f06993bc86413292a5b104524bd7f02355d",
+     "message": "관리자 권한이 필요합니다.",
+     "disposition_has_filename": false,
+     "leaks": {
+      "txt_bytes": false,
+      "png_bytes": false,
+      "txt_filename": false,
+      "png_filename": false,
+      "question_body": false
+     },
+     "ms": 53.7
+    },
+    "other_member.admin_post_list": {
+     "status": 403,
+     "ctype": "application/json",
+     "len": 66,
+     "sha256": "affa15b8d2bfa43e73796fcf53102f06993bc86413292a5b104524bd7f02355d",
+     "message": "관리자 권한이 필요합니다.",
+     "disposition_has_filename": false,
+     "leaks": {
+      "txt_bytes": false,
+      "png_bytes": false,
+      "txt_filename": false,
+      "png_filename": false,
+      "question_body": false
+     },
+     "ms": 53.8
+    },
+    "guest.support_show": {
+     "status": 401,
+     "ctype": "application/json",
+     "len": 64,
+     "sha256": "b7ac4b8fedef0ced32370bd72df55fce8c400ebc362bca6d3e6079bc350ba1c8",
+     "message": "인증이 필요합니다.",
+     "disposition_has_filename": false,
+     "leaks": {
+      "txt_bytes": false,
+      "png_bytes": false,
+      "txt_filename": false,
+      "png_filename": false,
+      "question_body": false
+     },
+     "ms": 38.4
+    },
+    "guest.support_list": {
+     "status": 401,
+     "ctype": "application/json",
+     "len": 64,
+     "sha256": "b7ac4b8fedef0ced32370bd72df55fce8c400ebc362bca6d3e6079bc350ba1c8",
+     "message": "인증이 필요합니다.",
+     "disposition_has_filename": false,
+     "leaks": {
+      "txt_bytes": false,
+      "png_bytes": false,
+      "txt_filename": false,
+      "png_filename": false,
+      "question_body": false
+     },
+     "ms": 45.0
+    },
+    "guest.user_post_show": {
+     "status": 401,
+     "ctype": "application/json",
+     "len": 92,
+     "sha256": "7c9a23b37a080c703acb38453148b3bac314709e6dbe4b8e75fad363b87a96ca",
+     "message": "Guests are not allowed to perform this action. Login required.",
+     "disposition_has_filename": false,
+     "leaks": {
+      "txt_bytes": false,
+      "png_bytes": false,
+      "txt_filename": false,
+      "png_filename": false,
+      "question_body": false
+     },
+     "ms": 46.4
+    },
+    "guest.user_post_list": {
+     "status": 401,
+     "ctype": "application/json",
+     "len": 92,
+     "sha256": "7c9a23b37a080c703acb38453148b3bac314709e6dbe4b8e75fad363b87a96ca",
+     "message": "Guests are not allowed to perform this action. Login required.",
+     "disposition_has_filename": false,
+     "leaks": {
+      "txt_bytes": false,
+      "png_bytes": false,
+      "txt_filename": false,
+      "png_filename": false,
+      "question_body": false
+     },
+     "ms": 53.2
+    },
+    "guest.admin_post_show": {
+     "status": 401,
+     "ctype": "application/json",
+     "len": 64,
+     "sha256": "b7ac4b8fedef0ced32370bd72df55fce8c400ebc362bca6d3e6079bc350ba1c8",
+     "message": "인증이 필요합니다.",
+     "disposition_has_filename": false,
+     "leaks": {
+      "txt_bytes": false,
+      "png_bytes": false,
+      "txt_filename": false,
+      "png_filename": false,
+      "question_body": false
+     },
+     "ms": 50.3
+    },
+    "guest.admin_post_list": {
+     "status": 401,
+     "ctype": "application/json",
+     "len": 64,
+     "sha256": "b7ac4b8fedef0ced32370bd72df55fce8c400ebc362bca6d3e6079bc350ba1c8",
+     "message": "인증이 필요합니다.",
+     "disposition_has_filename": false,
+     "leaks": {
+      "txt_bytes": false,
+      "png_bytes": false,
+      "txt_filename": false,
+      "png_filename": false,
+      "question_body": false
+     },
+     "ms": 47.4
+    }
+   },
+   "at": "18:38:47"
+  },
+  {
+   "name": "signed preview delegation (contract): admin-issued time-limited URL is a bearer capability; tampered/unsigned denied",
+   "status": "OBSERVED",
+   "detail": {
+    "guest_with_admin_issued_signed_url": {
+     "status": 200,
+     "ctype": "image/png",
+     "len": 166,
+     "sha256": "6bd3c16be01f36549522ad94dcdef1e54f5086d455d644652d534ada957d1aa7",
+     "message": null,
+     "disposition_has_filename": false,
+     "leaks": {},
+     "ms": 48.6,
+     "bytes_equal_disk": true
+    },
+    "guest_tampered_signature": {
+     "status": 403,
+     "ctype": "application/json",
+     "len": 70,
+     "sha256": "f061d155655d2869402c934377e04d00d50ed24a02d13b617ea6bd45a81a63da",
+     "message": "You do not have access to this resource.",
+     "disposition_has_filename": false,
+     "leaks": {
+      "txt_bytes": false,
+      "png_bytes": false,
+      "txt_filename": false,
+      "png_filename": false,
+      "question_body": false
+     },
+     "ms": 56.0
+    },
+    "guest_unsigned": {
+     "status": 403,
+     "ctype": "application/json",
+     "len": 70,
+     "sha256": "f061d155655d2869402c934377e04d00d50ed24a02d13b617ea6bd45a81a63da",
+     "message": "You do not have access to this resource.",
+     "disposition_has_filename": false,
+     "leaks": {
+      "txt_bytes": false,
+      "png_bytes": false,
+      "txt_filename": false,
+      "png_filename": false,
+      "question_body": false
+     },
+     "ms": 60.6
+    },
+    "signed_ttl_seconds": 1797
+   },
+   "at": "18:38:47"
+  },
+  {
+   "name": "native storage paths do not bypass the guard (direct path candidates return no file bytes)",
+   "status": "PASS",
+   "detail": {
+    "parent_public_storage_link_exists": false,
+    "candidates": {
+     "txt.cand0.guest": {
+      "status": 404,
+      "ctype": "text/html",
+      "len": 64241,
+      "sha256": "ecdd072328de193495191700904916714ef044f7484d6a637121520b37e18532",
+      "message": null,
+      "disposition_has_filename": false,
+      "leaks": {
+       "txt_bytes": false,
+       "png_bytes": false,
+       "txt_filename": false,
+       "png_filename": false,
+       "question_body": false
+      },
+      "ms": 82.7,
+      "bytes_equal_disk": false
+     },
+     "txt.cand0.admin": {
+      "status": 404,
+      "ctype": "text/html",
+      "len": 64906,
+      "sha256": "f2afb4bee0e28dd0dd2c2a9e345b6328778cb05569be5bb5c8a571bfa2ec4bf0",
+      "message": null,
+      "disposition_has_filename": false,
+      "leaks": {
+       "txt_bytes": false,
+       "png_bytes": false,
+       "txt_filename": false,
+       "png_filename": false,
+       "question_body": false
+      },
+      "ms": 87.0,
+      "bytes_equal_disk": false
+     },
+     "txt.cand1.guest": {
+      "status": 404,
+      "ctype": "text/html",
+      "len": 64241,
+      "sha256": "3d8d591000d86dc3f9576b4601924d002218259ef1e45669078c8f4502f7f78c",
+      "message": null,
+      "disposition_has_filename": false,
+      "leaks": {
+       "txt_bytes": false,
+       "png_bytes": false,
+       "txt_filename": false,
+       "png_filename": false,
+       "question_body": false
+      },
+      "ms": 84.3,
+      "bytes_equal_disk": false
+     },
+     "txt.cand1.admin": {
+      "status": 404,
+      "ctype": "text/html",
+      "len": 64906,
+      "sha256": "758f0024d9b238d4e1ed12b5148b083cf196befdacd770a937d5f0b3f3060efb",
+      "message": null,
+      "disposition_has_filename": false,
+      "leaks": {
+       "txt_bytes": false,
+       "png_bytes": false,
+       "txt_filename": false,
+       "png_filename": false,
+       "question_body": false
+      },
+      "ms": 84.2,
+      "bytes_equal_disk": false
+     },
+     "txt.cand2.guest": {
+      "status": 404,
+      "ctype": "text/html",
+      "len": 3055,
+      "sha256": "b66a580f987beb94a3163f2fb54c1b67c0f99ef5dc6480de5abf18a2278f415c",
+      "message": null,
+      "disposition_has_filename": false,
+      "leaks": {
+       "txt_bytes": false,
+       "png_bytes": false,
+       "txt_filename": false,
+       "png_filename": false,
+       "question_body": false
+      },
+      "ms": 130.3,
+      "bytes_equal_disk": false
+     },
+     "txt.cand2.admin": {
+      "status": 404,
+      "ctype": "text/html",
+      "len": 3055,
+      "sha256": "b66a580f987beb94a3163f2fb54c1b67c0f99ef5dc6480de5abf18a2278f415c",
+      "message": null,
+      "disposition_has_filename": false,
+      "leaks": {
+       "txt_bytes": false,
+       "png_bytes": false,
+       "txt_filename": false,
+       "png_filename": false,
+       "question_body": false
+      },
+      "ms": 75.2,
+      "bytes_equal_disk": false
+     },
+     "txt.cand3.guest": {
+      "status": 404,
+      "ctype": "text/html",
+      "len": 64241,
+      "sha256": "c42c282fae19e3aafcc17e64e14a36a82129d2eaf4ad9157a165135c8465f6a5",
+      "message": null,
+      "disposition_has_filename": false,
+      "leaks": {
+       "txt_bytes": false,
+       "png_bytes": false,
+       "txt_filename": false,
+       "png_filename": false,
+       "question_body": false
+      },
+      "ms": 81.6,
+      "bytes_equal_disk": false
+     },
+     "txt.cand3.admin": {
+      "status": 404,
+      "ctype": "text/html",
+      "len": 64906,
+      "sha256": "179fe885e8befa625621897b4bfff007ed16dcea1e23a09e917bce4069dd6a07",
+      "message": null,
+      "disposition_has_filename": false,
+      "leaks": {
+       "txt_bytes": false,
+       "png_bytes": false,
+       "txt_filename": false,
+       "png_filename": false,
+       "question_body": false
+      },
+      "ms": 86.0,
+      "bytes_equal_disk": false
+     },
+     "txt.cand4.guest": {
+      "status": 404,
+      "ctype": "text/html",
+      "len": 64241,
+      "sha256": "21e4ce2b6e780f17d0c5d9fd74a916c4f73f14f244f8417ee508cf838f9e4233",
+      "message": null,
+      "disposition_has_filename": false,
+      "leaks": {
+       "txt_bytes": false,
+       "png_bytes": false,
+       "txt_filename": false,
+       "png_filename": false,
+       "question_body": false
+      },
+      "ms": 82.4,
+      "bytes_equal_disk": false
+     },
+     "txt.cand4.admin": {
+      "status": 404,
+      "ctype": "text/html",
+      "len": 64906,
+      "sha256": "7dbab3491f004bc02c4a93c6b4ae0eed3486d3915f54840531a66fa18cd4f455",
+      "message": null,
+      "disposition_has_filename": false,
+      "leaks": {
+       "txt_bytes": false,
+       "png_bytes": false,
+       "txt_filename": false,
+       "png_filename": false,
+       "question_body": false
+      },
+      "ms": 85.3,
+      "bytes_equal_disk": false
+     },
+     "txt.cand5.guest": {
+      "status": 404,
+      "ctype": "text/html",
+      "len": 64241,
+      "sha256": "6d169a6f6e7dee0b40c4d0534c5ebbc15b3221fe549a3fddf1e90eb6cec997dd",
+      "message": null,
+      "disposition_has_filename": false,
+      "leaks": {
+       "txt_bytes": false,
+       "png_bytes": false,
+       "txt_filename": false,
+       "png_filename": false,
+       "question_body": false
+      },
+      "ms": 87.7,
+      "bytes_equal_disk": false
+     },
+     "txt.cand5.admin": {
+      "status": 404,
+      "ctype": "text/html",
+      "len": 64906,
+      "sha256": "5313cbf2c715e37e7fad539b9aaffd9922c7cd2f54a74b7f432c6bc4ab7867be",
+      "message": null,
+      "disposition_has_filename": false,
+      "leaks": {
+       "txt_bytes": false,
+       "png_bytes": false,
+       "txt_filename": false,
+       "png_filename": false,
+       "question_body": false
+      },
+      "ms": 86.3,
+      "bytes_equal_disk": false
+     },
+     "png.cand0.guest": {
+      "status": 404,
+      "ctype": "text/html",
+      "len": 3055,
+      "sha256": "b66a580f987beb94a3163f2fb54c1b67c0f99ef5dc6480de5abf18a2278f415c",
+      "message": null,
+      "disposition_has_filename": false,
+      "leaks": {
+       "txt_bytes": false,
+       "png_bytes": false,
+       "txt_filename": false,
+       "png_filename": false,
+       "question_body": false
+      },
+      "ms": 93.2,
+      "bytes_equal_disk": false
+     },
+     "png.cand0.admin": {
+      "status": 404,
+      "ctype": "text/html",
+      "len": 3055,
+      "sha256": "b66a580f987beb94a3163f2fb54c1b67c0f99ef5dc6480de5abf18a2278f415c",
+      "message": null,
+      "disposition_has_filename": false,
+      "leaks": {
+       "txt_bytes": false,
+       "png_bytes": false,
+       "txt_filename": false,
+       "png_filename": false,
+       "question_body": false
+      },
+      "ms": 89.9,
+      "bytes_equal_disk": false
+     },
+     "png.cand1.guest": {
+      "status": 404,
+      "ctype": "text/html",
+      "len": 3055,
+      "sha256": "b66a580f987beb94a3163f2fb54c1b67c0f99ef5dc6480de5abf18a2278f415c",
+      "message": null,
+      "disposition_has_filename": false,
+      "leaks": {
+       "txt_bytes": false,
+       "png_bytes": false,
+       "txt_filename": false,
+       "png_filename": false,
+       "question_body": false
+      },
+      "ms": 81.4,
+      "bytes_equal_disk": false
+     },
+     "png.cand1.admin": {
+      "status": 404,
+      "ctype": "text/html",
+      "len": 3055,
+      "sha256": "b66a580f987beb94a3163f2fb54c1b67c0f99ef5dc6480de5abf18a2278f415c",
+      "message": null,
+      "disposition_has_filename": false,
+      "leaks": {
+       "txt_bytes": false,
+       "png_bytes": false,
+       "txt_filename": false,
+       "png_filename": false,
+       "question_body": false
+      },
+      "ms": 92.7,
+      "bytes_equal_disk": false
+     },
+     "png.cand2.guest": {
+      "status": 404,
+      "ctype": "text/html",
+      "len": 3055,
+      "sha256": "b66a580f987beb94a3163f2fb54c1b67c0f99ef5dc6480de5abf18a2278f415c",
+      "message": null,
+      "disposition_has_filename": false,
+      "leaks": {
+       "txt_bytes": false,
+       "png_bytes": false,
+       "txt_filename": false,
+       "png_filename": false,
+       "question_body": false
+      },
+      "ms": 84.5,
+      "bytes_equal_disk": false
+     },
+     "png.cand2.admin": {
+      "status": 404,
+      "ctype": "text/html",
+      "len": 3055,
+      "sha256": "b66a580f987beb94a3163f2fb54c1b67c0f99ef5dc6480de5abf18a2278f415c",
+      "message": null,
+      "disposition_has_filename": false,
+      "leaks": {
+       "txt_bytes": false,
+       "png_bytes": false,
+       "txt_filename": false,
+       "png_filename": false,
+       "question_body": false
+      },
+      "ms": 87.6,
+      "bytes_equal_disk": false
+     },
+     "png.cand3.guest": {
+      "status": 404,
+      "ctype": "text/html",
+      "len": 3055,
+      "sha256": "b66a580f987beb94a3163f2fb54c1b67c0f99ef5dc6480de5abf18a2278f415c",
+      "message": null,
+      "disposition_has_filename": false,
+      "leaks": {
+       "txt_bytes": false,
+       "png_bytes": false,
+       "txt_filename": false,
+       "png_filename": false,
+       "question_body": false
+      },
+      "ms": 88.9,
+      "bytes_equal_disk": false
+     },
+     "png.cand3.admin": {
+      "status": 404,
+      "ctype": "text/html",
+      "len": 3055,
+      "sha256": "b66a580f987beb94a3163f2fb54c1b67c0f99ef5dc6480de5abf18a2278f415c",
+      "message": null,
+      "disposition_has_filename": false,
+      "leaks": {
+       "txt_bytes": false,
+       "png_bytes": false,
+       "txt_filename": false,
+       "png_filename": false,
+       "question_body": false
+      },
+      "ms": 92.2,
+      "bytes_equal_disk": false
+     },
+     "png.cand4.guest": {
+      "status": 404,
+      "ctype": "text/html",
+      "len": 3055,
+      "sha256": "b66a580f987beb94a3163f2fb54c1b67c0f99ef5dc6480de5abf18a2278f415c",
+      "message": null,
+      "disposition_has_filename": false,
+      "leaks": {
+       "txt_bytes": false,
+       "png_bytes": false,
+       "txt_filename": false,
+       "png_filename": false,
+       "question_body": false
+      },
+      "ms": 125.5,
+      "bytes_equal_disk": false
+     },
+     "png.cand4.admin": {
+      "status": 404,
+      "ctype": "text/html",
+      "len": 3055,
+      "sha256": "b66a580f987beb94a3163f2fb54c1b67c0f99ef5dc6480de5abf18a2278f415c",
+      "message": null,
+      "disposition_has_filename": false,
+      "leaks": {
+       "txt_bytes": false,
+       "png_bytes": false,
+       "txt_filename": false,
+       "png_filename": false,
+       "question_body": false
+      },
+      "ms": 87.5,
+      "bytes_equal_disk": false
+     },
+     "png.cand5.guest": {
+      "status": 404,
+      "ctype": "text/html",
+      "len": 3055,
+      "sha256": "b66a580f987beb94a3163f2fb54c1b67c0f99ef5dc6480de5abf18a2278f415c",
+      "message": null,
+      "disposition_has_filename": false,
+      "leaks": {
+       "txt_bytes": false,
+       "png_bytes": false,
+       "txt_filename": false,
+       "png_filename": false,
+       "question_body": false
+      },
+      "ms": 73.6,
+      "bytes_equal_disk": false
+     },
+     "png.cand5.admin": {
+      "status": 404,
+      "ctype": "text/html",
+      "len": 3055,
+      "sha256": "b66a580f987beb94a3163f2fb54c1b67c0f99ef5dc6480de5abf18a2278f415c",
+      "message": null,
+      "disposition_has_filename": false,
+      "leaks": {
+       "txt_bytes": false,
+       "png_bytes": false,
+       "txt_filename": false,
+       "png_filename": false,
+       "question_body": false
+      },
+      "ms": 64.4,
+      "bytes_equal_disk": false
+     }
+    }
+   },
+   "at": "18:38:49"
+  },
+  {
+   "name": "cleanup 1: native admin attachment DELETE (txt) then every actor/route denied; physical file state recorded",
+   "status": "PASS",
+   "detail": {
+    "admin_delete": {
+     "status": 200,
+     "ctype": "application/json",
+     "len": 73,
+     "sha256": "017ccdf7413259c1c3b49efceafb6bd42099ed007507acf7648a8bf671a038e0",
+     "message": "파일이 삭제되었습니다.",
+     "disposition_has_filename": false,
+     "leaks": {},
+     "ms": 83.7
+    },
+    "admin.admin_download": {
+     "status": 404,
+     "ctype": "application/json",
+     "len": 64,
+     "sha256": "ed4adeaa78450e4b642c9c43ec7920966dd349f04f3f80b7d0c5bdac9d552dfc",
+     "message": "파일을 찾을 수 없습니다.",
+     "disposition_has_filename": false,
+     "leaks": {
+      "txt_bytes": false,
+      "png_bytes": false,
+      "txt_filename": false,
+      "png_filename": false,
+      "question_body": false
+     },
+     "ms": 69.3
+    },
+    "admin.user_download": {
+     "status": 404,
+     "ctype": "application/json",
+     "len": 64,
+     "sha256": "ed4adeaa78450e4b642c9c43ec7920966dd349f04f3f80b7d0c5bdac9d552dfc",
+     "message": "파일을 찾을 수 없습니다.",
+     "disposition_has_filename": false,
+     "leaks": {
+      "txt_bytes": false,
+      "png_bytes": false,
+      "txt_filename": false,
+      "png_filename": false,
+      "question_body": false
+     },
+     "ms": 73.3
+    },
+    "owner.admin_download": {
+     "status": 403,
+     "ctype": "application/json",
+     "len": 66,
+     "sha256": "affa15b8d2bfa43e73796fcf53102f06993bc86413292a5b104524bd7f02355d",
+     "message": "관리자 권한이 필요합니다.",
+     "disposition_has_filename": false,
+     "leaks": {
+      "txt_bytes": false,
+      "png_bytes": false,
+      "txt_filename": false,
+      "png_filename": false,
+      "question_body": false
+     },
+     "ms": 58.8
+    },
+    "owner.user_download": {
+     "status": 403,
+     "ctype": "application/json",
+     "len": 60,
+     "sha256": "7de72e640844887c4f442173a6cabb08ac34b5f8a8c7e18d9870ae0c553b77d0",
+     "message": "해당 권한이 없습니다.",
+     "disposition_has_filename": false,
+     "leaks": {
+      "txt_bytes": false,
+      "png_bytes": false,
+      "txt_filename": false,
+      "png_filename": false,
+      "question_body": false
+     },
+     "ms": 53.7
+    },
+    "other_member.admin_download": {
+     "status": 403,
+     "ctype": "application/json",
+     "len": 66,
+     "sha256": "affa15b8d2bfa43e73796fcf53102f06993bc86413292a5b104524bd7f02355d",
+     "message": "관리자 권한이 필요합니다.",
+     "disposition_has_filename": false,
+     "leaks": {
+      "txt_bytes": false,
+      "png_bytes": false,
+      "txt_filename": false,
+      "png_filename": false,
+      "question_body": false
+     },
+     "ms": 49.8
+    },
+    "other_member.user_download": {
+     "status": 403,
+     "ctype": "application/json",
+     "len": 60,
+     "sha256": "7de72e640844887c4f442173a6cabb08ac34b5f8a8c7e18d9870ae0c553b77d0",
+     "message": "해당 권한이 없습니다.",
+     "disposition_has_filename": false,
+     "leaks": {
+      "txt_bytes": false,
+      "png_bytes": false,
+      "txt_filename": false,
+      "png_filename": false,
+      "question_body": false
+     },
+     "ms": 54.7
+    },
+    "guest.admin_download": {
+     "status": 401,
+     "ctype": "application/json",
+     "len": 64,
+     "sha256": "b7ac4b8fedef0ced32370bd72df55fce8c400ebc362bca6d3e6079bc350ba1c8",
+     "message": "인증이 필요합니다.",
+     "disposition_has_filename": false,
+     "leaks": {
+      "txt_bytes": false,
+      "png_bytes": false,
+      "txt_filename": false,
+      "png_filename": false,
+      "question_body": false
+     },
+     "ms": 42.0
+    },
+    "guest.user_download": {
+     "status": 401,
+     "ctype": "application/json",
+     "len": 92,
+     "sha256": "7c9a23b37a080c703acb38453148b3bac314709e6dbe4b8e75fad363b87a96ca",
+     "message": "Guests are not allowed to perform this action. Login required.",
+     "disposition_has_filename": false,
+     "leaks": {
+      "txt_bytes": false,
+      "png_bytes": false,
+      "txt_filename": false,
+      "png_filename": false,
+      "question_body": false
+     },
+     "ms": 43.9
+    },
+    "admin_show_attachment_ids": [
+     2
+    ],
+    "physical_file_after": [
+     {
+      "rel": "storage/app/modules/sirsoft-board/attachments/travel-lab-questions/2026/10/09/<stored_uuid_name>",
+      "size": 208,
+      "sha256": "7d5b00e25c898dd96ebd97aec3f92d31d299eeff46e9b08d0ade051e42dd5cac",
+      "mode": "0o644"
+     }
+    ]
+   },
+   "at": "18:38:50"
+  },
+  {
+   "name": "cleanup 2 / deleted-question boundary: native admin question DELETE cascades png; every actor/route denied; lists exclude",
+   "status": "PASS",
+   "detail": {
+    "admin_delete_question": {
+     "status": 200,
+     "ctype": "application/json",
+     "len": 1593,
+     "sha256": "c43b22a7d667d539d83988a9c9ce288129cbfd712c6b503d90e6568d8e256fe4",
+     "message": "게시글이 삭제되었습니다.",
+     "disposition_has_filename": false,
+     "leaks": {},
+     "ms": 179.7
+    },
+    "admin.admin_download": {
+     "status": 404,
+     "ctype": "application/json",
+     "len": 64,
+     "sha256": "ed4adeaa78450e4b642c9c43ec7920966dd349f04f3f80b7d0c5bdac9d552dfc",
+     "message": "파일을 찾을 수 없습니다.",
+     "disposition_has_filename": false,
+     "leaks": {
+      "txt_bytes": false,
+      "png_bytes": false,
+      "txt_filename": false,
+      "png_filename": false,
+      "question_body": false
+     },
+     "ms": 69.4
+    },
+    "admin.user_download": {
+     "status": 404,
+     "ctype": "application/json",
+     "len": 64,
+     "sha256": "ed4adeaa78450e4b642c9c43ec7920966dd349f04f3f80b7d0c5bdac9d552dfc",
+     "message": "파일을 찾을 수 없습니다.",
+     "disposition_has_filename": false,
+     "leaks": {
+      "txt_bytes": false,
+      "png_bytes": false,
+      "txt_filename": false,
+      "png_filename": false,
+      "question_body": false
+     },
+     "ms": 72.6
+    },
+    "admin.preview": {
+     "status": 404,
+     "ctype": "application/json",
+     "len": 64,
+     "sha256": "ed4adeaa78450e4b642c9c43ec7920966dd349f04f3f80b7d0c5bdac9d552dfc",
+     "message": "파일을 찾을 수 없습니다.",
+     "disposition_has_filename": false,
+     "leaks": {
+      "txt_bytes": false,
+      "png_bytes": false,
+      "txt_filename": false,
+      "png_filename": false,
+      "question_body": false
+     },
+     "ms": 55.8
+    },
+    "owner.admin_download": {
+     "status": 403,
+     "ctype": "application/json",
+     "len": 66,
+     "sha256": "affa15b8d2bfa43e73796fcf53102f06993bc86413292a5b104524bd7f02355d",
+     "message": "관리자 권한이 필요합니다.",
+     "disposition_has_filename": false,
+     "leaks": {
+      "txt_bytes": false,
+      "png_bytes": false,
+      "txt_filename": false,
+      "png_filename": false,
+      "question_body": false
+     },
+     "ms": 51.9
+    },
+    "owner.user_download": {
+     "status": 403,
+     "ctype": "application/json",
+     "len": 60,
+     "sha256": "7de72e640844887c4f442173a6cabb08ac34b5f8a8c7e18d9870ae0c553b77d0",
+     "message": "해당 권한이 없습니다.",
+     "disposition_has_filename": false,
+     "leaks": {
+      "txt_bytes": false,
+      "png_bytes": false,
+      "txt_filename": false,
+      "png_filename": false,
+      "question_body": false
+     },
+     "ms": 51.9
+    },
+    "owner.preview": {
+     "status": 404,
+     "ctype": "application/json",
+     "len": 64,
+     "sha256": "ed4adeaa78450e4b642c9c43ec7920966dd349f04f3f80b7d0c5bdac9d552dfc",
+     "message": "파일을 찾을 수 없습니다.",
+     "disposition_has_filename": false,
+     "leaks": {
+      "txt_bytes": false,
+      "png_bytes": false,
+      "txt_filename": false,
+      "png_filename": false,
+      "question_body": false
+     },
+     "ms": 50.1
+    },
+    "other_member.admin_download": {
+     "status": 403,
+     "ctype": "application/json",
+     "len": 66,
+     "sha256": "affa15b8d2bfa43e73796fcf53102f06993bc86413292a5b104524bd7f02355d",
+     "message": "관리자 권한이 필요합니다.",
+     "disposition_has_filename": false,
+     "leaks": {
+      "txt_bytes": false,
+      "png_bytes": false,
+      "txt_filename": false,
+      "png_filename": false,
+      "question_body": false
+     },
+     "ms": 52.4
+    },
+    "other_member.user_download": {
+     "status": 403,
+     "ctype": "application/json",
+     "len": 60,
+     "sha256": "7de72e640844887c4f442173a6cabb08ac34b5f8a8c7e18d9870ae0c553b77d0",
+     "message": "해당 권한이 없습니다.",
+     "disposition_has_filename": false,
+     "leaks": {
+      "txt_bytes": false,
+      "png_bytes": false,
+      "txt_filename": false,
+      "png_filename": false,
+      "question_body": false
+     },
+     "ms": 53.1
+    },
+    "other_member.preview": {
+     "status": 404,
+     "ctype": "application/json",
+     "len": 64,
+     "sha256": "ed4adeaa78450e4b642c9c43ec7920966dd349f04f3f80b7d0c5bdac9d552dfc",
+     "message": "파일을 찾을 수 없습니다.",
+     "disposition_has_filename": false,
+     "leaks": {
+      "txt_bytes": false,
+      "png_bytes": false,
+      "txt_filename": false,
+      "png_filename": false,
+      "question_body": false
+     },
+     "ms": 55.5
+    },
+    "guest.admin_download": {
+     "status": 401,
+     "ctype": "application/json",
+     "len": 64,
+     "sha256": "b7ac4b8fedef0ced32370bd72df55fce8c400ebc362bca6d3e6079bc350ba1c8",
+     "message": "인증이 필요합니다.",
+     "disposition_has_filename": false,
+     "leaks": {
+      "txt_bytes": false,
+      "png_bytes": false,
+      "txt_filename": false,
+      "png_filename": false,
+      "question_body": false
+     },
+     "ms": 39.0
+    },
+    "guest.user_download": {
+     "status": 401,
+     "ctype": "application/json",
+     "len": 92,
+     "sha256": "7c9a23b37a080c703acb38453148b3bac314709e6dbe4b8e75fad363b87a96ca",
+     "message": "Guests are not allowed to perform this action. Login required.",
+     "disposition_has_filename": false,
+     "leaks": {
+      "txt_bytes": false,
+      "png_bytes": false,
+      "txt_filename": false,
+      "png_filename": false,
+      "question_body": false
+     },
+     "ms": 52.4
+    },
+    "guest.preview": {
+     "status": 404,
+     "ctype": "application/json",
+     "len": 45,
+     "sha256": "7eab26fd3c20c682e373f28e16793c60bb6b2816314c6d59e3296758f41dd498",
+     "message": "File not found.",
+     "disposition_has_filename": false,
+     "leaks": {
+      "txt_bytes": false,
+      "png_bytes": false,
+      "txt_filename": false,
+      "png_filename": false,
+      "question_body": false
+     },
+     "ms": 45.3
+    },
+    "owner.support_show": 404,
+    "owner.support_list_contains": false,
+    "other_member.support_show": 404,
+    "other_member.support_list_contains": false,
+    "admin_show_trashed": {
+     "status": 200,
+     "deleted_at_set": true,
+     "attachment_ids": [
+      2
+     ]
+    },
+    "physical_file_after": [
+     {
+      "rel": "storage/app/modules/sirsoft-board/attachments/travel-lab-questions/2026/10/09/<stored_uuid_name>",
+      "size": 166,
+      "sha256": "6bd3c16be01f36549522ad94dcdef1e54f5086d455d644652d534ada957d1aa7",
+      "mode": "0o644"
+     }
+    ],
+    "txt_physical_file_after": [
+     {
+      "rel": "storage/app/modules/sirsoft-board/attachments/travel-lab-questions/2026/10/09/<stored_uuid_name>",
+      "size": 208,
+      "sha256": "7d5b00e25c898dd96ebd97aec3f92d31d299eeff46e9b08d0ade051e42dd5cac",
+      "mode": "0o644"
+     }
+    ]
+   },
+   "at": "18:38:51"
+  },
+  {
+   "name": "revoke only own issued tokens via native logout (supplied handoff tokens untouched)",
+   "status": "PASS",
+   "detail": {
+    "member": {
+     "logout": 200,
+     "after": 401
+    },
+    "other_member": {
+     "logout": 200,
+     "after": 401
+    },
+    "admin": {
+     "logout": 200,
+     "after": 401
+    }
+   },
+   "at": "18:38:51"
+  }
+ ]
+}

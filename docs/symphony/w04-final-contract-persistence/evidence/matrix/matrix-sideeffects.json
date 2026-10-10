@@ -1,0 +1,136 @@
+{
+ "phase": "matrix-sideeffects",
+ "review_sha": "5783e6ba124061bdfae639cdaf9b1c14a83cdf03",
+ "base_url": "http://127.0.0.1:18880",
+ "counts": {
+  "PASS": 3,
+  "FAIL": 0,
+  "OBSERVED": 0,
+  "BLOCKED": 0,
+  "NOT_RUN": 0
+ },
+ "results": [
+  {
+   "name": "M10 additional native admin decline/repeat exactly once",
+   "status": "PASS",
+   "detail": {
+    "statuses": [
+     200,
+     200
+    ],
+    "events": 2,
+    "reserved": [
+     0,
+     1,
+     0
+    ]
+   },
+   "at": "21:31:38"
+  },
+  {
+   "name": "M13 whole native orders/payments/temporders unchanged SQL before/after",
+   "status": "PASS",
+   "detail": {
+    "table_inventories": {
+     "g7_ecommerce_orders": {
+      "rows": 0,
+      "row_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "ddl_sha256": "673922d23f9a13ab99f2eb375b2e6bd4eba6ac5f7a38b54b89cdacb40da3d430"
+     },
+     "g7_ecommerce_order_payments": {
+      "rows": 0,
+      "row_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "ddl_sha256": "803d11f7538f059fcaf5c16e7e5283090ad8a28c72e6e7f13c974c4d58521ef5"
+     },
+     "g7_ecommerce_order_options": {
+      "rows": 0,
+      "row_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "ddl_sha256": "182a11a36c98513d2d1f8b47df582cfa6e973d1d3803a6618bf2e10d7b97be0f"
+     },
+     "g7_ecommerce_temp_orders": {
+      "rows": 0,
+      "row_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "ddl_sha256": "e56fd7f3bcb56ef29cf0bdb86a05f244362e84510daed8a9cbf4f9521e1932de"
+     }
+    },
+    "exact_rows_and_DDL": true
+   },
+   "at": "21:31:41"
+  },
+  {
+   "name": "M14 actual effective array/sync/local, jobs/mail/notification SQL unchanged",
+   "status": "PASS",
+   "detail": {
+    "adapters": {
+     "mail.default": "array",
+     "queue.default": "sync",
+     "filesystems.default": "local",
+     "scout.driver": "mysql-fulltext",
+     "cache.default": "database",
+     "session.driver": "array"
+    },
+    "table_inventories": {
+     "g7_jobs": {
+      "rows": 0,
+      "row_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "ddl_sha256": "8547a3be455eef0f04ab48101f77e9f4338a45a049152c30cc57d323778fcf48"
+     },
+     "g7_failed_jobs": {
+      "rows": 0,
+      "row_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "ddl_sha256": "faab8491087229fde9952872644349819d31cd4e3b3122ec81f3d840bdccee81"
+     },
+     "g7_mail_send_logs": {
+      "rows": 0,
+      "row_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "ddl_sha256": "36521cb09e03465bb2ec0a7cad26b380fb54db5d68895ca6b95f69b986f24dd1"
+     },
+     "g7_notification_logs": {
+      "rows": 0,
+      "row_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "ddl_sha256": "75132a6539d10dc700fb978daf244b70bc0f834b7f8fdfc77d6f53f54b7d4fe7"
+     },
+     "g7_notifications": {
+      "rows": 0,
+      "row_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "ddl_sha256": "927a5ba4fb870b1e9b46e262bf1e3fd4a77759a97722e87604370958a41939b1"
+     }
+    },
+    "exact_rows_and_DDL": true,
+    "external_provider_endpoints_called": 0
+   },
+   "at": "21:31:41"
+  }
+ ],
+ "http_checks": [
+  {
+   "method": "POST",
+   "path": "/api/modules/raonslab-travel_lab/cart",
+   "actor": "member",
+   "status": 201,
+   "seconds": 0.608
+  },
+  {
+   "method": "POST",
+   "path": "/api/modules/raonslab-travel_lab/inquiries",
+   "actor": "member",
+   "status": 201,
+   "seconds": 1.194
+  },
+  {
+   "method": "PATCH",
+   "path": "/api/modules/raonslab-travel_lab/admin/inquiries/8",
+   "actor": "admin",
+   "status": 200,
+   "seconds": 0.919
+  },
+  {
+   "method": "PATCH",
+   "path": "/api/modules/raonslab-travel_lab/admin/inquiries/8",
+   "actor": "admin",
+   "status": 200,
+   "seconds": 1.038
+  }
+ ],
+ "actual_http_count": 4
+}

@@ -1,0 +1,1173 @@
+{
+    "version": "1.0.0",
+    "layout_name": "travel/cart",
+    "extends": "_user_base",
+    "meta": {
+        "title": "$t:travel.meta.cart_title"
+    },
+    "initLocal": {
+        "busyId": null,
+        "submitting": false,
+        "ackTest": false
+    },
+    "data_sources": [
+        {
+            "id": "cart",
+            "label_key": "$t:editor.data_source.cart",
+            "type": "api",
+            "endpoint": "/api/modules/raonslab-travel_lab/cart",
+            "method": "GET",
+            "auto_fetch": true,
+            "auth_mode": "required",
+            "loading_strategy": "progressive",
+            "onSuccess": [
+                {
+                    "comment": "담긴 출발편·인원 묶음에 대응하는 멱등 키를 확보 — 같은 묶음이면 기존 키 재사용, 바뀌면 새 키",
+                    "handler": "travelLabEnsureInquiryKey",
+                    "params": {
+                        "cartIds": "{{(response.data?.data?.items ?? []).map(i => i.id)}}",
+                        "quantities": "{{(response.data?.data?.items ?? []).map(i => i.quantity)}}",
+                        "ownerId": "{{_global.currentUser?.uuid ?? _global.currentUser?.id}}"
+                    }
+                }
+            ]
+        }
+    ],
+    "modals": [
+        {
+            "partial": "partials/travel/_modal_cart_remove.json"
+        }
+    ],
+    "slots": {
+        "content": [
+            {
+                "type": "basic",
+                "name": "Div",
+                "props": {
+                    "className": "border-b border-slate-200 bg-white"
+                },
+                "children": [
+                    {
+                        "type": "basic",
+                        "name": "Div",
+                        "props": {
+                            "className": "mx-auto w-full max-w-6xl px-4 md:px-6 py-6 md:py-8"
+                        },
+                        "children": [
+                            {
+                                "type": "basic",
+                                "name": "Div",
+                                "props": {
+                                    "className": "mb-2 flex flex-wrap items-center gap-1 text-xs text-ink-500"
+                                },
+                                "children": [
+                                    {
+                                        "type": "basic",
+                                        "name": "Button",
+                                        "props": {
+                                            "type": "button",
+                                            "className": "hover:text-raon-700 hover:underline"
+                                        },
+                                        "text": "$t:travel.nav.home",
+                                        "actions": [
+                                            {
+                                                "type": "click",
+                                                "handler": "navigate",
+                                                "params": {
+                                                    "path": "/travel"
+                                                }
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "type": "basic",
+                                        "name": "Icon",
+                                        "props": {
+                                            "name": "chevron-right",
+                                            "className": "text-[10px] text-slate-400"
+                                        }
+                                    },
+                                    {
+                                        "type": "basic",
+                                        "name": "Span",
+                                        "props": {
+                                            "className": "font-semibold text-ink-700"
+                                        },
+                                        "text": "$t:travel.cart.title"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "basic",
+                                "name": "H1",
+                                "props": {
+                                    "className": "text-2xl font-extrabold tracking-tight text-ink-900 md:text-3xl"
+                                },
+                                "text": "$t:travel.cart.title"
+                            },
+                            {
+                                "type": "basic",
+                                "name": "P",
+                                "props": {
+                                    "className": "mt-1 text-sm text-ink-500 md:text-base"
+                                },
+                                "text": "$t:travel.cart.subtitle"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "type": "basic",
+                "name": "Div",
+                "props": {
+                    "className": "mx-auto w-full max-w-6xl px-4 md:px-6 mt-6 space-y-6"
+                },
+                "children": [
+                    {
+                        "type": "basic",
+                        "name": "P",
+                        "if": "{{(cart?.data?.items ?? []).length === 0 && !!_global.travelInquiryPending}}",
+                        "props": {
+                            "className": "rounded-xl border border-amber-200 bg-amber-50 p-4 text-sm",
+                            "data-testid": "inquiry-recovery-notice"
+                        },
+                        "text": "$t:travel.cart.recovery_notice"
+                    },
+                    {
+                        "comment": "cart 로딩 스켈레톤",
+                        "type": "basic",
+                        "name": "Div",
+                        "if": "{{cart === undefined && !_dataSourceErrors?.cart}}",
+                        "props": {
+                            "className": "space-y-3",
+                            "aria-busy": "true",
+                            "aria-live": "polite",
+                            "data-testid": "cart-loading"
+                        },
+                        "children": [
+                            {
+                                "type": "basic",
+                                "name": "Div",
+                                "props": {
+                                    "className": "space-y-2 rounded-2xl border border-slate-200 bg-white p-5"
+                                },
+                                "children": [
+                                    {
+                                        "type": "basic",
+                                        "name": "Div",
+                                        "props": {
+                                            "className": "h-4 w-1/2 animate-pulse rounded bg-slate-100"
+                                        }
+                                    },
+                                    {
+                                        "type": "basic",
+                                        "name": "Div",
+                                        "props": {
+                                            "className": "h-3 w-5/6 animate-pulse rounded bg-slate-100"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "basic",
+                                "name": "Div",
+                                "props": {
+                                    "className": "space-y-2 rounded-2xl border border-slate-200 bg-white p-5"
+                                },
+                                "children": [
+                                    {
+                                        "type": "basic",
+                                        "name": "Div",
+                                        "props": {
+                                            "className": "h-4 w-1/2 animate-pulse rounded bg-slate-100"
+                                        }
+                                    },
+                                    {
+                                        "type": "basic",
+                                        "name": "Div",
+                                        "props": {
+                                            "className": "h-3 w-5/6 animate-pulse rounded bg-slate-100"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "comment": "cart 오류 + 다시 시도",
+                        "type": "basic",
+                        "name": "Div",
+                        "if": "{{!cart && !!_dataSourceErrors?.cart}}",
+                        "props": {
+                            "className": "flex flex-col items-center gap-3 rounded-2xl border border-rose-200 bg-rose-50 px-6 py-10 text-center",
+                            "role": "alert",
+                            "data-testid": "cart-error"
+                        },
+                        "children": [
+                            {
+                                "type": "basic",
+                                "name": "Icon",
+                                "props": {
+                                    "name": "exclamation-triangle",
+                                    "className": "text-2xl text-rose-500"
+                                }
+                            },
+                            {
+                                "type": "basic",
+                                "name": "P",
+                                "props": {
+                                    "className": "text-sm font-semibold text-rose-700"
+                                },
+                                "text": "$t:travel.cart.error"
+                            },
+                            {
+                                "type": "basic",
+                                "name": "P",
+                                "props": {
+                                    "className": "text-xs text-rose-600"
+                                },
+                                "text": "$t:travel.common.error_hint"
+                            },
+                            {
+                                "type": "basic",
+                                "name": "Button",
+                                "props": {
+                                    "type": "button",
+                                    "className": "inline-flex items-center gap-2 rounded-xl bg-white px-4 py-2 text-sm font-semibold text-rose-700 ring-1 ring-rose-200 hover:bg-rose-100",
+                                    "data-testid": "cart-retry"
+                                },
+                                "children": [
+                                    {
+                                        "type": "basic",
+                                        "name": "Icon",
+                                        "props": {
+                                            "name": "rotate-left",
+                                            "className": "text-sm"
+                                        }
+                                    },
+                                    {
+                                        "type": "basic",
+                                        "name": "Span",
+                                        "text": "$t:travel.common.retry"
+                                    }
+                                ],
+                                "actions": [
+                                    {
+                                        "type": "click",
+                                        "handler": "refetchDataSource",
+                                        "params": {
+                                            "dataSourceId": "cart"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "basic",
+                        "name": "Div",
+                        "if": "{{!!cart && (cart?.data?.items ?? []).length === 0 && !_global.travelInquiryPending}}",
+                        "props": {
+                            "className": "flex flex-col items-center gap-3 rounded-2xl border border-dashed border-slate-300 bg-white px-6 py-12 text-center",
+                            "data-testid": "cart-empty"
+                        },
+                        "children": [
+                            {
+                                "type": "basic",
+                                "name": "Div",
+                                "props": {
+                                    "className": "flex h-14 w-14 items-center justify-center rounded-full bg-raon-50 text-raon-600"
+                                },
+                                "children": [
+                                    {
+                                        "type": "basic",
+                                        "name": "Icon",
+                                        "props": {
+                                            "name": "shopping-cart",
+                                            "className": "text-2xl"
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "basic",
+                                "name": "P",
+                                "props": {
+                                    "className": "text-base font-semibold text-ink-900"
+                                },
+                                "text": "$t:travel.cart.empty_title"
+                            },
+                            {
+                                "type": "basic",
+                                "name": "P",
+                                "props": {
+                                    "className": "max-w-md text-sm text-ink-500"
+                                },
+                                "text": "$t:travel.cart.empty_desc"
+                            },
+                            {
+                                "type": "basic",
+                                "name": "Button",
+                                "props": {
+                                    "type": "button",
+                                    "className": "inline-flex items-center justify-center gap-2 rounded-xl bg-raon-600 px-5 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-raon-700 disabled:cursor-not-allowed disabled:opacity-50"
+                                },
+                                "children": [
+                                    {
+                                        "type": "basic",
+                                        "name": "Icon",
+                                        "props": {
+                                            "name": "search",
+                                            "className": "text-sm"
+                                        }
+                                    },
+                                    {
+                                        "type": "basic",
+                                        "name": "Span",
+                                        "text": "$t:travel.cart.browse"
+                                    }
+                                ],
+                                "actions": [
+                                    {
+                                        "type": "click",
+                                        "handler": "navigate",
+                                        "params": {
+                                            "path": "/travel/search"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "type": "basic",
+                        "name": "Div",
+                        "if": "{{(cart?.data?.items ?? []).length > 0 || !!_global.travelInquiryPending}}",
+                        "props": {
+                            "className": "grid gap-6 lg:grid-cols-[1fr_380px] lg:items-start"
+                        },
+                        "children": [
+                            {
+                                "type": "basic",
+                                "name": "Div",
+                                "props": {
+                                    "className": "space-y-3"
+                                },
+                                "children": [
+                                    {
+                                        "type": "basic",
+                                        "name": "Div",
+                                        "iteration": {
+                                            "source": "{{cart?.data?.items ?? []}}",
+                                            "item_var": "item"
+                                        },
+                                        "children": [
+                                            {
+                                                "type": "basic",
+                                                "name": "Div",
+                                                "props": {
+                                                    "className": "rounded-2xl border border-slate-200 bg-white shadow-sm flex gap-4 p-4",
+                                                    "data-testid": "cart-item"
+                                                },
+                                                "children": [
+                                                    {
+                                                        "type": "basic",
+                                                        "name": "Button",
+                                                        "props": {
+                                                            "type": "button",
+                                                            "className": "h-24 w-24 shrink-0 overflow-hidden rounded-xl bg-raon-50 md:h-28 md:w-36",
+                                                            "aria-label": "{{item.product_name?.[_global.locale ?? 'ko'] ?? item.product_name?.ko ?? item.product_name?.en ?? ''}}"
+                                                        },
+                                                        "children": [
+                                                            {
+                                                                "type": "basic",
+                                                                "name": "Img",
+                                                                "if": "{{!!item.image_url}}",
+                                                                "props": {
+                                                                    "src": "{{item.image_url}}",
+                                                                    "alt": "{{item.product_name?.[_global.locale ?? 'ko'] ?? item.product_name?.ko ?? item.product_name?.en ?? ''}}",
+                                                                    "className": "h-full w-full object-cover"
+                                                                }
+                                                            },
+                                                            {
+                                                                "type": "composite",
+                                                                "name": "ScenicArt",
+                                                                "if": "{{!item.image_url}}",
+                                                                "props": {
+                                                                    "seed": "{{item.product_id ?? item.product?.id ?? item.id}}",
+                                                                    "className": "h-full w-full"
+                                                                }
+                                                            }
+                                                        ],
+                                                        "actions": [
+                                                            {
+                                                                "type": "click",
+                                                                "handler": "navigate",
+                                                                "params": {
+                                                                    "path": "/travel/products/{{item.product_id ?? item.product?.id}}"
+                                                                }
+                                                            }
+                                                        ]
+                                                    },
+                                                    {
+                                                        "type": "basic",
+                                                        "name": "Div",
+                                                        "props": {
+                                                            "className": "flex min-w-0 flex-1 flex-col gap-1"
+                                                        },
+                                                        "children": [
+                                                            {
+                                                                "type": "basic",
+                                                                "name": "H3",
+                                                                "props": {
+                                                                    "className": "line-clamp-2 text-base font-bold text-ink-900"
+                                                                },
+                                                                "text": "{{item.product_name?.[_global.locale ?? 'ko'] ?? item.product_name?.ko ?? item.product_name?.en ?? ''}}"
+                                                            },
+                                                            {
+                                                                "type": "basic",
+                                                                "name": "Div",
+                                                                "props": {
+                                                                    "className": "flex flex-wrap items-center gap-x-2 text-xs text-ink-500"
+                                                                },
+                                                                "children": [
+                                                                    {
+                                                                        "type": "basic",
+                                                                        "name": "Icon",
+                                                                        "props": {
+                                                                            "name": "calendar-alt",
+                                                                            "className": "text-xs"
+                                                                        }
+                                                                    },
+                                                                    {
+                                                                        "type": "basic",
+                                                                        "name": "Span",
+                                                                        "text": "{{item.departure_date ?? item.departure?.departure_date ?? ''}}"
+                                                                    },
+                                                                    {
+                                                                        "type": "basic",
+                                                                        "name": "Span",
+                                                                        "if": "{{!!(item.return_date ?? item.departure?.return_date)}}",
+                                                                        "text": "~"
+                                                                    },
+                                                                    {
+                                                                        "type": "basic",
+                                                                        "name": "Span",
+                                                                        "if": "{{!!(item.return_date ?? item.departure?.return_date)}}",
+                                                                        "text": "{{item.return_date ?? item.departure?.return_date ?? ''}}"
+                                                                    }
+                                                                ]
+                                                            },
+                                                            {
+                                                                "type": "basic",
+                                                                "name": "P",
+                                                                "if": "{{item.available !== true}}",
+                                                                "props": {
+                                                                    "className": "rounded-lg bg-amber-50 px-2 py-1 text-xs font-medium text-amber-700",
+                                                                    "data-testid": "cart-unavailable",
+                                                                    "role": "alert"
+                                                                },
+                                                                "text": "$t:travel.cart.unavailable"
+                                                            },
+                                                            {
+                                                                "type": "basic",
+                                                                "name": "Div",
+                                                                "props": {
+                                                                    "className": "mt-auto flex flex-wrap items-center justify-between gap-2 pt-2"
+                                                                },
+                                                                "children": [
+                                                                    {
+                                                                        "type": "basic",
+                                                                        "name": "Div",
+                                                                        "props": {
+                                                                            "className": "flex items-center gap-2"
+                                                                        },
+                                                                        "children": [
+                                                                            {
+                                                                                "type": "basic",
+                                                                                "name": "Button",
+                                                                                "props": {
+                                                                                    "type": "button",
+                                                                                    "className": "inline-flex h-8 w-8 items-center justify-center rounded-lg bg-slate-100 text-ink-700 hover:bg-slate-200 disabled:opacity-40",
+                                                                                    "disabled": "{{!!_local.busyId || item.available !== true || Number(item.quantity ?? 1) <= 1}}",
+                                                                                    "aria-label": "$t:travel.product.people_decrease",
+                                                                                    "data-testid": "cart-qty-decrease"
+                                                                                },
+                                                                                "children": [
+                                                                                    {
+                                                                                        "type": "basic",
+                                                                                        "name": "Icon",
+                                                                                        "props": {
+                                                                                            "name": "minus",
+                                                                                            "className": "text-xs"
+                                                                                        }
+                                                                                    }
+                                                                                ],
+                                                                                "actions": [
+                                                                                    {
+                                                                                        "type": "click",
+                                                                                        "handler": "sequence",
+                                                                                        "actions": [
+                                                                                            {
+                                                                                                "handler": "setState",
+                                                                                                "params": {
+                                                                                                    "target": "local",
+                                                                                                    "busyId": "{{item.id}}"
+                                                                                                }
+                                                                                            },
+                                                                                            {
+                                                                                                "handler": "apiCall",
+                                                                                                "auth_mode": "required",
+                                                                                                "target": "/api/modules/raonslab-travel_lab/cart/{{item.id}}",
+                                                                                                "params": {
+                                                                                                    "method": "PATCH",
+                                                                                                    "body": {
+                                                                                                        "quantity": "{{Number(item.quantity ?? 1) - 1}}"
+                                                                                                    }
+                                                                                                },
+                                                                                                "onSuccess": [
+                                                                                                    {
+                                                                                                        "handler": "travelLabEnsureInquiryKey",
+                                                                                                        "params": {
+                                                                                                            "cartChanged": true,
+                                                                                                            "cartIds": [],
+                                                                                                            "ownerId": "{{_global.currentUser?.uuid ?? _global.currentUser?.id}}"
+                                                                                                        }
+                                                                                                    },
+                                                                                                    {
+                                                                                                        "handler": "setState",
+                                                                                                        "params": {
+                                                                                                            "target": "local",
+                                                                                                            "busyId": null
+                                                                                                        }
+                                                                                                    },
+                                                                                                    {
+                                                                                                        "handler": "refetchDataSource",
+                                                                                                        "params": {
+                                                                                                            "dataSourceId": "cart"
+                                                                                                        }
+                                                                                                    },
+                                                                                                    {
+                                                                                                        "handler": "refetchDataSource",
+                                                                                                        "params": {
+                                                                                                            "dataSourceId": "travel_cart_badge"
+                                                                                                        }
+                                                                                                    }
+                                                                                                ],
+                                                                                                "onError": [
+                                                                                                    {
+                                                                                                        "handler": "setState",
+                                                                                                        "params": {
+                                                                                                            "target": "local",
+                                                                                                            "busyId": null
+                                                                                                        }
+                                                                                                    },
+                                                                                                    {
+                                                                                                        "handler": "toast",
+                                                                                                        "params": {
+                                                                                                            "type": "error",
+                                                                                                            "message": "{{error.message ?? '$t:travel.cart.update_failed'}}"
+                                                                                                        }
+                                                                                                    }
+                                                                                                ]
+                                                                                            }
+                                                                                        ]
+                                                                                    }
+                                                                                ]
+                                                                            },
+                                                                            {
+                                                                                "type": "basic",
+                                                                                "name": "Span",
+                                                                                "props": {
+                                                                                    "className": "min-w-10 text-center text-sm font-bold text-ink-900",
+                                                                                    "data-testid": "cart-qty"
+                                                                                },
+                                                                                "text": "$t:travel.product.people_value|count={{item.quantity ?? 1}}"
+                                                                            },
+                                                                            {
+                                                                                "type": "basic",
+                                                                                "name": "Button",
+                                                                                "props": {
+                                                                                    "type": "button",
+                                                                                    "className": "inline-flex h-8 w-8 items-center justify-center rounded-lg bg-slate-100 text-ink-700 hover:bg-slate-200 disabled:opacity-40",
+                                                                                    "disabled": "{{!!_local.busyId || item.available !== true || Number(item.quantity ?? 1) >= Number(item.remaining_capacity ?? 0)}}",
+                                                                                    "aria-label": "$t:travel.product.people_increase",
+                                                                                    "data-testid": "cart-qty-increase"
+                                                                                },
+                                                                                "children": [
+                                                                                    {
+                                                                                        "type": "basic",
+                                                                                        "name": "Icon",
+                                                                                        "props": {
+                                                                                            "name": "plus",
+                                                                                            "className": "text-xs"
+                                                                                        }
+                                                                                    }
+                                                                                ],
+                                                                                "actions": [
+                                                                                    {
+                                                                                        "type": "click",
+                                                                                        "handler": "sequence",
+                                                                                        "actions": [
+                                                                                            {
+                                                                                                "handler": "setState",
+                                                                                                "params": {
+                                                                                                    "target": "local",
+                                                                                                    "busyId": "{{item.id}}"
+                                                                                                }
+                                                                                            },
+                                                                                            {
+                                                                                                "handler": "apiCall",
+                                                                                                "auth_mode": "required",
+                                                                                                "target": "/api/modules/raonslab-travel_lab/cart/{{item.id}}",
+                                                                                                "params": {
+                                                                                                    "method": "PATCH",
+                                                                                                    "body": {
+                                                                                                        "quantity": "{{Number(item.quantity ?? 1) + 1}}"
+                                                                                                    }
+                                                                                                },
+                                                                                                "onSuccess": [
+                                                                                                    {
+                                                                                                        "handler": "travelLabEnsureInquiryKey",
+                                                                                                        "params": {
+                                                                                                            "cartChanged": true,
+                                                                                                            "cartIds": [],
+                                                                                                            "ownerId": "{{_global.currentUser?.uuid ?? _global.currentUser?.id}}"
+                                                                                                        }
+                                                                                                    },
+                                                                                                    {
+                                                                                                        "handler": "setState",
+                                                                                                        "params": {
+                                                                                                            "target": "local",
+                                                                                                            "busyId": null
+                                                                                                        }
+                                                                                                    },
+                                                                                                    {
+                                                                                                        "handler": "refetchDataSource",
+                                                                                                        "params": {
+                                                                                                            "dataSourceId": "cart"
+                                                                                                        }
+                                                                                                    },
+                                                                                                    {
+                                                                                                        "handler": "refetchDataSource",
+                                                                                                        "params": {
+                                                                                                            "dataSourceId": "travel_cart_badge"
+                                                                                                        }
+                                                                                                    }
+                                                                                                ],
+                                                                                                "onError": [
+                                                                                                    {
+                                                                                                        "handler": "setState",
+                                                                                                        "params": {
+                                                                                                            "target": "local",
+                                                                                                            "busyId": null
+                                                                                                        }
+                                                                                                    },
+                                                                                                    {
+                                                                                                        "handler": "toast",
+                                                                                                        "params": {
+                                                                                                            "type": "error",
+                                                                                                            "message": "{{error.message ?? '$t:travel.cart.update_failed'}}"
+                                                                                                        }
+                                                                                                    }
+                                                                                                ]
+                                                                                            }
+                                                                                        ]
+                                                                                    }
+                                                                                ]
+                                                                            }
+                                                                        ]
+                                                                    },
+                                                                    {
+                                                                        "type": "basic",
+                                                                        "name": "Div",
+                                                                        "props": {
+                                                                            "className": "flex items-center gap-2"
+                                                                        },
+                                                                        "children": [
+                                                                            {
+                                                                                "type": "composite",
+                                                                                "name": "PriceTag",
+                                                                                "props": {
+                                                                                    "amount": "{{item.line_total ?? (Number(item.unit_price ?? 0) * Number(item.quantity ?? 0))}}",
+                                                                                    "currency": "{{item.currency_code}}",
+                                                                                    "amountClassName": "text-base font-bold text-raon-700"
+                                                                                }
+                                                                            },
+                                                                            {
+                                                                                "type": "basic",
+                                                                                "name": "Button",
+                                                                                "props": {
+                                                                                    "type": "button",
+                                                                                    "className": "inline-flex items-center justify-center gap-1.5 rounded-lg px-3 py-2 text-sm font-medium text-rose-600 transition hover:bg-rose-50",
+                                                                                    "disabled": "{{!!_local.busyId}}",
+                                                                                    "data-testid": "cart-remove"
+                                                                                },
+                                                                                "children": [
+                                                                                    {
+                                                                                        "type": "basic",
+                                                                                        "name": "Icon",
+                                                                                        "props": {
+                                                                                            "name": "trash",
+                                                                                            "className": "text-xs"
+                                                                                        }
+                                                                                    },
+                                                                                    {
+                                                                                        "type": "basic",
+                                                                                        "name": "Span",
+                                                                                        "text": "$t:travel.cart.remove"
+                                                                                    }
+                                                                                ],
+                                                                                "actions": [
+                                                                                    {
+                                                                                        "type": "click",
+                                                                                        "handler": "sequence",
+                                                                                        "actions": [
+                                                                                            {
+                                                                                                "handler": "setState",
+                                                                                                "params": {
+                                                                                                    "target": "global",
+                                                                                                    "travelCartRemoveTarget": {
+                                                                                                        "id": "{{item.id}}",
+                                                                                                        "title": "{{item.product_name?.[_global.locale ?? 'ko'] ?? item.product_name?.ko ?? item.product_name?.en ?? ''}}"
+                                                                                                    }
+                                                                                                }
+                                                                                            },
+                                                                                            {
+                                                                                                "handler": "openModal",
+                                                                                                "target": "travel_cart_remove_modal"
+                                                                                            }
+                                                                                        ]
+                                                                                    }
+                                                                                ]
+                                                                            }
+                                                                        ]
+                                                                    }
+                                                                ]
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "type": "basic",
+                                        "name": "Div",
+                                        "props": {
+                                            "className": "flex items-start gap-3 rounded-2xl border border-dusk-200 bg-dusk-50 p-4 text-sm text-dusk-600",
+                                            "role": "note",
+                                            "data-testid": "simulation-notice"
+                                        },
+                                        "children": [
+                                            {
+                                                "type": "basic",
+                                                "name": "Icon",
+                                                "props": {
+                                                    "name": "info-circle",
+                                                    "className": "mt-0.5 text-base"
+                                                }
+                                            },
+                                            {
+                                                "type": "basic",
+                                                "name": "Div",
+                                                "props": {
+                                                    "className": "space-y-1"
+                                                },
+                                                "children": [
+                                                    {
+                                                        "type": "basic",
+                                                        "name": "P",
+                                                        "props": {
+                                                            "className": "font-semibold"
+                                                        },
+                                                        "text": "$t:travel.notice.simulation_title"
+                                                    },
+                                                    {
+                                                        "type": "basic",
+                                                        "name": "P",
+                                                        "props": {
+                                                            "className": "leading-relaxed"
+                                                        },
+                                                        "text": "$t:travel.notice.simulation_body"
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "basic",
+                                "name": "Div",
+                                "props": {
+                                    "className": "rounded-2xl border border-slate-200 bg-white shadow-sm space-y-4 p-5 md:p-6 lg:sticky lg:top-24",
+                                    "data-testid": "inquiry-form"
+                                },
+                                "children": [
+                                    {
+                                        "type": "basic",
+                                        "name": "H2",
+                                        "props": {
+                                            "className": "text-lg font-bold text-ink-900"
+                                        },
+                                        "text": "$t:travel.cart.summary_title"
+                                    },
+                                    {
+                                        "type": "basic",
+                                        "name": "Div",
+                                        "props": {
+                                            "className": "space-y-2 rounded-xl bg-sand-100 p-4 text-sm"
+                                        },
+                                        "children": [
+                                            {
+                                                "type": "basic",
+                                                "name": "Div",
+                                                "props": {
+                                                    "className": "flex justify-between"
+                                                },
+                                                "children": [
+                                                    {
+                                                        "type": "basic",
+                                                        "name": "Span",
+                                                        "props": {
+                                                            "className": "text-ink-500"
+                                                        },
+                                                        "text": "$t:travel.cart.trip_count"
+                                                    },
+                                                    {
+                                                        "type": "basic",
+                                                        "name": "Span",
+                                                        "props": {
+                                                            "className": "font-semibold"
+                                                        },
+                                                        "text": "$t:travel.cart.trip_count_value|count={{(cart?.data?.items ?? []).length}}"
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "type": "basic",
+                                                "name": "Div",
+                                                "props": {
+                                                    "className": "flex justify-between"
+                                                },
+                                                "children": [
+                                                    {
+                                                        "type": "basic",
+                                                        "name": "Span",
+                                                        "props": {
+                                                            "className": "text-ink-500"
+                                                        },
+                                                        "text": "$t:travel.cart.people_total"
+                                                    },
+                                                    {
+                                                        "type": "basic",
+                                                        "name": "Span",
+                                                        "props": {
+                                                            "className": "font-semibold"
+                                                        },
+                                                        "text": "$t:travel.product.people_value|count={{cart?.data?.totals?.quantity ?? (cart?.data?.items ?? []).reduce((sum, i) => sum + Number(i.quantity ?? 0), 0)}}"
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "type": "basic",
+                                                "name": "Hr",
+                                                "props": {
+                                                    "className": "border-slate-200"
+                                                }
+                                            },
+                                            {
+                                                "type": "basic",
+                                                "name": "Div",
+                                                "props": {
+                                                    "className": "flex items-center justify-between"
+                                                },
+                                                "children": [
+                                                    {
+                                                        "type": "basic",
+                                                        "name": "Span",
+                                                        "props": {
+                                                            "className": "font-semibold text-ink-700"
+                                                        },
+                                                        "text": "$t:travel.cart.estimate_total"
+                                                    },
+                                                    {
+                                                        "type": "composite",
+                                                        "name": "PriceTag",
+                                                        "props": {
+                                                            "amount": "{{cart?.data?.totals?.final_amount ?? 0}}",
+                                                            "currency": "{{cart?.data?.currency_code ?? cart?.data?.totals?.currency_code ?? cart?.data?.items?.[0]?.currency_code}}",
+                                                            "amountClassName": "text-xl font-black text-raon-700",
+                                                            "data-testid": "cart-total"
+                                                        }
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "type": "basic",
+                                                "name": "P",
+                                                "props": {
+                                                    "className": "text-xs text-ink-500"
+                                                },
+                                                "text": "$t:travel.cart.estimate_hint"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "type": "basic",
+                                        "name": "Div",
+                                        "children": [
+                                            {
+                                                "type": "basic",
+                                                "name": "Label",
+                                                "props": {
+                                                    "className": "mb-1.5 block text-sm font-semibold text-ink-700",
+                                                    "htmlFor": "travel-contact-name"
+                                                },
+                                                "text": "$t:travel.cart.contact_name"
+                                            },
+                                            {
+                                                "type": "basic",
+                                                "name": "Input",
+                                                "props": {
+                                                    "id": "travel-contact-name",
+                                                    "name": "contactName",
+                                                    "value": "{{_local.contactName ?? _global.travelInquiryContact?.name ?? _global.currentUser?.name ?? ''}}",
+                                                    "className": "w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm text-ink-900 placeholder:text-slate-400 focus:border-raon-500 focus:outline-none focus:ring-2 focus:ring-raon-100",
+                                                    "maxLength": 50,
+                                                    "required": true,
+                                                    "autoComplete": "name",
+                                                    "data-testid": "contact-name",
+                                                    "disabled": "{{(cart?.data?.items ?? []).length === 0 && !!_global.travelInquiryPending}}"
+                                                },
+                                                "actions": [
+                                                    {
+                                                        "type": "change",
+                                                        "handler": "setState",
+                                                        "params": {
+                                                            "target": "local",
+                                                            "contactName": "{{$event.target.value}}"
+                                                        }
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "type": "basic",
+                                        "name": "Div",
+                                        "children": [
+                                            {
+                                                "type": "basic",
+                                                "name": "Label",
+                                                "props": {
+                                                    "className": "mb-1.5 block text-sm font-semibold text-ink-700",
+                                                    "htmlFor": "travel-contact-phone"
+                                                },
+                                                "text": "$t:travel.cart.contact_phone"
+                                            },
+                                            {
+                                                "type": "basic",
+                                                "name": "Input",
+                                                "props": {
+                                                    "id": "travel-contact-phone",
+                                                    "type": "tel",
+                                                    "name": "contactPhone",
+                                                    "value": "{{_local.contactPhone ?? _global.travelInquiryContact?.phone ?? ''}}",
+                                                    "className": "w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm text-ink-900 placeholder:text-slate-400 focus:border-raon-500 focus:outline-none focus:ring-2 focus:ring-raon-100",
+                                                    "maxLength": 30,
+                                                    "autoComplete": "tel",
+                                                    "placeholder": "$t:travel.cart.contact_phone_placeholder",
+                                                    "data-testid": "contact-phone",
+                                                    "disabled": "{{(cart?.data?.items ?? []).length === 0 && !!_global.travelInquiryPending}}"
+                                                },
+                                                "actions": [
+                                                    {
+                                                        "type": "change",
+                                                        "handler": "setState",
+                                                        "params": {
+                                                            "target": "local",
+                                                            "contactPhone": "{{$event.target.value}}"
+                                                        }
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "type": "basic",
+                                        "name": "Label",
+                                        "props": {
+                                            "className": "flex cursor-pointer items-start gap-2 rounded-xl border border-dusk-200 bg-dusk-50 p-3 text-xs leading-relaxed text-dusk-600"
+                                        },
+                                        "children": [
+                                            {
+                                                "type": "basic",
+                                                "name": "Input",
+                                                "props": {
+                                                    "type": "checkbox",
+                                                    "name": "ackTest",
+                                                    "checked": "{{_local.ackTest === true}}",
+                                                    "className": "mt-0.5 h-4 w-4 accent-raon-600",
+                                                    "data-testid": "ack-test"
+                                                },
+                                                "actions": [
+                                                    {
+                                                        "type": "change",
+                                                        "handler": "setState",
+                                                        "params": {
+                                                            "target": "local",
+                                                            "ackTest": "{{$event.target.checked}}"
+                                                        }
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "type": "basic",
+                                                "name": "Span",
+                                                "text": "$t:travel.cart.ack_test"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "type": "basic",
+                                        "name": "Button",
+                                        "props": {
+                                            "type": "button",
+                                            "className": "inline-flex items-center justify-center gap-2 rounded-xl bg-raon-600 px-5 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-raon-700 disabled:cursor-not-allowed disabled:opacity-50 w-full py-3.5 text-base",
+                                            "disabled": "{{!!_local.submitting || !!_local.busyId || ((cart?.data?.items ?? []).length === 0 && !_global.travelInquiryPending) || _local.ackTest !== true || String(_local.contactName ?? _global.travelInquiryContact?.name ?? _global.currentUser?.name ?? '').trim() === '' || !_global.travelInquiryKey || (cart?.data?.items ?? []).some(i => i.available !== true)}}",
+                                            "data-testid": "submit-inquiry"
+                                        },
+                                        "children": [
+                                            {
+                                                "type": "basic",
+                                                "name": "Icon",
+                                                "props": {
+                                                    "name": "paper-plane",
+                                                    "className": "text-sm"
+                                                }
+                                            },
+                                            {
+                                                "type": "basic",
+                                                "name": "Span",
+                                                "if": "{{!_local.submitting}}",
+                                                "text": "$t:travel.cart.submit"
+                                            },
+                                            {
+                                                "type": "basic",
+                                                "name": "Span",
+                                                "if": "{{!!_local.submitting}}",
+                                                "text": "$t:travel.cart.submitting"
+                                            }
+                                        ],
+                                        "actions": [
+                                            {
+                                                "type": "click",
+                                                "handler": "sequence",
+                                                "actions": [
+                                                    {
+                                                        "handler": "travelLabPrepareInquiry",
+                                                        "params": {
+                                                            "cartIds": "{{(cart?.data?.items ?? []).map(i => i.id)}}",
+                                                            "quantities": "{{(cart?.data?.items ?? []).map(i => i.quantity)}}",
+                                                            "contact": {
+                                                                "name": "{{String(_local.contactName ?? _global.travelInquiryContact?.name ?? _global.currentUser?.name ?? '').trim()}}",
+                                                                "phone": "{{(_local.contactPhone ?? _global.travelInquiryContact?.phone ?? '').trim() || null}}"
+                                                            },
+                                                            "ownerId": "{{_global.currentUser?.uuid ?? _global.currentUser?.id}}"
+                                                        }
+                                                    },
+                                                    {
+                                                        "handler": "setState",
+                                                        "params": {
+                                                            "target": "local",
+                                                            "submitting": true,
+                                                            "travelInquiryPayload": "{{$prev}}"
+                                                        }
+                                                    },
+                                                    {
+                                                        "comment": "Prepared body is captured in sequence-local state; uncertain retries and reload recover the stored exact body.",
+                                                        "handler": "apiCall",
+                                                        "auth_mode": "required",
+                                                        "target": "/api/modules/raonslab-travel_lab/inquiries",
+                                                        "params": {
+                                                            "method": "POST",
+                                                            "body": {
+                                                                "cart_ids": "{{_local.travelInquiryPayload?.cart_ids}}",
+                                                                "contact": "{{_local.travelInquiryPayload?.contact}}",
+                                                                "idempotency_key": "{{_local.travelInquiryPayload?.idempotency_key}}"
+                                                            }
+                                                        },
+                                                        "onSuccess": [
+                                                            {
+                                                                "handler": "setState",
+                                                                "params": {
+                                                                    "target": "local",
+                                                                    "submitting": false,
+                                                                    "ackTest": false
+                                                                }
+                                                            },
+                                                            {
+                                                                "handler": "travelLabClearInquiryKey"
+                                                            },
+                                                            {
+                                                                "handler": "refetchDataSource",
+                                                                "params": {
+                                                                    "dataSourceId": "travel_cart_badge"
+                                                                }
+                                                            },
+                                                            {
+                                                                "handler": "toast",
+                                                                "params": {
+                                                                    "type": "success",
+                                                                    "message": "$t:travel.cart.submitted_toast"
+                                                                }
+                                                            },
+                                                            {
+                                                                "handler": "navigate",
+                                                                "params": {
+                                                                    "path": "/travel/requests/{{response.data?.id}}"
+                                                                }
+                                                            }
+                                                        ],
+                                                        "onError": [
+                                                            {
+                                                                "handler": "setState",
+                                                                "params": {
+                                                                    "target": "local",
+                                                                    "submitting": false
+                                                                }
+                                                            },
+                                                            {
+                                                                "handler": "toast",
+                                                                "params": {
+                                                                    "type": "error",
+                                                                    "message": "{{error.status ? (error.message ?? '$t:travel.cart.submit_failed') : '$t:travel.cart.submit_failed'}}"
+                                                                }
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "type": "basic",
+                                        "name": "P",
+                                        "if": "{{(cart?.data?.items ?? []).length === 0 || _local.ackTest !== true || String(_local.contactName ?? _global.travelInquiryContact?.name ?? _global.currentUser?.name ?? '').trim() === ''}}",
+                                        "props": {
+                                            "className": "text-center text-xs text-ink-500"
+                                        },
+                                        "text": "$t:travel.cart.submit_disabled_hint"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+}

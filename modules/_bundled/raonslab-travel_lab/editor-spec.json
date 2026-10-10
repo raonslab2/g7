@@ -1,0 +1,1892 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "moduleId": "raonslab-travel_lab",
+  "version": "1.0.0",
+  "description": "RAON Travel Lab editor contract. All samples are finite authored synthetic previews, never runtime fixtures, authentication, live API results or real bookings. Dates use an authored 2027-10-20 Asia/Seoul reference day, not the live clock.",
+  "sampleData": {
+    "comment": "Exact admin response shapes for catalog, candidates, inquiry list and detail. Numeric prices illustrate native option pricing, not a second price engine. No external assets, tokens or customer data.",
+    "byDataSourceId": {
+      "catalog": {
+        "success": true,
+        "message": "Editor-only authored synthetic response",
+        "data": {
+          "data": [
+            {
+              "id": 920001,
+              "title": "합성 제주 하루 여행 / Synthetic Jeju day trip",
+              "region": "jeju",
+              "theme": "nature",
+              "duration_days": 1,
+              "summary": "편집기 전용 합성 상품입니다. 실제 예약 상품이 아닙니다.",
+              "itinerary": [
+                {
+                  "day": 1,
+                  "title": {
+                    "ko": "합성 제주 일정",
+                    "en": "Synthetic Jeju itinerary"
+                  },
+                  "description": {
+                    "ko": "RAON 편집기용 가상 일정",
+                    "en": "Authored itinerary for the RAON editor preview"
+                  }
+                }
+              ],
+              "from_price": 120000,
+              "currency_code": "KRW",
+              "image_url": null,
+              "product_code": "EDITOR-TRAVEL-001",
+              "published": true,
+              "summary_translations": {
+                "ko": "편집기 전용 합성 여행",
+                "en": "Synthetic editor-only trip"
+              },
+              "itinerary_translations": [
+                {
+                  "day": 1,
+                  "title": {
+                    "ko": "합성 제주 일정",
+                    "en": "Synthetic Jeju itinerary"
+                  },
+                  "description": {
+                    "ko": "RAON 편집기용 가상 일정",
+                    "en": "Authored itinerary for the RAON editor preview"
+                  }
+                }
+              ],
+              "title_translations": {
+                "ko": "합성 제주 하루 여행",
+                "en": "Synthetic Jeju day trip"
+              },
+              "options": [
+                {
+                  "id": 930001,
+                  "option_name": "Synthetic 2027-11-01 departure",
+                  "stock_quantity": 12,
+                  "is_active": true
+                },
+                {
+                  "id": 930002,
+                  "option_name": "Synthetic 2027-11-08 departure",
+                  "stock_quantity": 0,
+                  "is_active": false
+                },
+                {
+                  "id": 930005,
+                  "option_name": "Synthetic new 2027-11-15 departure",
+                  "stock_quantity": 6,
+                  "is_active": true
+                }
+              ],
+              "departures": [
+                {
+                  "id": 940001,
+                  "product_id": 920001,
+                  "product_option_id": 930001,
+                  "departure_date": "2027-11-01",
+                  "return_date": "2027-11-01",
+                  "available": 10,
+                  "unit_price": 120000,
+                  "currency_code": "KRW",
+                  "capacity": 12,
+                  "reserved": 2,
+                  "is_active": true
+                },
+                {
+                  "id": 940002,
+                  "product_id": 920001,
+                  "product_option_id": 930002,
+                  "departure_date": "2027-11-08",
+                  "return_date": "2027-11-08",
+                  "available": 0,
+                  "unit_price": 125000,
+                  "currency_code": "KRW",
+                  "capacity": 10,
+                  "reserved": 0,
+                  "is_active": false
+                }
+              ]
+            }
+          ],
+          "pagination": {
+            "current_page": 1,
+            "per_page": 20,
+            "from": 1,
+            "to": 1,
+            "has_more_pages": false,
+            "last_page": 1,
+            "total": 1
+          },
+          "abilities": {
+            "can_update": true
+          }
+        }
+      },
+      "travel_candidates": {
+        "success": true,
+        "message": "Editor-only authored synthetic response",
+        "data": {
+          "data": [
+            {
+              "id": 920002,
+              "product_code": "EDITOR-TRAVEL-002",
+              "title": "합성 부산 문화 여행 / Synthetic Busan culture trip",
+              "shipping_policy_ready": true,
+              "options": [
+                {
+                  "id": 930003,
+                  "option_name": "Synthetic 2027-11-15 departure",
+                  "stock_quantity": 10,
+                  "is_active": true
+                },
+                {
+                  "id": 930004,
+                  "option_name": "Synthetic inactive departure",
+                  "stock_quantity": 0,
+                  "is_active": false
+                }
+              ]
+            }
+          ],
+          "pagination": {
+            "current_page": 1,
+            "per_page": 48,
+            "from": 1,
+            "to": 1,
+            "has_more_pages": false,
+            "last_page": 1,
+            "total": 1
+          }
+        }
+      },
+      "inquiries": {
+        "success": true,
+        "message": "Editor-only authored synthetic response",
+        "data": {
+          "data": [
+            {
+              "id": 950001,
+              "reference": "TL-00950001",
+              "status": "TEST_INQUIRY",
+              "allowed_transitions": [
+                "UNDER_REVIEW",
+                "DECLINED",
+                "CANCELLED"
+              ],
+              "can_cancel": false,
+              "first_product_name": "합성 제주 하루 여행",
+              "product_name": "합성 제주 하루 여행",
+              "total_quantity": 2,
+              "party_size": 2,
+              "departure_label": "2027-11-01",
+              "requester_name": "편집기 합성 회원",
+              "total_amount": "240000.00",
+              "currency_code": "KRW",
+              "contact": {
+                "name": "편집기 합성 회원",
+                "phone": "010-0000-0000"
+              },
+              "items": [
+                {
+                  "id": 960001,
+                  "departure_id": 940001,
+                  "product_id": 920001,
+                  "product_option_id": 930001,
+                  "quantity": 2,
+                  "unit_price": "120000.00",
+                  "line_total": "240000.00",
+                  "product_name": {
+                    "ko": "합성 제주 하루 여행",
+                    "en": "Synthetic Jeju day trip"
+                  },
+                  "departure_date": "2027-11-01"
+                }
+              ],
+              "created_at": "2027-10-20 09:00:00",
+              "updated_at": "2027-10-20 09:00:00",
+              "is_owner": false,
+              "abilities": {
+                "can_update": true,
+                "can_cancel": false
+              },
+              "user_id": 970001,
+              "admin_note": "편집기 합성 메모 — 외부 발송 없음",
+              "events": [
+                {
+                  "id": 980001,
+                  "actor_id": 970001,
+                  "from_status": null,
+                  "to_status": "TEST_INQUIRY",
+                  "note": null,
+                  "created_at": "2027-10-20T09:00:00+09:00"
+                }
+              ]
+            },
+            {
+              "id": 950002,
+              "reference": "TL-00950002",
+              "status": "UNDER_REVIEW",
+              "allowed_transitions": [
+                "TEST_ACCEPTED",
+                "DECLINED",
+                "CANCELLED"
+              ],
+              "can_cancel": false,
+              "first_product_name": "합성 제주 하루 여행",
+              "product_name": "합성 제주 하루 여행",
+              "total_quantity": 2,
+              "party_size": 2,
+              "departure_label": "2027-11-01",
+              "requester_name": "편집기 합성 회원",
+              "total_amount": "240000.00",
+              "currency_code": "KRW",
+              "contact": {
+                "name": "편집기 합성 회원",
+                "phone": "010-0000-0000"
+              },
+              "items": [
+                {
+                  "id": 960002,
+                  "departure_id": 940001,
+                  "product_id": 920001,
+                  "product_option_id": 930001,
+                  "quantity": 2,
+                  "unit_price": "120000.00",
+                  "line_total": "240000.00",
+                  "product_name": {
+                    "ko": "합성 제주 하루 여행",
+                    "en": "Synthetic Jeju day trip"
+                  },
+                  "departure_date": "2027-11-01"
+                }
+              ],
+              "created_at": "2027-10-20 09:00:00",
+              "updated_at": "2027-10-20 09:00:00",
+              "is_owner": false,
+              "abilities": {
+                "can_update": true,
+                "can_cancel": false
+              },
+              "user_id": 970001,
+              "admin_note": "편집기 합성 메모 — 외부 발송 없음",
+              "events": [
+                {
+                  "id": 980002,
+                  "actor_id": 970001,
+                  "from_status": null,
+                  "to_status": "TEST_INQUIRY",
+                  "note": null,
+                  "created_at": "2027-10-20T09:00:00+09:00"
+                },
+                {
+                  "id": 980012,
+                  "actor_id": 970002,
+                  "from_status": "TEST_INQUIRY",
+                  "to_status": "UNDER_REVIEW",
+                  "note": "편집기 합성 관리자 처리",
+                  "created_at": "2027-10-20T09:30:00+09:00"
+                }
+              ]
+            },
+            {
+              "id": 950003,
+              "reference": "TL-00950003",
+              "status": "TEST_ACCEPTED",
+              "allowed_transitions": [
+                "CANCELLED"
+              ],
+              "can_cancel": false,
+              "first_product_name": "합성 제주 하루 여행",
+              "product_name": "합성 제주 하루 여행",
+              "total_quantity": 2,
+              "party_size": 2,
+              "departure_label": "2027-11-01",
+              "requester_name": "편집기 합성 회원",
+              "total_amount": "240000.00",
+              "currency_code": "KRW",
+              "contact": {
+                "name": "편집기 합성 회원",
+                "phone": "010-0000-0000"
+              },
+              "items": [
+                {
+                  "id": 960003,
+                  "departure_id": 940001,
+                  "product_id": 920001,
+                  "product_option_id": 930001,
+                  "quantity": 2,
+                  "unit_price": "120000.00",
+                  "line_total": "240000.00",
+                  "product_name": {
+                    "ko": "합성 제주 하루 여행",
+                    "en": "Synthetic Jeju day trip"
+                  },
+                  "departure_date": "2027-11-01"
+                }
+              ],
+              "created_at": "2027-10-20 09:00:00",
+              "updated_at": "2027-10-20 09:00:00",
+              "is_owner": false,
+              "abilities": {
+                "can_update": true,
+                "can_cancel": false
+              },
+              "user_id": 970001,
+              "admin_note": "편집기 합성 메모 — 외부 발송 없음",
+              "events": [
+                {
+                  "id": 980003,
+                  "actor_id": 970001,
+                  "from_status": null,
+                  "to_status": "TEST_INQUIRY",
+                  "note": null,
+                  "created_at": "2027-10-20T09:00:00+09:00"
+                },
+                {
+                  "id": 980013,
+                  "actor_id": 970002,
+                  "from_status": "TEST_INQUIRY",
+                  "to_status": "UNDER_REVIEW",
+                  "note": "편집기 합성 관리자 처리",
+                  "created_at": "2027-10-20T09:30:00+09:00"
+                },
+                {
+                  "id": 980023,
+                  "actor_id": 970002,
+                  "from_status": "UNDER_REVIEW",
+                  "to_status": "TEST_ACCEPTED",
+                  "note": "시험 수락 — 실예약 확정 아님",
+                  "created_at": "2027-10-20T09:40:00+09:00"
+                }
+              ]
+            },
+            {
+              "id": 950004,
+              "reference": "TL-00950004",
+              "status": "DECLINED",
+              "allowed_transitions": [],
+              "can_cancel": false,
+              "first_product_name": "합성 제주 하루 여행",
+              "product_name": "합성 제주 하루 여행",
+              "total_quantity": 2,
+              "party_size": 2,
+              "departure_label": "2027-11-01",
+              "requester_name": "편집기 합성 회원",
+              "total_amount": "240000.00",
+              "currency_code": "KRW",
+              "contact": {
+                "name": "편집기 합성 회원",
+                "phone": "010-0000-0000"
+              },
+              "items": [
+                {
+                  "id": 960004,
+                  "departure_id": 940001,
+                  "product_id": 920001,
+                  "product_option_id": 930001,
+                  "quantity": 2,
+                  "unit_price": "120000.00",
+                  "line_total": "240000.00",
+                  "product_name": {
+                    "ko": "합성 제주 하루 여행",
+                    "en": "Synthetic Jeju day trip"
+                  },
+                  "departure_date": "2027-11-01"
+                }
+              ],
+              "created_at": "2027-10-20 09:00:00",
+              "updated_at": "2027-10-20 09:00:00",
+              "is_owner": false,
+              "abilities": {
+                "can_update": true,
+                "can_cancel": false
+              },
+              "user_id": 970001,
+              "admin_note": "편집기 합성 메모 — 외부 발송 없음",
+              "events": [
+                {
+                  "id": 980004,
+                  "actor_id": 970001,
+                  "from_status": null,
+                  "to_status": "TEST_INQUIRY",
+                  "note": null,
+                  "created_at": "2027-10-20T09:00:00+09:00"
+                },
+                {
+                  "id": 980014,
+                  "actor_id": 970002,
+                  "from_status": "TEST_INQUIRY",
+                  "to_status": "DECLINED",
+                  "note": "편집기 합성 관리자 처리",
+                  "created_at": "2027-10-20T09:30:00+09:00"
+                }
+              ]
+            },
+            {
+              "id": 950005,
+              "reference": "TL-00950005",
+              "status": "CANCELLED",
+              "allowed_transitions": [],
+              "can_cancel": false,
+              "first_product_name": "합성 제주 하루 여행",
+              "product_name": "합성 제주 하루 여행",
+              "total_quantity": 2,
+              "party_size": 2,
+              "departure_label": "2027-11-01",
+              "requester_name": "편집기 합성 회원",
+              "total_amount": "240000.00",
+              "currency_code": "KRW",
+              "contact": {
+                "name": "편집기 합성 회원",
+                "phone": "010-0000-0000"
+              },
+              "items": [
+                {
+                  "id": 960005,
+                  "departure_id": 940001,
+                  "product_id": 920001,
+                  "product_option_id": 930001,
+                  "quantity": 2,
+                  "unit_price": "120000.00",
+                  "line_total": "240000.00",
+                  "product_name": {
+                    "ko": "합성 제주 하루 여행",
+                    "en": "Synthetic Jeju day trip"
+                  },
+                  "departure_date": "2027-11-01"
+                }
+              ],
+              "created_at": "2027-10-20 09:00:00",
+              "updated_at": "2027-10-20 09:00:00",
+              "is_owner": false,
+              "abilities": {
+                "can_update": true,
+                "can_cancel": false
+              },
+              "user_id": 970001,
+              "admin_note": "편집기 합성 메모 — 외부 발송 없음",
+              "events": [
+                {
+                  "id": 980005,
+                  "actor_id": 970001,
+                  "from_status": null,
+                  "to_status": "TEST_INQUIRY",
+                  "note": null,
+                  "created_at": "2027-10-20T09:00:00+09:00"
+                },
+                {
+                  "id": 980015,
+                  "actor_id": 970002,
+                  "from_status": "TEST_INQUIRY",
+                  "to_status": "CANCELLED",
+                  "note": "편집기 합성 관리자 처리",
+                  "created_at": "2027-10-20T09:30:00+09:00"
+                }
+              ]
+            }
+          ],
+          "pagination": {
+            "current_page": 1,
+            "per_page": 20,
+            "from": 1,
+            "to": 5,
+            "has_more_pages": false,
+            "last_page": 1,
+            "total": 5
+          },
+          "abilities": {
+            "can_update": true
+          }
+        }
+      },
+      "inquiry": {
+        "success": true,
+        "message": "Editor-only authored synthetic response",
+        "data": {
+          "id": 950001,
+          "reference": "TL-00950001",
+          "status": "TEST_INQUIRY",
+          "allowed_transitions": [
+            "UNDER_REVIEW",
+            "DECLINED",
+            "CANCELLED"
+          ],
+          "can_cancel": false,
+          "first_product_name": "합성 제주 하루 여행",
+          "product_name": "합성 제주 하루 여행",
+          "total_quantity": 2,
+          "party_size": 2,
+          "departure_label": "2027-11-01",
+          "requester_name": "편집기 합성 회원",
+          "total_amount": "240000.00",
+          "currency_code": "KRW",
+          "contact": {
+            "name": "편집기 합성 회원",
+            "phone": "010-0000-0000"
+          },
+          "items": [
+            {
+              "id": 960001,
+              "departure_id": 940001,
+              "product_id": 920001,
+              "product_option_id": 930001,
+              "quantity": 2,
+              "unit_price": "120000.00",
+              "line_total": "240000.00",
+              "product_name": {
+                "ko": "합성 제주 하루 여행",
+                "en": "Synthetic Jeju day trip"
+              },
+              "departure_date": "2027-11-01"
+            }
+          ],
+          "created_at": "2027-10-20 09:00:00",
+          "updated_at": "2027-10-20 09:00:00",
+          "is_owner": false,
+          "abilities": {
+            "can_update": true,
+            "can_cancel": false
+          },
+          "user_id": 970001,
+          "admin_note": "편집기 합성 메모 — 외부 발송 없음",
+          "events": [
+            {
+              "id": 980001,
+              "actor_id": 970001,
+              "from_status": null,
+              "to_status": "TEST_INQUIRY",
+              "note": null,
+              "created_at": "2027-10-20T09:00:00+09:00"
+            }
+          ]
+        }
+      },
+      "campaigns": {
+        "success": true,
+        "message": "Editor-only authored synthetic response",
+        "data": {
+          "items": [
+            {
+              "slug": "travel-lab-campaign-autumn-escape",
+              "kind": "campaign",
+              "theme": "nature",
+              "title": "합성 가을 기획전 / Synthetic autumn campaign",
+              "excerpt": "편집기 전용 합성 기획전 발췌입니다. 실제 기획전이 아닙니다.",
+              "current_version": 1,
+              "published_at": "2027-10-20 09:00:00",
+              "path": "/travel/campaigns/travel-lab-campaign-autumn-escape",
+              "catalog_query": {
+                "theme": "nature",
+                "sort": "recommended"
+              },
+              "art_variant": "forest"
+            },
+            {
+              "slug": "travel-lab-campaign-weekend-reset",
+              "kind": "campaign",
+              "theme": "wellness",
+              "title": "합성 주말 기획전 / Synthetic weekend campaign",
+              "excerpt": "편집기 전용 합성 기획전 발췌입니다. 실제 기획전이 아닙니다.",
+              "current_version": 1,
+              "published_at": "2027-10-20 09:00:00",
+              "path": "/travel/campaigns/travel-lab-campaign-weekend-reset",
+              "catalog_query": {
+                "theme": "wellness",
+                "sort": "recommended"
+              },
+              "art_variant": "lake"
+            }
+          ]
+        }
+      },
+      "campaign": {
+        "success": true,
+        "message": "Editor-only authored synthetic response",
+        "data": {
+          "slug": "travel-lab-campaign-autumn-escape",
+          "kind": "campaign",
+          "theme": "nature",
+          "title": "합성 가을 기획전 / Synthetic autumn campaign",
+          "excerpt": "편집기 전용 합성 기획전 발췌입니다. 실제 기획전이 아닙니다.",
+          "current_version": 1,
+          "published_at": "2027-10-20 09:00:00",
+          "path": "/travel/campaigns/travel-lab-campaign-autumn-escape",
+          "catalog_query": {
+            "theme": "nature",
+            "sort": "recommended"
+          },
+          "art_variant": "forest",
+          "content": "편집기 전용 합성 본문입니다.\n가격·링크·이미지는 넣지 않습니다.",
+          "content_mode": "text",
+          "updated_at": "2027-10-20 09:00:00"
+        }
+      },
+      "campaign_trips": {
+        "success": true,
+        "message": "Editor-only authored synthetic response",
+        "data": {
+          "data": [],
+          "pagination": {
+            "current_page": 1,
+            "per_page": 6,
+            "last_page": 1,
+            "total": 0,
+            "has_more_pages": false
+          }
+        }
+      },
+      "campaign_pages": {
+        "success": true,
+        "message": "Editor-only authored synthetic response",
+        "data": {
+          "data": [
+            {
+              "id": 930001,
+              "slug": "travel-lab-campaign-autumn-escape",
+              "title": "합성 가을 기획전 / Synthetic autumn campaign",
+              "published": true,
+              "published_at": "2027-10-20 09:00:00",
+              "current_version": 1,
+              "abilities": {
+                "can_create": true,
+                "can_update": true,
+                "can_delete": false
+              }
+            }
+          ],
+          "meta": {
+            "current_page": 1,
+            "last_page": 1,
+            "per_page": 100,
+            "total": 1
+          }
+        }
+      }
+    }
+  },
+  "sampleGlobal": {
+    "travelEditorPreview": {
+      "synthetic": true,
+      "admin_uuid": "00000000-0000-4000-8000-000000000001",
+      "business_timezone": "Asia/Seoul",
+      "authored_reference_day": "2027-10-20",
+      "note": "Editor identity metadata only; does not set currentUser, a token, or permissions."
+    },
+    "travelMetadataEdit": {
+      "product_id": 920002,
+      "region": "busan",
+      "theme": "culture",
+      "duration_days": 1,
+      "summary_ko": "편집기 합성 부산 여행",
+      "summary_en": "Synthetic Busan editor trip",
+      "itinerary_json": "[{\"day\":1,\"title\":{\"ko\":\"합성 제주 일정\",\"en\":\"Synthetic Jeju itinerary\"},\"description\":{\"ko\":\"RAON 편집기용 가상 일정\",\"en\":\"Authored itinerary for the RAON editor preview\"}}]",
+      "published": true
+    },
+    "travelMetadataExisting": false,
+    "travelMetadataSaving": false,
+    "travelMetadataError": "",
+    "travelCandidateQuery": "",
+    "travelCandidatePage": 1,
+    "travelCandidateError": "",
+    "travelDepartureEdit": {
+      "id": null,
+      "product_id": 920001,
+      "product_option_id": 930005,
+      "departure_date": "2027-11-15",
+      "return_date": "2027-11-15",
+      "capacity": 6,
+      "reserved": 0,
+      "is_active": true,
+      "options": [
+        {
+          "id": 930001,
+          "option_name": "Synthetic 2027-11-01 departure",
+          "stock_quantity": 12,
+          "is_active": true
+        },
+        {
+          "id": 930002,
+          "option_name": "Synthetic 2027-11-08 departure",
+          "stock_quantity": 0,
+          "is_active": false
+        },
+        {
+          "id": 930005,
+          "option_name": "Synthetic new 2027-11-15 departure",
+          "stock_quantity": 6,
+          "is_active": true
+        }
+      ]
+    },
+    "travelDepartureSaving": false,
+    "travelInquiryNextStatus": "UNDER_REVIEW",
+    "travelInquiryNote": "편집기 합성 내부 메모",
+    "travelInquirySaving": false
+  },
+  "states": {
+    "groups": [
+      {
+        "scope": {
+          "kind": "route",
+          "match": "*/admin/travel-lab"
+        },
+        "items": [
+          {
+            "id": "catalog-populated",
+            "label": "$t:raonslab-travel_lab.admin.catalog.title",
+            "default": true
+          },
+          {
+            "id": "catalog-empty",
+            "label": "$t:raonslab-travel_lab.admin.catalog.empty",
+            "sampleDataOverrides": {
+              "byDataSourceId": {
+                "catalog": {
+                  "success": true,
+                  "message": "Editor-only authored synthetic response",
+                  "data": {
+                    "data": [],
+                    "pagination": {
+                      "current_page": 1,
+                      "per_page": 20,
+                      "from": null,
+                      "to": null,
+                      "has_more_pages": false,
+                      "last_page": 1,
+                      "total": 0
+                    },
+                    "abilities": {
+                      "can_update": true
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "id": "catalog-read-only",
+            "label": "Read-only catalog / 조회 전용",
+            "sampleDataOverrides": {
+              "byDataSourceId": {
+                "catalog": {
+                  "success": true,
+                  "message": "Editor-only authored synthetic response",
+                  "data": {
+                    "data": [
+                      {
+                        "id": 920001,
+                        "title": "합성 제주 하루 여행 / Synthetic Jeju day trip",
+                        "region": "jeju",
+                        "theme": "nature",
+                        "duration_days": 1,
+                        "summary": "편집기 전용 합성 상품입니다. 실제 예약 상품이 아닙니다.",
+                        "itinerary": [
+                          {
+                            "day": 1,
+                            "title": {
+                              "ko": "합성 제주 일정",
+                              "en": "Synthetic Jeju itinerary"
+                            },
+                            "description": {
+                              "ko": "RAON 편집기용 가상 일정",
+                              "en": "Authored itinerary for the RAON editor preview"
+                            }
+                          }
+                        ],
+                        "from_price": 120000,
+                        "currency_code": "KRW",
+                        "image_url": null,
+                        "product_code": "EDITOR-TRAVEL-001",
+                        "published": true,
+                        "summary_translations": {
+                          "ko": "편집기 전용 합성 여행",
+                          "en": "Synthetic editor-only trip"
+                        },
+                        "itinerary_translations": [
+                          {
+                            "day": 1,
+                            "title": {
+                              "ko": "합성 제주 일정",
+                              "en": "Synthetic Jeju itinerary"
+                            },
+                            "description": {
+                              "ko": "RAON 편집기용 가상 일정",
+                              "en": "Authored itinerary for the RAON editor preview"
+                            }
+                          }
+                        ],
+                        "title_translations": {
+                          "ko": "합성 제주 하루 여행",
+                          "en": "Synthetic Jeju day trip"
+                        },
+                        "options": [
+                          {
+                            "id": 930001,
+                            "option_name": "Synthetic 2027-11-01 departure",
+                            "stock_quantity": 12,
+                            "is_active": true
+                          },
+                          {
+                            "id": 930002,
+                            "option_name": "Synthetic 2027-11-08 departure",
+                            "stock_quantity": 0,
+                            "is_active": false
+                          },
+                          {
+                            "id": 930005,
+                            "option_name": "Synthetic new 2027-11-15 departure",
+                            "stock_quantity": 6,
+                            "is_active": true
+                          }
+                        ],
+                        "departures": [
+                          {
+                            "id": 940001,
+                            "product_id": 920001,
+                            "product_option_id": 930001,
+                            "departure_date": "2027-11-01",
+                            "return_date": "2027-11-01",
+                            "available": 10,
+                            "unit_price": 120000,
+                            "currency_code": "KRW",
+                            "capacity": 12,
+                            "reserved": 2,
+                            "is_active": true
+                          },
+                          {
+                            "id": 940002,
+                            "product_id": 920001,
+                            "product_option_id": 930002,
+                            "departure_date": "2027-11-08",
+                            "return_date": "2027-11-08",
+                            "available": 0,
+                            "unit_price": 125000,
+                            "currency_code": "KRW",
+                            "capacity": 10,
+                            "reserved": 0,
+                            "is_active": false
+                          }
+                        ]
+                      }
+                    ],
+                    "pagination": {
+                      "current_page": 1,
+                      "per_page": 20,
+                      "from": 1,
+                      "to": 1,
+                      "has_more_pages": false,
+                      "last_page": 1,
+                      "total": 1
+                    },
+                    "abilities": {
+                      "can_update": false
+                    }
+                  }
+                }
+              }
+            }
+          }
+        ]
+      },
+      {
+        "scope": {
+          "kind": "route",
+          "match": "*/admin/travel-lab/catalog"
+        },
+        "items": [
+          {
+            "id": "catalog-populated",
+            "label": "$t:raonslab-travel_lab.admin.catalog.title",
+            "default": true
+          },
+          {
+            "id": "catalog-empty",
+            "label": "$t:raonslab-travel_lab.admin.catalog.empty",
+            "sampleDataOverrides": {
+              "byDataSourceId": {
+                "catalog": {
+                  "success": true,
+                  "message": "Editor-only authored synthetic response",
+                  "data": {
+                    "data": [],
+                    "pagination": {
+                      "current_page": 1,
+                      "per_page": 20,
+                      "from": null,
+                      "to": null,
+                      "has_more_pages": false,
+                      "last_page": 1,
+                      "total": 0
+                    },
+                    "abilities": {
+                      "can_update": true
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "id": "catalog-read-only",
+            "label": "Read-only catalog / 조회 전용",
+            "sampleDataOverrides": {
+              "byDataSourceId": {
+                "catalog": {
+                  "success": true,
+                  "message": "Editor-only authored synthetic response",
+                  "data": {
+                    "data": [
+                      {
+                        "id": 920001,
+                        "title": "합성 제주 하루 여행 / Synthetic Jeju day trip",
+                        "region": "jeju",
+                        "theme": "nature",
+                        "duration_days": 1,
+                        "summary": "편집기 전용 합성 상품입니다. 실제 예약 상품이 아닙니다.",
+                        "itinerary": [
+                          {
+                            "day": 1,
+                            "title": {
+                              "ko": "합성 제주 일정",
+                              "en": "Synthetic Jeju itinerary"
+                            },
+                            "description": {
+                              "ko": "RAON 편집기용 가상 일정",
+                              "en": "Authored itinerary for the RAON editor preview"
+                            }
+                          }
+                        ],
+                        "from_price": 120000,
+                        "currency_code": "KRW",
+                        "image_url": null,
+                        "product_code": "EDITOR-TRAVEL-001",
+                        "published": true,
+                        "summary_translations": {
+                          "ko": "편집기 전용 합성 여행",
+                          "en": "Synthetic editor-only trip"
+                        },
+                        "itinerary_translations": [
+                          {
+                            "day": 1,
+                            "title": {
+                              "ko": "합성 제주 일정",
+                              "en": "Synthetic Jeju itinerary"
+                            },
+                            "description": {
+                              "ko": "RAON 편집기용 가상 일정",
+                              "en": "Authored itinerary for the RAON editor preview"
+                            }
+                          }
+                        ],
+                        "title_translations": {
+                          "ko": "합성 제주 하루 여행",
+                          "en": "Synthetic Jeju day trip"
+                        },
+                        "options": [
+                          {
+                            "id": 930001,
+                            "option_name": "Synthetic 2027-11-01 departure",
+                            "stock_quantity": 12,
+                            "is_active": true
+                          },
+                          {
+                            "id": 930002,
+                            "option_name": "Synthetic 2027-11-08 departure",
+                            "stock_quantity": 0,
+                            "is_active": false
+                          },
+                          {
+                            "id": 930005,
+                            "option_name": "Synthetic new 2027-11-15 departure",
+                            "stock_quantity": 6,
+                            "is_active": true
+                          }
+                        ],
+                        "departures": [
+                          {
+                            "id": 940001,
+                            "product_id": 920001,
+                            "product_option_id": 930001,
+                            "departure_date": "2027-11-01",
+                            "return_date": "2027-11-01",
+                            "available": 10,
+                            "unit_price": 120000,
+                            "currency_code": "KRW",
+                            "capacity": 12,
+                            "reserved": 2,
+                            "is_active": true
+                          },
+                          {
+                            "id": 940002,
+                            "product_id": 920001,
+                            "product_option_id": 930002,
+                            "departure_date": "2027-11-08",
+                            "return_date": "2027-11-08",
+                            "available": 0,
+                            "unit_price": 125000,
+                            "currency_code": "KRW",
+                            "capacity": 10,
+                            "reserved": 0,
+                            "is_active": false
+                          }
+                        ]
+                      }
+                    ],
+                    "pagination": {
+                      "current_page": 1,
+                      "per_page": 20,
+                      "from": 1,
+                      "to": 1,
+                      "has_more_pages": false,
+                      "last_page": 1,
+                      "total": 1
+                    },
+                    "abilities": {
+                      "can_update": false
+                    }
+                  }
+                }
+              }
+            }
+          }
+        ]
+      },
+      {
+        "scope": {
+          "kind": "route",
+          "match": "*/admin/travel-lab/inquiries"
+        },
+        "items": [
+          {
+            "id": "inquiries-populated",
+            "label": "$t:raonslab-travel_lab.admin.inquiries.title",
+            "default": true
+          },
+          {
+            "id": "inquiries-empty",
+            "label": "$t:raonslab-travel_lab.admin.inquiries.empty",
+            "sampleDataOverrides": {
+              "byDataSourceId": {
+                "inquiries": {
+                  "success": true,
+                  "message": "Editor-only authored synthetic response",
+                  "data": {
+                    "data": [],
+                    "pagination": {
+                      "current_page": 1,
+                      "per_page": 20,
+                      "from": null,
+                      "to": null,
+                      "has_more_pages": false,
+                      "last_page": 1,
+                      "total": 0
+                    },
+                    "abilities": {
+                      "can_update": true
+                    }
+                  }
+                }
+              }
+            }
+          }
+        ]
+      },
+      {
+        "scope": {
+          "kind": "route",
+          "match": "*/admin/travel-lab/inquiries/:id"
+        },
+        "items": [
+          {
+            "id": "inquiry-test_inquiry",
+            "label": "$t:raonslab-travel_lab.admin.inquiries.status.TEST_INQUIRY",
+            "default": true,
+            "initialState": {
+              "route": {
+                "id": "950001"
+              },
+              "global": {
+                "travelInquiryNextStatus": "UNDER_REVIEW"
+              }
+            },
+            "sampleDataOverrides": {
+              "byDataSourceId": {
+                "inquiry": {
+                  "success": true,
+                  "message": "Editor-only authored synthetic response",
+                  "data": {
+                    "id": 950001,
+                    "reference": "TL-00950001",
+                    "status": "TEST_INQUIRY",
+                    "allowed_transitions": [
+                      "UNDER_REVIEW",
+                      "DECLINED",
+                      "CANCELLED"
+                    ],
+                    "can_cancel": false,
+                    "first_product_name": "합성 제주 하루 여행",
+                    "product_name": "합성 제주 하루 여행",
+                    "total_quantity": 2,
+                    "party_size": 2,
+                    "departure_label": "2027-11-01",
+                    "requester_name": "편집기 합성 회원",
+                    "total_amount": "240000.00",
+                    "currency_code": "KRW",
+                    "contact": {
+                      "name": "편집기 합성 회원",
+                      "phone": "010-0000-0000"
+                    },
+                    "items": [
+                      {
+                        "id": 960001,
+                        "departure_id": 940001,
+                        "product_id": 920001,
+                        "product_option_id": 930001,
+                        "quantity": 2,
+                        "unit_price": "120000.00",
+                        "line_total": "240000.00",
+                        "product_name": {
+                          "ko": "합성 제주 하루 여행",
+                          "en": "Synthetic Jeju day trip"
+                        },
+                        "departure_date": "2027-11-01"
+                      }
+                    ],
+                    "created_at": "2027-10-20 09:00:00",
+                    "updated_at": "2027-10-20 09:00:00",
+                    "is_owner": false,
+                    "abilities": {
+                      "can_update": true,
+                      "can_cancel": false
+                    },
+                    "user_id": 970001,
+                    "admin_note": "편집기 합성 메모 — 외부 발송 없음",
+                    "events": [
+                      {
+                        "id": 980001,
+                        "actor_id": 970001,
+                        "from_status": null,
+                        "to_status": "TEST_INQUIRY",
+                        "note": null,
+                        "created_at": "2027-10-20T09:00:00+09:00"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          {
+            "id": "inquiry-under_review",
+            "label": "$t:raonslab-travel_lab.admin.inquiries.status.UNDER_REVIEW",
+            "default": false,
+            "initialState": {
+              "route": {
+                "id": "950002"
+              },
+              "global": {
+                "travelInquiryNextStatus": "TEST_ACCEPTED"
+              }
+            },
+            "sampleDataOverrides": {
+              "byDataSourceId": {
+                "inquiry": {
+                  "success": true,
+                  "message": "Editor-only authored synthetic response",
+                  "data": {
+                    "id": 950002,
+                    "reference": "TL-00950002",
+                    "status": "UNDER_REVIEW",
+                    "allowed_transitions": [
+                      "TEST_ACCEPTED",
+                      "DECLINED",
+                      "CANCELLED"
+                    ],
+                    "can_cancel": false,
+                    "first_product_name": "합성 제주 하루 여행",
+                    "product_name": "합성 제주 하루 여행",
+                    "total_quantity": 2,
+                    "party_size": 2,
+                    "departure_label": "2027-11-01",
+                    "requester_name": "편집기 합성 회원",
+                    "total_amount": "240000.00",
+                    "currency_code": "KRW",
+                    "contact": {
+                      "name": "편집기 합성 회원",
+                      "phone": "010-0000-0000"
+                    },
+                    "items": [
+                      {
+                        "id": 960002,
+                        "departure_id": 940001,
+                        "product_id": 920001,
+                        "product_option_id": 930001,
+                        "quantity": 2,
+                        "unit_price": "120000.00",
+                        "line_total": "240000.00",
+                        "product_name": {
+                          "ko": "합성 제주 하루 여행",
+                          "en": "Synthetic Jeju day trip"
+                        },
+                        "departure_date": "2027-11-01"
+                      }
+                    ],
+                    "created_at": "2027-10-20 09:00:00",
+                    "updated_at": "2027-10-20 09:00:00",
+                    "is_owner": false,
+                    "abilities": {
+                      "can_update": true,
+                      "can_cancel": false
+                    },
+                    "user_id": 970001,
+                    "admin_note": "편집기 합성 메모 — 외부 발송 없음",
+                    "events": [
+                      {
+                        "id": 980002,
+                        "actor_id": 970001,
+                        "from_status": null,
+                        "to_status": "TEST_INQUIRY",
+                        "note": null,
+                        "created_at": "2027-10-20T09:00:00+09:00"
+                      },
+                      {
+                        "id": 980012,
+                        "actor_id": 970002,
+                        "from_status": "TEST_INQUIRY",
+                        "to_status": "UNDER_REVIEW",
+                        "note": "편집기 합성 관리자 처리",
+                        "created_at": "2027-10-20T09:30:00+09:00"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          {
+            "id": "inquiry-test_accepted",
+            "label": "$t:raonslab-travel_lab.admin.inquiries.status.TEST_ACCEPTED",
+            "default": false,
+            "initialState": {
+              "route": {
+                "id": "950003"
+              },
+              "global": {
+                "travelInquiryNextStatus": "CANCELLED"
+              }
+            },
+            "sampleDataOverrides": {
+              "byDataSourceId": {
+                "inquiry": {
+                  "success": true,
+                  "message": "Editor-only authored synthetic response",
+                  "data": {
+                    "id": 950003,
+                    "reference": "TL-00950003",
+                    "status": "TEST_ACCEPTED",
+                    "allowed_transitions": [
+                      "CANCELLED"
+                    ],
+                    "can_cancel": false,
+                    "first_product_name": "합성 제주 하루 여행",
+                    "product_name": "합성 제주 하루 여행",
+                    "total_quantity": 2,
+                    "party_size": 2,
+                    "departure_label": "2027-11-01",
+                    "requester_name": "편집기 합성 회원",
+                    "total_amount": "240000.00",
+                    "currency_code": "KRW",
+                    "contact": {
+                      "name": "편집기 합성 회원",
+                      "phone": "010-0000-0000"
+                    },
+                    "items": [
+                      {
+                        "id": 960003,
+                        "departure_id": 940001,
+                        "product_id": 920001,
+                        "product_option_id": 930001,
+                        "quantity": 2,
+                        "unit_price": "120000.00",
+                        "line_total": "240000.00",
+                        "product_name": {
+                          "ko": "합성 제주 하루 여행",
+                          "en": "Synthetic Jeju day trip"
+                        },
+                        "departure_date": "2027-11-01"
+                      }
+                    ],
+                    "created_at": "2027-10-20 09:00:00",
+                    "updated_at": "2027-10-20 09:00:00",
+                    "is_owner": false,
+                    "abilities": {
+                      "can_update": true,
+                      "can_cancel": false
+                    },
+                    "user_id": 970001,
+                    "admin_note": "편집기 합성 메모 — 외부 발송 없음",
+                    "events": [
+                      {
+                        "id": 980003,
+                        "actor_id": 970001,
+                        "from_status": null,
+                        "to_status": "TEST_INQUIRY",
+                        "note": null,
+                        "created_at": "2027-10-20T09:00:00+09:00"
+                      },
+                      {
+                        "id": 980013,
+                        "actor_id": 970002,
+                        "from_status": "TEST_INQUIRY",
+                        "to_status": "UNDER_REVIEW",
+                        "note": "편집기 합성 관리자 처리",
+                        "created_at": "2027-10-20T09:30:00+09:00"
+                      },
+                      {
+                        "id": 980023,
+                        "actor_id": 970002,
+                        "from_status": "UNDER_REVIEW",
+                        "to_status": "TEST_ACCEPTED",
+                        "note": "시험 수락 — 실예약 확정 아님",
+                        "created_at": "2027-10-20T09:40:00+09:00"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          {
+            "id": "inquiry-declined",
+            "label": "$t:raonslab-travel_lab.admin.inquiries.status.DECLINED",
+            "default": false,
+            "initialState": {
+              "route": {
+                "id": "950004"
+              },
+              "global": {
+                "travelInquiryNextStatus": ""
+              }
+            },
+            "sampleDataOverrides": {
+              "byDataSourceId": {
+                "inquiry": {
+                  "success": true,
+                  "message": "Editor-only authored synthetic response",
+                  "data": {
+                    "id": 950004,
+                    "reference": "TL-00950004",
+                    "status": "DECLINED",
+                    "allowed_transitions": [],
+                    "can_cancel": false,
+                    "first_product_name": "합성 제주 하루 여행",
+                    "product_name": "합성 제주 하루 여행",
+                    "total_quantity": 2,
+                    "party_size": 2,
+                    "departure_label": "2027-11-01",
+                    "requester_name": "편집기 합성 회원",
+                    "total_amount": "240000.00",
+                    "currency_code": "KRW",
+                    "contact": {
+                      "name": "편집기 합성 회원",
+                      "phone": "010-0000-0000"
+                    },
+                    "items": [
+                      {
+                        "id": 960004,
+                        "departure_id": 940001,
+                        "product_id": 920001,
+                        "product_option_id": 930001,
+                        "quantity": 2,
+                        "unit_price": "120000.00",
+                        "line_total": "240000.00",
+                        "product_name": {
+                          "ko": "합성 제주 하루 여행",
+                          "en": "Synthetic Jeju day trip"
+                        },
+                        "departure_date": "2027-11-01"
+                      }
+                    ],
+                    "created_at": "2027-10-20 09:00:00",
+                    "updated_at": "2027-10-20 09:00:00",
+                    "is_owner": false,
+                    "abilities": {
+                      "can_update": true,
+                      "can_cancel": false
+                    },
+                    "user_id": 970001,
+                    "admin_note": "편집기 합성 메모 — 외부 발송 없음",
+                    "events": [
+                      {
+                        "id": 980004,
+                        "actor_id": 970001,
+                        "from_status": null,
+                        "to_status": "TEST_INQUIRY",
+                        "note": null,
+                        "created_at": "2027-10-20T09:00:00+09:00"
+                      },
+                      {
+                        "id": 980014,
+                        "actor_id": 970002,
+                        "from_status": "TEST_INQUIRY",
+                        "to_status": "DECLINED",
+                        "note": "편집기 합성 관리자 처리",
+                        "created_at": "2027-10-20T09:30:00+09:00"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          {
+            "id": "inquiry-cancelled",
+            "label": "$t:raonslab-travel_lab.admin.inquiries.status.CANCELLED",
+            "default": false,
+            "initialState": {
+              "route": {
+                "id": "950005"
+              },
+              "global": {
+                "travelInquiryNextStatus": ""
+              }
+            },
+            "sampleDataOverrides": {
+              "byDataSourceId": {
+                "inquiry": {
+                  "success": true,
+                  "message": "Editor-only authored synthetic response",
+                  "data": {
+                    "id": 950005,
+                    "reference": "TL-00950005",
+                    "status": "CANCELLED",
+                    "allowed_transitions": [],
+                    "can_cancel": false,
+                    "first_product_name": "합성 제주 하루 여행",
+                    "product_name": "합성 제주 하루 여행",
+                    "total_quantity": 2,
+                    "party_size": 2,
+                    "departure_label": "2027-11-01",
+                    "requester_name": "편집기 합성 회원",
+                    "total_amount": "240000.00",
+                    "currency_code": "KRW",
+                    "contact": {
+                      "name": "편집기 합성 회원",
+                      "phone": "010-0000-0000"
+                    },
+                    "items": [
+                      {
+                        "id": 960005,
+                        "departure_id": 940001,
+                        "product_id": 920001,
+                        "product_option_id": 930001,
+                        "quantity": 2,
+                        "unit_price": "120000.00",
+                        "line_total": "240000.00",
+                        "product_name": {
+                          "ko": "합성 제주 하루 여행",
+                          "en": "Synthetic Jeju day trip"
+                        },
+                        "departure_date": "2027-11-01"
+                      }
+                    ],
+                    "created_at": "2027-10-20 09:00:00",
+                    "updated_at": "2027-10-20 09:00:00",
+                    "is_owner": false,
+                    "abilities": {
+                      "can_update": true,
+                      "can_cancel": false
+                    },
+                    "user_id": 970001,
+                    "admin_note": "편집기 합성 메모 — 외부 발송 없음",
+                    "events": [
+                      {
+                        "id": 980005,
+                        "actor_id": 970001,
+                        "from_status": null,
+                        "to_status": "TEST_INQUIRY",
+                        "note": null,
+                        "created_at": "2027-10-20T09:00:00+09:00"
+                      },
+                      {
+                        "id": 980015,
+                        "actor_id": 970002,
+                        "from_status": "TEST_INQUIRY",
+                        "to_status": "CANCELLED",
+                        "note": "편집기 합성 관리자 처리",
+                        "created_at": "2027-10-20T09:30:00+09:00"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          {
+            "id": "inquiry-read-only",
+            "label": "Read-only inquiry / 조회 전용",
+            "sampleDataOverrides": {
+              "byDataSourceId": {
+                "inquiry": {
+                  "success": true,
+                  "message": "Editor-only authored synthetic response",
+                  "data": {
+                    "id": 950001,
+                    "reference": "TL-00950001",
+                    "status": "TEST_INQUIRY",
+                    "allowed_transitions": [
+                      "UNDER_REVIEW",
+                      "DECLINED",
+                      "CANCELLED"
+                    ],
+                    "can_cancel": false,
+                    "first_product_name": "합성 제주 하루 여행",
+                    "product_name": "합성 제주 하루 여행",
+                    "total_quantity": 2,
+                    "party_size": 2,
+                    "departure_label": "2027-11-01",
+                    "requester_name": "편집기 합성 회원",
+                    "total_amount": "240000.00",
+                    "currency_code": "KRW",
+                    "contact": {
+                      "name": "편집기 합성 회원",
+                      "phone": "010-0000-0000"
+                    },
+                    "items": [
+                      {
+                        "id": 960001,
+                        "departure_id": 940001,
+                        "product_id": 920001,
+                        "product_option_id": 930001,
+                        "quantity": 2,
+                        "unit_price": "120000.00",
+                        "line_total": "240000.00",
+                        "product_name": {
+                          "ko": "합성 제주 하루 여행",
+                          "en": "Synthetic Jeju day trip"
+                        },
+                        "departure_date": "2027-11-01"
+                      }
+                    ],
+                    "created_at": "2027-10-20 09:00:00",
+                    "updated_at": "2027-10-20 09:00:00",
+                    "is_owner": false,
+                    "abilities": {
+                      "can_update": false,
+                      "can_cancel": false
+                    },
+                    "user_id": 970001,
+                    "admin_note": "편집기 합성 메모 — 외부 발송 없음",
+                    "events": [
+                      {
+                        "id": 980001,
+                        "actor_id": 970001,
+                        "from_status": null,
+                        "to_status": "TEST_INQUIRY",
+                        "note": null,
+                        "created_at": "2027-10-20T09:00:00+09:00"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          {
+            "id": "inquiry-saving",
+            "label": "Saving test status / 시험 상태 저장 중",
+            "initialState": {
+              "global": {
+                "travelInquirySaving": true
+              }
+            }
+          }
+        ]
+      },
+      {
+        "scope": {
+          "kind": "modal",
+          "match": "travel_metadata_modal"
+        },
+        "items": [
+          {
+            "id": "metadata-new",
+            "label": "$t:raonslab-travel_lab.admin.catalog.metadata.register",
+            "default": true
+          },
+          {
+            "id": "metadata-existing",
+            "label": "$t:raonslab-travel_lab.admin.catalog.metadata.edit",
+            "initialState": {
+              "global": {
+                "travelMetadataExisting": true,
+                "travelMetadataEdit": {
+                  "product_id": 920001,
+                  "region": "jeju",
+                  "theme": "nature",
+                  "duration_days": 1,
+                  "summary_ko": "편집기 전용 합성 여행",
+                  "summary_en": "Synthetic editor-only trip",
+                  "itinerary_json": "[{\"day\":1,\"title\":{\"ko\":\"합성 제주 일정\",\"en\":\"Synthetic Jeju itinerary\"},\"description\":{\"ko\":\"RAON 편집기용 가상 일정\",\"en\":\"Authored itinerary for the RAON editor preview\"}}]",
+                  "published": true
+                }
+              }
+            }
+          },
+          {
+            "id": "metadata-empty-candidates",
+            "label": "$t:raonslab-travel_lab.admin.catalog.metadata.no_candidates",
+            "initialState": {
+              "global": {
+                "travelMetadataEdit": {
+                  "product_id": null
+                }
+              }
+            },
+            "sampleDataOverrides": {
+              "byDataSourceId": {
+                "travel_candidates": {
+                  "success": true,
+                  "message": "Editor-only authored synthetic response",
+                  "data": {
+                    "data": [],
+                    "pagination": {
+                      "current_page": 1,
+                      "per_page": 48,
+                      "from": null,
+                      "to": null,
+                      "has_more_pages": false,
+                      "last_page": 1,
+                      "total": 0
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "id": "metadata-candidate-error",
+            "label": "Candidate request error / 후보 조회 오류",
+            "initialState": {
+              "global": {
+                "travelCandidateError": "편집기 합성 조회 오류입니다. 검색 버튼으로 재시도하세요.",
+                "travelMetadataEdit": {
+                  "product_id": null
+                }
+              }
+            },
+            "sampleDataOverrides": {
+              "byDataSourceId": {
+                "travel_candidates": {
+                  "success": true,
+                  "message": "Editor-only authored synthetic response",
+                  "data": {
+                    "data": [],
+                    "pagination": {
+                      "current_page": 1,
+                      "per_page": 48,
+                      "from": null,
+                      "to": null,
+                      "has_more_pages": false,
+                      "last_page": 1,
+                      "total": 0
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "id": "metadata-validation-error",
+            "label": "Validation error / 입력 오류",
+            "formErrors": {
+              "_global.travelMetadataError": "편집기 합성 입력 오류: 일정을 JSON 배열로 입력하세요."
+            }
+          },
+          {
+            "id": "metadata-saving",
+            "label": "Saving travel information / 여행 정보 저장 중",
+            "initialState": {
+              "global": {
+                "travelMetadataSaving": true
+              }
+            }
+          }
+        ]
+      },
+      {
+        "scope": {
+          "kind": "modal",
+          "match": "travel_departure_modal"
+        },
+        "items": [
+          {
+            "id": "departure-new",
+            "label": "$t:raonslab-travel_lab.admin.catalog.new_departure",
+            "default": true
+          },
+          {
+            "id": "departure-edit",
+            "label": "$t:raonslab-travel_lab.admin.catalog.edit_departure",
+            "initialState": {
+              "global": {
+                "travelDepartureEdit": {
+                  "id": 940001,
+                  "departure_date": "2027-11-01",
+                  "return_date": "2027-11-01",
+                  "reserved": 2,
+                  "product_option_id": 930001,
+                  "capacity": 12
+                }
+              }
+            }
+          },
+          {
+            "id": "departure-saving",
+            "label": "Saving departure / 출발일 저장 중",
+            "initialState": {
+              "global": {
+                "travelDepartureSaving": true
+              }
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "stateLabels": [
+    {
+      "key": "travelCandidateQuery",
+      "scope": "_global",
+      "label_key": "$t:raonslab-travel_lab.admin.catalog.metadata.search"
+    },
+    {
+      "key": "travelCandidatePage",
+      "scope": "_global",
+      "label_key": "$t:raonslab-travel_lab.admin.common.page_summary"
+    },
+    {
+      "key": "travelMetadataEdit.product_id",
+      "scope": "_global",
+      "label_key": "$t:raonslab-travel_lab.admin.catalog.metadata.product_id"
+    },
+    {
+      "key": "travelMetadataEdit.region",
+      "scope": "_global",
+      "label_key": "$t:raonslab-travel_lab.admin.catalog.metadata.region"
+    },
+    {
+      "key": "travelMetadataEdit.theme",
+      "scope": "_global",
+      "label_key": "$t:raonslab-travel_lab.admin.catalog.metadata.theme"
+    },
+    {
+      "key": "travelMetadataEdit.duration_days",
+      "scope": "_global",
+      "label_key": "$t:raonslab-travel_lab.admin.catalog.metadata.duration_days"
+    },
+    {
+      "key": "travelMetadataEdit.summary_ko",
+      "scope": "_global",
+      "label_key": "$t:raonslab-travel_lab.admin.catalog.metadata.summary_ko"
+    },
+    {
+      "key": "travelMetadataEdit.summary_en",
+      "scope": "_global",
+      "label_key": "$t:raonslab-travel_lab.admin.catalog.metadata.summary_en"
+    },
+    {
+      "key": "travelMetadataEdit.itinerary_json",
+      "scope": "_global",
+      "label_key": "$t:raonslab-travel_lab.admin.catalog.metadata.itinerary_json"
+    },
+    {
+      "key": "travelMetadataEdit.published",
+      "scope": "_global",
+      "label_key": "$t:raonslab-travel_lab.admin.catalog.metadata.published"
+    },
+    {
+      "key": "travelDepartureEdit.product_option_id",
+      "scope": "_global",
+      "label_key": "$t:raonslab-travel_lab.admin.catalog.modal.product_option_id"
+    },
+    {
+      "key": "travelDepartureEdit.departure_date",
+      "scope": "_global",
+      "label_key": "$t:raonslab-travel_lab.admin.catalog.modal.departure_date"
+    },
+    {
+      "key": "travelDepartureEdit.return_date",
+      "scope": "_global",
+      "label_key": "$t:raonslab-travel_lab.admin.catalog.modal.return_date"
+    },
+    {
+      "key": "travelDepartureEdit.capacity",
+      "scope": "_global",
+      "label_key": "$t:raonslab-travel_lab.admin.catalog.modal.capacity"
+    },
+    {
+      "key": "travelInquiryNextStatus",
+      "scope": "_global",
+      "label_key": "$t:raonslab-travel_lab.admin.inquiry_detail.status_title"
+    },
+    {
+      "key": "travelInquiryNote",
+      "scope": "_global",
+      "label_key": "$t:raonslab-travel_lab.admin.inquiry_detail.admin_note"
+    },
+    {
+      "key": "travelMetadataSaving",
+      "scope": "_global",
+      "label_key": "$t:raonslab-travel_lab.admin.common.save"
+    },
+    {
+      "key": "travelDepartureSaving",
+      "scope": "_global",
+      "label_key": "$t:raonslab-travel_lab.admin.common.save"
+    },
+    {
+      "key": "travelInquirySaving",
+      "scope": "_global",
+      "label_key": "$t:raonslab-travel_lab.admin.common.save"
+    },
+    {
+      "key": "travelMetadataError",
+      "scope": "_global",
+      "label_key": "$t:raonslab-travel_lab.admin.catalog.metadata.title"
+    },
+    {
+      "key": "travelCandidateError",
+      "scope": "_global",
+      "label_key": "$t:raonslab-travel_lab.admin.catalog.metadata.search"
+    }
+  ],
+  "actionRecipes": {
+    "travelLabRefreshCatalog": {
+      "label": "$t:raonslab-travel_lab.admin.common.refresh",
+      "build": {
+        "handler": "refetchDataSource",
+        "params": {
+          "dataSourceId": "catalog"
+        }
+      }
+    },
+    "travelLabRefreshInquiries": {
+      "label": "$t:raonslab-travel_lab.admin.inquiries.title",
+      "build": {
+        "handler": "refetchDataSource",
+        "params": {
+          "dataSourceId": "inquiries"
+        }
+      }
+    },
+    "travelLabRetryCandidates": {
+      "label": "$t:raonslab-travel_lab.admin.catalog.metadata.search",
+      "build": {
+        "handler": "refetchDataSource",
+        "params": {
+          "dataSourceId": "travel_candidates"
+        }
+      }
+    }
+  }
+}

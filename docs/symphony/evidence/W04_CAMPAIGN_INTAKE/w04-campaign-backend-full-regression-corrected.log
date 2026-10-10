@@ -1,0 +1,25 @@
+PHPUnit 11.5.56 by Sebastian Bergmann and contributors.
+
+Runtime:       PHP 8.3.6
+Configuration: [request-worktree]/modules/_bundled/raonslab-travel_lab/tests/phpunit.xml
+
+...............................................................  63 / 175 ( 36%)
+......F........................................................ 126 / 175 ( 72%)
+.................................................               175 / 175 (100%)
+
+Time: 01:17.747, Memory: 311.00 MB
+
+There was 1 failure:
+
+1) Modules\Raonslab\TravelLab\Tests\Feature\TravelCheckoutGuardTest::test_guard_uses_product_and_option_membership_and_preserves_ordinary_commerce
+Failed asserting that two strings are identical.
+--- Expected
++++ Actual
+@@ @@
+-'83ce3cb92ecca87ad5e9d302bc90b96fdfd835066a3b5ab8e40f71fa7e08b393'
++'f350cb830b51041b1a22a43152a9c7c2d60ad06cf50b8573e9fc8e2c3b1dcf09'
+
+[request-worktree]/modules/_bundled/raonslab-travel_lab/tests/Feature/TravelCheckoutGuardTest.php:79
+
+FAILURES!
+Tests: 175, Assertions: 2917, Failures: 1.

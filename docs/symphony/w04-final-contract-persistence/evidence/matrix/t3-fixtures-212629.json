@@ -1,0 +1,448 @@
+{
+ "phase": "t3-fixtures-212629",
+ "review_sha": "5783e6ba124061bdfae639cdaf9b1c14a83cdf03",
+ "base_url": "http://127.0.0.1:18880",
+ "counts": {
+  "PASS": 1,
+  "FAIL": 0,
+  "OBSERVED": 0,
+  "BLOCKED": 0,
+  "NOT_RUN": 0
+ },
+ "results": [
+  {
+   "name": "own fixtures via native admin APIs: own shipping policy (or read-only reuse), category, 17-option product, catalog registration, 17 unique departures",
+   "status": "PASS",
+   "detail": {
+    "policy": 2,
+    "policy_own": true,
+    "policy_attempt": {
+     "status": 201,
+     "message": "배송정책이 등록되었습니다.",
+     "error_fields": null
+    },
+    "category": 1,
+    "product": 9,
+    "options": [
+     25,
+     26,
+     27,
+     28,
+     29,
+     30,
+     31,
+     32,
+     33,
+     34,
+     35,
+     36,
+     37,
+     38,
+     39,
+     40,
+     41
+    ],
+    "departures": {
+     "price": 25,
+     "qty": 26,
+     "state": 27,
+     "last": 28,
+     "key": 29,
+     "cd": 30,
+     "low": 31,
+     "spare": 32,
+     "gap1": 33,
+     "gap2": 34,
+     "gap3": 35,
+     "gap4": 36,
+     "gap5": 37,
+     "gap6": 38,
+     "gap7": 39,
+     "gap8": 40,
+     "gap9": 41
+    },
+    "sql_departures": {
+     "25": {
+      "id": 25,
+      "product_id": 9,
+      "product_option_id": 25,
+      "capacity": 3,
+      "reserved": 0,
+      "is_active": 1,
+      "departure_date": "2026-10-20",
+      "stock_quantity": 5,
+      "price_adjustment": "0.00",
+      "option_selling_price": "12000.00",
+      "product_selling_price": "12000.00"
+     },
+     "26": {
+      "id": 26,
+      "product_id": 9,
+      "product_option_id": 26,
+      "capacity": 4,
+      "reserved": 0,
+      "is_active": 1,
+      "departure_date": "2026-10-20",
+      "stock_quantity": 5,
+      "price_adjustment": "0.00",
+      "option_selling_price": "12000.00",
+      "product_selling_price": "12000.00"
+     },
+     "27": {
+      "id": 27,
+      "product_id": 9,
+      "product_option_id": 27,
+      "capacity": 3,
+      "reserved": 0,
+      "is_active": 1,
+      "departure_date": "2026-10-20",
+      "stock_quantity": 5,
+      "price_adjustment": "0.00",
+      "option_selling_price": "12000.00",
+      "product_selling_price": "12000.00"
+     },
+     "28": {
+      "id": 28,
+      "product_id": 9,
+      "product_option_id": 28,
+      "capacity": 1,
+      "reserved": 0,
+      "is_active": 1,
+      "departure_date": "2026-10-20",
+      "stock_quantity": 5,
+      "price_adjustment": "0.00",
+      "option_selling_price": "12000.00",
+      "product_selling_price": "12000.00"
+     },
+     "29": {
+      "id": 29,
+      "product_id": 9,
+      "product_option_id": 29,
+      "capacity": 3,
+      "reserved": 0,
+      "is_active": 1,
+      "departure_date": "2026-10-20",
+      "stock_quantity": 5,
+      "price_adjustment": "0.00",
+      "option_selling_price": "12000.00",
+      "product_selling_price": "12000.00"
+     },
+     "30": {
+      "id": 30,
+      "product_id": 9,
+      "product_option_id": 30,
+      "capacity": 2,
+      "reserved": 0,
+      "is_active": 1,
+      "departure_date": "2026-10-20",
+      "stock_quantity": 5,
+      "price_adjustment": "0.00",
+      "option_selling_price": "12000.00",
+      "product_selling_price": "12000.00"
+     },
+     "31": {
+      "id": 31,
+      "product_id": 9,
+      "product_option_id": 31,
+      "capacity": 2,
+      "reserved": 0,
+      "is_active": 1,
+      "departure_date": "2026-10-20",
+      "stock_quantity": 5,
+      "price_adjustment": "0.00",
+      "option_selling_price": "12000.00",
+      "product_selling_price": "12000.00"
+     },
+     "32": {
+      "id": 32,
+      "product_id": 9,
+      "product_option_id": 32,
+      "capacity": 2,
+      "reserved": 0,
+      "is_active": 1,
+      "departure_date": "2026-10-20",
+      "stock_quantity": 5,
+      "price_adjustment": "0.00",
+      "option_selling_price": "12000.00",
+      "product_selling_price": "12000.00"
+     },
+     "33": {
+      "id": 33,
+      "product_id": 9,
+      "product_option_id": 33,
+      "capacity": 1,
+      "reserved": 0,
+      "is_active": 1,
+      "departure_date": "2026-10-20",
+      "stock_quantity": 5,
+      "price_adjustment": "0.00",
+      "option_selling_price": "12000.00",
+      "product_selling_price": "12000.00"
+     },
+     "34": {
+      "id": 34,
+      "product_id": 9,
+      "product_option_id": 34,
+      "capacity": 1,
+      "reserved": 0,
+      "is_active": 1,
+      "departure_date": "2026-10-20",
+      "stock_quantity": 5,
+      "price_adjustment": "0.00",
+      "option_selling_price": "12000.00",
+      "product_selling_price": "12000.00"
+     },
+     "35": {
+      "id": 35,
+      "product_id": 9,
+      "product_option_id": 35,
+      "capacity": 1,
+      "reserved": 0,
+      "is_active": 1,
+      "departure_date": "2026-10-20",
+      "stock_quantity": 5,
+      "price_adjustment": "0.00",
+      "option_selling_price": "12000.00",
+      "product_selling_price": "12000.00"
+     },
+     "36": {
+      "id": 36,
+      "product_id": 9,
+      "product_option_id": 36,
+      "capacity": 1,
+      "reserved": 0,
+      "is_active": 1,
+      "departure_date": "2026-10-20",
+      "stock_quantity": 5,
+      "price_adjustment": "0.00",
+      "option_selling_price": "12000.00",
+      "product_selling_price": "12000.00"
+     },
+     "37": {
+      "id": 37,
+      "product_id": 9,
+      "product_option_id": 37,
+      "capacity": 1,
+      "reserved": 0,
+      "is_active": 1,
+      "departure_date": "2026-10-20",
+      "stock_quantity": 5,
+      "price_adjustment": "0.00",
+      "option_selling_price": "12000.00",
+      "product_selling_price": "12000.00"
+     },
+     "38": {
+      "id": 38,
+      "product_id": 9,
+      "product_option_id": 38,
+      "capacity": 1,
+      "reserved": 0,
+      "is_active": 1,
+      "departure_date": "2026-10-20",
+      "stock_quantity": 5,
+      "price_adjustment": "0.00",
+      "option_selling_price": "12000.00",
+      "product_selling_price": "12000.00"
+     },
+     "39": {
+      "id": 39,
+      "product_id": 9,
+      "product_option_id": 39,
+      "capacity": 1,
+      "reserved": 0,
+      "is_active": 1,
+      "departure_date": "2026-10-20",
+      "stock_quantity": 5,
+      "price_adjustment": "0.00",
+      "option_selling_price": "12000.00",
+      "product_selling_price": "12000.00"
+     },
+     "40": {
+      "id": 40,
+      "product_id": 9,
+      "product_option_id": 40,
+      "capacity": 1,
+      "reserved": 0,
+      "is_active": 1,
+      "departure_date": "2026-10-20",
+      "stock_quantity": 5,
+      "price_adjustment": "0.00",
+      "option_selling_price": "12000.00",
+      "product_selling_price": "12000.00"
+     },
+     "41": {
+      "id": 41,
+      "product_id": 9,
+      "product_option_id": 41,
+      "capacity": 1,
+      "reserved": 0,
+      "is_active": 1,
+      "departure_date": "2026-10-20",
+      "stock_quantity": 5,
+      "price_adjustment": "0.00",
+      "option_selling_price": "12000.00",
+      "product_selling_price": "12000.00"
+     }
+    }
+   },
+   "at": "21:27:05"
+  }
+ ],
+ "http_checks": [
+  {
+   "method": "POST",
+   "path": "/api/modules/sirsoft-ecommerce/admin/shipping-policies",
+   "actor": "admin",
+   "status": 201,
+   "seconds": 3.63
+  },
+  {
+   "method": "POST",
+   "path": "/api/modules/sirsoft-ecommerce/admin/categories",
+   "actor": "admin",
+   "status": 201,
+   "seconds": 1.967
+  },
+  {
+   "method": "POST",
+   "path": "/api/modules/sirsoft-ecommerce/admin/products",
+   "actor": "admin",
+   "status": 201,
+   "seconds": 3.279
+  },
+  {
+   "method": "GET",
+   "path": "/api/modules/sirsoft-ecommerce/admin/products/9",
+   "actor": "admin",
+   "status": 200,
+   "seconds": 1.615
+  },
+  {
+   "method": "POST",
+   "path": "/api/modules/raonslab-travel_lab/admin/catalog",
+   "actor": "admin",
+   "status": 201,
+   "seconds": 0.897
+  },
+  {
+   "method": "POST",
+   "path": "/api/modules/raonslab-travel_lab/admin/catalog/9/departures",
+   "actor": "admin",
+   "status": 200,
+   "seconds": 0.627
+  },
+  {
+   "method": "POST",
+   "path": "/api/modules/raonslab-travel_lab/admin/catalog/9/departures",
+   "actor": "admin",
+   "status": 200,
+   "seconds": 0.831
+  },
+  {
+   "method": "POST",
+   "path": "/api/modules/raonslab-travel_lab/admin/catalog/9/departures",
+   "actor": "admin",
+   "status": 200,
+   "seconds": 0.979
+  },
+  {
+   "method": "POST",
+   "path": "/api/modules/raonslab-travel_lab/admin/catalog/9/departures",
+   "actor": "admin",
+   "status": 200,
+   "seconds": 0.967
+  },
+  {
+   "method": "POST",
+   "path": "/api/modules/raonslab-travel_lab/admin/catalog/9/departures",
+   "actor": "admin",
+   "status": 200,
+   "seconds": 1.309
+  },
+  {
+   "method": "POST",
+   "path": "/api/modules/raonslab-travel_lab/admin/catalog/9/departures",
+   "actor": "admin",
+   "status": 200,
+   "seconds": 0.903
+  },
+  {
+   "method": "POST",
+   "path": "/api/modules/raonslab-travel_lab/admin/catalog/9/departures",
+   "actor": "admin",
+   "status": 200,
+   "seconds": 1.265
+  },
+  {
+   "method": "POST",
+   "path": "/api/modules/raonslab-travel_lab/admin/catalog/9/departures",
+   "actor": "admin",
+   "status": 200,
+   "seconds": 1.404
+  },
+  {
+   "method": "POST",
+   "path": "/api/modules/raonslab-travel_lab/admin/catalog/9/departures",
+   "actor": "admin",
+   "status": 200,
+   "seconds": 1.378
+  },
+  {
+   "method": "POST",
+   "path": "/api/modules/raonslab-travel_lab/admin/catalog/9/departures",
+   "actor": "admin",
+   "status": 200,
+   "seconds": 0.974
+  },
+  {
+   "method": "POST",
+   "path": "/api/modules/raonslab-travel_lab/admin/catalog/9/departures",
+   "actor": "admin",
+   "status": 200,
+   "seconds": 1.544
+  },
+  {
+   "method": "POST",
+   "path": "/api/modules/raonslab-travel_lab/admin/catalog/9/departures",
+   "actor": "admin",
+   "status": 200,
+   "seconds": 1.58
+  },
+  {
+   "method": "POST",
+   "path": "/api/modules/raonslab-travel_lab/admin/catalog/9/departures",
+   "actor": "admin",
+   "status": 200,
+   "seconds": 1.331
+  },
+  {
+   "method": "POST",
+   "path": "/api/modules/raonslab-travel_lab/admin/catalog/9/departures",
+   "actor": "admin",
+   "status": 200,
+   "seconds": 1.398
+  },
+  {
+   "method": "POST",
+   "path": "/api/modules/raonslab-travel_lab/admin/catalog/9/departures",
+   "actor": "admin",
+   "status": 200,
+   "seconds": 1.433
+  },
+  {
+   "method": "POST",
+   "path": "/api/modules/raonslab-travel_lab/admin/catalog/9/departures",
+   "actor": "admin",
+   "status": 200,
+   "seconds": 1.131
+  },
+  {
+   "method": "POST",
+   "path": "/api/modules/raonslab-travel_lab/admin/catalog/9/departures",
+   "actor": "admin",
+   "status": 200,
+   "seconds": 0.927
+  }
+ ],
+ "actual_http_count": 22
+}

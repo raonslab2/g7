@@ -1,0 +1,285 @@
+# 매니페스트 양식: docs/testing-guide.md "매니페스트 양식" — 테스트 메서드 docblock 의 @scenario case=<sub_flow id> 로 매핑한다.
+feature: travel_lab_support
+description: 여행 연구소 고객지원 — G7 게시판 재사용 공지/FAQ 공개 열람, 1:1 비밀 문의 작성자·관리자 격리, 알림 억제, LAB 게이트 프로비저닝, 관리자 레이아웃 계약
+test_files:
+- modules/_bundled/raonslab-travel_lab/tests/Feature/TravelSupportProvisionerTest.php
+- modules/_bundled/raonslab-travel_lab/tests/Feature/TravelSupportApiTest.php
+- modules/_bundled/raonslab-travel_lab/tests/Feature/TravelSupportNotificationTest.php
+- modules/_bundled/raonslab-travel_lab/tests/Feature/TravelSupportAdminLayoutRulesTest.php
+- modules/_bundled/raonslab-travel_lab/tests/Feature/W03SupportHardeningTest.php
+- modules/_bundled/raonslab-travel_lab/resources/js/__tests__/layouts/admin-travel-lab-layouts.test.tsx
+axes:
+  actor:
+  - guest
+  - member_author
+  - member_other
+  - admin_support_read
+  - admin_support_read_update
+  - board_admin_native
+  - legacy_role_support_only
+  - board_admin_without_support
+  - board_manager_self_scope
+  - board_manager_role_scope
+  - support_read_self_or_role_scope
+  - support_update_self_or_role_scope
+  - board_write_self_or_role_scope
+  channel:
+  - notices
+  - faqs
+  - questions
+  board_state:
+  - missing
+  - provisioned_safe
+  - existing_unsafe_same_slug
+  - tampered_permissions_or_settings
+  - all_16_missing_empty_or_foreign_permission_grants
+  - external_search_driver
+  provision_gate:
+  - config_off_confirm_off
+  - config_on_confirm_off
+  - config_off_confirm_on
+  - config_loose_truthy
+  - config_on_confirm_on
+  operation:
+  - list
+  - show
+  - create
+  - update
+  - provision
+  - provision_rerun
+  - native_admin_answer
+exclusions:
+- actor: guest
+  channel: questions
+  operation: show
+  reason: 문의 채널은 인증 필수 — 401 단일 결과로 auth_required 케이스가 커버
+- board_state: existing_unsafe_same_slug
+  operation: create
+  reason: 불일치 게시판에서는 요청 경로가 not_ready(503)로 수렴 — request_path_fail_closed 와 동일 경로
+effects:
+- provisioning_refused
+- no_boards_created
+- three_inactive_boards
+- questions_secret_always
+- notify_flags_off
+- uploads_off
+- synthetic_notices_faqs_seeded
+- no_duplicate_boards
+- no_duplicate_posts
+- content_persists
+- admin_edits_preserved
+- existing_board_unmodified
+- other_boards_not_created
+- misconfigured_error
+- service_unavailable_503
+- request_never_provisions
+- response_helper_envelope
+- notice_first
+- body_excluded_from_list
+- pagination_meta
+- channel_scoped_detail
+- per_page_capped
+- native_public_board_404
+- board_list_excludes_travel
+- unauthorized_401
+- nothing_stored
+- secret_forced
+- author_not_spoofable
+- attachments_absent
+- own_list_only
+- other_detail_404
+- other_update_404_unchanged
+- author_update_ok
+- admin_lists_all
+- admin_reads_any
+- read_only_admin_cannot_update
+- admin_updates_other
+- answer_visible_to_author
+- answer_hidden_from_other
+- answer_identity_not_exposed
+- title_required_422
+- title_max_422
+- content_max_422
+- skip_notification_option_passed
+- no_notifications_sent
+- no_mail_sent
+- extract_data_skipped_for_travel_posts
+- extract_data_skipped_for_travel_comments
+- other_boards_passthrough
+- admin_permissions_declared
+- core_layout_store_rules_pass
+- translations_complete
+- server_owned_transitions
+- no_price_editing
+- native_board_admin_links
+- list_context_preserved
+- allowed_transition_buttons_only
+- list_query_carried_to_detail
+- foreign_list_hidden
+- foreign_detail_404
+- foreign_patch_404
+- foreign_row_unchanged
+- own_question_still_open
+- board_admin_without_support_404
+- both_permissions_read
+- read_only_cannot_patch
+- both_update_permissions_patch
+- self_scope_list_own_only
+- self_scope_foreign_404
+- self_scope_own_200
+- public_role_on_secret_read_503
+- empty_roles_503
+- use_reply_503
+- use_comment_503
+- provision_refuses_without_overwrite
+- after_update_hook_fired
+- activity_log_persisted
+- secret_preserved
+- notifications_not_sent
+- mail_not_sent
+- questions_503
+- public_channels_still_open
+- provision_409_no_writes
+- create_not_indexed
+- restore_removed_after_native_index
+- import_limit_documented
+sub_flows:
+- id: lab_gate
+  effects:
+  - provisioning_refused
+  - no_boards_created
+- id: first_provision
+  effects:
+  - three_inactive_boards
+  - questions_secret_always
+  - notify_flags_off
+  - uploads_off
+  - synthetic_notices_faqs_seeded
+- id: rerun
+  effects:
+  - no_duplicate_boards
+  - no_duplicate_posts
+  - content_persists
+  - admin_edits_preserved
+- id: existing_unsafe_board
+  effects:
+  - existing_board_unmodified
+  - other_boards_not_created
+  - misconfigured_error
+- id: request_path_fail_closed
+  effects:
+  - service_unavailable_503
+  - request_never_provisions
+- id: public_lists
+  effects:
+  - response_helper_envelope
+  - notice_first
+  - body_excluded_from_list
+  - pagination_meta
+  - channel_scoped_detail
+  - per_page_capped
+- id: native_board_closed
+  effects:
+  - native_public_board_404
+  - board_list_excludes_travel
+- id: auth_required
+  effects:
+  - unauthorized_401
+  - nothing_stored
+- id: author_isolation
+  effects:
+  - secret_forced
+  - author_not_spoofable
+  - attachments_absent
+  - own_list_only
+  - other_detail_404
+  - other_update_404_unchanged
+  - author_update_ok
+- id: admin_read_all
+  effects:
+  - admin_lists_all
+  - admin_reads_any
+  - read_only_admin_cannot_update
+- id: admin_update_permission
+  effects:
+  - admin_updates_other
+- id: native_admin_answer
+  effects:
+  - answer_visible_to_author
+  - answer_hidden_from_other
+  - answer_identity_not_exposed
+- id: validation
+  effects:
+  - title_required_422
+  - title_max_422
+  - content_max_422
+  - nothing_stored
+- id: question_submit_skip
+  effects:
+  - skip_notification_option_passed
+  - no_notifications_sent
+  - no_mail_sent
+- id: filter_scope
+  effects:
+  - extract_data_skipped_for_travel_posts
+  - extract_data_skipped_for_travel_comments
+  - other_boards_passthrough
+- id: admin_layout_contract
+  effects:
+  - admin_permissions_declared
+  - core_layout_store_rules_pass
+  - translations_complete
+  - server_owned_transitions
+  - no_price_editing
+  - native_board_admin_links
+  - list_context_preserved
+- id: admin_render
+  effects:
+  - allowed_transition_buttons_only
+  - list_query_carried_to_detail
+- id: legacy_support_role_foreign_denied
+  effects:
+  - foreign_list_hidden
+  - foreign_detail_404
+  - foreign_patch_404
+  - foreign_row_unchanged
+  - own_question_still_open
+- id: support_permission_required
+  effects:
+  - board_admin_without_support_404
+- id: board_admin_foreign_allowed
+  effects:
+  - both_permissions_read
+  - read_only_cannot_patch
+  - both_update_permissions_patch
+- id: board_scope_self_owner_only
+  effects:
+  - self_scope_list_own_only
+  - self_scope_foreign_404
+  - self_scope_own_200
+- id: tampered_board_fail_closed
+  effects:
+  - public_role_on_secret_read_503
+  - empty_roles_503
+  - use_reply_503
+  - use_comment_503
+  - provision_refuses_without_overwrite
+- id: native_update_audit
+  effects:
+  - after_update_hook_fired
+  - activity_log_persisted
+  - secret_preserved
+- id: update_notifications_blocked
+  effects:
+  - notifications_not_sent
+  - mail_not_sent
+- id: external_search_driver_closed
+  effects:
+  - questions_503
+  - public_channels_still_open
+  - provision_409_no_writes
+- id: external_index_restore_removed
+  effects:
+  - create_not_indexed
+  - restore_removed_after_native_index
+  - import_limit_documented

@@ -1,0 +1,99 @@
+{
+    "results": {
+        "wrong-schema": {
+            "status": "PASS",
+            "rejected": true,
+            "unchanged_environment": null
+        },
+        "wrong-account": {
+            "status": "PASS",
+            "rejected": true,
+            "unchanged_environment": null
+        },
+        "wrong-DB_URL": {
+            "status": "PASS",
+            "rejected": true,
+            "unchanged_environment": null
+        },
+        "wrong-CACHE_STORE": {
+            "status": "PASS",
+            "rejected": true,
+            "unchanged_environment": null
+        },
+        "wrong-G7_ENV_PRIORITY": {
+            "status": "PASS",
+            "rejected": true,
+            "unchanged_environment": null
+        },
+        "wrong-DB_CACHE_LOCK_CONNECTION": {
+            "status": "PASS",
+            "rejected": true,
+            "unchanged_environment": null
+        },
+        "completed-empty": {
+            "status": "PASS",
+            "rejected": true,
+            "unchanged_environment": null
+        },
+        "installed-modules": {
+            "status": "PASS",
+            "rejected": true,
+            "unchanged_environment": null
+        },
+        "installed-templates": {
+            "status": "PASS",
+            "rejected": true,
+            "unchanged_environment": null
+        },
+        "installed-plugins": {
+            "status": "PASS",
+            "rejected": true,
+            "unchanged_environment": null
+        },
+        "genuine-empty": {
+            "status": "PASS",
+            "only_changed_key": "CACHE_STORE",
+            "process_value": "array",
+            "persisted_value": "database"
+        },
+        "partial-no-cache": {
+            "status": "PASS",
+            "rejected": false,
+            "unchanged_environment": true
+        }
+    },
+    "count": 12,
+    "whole_inventory_unchanged": true,
+    "before_digest": "02c88e78cb3ba720a4e15c58abd1b4488f005c210135287008d7a62b692a2c71",
+    "after_digest": "02c88e78cb3ba720a4e15c58abd1b4488f005c210135287008d7a62b692a2c71",
+    "exclusive": {
+        "pid": 976985,
+        "cwd": "/home/ubuntu/.agentopt-v2/workspaces/req_95d0024e7b144a5bb903cc7daad1fb5f",
+        "argv": [
+            "docs/symphony/w04-final-contract-persistence/bootstrap-check.php",
+            "empty"
+        ],
+        "own_connection_id": 137637,
+        "other_test_connections": 0,
+        "own_server_processes": 0,
+        "prior_request_handles": {
+            "utc": "2026-10-09T21:24:15.454348+00:00",
+            "count": 0,
+            "handles": [],
+            "unreadable_pids": [],
+            "lock_holders": [],
+            "excluded_ancestor_pids": [
+                964752,
+                976394,
+                976450,
+                976985,
+                977017,
+                977019,
+                3650359
+            ],
+            "method": "proc-only bounded cwd/argv/FD; known TEST owners and own nonancestor native processes"
+        },
+        "utc": "2026-10-09T21:24:15+00:00"
+    },
+    "published_helper_sha256": "9b0ab095834ae01f8255b083e2070571600dae44cde52c082f099b6db85c160d"
+}

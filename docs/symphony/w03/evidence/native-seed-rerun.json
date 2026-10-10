@@ -1,0 +1,26 @@
+{
+  "request_id": "req_b3b4d5373a384cfd8e0b7b8f55fb011f",
+  "source_sha": "28ada286c1c34606741bcfe4f9d12e06ac50af30",
+  "source_tree": "a821bd89f6cf8bdf8cad3b8b35d8758ce8446d9c",
+  "started_utc": "2026-10-09T10:34:06.839613+00:00",
+  "duration_seconds": 1.843,
+  "command": [
+    "php",
+    "docs/symphony/w03/native-seed-probe.php"
+  ],
+  "environment_scope": "guarded TEST req81_travel_lab_test; no APP access",
+  "exit_code": 0,
+  "execution_provenance": "W03 nonauthor independent execution; harness labels are not formal Validation",
+  "review_helpers_sha256_at_start": {
+    "helper-env-restoration.php": "2260ceb1180942de6dd4db4723ab93d2903368b460a1b269001d2f678c3a5bf9",
+    "recovery-failure-probe.php": "7d986ad6ccdeac437e205470e1114aacc40094e8854ee7e6ebaae364ddad2c52",
+    "test-bootstrap.php": "016f9df1e625867af81515531c107e725316a102611c909207803069ef5dbc4c",
+    "record.py": "4bfb24509359cf9af5b140e37b834318b10e20eb34ac71b91db8ab00c9ae304b",
+    "capture-test.php": "34d804cc6c0f4865d4531e4c477a4e098ed000b09a196605d97e119011aca52e",
+    "verify-capture.php": "65dae202ab746f6449b5ddfa89a76eea056af1ffa951b816ebbddf8c55c45699",
+    "native-seed-probe.php": "18c45f12a34d898145658a5bbf476fdf1a1cfb63491fc9772b8f1344240b167e",
+    "schema-snapshot.php": "010f920ac19f182d0c06e54e02ebbe67fb8991cbd9dcee9003ef86ce5c455644"
+  },
+  "output": "W03: native bundled source origin verified; TEST-only env restored before Laravel bootstrap.\n{\n    \"status\": \"PASS_W03_NATIVE_DEFAULT_AND_EXPLICIT_SEED_RERUN\",\n    \"db\": \"req81_travel_lab_test\",\n    \"tables_unchanged\": 10,\n    \"preserved_digests\": {\n        \"users\": {\n            \"count\": 6,\n            \"sha256\": \"ee98409628a4c904b3de70981051e2f8efb9303dafe3b0f6ff1719a1ad9921fb\"\n        },\n        \"ecommerce_products\": {\n            \"count\": 11,\n            \"sha256\": \"41a1c25690769bee7ede81be79d8db7fefbc28c9b829895686f72e046557a37d\"\n        },\n        \"ecommerce_product_options\": {\n            \"count\": 27,\n            \"sha256\": \"49a72f86f9e41a81a938da0e3acdce4efc994b6fb5f1742f4bd722e91bc6d072\"\n        },\n        \"travel_lab_products\": {\n            \"count\": 11,\n            \"sha256\": \"481ed4b0035e8cf1099ae3ab9f2f7d39c4d17e8422cc8816b86407a1bf167fa1\"\n        },\n        \"travel_lab_departures\": {\n            \"count\": 27,\n            \"sha256\": \"df077164ca5c23cb21e4024e1e0014912f39aaea439f55921632df891a246f8e\"\n        },\n        \"travel_lab_inquiries\": {\n            \"count\": 3,\n            \"sha256\": \"433278f97bae73fe8ff570dc3cac6ed610d7a22792121b5300ac9d09fb5fa6d4\"\n        },\n        \"travel_lab_inquiry_items\": {\n            \"count\": 3,\n            \"sha256\": \"8f434577bab64e5473f96f7ca65032d1c638455a4f438e0c4e0e23061d6d6f1d\"\n        },\n        \"travel_lab_inquiry_events\": {\n            \"count\": 6,\n            \"sha256\": \"f5e6f8e5eafacdc21b61b078c23c494836a058d1c86277a6e7105fc4fb860de8\"\n        },\n        \"ecommerce_orders\": {\n            \"count\": 0,\n            \"sha256\": \"4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945\"\n        },\n        \"ecommerce_order_payments\": {\n            \"count\": 0,\n            \"sha256\": \"4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945\"\n        }\n    },\n    \"limitation\": \"Native seeder classes on TEST; setup\\/account rotation and installed APP module:seed path NOT_RUN\"\n}\n",
+  "result_status": "PASS"
+}

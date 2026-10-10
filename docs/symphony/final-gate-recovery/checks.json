@@ -1,0 +1,56 @@
+{
+  "commands": [
+    {
+      "command": "composer install --no-interaction --no-scripts --prefer-dist",
+      "exit": 0,
+      "scope": "locked dependencies; scripts suppressed"
+    },
+    {
+      "command": "npm ci --ignore-scripts --no-audit --no-fund",
+      "exit": 0,
+      "packages": 255
+    },
+    {
+      "command": "php scripts/travel-lab/vendor-check.php --bundled",
+      "exit": 0,
+      "result": "PASS dependency-only check",
+      "bundle_sha256": "713f98578a866fada6782d11f8c80ff13037f1faf0edaaa55f004ddc4e80d1b9"
+    },
+    {
+      "command": "php scripts/travel-lab/vendor-check-test.php",
+      "exit": 0,
+      "checks": 8,
+      "scope": "private native vendor filesystem fixture, no DB"
+    },
+    {
+      "command": "php scripts/travel-lab/guard-test.php",
+      "exit": 0,
+      "checks": 27,
+      "scope": "negative isolation fixtures, no DB/service mutation"
+    },
+    {
+      "command": "npm ci --ignore-scripts --no-audit --no-fund --prefix templates/_bundled/raonslab-travel_lab",
+      "exit": 1,
+      "result": "FAIL invocation: repository recipe requires --legacy-peer-deps; no lockfile changed"
+    },
+    {
+      "command": "npm ci --ignore-scripts --no-audit --no-fund --legacy-peer-deps --prefix templates/_bundled/raonslab-travel_lab",
+      "exit": 243,
+      "result": "FAIL environment: shared npm cache EACCES; shared cache not modified; retry uses own worktree cache"
+    },
+    {
+      "command": "npm ci --ignore-scripts --no-audit --no-fund --legacy-peer-deps --cache \"$PWD/vendor/recovery-npm-cache\" --prefix templates/_bundled/raonslab-travel_lab",
+      "exit": 0,
+      "packages": 251,
+      "scope": "locked template dependencies in own worktree/cache; no package/lock change"
+    }
+  ],
+  "source": "e1c765d3d06b4d0e1cdd39ea32b85549de171745",
+  "environment": {
+    "php": "8.3.6",
+    "node": "22.23.3",
+    "npm": "10.9.9"
+  },
+  "build": "NOT_RUN; unchanged compiled artifacts; served binding separately checked",
+  "current_mysql_or_restart": "NOT_RUN; original exact-source evidence reused; live coordinator UNKNOWN"
+}

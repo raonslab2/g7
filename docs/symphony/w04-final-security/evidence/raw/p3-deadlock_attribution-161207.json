@@ -1,0 +1,60 @@
+{
+ "phase": "p3-deadlock_attribution-161207",
+ "review_sha": "1052e3fb4bc4cccabb51b8c538116c78655f345b",
+ "base_url": "http://127.0.0.1:18871",
+ "counts": {
+  "PASS": 0,
+  "FAIL": 0,
+  "OBSERVED": 1,
+  "BLOCKED": 0,
+  "NOT_RUN": 0
+ },
+ "results": [
+  {
+   "name": "R1c last-seat rerun, idempotency keys placed in the same (user_id,key) index gap: predicted one deadlock retried",
+   "status": "OBSERVED",
+   "detail": {
+    "variant": "c",
+    "keys": [
+     "member: sorts after all own keys",
+     "other: sorts before all own keys"
+    ],
+    "departure": 105,
+    "barrier_connection": 92794,
+    "waiting_ids": [
+     92796,
+     92799
+    ],
+    "sustained_s": 3.4,
+    "responses": [
+     {
+      "role": "member",
+      "status": 201,
+      "message": "성공적으로 처리되었습니다.",
+      "id": 128,
+      "sent_before_release_s": 4.05,
+      "completed_after_release_s": 0.083
+     },
+     {
+      "role": "other_member",
+      "status": 409,
+      "message": "현재 남은 시험 인원보다 많습니다. 인원을 다시 선택해 주세요.",
+      "id": null,
+      "sent_before_release_s": 3.999,
+      "completed_after_release_s": 0.091
+     }
+    ],
+    "reserved": 1,
+    "capacity": 1,
+    "innodb_deadlocks": {
+     "before_lock": 5,
+     "during_hold": 5,
+     "after_both_responses": 6,
+     "plus_3s": 6
+    },
+    "attribution": "counter incremented only in the release-to-response interval of this race (correlated, not engine-level proof)"
+   },
+   "at": "16:12:16"
+  }
+ ]
+}

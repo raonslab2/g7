@@ -1,0 +1,42 @@
+{
+ "phase": "p2-create_race-160528",
+ "review_sha": "1052e3fb4bc4cccabb51b8c538116c78655f345b",
+ "base_url": "http://127.0.0.1:18871",
+ "counts": {
+  "PASS": 1,
+  "FAIL": 0,
+  "OBSERVED": 0,
+  "BLOCKED": 0,
+  "NOT_RUN": 0
+ },
+ "results": [
+  {
+   "name": "bounded concurrent create burst (20 POST, 8 lanes) against the 10/min create budget on native FileStore",
+   "status": "PASS",
+   "detail": {
+    "lanes": 8,
+    "requests": 20,
+    "status_counts": {
+     "201": 10,
+     "429": 10
+    },
+    "elapsed_s": 0.775,
+    "sql_new_other_posts": 10,
+    "created_ids": [
+     79,
+     80,
+     81,
+     82,
+     84,
+     83,
+     85,
+     86,
+     87,
+     88
+    ],
+    "note": "bounded single run; not a proof of atomicity"
+   },
+   "at": "16:05:29"
+  }
+ ]
+}

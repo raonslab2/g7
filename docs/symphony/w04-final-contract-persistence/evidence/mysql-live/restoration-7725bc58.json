@@ -1,0 +1,102 @@
+{
+    "label": "mysql-live",
+    "child_exit": 2,
+    "wipe_exit": 0,
+    "empty_tables_after_wipe": 0,
+    "import_exit": 0,
+    "import_seconds": 12.863,
+    "import_pid": 1045446,
+    "import_process_gone": true,
+    "import_handles": {
+        "utc": "2026-10-09T21:38:55.488231+00:00",
+        "count": 0,
+        "handles": [],
+        "unreadable_pids": [],
+        "lock_holders": [],
+        "excluded_ancestor_pids": [
+            964752,
+            1043892,
+            1043895,
+            1046026,
+            1046028,
+            3650359
+        ],
+        "method": "proc-only bounded cwd/argv/FD; known TEST owners and own nonancestor native processes"
+    },
+    "exact_tables_rows_ddl": true,
+    "restored_digest": "84e16b64c6a36cc1fa16bb3f1e8ed97de8ece748786746bf1bb965268a16de39",
+    "expected_digest": "84e16b64c6a36cc1fa16bb3f1e8ed97de8ece748786746bf1bb965268a16de39",
+    "equals_original_baseline": false,
+    "table_count": 112,
+    "row_count": 1768,
+    "exclusive_pre_import": {
+        "pid": 1043895,
+        "cwd": "/home/ubuntu/.agentopt-v2/workspaces/req_95d0024e7b144a5bb903cc7daad1fb5f",
+        "argv": [
+            "docs/symphony/w04-final-contract-persistence/snapshot.php",
+            "mysql-live",
+            "run",
+            "/usr/bin/php8.3",
+            "vendor/bin/phpunit",
+            "--bootstrap",
+            "docs/symphony/w04-final-contract-persistence/test-bootstrap.php",
+            "scripts/travel-lab/LiveMysqlTest.php"
+        ],
+        "own_connection_id": 141816,
+        "other_test_connections": 0,
+        "own_server_processes": 0,
+        "prior_request_handles": {
+            "utc": "2026-10-09T21:38:42.623262+00:00",
+            "count": 0,
+            "handles": [],
+            "unreadable_pids": [],
+            "lock_holders": [],
+            "excluded_ancestor_pids": [
+                964752,
+                1043892,
+                1043895,
+                1045439,
+                1045440,
+                3650359
+            ],
+            "method": "proc-only bounded cwd/argv/FD; known TEST owners and own nonancestor native processes"
+        },
+        "utc": "2026-10-09T21:38:42+00:00"
+    },
+    "exclusive_post": {
+        "pid": 1043895,
+        "cwd": "/home/ubuntu/.agentopt-v2/workspaces/req_95d0024e7b144a5bb903cc7daad1fb5f",
+        "argv": [
+            "docs/symphony/w04-final-contract-persistence/snapshot.php",
+            "mysql-live",
+            "run",
+            "/usr/bin/php8.3",
+            "vendor/bin/phpunit",
+            "--bootstrap",
+            "docs/symphony/w04-final-contract-persistence/test-bootstrap.php",
+            "scripts/travel-lab/LiveMysqlTest.php"
+        ],
+        "own_connection_id": 141938,
+        "other_test_connections": 0,
+        "own_server_processes": 0,
+        "prior_request_handles": {
+            "utc": "2026-10-09T21:38:55.618300+00:00",
+            "count": 0,
+            "handles": [],
+            "unreadable_pids": [],
+            "lock_holders": [],
+            "excluded_ancestor_pids": [
+                964752,
+                1043892,
+                1043895,
+                1046035,
+                1046037,
+                3650359
+            ],
+            "method": "proc-only bounded cwd/argv/FD; known TEST owners and own nonancestor native processes"
+        },
+        "utc": "2026-10-09T21:38:55+00:00"
+    },
+    "backup_retained": true,
+    "utc": "2026-10-09T21:38:56+00:00"
+}

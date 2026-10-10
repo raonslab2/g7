@@ -1,0 +1,70 @@
+{
+  "kind": "author_repair_verification",
+  "source_state": "WORKING_TREE_IMPLEMENTER_CHECK",
+  "base_sha": "fe3b2f23cc54d452a17ae552e9613b5d37525ede",
+  "review_target_before_repair": "28ada286c1c34606741bcfe4f9d12e06ac50af30",
+  "scope_sha256": "e3285af6d857af33547bee1718d065edc4a15abd216f76d09248e1e67441bd26",
+  "files": {
+    "modules/_bundled/raonslab-travel_lab/src/Listeners/ProtectTravelCommerceCatalog.php": "903a94be831be5364d335fc798cff0577140b40d8bcc14e68e657ba2e48c62b8",
+    "modules/_bundled/raonslab-travel_lab/src/Http/Middleware/TravelCatalogConflictResponse.php": "8c2f45d828c69ca06c069255492bbba51e9782a05688c56df295a2a1f879dd0f",
+    "modules/_bundled/raonslab-travel_lab/src/Support/TravelDate.php": "55a9e2bfa98809bd38e17b2c1c89097aa5d1d06fa8e12d078b1651a49ecbc518",
+    "modules/_bundled/raonslab-travel_lab/src/Repositories/Contracts/WorkflowCartRepositoryInterface.php": "45ccb55260110b818bf144bf40add1fb705e5c043756ccb4113ab2c99b1b4928",
+    "modules/_bundled/raonslab-travel_lab/src/Repositories/WorkflowCartRepository.php": "d1aee869f15f1b81e1f0145086b1772be71e3b8a228d4dd2be38231b386aef8e",
+    "modules/_bundled/raonslab-travel_lab/src/Services/TravelCartService.php": "9790d3ea235a3a996f2f452581636cf97b337080fd8cf5cb2a66dcbf17cf3148",
+    "modules/_bundled/raonslab-travel_lab/src/Http/Requests/DepartureRequest.php": "d5ca7b6aa4d804a623f04b84001071c3f41221cf0c7a1f9bed5db28bf2d7f39c",
+    "modules/_bundled/raonslab-travel_lab/src/routes/workflow.php": "060b5f33d550fb3b4fcca965b601bf9a04c2c45be5fa30a90d4663b6605e7fb7",
+    "modules/_bundled/raonslab-travel_lab/src/lang/ko/workflow.php": "955661511b25590d38beec74ec7da02f450a5eceb906f052f6ded6d62153599f",
+    "modules/_bundled/raonslab-travel_lab/src/lang/en/workflow.php": "a8c43e180de65a4e539a0cd28cfe0585c6a1f82bde5dda9eb8721e30df8f262f",
+    "modules/_bundled/raonslab-travel_lab/tests/Feature/W03SecurityReviewTest.php": "8cc3e5f46a746824b7282d52ec1b848af45367b5427bc367f7641adb8dadd25a"
+  },
+  "environment": {
+    "php": "8.3.6",
+    "phpunit": "11.5.56",
+    "database": "SQLite :memory:",
+    "canonical_bundled_source": true,
+    "app_test_database_mutation": false
+  },
+  "checks": [
+    {
+      "command": "vendor/bin/phpunit -c modules/_bundled/raonslab-travel_lab/tests/phpunit.xml --filter W03SecurityReviewTest",
+      "result": "PASS",
+      "tests": 17,
+      "assertions": 258,
+      "seconds": 38.611
+    },
+    {
+      "check": "Pint scoped changed PHP files",
+      "result": "PASS"
+    },
+    {
+      "check": "PHP lint 11 owned files",
+      "result": "PASS"
+    },
+    {
+      "check": "git diff --check",
+      "result": "PASS"
+    }
+  ],
+  "coverage": [
+    "Native ProductService pre-destructive delete guard preserves image file; Q&A cleanup service is not called",
+    "Real native ProductController DELETE + module middleware gives travel-specific 409; ordinary product deletion passes",
+    "Departure-protected option sync is rejected with native 422 field reason before product/option writes; ordinary option sync and mapped price/stock/add pass",
+    "Earlier update filter removing linked options is rejected by final synchronous filter",
+    "Unmarked native 409 response remains unchanged",
+    "Business timezone KST boundary cart/submit and admin departure dates; next day allowed",
+    "10 idempotent submit attempts within minute retain inquiry ID; eleventh429 with Retry-After; other member separate allowance",
+    "Original security/ownership/price/idempotency invariants retained"
+  ],
+  "not_run": [
+    "Installed preview/native route registration after lead module update",
+    "MySQL race for simultaneous new departure vs native options sync",
+    "Official independent fixed-SHA Validation",
+    "Actual persisted Q&A thread fixture (service-not-called assertion instead)"
+  ],
+  "integration_required": [
+    "module.php registers ProtectTravelCommerceCatalog listener",
+    "TravelLabServiceProvider pushes TravelCatalogConflictResponse onto API middleware group",
+    "config/catalog.php business_timezone Asia/Seoul and CatalogRepository TravelDate alignment (lead-owned)"
+  ],
+  "remaining_contract_note": "Native full options sync reports 422 with explicit options field reason; native product delete reports409. Protected syncOptions() reflection bypass is not a public API contract."
+}

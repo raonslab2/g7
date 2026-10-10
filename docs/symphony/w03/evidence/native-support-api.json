@@ -1,0 +1,20 @@
+{
+  "request_id": "req_b3b4d5373a384cfd8e0b7b8f55fb011f",
+  "source_sha": "28ada286c1c34606741bcfe4f9d12e06ac50af30",
+  "source_tree": "a821bd89f6cf8bdf8cad3b8b35d8758ce8446d9c",
+  "started_utc": "2026-10-09T10:28:52.642283+00:00",
+  "duration_seconds": 26.503,
+  "command": [
+    "php",
+    "scripts/travel-lab/run.php",
+    "test",
+    "--bootstrap",
+    "docs/symphony/w03/test-bootstrap.php",
+    "modules/_bundled/raonslab-travel_lab/tests/Feature/TravelSupportApiTest.php"
+  ],
+  "environment_scope": "guarded TEST req81_travel_lab_test; no APP access",
+  "exit_code": 0,
+  "execution_provenance": "W03 nonauthor independent execution; harness labels are not formal Validation",
+  "output": "W03: native bundled source origin verified; TEST-only env restored before Laravel bootstrap.\nPHPUnit 11.5.56 by Sebastian Bergmann and contributors.\n\nRuntime:       PHP 8.3.6\nConfiguration: /home/ubuntu/.agentopt-v2/workspaces/req_b3b4d5373a384cfd8e0b7b8f55fb011f/phpunit.xml\n\n.......                                                             7 / 7 (100%)\n\nTime: 00:25.690, Memory: 74.50 MB\n\nOK (7 tests, 90 assertions)\n",
+  "result_status": "PASS"
+}

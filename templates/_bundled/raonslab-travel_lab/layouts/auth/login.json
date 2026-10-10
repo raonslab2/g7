@@ -1,0 +1,457 @@
+{
+    "version": "1.0.0",
+    "layout_name": "auth/login",
+    "extends": "_user_base",
+    "meta": {
+        "title": "$t:travel.meta.login_title"
+    },
+    "init_actions": [
+        {
+            "handler": "setState",
+            "params": {
+                "target": "global",
+                "isLoggingIn": false,
+                "loginError": null,
+                "twoFactor": null
+            }
+        }
+    ],
+    "slots": {
+        "content": [
+            {
+                "type": "basic",
+                "name": "Div",
+                "props": {
+                    "className": "mx-auto w-full max-w-6xl px-4 md:px-6 py-10 md:py-16"
+                },
+                "children": [
+                    {
+                        "type": "basic",
+                        "name": "Div",
+                        "props": {
+                            "className": "mx-auto grid max-w-4xl overflow-hidden rounded-3xl bg-white shadow-xl ring-1 ring-slate-200 md:grid-cols-2"
+                        },
+                        "children": [
+                            {
+                                "type": "basic",
+                                "name": "Div",
+                                "props": {
+                                    "className": "relative hidden min-h-[420px] md:block"
+                                },
+                                "children": [
+                                    {
+                                        "type": "composite",
+                                        "name": "ScenicArt",
+                                        "props": {
+                                            "variant": "mountain",
+                                            "className": "absolute inset-0 h-full w-full"
+                                        }
+                                    },
+                                    {
+                                        "type": "basic",
+                                        "name": "Div",
+                                        "props": {
+                                            "className": "absolute inset-x-0 bottom-0 bg-gradient-to-t from-ink-900/70 to-transparent p-8 text-white"
+                                        },
+                                        "children": [
+                                            {
+                                                "type": "basic",
+                                                "name": "P",
+                                                "props": {
+                                                    "className": "text-xl font-black"
+                                                },
+                                                "text": "$t:travel.auth.side_title"
+                                            },
+                                            {
+                                                "type": "basic",
+                                                "name": "P",
+                                                "props": {
+                                                    "className": "mt-1 text-sm text-white/85"
+                                                },
+                                                "text": "$t:travel.auth.side_desc"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "basic",
+                                "name": "Div",
+                                "props": {
+                                    "className": "space-y-6 p-6 md:p-10"
+                                },
+                                "children": [
+                                    {
+                                        "type": "basic",
+                                        "name": "Div",
+                                        "children": [
+                                            {
+                                                "type": "basic",
+                                                "name": "H1",
+                                                "props": {
+                                                    "className": "text-2xl font-black text-ink-900"
+                                                },
+                                                "text": "$t:travel.auth.login_title"
+                                            },
+                                            {
+                                                "type": "basic",
+                                                "name": "P",
+                                                "props": {
+                                                    "className": "mt-1 text-sm text-ink-500"
+                                                },
+                                                "text": "$t:travel.auth.login_desc"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "type": "basic",
+                                        "name": "Form",
+                                        "props": {
+                                            "id": "travel_login_form",
+                                            "className": "space-y-5",
+                                            "noValidate": false
+                                        },
+                                        "children": [
+                                            {
+                                                "type": "basic",
+                                                "name": "Div",
+                                                "if": "{{!_global.twoFactor?.required}}",
+                                                "props": {
+                                                    "className": "space-y-4"
+                                                },
+                                                "children": [
+                                                    {
+                                                        "type": "basic",
+                                                        "name": "Div",
+                                                        "children": [
+                                                            {
+                                                                "type": "basic",
+                                                                "name": "Label",
+                                                                "props": {
+                                                                    "className": "mb-1.5 block text-sm font-semibold text-ink-700",
+                                                                    "htmlFor": "travel-login-email"
+                                                                },
+                                                                "text": "$t:travel.auth.email"
+                                                            },
+                                                            {
+                                                                "type": "basic",
+                                                                "name": "Input",
+                                                                "props": {
+                                                                    "id": "travel-login-email",
+                                                                    "type": "email",
+                                                                    "name": "email",
+                                                                    "autoComplete": "email",
+                                                                    "required": true,
+                                                                    "className": "w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm text-ink-900 placeholder:text-slate-400 focus:border-raon-500 focus:outline-none focus:ring-2 focus:ring-raon-100",
+                                                                    "data-testid": "login-email"
+                                                                }
+                                                            }
+                                                        ]
+                                                    },
+                                                    {
+                                                        "type": "basic",
+                                                        "name": "Div",
+                                                        "children": [
+                                                            {
+                                                                "type": "basic",
+                                                                "name": "Label",
+                                                                "props": {
+                                                                    "className": "mb-1.5 block text-sm font-semibold text-ink-700",
+                                                                    "htmlFor": "travel-login-password"
+                                                                },
+                                                                "text": "$t:travel.auth.password"
+                                                            },
+                                                            {
+                                                                "type": "basic",
+                                                                "name": "Input",
+                                                                "props": {
+                                                                    "id": "travel-login-password",
+                                                                    "type": "password",
+                                                                    "name": "password",
+                                                                    "autoComplete": "current-password",
+                                                                    "required": true,
+                                                                    "className": "w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm text-ink-900 placeholder:text-slate-400 focus:border-raon-500 focus:outline-none focus:ring-2 focus:ring-raon-100",
+                                                                    "data-testid": "login-password"
+                                                                }
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "type": "basic",
+                                                "name": "Div",
+                                                "if": "{{!!_global.twoFactor?.required}}",
+                                                "props": {
+                                                    "className": "space-y-3"
+                                                },
+                                                "children": [
+                                                    {
+                                                        "type": "basic",
+                                                        "name": "P",
+                                                        "props": {
+                                                            "className": "text-sm text-ink-700"
+                                                        },
+                                                        "text": "$t:travel.auth.two_factor_desc"
+                                                    },
+                                                    {
+                                                        "type": "basic",
+                                                        "name": "Input",
+                                                        "props": {
+                                                            "name": "two_factor_code",
+                                                            "value": "{{_global.twoFactor?.code ?? ''}}",
+                                                            "inputMode": "numeric",
+                                                            "autoComplete": "one-time-code",
+                                                            "className": "w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm text-ink-900 placeholder:text-slate-400 focus:border-raon-500 focus:outline-none focus:ring-2 focus:ring-raon-100",
+                                                            "aria-label": "$t:travel.auth.two_factor_code",
+                                                            "data-testid": "login-2fa-code"
+                                                        },
+                                                        "actions": [
+                                                            {
+                                                                "type": "change",
+                                                                "handler": "setState",
+                                                                "params": {
+                                                                    "target": "global",
+                                                                    "twoFactor.code": "{{$event.target.value}}"
+                                                                }
+                                                            }
+                                                        ]
+                                                    },
+                                                    {
+                                                        "type": "basic",
+                                                        "name": "P",
+                                                        "if": "{{!!_global.twoFactor?.error}}",
+                                                        "props": {
+                                                            "className": "text-xs font-medium text-rose-600",
+                                                            "role": "alert"
+                                                        },
+                                                        "text": "{{_global.twoFactor?.error ?? ''}}"
+                                                    },
+                                                    {
+                                                        "type": "basic",
+                                                        "name": "Button",
+                                                        "props": {
+                                                            "type": "button",
+                                                            "className": "text-sm font-medium text-ink-500 underline"
+                                                        },
+                                                        "text": "$t:travel.auth.two_factor_restart",
+                                                        "actions": [
+                                                            {
+                                                                "type": "click",
+                                                                "handler": "setState",
+                                                                "params": {
+                                                                    "target": "global",
+                                                                    "twoFactor": null,
+                                                                    "loginError": null
+                                                                }
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "type": "basic",
+                                                "name": "P",
+                                                "if": "{{!!_global.loginError}}",
+                                                "props": {
+                                                    "className": "rounded-xl bg-rose-50 p-3 text-sm font-medium text-rose-700",
+                                                    "role": "alert",
+                                                    "data-testid": "login-error"
+                                                },
+                                                "text": "{{_global.loginError ?? ''}}"
+                                            },
+                                            {
+                                                "type": "basic",
+                                                "name": "Button",
+                                                "props": {
+                                                    "type": "submit",
+                                                    "className": "inline-flex items-center justify-center gap-2 rounded-xl bg-raon-600 px-5 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-raon-700 disabled:cursor-not-allowed disabled:opacity-50 w-full py-3.5 text-base",
+                                                    "disabled": "{{!!_global.isLoggingIn}}",
+                                                    "data-testid": "login-submit"
+                                                },
+                                                "children": [
+                                                    {
+                                                        "type": "basic",
+                                                        "name": "Span",
+                                                        "if": "{{!_global.isLoggingIn}}",
+                                                        "text": "$t:travel.auth.login"
+                                                    },
+                                                    {
+                                                        "type": "basic",
+                                                        "name": "Span",
+                                                        "if": "{{!!_global.isLoggingIn}}",
+                                                        "text": "$t:travel.auth.logging_in"
+                                                    }
+                                                ]
+                                            }
+                                        ],
+                                        "dataKey": "form",
+                                        "actions": [
+                                            {
+                                                "type": "submit",
+                                                "handler": "sequence",
+                                                "actions": [
+                                                    {
+                                                        "handler": "setState",
+                                                        "params": {
+                                                            "target": "global",
+                                                            "isLoggingIn": true,
+                                                            "loginError": null
+                                                        }
+                                                    },
+                                                    {
+                                                        "comment": "1단계 — 이메일/비밀번호. 2단계 인증이 켜진 사이트는 two_factor_required 형태의 200 을 돌려준다",
+                                                        "handler": "login",
+                                                        "target": "user",
+                                                        "if": "{{!_global.twoFactor?.required}}",
+                                                        "params": {
+                                                            "body": {
+                                                                "email": "{{form.email}}",
+                                                                "password": "{{form.password}}"
+                                                            }
+                                                        },
+                                                        "onSuccess": [
+                                                            {
+                                                                "comment": "같은 시퀀스 안에서는 _global 이 아직 갱신 전이므로 응답 값만 읽는다",
+                                                                "handler": "setState",
+                                                                "if": "{{response.two_factor_required}}",
+                                                                "params": {
+                                                                    "target": "global",
+                                                                    "isLoggingIn": false,
+                                                                    "twoFactor": {
+                                                                        "required": true,
+                                                                        "challenge_id": "{{response.challenge_id}}",
+                                                                        "provider_id": "{{response.provider_id}}",
+                                                                        "expires_at": "{{response.expires_at}}",
+                                                                        "code": "",
+                                                                        "error": null
+                                                                    }
+                                                                }
+                                                            },
+                                                            {
+                                                                "handler": "setState",
+                                                                "params": {
+                                                                    "target": "global",
+                                                                    "currentUser": "{{response.user}}",
+                                                                    "isLoggingIn": false
+                                                                },
+                                                                "if": "{{!response.two_factor_required}}"
+                                                            },
+                                                            {
+                                                                "handler": "toast",
+                                                                "params": {
+                                                                    "type": "success",
+                                                                    "message": "$t:travel.auth.login_success"
+                                                                },
+                                                                "if": "{{!response.two_factor_required}}"
+                                                            },
+                                                            {
+                                                                "handler": "navigate",
+                                                                "params": {
+                                                                    "path": "{{query.redirect ?? '/travel'}}"
+                                                                },
+                                                                "if": "{{!response.two_factor_required}}"
+                                                            }
+                                                        ],
+                                                        "onError": [
+                                                            {
+                                                                "handler": "setState",
+                                                                "params": {
+                                                                    "target": "global",
+                                                                    "isLoggingIn": false,
+                                                                    "loginError": "{{error.message ?? '$t:travel.auth.login_failed'}}"
+                                                                }
+                                                            }
+                                                        ]
+                                                    },
+                                                    {
+                                                        "comment": "2단계 — 인증번호 확인",
+                                                        "handler": "loginTwoFactor",
+                                                        "target": "user",
+                                                        "if": "{{!!_global.twoFactor?.required}}",
+                                                        "params": {
+                                                            "body": {
+                                                                "challenge_id": "{{_global.twoFactor?.challenge_id}}",
+                                                                "code": "{{_global.twoFactor?.code}}"
+                                                            }
+                                                        },
+                                                        "onSuccess": [
+                                                            {
+                                                                "handler": "setState",
+                                                                "params": {
+                                                                    "target": "global",
+                                                                    "currentUser": "{{response.user}}",
+                                                                    "isLoggingIn": false,
+                                                                    "twoFactor": null
+                                                                }
+                                                            },
+                                                            {
+                                                                "handler": "toast",
+                                                                "params": {
+                                                                    "type": "success",
+                                                                    "message": "$t:travel.auth.login_success"
+                                                                }
+                                                            },
+                                                            {
+                                                                "handler": "navigate",
+                                                                "params": {
+                                                                    "path": "{{query.redirect ?? '/travel'}}"
+                                                                }
+                                                            }
+                                                        ],
+                                                        "onError": [
+                                                            {
+                                                                "handler": "setState",
+                                                                "params": {
+                                                                    "target": "global",
+                                                                    "isLoggingIn": false,
+                                                                    "twoFactor.error": "{{error.message ?? '$t:travel.auth.login_failed'}}"
+                                                                }
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "type": "basic",
+                                        "name": "Button",
+                                        "props": {
+                                            "type": "button",
+                                            "className": "inline-flex items-center justify-center gap-1.5 rounded-lg px-3 py-2 text-sm font-medium text-ink-700 transition hover:bg-raon-50 hover:text-raon-700"
+                                        },
+                                        "children": [
+                                            {
+                                                "type": "basic",
+                                                "name": "Icon",
+                                                "props": {
+                                                    "name": "arrow-left",
+                                                    "className": "text-xs"
+                                                }
+                                            },
+                                            {
+                                                "type": "basic",
+                                                "name": "Span",
+                                                "text": "$t:travel.auth.back_home"
+                                            }
+                                        ],
+                                        "actions": [
+                                            {
+                                                "type": "click",
+                                                "handler": "navigate",
+                                                "params": {
+                                                    "path": "/travel"
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+}

@@ -1,0 +1,493 @@
+{
+ "request": "req_0683bc352fac4373b748cee64dedc53a",
+ "review_sha": "1052e3fb4bc4cccabb51b8c538116c78655f345b",
+ "review_tree": "f18fa2056a031353c889785d768f87824e3083f5",
+ "head_at_manifest": "1052e3fb4bc4cccabb51b8c538116c78655f345b",
+ "product_source_diff_vs_target_empty": true,
+ "commands": [
+  "git fetch origin feat/g7-travel-lab-c7ae42d1 && git checkout -B review/w04-final-security-1052 1052e3fb4bc4cccabb51b8c538116c78655f345b",
+  "composer install --no-scripts --no-interaction --prefer-dist -q   # 17.4s, own vendor (ignored)",
+  "php vendor/bin/phpunit --no-configuration --bootstrap vendor/autoload.php tests/Unit/Extension/TravelSupportThrottleIsolationTest.php tests/Unit/Extension/TravelSupportAuthThrottleOrderingTest.php  # PASS 10/2032 3.32s",
+  "php docs/symphony/w04-final-security/middleware_order_installed.php <parent>/bootstrap/cache/routes-v7.php evidence/middleware-order-installed.json",
+  "python3 -I docs/symphony/w04-final-security/source_provenance.py <review-root> <parent-root> evidence/source-provenance.json",
+  "php docs/symphony/w04-final-security/hooks_parity.php <parent>/bootstrap/cache/hooks.php evidence/hooks-parity.json",
+  "php docs/symphony/w04-final-security/db_guard.php <private-dir> query {floors|counts|tokens}   # p0 baseline, p9 final",
+  "python3 -I p1_public_identity.py <private-dir> <private-out> <parent-root> identity | boundary <role> <lanes>",
+  "python3 -I p2_questions.py <private-dir> <private-out> budget | semantics | create_race | auth | cleanup",
+  "python3 -I p3_workflow.py <private-dir> <private-out> fixtures | matrix | races | deadlock_attribution [W04F_VARIANT=c] | effects | cleanup"
+ ],
+ "phase_results_raw": {
+  "p1-boundary-160026.json": {
+   "counts": {
+    "PASS": 0,
+    "FAIL": 0,
+    "OBSERVED": 0,
+    "BLOCKED": 0,
+    "NOT_RUN": 1
+   },
+   "steps": [
+    [
+     "NOT_RUN",
+     "admin exact public boundary: 600 accepted then 601st 429 inside one 60s own window (4 lanes)",
+     "16:00:26"
+    ]
+   ]
+  },
+  "p1-boundary-160208.json": {
+   "counts": {
+    "PASS": 0,
+    "FAIL": 0,
+    "OBSERVED": 1,
+    "BLOCKED": 0,
+    "NOT_RUN": 0
+   },
+   "steps": [
+    [
+     "OBSERVED",
+     "admin exact public boundary: 600 accepted then 601st 429 inside one 60s own window (4 lanes)",
+     "16:02:23"
+    ]
+   ]
+  },
+  "p1-boundary-160300.json": {
+   "counts": {
+    "PASS": 0,
+    "FAIL": 0,
+    "OBSERVED": 0,
+    "BLOCKED": 0,
+    "NOT_RUN": 1
+   },
+   "steps": [
+    [
+     "NOT_RUN",
+     "admin exact public boundary: 600 accepted then 601st 429 inside one 60s own window (2 lanes)",
+     "16:03:00"
+    ]
+   ]
+  },
+  "p1-boundary-160337.json": {
+   "counts": {
+    "PASS": 0,
+    "FAIL": 0,
+    "OBSERVED": 1,
+    "BLOCKED": 0,
+    "NOT_RUN": 0
+   },
+   "steps": [
+    [
+     "OBSERVED",
+     "admin exact public boundary: 600 accepted then 601st 429 inside one 60s own window (2 lanes)",
+     "16:03:58"
+    ]
+   ]
+  },
+  "p1-boundary-160424.json": {
+   "counts": {
+    "PASS": 0,
+    "FAIL": 0,
+    "OBSERVED": 0,
+    "BLOCKED": 0,
+    "NOT_RUN": 1
+   },
+   "steps": [
+    [
+     "NOT_RUN",
+     "admin exact public boundary: 600 accepted then 601st 429 inside one 60s own window (1 lanes)",
+     "16:04:24"
+    ]
+   ]
+  },
+  "p1-boundary-160430.json": {
+   "counts": {
+    "PASS": 1,
+    "FAIL": 0,
+    "OBSERVED": 0,
+    "BLOCKED": 0,
+    "NOT_RUN": 0
+   },
+   "steps": [
+    [
+     "PASS",
+     "member exact public boundary: 600 accepted then 601st 429 inside one 60s own window (1 lanes)",
+     "16:05:11"
+    ]
+   ]
+  },
+  "p1-cache_inspect-162052.json": {
+   "counts": {
+    "PASS": 1,
+    "FAIL": 0,
+    "OBSERVED": 0,
+    "BLOCKED": 0,
+    "NOT_RUN": 0
+   },
+   "steps": [
+    [
+     "PASS",
+     "read-only native cache backend inspection: per-user and anonymous-IP public keys in FileStore match headers; DB cache has no travel rate rows",
+     "16:20:53"
+    ]
+   ]
+  },
+  "p1-identity-155826.json": {
+   "counts": {
+    "PASS": 2,
+    "FAIL": 1,
+    "OBSERVED": 0,
+    "BLOCKED": 0,
+    "NOT_RUN": 1
+   },
+   "steps": [
+    [
+     "PASS",
+     "same-IP valid member/other/admin public counters separate after member read consumption; guest IP bucket untouched",
+     "15:58:33"
+    ],
+    [
+     "FAIL",
+     "installed native cache backend: per-user signed public keys exist in FileStore with exact counts",
+     "15:58:33"
+    ],
+    [
+     "NOT_RUN",
+     "admin exact public boundary: 600 accepted then 601st 429 inside one 60s own window",
+     "15:59:44"
+    ],
+    [
+     "PASS",
+     "after admin public exhaustion: admin question prefix, member/other actors and guest IP remain available",
+     "15:59:44"
+    ]
+   ]
+  },
+  "p2-auth-160806.json": {
+   "counts": {
+    "PASS": 2,
+    "FAIL": 0,
+    "OBSERVED": 0,
+    "BLOCKED": 0,
+    "NOT_RUN": 0
+   },
+   "steps": [
+    [
+     "PASS",
+     "native login -> logout 401 -> relogin persists edited state -> logout 401; handoff token retained; own tokens absent",
+     "16:08:08"
+    ],
+    [
+     "PASS",
+     "optional auth semantics: guest IP bucket, invalid token 401, expired own token = guest (IP bucket) and private 401; own token removed",
+     "16:08:10"
+    ]
+   ]
+  },
+  "p2-budget-160242.json": {
+   "counts": {
+    "PASS": 1,
+    "FAIL": 0,
+    "OBSERVED": 0,
+    "BLOCKED": 0,
+    "NOT_RUN": 0
+   },
+   "steps": [
+    [
+     "PASS",
+     "member question budgets: create 10/11 and aggregate 120/121 counting the rejected write; actor and public prefixes separate",
+     "16:02:53"
+    ]
+   ]
+  },
+  "p2-cleanup-161238.json": {
+   "counts": {
+    "PASS": 1,
+    "FAIL": 0,
+    "OBSERVED": 0,
+    "BLOCKED": 0,
+    "NOT_RUN": 0
+   },
+   "steps": [
+    [
+     "PASS",
+     "own questions deleted via native admin API: owner requery 404, lists 0, native soft-delete retained rows counted",
+     "16:12:47"
+    ]
+   ]
+  },
+  "p2-create_race-160528.json": {
+   "counts": {
+    "PASS": 1,
+    "FAIL": 0,
+    "OBSERVED": 0,
+    "BLOCKED": 0,
+    "NOT_RUN": 0
+   },
+   "steps": [
+    [
+     "PASS",
+     "bounded concurrent create burst (20 POST, 8 lanes) against the 10/min create budget on native FileStore",
+     "16:05:29"
+    ]
+   ]
+  },
+  "p2-semantics-160358.json": {
+   "counts": {
+    "PASS": 6,
+    "FAIL": 0,
+    "OBSERVED": 0,
+    "BLOCKED": 0,
+    "NOT_RUN": 0
+   },
+   "steps": [
+    [
+     "PASS",
+     "owner native edit persists exact title/body; is_mine/is_secret",
+     "16:03:58"
+    ],
+    [
+     "PASS",
+     "foreign member show/patch 404, foreign list contains 0 own questions, anonymous 401",
+     "16:03:59"
+    ],
+    [
+     "PASS",
+     "admin reads and answers through native board admin comment; owner sees the answer",
+     "16:03:59"
+    ],
+    [
+     "PASS",
+     "native activity audit: exactly one post.update for owner edit with title metadata, body excluded; foreign attempts not audited",
+     "16:03:59"
+    ],
+    [
+     "PASS",
+     "native current-APP search and board list expose no own private question title/body to guest/member/other/admin",
+     "16:04:00"
+    ],
+    [
+     "PASS",
+     "isolated support board attachments disabled: native member upload denied, no attachment row",
+     "16:04:00"
+    ]
+   ]
+  },
+  "p3-cleanup-161230.json": {
+   "counts": {
+    "PASS": 1,
+    "FAIL": 0,
+    "OBSERVED": 0,
+    "BLOCKED": 0,
+    "NOT_RUN": 0
+   },
+   "steps": [
+    [
+     "PASS",
+     "workflow fixture terminal cleanup: own inquiries terminal, carts empty, departures inactive reserved0, product unpublished/hidden",
+     "16:12:38"
+    ]
+   ]
+  },
+  "p3-deadlock_attribution-161040.json": {
+   "counts": {
+    "PASS": 2,
+    "FAIL": 0,
+    "OBSERVED": 0,
+    "BLOCKED": 0,
+    "NOT_RUN": 0
+   },
+   "steps": [
+    [
+     "PASS",
+     "deadlock attribution control: server-wide Innodb_deadlocks during 45s without own traffic",
+     "16:11:27"
+    ],
+    [
+     "PASS",
+     "R1b last-seat rerun on a fresh own capacity-1 departure with release-window deadlock counter sampling",
+     "16:11:39"
+    ]
+   ]
+  },
+  "p3-deadlock_attribution-161207.json": {
+   "counts": {
+    "PASS": 0,
+    "FAIL": 0,
+    "OBSERVED": 1,
+    "BLOCKED": 0,
+    "NOT_RUN": 0
+   },
+   "steps": [
+    [
+     "OBSERVED",
+     "R1c last-seat rerun, idempotency keys placed in the same (user_id,key) index gap: predicted one deadlock retried",
+     "16:12:16"
+    ]
+   ]
+  },
+  "p3-effects-161230.json": {
+   "counts": {
+    "PASS": 1,
+    "FAIL": 0,
+    "OBSERVED": 0,
+    "BLOCKED": 0,
+    "NOT_RUN": 0
+   },
+   "steps": [
+    [
+     "PASS",
+     "M11-M13 native orders/payments/temp-orders/order-options and jobs/failed-jobs/notifications/mail/notification logs unchanged (own and global SQL)",
+     "16:12:30"
+    ]
+   ]
+  },
+  "p3-fixtures-160738.json": {
+   "counts": {
+    "PASS": 1,
+    "FAIL": 0,
+    "OBSERVED": 0,
+    "BLOCKED": 0,
+    "NOT_RUN": 0
+   },
+   "steps": [
+    [
+     "PASS",
+     "own fixtures via native admin APIs: category, 8-option product, catalog registration, 8 unique departures",
+     "16:07:40"
+    ]
+   ]
+  },
+  "p3-matrix-160746.json": {
+   "counts": {
+    "PASS": 8,
+    "FAIL": 0,
+    "OBSERVED": 0,
+    "BLOCKED": 0,
+    "NOT_RUN": 0
+   },
+   "steps": [
+    [
+     "PASS",
+     "M01 server native price: cart/catalog unit = native product price + option adjustment (SQL)",
+     "16:07:47"
+    ],
+    [
+     "PASS",
+     "M02 available native option price change is followed by server cart pricing (no client price)",
+     "16:07:47"
+    ],
+    [
+     "PASS",
+     "M03 quantity x server unit = line/total; M08 reservation increments by exact quantity (SQL)",
+     "16:07:48"
+    ],
+    [
+     "PASS",
+     "M04 quantity/money/owner tamper rejected (422), over-capacity 409, nothing written",
+     "16:07:49"
+    ],
+    [
+     "PASS",
+     "M05 date/tamper on departure: KST-today/past/return-before/reserved/unit_price 422, member 403",
+     "16:07:50"
+    ],
+    [
+     "PASS",
+     "M06 inquiry with foreign cart / client money / owner field rejected; nothing reserved",
+     "16:07:52"
+    ],
+    [
+     "PASS",
+     "M07 idempotent replay/409, foreign 404, member admin 403, TEST state transitions and invalid 409 (SQL)",
+     "16:07:53"
+    ],
+    [
+     "PASS",
+     "M09 capacity enforced at full reservation; M10 cancel releases exactly once, repeat cancel no-op, never negative (SQL)",
+     "16:07:54"
+    ]
+   ]
+  },
+  "p3-races-160900.json": {
+   "counts": {
+    "PASS": 3,
+    "FAIL": 1,
+    "OBSERVED": 0,
+    "BLOCKED": 0,
+    "NOT_RUN": 0
+   },
+   "steps": [
+    [
+     "FAIL",
+     "R1 last seat: different members overlap on own departure lock -> one 201 / one 409, reserved = capacity 1",
+     "16:09:05"
+    ],
+    [
+     "PASS",
+     "R2 same member same key: overlapping submits -> 201 then 200 same ID, reserved once; changed payload 409",
+     "16:09:09"
+    ],
+    [
+     "PASS",
+     "R3 owner cancel vs admin decline on own inquiry lock -> exactly one release, never negative",
+     "16:09:15"
+    ],
+    [
+     "PASS",
+     "R4 submit qty2 vs admin capacity 2->1 on own departure lock -> one wins, never below reserved",
+     "16:09:20"
+    ]
+   ]
+  }
+ },
+ "notes": [
+  "Probe defect retained: p1-identity cache-parse FAIL (PHP serialized i:N; not decoded); corrected in later runs, no product implication.",
+  "R1 raw FAIL is the strict deadlock-counter assertion; overlap and invariants passed; finding W04F-01.",
+  "p1-boundary-160208 used the pre-correction OBSERVED note text (duplicate values); accepted-before-429 = 611 is computed from its raw post_601 list.",
+  "M05 raw detail key kst_today shows the KST date string, overwriting the asserted status 422 (display defect in probe).",
+  "Private state files (p2-state.json, p3-state.json: contacts/payloads) are not delivered."
+ ],
+ "files_sha256": {
+  "docs/symphony/W04_SECURITY_FINAL.md": "dfb75a10bc2b39fcb7d52587e254c9140ada08f4a2820df7184d3143e29c03fd",
+  "docs/symphony/w04-final-security/build_manifest.py": "7374833f7618902320a08c6f7061c32b18dd050bc9fcbedaf384c113a9305406",
+  "docs/symphony/w04-final-security/db_guard.php": "cb8ef4df225b947ab6d050bb2f7aef2fd3cc535711cc503c2be98c695ff07055",
+  "docs/symphony/w04-final-security/evidence/fixture-tests.txt": "48946ca024183c34e3a545dda2a882f2c1c5db6f84bcff0482f337f0739f5e5d",
+  "docs/symphony/w04-final-security/evidence/hooks-parity.json": "19a53b8c9f9f72313078f7c44f8a76473e0a9ccefdfb77723462fe0c70104e12",
+  "docs/symphony/w04-final-security/evidence/middleware-order-installed.json": "409da48cdd0fe43a933889c060adbd6a52df58c30853b6296929addc04bdc56f",
+  "docs/symphony/w04-final-security/evidence/races-extract.json": "fbe6ded682a0f76a0cb02211b699f2a580088b1386496ed1e14bb0ca04969e43",
+  "docs/symphony/w04-final-security/evidence/raw/p0-counts.json": "a69d78730f6007dc5a509f90ed5c423270824db34d2d93118e930e6be0956798",
+  "docs/symphony/w04-final-security/evidence/raw/p0-floors.json": "a078c96b3a7b998907a57551c6806973ae3a30d4c90db233edd1cb64c0f4eebd",
+  "docs/symphony/w04-final-security/evidence/raw/p0-tokens.json": "9a94bc9eb2f8a7693b52acd3f4b59e55e700d51725f275f3b566f59257cd56c6",
+  "docs/symphony/w04-final-security/evidence/raw/p1-boundary-160026.json": "969ec7ce44cec6e58c193fec757bc7db0162c90fd349e48fd94a0041e74dded2",
+  "docs/symphony/w04-final-security/evidence/raw/p1-boundary-160208.json": "a498c17564216adfd1d833436c585e4c465b0d38116f34c3fc6e597ec930433e",
+  "docs/symphony/w04-final-security/evidence/raw/p1-boundary-160300.json": "7654bc49c34c4fa2e1157218bba8c4e68ab0c947abeaccb27195a33a676809cd",
+  "docs/symphony/w04-final-security/evidence/raw/p1-boundary-160337.json": "3dcbd9c17c527fee829ed99864eaf67f0b167a232a294a02ae68577519823aa9",
+  "docs/symphony/w04-final-security/evidence/raw/p1-boundary-160424.json": "03d1ad818f457541b04790b461e31a8765259f11e0b9fea2285263e6751adb8d",
+  "docs/symphony/w04-final-security/evidence/raw/p1-boundary-160430.json": "016c8eeddbe349b1f8bd506dada8b4e8e39b3132a57d74c8e436c8dd4b2c01d6",
+  "docs/symphony/w04-final-security/evidence/raw/p1-cache_inspect-162052.json": "4f6b8da0fce5f5848455533a55b2ba8bb8dd9973b2ddafc845abbb447455b71e",
+  "docs/symphony/w04-final-security/evidence/raw/p1-identity-155826.json": "58ba62ab7c7f9e41cdebbb0ece6248ab90383378cc1451731eef01ce2f987595",
+  "docs/symphony/w04-final-security/evidence/raw/p2-auth-160806.json": "9b90c0bff307d3a25bfe67a4dcde55497cad678eed62a597f568d401dd6a8e49",
+  "docs/symphony/w04-final-security/evidence/raw/p2-budget-160242.json": "0281c0ee10a09c93660eedef4c9b243e621ea49a68a43076ca70ac8f956ad9fd",
+  "docs/symphony/w04-final-security/evidence/raw/p2-cleanup-161238.json": "1bf36e8aae5992a897974b230a1712e37496aaaee36de9f2fc57df9d37767410",
+  "docs/symphony/w04-final-security/evidence/raw/p2-create_race-160528.json": "5ac2e76a20ed9399720a864f1d9ae3f95184dd95af40e51e96564829f9e402bb",
+  "docs/symphony/w04-final-security/evidence/raw/p2-semantics-160358.json": "5b1a8ca3c1bb492f0877444870ed927d2c9ae5bd299b8ead412107db087cca47",
+  "docs/symphony/w04-final-security/evidence/raw/p3-cleanup-161230.json": "f9ed9ea7d699b4d73bd08581244339d63590e9760966339461417a23680d0567",
+  "docs/symphony/w04-final-security/evidence/raw/p3-deadlock_attribution-161040.json": "7731285eee1838c71eb507c8549e19209ab4a4cf2b00dc45218172bd2ba37d68",
+  "docs/symphony/w04-final-security/evidence/raw/p3-deadlock_attribution-161207.json": "16d7dd468ef282ea19fac464987bfb5727110de8e709472129b890265b53ee48",
+  "docs/symphony/w04-final-security/evidence/raw/p3-effects-161230.json": "4c460c0135d5b48f5ea7536edd2206bd6135316cf583b4cd07f629e505d2a99b",
+  "docs/symphony/w04-final-security/evidence/raw/p3-fixtures-160738.json": "41e9b6a3102ab269ed4d7d2e44d78be41a7ec9ed4cc66d21626e0bf164f4865b",
+  "docs/symphony/w04-final-security/evidence/raw/p3-matrix-160746.json": "7626fcc785c0132b4e2315c90da8c1c706583a70295ebf71056edf74d61067cf",
+  "docs/symphony/w04-final-security/evidence/raw/p3-races-160900.json": "9731871381801a4680b94c44f7711e3127b68457b1b60c88bf878efff021ca15",
+  "docs/symphony/w04-final-security/evidence/raw/p9-counts.json": "5bb8e3745d814f9e408aae626306b9a3a093bb99a7abfefe4c3c2b10c478ddaf",
+  "docs/symphony/w04-final-security/evidence/raw/p9-floors.json": "c6a4cb756e41badf4a3088c5cbb583475bec5eea55bb358a9a35cefd18ee6566",
+  "docs/symphony/w04-final-security/evidence/raw/p9-inquiries.json": "5e349fe75835b89028ebc7c68ac13a2345779a1a2b9c14a447a3fa5ae6d08f68",
+  "docs/symphony/w04-final-security/evidence/raw/p9-lock-visibility.json": "72f2ccb2b2dda5e8bd7c4a5244b56367c966fe03adef68e75acf26a48347644b",
+  "docs/symphony/w04-final-security/evidence/raw/p9-tokens.json": "f35bc4b03453ccd8835d32410821e17ea01c1456da50be1936d858c29f23aaba",
+  "docs/symphony/w04-final-security/evidence/source-provenance.json": "dbb8cfc0b41ddda47b767a870216cb7564994d1e7fa6ff010effb716cf01f4a2",
+  "docs/symphony/w04-final-security/hooks_parity.php": "65ce73ed9da4ca5a122ad8b3d6731779bed204ef55220840f6478ed4771827b7",
+  "docs/symphony/w04-final-security/middleware_order_installed.php": "d0af75c127536bfabd615d25d746396e587cbde09b3efd462822e42d97e171cb",
+  "docs/symphony/w04-final-security/p1_public_identity.py": "5efaf776ee00c5f447e086c4a4609e3f47e23f1c1da6c25ead1acf1079e59d97",
+  "docs/symphony/w04-final-security/p2_questions.py": "469dae691771a7ec239f486d287f3aa2b20c99ac3ae14dfc98246892cd3cc01e",
+  "docs/symphony/w04-final-security/p3_workflow.py": "82dd334774fa0bc1b4ce8016d32545b28d191c7b1a04830e561b285584324537",
+  "docs/symphony/w04-final-security/source_provenance.py": "d81c77bc8d5fedde16cc2353c1a501696525c8b41c1321937c71ce6aca217a90",
+  "docs/symphony/w04-final-security/w04f_common.py": "383823698368c600a88bbf838e7582ee6a1b4cc2f6db3a8b49a4d4f6d6e42149"
+ }
+}

@@ -1,0 +1,91 @@
+{
+    "source_sha": "598a89fff702d51c1405f1a5952d95ab1d2651f4",
+    "scope": "canonical declaration; installed hooks not inspected",
+    "listener_count": 4,
+    "subscription_count": 11,
+    "listeners": [
+        {
+            "class": "Modules\\Raonslab\\TravelLab\\Listeners\\BlockTravelCommerceCheckout",
+            "source": "modules/_bundled/raonslab-travel_lab/src/Listeners/BlockTravelCommerceCheckout.php",
+            "sha256": "f81b898f22f5d4c00d9c26614660df369bce86507cf01ae53dd74072fd11d36e",
+            "subscriptions": {
+                "sirsoft-ecommerce.temp_order.before_create": {
+                    "method": "handle",
+                    "sync": true,
+                    "priority": 1
+                },
+                "sirsoft-ecommerce.temp_order.before_update": {
+                    "method": "handle",
+                    "sync": true,
+                    "priority": 1
+                },
+                "sirsoft-ecommerce.order.before_create": {
+                    "method": "handle",
+                    "sync": true,
+                    "priority": 1
+                },
+                "sirsoft-ecommerce.order.before_payment_complete": {
+                    "method": "handle",
+                    "sync": true,
+                    "priority": 1
+                }
+            }
+        },
+        {
+            "class": "Modules\\Raonslab\\TravelLab\\Listeners\\ProtectTravelCommerceCatalog",
+            "source": "modules/_bundled/raonslab-travel_lab/src/Listeners/ProtectTravelCommerceCatalog.php",
+            "sha256": "903a94be831be5364d335fc798cff0577140b40d8bcc14e68e657ba2e48c62b8",
+            "subscriptions": {
+                "sirsoft-ecommerce.product.before_delete": {
+                    "method": "beforeDelete",
+                    "sync": true,
+                    "priority": 1
+                },
+                "sirsoft-ecommerce.product.before_update": {
+                    "method": "beforeUpdate",
+                    "sync": true,
+                    "priority": 1
+                },
+                "sirsoft-ecommerce.product.filter_update_data": {
+                    "method": "filterUpdate",
+                    "type": "filter",
+                    "priority": 9223372036854775807
+                }
+            }
+        },
+        {
+            "class": "Modules\\Raonslab\\TravelLab\\Listeners\\SuppressTravelSupportNotifications",
+            "source": "modules/_bundled/raonslab-travel_lab/src/Listeners/SuppressTravelSupportNotifications.php",
+            "sha256": "7079d91df238488595a0512e2867aee2873267672150fbff78348315822fe5ce",
+            "subscriptions": {
+                "sirsoft-board.notification.extract_data": {
+                    "method": "suppressTravelSupport",
+                    "priority": 95,
+                    "type": "filter"
+                }
+            }
+        },
+        {
+            "class": "Modules\\Raonslab\\TravelLab\\Listeners\\ExcludeTravelSupportQuestionsFromSearch",
+            "source": "modules/_bundled/raonslab-travel_lab/src/Listeners/ExcludeTravelSupportQuestionsFromSearch.php",
+            "sha256": "74f3724be752f4f959e7924f8948520c5a60d4a262835a93b6e8d3485cd7477e",
+            "subscriptions": {
+                "sirsoft-board.search.post.index_should_update": {
+                    "method": "filterIndexUpdate",
+                    "priority": 9223372036854775807,
+                    "type": "filter"
+                },
+                "sirsoft-board.post.after_restore": {
+                    "method": "removeFromExternalIndex",
+                    "priority": 9223372036854775807,
+                    "sync": true
+                },
+                "sirsoft-board.post.after_delete": {
+                    "method": "removeFromExternalIndex",
+                    "priority": 9223372036854775807,
+                    "sync": true
+                }
+            }
+        }
+    ]
+}
